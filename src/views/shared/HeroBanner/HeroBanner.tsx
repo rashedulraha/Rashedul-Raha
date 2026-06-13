@@ -1,4 +1,4 @@
-import { ExternalLink, Sparkles, ChevronRight } from "lucide-react";
+import { ExternalLink, Sparkles, ChevronRight, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -62,8 +62,9 @@ export default function HeroBanner() {
           <Badge
             variant="outline"
             className="px-4 py-1.5 rounded-full bg-secondary/20 backdrop-blur-md border-primary/20 text-primary gap-2 text-[10px] sm:text-xs tracking-[0.15em] uppercase font-bold">
-            <Sparkles className="h-3.5 w-3.5" />
-            Available for new projects
+            {/* <Sparkles className="h-3.5 w-3.5" /> */}
+            <Terminal className="h-5 w-5 sm:h-6 sm:w-6" />
+            Hi , my name is Rashedul Islam
           </Badge>
         </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, Cpu, Send, X } from "lucide-react";
+import { Menu, Cpu, Send, X, Terminal } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -14,13 +14,16 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/ui/modeToggle";
 
 const links = [
   { title: "Home", to: "/" },
   { title: "Projects", to: "/projects" },
-  { title: "Tech Stack", to: "/stack" },
+  { title: "Skills", to: "/skills" },
   { title: "Experience", to: "/experience" },
   { title: "About", to: "/about" },
+  { title: "Certifications", to: "/certifications" },
+  { title: "Blogs", to: "/blogs" },
   { title: "Quick view", to: "/quick-view" },
 ];
 
@@ -57,7 +60,7 @@ export default function Navbar() {
         <div
           className={cn(
             "flex h-12 sm:h-16 items-center justify-between gap-4 md:gap-8",
-            "px-4",
+            "px-3",
             "border border-foreground/10 rounded-full",
             " backdrop-blur-xl",
             "shadow-lg shadow-black/5",
@@ -69,15 +72,10 @@ export default function Navbar() {
           <Link
             href="/"
             className="flex items-center gap-2 group shrink-0 active:scale-95 transition-transform">
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.5, type: "spring" }}
-              className="p-2 rounded-xl bg-foreground/5 group-hover:bg-foreground/10 transition-colors">
-              <Cpu className="h-5 w-5 sm:h-6 sm:w-6 text-foreground" />
-            </motion.div>
             <span className="text-lg sm:text-xl lg:text-2xl font-black tracking-tighter text-foreground">
               Rashed<span className="text-foreground/40">.</span>Dev
             </span>
+            <Terminal className="h-5 w-5 sm:h-6 sm:w-6" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -108,6 +106,8 @@ export default function Navbar() {
           {/* Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Desktop Contact Button */}
+            <ModeToggle />
+
             <Button
               asChild
               variant="outline"
@@ -119,7 +119,7 @@ export default function Navbar() {
                 "transition-all duration-300 gap-2 text-sm font-medium group",
               )}>
               <Link href="/contact">
-                Let's Talk
+                Contact
                 <Send className="h-3.5 w-3.5 lg:h-4 lg:w-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </Button>
@@ -159,7 +159,7 @@ export default function Navbar() {
                 {/* Mobile Menu Sheet */}
                 <SheetContent
                   side="right"
-                  className="w-[85vw] sm:w-[400px] bg-background/98 backdrop-blur-2xl border-l border-foreground/10 p-0 text-foreground">
+                  className="w-[85vw] sm:w-100 bg-background/98 backdrop-blur-2xl border-l border-foreground/10 p-0 text-foreground">
                   <div className="flex flex-col h-full p-6 sm:p-8">
                     <SheetHeader className="text-left mb-8">
                       <SheetTitle className="flex items-center gap-3">
@@ -167,7 +167,8 @@ export default function Navbar() {
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           className="p-2.5 rounded-xl bg-foreground/5 border border-foreground/10">
-                          <Cpu className="h-5 w-5 text-foreground" />
+                          {/* <Cpu className="h-5 w-5 text-foreground" /> */}
+                          <Terminal className="h-5 w-5 sm:h-6 sm:w-6" />
                         </motion.div>
                         <motion.span
                           initial={{ opacity: 0, x: -20 }}
@@ -254,7 +255,7 @@ export default function Navbar() {
           Height Calculation: top-5 (20px) + h-12 (48px) = 68px (Mobile)
                            top-5 (20px) + h-16 (64px) = 84px (Desktop)
       */}
-      <div className="h-[68px] sm:h-[84px]" />
+      <div className="h-17 sm:h-21" />
     </>
   );
 }
