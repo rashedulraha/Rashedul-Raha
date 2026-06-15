@@ -39,7 +39,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className=" bg-background text-foreground antialiased">
+      <body
+        className=" bg-background text-foreground antialiased"
+        suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

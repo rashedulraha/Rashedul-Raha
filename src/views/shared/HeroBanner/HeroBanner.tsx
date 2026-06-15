@@ -1,4 +1,4 @@
-import { ExternalLink, Sparkles, ChevronRight, Terminal } from "lucide-react";
+import { ExternalLink, Sparkles, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -26,9 +26,10 @@ export default function HeroBanner() {
   }, [textIndex, fullText]);
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-75px)] h-full flex justify-center overflow-hidden">
+    <section className="relative w-full min-h-[calc(100vh-75px)] h-full flex justify-center items-end overflow-hidden">
       {/* 1. Left Sidebar Socials (Desktop Only) */}
       <div className="absolute left-6 xl:left-12 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center justify-center gap-8 z-20">
+        <div className="h-24 w-px bg-linear-to-b from-transparent via-border to-primary/50"></div>
         <div className="flex flex-col gap-6">
           {socialLinks.map((social, i) => (
             <a
@@ -48,6 +49,12 @@ export default function HeroBanner() {
         <div className="h-24 w-px bg-linear-to-t from-transparent via-border to-primary/50"></div>
       </div>
 
+      {/* 2. Background Effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] bg-primary/5 rounded-[100%] blur-[120px]" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-border to-transparent" />
+      </div>
+
       {/* 3. Main Content Container */}
       <div className="relative z-10 flex flex-col items-center md:justify-center text-center max-w-4xl w-full space-y-3 py-20 md:py-0 ">
         {/* Top Badge */}
@@ -55,9 +62,8 @@ export default function HeroBanner() {
           <Badge
             variant="outline"
             className="px-4 py-1.5 rounded-full bg-secondary/20 backdrop-blur-md border-primary/20 text-primary gap-2 text-[10px] sm:text-xs tracking-[0.15em] uppercase font-bold">
-            {/* <Sparkles className="h-3.5 w-3.5" /> */}
-            <Terminal className="h-5 w-5 sm:h-6 sm:w-6" />
-            Hi , my name is Rashedul Islam
+            <Sparkles className="h-3.5 w-3.5" />
+            Available for new projects
           </Badge>
         </div>
 
@@ -82,10 +88,9 @@ export default function HeroBanner() {
             className="w-full sm:w-auto font-bold rounded-full px-8 shadow-lg shadow-primary/10 hover:shadow-primary/20 transition-all active:scale-95">
             <a
               href="/Md-Rasheduli-Islam.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              download
               className="flex items-center gap-2">
-              Show Resume <ExternalLink className="w-4 h-4" />
+              Get Resume <ExternalLink className="w-4 h-4" />
             </a>
           </Button>
 
@@ -101,16 +106,6 @@ export default function HeroBanner() {
 
         {/* Tech Stack Display */}
         <TechMarquee />
-      </div>
-
-      {/* 4. Experience Indicator (Bottom Right) */}
-      <div className="absolute bottom-10 left-6 xl:right-12 hidden md:flex items-center gap-4 text-muted-foreground border-l border-primary/20 pl-4 animate-in slide-in-from-right-8 duration-700">
-        <span className="text-4xl font-light text-foreground tracking-tighter">
-          02+
-        </span>
-        <span className="text-[10px] uppercase tracking-widest leading-tight font-medium">
-          Years <br /> Experience
-        </span>
       </div>
 
       {/* 5. Mobile Socials (Only visible on small screens) */}

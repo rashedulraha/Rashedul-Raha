@@ -32,7 +32,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Navbar from "../shared/Navbar/Navbar";
 
-import AnimatedGridBackground from "@/components/AnimatedGridBackground/AnimatedGridBackground";
 import OrbitCarousel from "@/components/orbit-carousel";
 
 // Social Links Configuration

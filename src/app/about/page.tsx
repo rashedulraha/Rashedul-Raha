@@ -1,10 +1,10 @@
-import Responsive from "@/components/Responsive/Responsive";
+import HorizontalResponsive from "@/components/Responsive/HorizontalResponsive";
 import About from "@/views/About/About";
 
 export default function Page() {
   return (
-    <Responsive>
+    <HorizontalResponsive>
       <About />
-    </Responsive>
+    </HorizontalResponsive>
   );
 }

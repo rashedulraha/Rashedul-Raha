@@ -24,6 +24,7 @@ import {
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
+import Responsive from "../Responsive/Responsive";
 
 // ─── INTERFACES ───
 interface ProjectLinks {
@@ -704,121 +705,126 @@ export default function FeaturedProjects() {
   return (
     <>
       <section className="py-24 relative overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-12 text-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-foreground tracking-tight  text-start">
-              Featured <span>Projects</span>
-            </h2>
-
-            <p className="text-muted-foreground text-base md:text-lg max-w-2xl  text-start">
-              A curated selection of full-stack web applications and real-world
-              digital products.
-            </p>
-          </motion.div>
-
-          {/* Search and Filter Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="mb-8">
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-              {/* Search Input */}
-              <div className="relative flex-1 max-w-2xl w-full">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Search projects by name, technology, or description..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-card border-2 border-border focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all text-foreground placeholder:text-muted-foreground"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery("")}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-                    <X className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
-
-              {/* Layout Toggle */}
-              <div className="flex gap-2 p-1 bg-muted rounded-xl border-2 border-border">
-                <button
-                  onClick={() => setGridLayout("dynamic")}
-                  className={`p-2 rounded-lg transition-all ${gridLayout === "dynamic" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
-                  <LayoutGrid className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => setGridLayout("grid")}
-                  className={`p-2 rounded-lg transition-all ${gridLayout === "grid" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
-                  <Grid3x3 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Results Count */}
-          <div className="mb-4 text-sm text-muted-foreground">
-            Found {filteredProjects.length} project
-            {filteredProjects.length !== 1 ? "s" : ""}
-            {searchQuery && ` matching "${searchQuery}"`}
-            {selectedCategory !== "all" && ` in ${selectedCategory}`}
-          </div>
-
-          {/* Category Filter */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="mb-12 flex flex-wrap gap-2 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all border-2 ${
-                  selectedCategory === category
-                    ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
-                    : "bg-card text-muted-foreground hover:bg-muted border-border hover:border-primary/40"
-                }`}>
-                {category === "all" ? "All Projects" : category}
-              </button>
-            ))}
-          </motion.div>
-
-          {/* Dynamic Bento Grid */}
-          {filteredProjects.length > 0 ? (
+        <Responsive>
+          <div className="relative z-10">
+            {/* Header */}
             <motion.div
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
-              }}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[280px] md:auto-rows-[320px]">
-              {filteredProjects.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  layoutClass={getLayoutClass(index)}
-                  onClick={() => setSelectedProject(project)}
-                  isFeatured={index === 0}
-                />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="mb-12 text-center">
+              <h2 className="text-4xl md:text-6xl font-bold text-foreground tracking-tight  text-start">
+                Featured <span>Projects</span>
+              </h2>
+
+              <p className="text-muted-foreground text-base md:text-lg max-w-2xl  text-start">
+                A curated selection of full-stack web applications and
+                real-world digital products.
+              </p>
+            </motion.div>
+
+            {/* Search and Filter Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="mb-8">
+              <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+                {/* Search Input */}
+                <div className="relative flex-1 max-w-2xl w-full">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <input
+                    type="text"
+                    placeholder="Search projects by name, technology, or description..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-card border-2 border-border focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all text-foreground placeholder:text-muted-foreground"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+
+                {/* Layout Toggle */}
+                <div className="flex gap-2 p-1 bg-muted rounded-xl border-2 border-border">
+                  <button
+                    onClick={() => setGridLayout("dynamic")}
+                    className={`p-2 rounded-lg transition-all ${gridLayout === "dynamic" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
+                    <LayoutGrid className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setGridLayout("grid")}
+                    className={`p-2 rounded-lg transition-all ${gridLayout === "grid" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
+                    <Grid3x3 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Results Count */}
+            <div className="mb-4 text-sm text-muted-foreground">
+              Found {filteredProjects.length} project
+              {filteredProjects.length !== 1 ? "s" : ""}
+              {searchQuery && ` matching "${searchQuery}"`}
+              {selectedCategory !== "all" && ` in ${selectedCategory}`}
+            </div>
+
+            {/* Category Filter */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="mb-12 flex flex-wrap gap-2 justify-center">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all border-2 ${
+                    selectedCategory === category
+                      ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
+                      : "bg-card text-muted-foreground hover:bg-muted border-border hover:border-primary/40"
+                  }`}>
+                  {category === "all" ? "All Projects" : category}
+                </button>
               ))}
             </motion.div>
-          ) : (
-            <EmptyState />
-          )}
-        </div>
+
+            {/* Dynamic Bento Grid */}
+            {filteredProjects.length > 0 ? (
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.08 },
+                  },
+                }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[280px] md:auto-rows-[320px]">
+                {filteredProjects.map((project, index) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    layoutClass={getLayoutClass(index)}
+                    onClick={() => setSelectedProject(project)}
+                    isFeatured={index === 0}
+                  />
+                ))}
+              </motion.div>
+            ) : (
+              <EmptyState />
+            )}
+          </div>
+        </Responsive>
       </section>
 
       {/* Project Modal */}
