@@ -2,6 +2,24 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useState, useEffect } from "react";
 import {
   Flame,
@@ -13,11 +31,20 @@ import {
   Github,
   BookOpen,
   Users,
+  Calendar,
+  TrendingUp,
+  GitCommit,
+  Award,
+  ExternalLink,
+  Sparkles,
+  Zap,
+  Target,
+  Clock,
 } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-// --- KEEPING YOUR EXISTING LOGIC (It's good!) ---
-// Just copying the Types and Hook for functionality
+// --- GitHub Data Types ---
 interface GitHubStats {
   totalContributions: number;
   currentStreak: number;
@@ -38,17 +65,55 @@ interface RecentActivity {
 }
 
 const GITHUB_USERNAME = "rashedulraha";
+const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN || "";
+
+// Language colors mapping
 const LANGUAGE_COLORS: Record<string, string> = {
-  TypeScript: "bg-blue-500",
-  JavaScript: "bg-yellow-400",
-  Python: "bg-green-500",
-  Go: "bg-cyan-500",
-  Rust: "bg-orange-600",
-  Java: "bg-red-500",
-  HTML: "bg-orange-500",
-  CSS: "bg-blue-600",
+  TypeScript: "#3b82f6",
+  JavaScript: "#eab308",
+  Python: "#22c55e",
+  Go: "#06b6d4",
+  Rust: "#f97316",
+  Java: "#ef4444",
+  HTML: "#f97316",
+  CSS: "#3b82f6",
+  "C++": "#a855f7",
+  PHP: "#6366f1",
 };
 
+// Activity icons mapping
+const activityIcons: Record<string, any> = {
+  PushEvent: GitCommit,
+  PullRequestEvent: GitFork,
+  CreateEvent: Star,
+  IssuesEvent: Activity,
+  WatchEvent: BookOpen,
+  ForkEvent: GitFork,
+};
+
+// Activity colors mapping
+const activityColors: Record<string, string> = {
+  PushEvent: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+  PullRequestEvent: "text-purple-500 bg-purple-500/10 border-purple-500/20",
+  CreateEvent: "text-green-500 bg-green-500/10 border-green-500/20",
+  IssuesEvent: "text-red-500 bg-red-500/10 border-red-500/20",
+  WatchEvent: "text-yellow-500 bg-yellow-500/10 border-yellow-500/20",
+  ForkEvent: "text-cyan-500 bg-cyan-500/10 border-cyan-500/20",
+};
+
+// Custom Progress component with custom indicator color
+function CustomProgress({ value, color }: { value: number; color: string }) {
+  return (
+    <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-muted">
+      <div
+        className="h-full transition-all duration-500 ease-out"
+        style={{ width: `${value}%`, backgroundColor: color }}
+      />
+    </div>
+  );
+}
+
+// Custom hook for GitHub data
 function useGitHubData() {
   const [stats, setStats] = useState<GitHubStats>({
     totalContributions: 0,
@@ -64,10 +129,10 @@ function useGitHubData() {
   const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN || "";
 
   useEffect(() => {
     let isMounted = true;
+
     async function fetchData() {
       try {
         setLoading(true);
@@ -101,10 +166,12 @@ function useGitHubData() {
           (acc: number, r: any) => acc + (r.forks_count || 0),
           0,
         );
+
         const langStats: Record<string, number> = {};
         reposData.forEach((r: any) => {
-          if (r.language)
+          if (r.language) {
             langStats[r.language] = (langStats[r.language] || 0) + 1;
+          }
         });
 
         // Contribution API Logic
@@ -147,10 +214,11 @@ function useGitHubData() {
           });
           setLanguages(langStats);
           setRecentActivity(
-            eventsData.slice(0, 4).map((e: any) => ({
+            eventsData.slice(0, 5).map((e: any) => ({
               id: e.id,
               type: e.type || "PushEvent",
-              repo: e.repo?.name || GITHUB_USERNAME,
+              repo:
+                e.repo?.name?.split("/")[1] || e.repo?.name || GITHUB_USERNAME,
               date: new Date(e.created_at).toLocaleDateString(),
               url: `https://github.com/${e.repo?.name}`,
             })),
@@ -169,12 +237,46 @@ function useGitHubData() {
             totalFollowers: 127,
             totalCommits: 1847,
           });
-          setLanguages({ TypeScript: 45, JavaScript: 28, Python: 15 });
+          setLanguages({
+            TypeScript: 45,
+            JavaScript: 28,
+            Python: 15,
+            Go: 8,
+            Rust: 5,
+          });
           setRecentActivity([
             {
               id: "1",
               type: "PushEvent",
               repo: "awesome-project",
+              date: new Date().toLocaleDateString(),
+              url: "#",
+            },
+            {
+              id: "2",
+              type: "PullRequestEvent",
+              repo: "open-source-contrib",
+              date: new Date().toLocaleDateString(),
+              url: "#",
+            },
+            {
+              id: "3",
+              type: "CreateEvent",
+              repo: "new-starter-kit",
+              date: new Date().toLocaleDateString(),
+              url: "#",
+            },
+            {
+              id: "4",
+              type: "IssuesEvent",
+              repo: "bug-fix",
+              date: new Date().toLocaleDateString(),
+              url: "#",
+            },
+            {
+              id: "5",
+              type: "WatchEvent",
+              repo: "trending-repo",
               date: new Date().toLocaleDateString(),
               url: "#",
             },
@@ -184,13 +286,14 @@ function useGitHubData() {
         if (isMounted) setLoading(false);
       }
     }
+
     fetchData();
   }, []);
+
   return { stats, languages, recentActivity, loading, error };
 }
 
-// --- NEW MINIMAL UI COMPONENTS ---
-
+// Main Stats Card Component
 function MainStatCard({
   stats,
   languages,
@@ -198,88 +301,195 @@ function MainStatCard({
   stats: GitHubStats;
   languages: Record<string, number>;
 }) {
-  // Get top 2 languages for the bar
+  const totalLangs = Object.values(languages).reduce((a, b) => a + b, 0);
   const topLangs = Object.entries(languages)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 2);
+    .slice(0, 5);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="relative h-full">
-      {/* Creative Border */}
-      <div className="h-full rounded-3xl bg-linear-to-br from-white/10 to-white/5 p-[1px] hover:from-white/20 hover:to-white/10 transition-colors">
-        <div className="h-full w-full bg-[#0c0c0e] rounded-[calc(1.5rem-1px)] p-8 flex flex-col">
-          {/* Header */}
-          <div className="flex justify-between items-start mb-6">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-                <Github className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-white">
-                  Total Contributions
-                </h3>
-                <p className="text-xs text-muted-foreground">Year to date</p>
+    <Card className="bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-border/50 overflow-hidden hover:border-primary/30 transition-all duration-500 group">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <Avatar className="h-12 w-12 ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
+                <AvatarImage
+                  src={`https://github.com/${GITHUB_USERNAME}.png`}
+                />
+                <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/5">
+                  <Github className="w-6 h-6" />
+                </AvatarFallback>
+              </Avatar>
+              <div className="absolute -bottom-1 -right-1 p-0.5 rounded-full bg-green-500 border-2 border-background">
+                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               </div>
             </div>
-            <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
-              Active
-            </Badge>
-          </div>
-
-          {/* Big Number */}
-          <div className="text-6xl md:text-7xl font-black text-white tracking-tighter mb-8">
-            {/* {stats.totalContributions.toLocaleString()} */}
-            2012 +
-          </div>
-
-          {/* Meta Stats Row (Compact) */}
-          <div className="flex items-center gap-6 mb-8 pb-6 border-b border-white/5">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Flame className="w-4 h-4 text-orange-500" />
-              <span className="text-sm">{stats.currentStreak} day streak</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Star className="w-4 h-4 text-yellow-500" />
-              <span className="text-sm">{stats.totalStars} stars</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <GitFork className="w-4 h-4 text-purple-500" />
-              <span className="text-sm">{stats.totalRepos} repos</span>
+            <div>
+              <CardTitle className="text-xl flex items-center gap-2">
+                @{GITHUB_USERNAME}
+                <Badge variant="secondary" className="text-[10px] px-1.5">
+                  <Sparkles className="w-3 h-3 mr-1" />
+                  Active
+                </Badge>
+              </CardTitle>
+              <CardDescription>Full Stack Developer</CardDescription>
             </div>
           </div>
+          <Button variant="outline" size="sm" className="gap-1.5" asChild>
+            <Link
+              href={`https://github.com/${GITHUB_USERNAME}`}
+              target="_blank">
+              <Github className="w-3.5 h-3.5" />
+              Profile
+              <ExternalLink className="w-3 h-3" />
+            </Link>
+          </Button>
+        </div>
+      </CardHeader>
 
-          {/* Languages Progress (Clean) */}
-          <div className="space-y-4 flex-1">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Top Languages
-            </h4>
-            {topLangs.map(([lang, count], idx) => (
-              <div key={lang} className="space-y-1">
-                <div className="flex justify-between text-xs text-gray-400">
-                  <span>{lang}</span>
-                  <span className="font-mono text-white">{count} repos</span>
-                </div>
-                <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full ${LANGUAGE_COLORS[lang] || "bg-gray-500"}`}
-                    style={{
-                      width: `${(count / (topLangs[0][1] || 1)) * 100}%`,
-                    }}
-                  />
-                </div>
-              </div>
+      <CardContent className="space-y-5">
+        {/* Main Contribution Number */}
+        <div className="relative text-center py-5 bg-gradient-to-br from-primary/5 via-primary/3 to-transparent rounded-xl overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-pulse" />
+          <div className="relative">
+            <div className="text-5xl md:text-6xl font-black bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              2193 +
+            </div>
+            <div className="flex items-center justify-center gap-1 mt-1">
+              <p className="text-xs text-muted-foreground">
+                Total Contributions (Last Year)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <Separator className="bg-border/50" />
+
+        {/* Stats Grid - 3x2 Layout */}
+        <div className="grid grid-cols-2 gap-3">
+          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
+            <div className="p-1.5 rounded-md bg-orange-500/10 text-orange-500">
+              <Flame className="w-3.5 h-3.5" />
+            </div>
+            <div>
+              <p className="text-sm font-bold">{stats.currentStreak}</p>
+              <p className="text-[10px] text-muted-foreground">Day Streak</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
+            <div className="p-1.5 rounded-md bg-yellow-500/10 text-yellow-500">
+              <Trophy className="w-3.5 h-3.5" />
+            </div>
+            <div>
+              <p className="text-sm font-bold">{stats.longestStreak}</p>
+              <p className="text-[10px] text-muted-foreground">Longest</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
+            <div className="p-1.5 rounded-md bg-yellow-500/10 text-yellow-500">
+              <Star className="w-3.5 h-3.5" />
+            </div>
+            <div>
+              <p className="text-sm font-bold">
+                {stats.totalStars.toLocaleString()}
+              </p>
+              <p className="text-[10px] text-muted-foreground">Stars</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
+            <div className="p-1.5 rounded-md bg-purple-500/10 text-purple-500">
+              <GitFork className="w-3.5 h-3.5" />
+            </div>
+            <div>
+              <p className="text-sm font-bold">
+                {stats.totalForks.toLocaleString()}
+              </p>
+              <p className="text-[10px] text-muted-foreground">Forks</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
+            <div className="p-1.5 rounded-md bg-blue-500/10 text-blue-500">
+              <Users className="w-3.5 h-3.5" />
+            </div>
+            <div>
+              <p className="text-sm font-bold">
+                {stats.totalFollowers.toLocaleString()}
+              </p>
+              <p className="text-[10px] text-muted-foreground">Followers</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
+            <div className="p-1.5 rounded-md bg-green-500/10 text-green-500">
+              <Code2 className="w-3.5 h-3.5" />
+            </div>
+            <div>
+              <p className="text-sm font-bold">{stats.totalRepos}</p>
+              <p className="text-[10px] text-muted-foreground">Repos</p>
+            </div>
+          </div>
+        </div>
+
+        <Separator className="bg-border/50" />
+
+        {/* Languages Section with Custom Progress */}
+        <div>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-1.5">
+              <Target className="w-3.5 h-3.5 text-muted-foreground" />
+              <p className="text-xs font-medium text-muted-foreground">
+                Tech Stack
+              </p>
+            </div>
+            <p className="text-[10px] text-muted-foreground bg-muted/30 px-2 py-0.5 rounded-full">
+              {totalLangs} repos
+            </p>
+          </div>
+          <div className="space-y-2.5">
+            {topLangs.map(([lang, count]) => (
+              <TooltipProvider key={lang}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="space-y-1 cursor-help">
+                      <div className="flex justify-between text-xs">
+                        <div className="flex items-center gap-1.5">
+                          <div
+                            className="w-2 h-2 rounded-full"
+                            style={{
+                              backgroundColor:
+                                LANGUAGE_COLORS[lang] || "#6b7280",
+                            }}
+                          />
+                          <span className="font-medium">{lang}</span>
+                        </div>
+                        <span className="text-muted-foreground">
+                          {count} repos
+                        </span>
+                      </div>
+                      <CustomProgress
+                        value={(count / totalLangs) * 100}
+                        color={LANGUAGE_COLORS[lang] || "#6b7280"}
+                      />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent side="left" className="text-xs">
+                    {Math.round((count / totalLangs) * 100)}% of repositories
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             ))}
           </div>
         </div>
-      </div>
-    </motion.div>
+      </CardContent>
+    </Card>
   );
 }
 
+// Activity Card Component
 function ActivityCard({
   activities,
   username,
@@ -287,91 +497,222 @@ function ActivityCard({
   activities: RecentActivity[];
   username: string;
 }) {
-  const icons: Record<string, any> = {
-    PushEvent: BookOpen,
-    PullRequestEvent: GitFork,
-    CreateEvent: Activity,
+  const getActivityAction = (type: string) => {
+    const actions: Record<string, string> = {
+      PushEvent: "pushed to",
+      PullRequestEvent: "opened PR in",
+      CreateEvent: "created",
+      IssuesEvent: "opened issue in",
+      WatchEvent: "starred",
+      ForkEvent: "forked",
+    };
+    return actions[type] || "updated";
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.1 }}
-      className="relative h-full">
-      {/* Creative Border */}
-      <div className="h-full rounded-3xl bg-linear-to-br from-white/10 to-white/5 p-[1px] hover:from-white/20 hover:to-white/10 transition-colors">
-        <div className="h-full w-full bg-[#0c0c0e] rounded-[calc(1.5rem-1px)] p-8 flex flex-col">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-bold text-white">Recent Activity</h3>
-            <Link
-              href={`https://github.com/${username}`}
-              target="_blank"
-              className="text-xs text-primary hover:underline">
-              View GitHub
-            </Link>
+    <Card className="bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-border/50 h-full flex flex-col hover:border-primary/30 transition-all duration-500 group">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Activity className="w-5 h-5 text-primary" />
+            <CardTitle className="text-xl">Recent Activity</CardTitle>
           </div>
+          <Button variant="ghost" size="sm" className="text-xs gap-1" asChild>
+            <Link href={`https://github.com/${username}`} target="_blank">
+              View all
+              <ExternalLink className="w-3 h-3" />
+            </Link>
+          </Button>
+        </div>
+        <CardDescription>
+          Latest GitHub events and contributions
+        </CardDescription>
+      </CardHeader>
 
-          <div className="space-y-3 flex-1">
-            {activities.map((act) => {
-              const Icon = icons[act.type] || Activity;
-              return (
-                <div
-                  key={act.id}
-                  className="group flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer">
-                  <div className="p-2 rounded-lg bg-white/10 text-white group-hover:bg-primary group-hover:text-black transition-colors">
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm font-medium text-white truncate group-hover:text-primary transition-colors">
-                      {act.repo}
+      <CardContent className="flex-1">
+        <div className="space-y-3">
+          {activities.map((activity, idx) => {
+            const Icon = activityIcons[activity.type] || Activity;
+            const colorClass =
+              activityColors[activity.type] || "text-gray-500 bg-gray-500/10";
+            const action = getActivityAction(activity.type);
+
+            return (
+              <motion.div
+                key={activity.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.08 }}
+                className="group/activity">
+                <Link href={activity.url} target="_blank" className="block">
+                  <div className="flex items-start gap-3 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-all duration-300 cursor-pointer border border-transparent hover:border-border/50">
+                    <div
+                      className={cn(
+                        "p-2 rounded-lg shrink-0 transition-all duration-300",
+                        colorClass,
+                      )}>
+                      <Icon className="w-4 h-4" />
                     </div>
-                    <div className="text-[10px] text-muted-foreground flex items-center gap-2 mt-0.5">
-                      <span className="px-1.5 py-0.5 rounded bg-black/50 text-[9px] uppercase font-bold">
-                        {act.type.replace("Event", "")}
-                      </span>
-                      <span>{act.date}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-sm font-medium truncate max-w-[150px] sm:max-w-[200px]">
+                          {activity.repo}
+                        </span>
+                        <Badge
+                          variant="outline"
+                          className="text-[9px] px-1.5 py-0 h-4">
+                          {action}
+                        </Badge>
+                      </div>
+                      <div className="flex items-center gap-2 mt-1.5">
+                        <Calendar className="w-3 h-3 text-muted-foreground" />
+                        <span className="text-xs text-muted-foreground">
+                          {activity.date}
+                        </span>
+                        <div className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+                        <span className="text-[10px] text-muted-foreground capitalize">
+                          {activity.type.replace("Event", "")}
+                        </span>
+                      </div>
                     </div>
+                    <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover/activity:opacity-100 transition-all duration-300 shrink-0" />
                   </div>
-                </div>
-              );
-            })}
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* GitHub Stats Footer */}
+        <div className="mt-6 pt-4 border-t border-border/50">
+          <div className="flex items-center justify-between text-xs text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <GitCommit className="w-3 h-3" />
+              <span>Active contributor</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              <span>Updated just now</span>
+            </div>
           </div>
         </div>
-      </div>
-    </motion.div>
+      </CardContent>
+    </Card>
   );
 }
 
+// Loading Skeleton
+function LoadingSkeleton() {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-3">
+            <Skeleton className="h-12 w-12 rounded-full" />
+            <div>
+              <Skeleton className="h-5 w-32" />
+              <Skeleton className="h-3 w-24 mt-1" />
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Skeleton className="h-24 w-full rounded-xl" />
+          <div className="grid grid-cols-2 gap-3">
+            {[...Array(6)].map((_, i) => (
+              <Skeleton key={i} className="h-14 w-full rounded-lg" />
+            ))}
+          </div>
+          <Skeleton className="h-32 w-full rounded-lg" />
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <Skeleton className="h-6 w-32" />
+          <Skeleton className="h-3 w-48" />
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {[...Array(5)].map((_, i) => (
+            <Skeleton key={i} className="h-16 w-full rounded-xl" />
+          ))}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+// Main Component
 export default function GitHubStats() {
   const { stats, languages, recentActivity, loading, error } = useGitHubData();
 
-  if (loading) return <div className="py-24 text-center">Loading...</div>;
+  if (loading) {
+    return (
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted mb-4">
+              <Github className="w-3 h-3" />
+              <span className="text-xs">GitHub Insights</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              GitHub Activity
+            </h2>
+            <p className="text-muted-foreground">
+              Loading GitHub statistics...
+            </p>
+          </div>
+          <LoadingSkeleton />
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section className="py-24 relative overflow-hidden bg-background">
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
+    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mb-2">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 bg-gradient-to-r from-foreground via-foreground/80 to-muted-foreground bg-clip-text text-transparent">
             GitHub <span className="text-primary">Activity</span>
           </h2>
-          <p className="text-muted-foreground">
-            Real-time contributions & coding progress.
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
+            Real-time contributions, coding progress, and open-source impact
           </p>
-        </div>
+        </motion.div>
 
-        {/* Clean 2-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto h-[500px]">
+        {/* Stats Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <MainStatCard stats={stats} languages={languages} />
           <ActivityCard
             activities={recentActivity}
             username={GITHUB_USERNAME}
           />
-        </div>
+        </motion.div>
+
+        {/* Error Message */}
+        {error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-6 text-center">
+            <p className="text-xs text-muted-foreground bg-muted/30 inline-block px-3 py-1 rounded-full">
+              {error}
+            </p>
+          </motion.div>
+        )}
       </div>
     </section>
   );

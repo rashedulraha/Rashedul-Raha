@@ -10,6 +10,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import Navbar from "../shared/Navbar/Navbar";
+import Responsive from "../Responsive/Responsive";
 
 const coreLanguages = [
   { name: "C/C++" },
@@ -80,7 +81,8 @@ export default function Skills() {
   return (
     <section className="relative bg-background">
       <Navbar />
-      <div className="container mx-auto px-4 max-w-6xl">
+
+      <Responsive>
         {/* Header */}
         <div className="mb-10">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-2">
@@ -232,7 +234,7 @@ export default function Skills() {
             </div>
           </div>
         </motion.div>
-      </div>
+      </Responsive>
     </section>
   );
 }

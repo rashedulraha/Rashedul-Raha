@@ -1,13 +1,12 @@
-import Responsive from "@/components/Responsive/Responsive";
-
+import HorizontalResponsive from "@/components/Responsive/HorizontalResponsive";
 import Skills from "@/views/skills/skills";
 
 export default function Page() {
   return (
     <>
-      <Responsive>
+      <HorizontalResponsive>
         <Skills />
-      </Responsive>
+      </HorizontalResponsive>
     </>
   );
 }

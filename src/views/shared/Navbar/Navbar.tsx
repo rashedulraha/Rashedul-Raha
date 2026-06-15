@@ -100,8 +100,8 @@ export default function Navbar() {
         animate={{ y: hidden ? -120 : 0, opacity: hidden ? 0 : 1 }}
         transition={{ duration: 0.3, type: "spring", bounce: 0.2 }}
         className={cn(
-          "fixed top-5 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-500",
-          scrolled && "top-3",
+          "fixed top-7 left-0 right-0 z-50 flex justify-center px-4 transition-all duration-500",
+          scrolled && "top-5",
         )}>
         {/* Floating Pill Container with Animated Gradient Border */}
         <div className="relative group">
@@ -113,7 +113,7 @@ export default function Navbar() {
               "relative flex h-14 sm:h-16 items-center justify-between gap-4 md:gap-6",
               "px-4 sm:px-6",
               "border border-foreground/10 rounded-full",
-              "bg-background/80 backdrop-blur-2xl",
+              "backdrop-blur-2xl",
               "shadow-lg shadow-black/5",
               "transition-all duration-300",
               scrolled && "shadow-xl shadow-black/10 bg-background/90",

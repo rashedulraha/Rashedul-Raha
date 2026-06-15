@@ -15,6 +15,7 @@ export default function QuickView() {
   return (
     <>
       <ThreeDMarqueeHome />
+
       <Navbar />
 
       <div className="min-h-screen bg-linear-to-br from-background via-background to-primary/5 ">

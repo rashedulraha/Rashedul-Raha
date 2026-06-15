@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import Navbar from "../shared/Navbar/Navbar";
 import HeroBanner from "../shared/HeroBanner/HeroBanner";
+import Responsive from "../Responsive/Responsive";
 
 const Home: React.FC = () => {
   const router = useRouter();
@@ -49,10 +50,13 @@ const Home: React.FC = () => {
   return (
     <div className="relative h-screen w-full overflow-hidden bg-background">
       <Navbar />
-
       <main className="relative z-10 h-full flex md:items-center justify-center">
-        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <HeroBanner />
+        <div className="w-full">
+          <Responsive>
+            <div className="py-5 md:my-10">
+              <HeroBanner />
+            </div>
+          </Responsive>
         </div>
       </main>
     </div>
