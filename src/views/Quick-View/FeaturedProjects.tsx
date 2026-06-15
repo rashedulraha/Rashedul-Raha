@@ -689,7 +689,7 @@ export default function FeaturedProjects() {
           <div className="mb-12 text-center">
             <div className="skeleton h-8 w-32 mx-auto mb-4 rounded-lg bg-muted animate-pulse" />
             <div className="skeleton h-12 w-96 mx-auto mb-4 rounded-lg bg-muted animate-pulse" />
-            <div className="skeleton h-6 w-[500px] mx-auto rounded-lg bg-muted animate-pulse" />
+            <div className="skeleton h-6 w-125 mx-auto rounded-lg bg-muted animate-pulse" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[300px]">
             {[1, 2, 3, 4].map((i) => (
