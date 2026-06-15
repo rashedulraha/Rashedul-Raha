@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/ui/themeProvider";
+import { ThemeProvider } from "../components/theme-provider";
+
 import RealTimeChatWidget from "@/components/RealTimeChatWidget/RealTimeChatWidget";
 
 export const metadata: Metadata = {
@@ -38,8 +39,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <body className=" bg-background text-foreground antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
           <div className="relative min-h-screen">
             {children}
             <RealTimeChatWidget />

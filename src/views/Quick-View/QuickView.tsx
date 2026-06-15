@@ -2,25 +2,19 @@
 
 import { motion, useScroll } from "framer-motion";
 import Navbar from "../shared/Navbar/Navbar";
-import HeroSection from "./HeroSection";
-import TechStackSection from "./TechStackSection";
 import FeaturedProjects from "./FeaturedProjects";
-import ExpertiseSection from "./ExpertiseSection";
 import GitHubStats from "./GitHubStats";
 import CallToAction from "./CallToAction";
+import { ThreeDMarqueeHome } from "./ThreeDMarqueeHome";
+import Skills from "../skills/skills";
+import NetworkVisualization from "@/components/network";
 
 export default function QuickView() {
   const { scrollYProgress } = useScroll();
 
-  const userData = {
-    name: "Rashedul Islam",
-    title:
-      "Full-Stack Architect | AI Integrator | System Designer | AI & RAG Systems Builder",
-    bio: "I'm a Full-Stack Developer and System Architect with a passion for building production-grade applications. My expertise spans from low-level performance optimization to high-level system design and AI integration.",
-  };
-
   return (
     <>
+      <ThreeDMarqueeHome />
       <Navbar />
 
       <div className="min-h-screen bg-linear-to-br from-background via-background to-primary/5 ">
@@ -30,10 +24,11 @@ export default function QuickView() {
           style={{ scaleX: scrollYProgress }}
         />
 
-        <HeroSection {...userData} />
-        <TechStackSection />
+        <div className="mt-5 md:mt-10">
+          <Skills />
+        </div>
         <FeaturedProjects />
-        <ExpertiseSection />
+        <NetworkVisualization />
         <GitHubStats />
         <CallToAction />
 
