@@ -1,3 +1,4 @@
+import { ThreeDMarqueeHome } from "@/views/Quick-View/ThreeDMarqueeHome";
 import Navbar from "@/views/shared/Navbar/Navbar";
 import React from "react";
 

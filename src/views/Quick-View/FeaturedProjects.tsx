@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   ArrowRight,
   X,
@@ -11,25 +11,34 @@ import {
   Github,
   Layers,
   Star,
+  Monitor,
+  TrendingUp,
+  AlertCircle,
+  Box,
+  Image as ImageIcon,
 } from "lucide-react";
 import { featuredProjects } from "./Data/quickViewData";
 import { useState } from "react";
 import Link from "next/link";
 
-// Type definition
+// ─── UPDATED INTERFACE WITH NEW FIELDS ───
 interface Project {
   title: string;
   desc: string;
   longDesc?: string;
-  gradient?: string; // Kept for fallback if needed
-  image: string; // Now expecting Unsplash URL
+  image: string;
+  screenshots?: string[]; // Array of image URLs
+  architecture?: string; // Text description or diagram URL
   tech: string;
+  role?: string; // e.g., "Lead Developer"
+  challenges?: string; // What was hard
+  outcome?: string; // Impact/Metrics
   github?: string;
   live?: string;
   stats: string;
 }
 
-// Animation Variants
+// ─── BENTO GRID VARIANTS ───
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -41,19 +50,80 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, scale: 0.95 },
   visible: {
     opacity: 1,
-    y: 0,
+    scale: 1,
     transition: {
       type: "spring" as const,
-      stiffness: 100,
-      damping: 12,
+      stiffness: 200,
+      damping: 20,
     },
   },
 };
 
-// ─── Professional Project Modal ───
+// ─── PROJECT CARD COMPONENT (Supports different sizes) ───
+function ProjectCard({
+  project,
+  layoutClass, // e.g., "md:col-span-2 md:row-span-2"
+  onClick,
+}: {
+  project: Project;
+  layoutClass?: string;
+  onClick: () => void;
+}) {
+  return (
+    <motion.div
+      variants={itemVariants}
+      className={`group relative cursor-pointer overflow-hidden rounded-3xl bg-white/5 border border-white/5 hover:border-white/20 transition-all duration-300 ${layoutClass}`}
+      onClick={onClick}>
+      {/* Image Background */}
+      <div className="absolute inset-0">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
+      </div>
+
+      {/* Content Overlay */}
+      <div className="absolute inset-0 p-6 flex flex-col justify-end">
+        <div className="space-y-2">
+          {/* Role Badge */}
+          {project.role && (
+            <Badge className="w-fit bg-white/10 backdrop-blur-md text-white border-white/20 text-[10px] px-2 py-0.5 uppercase tracking-wider">
+              {project.role}
+            </Badge>
+          )}
+
+          <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
+            {project.title}
+          </h3>
+
+          {/* Outcome Metric (Prominent) */}
+          {project.outcome && (
+            <div className="flex items-center gap-2 text-emerald-400 font-medium text-sm">
+              <TrendingUp className="w-4 h-4" />
+              <span>{project.outcome}</span>
+            </div>
+          )}
+
+          <p className="text-gray-300 text-sm line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+            {project.desc}
+          </p>
+        </div>
+
+        {/* Hover Action */}
+        <div className="absolute top-6 right-6 p-2 bg-black/50 backdrop-blur-md rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-[-10px] group-hover:translate-y-0">
+          <ArrowRight className="w-5 h-5 text-white" />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── ADVANCED PROJECT MODAL (Tabs) ───
 function ProjectModal({
   project,
   isOpen,
@@ -63,143 +133,230 @@ function ProjectModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const [activeTab, setActiveTab] = useState<
+    "overview" | "architecture" | "gallery"
+  >("overview");
+
   if (!isOpen) return null;
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md"
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md"
           />
 
-          {/* Modal Container */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 overflow-y-auto">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.96, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              exit={{ opacity: 0, scale: 0.96, y: 20 }}
               transition={{ type: "spring", duration: 0.5 }}
-              className="relative w-full max-w-5xl bg-[#0c0c0e] border border-white/10 rounded-2xl shadow-2xl overflow-hidden my-10">
-              {/* Close Button */}
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 z-20 p-2 bg-black/50 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md transition-all duration-300 border border-white/10">
-                <X className="w-5 h-5" />
-              </button>
+              className="relative w-full max-w-6xl bg-[#0c0c0e] border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] my-10">
+              {/* Modal Header */}
+              <div className="relative h-[30vh] md:h-[40vh]">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0e] to-transparent" />
+                <button
+                  onClick={onClose}
+                  className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-white text-white hover:text-black rounded-full backdrop-blur-md transition-all">
+                  <X className="w-5 h-5" />
+                </button>
 
-              {/* Split Layout: Image Left | Content Right */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
-                {/* Left: Large Image Showcase */}
-                <div className="relative h-64 lg:h-auto bg-black">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-90"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0e] to-transparent lg:bg-gradient-to-r" />
-
-                  {/* Floating Badge on Image */}
-                  <div className="absolute bottom-6 left-6 z-10">
-                    <Badge className="bg-primary text-white border-0 px-3 py-1 shadow-lg shadow-primary/25">
-                      <Star className="w-3 h-3 mr-1 fill-white" />
-                      Featured
-                    </Badge>
+                {/* Header Text */}
+                <div className="absolute bottom-8 left-8 md:left-12">
+                  <Badge className="mb-2 bg-primary text-white border-0">
+                    Case Study
+                  </Badge>
+                  <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+                    {project.title}
+                  </h2>
+                  <div className="flex items-center gap-4 mt-2 text-sm text-gray-300 font-mono">
+                    {project.role && <span>{project.role}</span>}
+                    <span className="w-1 h-1 bg-gray-500 rounded-full" />
+                    <span>{project.stats}</span>
                   </div>
                 </div>
+              </div>
 
-                {/* Right: Content */}
-                <div className="p-8 lg:p-12 flex flex-col justify-center">
-                  <div className="mb-6">
-                    <h2 className="text-3xl lg:text-4xl font-bold text-white mb-2 leading-tight">
-                      {project.title}
-                    </h2>
-                    <p className="text-muted-foreground font-mono text-sm flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                      {project.stats}
-                    </p>
-                  </div>
+              {/* Modal Body & Tabs */}
+              <div className="p-6 md:p-12 overflow-y-auto flex-1 bg-[#0c0c0e]">
+                {/* Tab Navigation */}
+                <div className="flex gap-1 p-1 bg-white/5 rounded-lg w-fit mb-8 border border-white/5">
+                  <button
+                    onClick={() => setActiveTab("overview")}
+                    className={`px-4 py-2 text-sm rounded-md transition-colors ${activeTab === "overview" ? "bg-white/10 text-white font-medium" : "text-gray-400 hover:text-white"}`}>
+                    Overview
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("architecture")}
+                    className={`px-4 py-2 text-sm rounded-md transition-colors ${activeTab === "architecture" ? "bg-white/10 text-white font-medium" : "text-gray-400 hover:text-white"}`}>
+                    Architecture
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("gallery")}
+                    className={`px-4 py-2 text-sm rounded-md transition-colors ${activeTab === "gallery" ? "bg-white/10 text-white font-medium" : "text-gray-400 hover:text-white"}`}>
+                    Gallery
+                  </button>
+                </div>
 
-                  <div className="mb-8 space-y-4">
-                    <p className="text-muted-foreground leading-relaxed text-base">
-                      {project.longDesc || project.desc}
-                    </p>
+                {/* Tab Content */}
+                <div className="min-h-50">
+                  {/* --- OVERVIEW TAB --- */}
+                  {activeTab === "overview" && (
+                    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-3">
+                          About the Project
+                        </h3>
+                        <p className="text-muted-foreground leading-relaxed">
+                          {project.longDesc || project.desc}
+                        </p>
+                      </div>
 
-                    {/* Features List (Visual filler for better look) */}
-                    <div className="bg-white/5 p-4 rounded-lg border border-white/5">
-                      <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-                        Highlights
-                      </h4>
-                      <ul className="space-y-2 text-sm text-gray-300">
-                        <li className="flex items-center gap-2">
-                          <div className="w-1 h-1 bg-primary rounded-full" />
-                          <span>High-performance architecture</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <div className="w-1 h-1 bg-primary rounded-full" />
-                          <span>Modern responsive UI/UX</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <div className="w-1 h-1 bg-primary rounded-full" />
-                          <span>Scalable backend integration</span>
-                        </li>
-                      </ul>
+                      {/* Tech Stack */}
+                      <div>
+                        <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+                          Tech Stack
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.split(",").map((t, i) => (
+                            <Badge
+                              key={i}
+                              variant="secondary"
+                              className="bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:text-white transition-colors px-3 py-1 rounded-md">
+                              {t.trim()}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Challenges */}
+                        {project.challenges && (
+                          <div className="bg-orange-500/5 border border-orange-500/10 rounded-xl p-5">
+                            <div className="flex items-center gap-2 text-orange-400 mb-2">
+                              <AlertCircle className="w-5 h-5" />
+                              <h4 className="font-bold">Challenges</h4>
+                            </div>
+                            <p className="text-sm text-gray-400">
+                              {project.challenges}
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Outcome */}
+                        {project.outcome && (
+                          <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-xl p-5">
+                            <div className="flex items-center gap-2 text-emerald-400 mb-2">
+                              <TrendingUp className="w-5 h-5" />
+                              <h4 className="font-bold">Outcome</h4>
+                            </div>
+                            <p className="text-sm text-gray-400">
+                              {project.outcome}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-white/10">
+                        {project.live && (
+                          <Button
+                            asChild
+                            className="bg-white text-black hover:bg-gray-200 h-12 rounded-xl font-semibold flex-1 justify-center">
+                            <a
+                              href={project.live}
+                              target="_blank"
+                              rel="noopener noreferrer">
+                              <ExternalLink className="w-4 h-4 mr-2" />
+                              Live Demo
+                            </a>
+                          </Button>
+                        )}
+                        {project.github && (
+                          <Button
+                            variant="outline"
+                            asChild
+                            className="h-12 rounded-xl border-white/20 hover:bg-white/5 flex-1 justify-center">
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer">
+                              <Github className="w-4 h-4 mr-2" />
+                              GitHub Repo
+                            </a>
+                          </Button>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Tech Stack */}
-                  <div className="mb-8">
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-2">
-                      <Layers className="w-3.5 h-3.5" /> Technology
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.split(",").map((t, i) => (
-                        <Badge
-                          key={i}
-                          variant="secondary"
-                          className="bg-white/5 border-white/10 text-xs px-3 py-1 rounded-md hover:bg-white/10 transition-colors">
-                          {t.trim()}
-                        </Badge>
-                      ))}
+                  {/* --- ARCHITECTURE TAB --- */}
+                  {activeTab === "architecture" && (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                      <h3 className="text-xl font-bold text-white mb-4">
+                        System Architecture
+                      </h3>
+                      <div className="bg-white/5 rounded-xl p-6 border border-white/5 min-h-[300px] flex items-center justify-center">
+                        {project.architecture ? (
+                          <div className="text-center text-gray-400">
+                            <Box className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                            <p>{project.architecture}</p>
+                          </div>
+                        ) : (
+                          <div className="text-center text-muted-foreground">
+                            <Monitor className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                            <p>
+                              Architecture diagram description would go here.
+                            </p>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-white/5">
-                    {project.live && (
-                      <Button
-                        asChild
-                        className="bg-primary hover:bg-primary/90 text-white h-11 rounded-lg font-medium flex-1 justify-center">
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Preview
-                        </a>
-                      </Button>
-                    )}
-
-                    {project.github && (
-                      <Button
-                        variant="outline"
-                        asChild
-                        className="h-11 rounded-lg border-white/20 hover:bg-white/5 hover:text-white flex-1 justify-center">
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          <Github className="w-4 h-4 mr-2" />
-                          Source Code
-                        </a>
-                      </Button>
-                    )}
-                  </div>
+                  {/* --- GALLERY TAB --- */}
+                  {activeTab === "gallery" && (
+                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                      <h3 className="text-xl font-bold text-white mb-4">
+                        Screenshots
+                      </h3>
+                      <div className="flex overflow-x-auto gap-4 pb-4 snap-x">
+                        {(project.screenshots || [project.image]).map(
+                          (img, i) => (
+                            <div
+                              key={i}
+                              className="min-w-[300px] md:min-w-[400px] snap-center rounded-xl overflow-hidden border border-white/10">
+                              <img
+                                src={img}
+                                alt={`Screenshot ${i + 1}`}
+                                className="w-full h-auto object-cover"
+                              />
+                            </div>
+                          ),
+                        )}
+                        {/* Add placeholder if empty */}
+                        {!project.screenshots && (
+                          <div className="min-w-[300px] h-[200px] bg-white/5 rounded-xl flex items-center justify-center border border-dashed border-white/10 text-muted-foreground">
+                            <div className="flex flex-col items-center">
+                              <ImageIcon className="w-8 h-8 mb-2 opacity-50" />
+                              <span>No more screenshots</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -210,109 +367,117 @@ function ProjectModal({
   );
 }
 
-// ─── Main Component ───
+// ─── MAIN COMPONENT ───
 export default function FeaturedProjects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <>
       <section className="py-24 relative overflow-hidden bg-muted/10">
-        {/* Background Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+        {/* Background */}
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150" />
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-purple-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
 
         <div className="container mx-auto px-4 relative z-10">
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-16">
-            <Badge
-              variant="outline"
-              className="mb-4 px-4 py-1 text-xs rounded-full border-white/10 bg-white/5 text-slate-300">
-              Selected Works
+            className="mb-16">
+            <Badge className="mb-4 bg-white/10 border-white/10 text-white">
+              Portfolio
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">
+            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-4">
               Featured Projects
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-base leading-relaxed">
-              Exploring the intersection of design and engineering through
-              real-world applications.
+            <p className="text-muted-foreground text-lg max-w-2xl">
+              Curated selection of impactful digital products and experiments.
             </p>
           </motion.div>
 
+          {/* BENTO GRID LAYOUT */}
+          {/* Using a 4-column grid. Cards span multiple rows/cols to fill space. */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {featuredProjects.map((project, idx) => (
-              <motion.div key={idx} variants={itemVariants} className="h-full">
-                <Card className="group relative h-full flex flex-col border-white/5 bg-card/50 backdrop-blur-sm overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300">
-                  {/* Unsplash Image Area */}
-                  <div className="relative h-56 w-full overflow-hidden">
-                    <img
-                      src={
-                        typeof project.image === "string"
-                          ? project.image
-                          : "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=800"
-                      }
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-80" />
+            className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[300px]">
+            {/* Project 1: Hero (Spans 2 cols, 2 rows) */}
+            {featuredProjects[0] && (
+              <ProjectCard
+                key={0}
+                project={featuredProjects[0] as unknown as Project}
+                layoutClass="md:col-span-2 md:row-span-2"
+                onClick={() =>
+                  setSelectedProject(featuredProjects[0] as unknown as Project)
+                }
+              />
+            )}
 
-                    {/* Hover Overlay for CTA */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <Button
-                        size="sm"
-                        onClick={() =>
-                          setSelectedProject(project as unknown as Project)
-                        }
-                        className="bg-white text-black hover:bg-gray-200 rounded-full px-6 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                        View Details
-                      </Button>
-                    </div>
-                  </div>
+            {/* Project 2: Standard (1x1) */}
+            {featuredProjects[1] && (
+              <ProjectCard
+                key={1}
+                project={featuredProjects[1] as unknown as Project}
+                layoutClass="md:col-span-1 md:row-span-1"
+                onClick={() =>
+                  setSelectedProject(featuredProjects[1] as unknown as Project)
+                }
+              />
+            )}
 
-                  <CardHeader className="pb-3 pt-5 px-6">
-                    <div className="flex justify-between items-start gap-2">
-                      <CardTitle className="text-lg font-bold text-white leading-tight">
-                        {project.title}
-                      </CardTitle>
-                      {project.live && (
-                        <Link
-                          href={`${project.live}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="p-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors">
-                          <ExternalLink className="w-4 h-4" />
-                        </Link>
-                      )}
-                    </div>
-                    <div className="mt-2">
-                      <Badge
-                        variant="secondary"
-                        className="bg-white/5 border-white/10 text-[10px] px-2 py-0.5 rounded">
-                        {project.tech.split(",")[0].trim()}
-                      </Badge>
-                    </div>
-                  </CardHeader>
+            {/* Project 3: Standard (1x1) */}
+            {featuredProjects[2] && (
+              <ProjectCard
+                key={2}
+                project={featuredProjects[2] as unknown as Project}
+                layoutClass="md:col-span-1 md:row-span-1"
+                onClick={() =>
+                  setSelectedProject(featuredProjects[2] as unknown as Project)
+                }
+              />
+            )}
 
-                  <CardContent className="pt-0 px-6 pb-6 grow">
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
-                      {project.desc}
-                    </p>
+            {/* Project 4: Wide (Spans 2 cols, 1 row) */}
+            {featuredProjects[3] && (
+              <ProjectCard
+                key={3}
+                project={featuredProjects[3] as unknown as Project}
+                layoutClass="md:col-span-2 md:row-span-1"
+                onClick={() =>
+                  setSelectedProject(featuredProjects[3] as unknown as Project)
+                }
+              />
+            )}
 
-                    <div className="flex items-center text-xs text-muted-foreground font-mono mt-auto border-t border-white/5 pt-3">
-                      <span>{project.stats}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+            {/* Project 5: Standard (1x1) */}
+            {featuredProjects[4] && (
+              <ProjectCard
+                key={4}
+                project={featuredProjects[4] as unknown as Project}
+                layoutClass="md:col-span-1 md:row-span-1"
+                onClick={() =>
+                  setSelectedProject(featuredProjects[4] as unknown as Project)
+                }
+              />
+            )}
+
+            {/* Project 6: Standard (1x1) */}
+            {featuredProjects[5] && (
+              <ProjectCard
+                key={5}
+                project={featuredProjects[5] as unknown as Project}
+                layoutClass="md:col-span-1 md:row-span-1"
+                onClick={() =>
+                  setSelectedProject(featuredProjects[5] as unknown as Project)
+                }
+              />
+            )}
+
+            {/* Add more projects dynamically if needed, adjusting layoutClass */}
           </motion.div>
         </div>
       </section>

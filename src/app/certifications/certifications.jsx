@@ -3,7 +3,7 @@ import React from "react";
 const Certifications = () => {
   return (
     <div>
-      <h1>Certifications</h1>
+      <h2>Home</h2>
     </div>
   );
 };

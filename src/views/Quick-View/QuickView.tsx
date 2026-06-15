@@ -3,11 +3,13 @@
 import { motion, useScroll } from "framer-motion";
 import Navbar from "../shared/Navbar/Navbar";
 import HeroSection from "./HeroSection";
-import TechStackSection from "./TechStackSection";
 import FeaturedProjects from "./FeaturedProjects";
 import ExpertiseSection from "./ExpertiseSection";
 import GitHubStats from "./GitHubStats";
 import CallToAction from "./CallToAction";
+import TechMarquee from "../shared/HeroBanner/TechMarquee";
+import Responsive from "../Responsive/Responsive";
+import { ThreeDMarqueeHome } from "./ThreeDMarqueeHome";
 
 export default function QuickView() {
   const { scrollYProgress } = useScroll();
@@ -20,6 +22,7 @@ export default function QuickView() {
 
   return (
     <>
+      <ThreeDMarqueeHome />
       <Navbar />
 
       <div className="min-h-screen bg-linear-to-br from-background via-background to-primary/5 ">
@@ -29,8 +32,12 @@ export default function QuickView() {
           style={{ scaleX: scrollYProgress }}
         />
 
-        <HeroSection {...userData} />
-        <TechStackSection />
+        {/* <HeroSection {...userData} /> */}
+
+        <Responsive>
+          <TechMarquee />
+        </Responsive>
+
         <FeaturedProjects />
         <ExpertiseSection />
         <GitHubStats />
