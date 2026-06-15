@@ -712,10 +712,6 @@ export default function FeaturedProjects() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className="mb-12 text-center">
-            <Badge className="mb-4 bg-primary/10 text-primary border-2 border-primary/20 px-3 py-1 text-xs font-semibold">
-              <Sparkles className="w-3 h-3 mr-1.5" />
-              Portfolio Showcase
-            </Badge>
             <h2 className="text-4xl md:text-6xl font-bold text-foreground tracking-tight  text-start">
               Featured <span>Projects</span>
             </h2>

@@ -12,11 +12,13 @@ import {
 import Navbar from "../shared/Navbar/Navbar";
 
 const coreLanguages = [
-  { name: "TypeScript", level: "Expert" },
-  { name: "JavaScript", level: "Expert" },
-  { name: "Python", level: "Proficient" },
-  { name: "SQL", level: "Proficient" },
-  { name: "HTML/CSS", level: "Expert" },
+  { name: "C/C++" },
+  { name: "Go" },
+  { name: "TypeScript" },
+  { name: "JavaScript" },
+  { name: "Python" },
+  { name: "SQL" },
+  { name: "HTML/CSS" },
 ];
 
 const techStack = {
@@ -113,7 +115,6 @@ export default function Skills() {
                   <span className="text-sm font-medium text-foreground">
                     {lang.name}
                   </span>
-                  <LevelBadge level={lang.level} />
                 </div>
               ))}
             </div>

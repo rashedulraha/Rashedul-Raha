@@ -31,7 +31,7 @@ export default function Experience() {
 
       <CommonBg />
 
-      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 pb-20">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <ExperienceHeader />
 
         <ExperienceTabs activeTab={activeTab} setActiveTab={setActiveTab} />

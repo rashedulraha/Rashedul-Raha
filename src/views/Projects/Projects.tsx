@@ -1,13 +1,10 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { AnimatePresence } from "framer-motion";
-import { Card } from "@/components/ui/card";
 
 // Components
 import ProjectHeader from "./ProjectHeader";
-import ProjectFilters from "./ProjectFilters";
-import TechCloud from "./TechCloud";
+
 import FooterCTA from "./FooterCTA";
 import Navbar from "../shared/Navbar/Navbar";
 
@@ -24,6 +21,7 @@ import ProjectStats from "./ ProjectStats";
 import { useLenis } from "@/Hooks/useLenis";
 import CommonBg from "@/components/CommonBg/CommonBg";
 import FeaturedProjects from "../Quick-View/FeaturedProjects";
+import Responsive from "../Responsive/Responsive";
 
 // JSON Data Structure Interface
 interface RawProject {
@@ -84,38 +82,18 @@ export default function Projects() {
     loadProjects();
   }, []);
 
-  const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
-      const matchesSearch =
-        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.tech.some((t) =>
-          t.toLowerCase().includes(searchQuery.toLowerCase()),
-        );
-      const matchesCategory =
-        selectedCategory === "all" || project.category === selectedCategory;
-      const matchesComplexity =
-        selectedComplexity === "all" ||
-        project.complexity === selectedComplexity;
-      return matchesSearch && matchesCategory && matchesComplexity;
-    });
-  }, [projects, searchQuery, selectedCategory, selectedComplexity]);
-
-  const clearFilters = () => {
-    setSearchQuery("");
-    setSelectedCategory("all");
-    setSelectedComplexity("all");
-  };
-
   return (
-    <div className="relative min-h-screen  ">
+    <div className="relative min-h-screen">
       <CommonBg />
       <Navbar />
-      <main className="relative z-10 max-w-7xl mx-auto px-4 pt-24 pb-20">
-        <ProjectHeader />
-        <FeaturedProjects />
+      <Responsive>
+        <main className="relative z-10">
+          <ProjectHeader />
+          <FeaturedProjects />
 
-        <FooterCTA />
-      </main>
+          <FooterCTA />
+        </main>
+      </Responsive>
     </div>
   );
 }

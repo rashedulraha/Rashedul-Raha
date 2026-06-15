@@ -6,6 +6,7 @@ import FeaturedProjects from "./FeaturedProjects";
 import GitHubStats from "./GitHubStats";
 import CallToAction from "./CallToAction";
 import { ThreeDMarqueeHome } from "./ThreeDMarqueeHome";
+import Skills from "../skills/skills";
 
 export default function QuickView() {
   const { scrollYProgress } = useScroll();
@@ -22,6 +23,9 @@ export default function QuickView() {
           style={{ scaleX: scrollYProgress }}
         />
 
+        <div className="mt-5 md:mt-10">
+          <Skills />
+        </div>
         <FeaturedProjects />
         <GitHubStats />
         <CallToAction />

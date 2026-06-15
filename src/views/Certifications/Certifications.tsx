@@ -105,7 +105,7 @@ export default function PageCertifications() {
   });
 
   return (
-    <section className="relative min-h-screen w-full bg-black text-white px-4 py-24 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative min-h-screen w-full bg-black text-white px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Decorative Ambient Lights */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-sky-500/10 blur-[120px]" />
@@ -114,7 +114,7 @@ export default function PageCertifications() {
 
       <div className="relative z-10 max-w-6xl mx-auto w-full">
         {/* Header Section */}
-        <div className="text-center md:text-left md:flex md:items-end md:justify-between border-b border-white/10 pb-8 mb-12">
+        <div className="text-center md:text-left md:flex md:items-end md:justify-between border-b border-white/10 ">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/5 px-3 py-1 text-xs font-medium text-sky-400 mb-4">
               <Award className="w-3.5 h-3.5" /> Verified Achievements
@@ -146,7 +146,7 @@ export default function PageCertifications() {
         </div>
 
         {/* Search & Filtering Controls */}
-        <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-10 w-full">
+        <div className="flex flex-col md:flex-row gap-4 justify-between items-center  w-full">
           {/* Search Input */}
           <div className="relative w-full md:max-w-md group">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 group-focus-within:text-sky-400 transition-colors" />

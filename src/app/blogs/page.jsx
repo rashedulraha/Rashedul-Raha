@@ -5,6 +5,7 @@ import {
   getCategories,
   getFeaturedPost,
 } from "./_Utilities/blog";
+import Responsive from "@/components/Responsive/Responsive";
 
 export const metadata = {
   title: "Blog | Rashedul Islam - Tech Insights & Tutorials",
@@ -34,13 +35,13 @@ export default function BlogPage() {
   return (
     <div>
       <Navbar />
-      <div className="my-10 md:my-20">
+      <Responsive>
         <BlogClient
           posts={posts}
           featuredPost={featuredPost}
           categories={categories}
         />
-      </div>
+      </Responsive>
     </div>
   );
 }
