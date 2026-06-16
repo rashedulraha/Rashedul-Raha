@@ -258,7 +258,7 @@ function NetworkVisualization() {
   }
 
   return (
-    <div className="flex items-center justify-center p-2 sm:p-4 overflow-hidden font-sans w-full h-full min-h-100">
+    <div className="flex items-center justify-center p-2 sm:p-4 overflow-hidden font-sans w-full h-full">
       <div
         className="relative"
         style={{

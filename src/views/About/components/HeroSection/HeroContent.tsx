@@ -48,13 +48,6 @@ const buttonConfig = {
 };
 
 const HeroContent = () => {
-  const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = "/resume.pdf";
-    link.download = "resume.pdf";
-    link.click();
-  };
-
   return (
     <motion.div
       initial="hidden"
@@ -86,11 +79,12 @@ const HeroContent = () => {
         variants={itemVariants}
         className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-w-md mx-auto lg:mx-0">
         {/* Download Resume Button */}
-        <Button size="lg" onClick={handleDownload} className="rounded-full">
-          <Download className="w-4 h-4 mr-2" />
-          {buttonConfig.resume.text}
-          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-        </Button>
+        <Link href="/Md-Rasheduli-Islam.pdf" target="_blank">
+          <Button size="lg" className="rounded-full">
+            Show Resume
+            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </Link>
 
         {/* Get In Touch Button */}
         <Link href={buttonConfig.contact.href} className="w-full sm:w-auto">

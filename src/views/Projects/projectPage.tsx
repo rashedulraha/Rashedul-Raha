@@ -15,10 +15,10 @@ import {
   X,
   Sparkles,
   Eye,
-  Globe,
 } from "lucide-react";
 import { useState, useEffect, useMemo, useRef } from "react";
 import Responsive from "../Responsive/Responsive";
+import { Input } from "@/components/ui/input";
 
 interface Project {
   id: string;
@@ -231,15 +231,11 @@ export default function ProjectsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center">
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors px-4 py-1">
-            <Sparkles className="w-3 h-3 mr-2" />
-            Selected Works
-          </Badge>
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground tracking-tight mb-4 bg-clip-text bg-linear-to-b from-foreground to-foreground/60">
+          className="mb-16">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-2">
             Featured Projects
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm text-muted-foreground max-w-2xl">
             A collection of high-performance web applications crafted with
             precision.
           </p>
@@ -253,28 +249,26 @@ export default function ProjectsPage() {
           className="backdrop-blur-xl bg-card/50 border-2 border-border rounded-3xl p-2 mb-12 shadow-2xl shadow-black/5">
           <div className="p-4">
             <div className="relative mb-6">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/70" />
-              <input
+              <Input
                 type="text"
                 placeholder="Search by technology, name..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                className="w-full pl-12 pr-12 py-4 rounded-2xl bg-background border-2 border-border focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all text-base text-foreground"
               />
               {searchInput && (
-                <button
+                <Button
                   onClick={() => setSearchInput("")}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-2 rounded-full hover:bg-muted transition-all">
                   <X className="w-5 h-5" />
-                </button>
+                </Button>
               )}
             </div>
             <div className="flex flex-wrap gap-3 items-center justify-center">
               {categories.map((category) => (
-                <button
+                <Button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`relative px-6 py-2.5 rounded-xl text-sm font-medium transition-all overflow-hidden group ${
+                  className={`relative px-6   text-sm font-medium transition-all overflow-hidden group ${
                     selectedCategory === category
                       ? "bg-foreground text-background border-2 border-transparent shadow-lg shadow-primary/20"
                       : "bg-muted/30 text-muted-foreground border-2 border-border hover:border-primary/30 hover:text-foreground hover:bg-muted/50"
@@ -295,7 +289,7 @@ export default function ProjectsPage() {
                       }}
                     />
                   )}
-                </button>
+                </Button>
               ))}
             </div>
             <div className="mt-6 text-center">

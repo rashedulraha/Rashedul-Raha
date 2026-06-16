@@ -1,4 +1,4 @@
-import { ExternalLink, Sparkles, ChevronRight } from "lucide-react";
+import { ExternalLink, Sparkles, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -74,17 +74,12 @@ export default function HeroBanner() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full py-5">
-          <Button
-            asChild
-            size="lg"
-            className="w-full sm:w-auto font-bold rounded-full px-8 shadow-lg shadow-primary/10 hover:shadow-primary/20 transition-all active:scale-95">
-            <a
-              href="/Md-Rasheduli-Islam.pdf"
-              download
-              className="flex items-center gap-2">
-              Get Resume <ExternalLink className="w-4 h-4" />
-            </a>
-          </Button>
+          <Link href="/Md-Rasheduli-Islam.pdf" target="_blank">
+            <Button size="lg" className="rounded-full">
+              Show Resume
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
 
           <Link href="/contact" className="w-full sm:w-auto">
             <Button

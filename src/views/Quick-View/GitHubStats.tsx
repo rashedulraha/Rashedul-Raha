@@ -307,7 +307,7 @@ function MainStatCard({
     .slice(0, 5);
 
   return (
-    <Card className="bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-border/50 overflow-hidden hover:border-primary/30 transition-all duration-500 group">
+    <Card className="bg-linear-to-br from-card to-card/80 backdrop-blur-sm border-border/50 overflow-hidden hover:border-primary/30 transition-all duration-500 group">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -316,7 +316,7 @@ function MainStatCard({
                 <AvatarImage
                   src={`https://github.com/${GITHUB_USERNAME}.png`}
                 />
-                <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/5">
+                <AvatarFallback className="bg-linear-to-br from-primary/20 to-primary/5">
                   <Github className="w-6 h-6" />
                 </AvatarFallback>
               </Avatar>
@@ -646,7 +646,7 @@ export default function GitHubStats() {
 
   if (loading) {
     return (
-      <section className="py-16 md:py-24 bg-background">
+      <section className="bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted mb-4">
@@ -667,7 +667,7 @@ export default function GitHubStats() {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
+    <section className="bg-background relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />

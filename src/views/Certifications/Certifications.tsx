@@ -21,67 +21,95 @@ interface Certificate {
   date: string;
   credentialId: string;
   credentialUrl: string;
-  category: "Full-Stack" | "Cloud & DevOps" | "UI/UX" | "Other";
+  category: string;
   skills: string[];
   featured: boolean;
 }
 
 // Default Data (Apni chaile alada file thekeo import korte parben)
+
 const defaultCertificates: Certificate[] = [
   {
     id: "cert-1",
-    title: "Advanced Next.js & React Architecture",
-    issuer: "Vercel / Next.js Expert Program",
-    date: "March 2024",
-    credentialId: "NX-88291-RH",
+    title: "Complete Web Development – Level 1",
+    issuer: "Programming Hero",
+    date: "",
+    credentialId: "",
     credentialUrl: "#",
     category: "Full-Stack",
-    skills: ["Next.js 14", "React 18", "Server Actions", "Turbopack"],
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Responsive Design",
+      "Next.js",
+      "Firebase",
+      "Next auth",
+    ],
     featured: true,
   },
+
   {
     id: "cert-2",
-    title: "AWS Certified Solutions Architect",
-    issuer: "Amazon Web Services (AWS)",
-    date: "January 2024",
-    credentialId: "AWS-ASA-9921",
-    credentialUrl: "#",
-    category: "Cloud & DevOps",
-    skills: ["AWS S3", "EC2", "Serverless", "CloudFront Architecture"],
-    featured: true,
-  },
-  {
-    id: "cert-3",
-    title: "TypeScript Enterprise Design Patterns",
-    issuer: "UI.dev / TypeScript Academy",
-    date: "November 2023",
-    credentialId: "TS-7712-RE",
+    title: "Complete Web Development – Level 2",
+    issuer: "Programming Hero",
+    date: "2-3-2026",
+    credentialId: "",
     credentialUrl: "#",
     category: "Full-Stack",
-    skills: ["Generics", "Advanced Types", "Async Workflows"],
-    featured: false,
+    skills: [
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Authentication",
+      "Postgresql",
+      "neon db",
+      "Type script",
+      "Prisma",
+      "Docker",
+      "N8N",
+      "AI",
+      "Nginx",
+    ],
+    featured: true,
   },
+
+  {
+    id: "cert-3",
+    title: "Software Engineering Program",
+    issuer: "Phitron",
+    date: "",
+    credentialId: "",
+    credentialUrl: "#",
+    category: "Software Engineering",
+    skills: ["C++", "Problem Solving", "Data Structures", "Algorithms"],
+    featured: true,
+  },
+
   {
     id: "cert-4",
-    title: "Prisma & PostgreSQL Masterclass",
-    issuer: "MongoDB & Prisma Institute",
-    date: "September 2023",
-    credentialId: "PR-DB-0021",
+    title: "System Design & Backend Learning",
+    issuer: "Self Learning",
+    date: "",
+    credentialId: "",
     credentialUrl: "#",
-    category: "Cloud & DevOps",
-    skills: ["PostgreSQL", "Prisma ORM", "Database Indexing", "Pooling"],
+    category: "Backend",
+    skills: ["REST APIs", "Database Design", "System Design", "Architecture"],
     featured: false,
   },
+
   {
     id: "cert-5",
-    title: "Advanced Interaction & Motion Design",
-    issuer: "Framer Motion Academy",
-    date: "June 2023",
-    credentialId: "FM-MOTION-443",
+    title: "AI & RAG Engineering",
+    issuer: "Self Learning",
+    date: "",
+    credentialId: "",
     credentialUrl: "#",
-    category: "UI/UX",
-    skills: ["Framer Motion", "3D Transforms", "SVG Animations"],
-    featured: true,
+    category: "AI",
+    skills: ["OpenAI", "RAG", "LangChain", "Vector Database"],
+    featured: false,
   },
 ];
 
