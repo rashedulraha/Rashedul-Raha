@@ -43,7 +43,7 @@ export default function ExperienceHeader() {
 
       <div className="w-full h-full bg-whiter border rounded-sm">
         {/* web cap feature */}
-        <WebcamPixelGridDemo />
+        {/* <WebcamPixelGridDemo /> */}
       </div>
     </div>
   );

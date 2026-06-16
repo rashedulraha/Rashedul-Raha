@@ -31,7 +31,7 @@ export function GridBackground() {
       <motion.div
         className={cn(
           "absolute inset-0",
-          "bg-[size:40px_40px]",
+          "bg-size-[40px_40px]",
           "bg-[linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
           "dark:bg-[linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]",
         )}
@@ -51,7 +51,7 @@ export function GridBackground() {
       <motion.div
         className={cn(
           "absolute inset-0",
-          "bg-[size:80px_80px]",
+          "bg-size-[80px_80px]",
           "bg-[linear-gradient(to_right,#e4e4e7_0.5px,transparent_0.5px),linear-gradient(to_bottom,#e4e4e7_0.5px,transparent_0.5px)]",
           "dark:bg-[linear-gradient(to_right,#262626_0.5px,transparent_0.5px),linear-gradient(to_bottom,#262626_0.5px,transparent_0.5px)]",
           "opacity-50",

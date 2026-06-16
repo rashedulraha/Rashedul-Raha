@@ -34,6 +34,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Responsive from "@/views/Responsive/Responsive";
 
 interface Project {
   id: string;
@@ -250,279 +251,280 @@ export default function ProjectDetailsPage() {
       {/* ═══════════════════════════════════════════════════════════
           MAIN CONTENT - MODERN GRADIENT BORDER CARD
           ═══════════════════════════════════════════════════════════ */}
-      <div className="container mx-auto px-4 -mt-5 relative z-10 pb-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className={cn(
-            "relative rounded-3xl overflow-hidden",
-            "bg-gradient-to-br p-[2px]",
-            categoryColors[project.category] ||
-              "from-primary/50 to-secondary/50",
-          )}>
-          {/* Inner Card */}
-          <div className="bg-card rounded-3xl overflow-hidden">
-            {/* PARTITION 1: STATS - MODERN GRID */}
-            <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border">
-              <div className="p-6 text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
-                  <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-                  <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
-                    Rating
-                  </p>
-                </div>
-                <span className="text-2xl font-bold text-foreground">
-                  {project.rating}
-                  <span className="text-sm text-muted-foreground font-normal ml-1">
-                    /5
-                  </span>
-                </span>
-              </div>
-
-              <div className="p-6 text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
-                  <Eye className="w-4 h-4 text-blue-500" />
-                  <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
-                    Views
-                  </p>
-                </div>
-                <span className="text-2xl font-bold text-foreground">
-                  {project.views.toLocaleString()}
-                </span>
-              </div>
-
-              <div className="p-6 text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
-                  <Clock className="w-4 h-4 text-emerald-500" />
-                  <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
-                    Duration
-                  </p>
-                </div>
-                <span className="text-2xl font-bold text-foreground">
-                  {project.duration}
-                </span>
-              </div>
-
-              <div className="p-6 text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
-                  <Users className="w-4 h-4 text-purple-500" />
-                  <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
-                    Team
-                  </p>
-                </div>
-                <span className="text-2xl font-bold text-foreground">
-                  {project.teamSize}
-                  <span className="text-sm text-muted-foreground font-normal ml-1">
-                    people
-                  </span>
-                </span>
-              </div>
-            </div>
-
-            {/* PARTITION 2: ABOUT + ROLE */}
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
-              <div className="p-6 md:p-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="p-1.5 rounded-lg bg-primary/10 text-primary">
-                    <Code2 className="w-5 h-5" />
+      <Responsive>
+        <div className="-mt-5 relative z-10 pb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className={cn(
+              "relative overflow-hidden",
+              categoryColors[project.category] ||
+                "from-primary/50 to-secondary/50",
+            )}>
+            {/* Inner Card */}
+            <div className=" bg-background overflow-hidden">
+              {/* PARTITION 1: STATS - MODERN GRID */}
+              <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border">
+                <div className="p-6 text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
+                    <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+                    <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+                      Rating
+                    </p>
                   </div>
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                    About Project
-                  </h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {project.longDesc}
-                </p>
-              </div>
-
-              <div className="p-6 md:p-8 space-y-6">
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="p-1.5 rounded-lg bg-blue-500/10 text-blue-500">
-                      <Briefcase className="w-5 h-5" />
-                    </div>
-                    <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                      My Role
-                    </h3>
-                  </div>
-                  <p className="text-base font-medium text-foreground">
-                    {project.role}
-                  </p>
-                </div>
-
-                <div className="pt-6 border-t border-border">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-500">
-                      <TrendingUp className="w-5 h-5" />
-                    </div>
-                    <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                      Key Metric
-                    </h3>
-                  </div>
-                  <p className="text-base font-medium text-foreground">
-                    {project.metric}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* PARTITION 3: TECH STACK */}
-            <div className="p-6 md:p-8 border-t border-border">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="p-1.5 rounded-lg bg-purple-500/10 text-purple-500">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                  Tech Stack
-                </h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((t) => {
-                  const Icon = techIcons[t] || Terminal;
-                  return (
-                    <span
-                      key={t}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 text-sm rounded-xl bg-muted border border-border/50 text-foreground hover:border-primary/50 hover:text-primary hover:bg-primary/5 transition-all duration-300">
-                      <Icon className="w-4 h-4" />
-                      {t}
+                  <span className="text-2xl font-bold text-foreground">
+                    {project.rating}
+                    <span className="text-sm text-muted-foreground font-normal ml-1">
+                      /5
                     </span>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* PARTITION 4: CHALLENGES + OUTCOME */}
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border border-t border-border">
-              <div className="p-6 md:p-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="p-1.5 rounded-lg bg-orange-500/10 text-orange-500">
-                    <AlertCircle className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                    Challenges
-                  </h3>
+                  </span>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {project.challenges}
-                </p>
+
+                <div className="p-6 text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
+                    <Eye className="w-4 h-4 text-blue-500" />
+                    <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+                      Views
+                    </p>
+                  </div>
+                  <span className="text-2xl font-bold text-foreground">
+                    {project.views.toLocaleString()}
+                  </span>
+                </div>
+
+                <div className="p-6 text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
+                    <Clock className="w-4 h-4 text-emerald-500" />
+                    <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+                      Duration
+                    </p>
+                  </div>
+                  <span className="text-2xl font-bold text-foreground">
+                    {project.duration}
+                  </span>
+                </div>
+
+                <div className="p-6 text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-2 mb-1">
+                    <Users className="w-4 h-4 text-purple-500" />
+                    <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+                      Team
+                    </p>
+                  </div>
+                  <span className="text-2xl font-bold text-foreground">
+                    {project.teamSize}
+                    <span className="text-sm text-muted-foreground font-normal ml-1">
+                      people
+                    </span>
+                  </span>
+                </div>
               </div>
 
-              <div className="p-6 md:p-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-500">
-                    <Award className="w-5 h-5" />
+              {/* PARTITION 2: ABOUT + ROLE */}
+              <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
+                <div className="p-6 md:p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="p-1.5 rounded-lg bg-primary/10 text-primary">
+                      <Code2 className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                      About Project
+                    </h3>
                   </div>
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                    Outcome
-                  </h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {project.outcome}
-                </p>
-              </div>
-            </div>
-
-            {/* PARTITION 5: ARCHITECTURE */}
-            <div className="p-6 md:p-8 border-t border-border">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-500">
-                  <Box className="w-5 h-5" />
-                </div>
-                <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                  Architecture
-                </h3>
-              </div>
-              <div className="p-5 rounded-xl bg-muted/30 border border-border/50 hover:border-primary/30 transition-colors duration-300">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10 text-primary mt-1">
-                    <Database className="w-5 h-5" />
-                  </div>
-                  <p className="text-sm font-mono text-muted-foreground leading-relaxed flex-1">
-                    {project.architecture}
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {project.longDesc}
                   </p>
                 </div>
-              </div>
-            </div>
 
-            {/* PARTITION 6: SCREENSHOTS */}
-            {project.screenshots && project.screenshots.length > 0 && (
+                <div className="p-6 md:p-8 space-y-6">
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="p-1.5 rounded-lg bg-blue-500/10 text-blue-500">
+                        <Briefcase className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                        My Role
+                      </h3>
+                    </div>
+                    <p className="text-base font-medium text-foreground">
+                      {project.role}
+                    </p>
+                  </div>
+
+                  <div className="pt-6 border-t border-border">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-500">
+                        <TrendingUp className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                        Key Metric
+                      </h3>
+                    </div>
+                    <p className="text-base font-medium text-foreground">
+                      {project.metric}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* PARTITION 3: TECH STACK */}
               <div className="p-6 md:p-8 border-t border-border">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-500">
-                    <Layers className="w-5 h-5" />
+                  <div className="p-1.5 rounded-lg bg-purple-500/10 text-purple-500">
+                    <Zap className="w-5 h-5" />
                   </div>
                   <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                    Screenshots
+                    Tech Stack
                   </h3>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {project.screenshots.map((img, i) => (
-                    <div
-                      key={i}
-                      className="relative rounded-xl overflow-hidden border border-border/50 aspect-video group hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
-                      <Image
-                        src={img}
-                        alt={`Screenshot ${i + 1}`}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <Badge className="bg-black/50 backdrop-blur-sm text-white border-0 text-xs">
-                          Screenshot {i + 1}
-                        </Badge>
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((t) => {
+                    const Icon = techIcons[t] || Terminal;
+                    return (
+                      <span
+                        key={t}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 text-sm rounded-xl bg-muted border border-border/50 text-foreground hover:border-primary/50 hover:text-primary hover:bg-primary/5 transition-all duration-300">
+                        <Icon className="w-4 h-4" />
+                        {t}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
-            )}
 
-            {/* PARTITION 7: ACTION BUTTONS */}
-            <div className="p-6 md:p-8 flex flex-col sm:flex-row gap-3 justify-center border-t border-border bg-muted/20">
-              {project.links.live && (
-                <Button
-                  asChild
-                  size="lg"
-                  className={cn(
-                    "rounded-xl font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95",
-                    "bg-gradient-to-r",
-                    categoryColors[project.category] ||
-                      "from-primary to-primary/80",
-                  )}>
-                  <a
-                    href={project.links.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2">
-                    <ExternalLink className="w-5 h-5" />
-                    Live Demo
-                  </a>
-                </Button>
+              {/* PARTITION 4: CHALLENGES + OUTCOME */}
+              <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border border-t border-border">
+                <div className="p-6 md:p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="p-1.5 rounded-lg bg-orange-500/10 text-orange-500">
+                      <AlertCircle className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                      Challenges
+                    </h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {project.challenges}
+                  </p>
+                </div>
+
+                <div className="p-6 md:p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-500">
+                      <Award className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                      Outcome
+                    </h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {project.outcome}
+                  </p>
+                </div>
+              </div>
+
+              {/* PARTITION 5: ARCHITECTURE */}
+              <div className="p-6 md:p-8 border-t border-border">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-500">
+                    <Box className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                    Architecture
+                  </h3>
+                </div>
+                <div className="p-5 rounded-xl bg-muted/30 border border-border/50 hover:border-primary/30 transition-colors duration-300">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-primary/10 text-primary mt-1">
+                      <Database className="w-5 h-5" />
+                    </div>
+                    <p className="text-sm font-mono text-muted-foreground leading-relaxed flex-1">
+                      {project.architecture}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* PARTITION 6: SCREENSHOTS */}
+              {project.screenshots && project.screenshots.length > 0 && (
+                <div className="p-6 md:p-8 border-t border-border">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-500">
+                      <Layers className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                      Screenshots
+                    </h3>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {project.screenshots.map((img, i) => (
+                      <div
+                        key={i}
+                        className="relative rounded-xl overflow-hidden border border-border/50 aspect-video group hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
+                        <Image
+                          src={img}
+                          alt={`Screenshot ${i + 1}`}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <Badge className="bg-black/50 backdrop-blur-sm text-white border-0 text-xs">
+                            Screenshot {i + 1}
+                          </Badge>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
-              {project.links.github && (
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="rounded-xl font-semibold border-2 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 hover:scale-105 active:scale-95">
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2">
-                    <FaGithub className="w-5 h-5" />
-                    GitHub Repo
-                  </a>
-                </Button>
-              )}
+
+              {/* PARTITION 7: ACTION BUTTONS */}
+              <div className="p-6 md:p-8 flex flex-col sm:flex-row gap-3 justify-center border-t border-border bg-muted/20">
+                {project.links.live && (
+                  <Button
+                    asChild
+                    size="lg"
+                    className={cn(
+                      "rounded-xl font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95",
+                      "bg-gradient-to-r",
+                      categoryColors[project.category] ||
+                        "from-primary to-primary/80",
+                    )}>
+                    <a
+                      href={project.links.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2">
+                      <ExternalLink className="w-5 h-5" />
+                      Live Demo
+                    </a>
+                  </Button>
+                )}
+                {project.links.github && (
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="rounded-xl font-semibold border-2 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 hover:scale-105 active:scale-95">
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2">
+                      <FaGithub className="w-5 h-5" />
+                      GitHub Repo
+                    </a>
+                  </Button>
+                )}
+              </div>
             </div>
-          </div>
-        </motion.div>
-      </div>
+          </motion.div>
+        </div>
+      </Responsive>
     </div>
   );
 }
