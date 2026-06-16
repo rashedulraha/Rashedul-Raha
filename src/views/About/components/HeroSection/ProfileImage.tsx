@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import image from "../../../../assets/rashedul.jpeg";
+import { HeroAvatar } from "../HeroAvatar";
 
 const itemVariants = {
   hidden: { opacity: 0, y: 10 },
@@ -16,11 +16,7 @@ export default function ProfileImage() {
       variants={itemVariants}
       className="relative group w-full max-w-60 sm:max-w-70 lg:max-w-none lg:w-auto">
       <div className="relative w-48 h-48 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 mx-auto rounded-2xl sm:rounded-3xl overflow-hidden border-2 sm:border-4 border-primary/20 bg-card shadow-2xl">
-        <img
-          src={image.src}
-          alt="Rashedul Islam"
-          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-        />
+        <HeroAvatar />
       </div>
 
       {/* Availability Badge */}

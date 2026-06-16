@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Type definitions
 interface Avatar {
   id: number;
   name: string;
@@ -25,29 +24,26 @@ interface AvatarPositions {
   [key: string]: Position;
 }
 
-// Main React component for the improved network visualization
 function NetworkVisualization() {
-  // State to track container dimensions
+  const [mounted, setMounted] = useState(false);
   const [containerSize, setContainerSize] = useState({
     width: 700,
     height: 700,
   });
-  // Removed unused isMobile state
 
-  // Responsive dimensions based on screen size
   const dimensions = useMemo(() => {
     const baseSize = Math.min(containerSize.width, containerSize.height);
-    const scale = baseSize / 700; // Scale factor based on original 700px design
+    const scale = baseSize / 700;
 
     return {
       containerSize: baseSize,
       outerRadius: Math.floor(290 * scale),
       innerRadius: Math.floor(180 * scale),
-      centerImageSize: Math.floor(160 * scale), // w-40 = 160px
-      outerAvatarSize: Math.floor(80 * scale), // w-20 = 80px
-      innerAvatarSize: Math.floor(72 * scale), // w-18 = 72px
-      outerImageSize: Math.floor(64 * scale), // w-16 = 64px
-      innerImageSize: Math.floor(56 * scale), // w-14 = 56px
+      centerImageSize: Math.floor(160 * scale),
+      outerAvatarSize: Math.floor(80 * scale),
+      innerAvatarSize: Math.floor(72 * scale),
+      outerImageSize: Math.floor(64 * scale),
+      innerImageSize: Math.floor(56 * scale),
       strokeWidth: Math.max(1, Math.floor(3 * scale)),
       tooltipTextSize: scale < 0.6 ? "text-xs" : "text-sm",
       centerX: baseSize / 2,
@@ -55,15 +51,15 @@ function NetworkVisualization() {
     };
   }, [containerSize]);
 
-  // Effect to handle responsive sizing
   useEffect(() => {
+    setMounted(true);
+
     const updateSize = () => {
+      if (typeof window === "undefined") return;
       const width = window.innerWidth;
       const height = window.innerHeight;
-      // Removed unused isMobile logic
 
-      // Calculate available space (accounting for padding and margins)
-      const maxWidth = Math.min(width - 32, 700); // 32px for padding
+      const maxWidth = Math.min(width - 32, 700);
       const maxHeight = Math.min(height - 32, 700);
       const size = Math.min(maxWidth, maxHeight);
 
@@ -75,9 +71,7 @@ function NetworkVisualization() {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  // Avatar data array with diverse images. Positions will be calculated dynamically.
   const avatars: Avatar[] = useMemo(() => {
-    // New list of image links for avatars
     const newImageLinks = [
       "https://i.pinimg.com/736x/8c/6d/db/8c6ddb5fe6600fcc4b183cb2ee228eb7.jpg",
       "https://i.pinimg.com/736x/6f/a3/6a/6fa36aa2c367da06b2a4c8ae1cf9ee02.jpg",
@@ -118,8 +112,6 @@ function NetworkVisualization() {
       { id: 16, name: "Pat", image: newImageLinks[15], ring: "outer" },
       { id: 17, name: "Drew", image: newImageLinks[16], ring: "inner" },
       { id: 18, name: "Lee", image: newImageLinks[17], ring: "outer" },
-      // Added more avatars for increased density and better distribution
-      // Using existing image links for additional avatars, cycling if needed
       {
         id: 19,
         name: "Taylor",
@@ -159,28 +151,25 @@ function NetworkVisualization() {
     ];
   }, []);
 
-  // Separate avatars into inner and outer rings for distinct positioning
   const outerRingAvatars = avatars.filter((a) => a.ring === "outer");
   const innerRingAvatars = avatars.filter((a) => a.ring === "inner");
 
-  // State to hold the active connections
   const [activeConnections, setActiveConnections] = useState<Connection[]>([]);
 
-  // Pre-calculate all avatar positions and store them in a map for easy lookup
   const allAvatarPositions: AvatarPositions = useMemo(() => {
-    // Function to calculate the absolute center position of an avatar
-    // relative to the top-left of the container.
     const getAvatarAbsolutePosition = (
       index: number,
       total: number,
       radius: number,
       startAngleOffset: number = 0,
     ): Position => {
-      const angle = startAngleOffset + (index / total) * 2 * Math.PI; // Angle in radians, with offset
-      const x = radius * Math.cos(angle);
-      const y = radius * Math.sin(angle);
-      // Add center coordinates to center the coordinates within the container
-      return { cx: dimensions.centerX + x, cy: dimensions.centerY + y };
+      const angle = startAngleOffset + (index / total) * 2 * Math.PI;
+      const x = parseFloat((radius * Math.cos(angle)).toFixed(3));
+      const y = parseFloat((radius * Math.sin(angle)).toFixed(3));
+      return {
+        cx: parseFloat((dimensions.centerX + x).toFixed(3)),
+        cy: parseFloat((dimensions.centerY + y).toFixed(3)),
+      };
     };
 
     const positions: AvatarPositions = {};
@@ -200,39 +189,37 @@ function NetworkVisualization() {
         Math.PI / 3,
       );
     });
-    // Add the center image's position
+
     positions["center"] = {
-      cx: dimensions.centerX,
-      cy: dimensions.centerY,
-    } as Position;
+      cx: parseFloat(dimensions.centerX.toFixed(3)),
+      cy: parseFloat(dimensions.centerY.toFixed(3)),
+    };
     return positions;
   }, [dimensions, outerRingAvatars, innerRingAvatars]);
 
-  // Get all possible connection points (avatar IDs and 'center')
   const allConnectionPoints: (number | "center")[] = useMemo(
     () => [...avatars.map((a) => a.id), "center"],
     [avatars],
   );
 
-  // Helper function to get a random element from an array
   const getRandomElement = <T,>(arr: T[]): T =>
     arr[Math.floor(Math.random() * arr.length)];
 
-  // Effect to generate random connections periodically
   useEffect(() => {
+    if (!mounted) return;
+
     const interval = setInterval(() => {
       let from: number | "center";
       let to: number | "center";
       let newConnection: Connection | null = null;
       let attempts = 0;
-      const maxAttempts = 10; // Prevent infinite loops if points are exhausted
+      const maxAttempts = 10;
 
       do {
         from = getRandomElement(allConnectionPoints);
         to = getRandomElement(allConnectionPoints);
         attempts++;
         if (from !== to) {
-          // Found a valid connection
           newConnection = {
             from,
             to,
@@ -252,22 +239,26 @@ function NetworkVisualization() {
         }
       } while (attempts < maxAttempts);
 
-      setActiveConnections(newConnection ? [newConnection] : []); // Only one connection at a time
-    }, 4000); // Update connections every 4 seconds (3s animation + 1s pause)
+      setActiveConnections(newConnection ? [newConnection] : []);
+    }, 4000);
 
-    // Cleanup interval on component unmount
     return () => clearInterval(interval);
-  }, [allConnectionPoints]); // Include allConnectionPoints dependency
+  }, [allConnectionPoints, mounted]);
 
-  // Helper function to check if an ID is part of the current active connection
   const isCurrentlyConnected = (id: number | "center"): boolean => {
     return activeConnections.some((conn) => conn.from === id || conn.to === id);
   };
 
+  if (!mounted) {
+    return (
+      <div className="flex items-center justify-center p-2 sm:p-4 w-full h-full min-h-[400px]">
+        <div className="animate-pulse bg-purple-400/10 rounded-full w-[500px] h-[500px]" />
+      </div>
+    );
+  }
+
   return (
-    // Main container for the visualization, setting background and centering content
     <div className="flex items-center justify-center p-2 sm:p-4 overflow-hidden font-sans w-full h-full min-h-[400px]">
-      {/* Relative container for the network elements to position them absolutely */}
       <div
         className="relative"
         style={{
@@ -294,11 +285,11 @@ function NetworkVisualization() {
 
         {/* Center image */}
         <div
-          className="absolute shadow-lg z-10 group-center cursor-pointer"
+          className="absolute shadow-lg z-10 group cursor-pointer"
           style={{
             left: `${dimensions.centerX}px`,
             top: `${dimensions.centerY}px`,
-            transform: `translate(-50%, -50%)`, // Center the image element precisely
+            transform: `translate(-50%, -50%)`,
           }}>
           <img
             src="https://i.pinimg.com/736x/5c/62/7a/5c627a3458297ee0c587328e5f7061fc.jpg"
@@ -313,7 +304,7 @@ function NetworkVisualization() {
               target.style.display = "none";
               const parent = target.parentElement;
               if (parent) {
-                parent.innerHTML = `<span class="text-2xl text-white">⭐</span>`; // Fallback to a star emoji
+                parent.innerHTML = `<span class="text-2xl text-white">⭐</span>`;
               }
             }}
           />
@@ -323,12 +314,11 @@ function NetworkVisualization() {
             className={`absolute -top-10 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full font-medium text-gray-800 shadow-lg transition-opacity duration-200 pointer-events-none whitespace-nowrap z-20 ${dimensions.tooltipTextSize}
               ${
                 isCurrentlyConnected("center")
-                  ? "opacity-100" // Visible if connected
-                  : "opacity-0 group-center:hover:opacity-100" // Otherwise, visible on hover
+                  ? "opacity-100"
+                  : "opacity-0 group-hover:opacity-100"
               }
           `}>
             Center Hub
-            {/* Tooltip arrow */}
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/90"></div>
           </div>
         </div>
@@ -336,7 +326,6 @@ function NetworkVisualization() {
         {/* SVG for drawing animated connection lines */}
         <svg className="absolute inset-0 w-full h-full z-0">
           <defs>
-            {/* Filter for line glow effect */}
             <filter id="lineGlow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur
                 in="SourceGraphic"
@@ -344,7 +333,6 @@ function NetworkVisualization() {
                 result="blur"
               />
               <feComponentTransfer in="blur" result="glow">
-                {/* Adjusts alpha for glow intensity */}
                 <feFuncA type="linear" slope="0.5" intercept="0" />
               </feComponentTransfer>
               <feMerge>
@@ -358,16 +346,15 @@ function NetworkVisualization() {
               const fromPos = allAvatarPositions[conn.from as number];
               const toPos = allAvatarPositions[conn.to as number];
 
-              if (!fromPos || !toPos) return null; // Skip if a position is not found
+              if (!fromPos || !toPos) return null;
 
-              // Calculate line length for stroke-dasharray
               const dx = toPos.cx - fromPos.cx;
               const dy = toPos.cy - fromPos.cy;
               const lineLength = Math.sqrt(dx * dx + dy * dy);
 
               return (
                 <motion.line
-                  key={`${conn.from}-${conn.to}`} // Key for Framer Motion to track unique lines
+                  key={`${conn.from}-${conn.to}`}
                   x1={fromPos.cx}
                   y1={fromPos.cy}
                   x2={toPos.cx}
@@ -411,8 +398,7 @@ function NetworkVisualization() {
 
         {/* Render outer ring avatars */}
         {outerRingAvatars.map((avatar) => {
-          const { cx, cy } = allAvatarPositions[avatar.id]; // Use pre-calculated positions
-          // Check if this avatar is currently involved in a connection
+          const { cx, cy } = allAvatarPositions[avatar.id];
           const isActive = isCurrentlyConnected(avatar.id);
 
           return (
@@ -422,33 +408,29 @@ function NetworkVisualization() {
               style={{
                 left: `${cx}px`,
                 top: `${cy}px`,
-                transform: `translate(-50%, -50%)`, // Center the avatar element precisely
+                transform: `translate(-50%, -50%)`,
               }}>
-              {/* Avatar container with hover effects */}
               <div
-                className={`bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer group-outer-${avatar.id} relative`}
+                className="bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer relative group"
                 style={{
                   width: `${dimensions.outerAvatarSize}px`,
                   height: `${dimensions.outerAvatarSize}px`,
                 }}>
-                {/* Inner circle for the avatar image/emoji */}
                 <div
                   className="rounded-full relative overflow-hidden flex items-center justify-center"
                   style={{
                     width: `${dimensions.outerImageSize}px`,
                     height: `${dimensions.outerImageSize}px`,
                   }}>
-                  {/* Avatar image with error fallback to emoji */}
                   <img
                     src={avatar.image || "/placeholder.svg"}
                     alt={avatar.name}
                     className="w-full h-full object-cover rounded-full"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.style.display = "none"; // Hide the broken image
+                      target.style.display = "none";
                       const parent = target.parentElement;
                       if (parent) {
-                        // Fallback to a generic emoji if image fails to load
                         parent.innerHTML = `<span class="text-2xl">👤</span>`;
                       }
                     }}
@@ -458,14 +440,9 @@ function NetworkVisualization() {
                 {/* Tooltip with avatar name */}
                 <div
                   className={`absolute -top-10 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full font-medium text-gray-800 shadow-lg transition-opacity duration-200 pointer-events-none whitespace-nowrap z-20 ${dimensions.tooltipTextSize}
-                    ${
-                      isActive
-                        ? "opacity-100" // Visible if connected
-                        : "opacity-0 group-outer-${avatar.id}:hover:opacity-100" // Otherwise, visible on hover
-                    }
+                    ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}
                 `}>
                   {avatar.name}
-                  {/* Tooltip arrow */}
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/90"></div>
                 </div>
               </div>
@@ -475,8 +452,7 @@ function NetworkVisualization() {
 
         {/* Render inner ring avatars */}
         {innerRingAvatars.map((avatar) => {
-          const { cx, cy } = allAvatarPositions[avatar.id]; // Use pre-calculated positions
-          // Check if this avatar is currently involved in a connection
+          const { cx, cy } = allAvatarPositions[avatar.id];
           const isActive = isCurrentlyConnected(avatar.id);
 
           return (
@@ -486,33 +462,29 @@ function NetworkVisualization() {
               style={{
                 left: `${cx}px`,
                 top: `${cy}px`,
-                transform: `translate(-50%, -50%)`, // Center the avatar element precisely
+                transform: `translate(-50%, -50%)`,
               }}>
-              {/* Avatar container with hover effects */}
               <div
-                className={`bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer group-inner-${avatar.id} relative`}
+                className="bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-200 cursor-pointer relative group"
                 style={{
                   width: `${dimensions.innerAvatarSize}px`,
                   height: `${dimensions.innerAvatarSize}px`,
                 }}>
-                {/* Inner circle for the avatar image/emoji */}
                 <div
                   className="rounded-full relative overflow-hidden flex items-center justify-center"
                   style={{
                     width: `${dimensions.innerImageSize}px`,
                     height: `${dimensions.innerImageSize}px`,
                   }}>
-                  {/* Avatar image with error fallback to emoji */}
                   <img
                     src={avatar.image || "/placeholder.svg"}
                     alt={avatar.name}
                     className="w-full h-full object-cover rounded-full"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.style.display = "none"; // Hide the broken image
+                      target.style.display = "none";
                       const parent = target.parentElement;
                       if (parent) {
-                        // Fallback to a generic emoji if image fails to load
                         parent.innerHTML = `<span class="text-2xl">👤</span>`;
                       }
                     }}
@@ -522,14 +494,9 @@ function NetworkVisualization() {
                 {/* Tooltip with avatar name */}
                 <div
                   className={`absolute -top-10 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full font-medium text-gray-800 shadow-lg transition-opacity duration-200 pointer-events-none whitespace-nowrap z-20 ${dimensions.tooltipTextSize}
-                    ${
-                      isActive
-                        ? "opacity-100" // Visible if connected
-                        : "opacity-0 group-inner-${avatar.id}:hover:opacity-100" // Otherwise, visible on hover
-                    }
+                    ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}
                 `}>
                   {avatar.name}
-                  {/* Tooltip arrow */}
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/90"></div>
                 </div>
               </div>
