@@ -1,9 +1,25 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "../components/theme-provider";
 import RealTimeChatWidget from "@/components/RealTimeChatWidget/RealTimeChatWidget";
+import { Inter } from "next/font/google";
 
-// ── 1. MAXIMUM SEO & SOCIAL ENGAGEMENT METADATA ──
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://rashedul-raha.vercel.app"),
 
@@ -70,7 +86,6 @@ export const metadata: Metadata = {
     ],
   },
 
-  // Twitter/X Card Preview
   twitter: {
     card: "summary_large_image",
     title: "Rashedul Islam | Full-Stack Architect",
@@ -110,16 +125,18 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} scroll-smooth`}>
       <head>
-        {/* JSON-LD Script Insertion */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body
-        className="bg-background text-foreground antialiased selection:bg-primary/20 selection:text-foreground"
+        className={`${inter.className} bg-background text-foreground antialiased selection:bg-primary/20 selection:text-foreground`}
         suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
@@ -128,12 +145,14 @@ export default function RootLayout({
           disableTransitionOnChange>
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only fixed top-4 left-4 z-100 bg-primary text-primary-foreground px-4 py-2 rounded-md shadow-lg">
+            className="sr-only focus:not-sr-only fixed top-4 left-4 z-100 bg-primary text-primary-foreground px-4 py-2 rounded-md shadow-lg transition-all">
             Skip to content
           </a>
 
-          <div className="relative min-h-screen">
-            <main id="main-content" className="outline-none">
+          <div className="relative flex flex-col min-h-screen">
+            <main
+              id="main-content"
+              className="flex-1 min-h-screen outline-none">
               {children}
             </main>
             <RealTimeChatWidget />

@@ -4,7 +4,6 @@ import { motion, useScroll } from "framer-motion";
 import Navbar from "../shared/Navbar/Navbar";
 import FeaturedProjects from "./FeaturedProjects";
 import GitHubStats from "./GitHubStats";
-import CallToAction from "./CallToAction";
 import { ThreeDMarqueeHome } from "./ThreeDMarqueeHome";
 import Skills from "../skills/skills";
 import NetworkVisualization from "@/components/network";

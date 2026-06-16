@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion"; // 'motion/react' থেকে 'framer-motion' এ পরিবর্তন করা সাজেস্টেড
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const ThreeDMarquee = ({
@@ -20,17 +20,13 @@ export const ThreeDMarquee = ({
   return (
     <div
       className={cn(
-        // relative এবং মেইন স্ক্রিন সাইজ নিশ্চিত করা হলো
         "relative w-full h-screen min-h-screen overflow-hidden bg-background",
         className,
       )}>
-      {/* ভেতরের কন্টেইনারকে ফ্লেক্স দিয়ে একদম সেন্টারে ফিট করা হলো */}
       <div className="flex w-full h-full items-center justify-center">
-        {/* এখানে ফিক্সড ১৮০০ পিক্সেল বাদ দিয়ে স্ক্রিনের সাপেক্ষে উইথ-হাইট দেওয়া হয়েছে */}
-        <div className="w-[120vw] h-[120vh] min-w-[1200px] min-h-[1200px] flex-shrink-0">
+        <div className="w-[120vw] h-[120vh] min-w-300 min-h-300 shrink-0">
           <div
             style={{
-              // রোটেশনের কারণে স্ক্রিনের সাইড কেটে যাওয়া ঠেকাতে scale(1.2) বা তার বেশি ব্যবহার করতে পারেন
               transform: "rotateX(55deg) rotateZ(-45deg) scale(1.2)",
             }}
             className="
@@ -90,8 +86,6 @@ export const ThreeDMarquee = ({
     </div>
   );
 };
-
-/* ─── Grid Components (No Changes Needed Here) ──────────────── */
 
 const GridLineHorizontal = ({
   className,

@@ -50,7 +50,7 @@ const Home: React.FC = () => {
   return (
     <div className="relative h-screen w-full overflow-hidden bg-background">
       <Navbar />
-      <main className="relative z-10 h-full flex md:items-center justify-center">
+      <main className="relative z-10 h-full flex md:items-end justify-center">
         <div className="w-full">
           <Responsive>
             <div className="py-5 md:my-10">

@@ -5,11 +5,11 @@ export default function CanvasTextRashedulIslam() {
   return (
     <h2
       className={cn(
-        "group relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black uppercase mb-3 sm:mb-4",
+        "group relative text-5xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl  uppercase mb-1 sm:mb-2",
       )}>
       <CanvasText
         text="Rashedul Islam"
-        backgroundClassName="bg-blue-600 dark:bg-blue-700"
+        backgroundClassName="bg-blue-600 dark:bg-blue-700 "
         colors={[
           "rgba(0, 153, 255, 1)",
           "rgba(0, 153, 255, 0.9)",

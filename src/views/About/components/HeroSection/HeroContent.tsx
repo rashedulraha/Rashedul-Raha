@@ -62,11 +62,6 @@ const HeroContent = () => {
       variants={containerVariants}
       className="flex-1 w-full text-center lg:text-left">
       {/* Badge */}
-      <motion.div variants={itemVariants}>
-        <Badge className="mb-5 bg-foreground/5 text-foreground border-foreground/20 text-xs md:text-sm font-medium px-4 py-2 rounded-full">
-          Full-Stack Developer | System Architect
-        </Badge>
-      </motion.div>
 
       {/* Canvas Text Component */}
       <motion.div variants={itemVariants}>

@@ -130,13 +130,13 @@ export default function PageCertifications({
 
           {/* Quick Stats */}
           <div className="mt-6 md:mt-0 flex gap-4 justify-center md:justify-end">
-            <div className="bg-card border border-border rounded-xl px-5 py-3 text-center min-w-[110px] shadow-sm">
+            <div className="bg-card hover:border-border rounded-xl px-5 py-3 text-center min-w-[110px] shadow-sm">
               <div className="text-2xl font-bold text-primary">
                 {certificates.length}+
               </div>
               <div className="text-xs text-muted-foreground">Total Certs</div>
             </div>
-            <div className="bg-card border border-border rounded-xl px-5 py-3 text-center min-w-[110px] shadow-sm">
+            <div className="bg-card  hover:border-border rounded-xl px-5 py-3 text-center min-w-[110px] shadow-sm">
               <div className="text-2xl font-bold text-secondary-foreground">
                 {certificates.filter((c) => c.featured).length}
               </div>
@@ -193,7 +193,7 @@ export default function PageCertifications({
                 whileHover={{ y: -4 }}
                 className={`group relative flex flex-col justify-between rounded-xl border bg-card text-card-foreground shadow-sm transition-all duration-300 overflow-hidden ${
                   cert.featured
-                    ? "border-primary/50 shadow-md"
+                    ? "shadow-md border-border hover:border-primary/30"
                     : "border-border hover:border-primary/30"
                 }`}>
                 {/* Top Featured Gradient Tag */}
