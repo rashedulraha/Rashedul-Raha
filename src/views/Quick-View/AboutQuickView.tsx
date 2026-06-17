@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { GraduationCap, Rocket, Trophy } from "lucide-react";
+import { GraduationCap, Rocket, Trophy, CheckCircle2 } from "lucide-react";
 import Responsive from "../Responsive/Responsive";
 
 const itemVariants = {
@@ -16,91 +16,143 @@ const itemVariants = {
 const AboutQuickView = () => {
   return (
     <Responsive>
+      <div className="mb-10">
+        <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-2">
+          About & Education
+        </h1>
+        <p className="text-sm text-muted-foreground max-w-2xl">
+          My learning journey and the foundations that shaped my technical
+          skills.
+        </p>
+      </div>
       {/* Bio */}
       <motion.div
         className="space-y-4 text-muted-foreground leading-relaxed"
         variants={itemVariants}>
-        <p className="text-base">
-          I'm{" "}
-          <span className="text-foreground font-semibold">Rashedul Islam</span>,
-          a{" "}
-          <span className="text-primary font-semibold">
-            Full-Stack Developer and AI/RAG enthusiast
-          </span>{" "}
-          based in Bangladesh. I build modern, scalable, and production-ready
-          web applications using TypeScript, JavaScript, Python, C++, and Go.
-        </p>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 bg-muted/40 rounded-xl border">
-          <div>
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <GraduationCap className="w-4 h-4 text-primary" />
-              Training & Education
-            </p>
-            <p className="text-sm mb-3 text-muted-foreground">
-              Completed structured training where I built a strong foundation in{" "}
-              <span className="text-foreground font-medium">
-                web development, software engineering, and core computer science
-                concepts
-              </span>
-              .
-            </p>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                <span className="font-medium text-foreground">
-                  Programming Hero
+          <p className="text-base">
+            I'm{" "}
+            <span className="text-foreground font-semibold">
+              Rashedul Islam
+            </span>
+            , a{" "}
+            <span className="text-primary font-semibold">
+              Full-Stack Developer and AI/RAG enthusiast
+            </span>{" "}
+            based in Bangladesh. I build modern, scalable, and production-ready
+            web applications using TypeScript, JavaScript, Python, C++, and Go.
+          </p>
+
+          <div className="space-y-5 md:space-y-10 p-5 bg-muted/40 rounded-xl border">
+            <div>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <GraduationCap className="w-4 h-4 text-primary" />
+                Training & Education
+              </p>
+              <p className="text-sm mb-3 text-muted-foreground">
+                Completed structured training where I built a strong foundation
+                in{" "}
+                <span className="text-foreground font-medium">
+                  web development, software engineering, and core computer
+                  science concepts
                 </span>
-                <Badge variant="secondary" className="text-xs">
-                  Level 1 & 2
-                </Badge>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                <span className="font-medium text-foreground">Phitron</span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <Trophy className="w-4 h-4 text-primary" />
-              Key Achievement
-            </p>
-            <p className="text-sm">
-              Solved{" "}
-              <span className="text-primary font-bold text-base">
-                500+ DSA problems
-              </span>
-              , strengthening problem-solving and system thinking abilities
-            </p>
+                .
+              </p>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  <span className="font-medium text-foreground">
+                    Programming Hero
+                  </span>
+                  <Badge variant="secondary" className="text-xs">
+                    Level 1 & 2
+                  </Badge>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  <span className="font-medium text-foreground">Phitron</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <Trophy className="w-4 h-4 text-primary" />
+                Key Achievement
+              </p>
+              <p className="text-sm">
+                Solved{" "}
+                <span className="text-primary font-bold text-base">
+                  500+ DSA problems
+                </span>
+                , strengthening problem-solving and system thinking abilities
+              </p>
+            </div>
           </div>
         </div>
 
-        <p className="text-base">
-          I enjoy working across both frontend and backend—building clean,
-          responsive user interfaces and designing efficient, scalable backend
-          systems and APIs. I am particularly interested in{" "}
-          <span className="text-foreground font-semibold">
-            system design, backend architecture, and real-world software
-            scalability
-          </span>
-          .
-        </p>
+        <div className="p-5 bg-muted/40 rounded-xl border space-y-4">
+          <p className="text-base">
+            I enjoy working across both frontend and backend—building clean,
+            responsive user interfaces and designing efficient, scalable backend
+            systems and APIs. I am particularly interested in{" "}
+            <span className="text-foreground font-semibold">
+              Rag system design, backend architecture, and real-world software
+              scalability
+            </span>
+            .
+          </p>
 
-        <p className="text-base">
-          Alongside full-stack development, I explore{" "}
-          <span className="text-primary font-semibold">
-            AI integrations and RAG-based systems
-          </span>
-          , focusing on building smarter and more intelligent applications.
-        </p>
+          <p className="text-base">
+            Alongside full-stack development, I explore{" "}
+            <span className="text-primary font-semibold">
+              AI integrations and RAG-based systems
+            </span>
+            , focusing on building smarter and more intelligent applications.
+          </p>
+
+          {/* NEW SECTION: What I Bring to the Table (Recruiter Magnet) */}
+          <div className="pt-4 border-t border-border/50">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+              What I Bring to the Table
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  <span className="text-foreground font-medium">
+                    Clean Code:
+                  </span>{" "}
+                  Writing maintainable, scalable, and well-documented code.
+                </p>
+              </div>
+              <div className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  <span className="text-foreground font-medium">
+                    Collaboration:
+                  </span>{" "}
+                  Thriving in agile teams, code reviews, and shared goals.
+                </p>
+              </div>
+              <div className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  <span className="text-foreground font-medium">
+                    Impact-Driven:
+                  </span>{" "}
+                  Translating complex business needs into technical solutions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <motion.div
           className="p-5 bg-primary/5 border-l-4 border-primary rounded-r-xl"
           whileHover={{ x: 5 }}
           transition={{ duration: 0.2 }}>
           <p className="text-sm flex items-start gap-2">
-            <Rocket className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+            <Rocket className="w-5 h-5 text-primary shrink-0 mt-0.5" />
             <span>
               I'm continuously learning, building projects, and improving my
               engineering skills with the goal of becoming a{" "}
