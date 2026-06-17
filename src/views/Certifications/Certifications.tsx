@@ -141,7 +141,7 @@ export default function PageCertifications({
   });
 
   return (
-    <section className="relative min-h-screen w-full bg-background text-foreground px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative min-h-screen w-full text-foreground px-4 sm:px-6 lg:px-8 overflow-hidden">
       <Responsive>
         <CommonBg />
         <div className="relative z-10 w-full">

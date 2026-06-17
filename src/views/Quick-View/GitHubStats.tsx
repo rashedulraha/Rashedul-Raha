@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -31,18 +30,16 @@ import {
   BookOpen,
   Users,
   Calendar,
-  TrendingUp,
   GitCommit,
-  Award,
   ExternalLink,
   Sparkles,
-  Zap,
   Target,
   Clock,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { FaGithub } from "react-icons/fa";
+import Responsive from "../Responsive/Responsive";
 
 // --- GitHub Data Types ---
 interface GitHubStats {
@@ -510,7 +507,7 @@ function ActivityCard({
   };
 
   return (
-    <Card className="bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-border/50 h-full flex flex-col hover:border-primary/30 transition-all duration-500 group">
+    <Card className="bg-linear-to-br from-card to-card/80 backdrop-blur-sm border-border/50 h-full flex flex-col hover:border-primary/30 transition-all duration-500 group">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -646,7 +643,7 @@ export default function GitHubStats() {
 
   if (loading) {
     return (
-      <section className="bg-background">
+      <section>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted mb-4">
@@ -667,53 +664,50 @@ export default function GitHubStats() {
   }
 
   return (
-    <section className="bg-background relative overflow-hidden">
-      {/* Background Decorations */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 bg-linear-to-r from-foreground via-foreground/80 to-muted-foreground bg-clip-text text-transparent">
-            GitHub <span className="text-primary">Activity</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
-            Real-time contributions, coding progress, and open-source impact
-          </p>
-        </motion.div>
-
-        {/* Stats Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <MainStatCard stats={stats} languages={languages} />
-          <ActivityCard
-            activities={recentActivity}
-            username={GITHUB_USERNAME}
-          />
-        </motion.div>
-
-        {/* Error Message */}
-        {error && (
+    <section className="relative overflow-hidden">
+      <Responsive>
+        <div className=" pb-10 md:pb-20 relative z-10">
+          {/* Header */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-6 text-center">
-            <p className="text-xs text-muted-foreground bg-muted/30 inline-block px-3 py-1 rounded-full">
-              {error}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 bg-linear-to-r from-foreground via-foreground/80 to-muted-foreground bg-clip-text text-transparent">
+              GitHub <span className="text-primary">Activity</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
+              Real-time contributions, coding progress, and open-source impact
             </p>
           </motion.div>
-        )}
-      </div>
+
+          {/* Stats Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <MainStatCard stats={stats} languages={languages} />
+            <ActivityCard
+              activities={recentActivity}
+              username={GITHUB_USERNAME}
+            />
+          </motion.div>
+
+          {/* Error Message */}
+          {error && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-6 text-center">
+              <p className="text-xs text-muted-foreground bg-muted/30 inline-block px-3 py-1 rounded-full">
+                {error}
+              </p>
+            </motion.div>
+          )}
+        </div>
+      </Responsive>
     </section>
   );
 }

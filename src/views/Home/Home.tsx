@@ -51,7 +51,6 @@ const Home: React.FC = () => {
   return (
     <div className="relative h-screen w-full overflow-hidden">
       <Navbar />
-
       <GridBackground />
     </div>
   );

@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import TechMarquee from "../shared/HeroBanner/TechMarquee";
 import Responsive from "../Responsive/Responsive";
-import HorizontalResponsive from "@/components/Responsive/HorizontalResponsive";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 const images = [
@@ -122,7 +121,7 @@ export function ThreeDMarqueeHome() {
   ];
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background">
+    <div className="relative flex min-h-screen h-full  w-full flex-col items-center justify-end overflow-hidden bg-background">
       {/* Background: 3D Marquee */}
       <div className="absolute inset-0 z-0">
         <ThreeDMarquee
@@ -144,7 +143,7 @@ export function ThreeDMarqueeHome() {
         }}
       />
 
-      <HorizontalResponsive>
+      <div className="py-10 ">
         <Responsive>
           <motion.div
             style={{ opacity, scale, filter: `blur(${blur}px)` }}
@@ -199,24 +198,6 @@ export function ThreeDMarqueeHome() {
                   </Button>
                 </Link>
               </motion.div>
-
-              <motion.div
-                variants={itemVariants}
-                className="flex items-center justify-center gap-4 sm:gap-6 mt-10 sm:mt-12">
-                {socialLinks.map((social) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.15, y: -3 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="p-2 rounded-full bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300"
-                    aria-label={social.label}>
-                    <social.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </motion.a>
-                ))}
-              </motion.div>
             </motion.div>
 
             <div className="pt-8 ">
@@ -224,7 +205,7 @@ export function ThreeDMarqueeHome() {
             </div>
           </motion.div>
         </Responsive>
-      </HorizontalResponsive>
+      </div>
     </div>
   );
 }

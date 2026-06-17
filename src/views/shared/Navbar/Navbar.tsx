@@ -235,10 +235,7 @@ export default function Navbar() {
                     "border-foreground/20 bg-foreground/5 text-foreground",
                     "transition-all duration-300 gap-2 text-sm font-medium group",
                   )}>
-                  <Link href="/contact">
-                    Contact
-                    <Send className="h-3.5 w-3.5 lg:h-4 lg:w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-foreground " />
-                  </Link>
+                  <Link href="/contact">Hire Me</Link>
                 </Button>
 
                 {/* Mobile Menu Trigger */}

@@ -389,20 +389,6 @@ export default function Footer() {
             <NewsletterSignup />
           </motion.div>
         </div>
-
-        {/* Made with love message */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
-          className="text-center mt-6">
-          <p className="text-[10px] text-muted-foreground flex items-center justify-center gap-1">
-            <Feather className="w-3 h-3" />
-            Crafted with passion for code and creativity
-            <Sparkles className="w-3 h-3 text-primary" />
-          </p>
-        </motion.div>
       </div>
     </footer>
   );

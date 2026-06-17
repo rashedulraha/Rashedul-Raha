@@ -9,6 +9,8 @@ import Skills from "../skills/skills";
 import NetworkVisualization from "@/components/network";
 import Footer from "./Footer.quick";
 import FeaturedProjects from "./FeaturedProjects";
+import AboutSection from "../About/About";
+import AboutQuickView from "./AboutQuickView";
 
 export default function QuickView() {
   const { scrollYProgress } = useScroll();
@@ -16,9 +18,7 @@ export default function QuickView() {
   return (
     <>
       <ThreeDMarqueeHome />
-
       <Navbar />
-
       <div className="min-h-screen bg-linear-to-br from-background via-background to-primary/5 ">
         {/* Progress Bar */}
         <motion.div
@@ -26,7 +26,8 @@ export default function QuickView() {
           style={{ scaleX: scrollYProgress }}
         />
 
-        <div className="mt-5 md:mt-10 flex flex-col space-y-10 md:space-y-20">
+        <div className="pt-5 md:pt-10 lg:pt-20 flex flex-col space-y-10 md:space-y-20">
+          <AboutQuickView />
           <Skills />
           <FeaturedProjects />
           <NetworkVisualization />

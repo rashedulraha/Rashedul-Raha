@@ -13,14 +13,15 @@ import Navbar from "../shared/Navbar/Navbar";
 import Responsive from "../Responsive/Responsive";
 import CommonBg from "@/components/CommonBg/CommonBg";
 
+// ===== CLEAN DATA =====
 const coreLanguages = [
-  { name: "C/C++" },
-  { name: "Go" },
-  { name: "TypeScript" },
-  { name: "JavaScript" },
-  { name: "Python" },
-  { name: "SQL" },
-  { name: "HTML/CSS" },
+  "C/C++",
+  "Go",
+  "TypeScript",
+  "JavaScript",
+  "Python",
+  "SQL",
+  "HTML/CSS",
 ];
 
 const techStack = {
@@ -32,14 +33,8 @@ const techStack = {
     "Shadcn/UI",
     "Zustand",
     "Redux Toolkit",
-    "React Query / TanStack Query",
-    "Server Components",
-    "SSR / SSG / ISR",
-    "Responsive Design",
-    "Performance Optimization",
-    "Accessibility (a11y)",
+    "React Query",
   ],
-
   backend: [
     "Node.js",
     "Express",
@@ -48,14 +43,8 @@ const techStack = {
     "Drizzle ORM",
     "REST APIs",
     "GraphQL",
-    "Authentication",
-    "Authorization",
     "PostgreSQL",
-    "Database Design",
-    "Caching",
-    "API Architecture",
   ],
-
   tools: [
     "Git",
     "GitHub",
@@ -66,9 +55,6 @@ const techStack = {
     "Linux",
     "Vercel",
     "CI/CD",
-    "GitHub Actions",
-    "Nginx",
-    "Docker Compose",
     "Kubernetes",
   ],
 };
@@ -76,59 +62,32 @@ const techStack = {
 const projectImplementations = [
   {
     stack: "Next.js + Tailwind + Prisma",
-    outcome:
-      "Portfolio Websites, SaaS Platforms, Dashboards & E-commerce Applications",
+    outcome: "Portfolio, SaaS, Dashboards & E-commerce",
   },
-
   {
     stack: "Node.js + Express + PostgreSQL",
-    outcome: "REST APIs, Authentication Systems & Scalable Backend Services",
+    outcome: "REST APIs, Auth & Scalable Backend",
   },
-
   {
     stack: "React + Framer Motion + Zustand",
-    outcome:
-      "Interactive Interfaces, Modern UI Systems & Smooth User Experiences",
+    outcome: "Interactive UIs & Smooth Experiences",
   },
-
   {
     stack: "OpenAI + LangChain + RAG",
-    outcome: "AI Integrations, Retrieval Systems & Intelligent Applications",
+    outcome: "AI Integrations & Intelligent Apps",
   },
 ];
 
 const currentlyLearning = [
-  {
-    name: "Rust",
-    focus: "Systems Programming",
-  },
-
-  {
-    name: "RAG",
-    focus: "Retrieval-Augmented Generation",
-  },
-
-  {
-    name: "Semantic Search",
-    focus: "Embeddings & Vector Retrieval",
-  },
-
-  {
-    name: "Docker",
-    focus: "Containerization",
-  },
-
-  {
-    name: "AWS",
-    focus: "Cloud Deployment",
-  },
-
-  {
-    name: "DevOps",
-    focus: "CI/CD & Infrastructure",
-  },
+  { name: "Rust", focus: "Systems Programming" },
+  { name: "RAG", focus: "Retrieval-Augmented Generation" },
+  { name: "Semantic Search", focus: "Embeddings & Vector Retrieval" },
+  { name: "Docker", focus: "Containerization" },
+  { name: "AWS", focus: "Cloud Deployment" },
+  { name: "DevOps", focus: "CI/CD & Infrastructure" },
 ];
 
+// ===== COMPONENTS =====
 function LevelBadge({ level }: { level: string }) {
   const styles: Record<string, string> = {
     Expert:
@@ -140,12 +99,31 @@ function LevelBadge({ level }: { level: string }) {
   };
   return (
     <Badge
-      className={`text-[10px] px-2 py-0 font-medium border ${styles[level] || styles.Proficient}`}>
+      className={`text-[10px] px-2 py-0 font-medium border ${
+        styles[level] || styles.Proficient
+      }`}>
       {level}
     </Badge>
   );
 }
 
+function TechTag({ tech }: { tech: string }) {
+  return (
+    <span className="px-2.5 py-1 text-xs rounded-md bg-muted border border-border text-foreground hover:border-primary/50 hover:text-primary transition-colors">
+      {tech}
+    </span>
+  );
+}
+
+function LanguageChip({ lang }: { lang: string }) {
+  return (
+    <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/30 border border-border hover:border-primary/40 transition-colors">
+      <span className="text-sm font-medium text-foreground">{lang}</span>
+    </div>
+  );
+}
+
+// ===== MAIN PAGE =====
 export default function Skills() {
   return (
     <section className="relative">
@@ -164,14 +142,14 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Single Master Card */}
+        {/* Master Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="border-2 border-border rounded-2xl bg-card overflow-hidden">
-          {/* PARTITION 1: Core Languages */}
+          {/* Core Languages */}
           <div className="p-6 border-b border-border">
             <div className="flex items-center gap-2 mb-4">
               <Code2 className="w-5 h-5 text-primary" />
@@ -181,71 +159,50 @@ export default function Skills() {
             </div>
             <div className="flex flex-wrap gap-2">
               {coreLanguages.map((lang) => (
-                <div
-                  key={lang.name}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/30 border border-border hover:border-primary/40 transition-colors">
-                  <span className="text-sm font-medium text-foreground">
-                    {lang.name}
-                  </span>
-                </div>
+                <LanguageChip key={lang} lang={lang} />
               ))}
             </div>
           </div>
 
-          {/* PARTITION 2: Technology Stack */}
+          {/* Tech Stack - 3 columns */}
           <div className="grid grid-cols-1 md:grid-cols-3 border-b border-border">
-            {/* Frontend */}
             <div className="p-6 border-b md:border-b-0 md:border-r border-border">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">
                 Frontend
               </h4>
               <div className="flex flex-wrap gap-2">
                 {techStack.frontend.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-1 text-xs rounded-md bg-muted border border-border text-foreground hover:border-primary/50 hover:text-primary transition-colors">
-                    {tech}
-                  </span>
+                  <TechTag key={tech} tech={tech} />
                 ))}
               </div>
             </div>
 
-            {/* Backend */}
             <div className="p-6 border-b md:border-b-0 md:border-r border-border">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">
                 Backend
               </h4>
               <div className="flex flex-wrap gap-2">
                 {techStack.backend.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-1 text-xs rounded-md bg-muted border border-border text-foreground hover:border-primary/50 hover:text-primary transition-colors">
-                    {tech}
-                  </span>
+                  <TechTag key={tech} tech={tech} />
                 ))}
               </div>
             </div>
 
-            {/* Tools */}
             <div className="p-6">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">
                 Tools & DevOps
               </h4>
               <div className="flex flex-wrap gap-2">
                 {techStack.tools.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2.5 py-1 text-xs rounded-md bg-muted border border-border text-foreground hover:border-primary/50 hover:text-primary transition-colors">
-                    {tech}
-                  </span>
+                  <TechTag key={tech} tech={tech} />
                 ))}
               </div>
             </div>
           </div>
 
-          {/* PARTITION 3: Implementations & Learning */}
+          {/* Bottom: Projects + Learning */}
           <div className="grid grid-cols-1 md:grid-cols-2">
-            {/* Left: Project Implementations */}
+            {/* What I Build */}
             <div className="p-6 border-b md:border-b-0 md:border-r border-border">
               <div className="flex items-center gap-2 mb-4">
                 <Server className="w-5 h-5 text-primary" />
@@ -259,7 +216,7 @@ export default function Skills() {
                     key={idx}
                     className="flex items-start gap-2.5 p-2.5 rounded-lg hover:bg-muted/30 transition-colors">
                     <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <div className="flex-1">
+                    <div>
                       <div className="text-sm font-medium text-foreground mb-0.5">
                         {item.stack}
                       </div>
@@ -273,7 +230,7 @@ export default function Skills() {
               </div>
             </div>
 
-            {/* Right: Currently Learning */}
+            {/* Currently Learning */}
             <div className="p-6">
               <div className="flex items-center gap-2 mb-4">
                 <BookOpen className="w-5 h-5 text-primary" />

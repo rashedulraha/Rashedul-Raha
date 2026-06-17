@@ -20,7 +20,7 @@ export const ThreeDMarquee = ({
   return (
     <div
       className={cn(
-        "relative w-full h-screen min-h-screen overflow-hidden bg-background",
+        "relative w-full overflow-hidden min-h-screen h-full",
         className,
       )}>
       <div className="flex w-full h-full items-center justify-center">
@@ -112,11 +112,11 @@ const GridLineHorizontal = ({
         `
         absolute
         left-[calc(var(--offset)/2*-1)]
-        h-[var(--height)]
+        h-(--height)
         w-[calc(100%+var(--offset))]
         z-30
         bg-[linear-gradient(to_right,var(--color),var(--color)_50%,transparent_0,transparent)]
-        [background-size:var(--width)_var(--height)]
+        bg-size-[var(--width)_var(--height)]
         [mask:linear-gradient(to_left,var(--background)_var(--fade-stop),transparent),linear-gradient(to_right,var(--background)_var(--fade-stop),transparent),linear-gradient(black,black)]
         [mask-composite:exclude]
         dark:bg-[linear-gradient(to_right,var(--color-dark),var(--color-dark)_50%,transparent_0,transparent)]
@@ -156,9 +156,9 @@ const GridLineVertical = ({
         w-[var(--width)]
         z-30
         bg-[linear-gradient(to_bottom,var(--color),var(--color)_50%,transparent_0,transparent)]
-        [background-size:var(--width)_var(--height)]
+        bg-size-[var(--width)_var(--height)]
         [mask:linear-gradient(to_top,var(--background)_var(--fade-stop),transparent),linear-gradient(to_bottom,var(--background)_var(--fade-stop),transparent),linear-gradient(black,black)]
-        [mask-composite:exclude]
+        mask-exclude
         dark:bg-[linear-gradient(to_bottom,var(--color-dark),var(--color-dark)_50%,transparent_0,transparent)]
       `,
         className,

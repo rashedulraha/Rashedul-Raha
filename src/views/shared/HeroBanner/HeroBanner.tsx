@@ -16,12 +16,32 @@ export default function HeroBanner() {
     "I build responsive web apps, dashboards, APIs, and AI-integrated tools with clean UI, maintainable code, and deployment-ready architecture.";
 
   useEffect(() => {
+    // Check if user has already visited the page in this session
+    const hasVisited = sessionStorage.getItem("heroBannerVisited");
+
+    if (hasVisited) {
+      // If visited, skip animation and set full text immediately
+      setTypedText(fullText);
+      setTextIndex(fullText.length);
+    } else {
+      // Optional: You could also start animation here if you want specific control
+    }
+  }, [fullText]);
+
+  useEffect(() => {
+    // If the text is already fully set (via reload logic), don't run the animation loop
+    if (textIndex >= fullText.length) return;
+
     if (textIndex < fullText.length) {
       const timeout = setTimeout(() => {
         setTypedText(fullText.substring(0, textIndex + 1));
         setTextIndex(textIndex + 1);
       }, 25);
+
       return () => clearTimeout(timeout);
+    } else {
+      // Mark as visited when animation finishes naturally
+      sessionStorage.setItem("heroBannerVisited", "true");
     }
   }, [textIndex, fullText]);
 
@@ -50,7 +70,7 @@ export default function HeroBanner() {
       </div>
 
       {/* 3. Main Content Container */}
-      <div className="relative z-10 flex flex-col items-center md:justify-center text-center max-w-4xl w-full space-y-3 py-20 md:py-0 ">
+      <div className="relative z-10 flex flex-col items-center md:justify-center text-center max-w-4xl w-full space-y-3 py-20 md:py-0">
         {/* Top Badge */}
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 mt-10">
           <Badge
@@ -65,15 +85,17 @@ export default function HeroBanner() {
           <TextGenerateEffectDemo />
 
           {/* Typing Subheading */}
-
+          {/* Note: The cursor (animate-pulse) will still be there. If you want it gone on reload, you can conditionally hide it based on sessionStorage */}
           <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {typedText}
-            <span className="inline-block w-0.5 h-5 bg-primary ml-1 animate-pulse align-middle" />
+            {textIndex < fullText.length && (
+              <span className="inline-block w-0.5 h-5 bg-primary ml-1 animate-pulse align-middle" />
+            )}
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full py-5">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full py-5 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <Link href="/Md-Rasheduli-Islam.pdf" target="_blank">
             <Button size="lg" className="rounded-full">
               Show Resume
@@ -90,9 +112,6 @@ export default function HeroBanner() {
             </Button>
           </Link>
         </div>
-
-        {/* Tech Stack Display */}
-        <TechMarquee />
       </div>
 
       {/* 5. Mobile Socials (Only visible on small screens) */}

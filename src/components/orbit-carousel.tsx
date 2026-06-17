@@ -14,7 +14,8 @@ const social = [
     name: "GitHub",
     role: "Code Repository & Collaboration",
     email: "github.com/rashedulraha",
-    profile: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg",
+    profile:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
     url: "https://github.com/rashedulraha",
   },
   {
@@ -22,7 +23,8 @@ const social = [
     name: "LinkedIn",
     role: "Professional Networking",
     email: "linkedin.com/in/rashedulraha",
-    profile: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg",
+    profile:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg",
     url: "https://linkedin.com/in/rashedulraha",
   },
   {
@@ -30,7 +32,8 @@ const social = [
     name: "X (Twitter)",
     role: "Tech Community & Updates",
     email: "x.com/rashedulraha",
-    profile: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg",
+    profile:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg",
     url: "https://x.com/rashedulraha",
   },
   {
@@ -39,7 +42,7 @@ const social = [
     role: "Q&A for Developers",
     email: "stackoverflow.com/users/rashedulraha",
     profile:
-      "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/stackoverflow.svg",
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/stackoverflow/stackoverflow-original.svg",
     url: "https://stackoverflow.com/users/rashedulraha",
   },
   {
@@ -47,7 +50,8 @@ const social = [
     name: "Portfolio",
     role: "Projects & Experience",
     email: "rashedul.dev",
-    profile: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vercel.svg",
+    profile:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
     url: "https://rashedul.dev",
   },
   {
@@ -55,7 +59,8 @@ const social = [
     name: "Dev.to",
     role: "Blog & Articles",
     email: "dev.to/rashedulraha",
-    profile: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/devdotto.svg",
+    profile:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/devicon/devicon-original.svg",
     url: "https://dev.to/rashedulraha",
   },
   {
@@ -63,7 +68,8 @@ const social = [
     name: "GitLab",
     role: "DevOps & CI/CD",
     email: "gitlab.com/rashedulraha",
-    profile: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gitlab.svg",
+    profile:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg",
     url: "https://gitlab.com/rashedulraha",
   },
   {
@@ -71,7 +77,8 @@ const social = [
     name: "Hashnode",
     role: "Technical Writing",
     email: "hashnode.com/@rashedulraha",
-    profile: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/hashnode.svg",
+    profile:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hashnode/hashnode-original.svg",
     url: "https://hashnode.com/@rashedulraha",
   },
 ];
