@@ -84,30 +84,27 @@ export default function Navbar() {
           "fixed left-0 right-0 z-50 flex justify-center transition-all duration-500",
           scrolled ? "top-0" : "top-4",
         )}>
-        <div className="relative group w-full flex justify-center">
+        <div className="relative group w-full flex justify-center ">
           {/* Gradient Border: Only show in Pill Mode (!scrolled) */}
           {!scrolled && (
-            <div className="absolute -inset-[1.5px] rounded-full navbar-gradient-border opacity-70 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]" />
+            <div className="absolute -inset-[1.5px] rounded-full navbar-gradient-border opacity-70 group-hover:opacity-100 transition-opacity duration-500 blur-[1px] px-4" />
           )}
 
           {/* Main Container */}
           <div
             className={cn(
-              "relative flex h-16 items-center justify-between gap-2 md:gap-6 transition-all duration-500 overflow-hidden",
+              "relative flex h-16 items-center justify-between gap-2 md:gap-4 transition-all duration-500 overflow-hidden",
               // State: NOT Scrolled (Room / Pill Mode)
               !scrolled
-                ? "max-w-5xl w-[90%] md:w-[95%] mt-0 rounded-full bg-background/80 backdrop-blur-xl shadow-lg"
+                ? "max-w-5xl w-full mt-0 rounded-full bg-background/80 backdrop-blur-xl shadow-lg px-4"
                 : // State: Scrolled (Full Width / Transparent)
                   "w-full max-w-full mt-0 rounded-none bg-background/60 backdrop-blur-2xl shadow-none",
-              // Creative border (theme-aware)
             )}
             style={{
               borderTop: "1.5px solid var(--border)",
               borderLeft: "1px solid var(--border)",
               borderRight: "1px solid var(--border)",
-              borderBottom: scrolled
-                ? "1px solid color-mix(in srgb, var(--border) 15%)"
-                : "1px solid color-mix(in srgb, var(--border) 15%)",
+              borderBottom: "1px solid color-mix(in srgb, var(--border) 15%)",
             }}>
             {/* Top accent line */}
             <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
@@ -115,7 +112,7 @@ export default function Navbar() {
             {/* Content Wrapper: Controls Max Width in Scroll Mode */}
             <div
               className={cn(
-                "flex items-center justify-between gap-2 md:gap-6 w-full transition-all duration-500",
+                "flex items-center justify-between gap-2 md:gap-4 w-full transition-all duration-500",
                 // When scrolled, constrain content width
                 scrolled && "max-w-7xl mx-auto w-[95%]",
               )}>
@@ -136,102 +133,115 @@ export default function Navbar() {
                 </span>
               </Link>
 
-              {/* Desktop Navigation */}
+              {/* Desktop Navigation - Inner Box with Border */}
               <nav
                 aria-label="Desktop Main Navigation"
-                className="hidden md:flex items-center gap-1 shrink-0">
-                {primaryLinks.map((link) => (
-                  <Link
-                    key={link.title}
-                    href={link.to}
-                    className={cn(
-                      "relative px-2.5 py-2 text-sm lg:text-[15px] font-medium transition-all duration-300 rounded-full whitespace-nowrap",
-                      pathname === link.to
-                        ? "text-foreground bg-primary/10 border border-primary/20 shadow-sm"
-                        : "text-foreground/70 hover:text-foreground hover:bg-muted/50",
-                    )}>
-                    {link.title}
-                  </Link>
-                ))}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <div
-                      role="button"
-                      tabIndex={0}
+                className="hidden md:flex items-center shrink-0">
+                {/* Nav Links Container with Border */}
+                <div
+                  className="flex items-center gap-1 px-2  py-1 rounded-full bg-ring/30"
+                  style={{
+                    borderTop: "1px solid var(--border)",
+                    borderLeft:
+                      "1px solid color-mix(in srgb, var(--border) 80%)",
+                    borderRight:
+                      "1px solid color-mix(in srgb, var(--border) 80%)",
+                    borderBottom:
+                      "1px solid color-mix(in srgb, var(--border) 10%)",
+                  }}>
+                  {primaryLinks.map((link) => (
+                    <Link
+                      key={link.title}
+                      href={link.to}
                       className={cn(
-                        "relative flex items-center gap-1.5 px-3 py-2 text-sm lg:text-[15px] font-medium transition-all duration-300 rounded-full cursor-pointer select-none outline-none group/trigger whitespace-nowrap",
-                        isMoreLinkActive
+                        "relative px-3 py-1.5 text-sm lg:text-[15px] font-medium transition-all duration-300 rounded-full whitespace-nowrap ",
+                        pathname === link.to
                           ? "text-foreground bg-primary/10 border border-primary/20 shadow-sm"
-                          : "text-foreground/70 hover:text-foreground hover:bg-muted/50",
+                          : "text-foreground/70 hover:text-foreground hover:bg-background/60",
                       )}>
-                      <span>More</span>
-                      <ChevronDown className="h-3.5 w-3.5 lg:h-4 lg:w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-                    </div>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    align="end"
-                    sideOffset={12}
-                    className="w-64 p-2 rounded-2xl bg-card/95 backdrop-blur-2xl shadow-2xl"
-                    style={{
-                      borderTop: "1.5px solid var(--border)",
-                      borderLeft: "1px solid var(--border)",
-                      borderRight: "1px solid var(--border)",
-                      borderBottom:
-                        "1px solid color-mix(in srgb, var(--border) 15%)",
-                    }}>
-                    {/* Top accent line for dropdown */}
-                    <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none rounded-t-2xl" />
+                      {link.title}
+                    </Link>
+                  ))}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <div
+                        role="button"
+                        tabIndex={0}
+                        className={cn(
+                          "relative flex items-center gap-1.5 px-3 py-1.5 text-sm lg:text-[15px] font-medium transition-all duration-300 rounded-full cursor-pointer select-none outline-none group/trigger whitespace-nowrap",
+                          isMoreLinkActive
+                            ? "text-foreground bg-primary/10 border border-primary/20 shadow-sm"
+                            : "text-foreground/70 hover:text-foreground hover:bg-background/60",
+                        )}>
+                        <span>More</span>
+                        <ChevronDown className="h-3.5 w-3.5 lg:h-4 lg:w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                      </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      align="end"
+                      sideOffset={12}
+                      className="w-64 p-2 rounded-2xl bg-card/95 backdrop-blur-2xl shadow-2xl"
+                      style={{
+                        borderTop: "1.5px solid var(--border)",
+                        borderLeft: "1px solid var(--border)",
+                        borderRight: "1px solid var(--border)",
+                        borderBottom:
+                          "1px solid color-mix(in srgb, var(--border) 15%)",
+                      }}>
+                      {/* Top accent line for dropdown */}
+                      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none rounded-t-2xl" />
 
-                    {moreLinks.map((link, index) => {
-                      const Icon = link.icon;
-                      const isActive = pathname === link.to;
-                      return (
-                        <div key={link.title}>
-                          <DropdownMenuItem asChild>
-                            <Link
-                              href={link.to}
-                              className={cn(
-                                "flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-all duration-300 group/item",
-                                isActive
-                                  ? "bg-primary/10 text-foreground"
-                                  : "hover:bg-muted/50",
-                              )}>
-                              <div
+                      {moreLinks.map((link, index) => {
+                        const Icon = link.icon;
+                        const isActive = pathname === link.to;
+                        return (
+                          <div key={link.title}>
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={link.to}
                                 className={cn(
-                                  "p-2 rounded-lg transition-all duration-300 shrink-0",
+                                  "flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-all duration-300 group/item",
                                   isActive
-                                    ? "bg-primary/20 text-primary border border-primary/30"
-                                    : "bg-muted/50 text-foreground/70 group-hover/item:bg-primary/10 group-hover/item:text-primary border border-border/50",
+                                    ? "bg-primary/10 text-foreground"
+                                    : "hover:bg-muted/50",
                                 )}>
-                                <Icon className="h-4 w-4" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2">
-                                  <span className="font-semibold text-sm text-foreground">
-                                    {link.title}
-                                  </span>
-                                  {isActive && (
-                                    <motion.div
-                                      initial={{ scale: 0 }}
-                                      animate={{ scale: 1 }}
-                                      className="w-1.5 h-1.5 rounded-full bg-primary"
-                                    />
-                                  )}
+                                <div
+                                  className={cn(
+                                    "p-2 rounded-lg transition-all duration-300 shrink-0",
+                                    isActive
+                                      ? "bg-primary/20 text-primary border border-primary/30"
+                                      : "bg-muted/50 text-foreground/70 group-hover/item:bg-primary/10 group-hover/item:text-primary border border-border/50",
+                                  )}>
+                                  <Icon className="h-4 w-4" />
                                 </div>
-                                <p className="text-xs text-foreground/70 mt-0.5">
-                                  {link.description}
-                                </p>
-                              </div>
-                            </Link>
-                          </DropdownMenuItem>
-                          {index < moreLinks.length - 1 && (
-                            <DropdownMenuSeparator className="my-1 bg-border/50" />
-                          )}
-                        </div>
-                      );
-                    })}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2">
+                                    <span className="font-semibold text-sm text-foreground">
+                                      {link.title}
+                                    </span>
+                                    {isActive && (
+                                      <motion.div
+                                        initial={{ scale: 0 }}
+                                        animate={{ scale: 1 }}
+                                        className="w-1.5 h-1.5 rounded-full bg-primary"
+                                      />
+                                    )}
+                                  </div>
+                                  <p className="text-xs text-foreground/70 mt-0.5">
+                                    {link.description}
+                                  </p>
+                                </div>
+                              </Link>
+                            </DropdownMenuItem>
+                            {index < moreLinks.length - 1 && (
+                              <DropdownMenuSeparator className="my-1 bg-border/50" />
+                            )}
+                          </div>
+                        );
+                      })}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
               </nav>
 
               {/* Action Buttons */}

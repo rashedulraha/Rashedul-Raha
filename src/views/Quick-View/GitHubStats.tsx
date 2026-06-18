@@ -88,20 +88,20 @@ const activityIcons: Record<string, any> = {
   ForkEvent: GitFork,
 };
 
-// Activity colors mapping
+// Activity colors mapping (theme-aware)
 const activityColors: Record<string, string> = {
-  PushEvent: "text-blue-500 bg-blue-500/10 border-blue-500/20",
-  PullRequestEvent: "text-purple-500 bg-purple-500/10 border-purple-500/20",
-  CreateEvent: "text-green-500 bg-green-500/10 border-green-500/20",
-  IssuesEvent: "text-red-500 bg-red-500/10 border-red-500/20",
-  WatchEvent: "text-yellow-500 bg-yellow-500/10 border-yellow-500/20",
-  ForkEvent: "text-cyan-500 bg-cyan-500/10 border-cyan-500/20",
+  PushEvent: "text-primary bg-primary/10 border-primary/20",
+  PullRequestEvent: "text-primary bg-primary/10 border-primary/20",
+  CreateEvent: "text-primary bg-primary/10 border-primary/20",
+  IssuesEvent: "text-primary bg-primary/10 border-primary/20",
+  WatchEvent: "text-primary bg-primary/10 border-primary/20",
+  ForkEvent: "text-primary bg-primary/10 border-primary/20",
 };
 
 // Custom Progress component with custom indicator color
 function CustomProgress({ value, color }: { value: number; color: string }) {
   return (
-    <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-muted">
+    <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-muted/40">
       <div
         className="h-full transition-all duration-500 ease-out"
         style={{ width: `${value}%`, backgroundColor: color }}
@@ -109,6 +109,21 @@ function CustomProgress({ value, color }: { value: number; color: string }) {
     </div>
   );
 }
+
+// ===== CREATIVE BORDER STYLES (Theme-aware, no hardcode) =====
+const creativeBorderStyle = {
+  borderTop: "1.5px solid var(--border)",
+  borderLeft: "1px solid var(--border)",
+  borderRight: "1px solid var(--border)",
+  borderBottom: "1px solid color-mix(in srgb, var(--border) 15%)",
+};
+
+const innerCardBorderStyle = {
+  borderTop: "1px solid var(--border)",
+  borderLeft: "1px solid color-mix(in srgb, var(--border) 80%)",
+  borderRight: "1px solid color-mix(in srgb, var(--border) 80%)",
+  borderBottom: "1px solid color-mix(in srgb, var(--border) 10%)",
+};
 
 // Custom hook for GitHub data
 function useGitHubData() {
@@ -304,35 +319,44 @@ function MainStatCard({
     .slice(0, 5);
 
   return (
-    <Card className="bg-linear-to-br from-card to-card/80 backdrop-blur-sm border-border/50 overflow-hidden hover:border-primary/30 transition-all duration-500 group">
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
+    <div
+      className="relative overflow-hidden rounded-xl bg-card/50 transition-all duration-500 hover:shadow-lg group"
+      style={creativeBorderStyle}>
+      {/* Top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
+      {/* Subtle corner glow */}
+      <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+      <div className="relative p-6">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <Avatar className="h-12 w-12 ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
+              <div className="absolute inset-0 bg-primary/20 rounded-xl blur-md group-hover:bg-primary/40 transition-colors duration-300" />
+              <Avatar className="relative h-12 w-12 ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
                 <AvatarImage
                   src={`https://github.com/${GITHUB_USERNAME}.png`}
                 />
-                <AvatarFallback className="bg-linear-to-br from-primary/20 to-primary/5">
-                  <FaGithub className="w-6 h-6" />
+                <AvatarFallback className="bg-primary/10">
+                  <FaGithub className="w-6 h-6 text-primary" />
                 </AvatarFallback>
               </Avatar>
-              <div className="absolute -bottom-1 -right-1 p-0.5 rounded-full bg-green-500 border-2 border-background">
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <div className="absolute -bottom-1 -right-1 p-0.5 rounded-full bg-primary border-2 border-background">
+                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               </div>
             </div>
             <div>
-              <CardTitle className="text-xl flex items-center gap-2">
+              <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
                 @{GITHUB_USERNAME}
-                <Badge variant="secondary" className="text-[10px] px-1.5">
-                  <Sparkles className="w-3 h-3 mr-1" />
-                  Active
-                </Badge>
-              </CardTitle>
-              <CardDescription>Full Stack Developer</CardDescription>
+              </h3>
+              <p className="text-sm text-foreground/70">Full Stack Developer</p>
             </div>
           </div>
-          <Button variant="outline" size="sm" className="gap-1.5" asChild>
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-1.5 border-border bg-muted/30 hover:bg-primary hover:text-primary-foreground hover:border-primary"
+            asChild>
             <Link
               href={`https://github.com/${GITHUB_USERNAME}`}
               target="_blank">
@@ -342,107 +366,38 @@ function MainStatCard({
             </Link>
           </Button>
         </div>
-      </CardHeader>
 
-      <CardContent className="space-y-5">
         {/* Main Contribution Number */}
-        <div className="relative text-center py-5 bg-gradient-to-br from-primary/5 via-primary/3 to-transparent rounded-xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-pulse" />
+        <div
+          className="relative text-center py-5 bg-muted/30 rounded-xl overflow-hidden mb-5"
+          style={innerCardBorderStyle}>
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
           <div className="relative">
             <div className="text-5xl md:text-6xl font-black bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              2193 +
+              2493 +
             </div>
             <div className="flex items-center justify-center gap-1 mt-1">
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-foreground/70">
                 Total Contributions (Last Year)
               </p>
             </div>
           </div>
         </div>
 
-        <Separator className="bg-border/50" />
+        <Separator className="bg-border/40" />
 
-        {/* Stats Grid - 3x2 Layout */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
-            <div className="p-1.5 rounded-md bg-orange-500/10 text-orange-500">
-              <Flame className="w-3.5 h-3.5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold">{stats.currentStreak}</p>
-              <p className="text-[10px] text-muted-foreground">Day Streak</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
-            <div className="p-1.5 rounded-md bg-yellow-500/10 text-yellow-500">
-              <Trophy className="w-3.5 h-3.5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold">{stats.longestStreak}</p>
-              <p className="text-[10px] text-muted-foreground">Longest</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
-            <div className="p-1.5 rounded-md bg-yellow-500/10 text-yellow-500">
-              <Star className="w-3.5 h-3.5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold">
-                {stats.totalStars.toLocaleString()}
-              </p>
-              <p className="text-[10px] text-muted-foreground">Stars</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
-            <div className="p-1.5 rounded-md bg-purple-500/10 text-purple-500">
-              <GitFork className="w-3.5 h-3.5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold">
-                {stats.totalForks.toLocaleString()}
-              </p>
-              <p className="text-[10px] text-muted-foreground">Forks</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
-            <div className="p-1.5 rounded-md bg-blue-500/10 text-blue-500">
-              <Users className="w-3.5 h-3.5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold">
-                {stats.totalFollowers.toLocaleString()}
-              </p>
-              <p className="text-[10px] text-muted-foreground">Followers</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors group/stat">
-            <div className="p-1.5 rounded-md bg-green-500/10 text-green-500">
-              <Code2 className="w-3.5 h-3.5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold">{stats.totalRepos}</p>
-              <p className="text-[10px] text-muted-foreground">Repos</p>
-            </div>
-          </div>
-        </div>
-
-        <Separator className="bg-border/50" />
+        <Separator className="bg-border/40 mt-5" />
 
         {/* Languages Section with Custom Progress */}
-        <div>
+        <div className="mt-5">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-1.5">
-              <Target className="w-3.5 h-3.5 text-muted-foreground" />
-              <p className="text-xs font-medium text-muted-foreground">
+              <Target className="w-3.5 h-3.5 text-primary" />
+              <p className="text-xs font-medium text-foreground/70">
                 Tech Stack
               </p>
             </div>
-            <p className="text-[10px] text-muted-foreground bg-muted/30 px-2 py-0.5 rounded-full">
+            <p className="text-[10px] text-foreground/70 bg-muted/30 px-2 py-0.5 rounded-full border border-border/50">
               {totalLangs} repos
             </p>
           </div>
@@ -461,9 +416,11 @@ function MainStatCard({
                                 LANGUAGE_COLORS[lang] || "#6b7280",
                             }}
                           />
-                          <span className="font-medium">{lang}</span>
+                          <span className="font-medium text-foreground">
+                            {lang}
+                          </span>
                         </div>
-                        <span className="text-muted-foreground">
+                        <span className="text-foreground/70">
                           {count} repos
                         </span>
                       </div>
@@ -481,8 +438,8 @@ function MainStatCard({
             ))}
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
@@ -507,31 +464,47 @@ function ActivityCard({
   };
 
   return (
-    <Card className="bg-linear-to-br from-card to-card/80 backdrop-blur-sm border-border/50 h-full flex flex-col hover:border-primary/30 transition-all duration-500 group">
-      <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
+    <div
+      className="relative overflow-hidden rounded-xl bg-card/50 transition-all duration-500 hover:shadow-lg group h-full flex flex-col"
+      style={creativeBorderStyle}>
+      {/* Top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
+      {/* Subtle corner glow */}
+      <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+      <div className="relative p-6 flex-1 flex flex-col">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <Activity className="w-5 h-5 text-primary" />
-            <CardTitle className="text-xl">Recent Activity</CardTitle>
+            <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+              <Activity className="w-4 h-4 text-primary" />
+            </div>
+            <h3 className="text-xl font-bold text-foreground">
+              Recent Activity
+            </h3>
           </div>
-          <Button variant="ghost" size="sm" className="text-xs gap-1" asChild>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-xs gap-1 hover:bg-primary/10 hover:text-primary"
+            asChild>
             <Link href={`https://github.com/${username}`} target="_blank">
               View all
               <ExternalLink className="w-3 h-3" />
             </Link>
           </Button>
         </div>
-        <CardDescription>
+        <p className="text-sm text-foreground/70 mb-4">
           Latest GitHub events and contributions
-        </CardDescription>
-      </CardHeader>
+        </p>
 
-      <CardContent className="flex-1">
-        <div className="space-y-3">
+        {/* Activities */}
+        <div className="space-y-3 flex-1">
           {activities.map((activity, idx) => {
             const Icon = activityIcons[activity.type] || Activity;
             const colorClass =
-              activityColors[activity.type] || "text-gray-500 bg-gray-500/10";
+              activityColors[activity.type] ||
+              "text-primary bg-primary/10 border-primary/20";
             const action = getActivityAction(activity.type);
 
             return (
@@ -542,37 +515,40 @@ function ActivityCard({
                 transition={{ delay: idx * 0.08 }}
                 className="group/activity">
                 <Link href={activity.url} target="_blank" className="block">
-                  <div className="flex items-start gap-3 p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-all duration-300 cursor-pointer border border-transparent hover:border-border/50">
+                  <div
+                    className="relative flex items-start gap-3 p-3 rounded-lg bg-muted/30 hover:bg-primary/5 transition-all duration-300 cursor-pointer hover:scale-[1.02]"
+                    style={innerCardBorderStyle}>
+                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
                     <div
                       className={cn(
-                        "p-2 rounded-lg shrink-0 transition-all duration-300",
+                        "p-2 rounded-lg shrink-0 transition-all duration-300 border",
                         colorClass,
                       )}>
                       <Icon className="w-4 h-4" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-sm font-medium truncate max-w-[150px] sm:max-w-[200px]">
+                        <span className="text-sm font-medium truncate max-w-[150px] sm:max-w-[200px] text-foreground">
                           {activity.repo}
                         </span>
                         <Badge
                           variant="outline"
-                          className="text-[9px] px-1.5 py-0 h-4">
+                          className="text-[9px] px-1.5 py-0 h-4 border-border/50 text-foreground/70">
                           {action}
                         </Badge>
                       </div>
                       <div className="flex items-center gap-2 mt-1.5">
-                        <Calendar className="w-3 h-3 text-muted-foreground" />
-                        <span className="text-xs text-muted-foreground">
+                        <Calendar className="w-3 h-3 text-foreground/70" />
+                        <span className="text-xs text-foreground/70">
                           {activity.date}
                         </span>
-                        <div className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-                        <span className="text-[10px] text-muted-foreground capitalize">
+                        <div className="w-1 h-1 rounded-full bg-foreground/30" />
+                        <span className="text-[10px] text-foreground/70 capitalize">
                           {activity.type.replace("Event", "")}
                         </span>
                       </div>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover/activity:opacity-100 transition-all duration-300 shrink-0" />
+                    <ExternalLink className="w-3.5 h-3.5 text-foreground/70 opacity-0 group-hover/activity:opacity-100 transition-all duration-300 shrink-0" />
                   </div>
                 </Link>
               </motion.div>
@@ -581,20 +557,20 @@ function ActivityCard({
         </div>
 
         {/* GitHub Stats Footer */}
-        <div className="mt-6 pt-4 border-t border-border/50">
-          <div className="flex items-center justify-between text-xs text-muted-foreground">
+        <div className="mt-6 pt-4 border-t border-border/40">
+          <div className="flex items-center justify-between text-xs text-foreground/70">
             <div className="flex items-center gap-2">
-              <GitCommit className="w-3 h-3" />
+              <GitCommit className="w-3 h-3 text-primary" />
               <span>Active contributor</span>
             </div>
             <div className="flex items-center gap-1">
-              <Clock className="w-3 h-3" />
+              <Clock className="w-3 h-3 text-primary" />
               <span>Updated just now</span>
             </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
@@ -602,37 +578,37 @@ function ActivityCard({
 function LoadingSkeleton() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-3">
-            <Skeleton className="h-12 w-12 rounded-full" />
-            <div>
-              <Skeleton className="h-5 w-32" />
-              <Skeleton className="h-3 w-24 mt-1" />
-            </div>
+      <div
+        className="relative overflow-hidden rounded-xl bg-card/50 p-6"
+        style={creativeBorderStyle}>
+        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+        <div className="flex items-center gap-3 mb-5">
+          <Skeleton className="h-12 w-12 rounded-xl bg-muted/40" />
+          <div>
+            <Skeleton className="h-5 w-32 bg-muted/40" />
+            <Skeleton className="h-3 w-24 mt-1 bg-muted/40" />
           </div>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Skeleton className="h-24 w-full rounded-xl" />
-          <div className="grid grid-cols-2 gap-3">
-            {[...Array(6)].map((_, i) => (
-              <Skeleton key={i} className="h-14 w-full rounded-lg" />
-            ))}
-          </div>
-          <Skeleton className="h-32 w-full rounded-lg" />
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <Skeleton className="h-6 w-32" />
-          <Skeleton className="h-3 w-48" />
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {[...Array(5)].map((_, i) => (
-            <Skeleton key={i} className="h-16 w-full rounded-xl" />
+        </div>
+        <Skeleton className="h-24 w-full rounded-xl bg-muted/40 mb-5" />
+        <div className="grid grid-cols-2 gap-3">
+          {[...Array(6)].map((_, i) => (
+            <Skeleton key={i} className="h-14 w-full rounded-lg bg-muted/40" />
           ))}
-        </CardContent>
-      </Card>
+        </div>
+        <Skeleton className="h-32 w-full rounded-xl bg-muted/40 mt-5" />
+      </div>
+      <div
+        className="relative overflow-hidden rounded-xl bg-card/50 p-6"
+        style={creativeBorderStyle}>
+        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+        <Skeleton className="h-6 w-32 bg-muted/40 mb-2" />
+        <Skeleton className="h-3 w-48 bg-muted/40 mb-4" />
+        <div className="space-y-3">
+          {[...Array(5)].map((_, i) => (
+            <Skeleton key={i} className="h-16 w-full rounded-lg bg-muted/40" />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -646,16 +622,16 @@ export default function GitHubStats() {
       <section>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted mb-4">
-              <FaGithub className="w-3 h-3" />
-              <span className="text-xs">GitHub Insights</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/40 border border-border mb-4">
+              <FaGithub className="w-3 h-3 text-primary" />
+              <span className="text-xs text-foreground/70">
+                GitHub Insights
+              </span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-foreground">
               GitHub Activity
             </h2>
-            <p className="text-muted-foreground">
-              Loading GitHub statistics...
-            </p>
+            <p className="text-foreground/70">Loading GitHub statistics...</p>
           </div>
           <LoadingSkeleton />
         </div>
@@ -666,17 +642,17 @@ export default function GitHubStats() {
   return (
     <section className="relative overflow-hidden">
       <Responsive>
-        <div className=" pb-10 md:pb-20 relative z-10">
+        <div className="pb-10 md:pb-20 relative z-10">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 bg-linear-to-r from-foreground via-foreground/80 to-muted-foreground bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-foreground">
               GitHub <span className="text-primary">Activity</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
+            <p className="text-foreground/70 max-w-2xl mx-auto text-sm">
               Real-time contributions, coding progress, and open-source impact
             </p>
           </motion.div>
@@ -701,7 +677,7 @@ export default function GitHubStats() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="mt-6 text-center">
-              <p className="text-xs text-muted-foreground bg-muted/30 inline-block px-3 py-1 rounded-full">
+              <p className="text-xs text-foreground/70 bg-muted/40 border border-border inline-block px-3 py-1 rounded-full">
                 {error}
               </p>
             </motion.div>

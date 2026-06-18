@@ -79,7 +79,6 @@ const projectImplementations = [
 ];
 
 const currentlyLearning = [
-  { name: "Rust", focus: "Systems Programming" },
   { name: "RAG", focus: "Retrieval-Augmented Generation" },
   { name: "Semantic Search", focus: "Embeddings & Vector Retrieval" },
   { name: "Docker", focus: "Containerization" },
