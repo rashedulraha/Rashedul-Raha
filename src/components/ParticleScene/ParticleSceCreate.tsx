@@ -7,6 +7,8 @@ import { ArrowLeft, Sparkles, Wand2 } from "lucide-react";
 import ParticleScene from "./ParticleScene";
 import Link from "next/link";
 import { FaHome } from "react-icons/fa";
+import CommonBg from "../CommonBg/CommonBg";
+import { ModeToggle } from "../ui/modeToggle";
 
 // ===== CREATIVE BORDER STYLES (Theme-aware, no hardcode) =====
 const creativeBorderStyle = {
@@ -38,8 +40,9 @@ const ParticleSceCreate: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-background text-foreground overflow-hidden font-sans selection:bg-primary/30 selection:text-primary-foreground">
+    <div className="relative min-h-screen w-full text-foreground overflow-hidden font-sans selection:bg-primary/30 selection:text-primary-foreground">
       {/* 3D Scene Component */}
+      <CommonBg />
       <ParticleScene triggerText={triggerMorph} />
 
       {/* ── Top Left: Back Button ── */}
@@ -53,7 +56,7 @@ const ParticleSceCreate: React.FC = () => {
           className="group relative flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 backdrop-blur-md transition-all duration-300 hover:shadow-lg active:scale-95"
           style={creativeBorderStyle}>
           {/* Top accent line */}
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent rounded-t-full" />
+          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-linear-to-r from-transparent via-primary/40 to-transparent rounded-t-full" />
 
           <ArrowLeft className="w-4 h-4 text-primary group-hover:-translate-x-0.5 transition-transform" />
           <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
@@ -70,8 +73,9 @@ const ParticleSceCreate: React.FC = () => {
         className="fixed top-6 right-6 z-20 hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 backdrop-blur-md shadow-lg"
         style={creativeBorderStyle}>
         {/* Top accent line */}
-        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent rounded-t-full" />
 
+        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-linear-to-r from-transparent via-primary/40 to-transparent rounded-t-full" />
+        <ModeToggle />
         <FaHome className="text-primary" />
         <Link href={"/"}> Home</Link>
       </motion.div>
@@ -84,7 +88,7 @@ const ParticleSceCreate: React.FC = () => {
         className="fixed top-6 left-1/2 -translate-x-1/2 z-20 md:hidden flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 backdrop-blur-md shadow-lg"
         style={creativeBorderStyle}>
         {/* Top accent line */}
-        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent rounded-t-full" />
+        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-linear-to-r from-transparent via-primary/40 to-transparent rounded-t-full" />
 
         <Link href={"Home"}> Home</Link>
       </motion.div>

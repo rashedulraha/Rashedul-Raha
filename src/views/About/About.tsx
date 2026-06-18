@@ -55,47 +55,53 @@ const AboutPage = () => {
                 Full-Stack Developer & AI/RAG Enthusiast
               </p>
             </div>
+            {/* Bio with Highlighted Topics */}
 
-            {/* Bio with Highlighted Topics - Improved Readability */}
             <div className="space-y-5 text-base leading-relaxed flex-grow">
               <p className="text-foreground/90">
-                I'm a passionate developer based in{" "}
-                <span className="text-foreground font-semibold border-b-2 border-primary/30">
+                I am a passionate developer from{" "}
+                <span className="text-foreground font-semibold border-b border-primary/40">
                   Bangladesh
                 </span>
-                , building{" "}
+                . I build{" "}
                 <span className="text-primary font-semibold">
-                  modern, scalable, and production-ready web applications
+                  modern web applications
                 </span>{" "}
-                using TypeScript, JavaScript, Python, C++, and Go.
+                using technologies such as TypeScript, JavaScript, and Python. I
+                also work with C++ and Go.
               </p>
 
               <p className="text-foreground/90">
-                I specialize in both{" "}
-                <span className="text-foreground font-semibold">
-                  frontend and backend development
-                </span>{" "}
-                — crafting{" "}
+                My expertise includes both{" "}
                 <span className="text-primary font-semibold">
-                  clean, responsive user interfaces
+                  frontend development
                 </span>{" "}
-                and designing{" "}
+                and{" "}
                 <span className="text-primary font-semibold">
-                  efficient, scalable backend systems and APIs
+                  backend development
                 </span>
-                .
+                . I create{" "}
+                <span className="text-foreground font-semibold">
+                  clean user interfaces
+                </span>{" "}
+                and design{" "}
+                <span className="text-primary font-semibold">
+                  scalable backend systems
+                </span>{" "}
+                and APIs.
               </p>
 
               <p className="text-foreground/90">
-                Currently exploring{" "}
+                Currently, I am exploring{" "}
                 <span className="text-foreground font-semibold">
-                  AI integrations and RAG-based systems
-                </span>
-                , focusing on building{" "}
+                  AI integrations
+                </span>{" "}
+                and Retrieval-Augmented Generation (RAG) systems. My goal is to
+                build{" "}
                 <span className="text-primary font-semibold">
-                  smarter and more intelligent applications
-                </span>
-                .
+                  intelligent applications
+                </span>{" "}
+                that deliver more meaningful and capable experiences.
               </p>
             </div>
 

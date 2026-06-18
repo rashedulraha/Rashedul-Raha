@@ -82,9 +82,9 @@ export default function Navbar() {
         transition={{ duration: 0.5, type: "spring", bounce: 0.2 }}
         className={cn(
           "fixed left-0 right-0 z-50 flex justify-center transition-all duration-500",
-          scrolled ? "top-0" : "top-4",
+          scrolled ? "top-0" : "top-9",
         )}>
-        <div className="relative group w-full flex justify-center ">
+        <div className="relative group w-full flex justify-center">
           {/* Gradient Border: Only show in Pill Mode (!scrolled) */}
           {!scrolled && (
             <div className="absolute -inset-[1.5px] rounded-full navbar-gradient-border opacity-70 group-hover:opacity-100 transition-opacity duration-500 blur-[1px] px-4" />
@@ -107,7 +107,7 @@ export default function Navbar() {
               borderBottom: "1px solid color-mix(in srgb, var(--border) 15%)",
             }}>
             {/* Top accent line */}
-            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
+            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-linear-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
 
             {/* Content Wrapper: Controls Max Width in Scroll Mode */}
             <div
@@ -117,150 +117,142 @@ export default function Navbar() {
                 scrolled && "max-w-7xl mx-auto w-[95%]",
               )}>
               {/* Logo Section */}
-              <Link
-                href="/"
-                className="flex items-center gap-2 group/logo shrink-0 active:scale-95 transition-transform"
-                aria-label="Rashed Dev Home">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-primary/20 rounded-lg blur-md group-hover/logo:bg-primary/40 transition-colors duration-300" />
-                </div>
-                <span className="text-lg sm:text-xl lg:text-2xl font-black tracking-tighter text-foreground">
-                  Rashed<span className="text-primary">.</span>
-                  <span className="text-foreground/70">Dev</span>
-                </span>
-              </Link>
+              <div className="flex-1">
+                <Link
+                  href="/"
+                  className="flex items-center gap-2 group/logo shrink-0 active:scale-95 transition-transform"
+                  aria-label="Rashed Dev Home">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-primary/20 rounded-lg blur-md group-hover/logo:bg-primary/40 transition-colors duration-300" />
+                  </div>
+                  <span className="text-lg sm:text-xl lg:text-2xl font-black tracking-tighter text-foreground">
+                    Rashed<span className="text-primary">.</span>
+                    <span className="text-foreground/70">Dev</span>
+                  </span>
+                </Link>
+              </div>
 
               {/* Desktop Navigation - Inner Box with Border */}
-              <nav
-                aria-label="Desktop Main Navigation"
-                className="hidden md:flex items-center shrink-0">
-                {/* Nav Links Container with Border */}
-                <div
-                  className="flex items-center gap-1 px-2  py-1 rounded-full bg-ring/30"
-                  style={{
-                    borderTop: "1px solid var(--border)",
-                    borderLeft:
-                      "1px solid color-mix(in srgb, var(--border) 80%)",
-                    borderRight:
-                      "1px solid color-mix(in srgb, var(--border) 80%)",
-                    borderBottom:
-                      "1px solid color-mix(in srgb, var(--border) 10%)",
-                  }}>
-                  {primaryLinks.map((link) => (
-                    <Link
-                      key={link.title}
-                      href={link.to}
-                      className={cn(
-                        "relative px-3 py-1.5 text-sm lg:text-[15px] font-medium transition-all duration-300 rounded-full whitespace-nowrap ",
-                        pathname === link.to
-                          ? "text-foreground bg-primary/10 border border-primary/20 shadow-sm"
-                          : "text-foreground/70 hover:text-foreground hover:bg-background/60",
-                      )}>
-                      {link.title}
-                    </Link>
-                  ))}
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <div
-                        role="button"
-                        tabIndex={0}
+              <div className="flex-2 flex items-center justify-center">
+                <nav
+                  aria-label="Desktop Main Navigation"
+                  className="hidden md:flex items-center shrink-0">
+                  {/* Nav Links Container with Border */}
+                  <div
+                    className="flex items-center gap-1 px-2  py-1 rounded-full bg-ring/30"
+                    style={{
+                      borderTop: "1px solid var(--border)",
+                      borderLeft:
+                        "1px solid color-mix(in srgb, var(--border) 80%)",
+                      borderRight:
+                        "1px solid color-mix(in srgb, var(--border) 80%)",
+                      borderBottom:
+                        "1px solid color-mix(in srgb, var(--border) 10%)",
+                    }}>
+                    {primaryLinks.map((link) => (
+                      <Link
+                        key={link.title}
+                        href={link.to}
                         className={cn(
-                          "relative flex items-center gap-1.5 px-3 py-1.5 text-sm lg:text-[15px] font-medium transition-all duration-300 rounded-full cursor-pointer select-none outline-none group/trigger whitespace-nowrap",
-                          isMoreLinkActive
+                          "relative px-3 py-1.5 text-sm lg:text-[15px] font-medium transition-all duration-300 rounded-full whitespace-nowrap ",
+                          pathname === link.to
                             ? "text-foreground bg-primary/10 border border-primary/20 shadow-sm"
                             : "text-foreground/70 hover:text-foreground hover:bg-background/60",
                         )}>
-                        <span>More</span>
-                        <ChevronDown className="h-3.5 w-3.5 lg:h-4 lg:w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-                      </div>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      align="end"
-                      sideOffset={12}
-                      className="w-64 p-2 rounded-2xl bg-card/95 backdrop-blur-2xl shadow-2xl"
-                      style={{
-                        borderTop: "1.5px solid var(--border)",
-                        borderLeft: "1px solid var(--border)",
-                        borderRight: "1px solid var(--border)",
-                        borderBottom:
-                          "1px solid color-mix(in srgb, var(--border) 15%)",
-                      }}>
-                      {/* Top accent line for dropdown */}
-                      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none rounded-t-2xl" />
+                        {link.title}
+                      </Link>
+                    ))}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <div
+                          role="button"
+                          tabIndex={0}
+                          className={cn(
+                            "relative flex items-center gap-1.5 px-3 py-1.5 text-sm lg:text-[15px] font-medium transition-all duration-300 rounded-full cursor-pointer select-none outline-none group/trigger whitespace-nowrap",
+                            isMoreLinkActive
+                              ? "text-foreground bg-primary/10 border border-primary/20 shadow-sm"
+                              : "text-foreground/70 hover:text-foreground hover:bg-background/60",
+                          )}>
+                          <span>More</span>
+                          <ChevronDown className="h-3.5 w-3.5 lg:h-4 lg:w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                        </div>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        align="end"
+                        sideOffset={12}
+                        className="w-64 p-2 rounded-2xl bg-card/95 backdrop-blur-2xl shadow-2xl"
+                        style={{
+                          borderTop: "1.5px solid var(--border)",
+                          borderLeft: "1px solid var(--border)",
+                          borderRight: "1px solid var(--border)",
+                          borderBottom:
+                            "1px solid color-mix(in srgb, var(--border) 15%)",
+                        }}>
+                        {/* Top accent line for dropdown */}
+                        <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none rounded-t-2xl" />
 
-                      {moreLinks.map((link, index) => {
-                        const Icon = link.icon;
-                        const isActive = pathname === link.to;
-                        return (
-                          <div key={link.title}>
-                            <DropdownMenuItem asChild>
-                              <Link
-                                href={link.to}
-                                className={cn(
-                                  "flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-all duration-300 group/item",
-                                  isActive
-                                    ? "bg-primary/10 text-foreground"
-                                    : "hover:bg-muted/50",
-                                )}>
-                                <div
+                        {moreLinks.map((link, index) => {
+                          const Icon = link.icon;
+                          const isActive = pathname === link.to;
+                          return (
+                            <div key={link.title}>
+                              <DropdownMenuItem asChild>
+                                <Link
+                                  href={link.to}
                                   className={cn(
-                                    "p-2 rounded-lg transition-all duration-300 shrink-0",
+                                    "flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-all duration-300 group/item",
                                     isActive
-                                      ? "bg-primary/20 text-primary border border-primary/30"
-                                      : "bg-muted/50 text-foreground/70 group-hover/item:bg-primary/10 group-hover/item:text-primary border border-border/50",
+                                      ? "bg-primary/10 text-foreground"
+                                      : "hover:bg-muted/50",
                                   )}>
-                                  <Icon className="h-4 w-4" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex items-center gap-2">
-                                    <span className="font-semibold text-sm text-foreground">
-                                      {link.title}
-                                    </span>
-                                    {isActive && (
-                                      <motion.div
-                                        initial={{ scale: 0 }}
-                                        animate={{ scale: 1 }}
-                                        className="w-1.5 h-1.5 rounded-full bg-primary"
-                                      />
-                                    )}
+                                  <div
+                                    className={cn(
+                                      "p-2 rounded-lg transition-all duration-300 shrink-0",
+                                      isActive
+                                        ? "bg-primary/20 text-primary border border-primary/30"
+                                        : "bg-muted/50 text-foreground/70 group-hover/item:bg-primary/10 group-hover/item:text-primary border border-border/50",
+                                    )}>
+                                    <Icon className="h-4 w-4" />
                                   </div>
-                                  <p className="text-xs text-foreground/70 mt-0.5">
-                                    {link.description}
-                                  </p>
-                                </div>
-                              </Link>
-                            </DropdownMenuItem>
-                            {index < moreLinks.length - 1 && (
-                              <DropdownMenuSeparator className="my-1 bg-border/50" />
-                            )}
-                          </div>
-                        );
-                      })}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </nav>
-
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2">
+                                      <span className="font-semibold text-sm text-foreground">
+                                        {link.title}
+                                      </span>
+                                      {isActive && (
+                                        <motion.div
+                                          initial={{ scale: 0 }}
+                                          animate={{ scale: 1 }}
+                                          className="w-1.5 h-1.5 rounded-full bg-primary"
+                                        />
+                                      )}
+                                    </div>
+                                    <p className="text-xs text-foreground/70 mt-0.5">
+                                      {link.description}
+                                    </p>
+                                  </div>
+                                </Link>
+                              </DropdownMenuItem>
+                              {index < moreLinks.length - 1 && (
+                                <DropdownMenuSeparator className="my-1 bg-border/50" />
+                              )}
+                            </div>
+                          );
+                        })}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </nav>
+              </div>
               {/* Action Buttons */}
-              <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              <div className="flex flex-1 items-center gap-2 sm:gap-3 shrink-0">
+                <ModeToggle />
                 <Link href={"/particle"}>
-                  <Button className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded  bg-primary border border-primary/20">
+                  <Button className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full  bg-primary border border-primary/20">
                     Particle
                   </Button>
                 </Link>
 
-                {/* Status Badge */}
-                <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
-                  <div className="relative">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    <div className="absolute inset-0 w-2 h-2 rounded-full bg-primary animate-ping" />
-                  </div>
-                  <span className="text-xs font-medium text-primary">
-                    Available
-                  </span>
-                </div>
-
-                <ModeToggle />
                 {/* Desktop Contact Button */}
                 <Button
                   asChild

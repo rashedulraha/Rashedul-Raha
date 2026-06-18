@@ -27,8 +27,6 @@ const itemVariants = {
   },
 };
 
-// Creative border style (theme-aware, no hardcode)
-// Top: more visible, Left/Right: medium, Bottom: almost invisible
 const creativeBorderStyle = {
   borderTop: "1.5px solid var(--border)",
   borderLeft: "1px solid var(--border)",

@@ -167,9 +167,6 @@ export default function ProjectsPage() {
             transition={{ duration: 0.6 }}
             className="mb-12">
             <div className="flex items-center gap-2 mb-3">
-              <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
-                <Sparkles className="w-4 h-4 text-primary" />
-              </div>
               <span className="text-xs font-mono text-primary/70 tracking-widest uppercase">
                 Portfolio
               </span>

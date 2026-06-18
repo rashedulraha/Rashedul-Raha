@@ -23,7 +23,6 @@ const techStack = {
     "Next.js",
     "React",
     "Tailwind CSS",
-    "Framer Motion",
     "Shadcn/UI",
     "Zustand",
     "Redux Toolkit",

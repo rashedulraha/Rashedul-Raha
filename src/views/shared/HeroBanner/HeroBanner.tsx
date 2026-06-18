@@ -12,37 +12,11 @@ export default function HeroBanner() {
   const [textIndex, setTextIndex] = useState(0);
   const socialLinks = socialData;
 
-  const fullText =
-    "I build responsive web apps, dashboards, APIs, and AI-integrated tools with clean UI, maintainable code, and deployment-ready architecture.";
-
-  useEffect(() => {
-    const hasVisited = sessionStorage.getItem("heroBannerVisited");
-    if (hasVisited) {
-      setTypedText(fullText);
-      setTextIndex(fullText.length);
-    }
-  }, [fullText]);
-
-  useEffect(() => {
-    if (textIndex >= fullText.length) return;
-
-    if (textIndex < fullText.length) {
-      const timeout = setTimeout(() => {
-        setTypedText(fullText.substring(0, textIndex + 1));
-        setTextIndex(textIndex + 1);
-      }, 25);
-
-      return () => clearTimeout(timeout);
-    } else {
-      sessionStorage.setItem("heroBannerVisited", "true");
-    }
-  }, [textIndex, fullText]);
-
   return (
     <section className="relative w-full min-h-full h-full flex justify-center items-end overflow-hidden">
       {/* ── Left Sidebar Socials (Desktop Only) ── */}
       <div className="absolute left-6 xl:left-12 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center justify-center gap-8 z-20">
-        <div className="h-24 w-px bg-gradient-to-b from-transparent via-border to-primary/50" />
+        <div className="h-24 w-px bg-linear-to-b from-transparent via-border to-primary/50" />
 
         <div className="flex flex-col gap-6">
           {socialLinks.map((social, i) => (
@@ -69,7 +43,7 @@ export default function HeroBanner() {
           ))}
         </div>
 
-        <div className="h-24 w-px bg-gradient-to-t from-transparent via-border to-primary/50" />
+        <div className="h-24 w-px bg-linear-to-t from-transparent via-border to-primary/50" />
       </div>
 
       {/* ── Main Content Container ── */}
@@ -93,18 +67,7 @@ export default function HeroBanner() {
 
         {/* Heading */}
         <div className="space-y-4">
-          {/* <TextGenerateEffectDemo /> */}
-
           <ParticleView />
-          {/* Typing Subheading */}
-          <div className="relative">
-            <p className="text-sm md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed min-h-[60px]">
-              {typedText}
-              {textIndex < fullText.length && (
-                <span className="inline-block w-0.5 h-5 bg-primary ml-1 animate-pulse align-middle" />
-              )}
-            </p>
-          </div>
         </div>
 
         {/* Action Buttons */}

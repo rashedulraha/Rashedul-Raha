@@ -34,7 +34,7 @@ const defaultCertificates: Certificate[] = [
     id: "cert-1",
     title: "Complete Web Development – Level 1",
     issuer: "Programming Hero",
-    date: "",
+    date: "11-23-29",
     credentialId: "",
     credentialUrl: "#",
     category: "Full-Stack",
@@ -229,21 +229,22 @@ export default function PageCertifications({
             </div>
           </div>
 
-          {/* Certificate Cards Grid */}
+          {/* Certificate Grid - Creative Theme-Aware */}
           <motion.div
             layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mt-8">
+            className="w-full mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence mode="popLayout">
-              {filteredCertificates.map((cert) => (
+              {filteredCertificates.map((cert, index) => (
                 <motion.div
                   layout
                   key={cert.id}
-                  initial={{ opacity: 0, scale: 0.92 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.92 }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{ y: -4 }}
-                  className="group relative flex flex-col justify-between rounded-xl bg-card/50 text-card-foreground transition-all duration-500 hover:shadow-lg overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className={`group relative flex flex-col rounded-xl bg-card overflow-hidden transition-all duration-500 hover:shadow-lg ${
+                    cert.featured ? "ring-1 ring-primary/20" : ""
+                  }`}
                   style={
                     cert.featured ? featuredBorderStyle : creativeBorderStyle
                   }>
@@ -251,89 +252,88 @@ export default function PageCertifications({
                   <div
                     className={`absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent ${
                       cert.featured ? "via-primary/70" : "via-primary/40"
-                    } to-transparent`}
+                    } to-transparent pointer-events-none z-20`}
                   />
 
                   {/* Subtle corner glow on hover */}
                   <div
-                    className={`absolute -top-20 -right-20 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 ${
+                    className={`absolute -top-20 -right-20 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10 ${
                       cert.featured ? "bg-primary/10" : "bg-primary/5"
                     }`}
                   />
 
-                  {/* Top Featured Gradient Tag */}
+                  {/* Featured Badge */}
                   {cert.featured && (
-                    <div className="absolute top-0 right-0 p-3">
-                      <div className="flex items-center gap-1 bg-primary/90 text-primary-foreground px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider shadow-sm">
-                        <GraduationCap className="w-3 h-3" /> Featured
-                      </div>
-                    </div>
+                    <div className="absolute top-4 right-4 z-20"></div>
                   )}
 
-                  <div className="relative p-6">
-                    {/* Institution Details */}
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
-                        <Building2 className="w-3.5 h-3.5 text-primary group-hover:text-primary transition-colors" />
+                  {/* Content Container */}
+                  <div className="relative p-6 flex-1 flex flex-col">
+                    {/* Header Section */}
+                    <div className="mb-4">
+                      {/* Issuer with Icon */}
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-xs text-foreground/70 font-medium uppercase tracking-wider">
+                          {cert.issuer}
+                        </span>
                       </div>
-                      <span className="text-xs text-foreground/75 font-medium">
-                        {cert.issuer}
-                      </span>
-                    </div>
 
-                    {/* Certificate Title */}
-                    <h3 className="text-lg font-bold leading-snug line-clamp-2 group-hover:text-primary transition-colors text-foreground">
-                      {cert.title}
-                    </h3>
+                      {/* Certificate Title */}
+                      <h3 className="text-lg font-bold leading-snug line-clamp-2 group-hover:text-primary transition-colors text-foreground mb-2">
+                        {cert.title}
+                      </h3>
 
-                    {/* Date & ID Row */}
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-xs text-foreground/75">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
-                        <span>{cert.date}</span>
+                      {/* Date & ID Row */}
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-foreground/70">
+                        {cert.date && (
+                          <div className="flex items-center gap-1">
+                            <Calendar className="w-3 h-3 text-primary/60" />
+                            <span>{cert.date}</span>
+                          </div>
+                        )}
+                        {cert.credentialId && (
+                          <div className="flex items-center gap-1">
+                            <CheckCircle2 className="w-3 h-3 text-primary/60" />
+                            <span className="font-mono text-[10px]">
+                              ID: {cert.credentialId}
+                            </span>
+                          </div>
+                        )}
                       </div>
-                      {cert.credentialId && (
-                        <div className="flex items-center gap-1">
-                          <CheckCircle2 className="w-3 h-3" />
-                          <span className="font-mono text-[11px] opacity-80">
-                            ID: {cert.credentialId}
-                          </span>
-                        </div>
-                      )}
                     </div>
 
                     {/* Tech Tags / Skills Learned */}
-                    <div className="flex flex-wrap gap-1.5 mt-5">
+                    <div className="flex flex-wrap gap-1.5 mt-auto mb-4">
                       {cert.skills.map((skill, i) => (
                         <span
                           key={i}
-                          className="inline-flex items-center rounded-md border border-border bg-muted/40 px-2.5 py-0.5 text-xs font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary">
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-muted/30 border border-border/50 text-[11px] font-medium text-foreground/80 transition-all duration-300 hover:border-primary/50 hover:text-primary hover:bg-primary/5">
+                          <span className="w-1 h-1 rounded-full bg-primary/60" />
                           {skill}
                         </span>
                       ))}
                     </div>
-                  </div>
 
-                  {/* Bottom Action Button/Link */}
-                  <div className="relative mt-auto border-t border-border/30 p-4 bg-muted/20 flex items-center justify-between">
-                    <span className="text-[11px] uppercase tracking-wider font-semibold text-foreground/75">
-                      {cert.category}
-                    </span>
+                    {/* Bottom Action Row */}
+                    <div className="flex items-center justify-between pt-3 border-t border-border/30">
+                      <span className="text-[11px] uppercase tracking-wider font-semibold text-foreground/70 bg-muted/30 px-2.5 py-1 rounded-md border border-border/50">
+                        {cert.category}
+                      </span>
 
-                    <a
-                      href={cert.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline decoration-primary/30 underline-offset-4">
-                      Verify Link
-                      <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </a>
+                      <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline decoration-primary/30 underline-offset-4 group/link">
+                        Verify Link
+                        <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </AnimatePresence>
           </motion.div>
-
           {/* Empty State */}
           {filteredCertificates.length === 0 && (
             <motion.div

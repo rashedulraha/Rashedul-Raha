@@ -5,8 +5,6 @@ import Link from "next/link";
 import {
   Mail,
   ArrowUp,
-  Heart,
-  Code2,
   Sparkles,
   ExternalLink,
   MapPin,
@@ -16,8 +14,6 @@ import {
   BookOpen,
   Users,
   Star,
-  Award,
-  Feather,
   Compass,
   Server,
   Braces,
@@ -29,7 +25,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { FaXTwitter } from "react-icons/fa6";
@@ -143,7 +138,7 @@ function AnimatedCounter({ value, label }: { value: number; label: string }) {
 
   return (
     <div className="text-center">
-      <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+      <div className="text-3xl md:text-4xl font-bold bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent  border-t-2">
         {count}+
       </div>
       <p className="text-xs text-muted-foreground mt-1">{label}</p>
@@ -166,10 +161,9 @@ function NewsletterSignup() {
   };
 
   return (
-    <Card className="bg-gradient-to-br from-primary/5 to-primary/2 border-border/50 overflow-hidden">
+    <Card className="bg-linear-to-br from-primary/5 to-primary/2 border-border/50 overflow-hidden">
       <CardContent className="p-5">
         <div className="flex items-center gap-2 mb-2">
-          <Sparkles className="w-4 h-4 text-primary" />
           <h4 className="font-semibold text-sm">Stay Updated</h4>
         </div>
         <p className="text-xs text-muted-foreground mb-3">
@@ -248,11 +242,8 @@ export default function Footer() {
             viewport={{ once: true }}
             className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="p-2 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5">
-                <Terminal className="w-6 h-6 text-primary" />
-              </div>
               <div>
-                <h3 className="text-xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                <h3 className="text-xl font-bold bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                   Rashedul Islam
                 </h3>
                 <p className="text-[10px] text-muted-foreground">
@@ -311,7 +302,6 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}>
             <h4 className="font-semibold text-sm mb-4 flex items-center gap-2">
-              <Compass className="w-4 h-4 text-primary" />
               Explore
             </h4>
             <ul className="space-y-2">
@@ -335,7 +325,6 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}>
             <h4 className="font-semibold text-sm mb-4 flex items-center gap-2">
-              <Star className="w-4 h-4 text-primary" />
               Resources
             </h4>
             <ul className="space-y-2">
@@ -369,7 +358,6 @@ export default function Footer() {
             {/* Tech Stack */}
             <div>
               <h4 className="font-semibold text-sm mb-3 flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-primary" />
                 Tech Stack
               </h4>
               <div className="flex flex-wrap gap-1.5">
@@ -378,7 +366,6 @@ export default function Footer() {
                     key={tech.name}
                     variant="outline"
                     className="text-[10px] gap-1">
-                    <tech.icon className={cn("w-2.5 h-2.5", tech.color)} />
                     {tech.name}
                   </Badge>
                 ))}

@@ -115,9 +115,6 @@ const AboutQuickView = () => {
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <GraduationCap className="w-4 h-4 text-primary" />
-                  </div>
                   <span className="text-xs font-semibold text-foreground uppercase tracking-wider">
                     Education
                   </span>
@@ -153,9 +150,6 @@ const AboutQuickView = () => {
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <Trophy className="w-4 h-4 text-primary" />
-                  </div>
                   <span className="text-xs font-semibold text-foreground uppercase tracking-wider">
                     Achievement
                   </span>

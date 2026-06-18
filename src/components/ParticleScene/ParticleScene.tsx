@@ -15,14 +15,14 @@ const ParticleScene: React.FC<ParticleSceneProps> = ({ triggerText }) => {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const currentStateRef = useRef<"sphere" | "text">("sphere");
+  const animationTweenRef = useRef<gsap.core.Tween | null>(null);
 
   const COUNT = 12000;
 
-  // Initialize Three.js
+  // Initialize Three.js Scene
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // Scene Setup
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
@@ -37,17 +37,16 @@ const ParticleScene: React.FC<ParticleSceneProps> = ({ triggerText }) => {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mountRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Create Particles
-    // eslint-disable-next-line react-hooks/immutability
     createParticles();
 
     // Animation Loop
+    let animationFrameId: number;
     const animate = () => {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
 
       if (particlesRef.current && currentStateRef.current === "sphere") {
         particlesRef.current.rotation.y += 0.002;
@@ -68,6 +67,7 @@ const ParticleScene: React.FC<ParticleSceneProps> = ({ triggerText }) => {
 
     // Cleanup
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
       if (mountRef.current && renderer.domElement) {
         mountRef.current.removeChild(renderer.domElement);
@@ -123,7 +123,7 @@ const ParticleScene: React.FC<ParticleSceneProps> = ({ triggerText }) => {
     geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.08,
+      size: 0.1,
       vertexColors: true,
       blending: THREE.AdditiveBlending,
       transparent: true,
@@ -134,29 +134,22 @@ const ParticleScene: React.FC<ParticleSceneProps> = ({ triggerText }) => {
     if (particlesRef.current) sceneRef.current.remove(particlesRef.current);
 
     const particles = new THREE.Points(geometry, material);
-    particles.rotation.x = 0;
-    particles.rotation.y = 0;
-    particles.rotation.z = 0;
-
     sceneRef.current.add(particles);
     particlesRef.current = particles;
   };
 
   const createTextPoints = (text: string) => {
     const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return [];
 
-    const fontSize = 100;
-    const padding = 20;
-
+    const fontSize = 60;
     ctx.font = `bold ${fontSize}px Arial`;
-    const textMetrics = ctx.measureText(text);
-    const textWidth = textMetrics.width;
+    const textWidth = ctx.measureText(text).width;
     const textHeight = fontSize;
 
-    canvas.width = textWidth + padding * 2;
-    canvas.height = textHeight + padding * 2;
+    canvas.width = textWidth + 40;
+    canvas.height = textHeight + 40;
 
     ctx.fillStyle = "white";
     ctx.font = `bold ${fontSize}px Arial`;
@@ -167,17 +160,16 @@ const ParticleScene: React.FC<ParticleSceneProps> = ({ triggerText }) => {
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const pixels = imageData.data;
     const points: { x: number; y: number }[] = [];
-    const threshold = 128;
 
-    for (let i = 0; i < pixels.length; i += 4) {
-      if (pixels[i] > threshold) {
-        const x = (i / 4) % canvas.width;
-        const y = Math.floor(i / 4 / canvas.width);
-
-        if (Math.random() < 0.3) {
+    // Skip every 2 pixels to improve loop performance
+    for (let y = 0; y < canvas.height; y += 2) {
+      for (let x = 0; x < canvas.width; x += 2) {
+        const index = (y * canvas.width + x) * 4;
+        if (pixels[index] > 128) {
+          // Properly scaled dimensions for the 3D space
           points.push({
-            x: (x - canvas.width / 2) / (fontSize / 10),
-            y: -(y - canvas.height / 2) / (fontSize / 10),
+            x: (x - canvas.width / 2) * 0.15,
+            y: -(y - canvas.height / 2) * 0.15,
           });
         }
       }
@@ -188,109 +180,100 @@ const ParticleScene: React.FC<ParticleSceneProps> = ({ triggerText }) => {
   const morphToText = (text: string) => {
     if (!particlesRef.current) return;
 
+    // Prevent tween overlaps
+    if (animationTweenRef.current) animationTweenRef.current.kill();
+
     currentStateRef.current = "text";
     const textPoints = createTextPoints(text);
-    const positions = particlesRef.current.geometry.attributes.position.array;
+
+    const geometry = particlesRef.current.geometry;
+    const currentPositions = geometry.attributes.position.array as Float32Array;
+
+    // Cache start states
+    const startPositions = new Float32Array(currentPositions);
     const targetPositions = new Float32Array(COUNT * 3);
 
-    // Reset rotation
-    gsap.to(particlesRef.current.rotation, {
-      x: 0,
-      y: 0,
-      z: 0,
-      duration: 0.5,
-    });
+    // Reset rotation before morphing
+    gsap.to(particlesRef.current.rotation, { x: 0, y: 0, z: 0, duration: 0.5 });
 
     for (let i = 0; i < COUNT; i++) {
-      if (i < textPoints.length) {
+      if (textPoints.length > 0 && i < textPoints.length) {
         targetPositions[i * 3] = textPoints[i].x;
         targetPositions[i * 3 + 1] = textPoints[i].y;
         targetPositions[i * 3 + 2] = 0;
       } else {
+        // Explode extra particles outward in space
         const angle = Math.random() * Math.PI * 2;
-        const radius = Math.random() * 20 + 10;
+        const radius = Math.random() * 15 + 12;
         targetPositions[i * 3] = Math.cos(angle) * radius;
         targetPositions[i * 3 + 1] = Math.sin(angle) * radius;
-        targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+        targetPositions[i * 3 + 2] = (Math.random() - 0.5) * 5;
       }
     }
 
-    // Animate Position
-    for (let i = 0; i < positions.length; i += 3) {
-      gsap.to(positions, {
-        [i]: targetPositions[i],
-        [i + 1]: targetPositions[i + 1],
-        [i + 2]: targetPositions[i + 2],
-        duration: 2,
-        ease: "power2.inOut",
-        onUpdate: () => {
-          if (particlesRef.current) {
-            particlesRef.current.geometry.attributes.position.needsUpdate = true;
-          }
-        },
-      });
-    }
+    // Single unified GSAP animation wrapper
+    const transitionProgress = { value: 0 };
+    animationTweenRef.current = gsap.to(transitionProgress, {
+      value: 1,
+      duration: 2,
+      ease: "power2.inOut",
+      onUpdate: () => {
+        if (!particlesRef.current) return;
+        const posAttr = particlesRef.current.geometry.attributes.position
+          .array as Float32Array;
+        const t = transitionProgress.value;
 
-    // Auto revert
-    setTimeout(() => {
-      morphToCircle();
-    }, 4000);
+        for (let i = 0; i < COUNT * 3; i++) {
+          posAttr[i] =
+            startPositions[i] + (targetPositions[i] - startPositions[i]) * t;
+        }
+        particlesRef.current.geometry.attributes.position.needsUpdate = true;
+      },
+      onComplete: () => {
+        setTimeout(() => {
+          morphToCircle();
+        }, 4000);
+      },
+    });
   };
 
   const morphToCircle = () => {
     if (!particlesRef.current) return;
 
+    if (animationTweenRef.current) animationTweenRef.current.kill();
+
     currentStateRef.current = "sphere";
-    const positions = particlesRef.current.geometry.attributes.position.array;
+    const geometry = particlesRef.current.geometry;
+    const currentPositions = geometry.attributes.position.array as Float32Array;
+
+    const startPositions = new Float32Array(currentPositions);
     const targetPositions = new Float32Array(COUNT * 3);
-    const colors = particlesRef.current.geometry.attributes.color.array;
 
     for (let i = 0; i < COUNT; i++) {
       const point = sphericalDistribution(i);
       targetPositions[i * 3] = point.x + (Math.random() - 0.5) * 0.5;
       targetPositions[i * 3 + 1] = point.y + (Math.random() - 0.5) * 0.5;
       targetPositions[i * 3 + 2] = point.z + (Math.random() - 0.5) * 0.5;
-
-      const depth =
-        Math.sqrt(point.x * point.x + point.y * point.y + point.z * point.z) /
-        8;
-      const color = new THREE.Color();
-      color.setHSL(0.5 + depth * 0.2, 0.7, 0.4 + depth * 0.3);
-
-      colors[i * 3] = color.r;
-      colors[i * 3 + 1] = color.g;
-      colors[i * 3 + 2] = color.b;
     }
 
-    for (let i = 0; i < positions.length; i += 3) {
-      gsap.to(positions, {
-        [i]: targetPositions[i],
-        [i + 1]: targetPositions[i + 1],
-        [i + 2]: targetPositions[i + 2],
-        duration: 2,
-        ease: "power2.inOut",
-        onUpdate: () => {
-          if (particlesRef.current) {
-            particlesRef.current.geometry.attributes.position.needsUpdate = true;
-          }
-        },
-      });
-    }
+    const transitionProgress = { value: 0 };
+    animationTweenRef.current = gsap.to(transitionProgress, {
+      value: 1,
+      duration: 2,
+      ease: "power2.inOut",
+      onUpdate: () => {
+        if (!particlesRef.current) return;
+        const posAttr = particlesRef.current.geometry.attributes.position
+          .array as Float32Array;
+        const t = transitionProgress.value;
 
-    for (let i = 0; i < colors.length; i += 3) {
-      gsap.to(colors, {
-        [i]: colors[i],
-        [i + 1]: colors[i + 1],
-        [i + 2]: colors[i + 2],
-        duration: 2,
-        ease: "power2.inOut",
-        onUpdate: () => {
-          if (particlesRef.current) {
-            particlesRef.current.geometry.attributes.color.needsUpdate = true;
-          }
-        },
-      });
-    }
+        for (let i = 0; i < COUNT * 3; i++) {
+          posAttr[i] =
+            startPositions[i] + (targetPositions[i] - startPositions[i]) * t;
+        }
+        particlesRef.current.geometry.attributes.position.needsUpdate = true;
+      },
+    });
   };
 
   return (

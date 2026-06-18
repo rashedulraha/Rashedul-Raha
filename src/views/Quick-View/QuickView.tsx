@@ -2,7 +2,6 @@
 
 import { motion, useScroll } from "framer-motion";
 import Navbar from "../shared/Navbar/Navbar";
-// import { SentientSphere } from "./SentientSphere";
 // import hero component
 import { Hero } from "./Hero";
 
@@ -15,6 +14,7 @@ import FeaturedProjects from "./FeaturedProjects";
 
 import AboutQuickView from "./AboutQuickView";
 import SkillsQuickView from "./SkillsQuickView";
+import { GlobeToMapTransform } from "@/components/GlobeToMapTransform";
 
 export default function QuickView() {
   const { scrollYProgress } = useScroll();
@@ -24,7 +24,7 @@ export default function QuickView() {
       <Hero />
       <Navbar />
       <div className="min-h-screen">
-        <div className="pt-5 md:pt-10 lg:pt-20 flex flex-col space-y-10 md:space-y-20 bg-background/50">
+        <div className="flex flex-col space-y-10 md:space-y-20">
           <AboutQuickView />
           <SkillsQuickView />
           <FeaturedProjects />

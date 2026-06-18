@@ -103,7 +103,7 @@ export default function Contact() {
     <div className="relative min-h-screen w-full bg-background overflow-x-hidden">
       <Navbar />
 
-      <main className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
+      <main className="relative z-10 w-full flex  items-center justify-center min-h-screen pt-5 md:mt-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
