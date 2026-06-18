@@ -28,8 +28,7 @@ interface Certificate {
   featured: boolean;
 }
 
-// Default Data (Apni chaile alada file thekeo import korte parben)
-
+// Default Data
 const defaultCertificates: Certificate[] = [
   {
     id: "cert-1",
@@ -51,7 +50,6 @@ const defaultCertificates: Certificate[] = [
     ],
     featured: true,
   },
-
   {
     id: "cert-2",
     title: "Complete Web Development – Level 2",
@@ -77,7 +75,6 @@ const defaultCertificates: Certificate[] = [
     ],
     featured: true,
   },
-
   {
     id: "cert-3",
     title: "Software Engineering Program",
@@ -89,7 +86,6 @@ const defaultCertificates: Certificate[] = [
     skills: ["C++", "Problem Solving", "Data Structures", "Algorithms"],
     featured: true,
   },
-
   {
     id: "cert-4",
     title: "System Design & Backend Learning",
@@ -101,7 +97,6 @@ const defaultCertificates: Certificate[] = [
     skills: ["REST APIs", "Database Design", "System Design", "Architecture"],
     featured: false,
   },
-
   {
     id: "cert-5",
     title: "AI & RAG Engineering",
@@ -168,7 +163,7 @@ export default function PageCertifications({
                 </div>
                 <div className="text-xs text-muted-foreground">Total Certs</div>
               </div>
-              <div className="bg-card  hover:border-border rounded-xl px-5 py-3 text-center min-w-[110px] shadow-sm">
+              <div className="bg-card hover:border-border rounded-xl px-5 py-3 text-center min-w-[110px] shadow-sm">
                 <div className="text-2xl font-bold text-secondary-foreground">
                   {certificates.filter((c) => c.featured).length}
                 </div>
@@ -181,7 +176,7 @@ export default function PageCertifications({
 
           {/* Search & Filtering Controls */}
           <div className="flex flex-col md:flex-row gap-4 justify-between items-center w-full mt-8">
-            {/* Search Input - Shadcn Style */}
+            {/* Search Input */}
             <div className="relative w-full md:max-w-md group">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <input
@@ -193,7 +188,7 @@ export default function PageCertifications({
               />
             </div>
 
-            {/* Category Tabs - Shadcn Badge/Toggle Style */}
+            {/* Category Tabs */}
             <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
               <Filter className="w-3.5 h-3.5 text-muted-foreground mr-1 hidden sm:block" />
               {categories.map((cat) => (
@@ -225,11 +220,15 @@ export default function PageCertifications({
                   exit={{ opacity: 0, scale: 0.92 }}
                   transition={{ duration: 0.3 }}
                   whileHover={{ y: -4 }}
-                  className={`group relative flex flex-col justify-between rounded-xl border bg-card text-card-foreground shadow-sm transition-all duration-300 overflow-hidden ${
-                    cert.featured
-                      ? "shadow-md border-border hover:border-primary/30"
-                      : "border-border hover:border-primary/30"
-                  }`}>
+                  className="group relative flex flex-col justify-between rounded-xl bg-card text-card-foreground shadow-sm transition-all duration-300 overflow-hidden"
+                  style={{
+                    borderTop: cert.featured
+                      ? "1.5px solid var(--primary)"
+                      : "1.5px solid var(--border)",
+                    borderLeft: "1px solid var(--border)",
+                    borderRight: "1px solid var(--border)",
+                    borderBottom: "1px solid var(--border) / 0.2",
+                  }}>
                   {/* Top Featured Gradient Tag */}
                   {cert.featured && (
                     <div className="absolute top-0 right-0 p-3">
@@ -280,7 +279,7 @@ export default function PageCertifications({
                   </div>
 
                   {/* Bottom Action Button/Link */}
-                  <div className="mt-auto border-t border-border p-4 bg-secondary/20 flex items-center justify-between">
+                  <div className="mt-auto border-t border-border/30 p-4 bg-secondary/20 flex items-center justify-between">
                     <span className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground">
                       {cert.category}
                     </span>

@@ -139,10 +139,11 @@ const AboutPage = () => {
                   <FaXTwitter className="h-5 w-5" />
                 </Button>
               </Link>
-
-              <Button variant="default" className="ml-2 gap-2 h-11 px-5">
-                Contact Me <ArrowUpRight className="w-4 h-4" />
-              </Button>
+              <Link href="/contact">
+                <Button variant="default" className="ml-2 gap-2 h-11 px-5">
+                  Contact Me <ArrowUpRight className="w-4 h-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </motion.div>
