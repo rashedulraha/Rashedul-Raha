@@ -98,7 +98,6 @@ export default function Contact() {
 
   async function onSubmit(values: FormValues) {
     setIsLoading(true);
-    // Simulate a network request
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     console.log(values);
@@ -106,7 +105,6 @@ export default function Contact() {
     setIsSubmitted(true);
     form.reset();
 
-    // Hide success message after 5 seconds
     setTimeout(() => setIsSubmitted(false), 5000);
   }
 
@@ -139,26 +137,26 @@ export default function Contact() {
           initial="hidden"
           animate="visible"
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center">
-          {/* LEFT: Carousel Section (Takes 6 cols out of 12 on large screens) */}
+          {/* LEFT: Carousel Section */}
           <motion.div
             variants={itemVariants}
             className="col-span-1 lg:col-span-6 w-full flex justify-center items-center">
             <OrbitCarousel />
           </motion.div>
 
-          {/* RIGHT: Form Section (Takes 6 cols out of 12 on large screens) */}
+          {/* RIGHT: Form Section */}
           <motion.div
             variants={itemVariants}
             className="col-span-1 lg:col-span-6 w-full">
-            <div className="relative p-5 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl border border-border/40 bg-card/20 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-500">
+            <div className="relative p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-border bg-card shadow-lg hover:shadow-xl transition-all duration-500">
               {/* Success Message */}
               {isSubmitted && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-4 left-4 right-4 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-green-500/10 border border-green-500/30 text-green-600 text-xs sm:text-sm font-medium flex items-center gap-2 z-10">
-                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                  className="absolute top-4 left-4 right-4 p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-600 dark:text-green-400 text-sm font-medium flex items-center gap-2 z-10">
+                  <CheckCircle className="w-5 h-5 shrink-0" />
                   <span>
                     Message sent successfully! I'll get back to you soon.
                   </span>
@@ -177,15 +175,15 @@ export default function Contact() {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-[10px] sm:text-xs font-mono uppercase text-primary tracking-wider">
-                            Full_Name
+                          <FormLabel className="text-xs sm:text-sm font-semibold text-foreground tracking-wide">
+                            Full Name
                           </FormLabel>
                           <FormControl>
                             <div className="relative group">
-                              <User className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-3 h-3 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                              <User className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground transition-colors group-focus-within:text-primary" />
                               <Input
                                 placeholder="Rashedul Islam"
-                                className="pl-10"
+                                className="pl-10 h-11 text-base bg-background border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                                 {...field}
                               />
                             </div>
@@ -201,15 +199,15 @@ export default function Contact() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-[10px] sm:text-xs font-mono uppercase text-primary tracking-wider">
+                          <FormLabel className="text-xs sm:text-sm font-semibold text-foreground tracking-wide">
                             Email
                           </FormLabel>
                           <FormControl>
                             <div className="relative group">
-                              <Mail className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-3 h-3 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                              <Mail className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground transition-colors group-focus-within:text-primary" />
                               <Input
                                 placeholder="email@example.com"
-                                className="pl-10"
+                                className="pl-10 h-11 text-base bg-background border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                                 {...field}
                               />
                             </div>
@@ -226,15 +224,15 @@ export default function Contact() {
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[10px] sm:text-xs font-mono uppercase text-primary tracking-wider">
+                        <FormLabel className="text-xs sm:text-sm font-semibold text-foreground tracking-wide">
                           Subject
                         </FormLabel>
                         <FormControl>
                           <div className="relative group">
-                            <MessageSquare className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-3 h-3 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                            <MessageSquare className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground transition-colors group-focus-within:text-primary" />
                             <Input
                               placeholder="Project Inquiry"
-                              className="pl-10"
+                              className="pl-10 h-11 text-base bg-background border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                               {...field}
                             />
                           </div>
@@ -250,13 +248,13 @@ export default function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-[10px] sm:text-xs font-mono uppercase text-primary tracking-wider">
+                        <FormLabel className="text-xs sm:text-sm font-semibold text-foreground tracking-wide">
                           Message
                         </FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="How can I help you?"
-                            className="min-h-30 sm:min-h-35 lg:min-h-37.5 bg-background/50 text-sm sm:text-base rounded-lg sm:rounded-xl p-3 sm:p-4 resize-none border-border/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                            className="min-h-[150px] bg-background text-base rounded-xl p-4 resize-none border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                             {...field}
                           />
                         </FormControl>
@@ -266,16 +264,19 @@ export default function Contact() {
                   />
 
                   {/* Submit Button */}
-                  <Button type="submit" disabled={isLoading} className="w-full">
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full h-12 text-base font-semibold">
                     {isLoading ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <Loader2 className="w-4 h-4 animate-spin mr-2" />
                         Sending...
                       </>
                     ) : (
                       <>
                         Send Message
-                        <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <Send className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}
                   </Button>

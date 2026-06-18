@@ -27,6 +27,14 @@ const itemVariants = {
   },
 };
 
+// Custom border style for cards
+const cardBorderStyle = {
+  borderTop: "1.5px solid var(--border)",
+  borderLeft: "1px solid var(--border)",
+  borderRight: "1px solid var(--border)",
+  borderBottom: "1px solid var(--border) / 0.15",
+};
+
 const SkillsPage = () => {
   const skillCategories = [
     {
@@ -91,80 +99,85 @@ const SkillsPage = () => {
   return (
     <Responsive>
       <Navbar />
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-2">
+
+      {/* Header */}
+      <div className="mb-12">
+        <h1 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight mb-3">
           Technical Skills
         </h1>
-        <p className="text-sm text-muted-foreground max-w-2xl">
+        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed">
           Technologies and tools I work with, built through structured learning
           and hands-on practice.
         </p>
       </div>
 
       <motion.div
-        className="space-y-4 text-muted-foreground leading-relaxed"
+        className="space-y-8"
         variants={itemVariants}
         initial="hidden"
         animate="visible">
         {/* Education & Training */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 bg-muted/40 rounded-xl border">
-          <div>
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <GraduationCap className="w-4 h-4 text-primary" />
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 sm:p-8 bg-card rounded-xl shadow-sm"
+          style={cardBorderStyle}>
+          <div className="space-y-3">
+            <p className="text-sm font-semibold text-foreground uppercase tracking-wider flex items-center gap-2">
+              <GraduationCap className="w-5 h-5 text-primary" />
               Programming Hero
             </p>
-            <p className="text-sm mb-3 text-muted-foreground">
+            <p className="text-base text-muted-foreground leading-relaxed">
               Completed comprehensive full-stack training covering modern
               JavaScript, React, Node.js, and database management.
             </p>
-            <div className="flex gap-2">
-              <Badge variant="secondary" className="text-xs">
+            <div className="flex gap-2 pt-1">
+              <Badge variant="secondary" className="text-xs px-3 py-1">
                 Level 1 ✓
               </Badge>
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className="text-xs px-3 py-1">
                 Level 2 ✓
               </Badge>
             </div>
           </div>
 
-          <div>
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <Terminal className="w-4 h-4 text-primary" />
+          <div className="space-y-3 sm:border-l sm:border-border/50 sm:pl-6">
+            <p className="text-sm font-semibold text-foreground uppercase tracking-wider flex items-center gap-2">
+              <Terminal className="w-5 h-5 text-primary" />
               Phitron
             </p>
-            <p className="text-sm mb-3 text-muted-foreground">
+            <p className="text-base text-muted-foreground leading-relaxed">
               Advanced programming and data structures course focusing on
               problem-solving, algorithms, and software engineering
               fundamentals.
             </p>
-            <Badge variant="secondary" className="text-xs">
+            <Badge variant="secondary" className="text-xs px-3 py-1 mt-1">
               Completed ✓
             </Badge>
           </div>
         </div>
 
-        {/* Technical Expertise (Responsive Grid: 4 Top, 2 Centered Bottom) */}
-        {/* Technical Expertise (Responsive Grid: 4 Top, 2 Centered Bottom) */}
-        <div className="p-5 bg-muted/40 rounded-xl border">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4 flex items-center gap-1.5">
-            <Code2 className="w-4 h-4 text-primary" />
+        {/* Technical Expertise */}
+        <div
+          className="p-6 sm:p-8 bg-card rounded-xl shadow-sm"
+          style={cardBorderStyle}>
+          <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-6 flex items-center gap-2">
+            <Code2 className="w-5 h-5 text-primary" />
             Technical Expertise
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {/* First 4 items - Top row */}
             {skillCategories.slice(0, 4).map((category) => (
-              <div key={category.title} className="space-y-2">
-                <p className="text-sm font-semibold text-foreground flex items-center gap-2">
-                  <category.icon className="w-4 h-4 text-primary shrink-0" />
+              <div key={category.title} className="space-y-3">
+                <p className="text-base font-semibold text-foreground flex items-center gap-2 pb-2 border-b border-border/30">
+                  <category.icon className="w-5 h-5 text-primary shrink-0" />
                   <span className="truncate">{category.title}</span>
                 </p>
-                <ul className="space-y-1.5">
+                <ul className="space-y-2">
                   {category.skills.map((skill) => (
                     <li
                       key={skill}
-                      className="text-sm text-muted-foreground flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary/50 flex-shrink-0" />
+                      className="text-sm text-muted-foreground flex items-center gap-2 hover:text-foreground transition-colors">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
                       <span className="truncate">{skill}</span>
                     </li>
                   ))}
@@ -172,20 +185,20 @@ const SkillsPage = () => {
               </div>
             ))}
 
-            {/* Bottom row: 2 items centered, each taking 2 columns */}
-            <div className="col-span-2 md:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+            {/* Bottom row: 2 items centered */}
+            <div className="col-span-2 md:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
               {skillCategories.slice(4).map((category) => (
-                <div key={category.title} className="space-y-2">
-                  <p className="text-sm font-semibold text-foreground flex items-center gap-2">
-                    <category.icon className="w-4 h-4 text-primary shrink-0" />
+                <div key={category.title} className="space-y-3">
+                  <p className="text-base font-semibold text-foreground flex items-center gap-2 pb-2 border-b border-border/30">
+                    <category.icon className="w-5 h-5 text-primary shrink-0" />
                     {category.title}
                   </p>
-                  <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5">
+                  <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
                     {category.skills.map((skill) => (
                       <li
                         key={skill}
-                        className="text-sm text-muted-foreground flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary/50 flex-shrink-0" />
+                        className="text-sm text-muted-foreground flex items-center gap-2 hover:text-foreground transition-colors">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
                         <span className="truncate">{skill}</span>
                       </li>
                     ))}
@@ -195,34 +208,37 @@ const SkillsPage = () => {
             </div>
           </div>
         </div>
+
         {/* Key Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 bg-muted/40 rounded-xl border">
-          <div>
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <Trophy className="w-4 h-4 text-primary" />
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 sm:p-8 bg-card rounded-xl shadow-sm"
+          style={cardBorderStyle}>
+          <div className="space-y-2">
+            <p className="text-sm font-semibold text-foreground uppercase tracking-wider flex items-center gap-2">
+              <Trophy className="w-5 h-5 text-primary" />
               Key Achievement
             </p>
-            <p className="text-sm">
+            <p className="text-base text-muted-foreground leading-relaxed">
               Solved{" "}
-              <span className="text-primary font-bold text-base">
+              <span className="text-primary font-bold text-lg">
                 500+ DSA problems
               </span>
               , strengthening problem-solving and system thinking abilities.
             </p>
           </div>
 
-          <div>
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
-              <Code2 className="w-4 h-4 text-primary" />
+          <div className="space-y-2 sm:border-l sm:border-border/50 sm:pl-6">
+            <p className="text-sm font-semibold text-foreground uppercase tracking-wider flex items-center gap-2">
+              <Code2 className="w-5 h-5 text-primary" />
               Projects & Experience
             </p>
-            <p className="text-sm">
+            <p className="text-base text-muted-foreground leading-relaxed">
               Built{" "}
-              <span className="text-primary font-bold text-base">
+              <span className="text-primary font-bold text-lg">
                 15+ projects
               </span>{" "}
               using{" "}
-              <span className="text-foreground font-medium">
+              <span className="text-foreground font-semibold">
                 20+ technologies
               </span>
               , with 2+ years of hands-on experience.
@@ -231,8 +247,10 @@ const SkillsPage = () => {
         </div>
 
         {/* What I Bring */}
-        <div className="p-5 bg-muted/40 rounded-xl border space-y-4">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+        <div
+          className="p-6 sm:p-8 bg-card rounded-xl shadow-sm space-y-5"
+          style={cardBorderStyle}>
+          <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
             What I Bring to the Table
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -262,10 +280,12 @@ const SkillsPage = () => {
                 desc: "Docker, CI/CD, cloud deployment, and version control",
               },
             ].map((item) => (
-              <div key={item.title} className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  <span className="text-foreground font-medium">
+              <div
+                key={item.title}
+                className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/30 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  <span className="text-foreground font-semibold">
                     {item.title}:
                   </span>{" "}
                   {item.desc}
@@ -277,15 +297,15 @@ const SkillsPage = () => {
 
         {/* Mission */}
         <motion.div
-          className="p-5 bg-primary/5 border-l-4 border-primary rounded-r-xl"
+          className="p-6 bg-primary/5 border border-primary/20 border-l-4 border-l-primary rounded-r-xl"
           whileHover={{ x: 5 }}
           transition={{ duration: 0.2 }}>
-          <p className="text-sm flex items-start gap-2">
+          <p className="text-base flex items-start gap-3 text-foreground leading-relaxed">
             <Terminal className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
             <span>
               I'm continuously learning new technologies and improving my
               engineering skills with the goal of becoming a{" "}
-              <span className="text-foreground font-semibold">
+              <span className="text-primary font-semibold">
                 strong software engineer
               </span>{" "}
               who can design and develop impactful systems.

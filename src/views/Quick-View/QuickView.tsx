@@ -2,9 +2,12 @@
 
 import { motion, useScroll } from "framer-motion";
 import Navbar from "../shared/Navbar/Navbar";
+// import { SentientSphere } from "./SentientSphere";
+// import hero component
+import { Hero } from "./Hero";
 
 import GitHubStats from "./GitHubStats";
-import { ThreeDMarqueeHome } from "./ThreeDMarqueeHome";
+// import { ThreeDMarqueeHome } from "./ThreeDMarqueeHome";
 
 import NetworkVisualization from "@/components/network";
 import Footer from "./Footer.quick";
@@ -18,7 +21,10 @@ export default function QuickView() {
 
   return (
     <>
-      <ThreeDMarqueeHome />
+      {/* <ThreeDMarqueeHome /> */}
+      {/* <SentientSphere /> */}
+
+      <Hero />
       <Navbar />
       <div className="min-h-screen border-t">
         <div className="pt-5 md:pt-10 lg:pt-20 flex flex-col space-y-10 md:space-y-20 bg-background/50">

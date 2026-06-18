@@ -17,20 +17,25 @@ const AboutQuickView = () => {
   return (
     <Responsive>
       <div className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-2">
+        {/* Heading size increased for better visibility */}
+        <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-3">
           About & Education
         </h1>
-        <p className="text-sm text-muted-foreground max-w-2xl">
+        {/* Subtitle size increased */}
+        <p className="text-base text-muted-foreground max-w-2xl">
           My learning journey and the foundations that shaped my technical
           skills.
         </p>
       </div>
       {/* Bio */}
       <motion.div
-        className="space-y-4 text-muted-foreground leading-relaxed"
-        variants={itemVariants}>
+        className="space-y-4 leading-relaxed"
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-5 bg-muted/40 rounded-xl border">
-          <p className="text-base">
+          {/* Text color changed to foreground/85 for better contrast */}
+          <p className="text-base text-foreground/85">
             I'm{" "}
             <span className="text-foreground font-semibold">
               Rashedul Islam
@@ -45,11 +50,13 @@ const AboutQuickView = () => {
 
           <div className="space-y-5 md:space-y-10 p-5 bg-muted/40 rounded-xl border">
             <div>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              {/* Heading size increased from text-xs to text-sm */}
+              <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
                 <GraduationCap className="w-4 h-4 text-primary" />
                 Training & Education
               </p>
-              <p className="text-sm mb-3 text-muted-foreground">
+              {/* Body text size increased to text-base and contrast improved */}
+              <p className="text-base mb-3 text-foreground/85">
                 Completed structured training where I built a strong foundation
                 in{" "}
                 <span className="text-foreground font-medium">
@@ -58,7 +65,8 @@ const AboutQuickView = () => {
                 </span>
                 .
               </p>
-              <ul className="space-y-2 text-sm">
+              {/* List text size increased to text-base */}
+              <ul className="space-y-2 text-base">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                   <span className="font-medium text-foreground">
@@ -75,13 +83,13 @@ const AboutQuickView = () => {
               </ul>
             </div>
             <div>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-2 flex items-center gap-1.5">
                 <Trophy className="w-4 h-4 text-primary" />
                 Key Achievement
               </p>
-              <p className="text-sm">
+              <p className="text-base text-foreground/85">
                 Solved{" "}
-                <span className="text-primary font-bold text-base">
+                <span className="text-primary font-bold text-lg">
                   500+ DSA problems
                 </span>
                 , strengthening problem-solving and system thinking abilities
@@ -91,7 +99,7 @@ const AboutQuickView = () => {
         </div>
 
         <div className="p-5 bg-muted/40 rounded-xl border space-y-4">
-          <p className="text-base">
+          <p className="text-base text-foreground/85">
             I enjoy working across both frontend and backend—building clean,
             responsive user interfaces and designing efficient, scalable backend
             systems and APIs. I am particularly interested in{" "}
@@ -102,7 +110,7 @@ const AboutQuickView = () => {
             .
           </p>
 
-          <p className="text-base">
+          <p className="text-base text-foreground/85">
             Alongside full-stack development, I explore{" "}
             <span className="text-primary font-semibold">
               AI integrations and RAG-based systems
@@ -110,15 +118,15 @@ const AboutQuickView = () => {
             , focusing on building smarter and more intelligent applications.
           </p>
 
-          {/* NEW SECTION: What I Bring to the Table (Recruiter Magnet) */}
+          {/* What I Bring to the Table */}
           <div className="pt-4 border-t border-border/50">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+            <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-3">
               What I Bring to the Table
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">
+                <p className="text-sm sm:text-base text-foreground/85">
                   <span className="text-foreground font-medium">
                     Clean Code:
                   </span>{" "}
@@ -127,7 +135,7 @@ const AboutQuickView = () => {
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">
+                <p className="text-sm sm:text-base text-foreground/85">
                   <span className="text-foreground font-medium">
                     Collaboration:
                   </span>{" "}
@@ -136,7 +144,7 @@ const AboutQuickView = () => {
               </div>
               <div className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <p className="text-xs sm:text-sm text-muted-foreground">
+                <p className="text-sm sm:text-base text-foreground/85">
                   <span className="text-foreground font-medium">
                     Impact-Driven:
                   </span>{" "}
@@ -151,7 +159,8 @@ const AboutQuickView = () => {
           className="p-5 bg-primary/5 border-l-4 border-primary rounded-r-xl"
           whileHover={{ x: 5 }}
           transition={{ duration: 0.2 }}>
-          <p className="text-sm flex items-start gap-2">
+          {/* Text size increased to text-base and contrast improved */}
+          <p className="text-base flex items-start gap-2 text-foreground/90">
             <Rocket className="w-5 h-5 text-primary shrink-0 mt-0.5" />
             <span>
               I'm continuously learning, building projects, and improving my

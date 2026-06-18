@@ -67,79 +67,102 @@
   --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
 }
 
-/* ── 2. ROOT & DARK THEME ── */
 :root {
   --radius: 0.75rem;
 
-  --background: #fcfcfd;
-  --foreground: #111827;
-  --card: #ffffff;
-  --card-foreground: #000000;
-  --popover: #ffffff;
-  --popover-foreground: #000000;
-  --primary: #000000;
-  --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #333333;
-  --muted: #f5f5f5;
-  --muted-foreground: #666666;
-  --accent: #f2f2f2;
-  --accent-foreground: #1a1a1a;
-  --destructive: #e11d48;
-  --destructive-foreground: #ffffff;
-  --border: #d4d4d8;
-  --input: #d4d4d8;
-  --ring: #00000033;
+  /* Premium Minimalist Light Mode */
+  --background: #fafafa; /* Pure, clean clean light background */
+  --foreground: #09090b; /* Deep Zinc - পিউর ব্ল্যাকের চেয়ে মডার্ন */
 
-  --chart-1: #2563eb;
+  --card: #ffffff; /* ব্যাকগ্রাউন্ডের সাথে পারফেক্ট ব্লেন্ড */
+  --card-foreground: #09090b;
+
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+
+  --primary: #4f46e5; /* Deep Indigo - লাইট মোডে চমৎকার কন্ট্রাস্ট দেয় */
+  --primary-foreground: #ffffff;
+
+  --secondary: #f4f4f5; /* Zinc 100 */
+  --secondary-foreground: #71717a;
+
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+
+  --accent: #f4f4f5;
+  --accent-foreground: #09090b;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Borders & Inputs - একদম হালকা ও ইনভিজিবল প্রাইস */
+  --border: #e4e4e7; /* Zinc 200 - খুবই সফট, কালো হয়ে থাকবে না */
+  --input: #e4e4e7;
+  --ring: #4f46e533;
+
+  --chart-1: #4f46e5;
   --chart-2: #06b6d4;
-  --chart-3: #db2777;
-  --chart-4: #eab308;
+  --chart-3: #f59e0b;
+  --chart-4: #ec4899;
   --chart-5: #10b981;
 
+  /* Sidebar Settings */
   --sidebar: #fafafa;
-  --sidebar-foreground: #000000;
-  --sidebar-primary: #000000;
+  --sidebar-foreground: #52525b;
+  --sidebar-primary: #4f46e5;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f2f2f2;
-  --sidebar-accent-foreground: #1a1a1a;
-  --sidebar-border: #d4d4d8;
-  --sidebar-ring: #00000026;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-accent-foreground: #09090b;
+  --sidebar-border: #e4e4e7;
+  --sidebar-ring: #4f46e533;
 }
 
 .dark {
-  --background: #131420;
-  --foreground: #f7fafc;
-  --card: #1a202c;
-  --card-foreground: #f7fafc;
-  --popover: #1a202c;
-  --popover-foreground: #f7fafc;
-  --primary: #16a394;
-  --primary-foreground: #fff;
-  --secondary: #1d242f;
-  --secondary-foreground: #f7fafc;
-  --muted: #1d242f;
-  --muted-foreground: #a0aec0;
-  --accent: #0d3a38;
-  --accent-foreground: #71e8df;
-  --destructive: #e53e3e;
-  --destructive-foreground: #fff;
-  --border: #1d242f;
-  --input: #1d242f;
-  --ring: #16a394;
-  --chart-1: #71e8df;
-  --chart-2: #7f9cf5;
-  --chart-3: #319795;
-  --chart-4: #805ad5;
-  --chart-5: #d69e2e;
-  --sidebar: #131420;
-  --sidebar-foreground: #f7fafc;
-  --sidebar-primary: #16a394;
-  --sidebar-primary-foreground: #fff;
-  --sidebar-accent: #0d3a38;
-  --sidebar-accent-foreground: #71e8df;
-  --sidebar-border: #1d242f;
-  --sidebar-ring: #16a394;
+  /* Ultra Deep & Rich Carbon Dark Mode */
+  --background: #030303; /* Deep Jet Black - আপনার পছন্দমতো অনেক বেশি ডার্ক */
+  --foreground: #f4f4f5; /* Zinc 100 - চোখে না লাগা সফট হোয়াইট টেক্সট */
+
+  --card: #09090b; /* Zinc 950 - ব্যাকগ্রাউন্ডের সাথে খুব সূক্ষ্ম তফাৎ, যা প্রিমিয়াম দেখায় */
+  --card-foreground: #f4f4f5;
+
+  --popover: #09090b;
+  --popover-foreground: #f4f4f5;
+
+  --primary: #6366f1; /* Glowing Indigo/Violet - এই ডার্ক ব্যাকগ্রাউন্ডে দারুন ফুটবে */
+  --primary-foreground: #ffffff;
+
+  --secondary: #18181b; /* Zinc 900 */
+  --secondary-foreground: #a1a1aa;
+
+  --muted: #18181b;
+  --muted-foreground: #71717a;
+
+  --accent: #18181b;
+  --accent-foreground: #f4f4f5;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  /* Borders & Inputs - ডার্ক মোডেও যেন বর্ডার ভেসে না ওঠে */
+  --border: #131316; /* অত্যন্ত সূক্ষ্ম ও ডার্ক বর্ডার, যা লেআউটকে ক্লিন রাখে */
+  --input: #131316;
+  --ring: #6366f166;
+
+  --chart-1: #6366f1;
+  --chart-2: #2dd4bf;
+  --chart-3: #fbbf24;
+  --chart-4: #f472b6;
+  --chart-5: #60a5fa;
+
+  /* Sidebar Settings */
+  --sidebar: #030303;
+  --sidebar-foreground: #a1a1aa;
+  --sidebar-primary: #6366f1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #09090b;
+  --sidebar-accent-foreground: #f4f4f5;
+  --sidebar-border: #131316;
+  --sidebar-ring: #6366f166;
 }
 
 /* ── 3. TYPOGRAPHY SYSTEM (Responsive & Readable) ── */
