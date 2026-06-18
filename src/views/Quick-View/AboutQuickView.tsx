@@ -72,15 +72,6 @@ const AboutQuickView = () => {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Column - Bio */}
             <div className="space-y-5">
-              <div className="flex items-center gap-2 mb-1">
-                <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
-                  <Users className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-xs font-mono text-primary/70 tracking-widest uppercase">
-                  Profile
-                </span>
-              </div>
-
               <p className="text-base md:text-lg text-foreground/85 leading-relaxed">
                 I'm{" "}
                 <span className="text-foreground font-bold text-lg md:text-xl">
@@ -192,9 +183,6 @@ const AboutQuickView = () => {
 
           <div className="relative z-10 space-y-5">
             <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
-                <Briefcase className="w-4 h-4 text-primary" />
-              </div>
               <span className="text-xs font-mono text-primary/70 tracking-widest uppercase">
                 Expertise
               </span>
@@ -275,9 +263,6 @@ const AboutQuickView = () => {
           <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/60 via-primary/30 to-transparent" />
 
           <div className="flex items-start gap-4 pl-3">
-            <div className="p-3 rounded-lg bg-primary/20 border border-primary/30">
-              <Rocket className="w-6 h-6 text-primary" />
-            </div>
             <div>
               <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-primary" />

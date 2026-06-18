@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -8,15 +8,15 @@ import Image from "next/image";
 import {
   ArrowRight,
   ExternalLink,
-  Star,
   Clock,
   Users,
   Search,
   X,
-  Sparkles,
   Eye,
+  Sparkles,
+  Filter,
 } from "lucide-react";
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Responsive from "../Responsive/Responsive";
 import { Input } from "@/components/ui/input";
 import CommonBg from "@/components/CommonBg/CommonBg";
@@ -38,101 +38,13 @@ interface Project {
   metric: string;
 }
 
-// --- Creative Component: Spotlight Card (Fixed TypeScript) ---
-function SpotlightCard({ children, className, ...props }: any) {
-  const divRef = useRef<HTMLDivElement>(null);
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    // Fix: Explicitly use HTMLDivElement
-    const { left, top } = e.currentTarget.getBoundingClientRect();
-    // Fix: Set styles on the element
-    e.currentTarget.style.setProperty("--x", `${e.clientX - left}px`);
-    e.currentTarget.style.setProperty("--y", `${e.clientY - top}px`);
-  }
-
-  return (
-    <div
-      ref={divRef}
-      className={cn(
-        "group relative rounded-xl bg-card/50 border-2 border-border overflow-hidden",
-        "hover:border-primary/30 transition-colors duration-300",
-        className,
-      )}
-      onMouseMove={handleMouseMove}
-      {...props}>
-      {/* Spotlight Gradient (Using CSS Variables) */}
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div
-          className="absolute inset-[-1px] rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background: `radial-gradient(
-                    800px circle at var(--x) var(--y),
-                    rgba(255, 255, 255, 0.06),
-                    transparent 40%
-                )`,
-          }}
-        />
-      </div>
-
-      {/* Content Layer - Ensure pointer events work for children */}
-      <div className="relative z-10 h-full flex flex-col">{children}</div>
-    </div>
-  );
-}
-
-// --- Creative Component: 3D Tilt Card ---
-function TiltCard({ children, className, isFeatured }: any) {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const xSpring = useSpring(x, { stiffness: 150, damping: 10 });
-  const ySpring = useSpring(y, { stiffness: 150, damping: 10 });
-
-  const transform = useTransform(
-    [xSpring, ySpring],
-    ([latestX, latestY]) =>
-      `perspective(1000px) rotateX(${latestY}deg) rotateY(${latestX}deg) scale3d(1.02, 1.02, 1.02)`,
-  );
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct * 5);
-    y.set(-yPct * 5);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transformStyle: "preserve-3d", transform }}
-      className={cn(
-        "transition-all duration-300 ease-out",
-        className,
-        isFeatured ? "md:col-span-2 lg:col-span-2" : "",
-      )}>
-      {children}
-    </motion.div>
-  );
-}
-
-// Helper for className merge
-function cn(...classes: (string | boolean | undefined)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+// ===== CREATIVE BORDER STYLES (Theme-aware, no hardcode) =====
+const creativeBorderStyle = {
+  borderTop: "1.5px solid var(--border)",
+  borderLeft: "1px solid var(--border)",
+  borderRight: "1px solid var(--border)",
+  borderBottom: "1px solid color-mix(in srgb, var(--border) 15%)",
+};
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -143,7 +55,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     const loadProjects = async () => {
       try {
-        await new Promise((r) => setTimeout(r, 1000));
+        await new Promise((r) => setTimeout(r, 800));
         const response = await fetch("/projects.json");
         const data = await response.json();
         setProjects(data);
@@ -179,141 +91,190 @@ export default function ProjectsPage() {
 
   if (loading) {
     return (
-      <section className="bg-background py-16 md:py-24 min-h-screen">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 space-y-4">
-            <div className="h-12 bg-muted/50 rounded-2xl w-1/3 animate-pulse" />
-            <div className="h-6 bg-muted/30 rounded-xl w-2/3 animate-pulse" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div
-                key={i}
-                className="border-2 border-border rounded-2xl bg-card/50 overflow-hidden h-[500px] relative">
-                <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent z-10" />
-                <div className="h-64 bg-muted/50 w-full" />
-                <div className="p-6 space-y-4">
-                  <div className="space-y-3">
-                    <div className="h-8 bg-muted/50 rounded-lg w-3/4" />
-                    <div className="h-4 bg-muted/30 rounded w-1/2" />
-                  </div>
-                  <div className="space-y-2">
-                    <div className="h-3 bg-muted/30 rounded w-full" />
-                    <div className="h-3 bg-muted/30 rounded w-full" />
-                  </div>
-                  <div className="flex gap-2 pt-4">
-                    <div className="h-10 bg-muted/50 rounded-lg flex-1" />
-                    <div className="h-10 bg-muted/50 rounded-lg flex-1" />
+      <section className="min-h-screen relative">
+        <CommonBg />
+        <Responsive>
+          <div className="relative z-10 py-16 md:py-24">
+            {/* Header Skeleton */}
+            <div className="mb-12 space-y-4">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="h-10 w-10 rounded-lg bg-muted/40 animate-pulse" />
+                <div className="h-4 w-20 bg-muted/40 rounded animate-pulse" />
+              </div>
+              <div className="h-12 bg-muted/40 rounded-xl w-1/3 animate-pulse" />
+              <div className="h-6 bg-muted/40 rounded-lg w-2/3 animate-pulse" />
+            </div>
+
+            {/* Search + Filter Skeleton */}
+            <div
+              className="relative overflow-hidden rounded-xl bg-card p-6 mb-12"
+              style={creativeBorderStyle}>
+              <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+              <div className="h-12 bg-muted/40 rounded-lg mb-6 animate-pulse" />
+              <div className="flex flex-wrap gap-3">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div
+                    key={i}
+                    className="h-10 w-24 bg-muted/40 rounded-lg animate-pulse"
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Projects Grid Skeleton - Auto-fill */}
+            <div
+              className="grid gap-6"
+              style={{
+                gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+              }}>
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div
+                  key={i}
+                  className="relative overflow-hidden rounded-xl bg-card"
+                  style={creativeBorderStyle}>
+                  <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+                  <div className="h-56 bg-muted/40 w-full animate-pulse" />
+                  <div className="p-6 space-y-4">
+                    <div className="h-6 bg-muted/40 rounded w-3/4 animate-pulse" />
+                    <div className="h-4 bg-muted/40 rounded w-1/2 animate-pulse" />
+                    <div className="space-y-2">
+                      <div className="h-3 bg-muted/40 rounded w-full animate-pulse" />
+                      <div className="h-3 bg-muted/40 rounded w-full animate-pulse" />
+                    </div>
+                    <div className="flex gap-2 pt-4">
+                      <div className="h-10 bg-muted/40 rounded-lg flex-1 animate-pulse" />
+                      <div className="h-10 bg-muted/40 rounded-lg flex-1 animate-pulse" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-        <style jsx>{`
-          @keyframes shimmer {
-            100% {
-              transform: translateX(100%);
-            }
-          }
-        `}</style>
+        </Responsive>
       </section>
     );
   }
 
   return (
     <section className="min-h-screen relative overflow-hidden">
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -z-10 animate-pulse" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] -z-10" />
-
       <CommonBg />
       <Responsive>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-2">
-            Featured Projects
-          </h1>
-          <p className="text-sm text-muted-foreground max-w-2xl">
-            A collection of high-performance web applications crafted with
-            precision.
-          </p>
-        </motion.div>
-
-        {/* Search + Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="backdrop-blur-xl bg-card/50/50 border-2 border-border rounded-3xl p-2 mb-12 shadow-2xl shadow-black/5">
-          <div className="p-4">
-            <div className="relative mb-6">
-              <Input
-                type="text"
-                placeholder="Search by technology, name..."
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
-              {searchInput && (
-                <Button
-                  onClick={() => setSearchInput("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground p-2 rounded-full hover:bg-muted transition-all">
-                  <X className="w-5 h-5" />
-                </Button>
-              )}
-            </div>
-            <div className="flex flex-wrap gap-3 items-center justify-center">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`relative px-6   text-sm font-medium transition-all overflow-hidden group ${
-                    selectedCategory === category
-                      ? "bg-foreground text-background border-2 border-transparent shadow-lg shadow-primary/20"
-                      : "bg-muted/30 text-muted-foreground border-2 border-border hover:border-primary/30 hover:text-foreground hover:bg-muted/50"
-                  }`}>
-                  <span className="relative z-10">
-                    {category === "all" ? "All Projects" : category}
-                  </span>
-                  {selectedCategory === category && (
-                    <motion.span
-                      layoutId="activeCategory"
-                      className="absolute inset-0 bg-foreground"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                </Button>
-              ))}
-            </div>
-            <div className="mt-6 text-center">
-              <span className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground bg-background/50 px-4 py-1.5 rounded-full border border-border">
-                <Eye className="w-3.5 h-3.5 text-primary" />
-                Showing {filteredProjects.length} result
-                {filteredProjects.length !== 1 ? "s" : ""}
+        <div className="relative z-10 py-16 md:py-24">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-12">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
+                <Sparkles className="w-4 h-4 text-primary" />
+              </div>
+              <span className="text-xs font-mono text-primary/70 tracking-widest uppercase">
+                Portfolio
               </span>
             </div>
-          </div>
-        </motion.div>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-3">
+              Featured Projects
+            </h1>
+            <p className="text-base text-foreground/70 max-w-2xl leading-relaxed">
+              A collection of high-performance web applications crafted with
+              precision.
+            </p>
+          </motion.div>
 
-        {/* Projects Grid */}
-        {filteredProjects.length > 0 ? (
+          {/* Search + Filter */}
           <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <TiltCard key={project.id} isFeatured={index === 0}>
-                <SpotlightCard className="h-full flex flex-col">
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="relative overflow-hidden rounded-xl bg-card p-6 mb-12 transition-all duration-500 hover:shadow-lg group"
+            style={creativeBorderStyle}>
+            {/* Top accent line */}
+            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
+            {/* Subtle corner glow */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+            <div className="relative">
+              {/* Search Input */}
+              <div className="relative mb-6">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/70" />
+                <Input
+                  type="text"
+                  placeholder="Search by technology, name..."
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  className="pl-11 h-12 text-base bg-background border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+                {searchInput && (
+                  <Button
+                    onClick={() => setSearchInput("")}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-foreground/70 hover:text-foreground p-2 rounded-lg hover:bg-muted/50 transition-all"
+                    variant="ghost"
+                    size="icon">
+                    <X className="w-4 h-4" />
+                  </Button>
+                )}
+              </div>
+
+              {/* Category Filter */}
+              <div className="flex items-center gap-2 mb-4">
+                <Filter className="w-4 h-4 text-primary" />
+                <span className="text-sm font-semibold text-foreground">
+                  Filter by Category
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
+                      selectedCategory === category
+                        ? "bg-primary text-primary-foreground shadow-md"
+                        : "bg-muted/30 text-foreground/70 border border-border hover:bg-primary/10 hover:border-primary/30 hover:text-primary"
+                    }`}>
+                    {category === "all" ? "All Projects" : category}
+                  </Button>
+                ))}
+              </div>
+
+              {/* Results Count */}
+              <div className="mt-6 pt-4 border-t border-border/40">
+                <div className="inline-flex items-center gap-2 text-xs font-medium text-foreground/70 bg-muted/30 px-3 py-1.5 rounded-full border border-border/50">
+                  <Eye className="w-3.5 h-3.5 text-primary" />
+                  Showing {filteredProjects.length} result
+                  {filteredProjects.length !== 1 ? "s" : ""}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Projects Grid - Auto-fill Dynamic Layout */}
+          {filteredProjects.length > 0 ? (
+            <motion.div
+              layout
+              className="grid gap-6"
+              style={{
+                gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+              }}>
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="group relative overflow-hidden rounded-xl bg-card transition-all duration-500 hover:shadow-lg flex flex-col"
+                  style={creativeBorderStyle}>
+                  {/* Top accent line */}
+                  <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none z-20" />
+                  {/* Subtle corner glow */}
+                  <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
+
                   {/* Image Section */}
-                  <div className="relative h-64 overflow-hidden bg-muted">
+                  <div className="relative h-56 overflow-hidden bg-muted/30">
                     <Image
                       src={project.image}
                       alt={project.title}
@@ -321,35 +282,42 @@ export default function ProjectsPage() {
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Category Badge */}
                     <div className="absolute top-4 left-4 z-20">
-                      <Badge className="bg-black/60 backdrop-blur-md border-0 text-white text-xs px-3 py-1.5 shadow-lg">
+                      <div className="px-3 py-1 rounded-full bg-background/80 backdrop-blur-md border border-border/50 text-foreground text-xs font-bold">
                         {project.category}
-                      </Badge>
+                      </div>
                     </div>
                   </div>
 
                   {/* Content Section */}
-                  <div className="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-muted/20">
+                  <div className="relative p-6 flex flex-col flex-grow">
                     <div className="mb-auto">
-                      <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
+                      <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
                         {project.title}
                       </h3>
-                      <p className="text-xs text-muted-foreground font-mono mb-3 opacity-80">
+                      <p className="text-xs text-foreground/70 font-mono mb-3 line-clamp-1">
                         {project.subtitle}
                       </p>
-                      <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                      <p className="text-sm text-foreground/70 line-clamp-2 mb-4 leading-relaxed">
                         {project.description}
                       </p>
                     </div>
 
                     {/* Quick Stats */}
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4 pb-4 border-b border-border">
+                    <div className="flex items-center gap-4 text-xs text-foreground/70 mb-4 pb-4 border-b border-border/40">
                       <div className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-emerald-500" />
+                        <div className="p-1 rounded bg-primary/10 border border-primary/20">
+                          <Clock className="w-3 h-3 text-primary" />
+                        </div>
                         <span className="font-medium">{project.duration}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Users className="w-3.5 h-3.5 text-blue-500" />
+                        <div className="p-1 rounded bg-primary/10 border border-primary/20">
+                          <Users className="w-3 h-3 text-primary" />
+                        </div>
                         <span className="font-medium">
                           {project.teamSize} people
                         </span>
@@ -361,73 +329,70 @@ export default function ProjectsPage() {
                       {project.tech.slice(0, 4).map((t) => (
                         <span
                           key={t}
-                          className="px-2.5 py-1 text-xs rounded-lg bg-muted border border-border text-foreground font-medium">
+                          className="px-2.5 py-1 text-xs rounded-md bg-muted/40 border border-border text-foreground font-medium hover:border-primary/50 hover:text-primary transition-colors">
                           {t}
                         </span>
                       ))}
                       {project.tech.length > 4 && (
-                        <span className="px-2.5 py-1 text-xs rounded-lg bg-primary/10 text-primary border border-primary/20 font-medium">
+                        <span className="px-2.5 py-1 text-xs rounded-md bg-primary/10 text-primary border border-primary/20 font-medium">
                           +{project.tech.length - 4}
                         </span>
                       )}
                     </div>
 
-                    {/* Action Buttons (Fixed & Working) */}
-                    <div className="flex gap-2 mt-auto relative z-20">
+                    {/* Action Buttons */}
+                    <div className="flex gap-2 mt-auto">
                       {project.links.live && (
-                        <Button asChild size="sm" className="flex-1">
-                          <a
-                            href={project.links.live}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-1.5">
-                            <ExternalLink className="w-3.5 h-3.5" />
-                            Live Demo
-                          </a>
-                        </Button>
+                        <a
+                          href={project.links.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition-colors">
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          Live Demo
+                        </a>
                       )}
-                      <Button
-                        asChild
-                        variant="outline"
-                        size="sm"
-                        className="flex-1">
-                        <Link
-                          href={`/projects/${project.id}`}
-                          className="flex items-center justify-center gap-1.5">
-                          View Details
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
-                      </Button>
+                      <Link
+                        href={`/projects/${project.id}`}
+                        className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-muted/30 border border-border text-foreground text-xs font-semibold hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all duration-300">
+                        View Details
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
                     </div>
                   </div>
-                </SpotlightCard>
-              </TiltCard>
-            ))}
-          </motion.div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="border-2 border-dashed border-border rounded-3xl bg-muted/30 p-16 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-muted/50 mb-6">
-              <Search className="w-10 h-10 text-muted-foreground" />
-            </div>
-            <h3 className="text-2xl font-bold text-foreground mb-3">
-              No projects found
-            </h3>
-            <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
-              We couldn't find any projects matching your search criteria.
-            </p>
-            <Button
-              onClick={() => {
-                setSearchInput("");
-                setSelectedCategory("all");
-              }}
-              size="lg">
-              Clear all filters
-            </Button>
-          </motion.div>
-        )}
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="relative overflow-hidden rounded-xl bg-card p-16 text-center"
+              style={creativeBorderStyle}>
+              {/* Top accent line */}
+              <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-xl bg-primary/10 border border-primary/20 mb-6">
+                <Search className="w-10 h-10 text-primary" />
+              </div>
+              <h3 className="text-2xl font-bold text-foreground mb-3">
+                No projects found
+              </h3>
+              <p className="text-sm text-foreground/70 mb-6 max-w-md mx-auto">
+                We couldn't find any projects matching your search criteria.
+              </p>
+              <Button
+                onClick={() => {
+                  setSearchInput("");
+                  setSelectedCategory("all");
+                }}
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                Clear all filters
+              </Button>
+            </motion.div>
+          )}
+        </div>
       </Responsive>
     </section>
   );

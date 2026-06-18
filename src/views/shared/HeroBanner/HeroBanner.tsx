@@ -1,19 +1,12 @@
-import {
-  ExternalLink,
-  Sparkles,
-  ChevronRight,
-  ArrowRight,
-  Terminal,
-} from "lucide-react";
+import { ChevronRight, ArrowRight, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { socialData } from "@/Data/HeroBanner/HeroBanner";
-import { TextGenerateEffectDemo } from "@/views/Home/shared/TextGenerateEffect";
-import TechMarquee from "./TechMarquee";
 
+import ParticleView from "@/components/particle";
 export default function HeroBanner() {
   const [typedText, setTypedText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
@@ -100,8 +93,9 @@ export default function HeroBanner() {
 
         {/* Heading */}
         <div className="space-y-4">
-          <TextGenerateEffectDemo />
+          {/* <TextGenerateEffectDemo /> */}
 
+          <ParticleView />
           {/* Typing Subheading */}
           <div className="relative">
             <p className="text-sm md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed min-h-[60px]">

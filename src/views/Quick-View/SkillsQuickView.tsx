@@ -2,13 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import {
-  Code2,
-  Server,
-  BookOpen,
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Navbar from "../shared/Navbar/Navbar";
 import Responsive from "../Responsive/Responsive";
 import CommonBg from "@/components/CommonBg/CommonBg";
@@ -121,19 +115,34 @@ function LevelBadge({ level }: { level: string }) {
     </Badge>
   );
 }
-
 function TechTag({ tech }: { tech: string }) {
   return (
-    <span className="px-3 py-1.5 text-sm rounded-md bg-muted/40 border border-border text-foreground hover:border-primary/50 hover:text-primary transition-colors">
-      {tech}
-    </span>
+    <div className="flex items-center gap-1 py-1 group">
+      <span className="text-xs text-primary/50 font-mono">{"<"}</span>
+      <span className="text-sm font-medium text-foreground/80  font-mono transition-colors duration-300">
+        {tech}
+      </span>
+      <span className="text-xs text-primary/50 font-mono">{"/>"}</span>
+    </div>
   );
 }
 
 function LanguageChip({ lang }: { lang: string }) {
   return (
-    <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/30 border border-border hover:border-primary/40 transition-colors">
-      <span className="text-base font-medium text-foreground">{lang}</span>
+    <div className="flex items-center gap-3 py-2 group">
+      {/* Animated Bullet */}
+      <div className="relative flex items-center justify-center w-4 h-4">
+        <div className="absolute w-1.5 h-1.5 rounded-full bg-primary" />
+        <div className="absolute w-4 h-4 rounded-full border border-primary/20 group-hover:border-primary/50 group-hover:scale-110 transition-all duration-300" />
+      </div>
+
+      {/* Language Name with subtle line */}
+      <div className="flex items-center gap-2">
+        <span className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+          {lang}
+        </span>
+        <div className="h-px w-8 bg-border group-hover:w-12 group-hover:bg-primary/30 transition-all duration-300" />
+      </div>
     </div>
   );
 }
@@ -174,9 +183,6 @@ export default function Skills() {
           {/* Core Languages */}
           <div className="relative p-6 border-b border-border/40">
             <div className="flex items-center gap-2 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
-                <Code2 className="w-4 h-4 text-primary" />
-              </div>
               <h3 className="text-lg font-bold text-foreground">
                 Core Languages
               </h3>
@@ -237,9 +243,6 @@ export default function Skills() {
               {/* Top accent line */}
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
               <div className="flex items-center gap-2 mb-4">
-                <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
-                  <Server className="w-4 h-4 text-primary" />
-                </div>
                 <h3 className="text-lg font-bold text-foreground">
                   What I Build
                 </h3>
@@ -269,9 +272,6 @@ export default function Skills() {
               {/* Top accent line */}
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
               <div className="flex items-center gap-2 mb-4">
-                <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
-                  <BookOpen className="w-4 h-4 text-primary" />
-                </div>
                 <h3 className="text-lg font-bold text-foreground">
                   Currently Learning
                 </h3>

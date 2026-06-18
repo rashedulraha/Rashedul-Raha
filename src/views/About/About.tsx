@@ -157,9 +157,6 @@ const AboutPage = () => {
           {/* Column 1: Focus Areas */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 mb-3">
-              <div className="p-2.5 rounded-lg bg-primary/10">
-                <Code2 className="w-5 h-5 text-primary" />
-              </div>
               <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
                 Focus Areas
               </h3>
@@ -181,9 +178,6 @@ const AboutPage = () => {
           {/* Column 2: Education */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 mb-3">
-              <div className="p-2.5 rounded-lg bg-primary/10">
-                <Brain className="w-5 h-5 text-primary" />
-              </div>
               <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
                 Education & Training
               </h3>
@@ -208,9 +202,6 @@ const AboutPage = () => {
           {/* Column 3: Key Stat */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 mb-3">
-              <div className="p-2.5 rounded-lg bg-primary/10">
-                <Server className="w-5 h-5 text-primary" />
-              </div>
               <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
                 Key Achievement
               </h3>

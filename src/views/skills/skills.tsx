@@ -136,9 +136,6 @@ const SkillsPage = () => {
 
           <div className="relative space-y-3">
             <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
-                <GraduationCap className="w-4 h-4 text-primary" />
-              </div>
               <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
                 Programming Hero
               </p>
@@ -163,9 +160,6 @@ const SkillsPage = () => {
 
           <div className="relative space-y-3 sm:border-l sm:border-border/40 sm:pl-6">
             <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
-                <Terminal className="w-4 h-4 text-primary" />
-              </div>
               <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
                 Phitron
               </p>
@@ -188,14 +182,11 @@ const SkillsPage = () => {
           className="relative overflow-hidden p-6 sm:p-8 bg-card/50 rounded-xl transition-all duration-500 hover:shadow-lg group"
           style={creativeBorderStyle}>
           {/* Top accent line */}
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-linear-to-r from-transparent via-primary/40 to-transparent" />
           {/* Subtle corner glow */}
           <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
           <div className="relative flex items-center gap-2 mb-6">
-            <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
-              <Code2 className="w-4 h-4 text-primary" />
-            </div>
             <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
               Technical Expertise
             </p>
@@ -257,9 +248,6 @@ const SkillsPage = () => {
 
           <div className="relative space-y-2">
             <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
-                <Trophy className="w-4 h-4 text-primary" />
-              </div>
               <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
                 Key Achievement
               </p>
@@ -275,9 +263,6 @@ const SkillsPage = () => {
 
           <div className="relative space-y-2 sm:border-l sm:border-border/40 sm:pl-6">
             <div className="flex items-center gap-2">
-              <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
-                <Code2 className="w-4 h-4 text-primary" />
-              </div>
               <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
                 Projects & Experience
               </p>
@@ -306,9 +291,6 @@ const SkillsPage = () => {
           <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
           <div className="relative flex items-center gap-2 mb-5">
-            <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20">
-              <CheckCircle2 className="w-4 h-4 text-primary" />
-            </div>
             <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
               What I Bring to the Table
             </p>
@@ -371,9 +353,6 @@ const SkillsPage = () => {
           <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/60 via-primary/30 to-transparent" />
 
           <div className="relative flex items-start gap-4 pl-3">
-            <div className="p-3 rounded-lg bg-primary/20 border border-primary/30">
-              <Terminal className="w-6 h-6 text-primary" />
-            </div>
             <div>
               <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
                 <span className="w-1 h-1 rounded-full bg-primary" />

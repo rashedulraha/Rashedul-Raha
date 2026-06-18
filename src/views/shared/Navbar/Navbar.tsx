@@ -123,9 +123,6 @@ export default function Navbar() {
                 aria-label="Rashed Dev Home">
                 <div className="relative">
                   <div className="absolute inset-0 bg-primary/20 rounded-lg blur-md group-hover/logo:bg-primary/40 transition-colors duration-300" />
-                  <div className="relative p-1.5 rounded-lg bg-primary/10 border border-primary/20">
-                    <Terminal className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-                  </div>
                 </div>
                 <span className="text-lg sm:text-xl lg:text-2xl font-black tracking-tighter text-foreground">
                   Rashed<span className="text-primary">.</span>
@@ -246,6 +243,12 @@ export default function Navbar() {
 
               {/* Action Buttons */}
               <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                <Link href={"/particle"}>
+                  <Button className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded  bg-primary border border-primary/20">
+                    Particle
+                  </Button>
+                </Link>
+
                 {/* Status Badge */}
                 <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
                   <div className="relative">
@@ -313,9 +316,6 @@ export default function Navbar() {
                       <div className="flex flex-col h-full p-6 sm:p-8">
                         <SheetHeader className="text-left mb-8">
                           <SheetTitle className="flex items-center gap-3">
-                            <div className="p-2.5 rounded-xl bg-primary/10 border border-primary/20">
-                              <Terminal className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                            </div>
                             <span className="font-black tracking-tighter text-xl text-foreground">
                               Rashed<span className="text-primary">.</span>
                               <span className="text-foreground/70">Dev</span>
