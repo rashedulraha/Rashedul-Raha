@@ -23,7 +23,7 @@ export default function QuickView() {
     <>
       <Hero />
       <Navbar />
-      <div className="min-h-screen border-t">
+      <div className="min-h-screen">
         <div className="pt-5 md:pt-10 lg:pt-20 flex flex-col space-y-10 md:space-y-20 bg-background/50">
           <AboutQuickView />
           <SkillsQuickView />

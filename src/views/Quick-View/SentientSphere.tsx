@@ -14,9 +14,9 @@ function Sphere({ isDarkMode }: { isDarkMode: boolean }) {
     () => ({
       uTime: { value: 0 },
       uMouse: { value: [0, 0] },
-      // Dark mode: #16a394 (teal), Light mode: #000000 (black)
-      uColorDark: { value: [0.086, 0.639, 0.58] },
-      uColorLight: { value: [0.0, 0.0, 0.0] },
+      // Light mode: #4f46e5 (Indigo), Dark mode: #6366f1 (Glowing Indigo)
+      uColorDark: { value: [0.388, 0.4, 0.945] },
+      uColorLight: { value: [0.31, 0.275, 0.898] },
       uIsDark: { value: isDarkMode ? 1.0 : 0.0 },
     }),
     [],
