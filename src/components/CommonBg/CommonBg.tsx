@@ -50,7 +50,7 @@ export default function CommonBg() {
   return (
     <>
       {/* ── Fixed Background Layer ── */}
-      <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-background">
+      <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden ">
         {/* Subtle gradient base */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/10" />
 

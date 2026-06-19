@@ -3,18 +3,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import {
-  Code2,
-  Server,
-  Database,
-  Cloud,
-  Cpu,
-  Shield,
-  GraduationCap,
-  Trophy,
-  CheckCircle2,
-  Terminal,
-} from "lucide-react";
+import { Code2, Server, Database, Cloud, Cpu, Shield } from "lucide-react";
 import Responsive from "../Responsive/Responsive";
 import Navbar from "../shared/Navbar/Navbar";
 
@@ -34,14 +23,6 @@ const creativeBorderStyle = {
   borderBottom: "1px solid color-mix(in srgb, var(--border) 15%)",
 };
 
-// Inner card border (subtler version)
-const innerCardBorderStyle = {
-  borderTop: "1px solid var(--border)",
-  borderLeft: "1px solid color-mix(in srgb, var(--border) 80%)",
-  borderRight: "1px solid color-mix(in srgb, var(--border) 80%)",
-  borderBottom: "1px solid color-mix(in srgb, var(--border) 10%)",
-};
-
 const SkillsPage = () => {
   const skillCategories = [
     {
@@ -59,14 +40,7 @@ const SkillsPage = () => {
     {
       icon: Server,
       title: "Backend Development",
-      skills: [
-        "Node.js",
-        "Express.js",
-        "Python",
-        "Go",
-        "RESTful APIs",
-        "GraphQL",
-      ],
+      skills: ["Node.js", "Express.js", "Python", "Go", "RESTful APIs"],
     },
     {
       icon: Database,
@@ -108,13 +82,14 @@ const SkillsPage = () => {
       <Navbar />
 
       {/* Header */}
-      <div className="mb-12">
-        <h1 className="text-4xl sm:text-5xl font-bold text-foreground tracking-tight mb-3">
+      <div className="mb-14">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-2">
           Technical Skills
         </h1>
-        <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed">
-          Technologies and tools I work with, built through structured learning
-          and hands-on practice.
+
+        <p className="max-w-2xl text-base sm:text-lg leading-8 text-muted-foreground">
+          Technologies and tools I use to build scalable and modern
+          applications.
         </p>
       </div>
 
@@ -278,96 +253,6 @@ const SkillsPage = () => {
             </p>
           </div>
         </div>
-
-        {/* What I Bring */}
-        <div
-          className="relative overflow-hidden p-6 sm:p-8 bg-card/50 rounded-xl transition-all duration-500 hover:shadow-lg group"
-          style={creativeBorderStyle}>
-          {/* Top accent line */}
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-          {/* Subtle corner glow */}
-          <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-          <div className="relative flex items-center gap-2 mb-5">
-            <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
-              What I Bring to the Table
-            </p>
-          </div>
-          <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              {
-                title: "Strong Foundation",
-                desc: "Computer science fundamentals from Programming Hero & Phitron",
-              },
-              {
-                title: "Full-Stack Expertise",
-                desc: "MERN stack, Next.js, TypeScript, and modern frameworks",
-              },
-              {
-                title: "Scalable Systems",
-                desc: "Backend architecture, RESTful APIs, and database design",
-              },
-              {
-                title: "AI Integration",
-                desc: "RAG systems, LangChain, and intelligent applications",
-              },
-              {
-                title: "Problem Solving",
-                desc: "500+ DSA challenges and algorithmic thinking",
-              },
-              {
-                title: "DevOps Ready",
-                desc: "Docker, CI/CD, cloud deployment, and version control",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="flex items-start gap-3 p-3 rounded-lg hover:bg-primary/5 transition-all duration-300 hover:scale-[1.02]">
-                <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                <p className="text-sm sm:text-base text-foreground/85 leading-relaxed">
-                  <span className="text-foreground font-semibold">
-                    {item.title}:
-                  </span>{" "}
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Mission */}
-        <motion.div
-          className="relative overflow-hidden p-6 bg-primary/5 rounded-xl transition-all duration-500 hover:shadow-lg group"
-          whileHover={{ x: 5 }}
-          style={{
-            borderTop: "1.5px solid color-mix(in srgb, var(--primary) 40%)",
-            borderLeft: "1px solid color-mix(in srgb, var(--primary) 25%)",
-            borderRight: "1px solid color-mix(in srgb, var(--primary) 25%)",
-            borderBottom: "1px solid color-mix(in srgb, var(--primary) 8%)",
-          }}>
-          {/* Top accent line with primary color */}
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-          {/* Left accent bar */}
-          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/60 via-primary/30 to-transparent" />
-
-          <div className="relative flex items-start gap-4 pl-3">
-            <div>
-              <p className="text-sm font-semibold text-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-primary" />
-                Mission
-                <span className="w-1 h-1 rounded-full bg-primary" />
-              </p>
-              <p className="text-base text-foreground/90 leading-relaxed">
-                I'm continuously learning new technologies and improving my
-                engineering skills with the goal of becoming a{" "}
-                <span className="text-primary font-semibold">
-                  strong software engineer
-                </span>{" "}
-                who can design and develop impactful systems.
-              </p>
-            </div>
-          </div>
-        </motion.div>
       </motion.div>
     </Responsive>
   );

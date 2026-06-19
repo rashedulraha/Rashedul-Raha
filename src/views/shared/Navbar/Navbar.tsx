@@ -82,7 +82,7 @@ export default function Navbar() {
         transition={{ duration: 0.5, type: "spring", bounce: 0.2 }}
         className={cn(
           "fixed left-0 right-0 z-50 flex justify-center transition-all duration-500",
-          scrolled ? "top-0" : "top-9",
+          scrolled ? "top-0" : "top-5",
         )}>
         <div className="relative group w-full flex justify-center">
           {/* Gradient Border: Only show in Pill Mode (!scrolled) */}
@@ -247,11 +247,6 @@ export default function Navbar() {
               {/* Action Buttons */}
               <div className="flex flex-1 items-center gap-2 sm:gap-3 shrink-0">
                 <ModeToggle />
-                <Link href={"/particle"}>
-                  <Button className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full  bg-primary border border-primary/20">
-                    Particle
-                  </Button>
-                </Link>
 
                 {/* Desktop Contact Button */}
                 <Button
@@ -263,7 +258,7 @@ export default function Navbar() {
                     "transition-all duration-300 gap-2 text-sm font-medium group",
                     "hover:bg-primary hover:text-primary-foreground hover:border-primary",
                   )}>
-                  <Link href="/contact">Hire Me</Link>
+                  <Link href="/contact">Contact</Link>
                 </Button>
 
                 {/* Mobile Menu Trigger */}

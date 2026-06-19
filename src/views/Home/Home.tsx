@@ -4,54 +4,53 @@ import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 import Navbar from "../shared/Navbar/Navbar";
-import HeroBanner from "../shared/HeroBanner/HeroBanner";
-import Responsive from "../Responsive/Responsive";
-import { GridBackground } from "@/components/GridBackground";
+
+import HeroSection from "./Shared/HeroSection/HeroSection";
 
 const Home: React.FC = () => {
-  const router = useRouter();
-  const triggeredRef = useRef<boolean>(false);
+  // const router = useRouter();
+  // const triggeredRef = useRef<boolean>(false);
 
-  useEffect(() => {
-    // Desktop scroll (wheel)
-    const handleWheel = (e: WheelEvent) => {
-      if (!triggeredRef.current && e.deltaY > 0) {
-        triggeredRef.current = true;
-        router.push("/quick-view");
-      }
-    };
+  // useEffect(() => {
+  //   // Desktop scroll (wheel)
+  //   const handleWheel = (e: WheelEvent) => {
+  //     if (!triggeredRef.current && e.deltaY > 0) {
+  //       triggeredRef.current = true;
+  //       router.push("/quick-view");
+  //     }
+  //   };
 
-    // Mobile touch
-    let startY: number = 0;
+  //   // Mobile touch
+  //   let startY: number = 0;
 
-    const handleTouchStart = (e: TouchEvent) => {
-      startY = e.touches[0].clientY;
-    };
+  //   const handleTouchStart = (e: TouchEvent) => {
+  //     startY = e.touches[0].clientY;
+  //   };
 
-    const handleTouchEnd = (e: TouchEvent) => {
-      const endY = e.changedTouches[0].clientY;
+  //   const handleTouchEnd = (e: TouchEvent) => {
+  //     const endY = e.changedTouches[0].clientY;
 
-      if (!triggeredRef.current && startY > endY) {
-        triggeredRef.current = true;
-        router.push("/quick-view");
-      }
-    };
+  //     if (!triggeredRef.current && startY > endY) {
+  //       triggeredRef.current = true;
+  //       router.push("/quick-view");
+  //     }
+  //   };
 
-    window.addEventListener("wheel", handleWheel);
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchend", handleTouchEnd);
+  //   window.addEventListener("wheel", handleWheel);
+  //   window.addEventListener("touchstart", handleTouchStart);
+  //   window.addEventListener("touchend", handleTouchEnd);
 
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, [router]);
+  //   return () => {
+  //     window.removeEventListener("wheel", handleWheel);
+  //     window.removeEventListener("touchstart", handleTouchStart);
+  //     window.removeEventListener("touchend", handleTouchEnd);
+  //   };
+  // }, [router]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="  min-h-screen w-full ">
       <Navbar />
-      <GridBackground />
+      <HeroSection />
     </div>
   );
 };
