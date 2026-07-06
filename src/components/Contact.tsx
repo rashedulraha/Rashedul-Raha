@@ -12,7 +12,6 @@ export default function Contact() {
           <div className="relative z-10 mx-auto flex w-full flex-col items-center justify-center gap-y-2 py-10 text-center">
             <div
               className="absolute z-50 cursor-grab overflow-hidden rounded-full top-10 left-1/2 -translate-x-1/2 lg:top-1/2 lg:left-1/2 lg:translate-x-[280px] lg:-translate-y-[70px]"
-              draggable="false"
               tabIndex={0}
               style={{
                 WebkitTouchCallout: "none",
@@ -66,15 +65,12 @@ export default function Contact() {
               </div>
             </div>
             <div className="relative pointer-events-none">
-              <img
+              <Image
                 alt="wings"
                 aria-hidden="true"
-                draggable="false"
                 loading="lazy"
                 width={338}
                 height={110}
-                decoding="async"
-                data-nimg={1}
                 className="select-none"
                 style={{ color: "transparent" }}
                 src="/images/wings.1kcr10vzfjw84.svg"
@@ -99,7 +95,7 @@ export default function Contact() {
                 FROM CONCEPT TO <span className="font-extrabold">CREATION</span>
               </h3>
               <h3 className="mt-3 text-nowrap">
-                LET'S MAKE IT{/* */}{" "}
+                LET&apos;S MAKE IT{/* */}{" "}
                 <span className="font-extrabold">HAPPEN!</span>
               </h3>
             </span>
@@ -162,8 +158,8 @@ export default function Contact() {
                 </span>
               </button>
             </div>
-            <p className="font-bluu font-semibold text-base lg:text-2xl">
-              I'm available for full-time roles &amp; freelance projects.
+            <p className="font-semibold text-base lg:text-2xl">
+              I&apos;m available for full-time roles &amp; freelance projects.
             </p>
             <p className="my-2 text-balance font-extralight text-sm tracking-wide opacity-75 lg:text-xl">
               I thrive on crafting dynamic web applications, and

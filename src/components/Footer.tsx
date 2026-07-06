@@ -33,7 +33,7 @@ export default function Footer() {
             <div className="flex w-full flex-col items-start px-4 py-6 text-xs lg:w-[56%] lg:px-16">
               <div className="flex w-full flex-wrap justify-between gap-8 md:gap-18">
                 <div className="flex flex-col gap-2 sm:gap-4">
-                  <h4 className="px-2 font-mono text-neutral-700 text-xs uppercase dark:text-neutral-400">
+                  <h4 className="px-2 text-neutral-700 text-xs uppercase dark:text-neutral-400">
                     General
                   </h4>
                   <ul className="flex flex-col flex-wrap items-start gap-x-4 gap-y-2 text-base sm:gap-y-3 dark:text-neutral-50">
@@ -132,7 +132,7 @@ export default function Footer() {
                   </ul>
                 </div>
                 <div className="flex flex-col gap-2 sm:gap-4">
-                  <h4 className="px-2 font-mono text-neutral-700 text-xs uppercase dark:text-neutral-400">
+                  <h4 className="px-2 text-neutral-700 text-xs uppercase dark:text-neutral-400">
                     Specifics
                   </h4>
                   <ul className="flex flex-col flex-wrap items-start gap-x-4 gap-y-2 text-base sm:gap-y-3 dark:text-neutral-50">
@@ -231,7 +231,7 @@ export default function Footer() {
                   </ul>
                 </div>
                 <div className="flex flex-col gap-2 sm:gap-4">
-                  <h4 className="px-2 font-mono text-neutral-700 text-xs uppercase dark:text-neutral-400">
+                  <h4 className="px-2 text-neutral-700 text-xs uppercase dark:text-neutral-400">
                     More
                   </h4>
                   <ul className="flex flex-col flex-wrap items-start gap-x-4 gap-y-2 text-base sm:gap-y-3 dark:text-neutral-50">

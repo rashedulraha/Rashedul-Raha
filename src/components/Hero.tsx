@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { toast } from "sonner";
 
@@ -73,20 +74,16 @@ export default function Hero() {
           </h1>
           <h2 className="grad-white relative z-20 flex animate-fadeInUp flex-col items-center justify-center fill-mode-[backwards] text-center font-normal text-lg tracking-tight [animation-delay:100ms] sm:flex-row sm:text-xl lg:text-2xl">
             <span className="flex items-center justify-center" >
-              Hello, I'm Rashedul Islam
+              Hello, I&apos;m Rashedul Islam
               <span className="group relative z-30">
                 <span className="mx-2 inline-block w-16 cursor-pointer overflow-hidden rounded-3xl md:w-20 lg:mx-3">
-                  <img
+                  <Image
                     alt="Aayush Bharti — Full Stack Developer & Design Engineer"
-                    draggable="false"
                     fetchPriority="high"
                     width={2459}
                     height={1262}
-                    decoding="async"
-                    data-nimg={1}
                     className="transition-transform duration-200 ease-out hover:scale-110 group-hover:rotate-6"
                     sizes="(min-width: 768px) 80px, 64px"
-                    srcSet="/images/image_32.jpg 32w, /images/image_66.jpg 48w, /images/image_27.jpg 64w, /images/image_29.jpg 96w, /images/image_60.jpg 128w, /images/image_26.jpg 256w, /images/image_31.jpg 384w, /images/image_25.jpg 640w, /images/image_41.jpg 828w, /images/image_44.jpg 1080w, /images/image_2.webp 1440w, /images/image.webp 1920w"
                     src="/images/image.webp"
                   />
                 </span>
@@ -117,7 +114,7 @@ export default function Hero() {
           <div className="z-10 mt-4 flex animate-fadeInUp flex-col items-center gap-4 fill-mode-[backwards] [animation-delay:150ms] sm:flex-row">
             <button className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/30 bg-black/20 py-1 pr-1 pl-3 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/50 hover:bg-black hover:opacity-100 hover:shadow-black/20 hover:shadow-lg active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20">
               <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">
-                Let's Connect
+                Let&apos;s Connect
               </span>
               <span
                 aria-hidden="true"

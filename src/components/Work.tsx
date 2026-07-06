@@ -11,7 +11,7 @@ export default function Work() {
               "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
           }}
         >
-          <p className="mb-4 font-mono font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
+          <p className="mb-4 font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
             CASE STUDIES
           </p>
           <span className="inline-block font-instrument-serif">
@@ -36,11 +36,11 @@ export default function Work() {
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       01
                     </span>
                     <div className="h-px w-8 bg-neutral-200 dark:bg-neutral-800" />
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       Web App
                     </span>
                   </div>
@@ -56,7 +56,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 font-mono text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
                 >
                   Q2 2026
                 </span>
@@ -65,7 +65,6 @@ export default function Work() {
             <a
               aria-label="View Details of Keythm"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              draggable="false"
               href="/projects/keythm"
             >
               <div
@@ -115,17 +114,13 @@ export default function Work() {
                   </svg>
                 </div>
                 <div className="absolute top-14 right-0 left-0 z-10 flex w-full flex-col items-center justify-center md:top-20 lg:top-28">
-                  <img
+                  <Image
                     alt="Keythm"
-                    draggable="false"
                     loading="lazy"
                     width={3195}
                     height={2091}
-                    decoding="async"
-                    data-nimg={1}
                     className="rounded-t-sm border-2 border-white/50 lg:border-3 shadow-[0_4px_20px_rgba(0,0,0,0.4),0_15px_50px_-5px_rgba(0,0,0,0.5)] h-auto w-full max-w-[85%] translate-y-5 lg:block transition-transform duration-500 ease-out rotate-1 lg:rotate-0 lg:group-hover:transform-[perspective(1200px)_rotateX(-5deg)_translateY(-0.25rem)_rotate(1deg)_scale(1.05)]"
                     sizes="(max-width: 768px) 85vw, 580px"
-                    srcSet="/images/image_14.png 640w, /images/image_5.png 828w, /images/image_17.png 1080w, /images/image_18.png 1440w, /images/image.png 1920w"
                     src="/images/image.png"
                   />
                 </div>
@@ -133,8 +128,8 @@ export default function Work() {
             </a>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -149,8 +144,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -165,8 +160,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -181,8 +176,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -197,8 +192,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -213,8 +208,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -229,8 +224,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -245,7 +240,7 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
                   <span aria-hidden="true" className="h-3 sm:h-3.5" />
                   <span className="font-medium text-[10px] text-neutral-600 uppercase tracking-wide sm:text-[11px] dark:text-neutral-300">
                     web-audio-api
@@ -253,7 +248,7 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
                   <span aria-hidden="true" className="h-3 sm:h-3.5" />
                   <span className="font-medium text-[10px] text-neutral-600 uppercase tracking-wide sm:text-[11px] dark:text-neutral-300">
                     serwist
@@ -261,8 +256,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -277,7 +272,7 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
                   <span aria-hidden="true" className="h-3 sm:h-3.5" />
                   <span className="font-medium text-[10px] text-neutral-600 uppercase tracking-wide sm:text-[11px] dark:text-neutral-300">
                     recharts
@@ -291,11 +286,11 @@ export default function Work() {
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       02
                     </span>
                     <div className="h-px w-8 bg-neutral-200 dark:bg-neutral-800" />
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       Web App
                     </span>
                   </div>
@@ -311,7 +306,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 font-mono text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
                 >
                   Q4 2024
                 </span>
@@ -320,7 +315,6 @@ export default function Work() {
             <a
               aria-label="View Details of Nextdemy"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              draggable="false"
               href="/projects/nextdemy"
             >
               <div
@@ -370,17 +364,13 @@ export default function Work() {
                   </svg>
                 </div>
                 <div className="absolute top-14 right-0 left-0 z-10 flex w-full flex-col items-center justify-center md:top-20 lg:top-28">
-                  <img
+                  <Image
                     alt="Nextdemy"
-                    draggable="false"
                     loading="lazy"
                     width={1203}
                     height={753}
-                    decoding="async"
-                    data-nimg={1}
                     className="rounded-t-sm border-2 border-white/50 lg:border-3 shadow-[0_4px_20px_rgba(0,0,0,0.4),0_15px_50px_-5px_rgba(0,0,0,0.5)] h-auto w-full max-w-[85%] translate-y-5 lg:block transition-transform duration-500 ease-out -rotate-2 lg:rotate-0 lg:group-hover:transform-[perspective(1200px)_rotateX(-4deg)_translateY(-0.25rem)_rotate(-2deg)_scale(1.06)]"
                     sizes="(max-width: 768px) 85vw, 580px"
-                    srcSet="/images/image_36.jpg 640w, /images/image_21.jpg 828w, /images/image_30.jpg 1080w, /images/image_40.jpg 1440w, /images/image_4.jpg 1920w"
                     src="/images/image_4.jpg"
                   />
                 </div>
@@ -388,8 +378,8 @@ export default function Work() {
             </a>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -404,8 +394,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -420,8 +410,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -436,8 +426,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -452,8 +442,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -468,8 +458,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -484,8 +474,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -500,8 +490,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -516,8 +506,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -532,8 +522,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -548,8 +538,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -564,8 +554,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -580,8 +570,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -596,8 +586,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -618,11 +608,11 @@ export default function Work() {
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       03
                     </span>
                     <div className="h-px w-8 bg-neutral-200 dark:bg-neutral-800" />
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       Web App
                     </span>
                   </div>
@@ -638,7 +628,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 font-mono text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
                 >
                   Q1 2025
                 </span>
@@ -647,7 +637,6 @@ export default function Work() {
             <a
               aria-label="View Details of VentureDen"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              draggable="false"
               href="/projects/venture-den"
             >
               <div
@@ -698,30 +687,22 @@ export default function Work() {
                 </div>
                 <div className="absolute top-14 right-0 left-0 z-10 flex w-full flex-col items-center justify-center md:top-20 lg:top-28">
                   <div className="relative flex w-full group perspective-[2000px] items-center justify-center pt-4">
-                    <img
+                    <Image
                       alt="VentureDen screen 1"
-                      draggable="false"
                       loading="lazy"
                       width={3036}
                       height={2082}
-                      decoding="async"
-                      data-nimg={1}
                       className="rounded-t-sm border-2 border-white/50 lg:border-3 shadow-[0_4px_20px_rgba(0,0,0,0.4),0_15px_50px_-5px_rgba(0,0,0,0.5)] h-auto w-[85%] max-lg:z-10 lg:block transition-[translate,rotate,scale,filter] duration-500 ease-out -translate-x-10 -rotate-6 scale-80 brightness-90 lg:translate-x-0 lg:rotate-0 lg:scale-100 lg:brightness-100 lg:group-hover:-translate-x-10 lg:group-hover:-rotate-6 lg:group-hover:scale-[0.90] lg:group-hover:brightness-90"
                       sizes="(max-width: 768px) 85vw, 500px"
-                      srcSet="/images/image_39.jpg 640w, /images/image_51.jpg 828w, /images/image_37.jpg 1080w, /images/image_20.jpg 1440w, /images/image_5.jpg 1920w"
                       src="/images/image_5.jpg"
                     />
-                    <img
+                    <Image
                       alt="VentureDen screen 2"
-                      draggable="false"
                       loading="lazy"
                       width={3066}
                       height={2088}
-                      decoding="async"
-                      data-nimg={1}
                       className="rounded-t-sm border-2 border-white/50 lg:border-3 shadow-[0_4px_20px_rgba(0,0,0,0.4),0_15px_50px_-5px_rgba(0,0,0,0.5)] h-auto absolute right-[5%] bottom-0 w-[65%] lg:block transition-[translate,rotate,scale,opacity] duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] [transition-delay:75ms] translate-x-4 -translate-y-5 rotate-3 scale-90 opacity-100 lg:translate-x-0 lg:translate-y-12 lg:rotate-12 lg:scale-75 lg:opacity-0 lg:group-hover:translate-x-4 lg:group-hover:-translate-y-5 lg:group-hover:rotate-3 lg:group-hover:scale-100 lg:group-hover:opacity-100"
                       sizes="(max-width: 768px) 65vw, 430px"
-                      srcSet="/images/image_22.jpg 640w, /images/image_33.jpg 828w, /images/image_24.jpg 1080w, /images/image_34.jpg 1440w, /images/image_10.jpg 1920w"
                       src="/images/image_10.jpg"
                     />
                   </div>
@@ -730,8 +711,8 @@ export default function Work() {
             </a>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -746,8 +727,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -762,8 +743,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -778,8 +759,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -794,8 +775,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -810,8 +791,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -826,8 +807,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -842,8 +823,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -858,8 +839,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -874,8 +855,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -890,8 +871,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -906,8 +887,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -928,11 +909,11 @@ export default function Work() {
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       04
                     </span>
                     <div className="h-px w-8 bg-neutral-200 dark:bg-neutral-800" />
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       Mobile App
                     </span>
                   </div>
@@ -948,7 +929,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 font-mono text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
                 >
                   Q4 2025
                 </span>
@@ -957,7 +938,6 @@ export default function Work() {
             <a
               aria-label="View Details of Finote"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              draggable="false"
               href="/projects/finote"
             >
               <div
@@ -1008,43 +988,31 @@ export default function Work() {
                 </div>
                 <div className="absolute top-14 right-0 left-0 z-10 flex w-full flex-col items-center justify-center md:top-20 lg:top-28">
                   <div className="perspective-[2000px] group relative flex w-full items-start justify-center">
-                    <img
+                    <Image
                       alt="Finote screen 1"
-                      draggable="false"
                       loading="lazy"
                       width={765}
                       height={1518}
-                      decoding="async"
-                      data-nimg={1}
                       className="absolute h-auto w-[40%] transition-[translate,rotate,scale,opacity] duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-10 origin-bottom-right -translate-x-[55%] -rotate-6 scale-90 opacity-90 lg:group-hover:-translate-x-[calc(100%-1.5rem)] lg:group-hover:-translate-y-20 lg:group-hover:rotate-0 lg:group-hover:scale-80 lg:group-hover:opacity-100"
                       sizes="(max-width: 768px) 40vw, 270px"
-                      srcSet="/images/image_8.png 256w, /images/image_22.png 384w, /images/image_16.png 640w, /images/image_21.png 828w, /images/image_12.png 1080w, /images/image_11.png 1440w, /images/image_3.png 1920w"
                       src="/images/image_3.png"
                     />
-                    <img
+                    <Image
                       alt="Finote screen 2"
-                      draggable="false"
                       loading="lazy"
                       width={765}
                       height={1518}
-                      decoding="async"
-                      data-nimg={1}
                       className="absolute h-auto w-[40%] transition-[translate,rotate,scale,opacity] duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-20 lg:group-hover:-translate-y-10 lg:group-hover:scale-90"
                       sizes="(max-width: 768px) 40vw, 270px"
-                      srcSet="/images/image_7.png 256w, /images/image_4.png 384w, /images/image_9.png 640w, /images/image_19.png 828w, /images/image_24.png 1080w, /images/image_20.png 1440w, /images/image_2.png 1920w"
                       src="/images/image_2.png"
                     />
-                    <img
+                    <Image
                       alt="Finote screen 3"
-                      draggable="false"
                       loading="lazy"
                       width={765}
                       height={1518}
-                      decoding="async"
-                      data-nimg={1}
                       className="absolute h-auto w-[40%] transition-[translate,rotate,scale,opacity] duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] z-10 origin-bottom-left translate-x-[55%] rotate-6 scale-90 opacity-90 lg:group-hover:translate-x-[calc(100%-1.5rem)] lg:group-hover:-translate-y-20 lg:group-hover:rotate-0 lg:group-hover:scale-80 lg:group-hover:opacity-100"
                       sizes="(max-width: 768px) 40vw, 270px"
-                      srcSet="/images/image_10.png 256w, /images/image_13.png 384w, /images/image_6.png 640w, /images/image_15.png 828w, /images/image_25.png 1080w, /images/image_23.png 1440w, /images/image_1.png 1920w"
                       src="/images/image_1.png"
                     />
                   </div>
@@ -1053,7 +1021,7 @@ export default function Work() {
             </a>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
                   <span aria-hidden="true" className="h-3 sm:h-3.5" />
                   <span className="font-medium text-[10px] text-neutral-600 uppercase tracking-wide sm:text-[11px] dark:text-neutral-300">
                     react-native
@@ -1061,8 +1029,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -1077,8 +1045,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -1093,8 +1061,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -1109,8 +1077,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -1125,8 +1093,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"
@@ -1141,7 +1109,7 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
                   <span aria-hidden="true" className="h-3 sm:h-3.5" />
                   <span className="font-medium text-[10px] text-neutral-600 uppercase tracking-wide sm:text-[11px] dark:text-neutral-300">
                     cloudinary
@@ -1149,7 +1117,7 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
                   <span aria-hidden="true" className="h-3 sm:h-3.5" />
                   <span className="font-medium text-[10px] text-neutral-600 uppercase tracking-wide sm:text-[11px] dark:text-neutral-300">
                     reanimated
@@ -1157,7 +1125,7 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
                   <span aria-hidden="true" className="h-3 sm:h-3.5" />
                   <span className="font-medium text-[10px] text-neutral-600 uppercase tracking-wide sm:text-[11px] dark:text-neutral-300">
                     gifted-charts
@@ -1171,11 +1139,11 @@ export default function Work() {
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       05
                     </span>
                     <div className="h-px w-8 bg-neutral-200 dark:bg-neutral-800" />
-                    <span className="font-mono text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
+                    <span className="text-[10px] text-neutral-600 uppercase tracking-wider dark:text-neutral-400">
                       Web App
                     </span>
                   </div>
@@ -1191,7 +1159,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 font-mono text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
                 >
                   Q1 2024
                 </span>
@@ -1200,7 +1168,6 @@ export default function Work() {
             <a
               aria-label="View Details of StarForge"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              draggable="false"
               href="/projects/star-forge"
             >
               <div
@@ -1251,30 +1218,22 @@ export default function Work() {
                 </div>
                 <div className="absolute top-14 right-0 left-0 z-10 flex w-full flex-col items-center justify-center md:top-20 lg:top-28">
                   <div className="relative flex w-full justify-start pt-2">
-                    <img
+                    <Image
                       alt="StarForge screen 1"
-                      draggable="false"
                       loading="lazy"
                       width={1378}
                       height={1081}
-                      decoding="async"
-                      data-nimg={1}
                       className="rounded-t-sm border-2 border-white/50 lg:border-3 shadow-[0_4px_20px_rgba(0,0,0,0.4),0_15px_50px_-5px_rgba(0,0,0,0.5)] h-auto absolute top-3 right-[3%] z-20 w-[68%] lg:top-0 transition-all duration-500 ease-out lg:group-hover:z-15 lg:group-hover:translate-y-[3%] lg:group-hover:rotate-3 lg:group-hover:scale-95 lg:group-hover:brightness-90"
                       sizes="(max-width: 768px) 68vw, 450px"
-                      srcSet="/images/image_35.jpg 640w, /images/image_54.jpg 828w, /images/image_42.jpg 1080w, /images/image_38.jpg 1440w, /images/image_7.jpg 1920w"
                       src="/images/image_7.jpg"
                     />
-                    <img
+                    <Image
                       alt="StarForge screen 2"
-                      draggable="false"
                       loading="lazy"
                       width={1378}
                       height={1324}
-                      decoding="async"
-                      data-nimg={1}
                       className="rounded-t-sm border-2 border-white/50 lg:border-3 shadow-[0_4px_20px_rgba(0,0,0,0.4),0_15px_50px_-5px_rgba(0,0,0,0.5)] h-auto relative z-10 ml-[3%] w-[55%] translate-y-10 transition-all duration-500 ease-out lg:group-hover:z-30 lg:group-hover:translate-x-[5%] lg:group-hover:translate-y-0 lg:group-hover:-rotate-3 lg:group-hover:scale-[1.08]"
                       sizes="(max-width: 768px) 55vw, 380px"
-                      srcSet="/images/image_57.jpg 384w, /images/image_46.jpg 640w, /images/image_71.jpg 828w, /images/image_74.jpg 1080w, /images/image_69.jpg 1440w, /images/image_15.jpg 1920w"
                       src="/images/image_15.jpg"
                     />
                   </div>
@@ -1283,8 +1242,8 @@ export default function Work() {
             </a>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -1299,8 +1258,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -1315,8 +1274,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -1331,8 +1290,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5"
@@ -1347,7 +1306,7 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
                   <span aria-hidden="true" className="h-3 sm:h-3.5" />
                   <span className="font-medium text-[10px] text-neutral-600 uppercase tracking-wide sm:text-[11px] dark:text-neutral-300">
                     parallax
@@ -1355,8 +1314,8 @@ export default function Work() {
                 </span>
               </div>
               <div style={{ opacity: 0, transform: "scale(0.8)" }}>
-                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 font-mono shadow-border sm:px-2.5 sm:py-[5px]">
-                  <img
+                <span className="flex gap-0 rounded-md bg-primary/5 px-2 py-1 shadow-border sm:px-2.5 sm:py-[5px]">
+                  <Image
                     alt=""
                     aria-hidden="true"
                     className="mr-1.5 size-3 sm:size-3.5 dark:invert"

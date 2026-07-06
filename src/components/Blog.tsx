@@ -11,10 +11,10 @@ export default function Blog() {
               "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
           }}
         >
-          <p className="mb-4 font-mono font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
+          <p className="mb-4 font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
             FROM THE DESK
           </p>
-          <span className="inline-block font-instrument-serif">
+          <span className="inline-block">
             Thoughts &amp;{" "}
             <span
               className="px-1 pb-1 text-shadow-none italic animate-gradient-x text-colorfull"
@@ -40,11 +40,8 @@ export default function Blog() {
               <img
                 alt="How to Optimise a Next.js Web App"
                 loading="lazy"
-                decoding="async"
-                data-nimg="fill"
                 className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 380px"
-                srcSet="/images/image_47.jpg 384w, /images/image_19.jpg 640w, /images/image_50.jpg 828w, /images/image_68.jpg 1080w, /images/image_58.jpg 1440w, /images/image_17.jpg 1920w"
                 src="/images/image_17.jpg"
               />
               <div className="absolute inset-0 bg-black/25 dark:bg-black/40" />
@@ -64,7 +61,7 @@ export default function Blog() {
                 next.config flags nobody talks about.
               </p>
               <div className="mt-auto flex items-center justify-between gap-3 pt-4">
-                <div className="font-mono text-[11px] text-neutral-500 uppercase tracking-wide dark:text-neutral-500">
+                <div className="text-[11px] text-neutral-500 uppercase tracking-wide dark:text-neutral-500">
                   <span>15{/* */} min read</span>
                   <span className="mx-1.5">·</span>
                   <time dateTime="2026-04-14T00:00:00.000Z">Apr 14, 2026</time>
@@ -137,11 +134,8 @@ export default function Blog() {
               <img
                 alt="Every Tool in My Terminal-First Dev Setup"
                 loading="lazy"
-                decoding="async"
-                data-nimg="fill"
                 className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 380px"
-                srcSet="/images/image_63.jpg 384w, /images/image_45.jpg 640w, /images/image_48.jpg 828w, /images/image_55.jpg 1080w, /images/image_70.jpg 1440w, /images/image_18.jpg 1920w"
                 src="/images/image_18.jpg"
               />
               <div className="absolute inset-0 bg-black/25 dark:bg-black/40" />
@@ -161,7 +155,7 @@ export default function Blog() {
                 alternatives.
               </p>
               <div className="mt-auto flex items-center justify-between gap-3 pt-4">
-                <div className="font-mono text-[11px] text-neutral-500 uppercase tracking-wide dark:text-neutral-500">
+                <div className="text-[11px] text-neutral-500 uppercase tracking-wide dark:text-neutral-500">
                   <span>12{/* */} min read</span>
                   <span className="mx-1.5">·</span>
                   <time dateTime="2025-10-19T00:00:00.000Z">Oct 19, 2025</time>
@@ -234,11 +228,8 @@ export default function Blog() {
               <img
                 alt="Build a Blog with Next.js and MDX from Scratch"
                 loading="lazy"
-                decoding="async"
-                data-nimg="fill"
                 className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 380px"
-                srcSet="/images/image_65.jpg 384w, /images/image_59.jpg 640w, /images/image_67.jpg 828w, /images/image_62.jpg 1080w, /images/image_3.webp 1440w, /images/image_1.webp 1920w"
                 src="/images/image_1.webp"
               />
               <div className="absolute inset-0 bg-black/25 dark:bg-black/40" />
@@ -258,7 +249,7 @@ export default function Blog() {
                 Next.js, MDX, and gray-matter.
               </p>
               <div className="mt-auto flex items-center justify-between gap-3 pt-4">
-                <div className="font-mono text-[11px] text-neutral-500 uppercase tracking-wide dark:text-neutral-500">
+                <div className="text-[11px] text-neutral-500 uppercase tracking-wide dark:text-neutral-500">
                   <span>11{/* */} min read</span>
                   <span className="mx-1.5">·</span>
                   <time dateTime="2025-03-12T00:00:00.000Z">Mar 12, 2025</time>
@@ -325,8 +316,8 @@ export default function Blog() {
           </a>
         </div>
         <div aria-hidden="true" className="w-full border-t" />
-        <a
-          className="group flex w-fit items-center justify-center gap-2 font-mono text-neutral-800 text-xs uppercase transition-colors hover:text-black dark:text-white/80 mx-auto mt-pagebuilder"
+     <a
+          className="group flex w-fit items-center justify-center gap-2 text-neutral-800 text-xs uppercase transition-colors hover:text-black dark:text-white/80 mx-auto mt-pagebuilder my-5"
           href="/blog"
         >
           Read more posts

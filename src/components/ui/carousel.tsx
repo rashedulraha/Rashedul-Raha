@@ -90,16 +90,18 @@ function Carousel({
 
   React.useEffect(() => {
     if (!api || !setApi) return
-    setApi(api)
+    const timeout = setTimeout(() => setApi(api), 0)
+    return () => clearTimeout(timeout)
   }, [api, setApi])
 
   React.useEffect(() => {
     if (!api) return
-    onSelect(api)
+    const timeout = setTimeout(() => onSelect(api), 0)
     api.on("reInit", onSelect)
     api.on("select", onSelect)
 
     return () => {
+      clearTimeout(timeout)
       api?.off("select", onSelect)
     }
   }, [api, onSelect])

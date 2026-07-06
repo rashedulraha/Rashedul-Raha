@@ -11,10 +11,10 @@ export default function FAQ() {
               "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
           }}
         >
-          <p className="mb-4 font-mono font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
+          <p className="mb-4 font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
             My Site
           </p>
-          <span className="inline-block font-instrument-serif">
+          <span className="inline-block">
             Explore, experiment{" "}
             <span
               className="px-1 pb-1 text-shadow-none italic animate-gradient-x text-colorfull"
@@ -46,11 +46,8 @@ export default function FAQ() {
                           loading="lazy"
                           width={50}
                           height={50}
-                          decoding="async"
-                          data-nimg={1}
                           className="h-10 w-10"
                           style={{ color: "transparent" }}
-                          srcSet="/images/image_23.jpg 1x, /images/image_1.jpg 2x"
                           src="/images/image_1.jpg"
                         />
                       </div>
@@ -64,11 +61,8 @@ export default function FAQ() {
                           loading="lazy"
                           width={50}
                           height={50}
-                          decoding="async"
-                          data-nimg={1}
                           className="h-10 w-10"
                           style={{ color: "transparent" }}
-                          srcSet="/images/image_43.jpg 1x, /images/image_2.jpg 2x"
                           src="/images/image_2.jpg"
                         />
                       </div>
@@ -82,11 +76,8 @@ export default function FAQ() {
                           loading="lazy"
                           width={50}
                           height={50}
-                          decoding="async"
-                          data-nimg={1}
                           className="h-10 w-10"
                           style={{ color: "transparent" }}
-                          srcSet="/images/image_49.jpg 1x, /images/image.jpg 2x"
                           src="/images/image.jpg"
                         />
                       </div>
@@ -100,11 +91,8 @@ export default function FAQ() {
                           loading="lazy"
                           width={50}
                           height={50}
-                          decoding="async"
-                          data-nimg={1}
                           className="h-10 w-10"
                           style={{ color: "transparent" }}
-                          srcSet="/images/image_52.jpg 1x, /images/image_11.jpg 2x"
                           src="/images/image_11.jpg"
                         />
                       </div>
@@ -118,11 +106,8 @@ export default function FAQ() {
                           loading="lazy"
                           width={50}
                           height={50}
-                          decoding="async"
-                          data-nimg={1}
                           className="h-10 w-10"
                           style={{ color: "transparent" }}
-                          srcSet="/images/image_28.jpg 1x, /images/image_3.jpg 2x"
                           src="/images/image_3.jpg"
                         />
                       </div>
@@ -131,10 +116,10 @@ export default function FAQ() {
                 </div>
               </div>
               <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 w-full text-center">
-                <p className="font-mono text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+                <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
                   Uses
                 </p>
-                <p className="font-bluu text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
+                <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
                   Check out my favorite tools
                 </p>
               </div>
@@ -186,20 +171,17 @@ export default function FAQ() {
                       loading="lazy"
                       width={144}
                       height={192}
-                      decoding="async"
-                      data-nimg={1}
                       className="absolute inset-0 h-48 w-36 rotate-8 rounded-lg object-cover shadow transition-all duration-500 group-hover:rotate-3 group-hover:scale-105"
-                      srcSet="/images/image_53.jpg 1x, /images/image_8.jpg 2x"
                       src="/images/image_8.jpg"
                     />
                   </div>
                 </div>
               </div>
               <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 absolute top-0 left-0 w-full text-center">
-                <p className="font-mono text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+                <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
                   Behind The Code
                 </p>
-                <p className="font-bluu text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
+                <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
                   Journey, skills &amp; experience
                 </p>
               </div>
@@ -501,10 +483,10 @@ export default function FAQ() {
                   </svg>
                 </div>
                 <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 w-full text-center">
-                  <p className="font-mono text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+                  <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
                     Guestbook
                   </p>
-                  <p className="font-bluu text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
+                  <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
                     Let me know you were here
                   </p>
                 </div>
