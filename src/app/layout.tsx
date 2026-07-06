@@ -1,63 +1,28 @@
-import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
-import type { PropsWithChildren } from "react";
-
-import { Footer } from "@/components/main/footer";
-import { Navbar } from "@/components/main/navbar";
-
-import { siteConfig } from "@/config";
+import type { Metadata } from "next";
+import { Toaster } from "@/components/ui/sonner"
+import "./globals.css";
+import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-import "./globals.css";
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-export const viewport: Viewport = {
-  themeColor: "#030014",
+export const metadata: Metadata = {
+  title: "Aayush Bharti - Developer, Freelancer & Problem Solver",
+  description: "Full-Stack Developer specializing in Next.js, React, TypeScript, and Sanity CMS. I build fast, accessible web apps and help founders ship products that users love.",
 };
 
-export const metadata: Metadata = siteConfig;
-
-export default function RootLayout({ children }: PropsWithChildren) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const savedTheme = localStorage.getItem('theme') || 'dark';
-                  document.documentElement.classList.add(savedTheme);
-                  document.documentElement.style.colorScheme = savedTheme;
-                } catch (e) {}
-              })()
-            `,
-          }}
-        />
-      </head>
-      <body
-        className={cn(
-          "bg-bg-primary text-text-primary min-h-screen overflow-y-scroll overflow-x-hidden font-sans transition-colors duration-300",
-          inter.variable,
-        )}
-      >
-    
-          
-
-
-          <div className="relative z-10 flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        
+    <html lang="en" className={cn("dark", "font-sans", geist.variable)} style={{ colorScheme: "dark" }}>
+      <body>{children}
+         <Toaster />
       </body>
+      
     </html>
   );
 }
+
