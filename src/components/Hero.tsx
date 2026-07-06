@@ -114,6 +114,7 @@ export default function Hero() {
           <div className="z-10 mt-4 flex animate-fadeInUp flex-col items-center gap-4 fill-mode-[backwards] [animation-delay:150ms] sm:flex-row">
             <button 
               onClick={() => window.dispatchEvent(new CustomEvent('open-modal', { detail: { view: 'contact' } }))}
+              
               className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/30 bg-black/20 py-1 pr-1 pl-3 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/50 hover:bg-black hover:opacity-100 hover:shadow-black/20 hover:shadow-lg active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20"
             >
               <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">

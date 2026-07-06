@@ -196,7 +196,7 @@ export default function Testimonials() {
         {/* Bottom Controls */}
         <div className="flex items-center justify-center gap-4 mt-10 px-4">
           {/* Pagination Pill */}
-          <div className="flex items-center gap-2 rounded-full bg-black/40 border border-white/10 p-2 px-4 backdrop-blur-md">
+          <div className="flex items-center gap-2 rounded-full bg-black/40 border border-white/10 p-2 px-4 backdrop-blur-md ">
             {testimonialsData.map((_, i) => (
               <button
                 key={i}
