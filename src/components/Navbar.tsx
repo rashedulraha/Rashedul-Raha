@@ -8,7 +8,6 @@ import SearchModal from "./SearchModal";
 
 export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -134,7 +133,7 @@ export default function Navbar() {
 
           {/* Search Button */}
           <button
-            onClick={() => setIsSearchOpen(true)}
+            onClick={() => window.dispatchEvent(new CustomEvent('open-modal', { detail: { view: 'search' } }))}
             aria-label="Search"
             className="flex h-[42px] w-[42px] sm:h-[46px] sm:w-[46px] shrink-0 items-center justify-center rounded-full bg-background/80 text-muted-foreground shadow-[0_8px_30px_rgb(0,0,0,0.5)] border border-border backdrop-blur-md transition-colors hover:text-primary hover:bg-accent"
           >
@@ -213,7 +212,7 @@ export default function Navbar() {
       </header>
 
       {/* Search Modal overlay */}
-      <SearchModal open={isSearchOpen} onOpenChange={setIsSearchOpen} />
+      <SearchModal />
     </>
   );
 }
