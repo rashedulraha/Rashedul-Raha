@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "KALYAN MANNA",
+    "message": "Great Work Buddy ❤️",
+    "date": "Jun 26, 2026",
+    "bgColor": "bg-[#0b2d22]",
+    "doodles": "absolute right-10 top-1/2 w-16 h-16 border border-green-500/30 rounded-full opacity-50",
+    "doodle2": "absolute left-10 top-10 text-4xl text-green-500/30 font-serif",
+    "avatarBg": "bg-teal-600"
+  },
+  {
+    "id": 2,
+    "name": "Yashas8gatty",
+    "message": "Wohhhhhhh wohhhhhh wohhhhh just wohhhhhhh!!!",
+    "date": "Jun 25, 2026",
+    "bgColor": "bg-[#1f1b3e]",
+    "doodles": "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/10 text-6xl rotate-45",
+    "doodle2": "absolute right-20 top-20 w-4 h-4 rounded-full bg-white/20",
+    "avatarBg": "bg-green-500"
+  },
+  {
+    "id": 3,
+    "name": "Rashedul Islam",
+    "message": "YO!! this just fires me up to make more effort in my projects Love your work man",
+    "date": "Jun 20, 2026",
+    "bgColor": "bg-[#0a2034]",
+    "doodles": "absolute bottom-10 left-10 w-32 h-16 border-t-2 border-blue-500/30 rounded-[100%] opacity-50 -rotate-12",
+    "doodle2": "absolute top-10 right-10 w-24 h-24 border border-blue-500/20 rounded-full",
+    "avatarBg": "bg-blue-600"
+  },
+  {
+    "id": 4,
+    "name": "Anonymous User",
+    "message": "This portfolio describes what actually perfection looks like, 😵‍💫😱",
+    "date": "Jun 15, 2026",
+    "bgColor": "bg-[#331111]",
+    "doodles": "absolute left-20 bottom-10 text-red-500/30 text-5xl font-serif rotate-12",
+    "doodle2": "absolute right-20 top-20 text-red-500/20 text-6xl -rotate-12",
+    "avatarBg": "bg-red-500"
+  },
+  {
+    "id": 5,
+    "name": "Design Master",
+    "message": "Words that echo always... beautiful implementation.",
+    "date": "Jun 10, 2026",
+    "bgColor": "bg-[#25152a]",
+    "doodles": "absolute left-1/4 top-1/4 w-12 h-12 border-2 border-fuchsia-500/20 rounded-full",
+    "doodle2": "absolute right-1/4 bottom-1/4 text-fuchsia-500/20 text-4xl",
+    "avatarBg": "bg-fuchsia-600"
+  }
+]
