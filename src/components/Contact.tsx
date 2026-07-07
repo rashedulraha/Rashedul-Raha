@@ -1,18 +1,87 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 export default function Contact() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Rotating text animation
+  const [rotation, setRotation] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRotation((prev) => (prev + 1) % 360);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Floating particles for background
+  const particles = Array.from({ length: 15 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 2 + 1,
+    duration: Math.random() * 15 + 10,
+    delay: Math.random() * 8,
+  }));
+
   return (
     <>
-      <section className="relative z-0 py-pagebuilder" id="contact">
+      <section
+        ref={sectionRef}
+        className="relative z-0 py-pagebuilder overflow-hidden"
+        id="contact"
+      >
+        {/* Background particles */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {particles.map((p) => (
+            <motion.div
+              key={p.id}
+              className="absolute rounded-full bg-indigo-500/10 dark:bg-indigo-400/5"
+              style={{
+                left: `${p.x}%`,
+                top: `${p.y}%`,
+                width: p.size,
+                height: p.size,
+              }}
+              animate={{
+                y: [0, -40, 0],
+                x: [0, 15, -15, 0],
+                opacity: [0.2, 0.6, 0.2],
+              }}
+              transition={{
+                duration: p.duration,
+                delay: p.delay,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
         <div aria-hidden="true" className="w-full border-t" />
-        <div className="relative w-full overflow-hidden rounded-2xl ring-1 ring-border">
-          {/*$!*/}
-          <template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING"></template>
-          {/*/$*/}
-          <div className="relative z-10 mx-auto flex w-full flex-col items-center justify-center gap-y-2 py-10 text-center">
-            <div
-              className="absolute z-50 cursor-grab overflow-hidden rounded-full top-10 left-1/2 -translate-x-1/2 lg:top-1/2 lg:left-1/2 lg:translate-x-[280px] lg:-translate-y-[70px]"
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          className="relative w-full overflow-hidden rounded-2xl ring-1 ring-border bg-gradient-to-b from-background/50 via-background to-background/80"
+        >
+          <div className="relative z-10 mx-auto flex w-full flex-col items-center justify-center gap-y-2 py-16 sm:py-20 text-center px-4">
+            {/* Rotating Badge */}
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isInView ? { scale: 1, opacity: 1 } : {}}
+              transition={{ 
+                duration: 0.5, 
+                delay: 0.2,
+                type: "spring",
+                stiffness: 200,
+                damping: 20
+              }}
+              className="absolute z-50 cursor-grab overflow-hidden rounded-full top-4 left-1/2 -translate-x-1/2 lg:top-1/2 lg:left-1/2 lg:translate-x-[280px] lg:-translate-y-[70px]"
               tabIndex={0}
               style={{
                 WebkitTouchCallout: "none",
@@ -21,8 +90,12 @@ export default function Contact() {
                 touchAction: "none",
               }}
             >
-              <div className="relative rounded-full bg-blue-700 p-1.5 font-medium leading-none">
-                <div className="relative size-23.75 rounded-full bg-black p-2 text-white">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 p-1.5 font-medium leading-none shadow-lg shadow-blue-500/20"
+              >
+                <div className="relative size-23.75 rounded-full bg-background p-2 text-foreground">
                   <div className="absolute top-1/2 left-1/2 size-20 -translate-x-1/2 -translate-y-1/2 rounded-full">
                     <svg
                       className="absolute inset-0 size-full"
@@ -52,72 +125,89 @@ export default function Contact() {
                       </text>
                     </svg>
                   </div>
-                  <svg
+                  <motion.svg
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                     height={24}
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute top-1/2 left-1/2 size-10 -translate-x-1/2 -translate-y-1/2 rotate-45 fill-white text-white opacity-80 hidden lg:block"
+                    className="absolute top-1/2 left-1/2 size-10 -translate-x-1/2 -translate-y-1/2 fill-white text-foreground opacity-80 hidden lg:block"
                   >
                     <path d="M12 1C12 1 12 8 10 10C8 12 1 12 1 12C1 12 8 12 10 14C12 16 12 23 12 23C12 23 12 16 14 14C16 12 23 12 23 12C23 12 16 12 14 10C12 8 12 1 12 1Z" />
-                  </svg>
+                  </motion.svg>
                 </div>
                 <span className="sr-only">OPEN TO WORK · OPEN TO WORK ·</span>
-              </div>
-            </div>
-            <div className="relative pointer-events-none">
-              <Image
-                alt="wings"
-                aria-hidden="true"
-                loading="lazy"
-                width={338}
-                height={110}
-                className="select-none"
-                style={{ color: "transparent" }}
-                src="/images/wings.1kcr10vzfjw84.svg"
-              />
-              <svg
-                viewBox="0 0 5350 5350"
-                xmlns="http://www.w3.org/2000/svg"
-                className="absolute top-1/2 left-1/2 z-50 w-8 -translate-x-1/2 -translate-y-1/2 md:w-10 lg:invert dark:lg:invert-0"
+              </motion.div>
+            </motion.div>
+
+            {/* Main Heading */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-12 lg:mt-0"
+            >
+              <h3 className="text-2xl sm:text-3xl lg:text-5xl font-light text-foreground tracking-wide">
+                FROM CONCEPT TO{" "}
+                <motion.span
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+                >
+                  CREATION
+                </motion.span>
+              </h3>
+              <h3 className="mt-3 text-2xl sm:text-3xl lg:text-5xl font-light text-foreground tracking-wide">
+                LET&apos;S MAKE IT{" "}
+                <motion.span
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  className="font-extrabold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                >
+                  HAPPEN!
+                </motion.span>
+              </h3>
+            </motion.div>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              style={{ transform: "none" }}
+            >
+              <motion.button
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() =>
+                  window.dispatchEvent(
+                    new CustomEvent("open-modal", {
+                      detail: { view: "contact" },
+                    })
+                  )
+                }
+                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-accent py-1 pr-1 pl-3 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-border hover:bg-primary hover:opacity-100 hover:shadow-black/20 hover:shadow-lg active:scale-[0.98] dark:border-border dark:bg-accent dark:hover:border-border dark:hover:bg-card  my-10"
               >
-                <path
-                  d="M265 4069c-70-20-71-59-4-197 29-59 78-161 109-227 32-66 85-178 119-248 77-159 167-347 236-492 29-60 81-168 115-240 34-71 79-166 100-210 21-44 62-132 93-195 30-63 101-212 157-330 240-504 311-652 373-780 35-74 101-210 145-303 90-186 96-193 186-184 58 5 76 23 124 121 341 693 462 946 462 968 0 10 3 18 8 18 4 0 17 19 29 42 27 52 229 469 288 593 23 50 88 182 143 295 55 113 165 340 245 505 80 165 188 389 241 499 53 109 103 214 112 235 18 44 11 91-17 117-20 18-41 19-303 19-281 0-281 0-344-29-110-51-132-84-347-521-106-214-303-613-437-886-135-273-251-499-257-503-19-12-39 11-73 83-17 36-85 176-151 311-66 135-134 277-152 315-18 39-65 138-105 220-82 169-166 344-250 520-153 323-181 373-230 419-73 68-112 76-369 75-119 0-229-5-246-10z"
-                  fill="#fff"
-                />
-                <path
-                  d="M3922 3999c-42-21-47-29-134-208-143-293-148-310-107-347 19-17 43-20 253-24 274-7 308-16 406-107 209-193 166-551-82-696-100-58-168-67-520-67-344 0-370-3-403-53-9-14-54-107-101-206-92-200-101-237-59-269 24-19 45-20 373-24 347-4 347-4 422-39 137-65 210-175 210-317 0-176-102-308-267-348-46-10-182-13-642-14-584 0-584 0-618-38-30-32-93-155-234-460-37-80-38-124-3-151 26-21 33-21 788-21 708 0 769 1 876 20 238 40 409 119 565 262 120 109 221 278 266 443 45 169 34 388-28 557-30 81-104 197-157 247-20 19-36 43-36 52 0 10 32 40 78 72 309 217 445 544 388 927-66 435-413 770-851 820-49 5-146 10-215 10-108 0-131-3-168-21z"
-                  fill="#fff"
-                />
-              </svg>
-            </div>
-            <span className="mt-4 font-light text-2xl text-black tracking-wide sm:text-4xl lg:text-5xl dark:text-white">
-              <h3 className="text-nowrap">
-                FROM CONCEPT TO <span className="font-extrabold">CREATION</span>
-              </h3>
-              <h3 className="mt-3 text-nowrap">
-                LET&apos;S MAKE IT{/* */}{" "}
-                <span className="font-extrabold">HAPPEN!</span>
-              </h3>
-            </span>
-            <div style={{ transform: "none" }}>
-              <button  onClick={() => window.dispatchEvent(new CustomEvent('open-modal', { detail: { view: 'contact' } }))}
-               className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/30 bg-black/20 py-1 pr-1 pl-3 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/50 hover:bg-black hover:opacity-100 hover:shadow-black/20 hover:shadow-lg active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20 my-10 max-md:scale-110 md:hover:scale-125">
-                <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">
+                <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-foreground dark:text-foreground dark:group-hover:text-foreground">
                   Get In Touch
                 </span>
                 <span
                   aria-hidden="true"
-                  className="absolute inset-y-1 right-1 w-10 rounded-full bg-black transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)] dark:bg-white"
+                  className="absolute inset-y-1 right-1 w-10 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)]"
                 />
-                <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-black p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent dark:bg-white">
+                <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent">
                   <svg
                     fill="none"
                     height={24}
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="size-[18px] text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                    className="size-[18px] text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
                   >
                     <path
                       d="M18.5 12L4.99997 12"
@@ -140,7 +230,7 @@ export default function Contact() {
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute size-[18px] -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                    className="absolute size-[18px] -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
                   >
                     <path
                       d="M18.5 12L4.99997 12"
@@ -158,19 +248,69 @@ export default function Contact() {
                     />
                   </svg>
                 </span>
-              </button>
-            </div>
-            <p className="font-semibold text-base lg:text-2xl">
-              I&apos;m available for full-time roles &amp; freelance projects.
-            </p>
-            <p className="my-2 text-balance font-extralight text-sm tracking-wide opacity-75 lg:text-xl">
+              </motion.button>
+            </motion.div>
+
+            {/* Availability Text */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="font-semibold text-base sm:text-xl lg:text-2xl text-foreground"
+            >
+              I&apos;m available for{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                full-time roles
+              </span>{" "}
+              &amp;{" "}
+              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                freelance projects
+              </span>
+              .
+            </motion.p>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.9 }}
+              className="my-2 text-balance font-extralight text-sm tracking-wide opacity-75 lg:text-xl text-muted-foreground"
+            >
               I thrive on crafting dynamic web applications, and
-              <br />
+              <br className="hidden sm:block" />
               delivering seamless user experiences.
-            </p>
+            </motion.p>
+
+            {/* Decorative Elements */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.5, delay: 1 }}
+              className="flex gap-2 mt-4"
+            >
+              <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 text-xs font-medium border border-blue-500/20">
+                React
+              </span>
+              <span className="px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 text-xs font-medium border border-purple-500/20">
+                Next.js
+              </span>
+              <span className="px-3 py-1 rounded-full bg-pink-500/10 text-pink-600 text-xs font-medium border border-pink-500/20">
+                TypeScript
+              </span>
+              <span className="px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-600 text-xs font-medium border border-indigo-500/20">
+                Tailwind
+              </span>
+            </motion.div>
           </div>
-        </div>
-        <span className="absolute bottom-6 left-8">
+        </motion.div>
+
+        {/* Decorative Bottom Elements */}
+        <motion.span
+          initial={{ opacity: 0, x: -20 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="absolute bottom-6 left-8"
+        >
           <svg
             fill="none"
             height={14}
@@ -184,8 +324,14 @@ export default function Contact() {
               opacity="0.24"
             />
           </svg>
-        </span>
-        <span className="absolute right-8 bottom-6">
+        </motion.span>
+
+        <motion.span
+          initial={{ opacity: 0, x: 20 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="absolute right-8 bottom-6"
+        >
           <svg
             fill="none"
             height={8}
@@ -244,7 +390,8 @@ export default function Contact() {
               </filter>
             </defs>
           </svg>
-        </span>
+        </motion.span>
+
         <div aria-hidden="true" className="w-full border-t" />
       </section>
     </>

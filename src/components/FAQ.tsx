@@ -1,235 +1,278 @@
-import Image from "next/image";
+/* eslint-disable react-hooks/purity */
+"use client";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 export default function FAQ() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
+
+  // Floating particles for background
+  const particles = Array.from({ length: 12 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 2 + 1,
+    duration: Math.random() * 15 + 10,
+    delay: Math.random() * 8,
+  }));
+
+  // Card data for better structure
+  const cards = [
+    {
+      id: "uses",
+      title: "Uses",
+      description: "Check out my favorite tools",
+      href: "/uses",
+      images: [
+        { src: "/images/image_1.jpg", alt: "Zed", delay: 200 },
+        { src: "/images/image_2.jpg", alt: "Claude Code", delay: 100 },
+        { src: "/images/image.jpg", alt: "Ghostty", delay: 0 },
+        { src: "/images/image_11.jpg", alt: "Arc", delay: 100 },
+        { src: "/images/image_3.jpg", alt: "Linear", delay: 200 },
+      ],
+      icon: "🛠️",
+    },
+    {
+      id: "about",
+      title: "Behind The Code",
+      description: "Journey, skills & experience",
+      href: "/about",
+      image: "/images/image_8.jpg",
+      icon: "👨‍💻",
+    },
+    {
+      id: "guestbook",
+      title: "Guestbook",
+      description: "Let me know you were here",
+      href: "/guestbook",
+      icon: "📝",
+    },
+  ];
+
   return (
     <>
-      <section className="relative py-pagebuilder">
-        <h2
-          className="relative z-2 mx-auto mb-pagebuilder max-w-xl text-balance font-medium text-5xl tracking-tight max-sm:px-5 sm:text-5xl md:text-6xl text-center"
+      <section
+        ref={sectionRef}
+        className="relative py-pagebuilder overflow-hidden">
+        {/* Background particles */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {particles.map((p) => (
+            <motion.div
+              key={p.id}
+              className="absolute rounded-full bg-indigo-500/10 dark:bg-indigo-400/5"
+              style={{
+                left: `${p.x}%`,
+                top: `${p.y}%`,
+                width: p.size,
+                height: p.size,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, 10, -10, 0],
+                opacity: [0.2, 0.5, 0.2],
+              }}
+              transition={{
+                duration: p.duration,
+                delay: p.delay,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+          className="relative z-2 mx-auto mb-pagebuilder max-w-xl text-balance font-medium text-5xl tracking-tight max-sm:px-5 sm:text-5xl md:text-6xl text-center mb-5 sm:mb-10 lg:mb-14"
           style={{
             textShadow:
               "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
-          }}
-        >
+          }}>
           <p className="mb-4 font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
-            My Site
+            Explore My Site
           </p>
           <span className="inline-block">
             Explore, experiment{" "}
-            <span
+            <motion.span
+              initial={{ backgroundPosition: "0% 100%" }}
+              animate={isInView ? { backgroundPosition: "100% 100%" } : {}}
+              transition={{ duration: 2, delay: 1 }}
               className="px-1 pb-1 text-shadow-none italic animate-gradient-x text-colorfull"
               style={{
-                WebkitMaskImage:
-                  "linear-gradient(to right, black 70%, transparent 100%)",
-                WebkitMaskSize: "0% 100%",
-                WebkitMaskPosition: "left",
-                WebkitMaskRepeat: "no-repeat",
-              }}
-            >
+                backgroundImage:
+                  "linear-gradient(to right, #6366f1, #8b5cf6, #a855f7)",
+                backgroundSize: "200% 100%",
+                backgroundPosition: "0% 100%",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}>
               &amp;&amp; say hello
-            </span>
+            </motion.span>
           </span>
-        </h2>
-        <div className="grid grid-cols-1 gap-3 border-y md:grid-cols-12">
-          <div className="col-span-1 md:col-span-6 lg:col-span-4">
+        </motion.div>
+
+        {/* Cards Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="grid grid-cols-1 gap-3 border-y md:grid-cols-12">
+          {/* Card 1 - Uses */}
+          <motion.div
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.2 }}
+            className="col-span-1 md:col-span-6 lg:col-span-4">
             <a
-              className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-colors duration-300 hover:bg-white dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-72"
-              href="/uses"
-            >
+              className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-72"
+              href="/uses">
               <div className="size-full">
                 <div className="mt-10 flex items-center justify-center gap-3 md:mt-12">
-                  <div className="inline-block text-center">
-                    <div className="rounded-[20px] border-2 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 size-24 delay-200">
-                      <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-white/[0.06] dark:bg-white/[0.04] dark:group-hover:bg-indigo-500/10">
-                        <img
-                          alt="Zed"
-                          loading="lazy"
-                          width={50}
-                          height={50}
-                          className="h-10 w-10"
-                          style={{ color: "transparent" }}
-                          src="/images/image_1.jpg"
-                        />
+                  {cards[0].images?.map((img, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{
+                        duration: 0.3,
+                        delay: 0.3 + idx * 0.05,
+                      }}
+                      className="inline-block text-center">
+                      <div
+                        className={`rounded-[20px] border-2 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 size-24 delay-[${img.delay}ms]`}>
+                        <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-white/[0.06] dark:bg-white/[0.04] dark:group-hover:bg-indigo-500/10">
+                          <img
+                            alt={img.alt}
+                            loading="lazy"
+                            width={50}
+                            height={50}
+                            className="h-10 w-10 object-contain"
+                            style={{ color: "transparent" }}
+                            src={img.src}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="inline-block text-center">
-                    <div className="rounded-[20px] border-2 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 size-24 delay-100">
-                      <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-white/[0.06] dark:bg-white/[0.04] dark:group-hover:bg-indigo-500/10">
-                        <img
-                          alt="Claude Code"
-                          loading="lazy"
-                          width={50}
-                          height={50}
-                          className="h-10 w-10"
-                          style={{ color: "transparent" }}
-                          src="/images/image_2.jpg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="inline-block text-center">
-                    <div className="rounded-[20px] border-2 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 size-28 delay-0">
-                      <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-white/[0.06] dark:bg-white/[0.04] dark:group-hover:bg-indigo-500/10">
-                        <img
-                          alt="Ghostty"
-                          loading="lazy"
-                          width={50}
-                          height={50}
-                          className="h-10 w-10"
-                          style={{ color: "transparent" }}
-                          src="/images/image.jpg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="inline-block text-center">
-                    <div className="rounded-[20px] border-2 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 size-24 delay-100">
-                      <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-white/[0.06] dark:bg-white/[0.04] dark:group-hover:bg-indigo-500/10">
-                        <img
-                          alt="Arc"
-                          loading="lazy"
-                          width={50}
-                          height={50}
-                          className="h-10 w-10"
-                          style={{ color: "transparent" }}
-                          src="/images/image_11.jpg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="inline-block text-center">
-                    <div className="rounded-[20px] border-2 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 size-24 delay-200">
-                      <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-white/[0.06] dark:bg-white/[0.04] dark:group-hover:bg-indigo-500/10">
-                        <img
-                          alt="Linear"
-                          loading="lazy"
-                          width={50}
-                          height={50}
-                          className="h-10 w-10"
-                          style={{ color: "transparent" }}
-                          src="/images/image_3.jpg"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
+
               <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 w-full text-center">
                 <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
-                  Uses
+                  {cards[0].icon} {cards[0].title}
                 </p>
                 <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
-                  Check out my favorite tools
+                  {cards[0].description}
                 </p>
               </div>
+
               <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
-              <div className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/10 max-md:border dark:bg-white/10 transition-all duration-300 ease-out -translate-y-2 opacity-100 md:translate-y-0 md:opacity-0 md:group-hover:-translate-y-2 md:group-hover:opacity-100">
-                <svg
-                  fill="none"
-                  height={24}
-                  viewBox="0 0 24 24"
-                  width={24}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="size-[18px] text-neutral-700 dark:text-neutral-200"
-                >
-                  <path
-                    d="M18.5 12L4.99997 12"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  />
-                  <path
-                    d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </div>
+
+              <motion.div
+                initial={{ y: 0, opacity: 0 }}
+                whileHover={{ y: -2, opacity: 1 }}
+                transition={{ duration: 0.2 }}
+                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/10 max-md:border dark:bg-white/10 transition-all duration-300 ease-out">
+                <ArrowRight className="size-[18px] text-neutral-700 dark:text-neutral-200" />
+              </motion.div>
             </a>
-          </div>
-          <div className="col-span-1 md:col-span-6 lg:col-span-4">
+          </motion.div>
+
+          {/* Card 2 - About */}
+          <motion.div
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.2 }}
+            className="col-span-1 md:col-span-6 lg:col-span-4">
             <a
-              className="group relative flex w-full flex-col justify-between rounded-xl bg-surface transition-colors duration-300 hover:bg-white dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer group h-72 overflow-hidden"
-              href="/about"
-            >
+              className="group relative flex w-full flex-col justify-between rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-72 overflow-hidden"
+              href="/about">
               <div className="size-full">
                 <div className="absolute inset-x-0 -bottom-4 flex justify-center">
                   <div className="relative h-48 w-36">
-                    <div
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={isInView ? { opacity: 1 } : {}}
+                      transition={{ duration: 0.5, delay: 0.4 }}
                       aria-hidden="true"
                       className="pointer-events-none absolute -inset-4 rounded-full bg-indigo-500/40 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100 dark:bg-indigo-400/30"
                     />
-                    <div className="absolute inset-0 scale-105 rounded-2xl border border-neutral-300 p-2 transition-all duration-500 ease-out group-hover:border-indigo-400/60 dark:border-neutral-600 dark:group-hover:border-indigo-400/60">
+                    <motion.div
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                      transition={{ duration: 0.4, delay: 0.5 }}
+                      className="absolute inset-0 scale-105 rounded-2xl border border-neutral-300 p-2 transition-all duration-500 ease-out group-hover:border-indigo-400/60 dark:border-neutral-600 dark:group-hover:border-indigo-400/60">
                       <div className="h-full w-full rounded-xl border-2 border-neutral-200/10 bg-[#dfe0e1] shadow-inner dark:border-neutral-500/20 dark:bg-neutral-700" />
-                    </div>
-                    <img
-                      alt="Aayush Bharti"
+                    </motion.div>
+                    <motion.img
+                      initial={{ scale: 0.8, opacity: 0, rotate: -8 }}
+                      animate={
+                        isInView ? { scale: 1, opacity: 1, rotate: 8 } : {}
+                      }
+                      transition={{ duration: 0.5, delay: 0.6 }}
+                      alt="Rashedul Islam"
                       loading="lazy"
                       width={144}
                       height={192}
-                      className="absolute inset-0 h-48 w-36 rotate-8 rounded-lg object-cover shadow transition-all duration-500 group-hover:rotate-3 group-hover:scale-105"
-                      src="/images/image_8.jpg"
+                      className="absolute inset-0 h-48 w-36 rounded-lg object-cover shadow transition-all duration-500 group-hover:rotate-3 group-hover:scale-105"
+                      src="/personal_img/rashedul.jpeg"
                     />
                   </div>
                 </div>
               </div>
+
               <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 absolute top-0 left-0 w-full text-center">
                 <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
-                  Behind The Code
+                  {cards[1].icon} {cards[1].title}
                 </p>
                 <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
-                  Journey, skills &amp; experience
+                  {cards[1].description}
                 </p>
               </div>
+
               <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
-              <div className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/10 max-md:border dark:bg-white/10 transition-all duration-300 ease-out -translate-y-2 opacity-100 md:translate-y-0 md:opacity-0 md:group-hover:-translate-y-2 md:group-hover:opacity-100">
-                <svg
-                  fill="none"
-                  height={24}
-                  viewBox="0 0 24 24"
-                  width={24}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="size-[18px] text-neutral-700 dark:text-neutral-200"
-                >
-                  <path
-                    d="M18.5 12L4.99997 12"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  />
-                  <path
-                    d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </div>
+
+              <motion.div
+                initial={{ y: 0, opacity: 0 }}
+                whileHover={{ y: -2, opacity: 1 }}
+                transition={{ duration: 0.2 }}
+                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/10 max-md:border dark:bg-white/10 transition-all duration-300 ease-out">
+                <ArrowRight className="size-[18px] text-neutral-700 dark:text-neutral-200" />
+              </motion.div>
             </a>
-          </div>
-          <div className="col-span-1 md:col-span-6 lg:col-span-4">
+          </motion.div>
+
+          {/* Card 3 - Guestbook */}
+          <motion.div
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.2 }}
+            className="col-span-1 md:col-span-6 lg:col-span-4">
             <div className="relative w-full h-72">
               <a
-                className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-surface transition-colors duration-300 hover:bg-white dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer size-full"
-                href="/guestbook"
-              >
+                className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer size-full"
+                href="/guestbook">
                 <div className="size-full">
-                  <div className="absolute inset-0 bg-[length:16px_16px] bg-[radial-gradient(circle,#c4c4c4_1px,transparent_1px)] opacity-50 [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] dark:bg-[radial-gradient(circle,#525252_1px,transparent_1px)] dark:opacity-50" />
-                  <svg
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ duration: 0.5, delay: 0.7 }}
+                    className="absolute inset-0 bg-size-[16px_16px] bg-[radial-gradient(circle,#c4c4c4_1px,transparent_1px)] opacity-50 mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] dark:bg-[radial-gradient(circle,#525252_1px,transparent_1px)] dark:opacity-50"
+                  />
+
+                  <motion.svg
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={isInView ? { x: 0, opacity: 1 } : {}}
+                    transition={{ duration: 0.5, delay: 0.8 }}
                     className="absolute top-0 w-48 fill-neutral-500 drop-shadow-lg dark:fill-[#666666]"
                     fill="none"
                     viewBox="0 0 171 152"
                     xmlns="http://www.w3.org/2000/svg"
                     style={{
                       transform: "translateY(-15px) rotate(-8deg)",
-                    }}
-                  >
+                    }}>
                     <g clipPath="url(#clip0_1_2784)">
                       <g>
                         <g>
@@ -370,16 +413,19 @@ export default function FAQ() {
                         />
                       </clipPath>
                     </defs>
-                  </svg>
-                  <svg
+                  </motion.svg>
+
+                  <motion.svg
+                    initial={{ x: 20, opacity: 0 }}
+                    animate={isInView ? { x: 0, opacity: 1 } : {}}
+                    transition={{ duration: 0.5, delay: 0.9 }}
                     className="absolute top-8 -right-5 w-56 drop-shadow-lg md:top-10 md:right-0"
                     fill="none"
                     viewBox="0 0 214 223"
                     xmlns="http://www.w3.org/2000/svg"
                     style={{
                       transform: "translateY(-5px) rotate(8deg)",
-                    }}
-                  >
+                    }}>
                     <g>
                       <g>
                         <rect
@@ -465,8 +511,7 @@ export default function FAQ() {
                         x1="110.398"
                         x2="-4.8642"
                         y1="-2.56166"
-                        y2="120.596"
-                      >
+                        y2="120.596">
                         <stop stopColor="#FFD2ED" />
                         <stop offset={1} stopColor="#C691FF" />
                       </linearGradient>
@@ -480,46 +525,34 @@ export default function FAQ() {
                         />
                       </clipPath>
                     </defs>
-                  </svg>
+                  </motion.svg>
                 </div>
+
                 <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 w-full text-center">
                   <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
-                    Guestbook
+                    {cards[2].icon} {cards[2].title}
                   </p>
                   <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
-                    Let me know you were here
+                    {cards[2].description}
                   </p>
                 </div>
+
                 <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
-                <div className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/10 max-md:border dark:bg-white/10 transition-all duration-300 ease-out -translate-y-2 opacity-100 md:translate-y-0 md:opacity-0 md:group-hover:-translate-y-2 md:group-hover:opacity-100">
-                  <svg
-                    fill="none"
-                    height={24}
-                    viewBox="0 0 24 24"
-                    width={24}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-[18px] text-neutral-700 dark:text-neutral-200"
-                  >
-                    <path
-                      d="M18.5 12L4.99997 12"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                    <path
-                      d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
-                </div>
+
+                <motion.div
+                  initial={{ y: 0, opacity: 0 }}
+                  whileHover={{ y: -2, opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/10 max-md:border dark:bg-white/10 transition-all duration-300 ease-out">
+                  <ArrowRight className="size-4.5 text-neutral-700 dark:text-neutral-200" />
+                </motion.div>
               </a>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Bottom decorative line */}
+        <div aria-hidden="true" className="w-full border-t mt-8" />
       </section>
     </>
   );

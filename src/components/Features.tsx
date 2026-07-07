@@ -2,9 +2,19 @@
 
 import React from "react";
 import Image from "next/image";
-import { Code, Box, Layout, Server, Database, Wind, Layers, Terminal, Monitor, Sparkles } from "lucide-react";
+import {
+  Code,
+  Box,
+  Layout,
+  Server,
+  Database,
+  Wind,
+  Layers,
+  Terminal,
+  Monitor,
+  Sparkles,
+} from "lucide-react";
 import SoundCard from "./SoundCard";
-
 
 const row1 = [
   { name: "Next.js", icon: Layout },
@@ -28,7 +38,7 @@ export default function Features() {
   return (
     <>
       <div className="mb-pagebuilder grid grid-cols-1 gap-3 border-y md:grid-cols-12 lg:my-pagebuilder">
-      <SoundCard/>
+        <SoundCard />
         <div className="md:col-span-6 lg:col-span-5 lg:row-span-5">
           <div className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-colors duration-300 hover:bg-white dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border h-full min-h-72">
             <div className="absolute inset-0 z-0 flex flex-col justify-center gap-4 overflow-hidden pt-12 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
@@ -37,8 +47,7 @@ export default function Features() {
                 {[...row1, ...row1].map((tech, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm"
-                  >
+                    className="flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm">
                     <tech.icon className="h-4 w-4 text-muted-foreground" />
                     <span>{tech.name}</span>
                   </div>
@@ -50,15 +59,13 @@ export default function Features() {
                 {[...row2, ...row2].map((tech, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm"
-                  >
+                    className="flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm">
                     <tech.icon className="h-4 w-4 text-muted-foreground" />
                     <span>{tech.name}</span>
                   </div>
                 ))}
               </div>
             </div>
-
 
             <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 absolute top-0 left-0 w-full text-center">
               <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
@@ -69,15 +76,13 @@ export default function Features() {
               </p>
             </div>
 
-            
             <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
           </div>
         </div>
         <div className="md:col-span-6 lg:col-span-4 lg:row-span-6">
           <a
             className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-colors duration-300 hover:bg-white dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-full min-h-72"
-            href="/projects"
-          >
+            href="/projects">
             <div className="size-full">
               <div className="absolute inset-0 -bottom-10 flex items-end justify-center overflow-hidden">
                 {/*$!*/}
@@ -101,8 +106,7 @@ export default function Features() {
                 viewBox="0 0 24 24"
                 width={24}
                 xmlns="http://www.w3.org/2000/svg"
-                className="size-[18px] text-neutral-700 dark:text-neutral-200"
-              >
+                className="size-[18px] text-neutral-700 dark:text-neutral-200">
                 <path
                   d="M18.5 12L4.99997 12"
                   stroke="currentColor"
@@ -144,8 +148,7 @@ export default function Features() {
         <div className="col-span-1 md:col-span-12 lg:col-span-4 lg:row-span-6">
           <a
             className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-colors duration-300 hover:bg-white dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-72"
-            href="/uses"
-          >
+            href="/uses">
             <div className="size-full">
               <div className="mt-10 flex items-center justify-center gap-3 md:mt-12">
                 <div className="inline-block text-center">
@@ -241,8 +244,7 @@ export default function Features() {
                 viewBox="0 0 24 24"
                 width={24}
                 xmlns="http://www.w3.org/2000/svg"
-                className="size-[18px] text-neutral-700 dark:text-neutral-200"
-              >
+                className="size-[18px] text-neutral-700 dark:text-neutral-200">
                 <path
                   d="M18.5 12L4.99997 12"
                   stroke="currentColor"

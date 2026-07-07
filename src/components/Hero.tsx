@@ -1,193 +1,249 @@
+/* eslint-disable react-hooks/purity */
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 // --- DUMMY IMAGES — replace these src values with your own real photos ---
 const avatarSlides = [
   {
     src: "/personal_img/protfolio.jpeg",
-    alt: "Photo 1",
+    alt: "Portfolio Photo",
+    title: "Workspace",
+    description: "My creative workspace setup",
   },
   {
     src: "/personal_img/rashedul-2.jpeg",
-    alt: "Photo 2",
+    alt: "Rashedul Photo 2",
+    title: "Portrait",
+    description: "Professional headshot",
   },
   {
     src: "/personal_img/rashedul.jpeg",
-    alt: "Photo 3",
+    alt: "Rashedul Photo 1",
+    title: "Creative",
+    description: "Creative session in action",
   },
   {
     src: "/personal_img/rashedul-2.jpeg",
-    alt: "Photo 4",
+    alt: "Rashedul Photo 4",
+    title: "Studio",
+    description: "Studio vibes",
   },
 ];
 
-const AUTOPLAY_DELAY = 2500;
-
-function AvatarCarouselPopover({
+// --- Center Modal Gallery ---
+function CenterGalleryModal({
   isOpen,
+  onClose,
 }: {
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [isPaused, setIsPaused] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  const goTo = (next: number, dir: number) => {
-    setDirection(dir);
-    setIndex(
-      ((next % avatarSlides.length) + avatarSlides.length) %
-        avatarSlides.length,
-    );
+  const goTo = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
   };
 
-  const goNext = () => goTo(index + 1, 1);
-  const goPrev = () => goTo(index - 1, -1);
+  const next = () => {
+    const nextIndex = (currentIndex + 1) % avatarSlides.length;
+    goTo(nextIndex);
+  };
 
+  const prev = () => {
+    const prevIndex =
+      (currentIndex - 1 + avatarSlides.length) % avatarSlides.length;
+    goTo(prevIndex);
+  };
+
+  // Keyboard navigation
   useEffect(() => {
-    if (!isOpen || isPaused) {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      return;
-    }
-    intervalRef.current = setInterval(() => {
-      setDirection(1);
-      setIndex((prev) => (prev + 1) % avatarSlides.length);
-    }, AUTOPLAY_DELAY);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
     };
-  }, [isOpen, isPaused]);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, currentIndex]);
 
+  // Prevent body scroll
   useEffect(() => {
     if (isOpen) {
-      setIndex(0);
-      setDirection(1);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
     }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  // Reset to first image when opened
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (isOpen) setCurrentIndex(0);
   }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8, scale: 0.95 }}
-      transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      className="absolute bottom-full left-1/2 z-50 mb-3 w-56 -translate-x-1/2 overflow-hidden rounded-2xl border border-white/10 bg-background/95 shadow-2xl backdrop-blur-xl sm:w-64">
-      <div className="relative h-40 w-full overflow-hidden sm:h-48">
-        <AnimatePresence initial={false} custom={direction} mode="popLayout">
-          <motion.div
-            key={index}
-            custom={direction}
-            initial={{ opacity: 0, x: direction > 0 ? 40 : -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction > 0 ? -40 : 40 }}
-            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute inset-0">
-            <Image
-              src={avatarSlides[index].src}
-              alt={avatarSlides[index].alt}
-              fill
-              sizes="256px"
-              className="object-cover"
-            />
-          </motion.div>
-        </AnimatePresence>
-
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-md p-4"
+      onClick={onClose}>
+      <motion.div
+        ref={modalRef}
+        initial={{ scale: 0.9, opacity: 0, y: 30 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 30 }}
+        transition={{
+          duration: 0.35,
+          ease: [0.4, 0, 0.2, 1],
+          type: "spring",
+          stiffness: 350,
+          damping: 28,
+        }}
+        className="relative w-full max-w-5xl bg-background/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}>
+        {/* Close button */}
         <button
-          type="button"
-          aria-label="Previous photo"
-          onClick={(e) => {
-            e.stopPropagation();
-            goPrev();
-          }}
-          className="absolute left-2 top-1/2 z-10 flex size-7 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60">
-          <svg viewBox="0 0 24 24" fill="none" className="size-4">
-            <path
-              d="M15 6C15 6 9 10.4189 9 12C9 13.5812 15 18 15 18"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-            />
-          </svg>
+          onClick={onClose}
+          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors text-white/80 hover:text-white">
+          <X className="w-5 h-5" />
         </button>
-        <button
-          type="button"
-          aria-label="Next photo"
-          onClick={(e) => {
-            e.stopPropagation();
-            goNext();
-          }}
-          className="absolute right-2 top-1/2 z-10 flex size-7 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60">
-          <svg viewBox="0 0 24 24" fill="none" className="size-4">
-            <path
-              d="M9 6C9 6 15 10.4189 15 12C15 13.5812 9 18 9 18"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-            />
-          </svg>
-        </button>
-      </div>
 
-      <div className="flex items-center justify-center gap-1.5 py-2.5">
-        {avatarSlides.map((slide, i) => (
+        {/* Main Image Area */}
+        <div className="relative w-full aspect-[16/9] bg-black/30">
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{
+                opacity: 0,
+                x: direction > 0 ? 60 : -60,
+                scale: 0.95,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                x: direction > 0 ? -60 : 60,
+                scale: 0.95,
+              }}
+              transition={{
+                duration: 0.3,
+                ease: [0.4, 0, 0.2, 1],
+              }}
+              className="absolute inset-0">
+              <Image
+                src={avatarSlides[currentIndex].src}
+                alt={avatarSlides[currentIndex].alt}
+                fill
+                className="object-contain"
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                priority
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Arrows */}
           <button
-            key={slide.src}
-            type="button"
-            aria-label={`Go to photo ${i + 1}`}
             onClick={(e) => {
               e.stopPropagation();
-              goTo(i, i > index ? 1 : -1);
+              prev();
             }}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === index
-                ? "w-4 bg-primary"
-                : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-            }`}
-          />
-        ))}
-      </div>
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2.5 rounded-full bg-black/50 hover:bg-black/70 transition-all duration-200 text-white/80 hover:text-white hover:scale-105">
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              next();
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2.5 rounded-full bg-black/50 hover:bg-black/70 transition-all duration-200 text-white/80 hover:text-white hover:scale-105">
+            <ChevronRight className="w-6 h-6" />
+          </button>
 
-      <div className="absolute -bottom-1.5 left-1/2 size-3 -translate-x-1/2 rotate-45 border-r border-b border-white/10 bg-background/95" />
+          {/* Image Counter */}
+          <div className="absolute bottom-4 left-4 z-10 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full text-white/90 text-sm font-medium">
+            {currentIndex + 1} / {avatarSlides.length}
+          </div>
+
+          {/* Image Title */}
+          <div className="absolute bottom-4 right-4 z-10 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full text-white/90 text-sm font-medium">
+            {avatarSlides[currentIndex].title}
+          </div>
+        </div>
+
+        {/* Thumbnail Strip */}
+        <div className="p-4 bg-background/80">
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent justify-center">
+            {avatarSlides.map((img, idx) => (
+              <motion.button
+                key={idx}
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goTo(idx);
+                }}
+                className={`relative flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden transition-all duration-200 ${
+                  idx === currentIndex
+                    ? "ring-2 ring-primary scale-105 shadow-lg shadow-primary/20"
+                    : "ring-1 ring-white/10 hover:ring-white/30"
+                }`}>
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                />
+                {idx === currentIndex && (
+                  <div className="absolute inset-0 bg-primary/10" />
+                )}
+              </motion.button>
+            ))}
+          </div>
+
+          {/* Image Description */}
+          <motion.p
+            key={currentIndex}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+            className="mt-2 text-center text-sm text-muted-foreground font-light">
+            {avatarSlides[currentIndex].description}
+          </motion.p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
 
 export default function Hero() {
-  const [isAvatarOpen, setIsAvatarOpen] = useState(false);
-  const avatarWrapRef = useRef<HTMLSpanElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const avatarRef = useRef<HTMLSpanElement>(null);
 
   const copyEmail = async () => {
     await navigator.clipboard.writeText("rashedulraha.bd@gmail.com");
     toast.success("Email copied to clipboard!");
   };
 
-  useEffect(() => {
-    if (!isAvatarOpen) return;
-    const handleOutside = (e: MouseEvent) => {
-      if (
-        avatarWrapRef.current &&
-        !avatarWrapRef.current.contains(e.target as Node)
-      ) {
-        setIsAvatarOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleOutside);
-    return () => document.removeEventListener("mousedown", handleOutside);
-  }, [isAvatarOpen]);
-
   // Floating particles for background
-  const particles = Array.from({ length: 20 }, (_, i) => ({
+  const particles = Array.from({ length: 25 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
@@ -303,24 +359,13 @@ export default function Hero() {
             <span className="flex items-center justify-center">
               Hello, I&apos;m Rashedul Islam
               <span
-                ref={avatarWrapRef}
-                className="group relative z-30"
-                onMouseEnter={() => setIsAvatarOpen(true)}
-                onMouseLeave={() => setIsAvatarOpen(false)}>
+                ref={avatarRef}
+                className="group relative z-30 cursor-pointer"
+                onClick={() => setIsModalOpen(true)}>
                 <motion.span
-                  role="button"
-                  tabIndex={0}
-                  aria-label="View photo gallery"
-                  onClick={() => setIsAvatarOpen((prev) => !prev)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setIsAvatarOpen((prev) => !prev);
-                    }
-                  }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="mx-2 inline-block w-16 cursor-pointer overflow-hidden rounded-3xl shadow-lg transition-shadow hover:shadow-xl md:w-20 lg:mx-3">
+                  className="mx-2 inline-block w-16 overflow-hidden rounded-3xl shadow-lg transition-shadow hover:shadow-xl md:w-20 lg:mx-3">
                   <Image
                     alt="Rashedul Islam — Full Stack Developer"
                     fetchPriority="high"
@@ -331,40 +376,15 @@ export default function Hero() {
                     src="/personal_img/rashedul-2.jpeg"
                   />
                 </motion.span>
-                <motion.svg
-                  aria-hidden="true"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{
-                    scale: isAvatarOpen ? 1 : 0,
-                    opacity: isAvatarOpen ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className="pointer-events-none absolute -bottom-1 -right-1 size-6"
-                  viewBox="0 0 36 36"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="m4.861 9.147c.94-.657 2.357-.531 3.201.166l-.968-1.407c-.779-1.111-.5-2.313.612-3.093 1.112-.777 4.263 1.312 4.263 1.312-.786-1.122-.639-2.544.483-3.331 1.122-.784 2.67-.513 3.456.611l10.42 14.72-1.328 12.875-11.083-4.042-9.667-14.333c-.793-1.129-.519-2.686.611-3.478z"
-                    fill="#ef9645"
-                  />
-                  <path
-                    d="m2.695 17.336s-1.132-1.65.519-2.781c1.649-1.131 2.78.518 2.78.518l5.251 7.658c.181-.302.379-.6.6-.894l-7.288-10.627s-1.131-1.649.519-2.78c1.649-1.131 2.78.518 2.78.518l6.855 9.997c.255-.208.516-.417.785-.622l-7.947-11.591s-1.131-1.649.519-2.78c1.649-1.131 2.78.518 2.78.518l7.947 11.589c.292-.179.581-.334.871-.498l-7.428-10.832s-1.131-1.649.518-2.78 2.78.518 2.78.518l7.854 11.454 1.194 1.742c-4.948 3.394-5.419 9.779-2.592 13.902.565.825 1.39.26 1.39.26-3.393-4.949-2.357-10.51 2.592-13.903l-1.459-7.302s-.545-1.924 1.378-2.47c1.924-.545 2.47 1.379 2.47 1.379l1.685 5.004c.668 1.984 1.379 3.961 2.32 5.831 2.657 5.28 1.07 11.842-3.94 15.279-5.465 3.747-12.936 2.354-16.684-3.11z"
-                    fill="#ffdc5d"
-                  />
-                  <g fill="#5dadec">
-                    <path d="m12 32.042c-4 0-8.042-4.042-8.042-8.042 0-.553-.405-1-.958-1s-1.042.447-1.042 1c0 6 4.042 10.042 10.042 10.042.553 0 1-.489 1-1.042s-.447-.958-1-.958z" />
-                    <path d="m7 34c-3 0-5-2-5-5 0-.553-.447-1-1-1s-1 .447-1 1c0 4 3 7 7 7 .553 0 1-.447 1-1s-.447-1-1-1zm17-32c-.552 0-1 .448-1 1s.448 1 1 1c4 0 8 3.589 8 8 0 .552.448 1 1 1s1-.448 1-1c0-5.514-4-10-10-10z" />
-                    <path d="m29 .042c-.552 0-1 .406-1 .958s.448 1.042 1 1.042c3 0 4.958 2.225 4.958 4.958 0 .552.489 1 1.042 1s.958-.448.958-1c0-3.837-2.958-6.958-6.958-6.958z" />
-                  </g>
-                </motion.svg>
 
-                <AnimatePresence>
-                  {isAvatarOpen && (
-                    <AvatarCarouselPopover
-                      isOpen={isAvatarOpen}
-                      onClose={() => setIsAvatarOpen(false)}
-                    />
-                  )}
-                </AnimatePresence>
+                {/* Click hint */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.5, duration: 0.5 }}
+                  className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-muted-foreground whitespace-nowrap bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                  Click to view gallery
+                </motion.div>
               </span>
             </span>
             <motion.span
@@ -507,6 +527,16 @@ export default function Hero() {
           </div>
         </div>
       </section>
+
+      {/* Center Modal Gallery */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <CenterGalleryModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

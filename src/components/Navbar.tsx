@@ -89,7 +89,7 @@ const dropdownVariants: Variants = {
   },
 };
 
-const mobileMenuVariants = {
+const mobileMenuVariants: Variants = {
   hidden: {
     opacity: 0,
     y: -8,
@@ -104,7 +104,7 @@ const mobileMenuVariants = {
   },
 };
 
-const iconVariants = {
+const iconVariants: Variants = {
   initial: { scale: 1, rotate: 0 },
   hover: { scale: 1.08, rotate: 3, transition: { duration: 0.2 } },
   tap: { scale: 0.95, transition: { duration: 0.1 } },
