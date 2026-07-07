@@ -3,156 +3,16 @@
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useInView, useScroll } from "framer-motion";
-import { ArrowRight, ExternalLink, ChevronRight } from "lucide-react";
+import { ExternalLink, ChevronRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
+import { projects } from "@/lib/work-data";
+import Link from "next/link";
 
 export default function Work() {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [activeIndex, setActiveIndex] = useState(0);
-
-  // Projects data
-  const projects = [
-    {
-      id: "keythm",
-      title: "Keythm",
-      subtitle: "Typing Test Reimagined",
-      description:
-        "Keychron meets typing test — every key has its own sound, every stat tracked",
-      image: "/images/image.png",
-      badge: "Q2 2026",
-      type: "Web App",
-      stats: "4,367 checks",
-      features: [
-        "Per-key mechanical audio via Web Audio API",
-        "Four modes with live WPM & accuracy tracking",
-        "Statistical anti-cheat with 13 checks",
-        "Offline-first PWA with Serwist precaching",
-      ],
-      tags: [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "Drizzle ORM",
-        "Motion.dev",
-      ],
-      links: {
-        live: "https://keythm.dev",
-        github: "https://github.com/username/keythm",
-      },
-    },
-    {
-      id: "nextdemy",
-      title: "Nextdemy",
-      subtitle: "Learning Platform",
-      description:
-        "A monorepo-powered learning platform with real payments, real auth, and real content delivery",
-      image: "/images/image_4.jpg",
-      badge: "Q4 2024",
-      type: "Web App",
-      stats: "1,200+ learners",
-      features: [
-        "Monorepo with Turborepo for scalable code",
-        "Real payment processing with Razorpay",
-        "JWT authentication with session management",
-        "Optimized content delivery & caching",
-      ],
-      tags: [
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "TanStack Query",
-        "Zustand",
-        "Shadcn UI",
-      ],
-      links: {
-        live: "https://nextdemy.dev",
-        github: "https://github.com/username/nextdemy",
-      },
-    },
-    {
-      id: "venture-den",
-      title: "VentureDen",
-      subtitle: "AI Pitch Platform",
-      description:
-        "Where founders pitch ideas, get instant AI feedback, and get discovered by investors",
-      image: "/images/image_5.jpg",
-      badge: "Q1 2025",
-      type: "Web App",
-      stats: "500+ pitches",
-      features: [
-        "AI-powered pitch analysis with instant feedback",
-        "Investor discovery & matching algorithm",
-        "Sanity CMS for content management",
-        "Real-time analytics & engagement tracking",
-      ],
-      tags: [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Sanity CMS",
-        "Tailwind CSS",
-        "Motion.dev",
-      ],
-      links: {
-        live: "https://ventureden.dev",
-        github: "https://github.com/username/ventureden",
-      },
-    },
-    {
-      id: "finote",
-      title: "Finote",
-      subtitle: "Finance Tracker",
-      description:
-        "An intuitive mobile companion for organizing your digital wallets and analyzing your financial health",
-      image: "/images/image_3.png",
-      badge: "Q4 2025",
-      type: "Mobile App",
-      stats: "10K+ downloads",
-      features: [
-        "React Native with Expo framework",
-        "Wallet organization & expense tracking",
-        "Financial health analytics with charts",
-        "Optimized media with Cloudinary",
-      ],
-      tags: [
-        "React Native",
-        "Expo",
-        "TypeScript",
-        "Firebase",
-        "Zod",
-        "Zustand",
-      ],
-      links: {
-        live: "https://finote.app",
-        github: "https://github.com/username/finote",
-      },
-    },
-    {
-      id: "star-forge",
-      title: "StarForge",
-      subtitle: "AI SaaS Landing",
-      description:
-        "A sleek AI SaaS landing page with a user-friendly design that enhances engagement.",
-      image: "/images/image_7.jpg",
-      badge: "Q1 2024",
-      type: "Web App",
-      stats: "3x conversion",
-      features: [
-        "Modern AI SaaS landing page design",
-        "Parallax scrolling & smooth animations",
-        "Optimized performance with Vercel",
-        "User-friendly Tailwind CSS interface",
-      ],
-      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
-      links: {
-        live: "https://starforge.dev",
-        github: "https://github.com/username/starforge",
-      },
-    },
-  ];
 
   // Scroll tracking
   const { scrollYProgress } = useScroll({
@@ -169,7 +29,7 @@ export default function Work() {
       setActiveIndex(index);
     });
     return () => unsubscribe();
-  }, [scrollYProgress, projects.length]);
+  }, [scrollYProgress]);
 
   // Helper to get tag icon
   const getTagIcon = (tagName: string) => {
@@ -290,13 +150,13 @@ export default function Work() {
                   </div>
                 </div>
 
-                {/* view all project  Button */}
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group relative inline-flex mt-4  cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/20 bg-black/10 py-1 pr-1 pl-4 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/40 hover:bg-black hover:opacity-100 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20 w-full">
+                {/* view all project Button */}
+                <Link
+                  href="/work"
+                  className="group relative inline-flex mt-4 cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/20 bg-black/10 py-1 pr-1 pl-4 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/40 hover:bg-black hover:opacity-100 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20 w-full block text-center"
+                >
                   <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">
-                    View all project
+                    View all projects
                   </span>
                   <span
                     aria-hidden="true"
@@ -309,7 +169,8 @@ export default function Work() {
                       viewBox="0 0 24 24"
                       width={24}
                       xmlns="http://www.w3.org/2000/svg"
-                      className="size-4.5 text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                      className="size-4.5 text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                    >
                       <path
                         d="M18.5 12L4.99997 12"
                         stroke="currentColor"
@@ -331,7 +192,8 @@ export default function Work() {
                       viewBox="0 0 24 24"
                       width={24}
                       xmlns="http://www.w3.org/2000/svg"
-                      className="absolute size-4.5 -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                      className="absolute size-4.5 -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                    >
                       <path
                         d="M18.5 12L4.99997 12"
                         stroke="currentColor"
@@ -348,7 +210,7 @@ export default function Work() {
                       />
                     </svg>
                   </span>
-                </motion.button>
+                </Link>
               </div>
             </div>
           </div>
