@@ -329,7 +329,7 @@ const TechStack = () => {
               initial={{ x: -20, opacity: 0 }}
               animate={isInView ? { x: 0, opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex w-max animate-marquee-left gap-3 hover:[animation-play-state:paused]">
+              className="flex w-max animate-marquee-left gap-3 hover:paused">
               {[...row1, ...row1].map((tech, i) => (
                 <motion.div
                   key={i}
@@ -397,14 +397,14 @@ const TechStack = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.3, delay: 0.4 }}
-              className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+              className="text-[0px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold">
               Tech Stack
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.3, delay: 0.5 }}
-              className="text-sm text-neutral-600 tracking-wide dark:text-neutral-400 group-hover:text-neutral-800 dark:group-hover:text-neutral-200 transition-colors duration-500">
+              className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
               The stack behind everything I ship
             </motion.p>
           </div>
