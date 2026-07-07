@@ -14,7 +14,7 @@ const SoundCard = () => {
   const outerAvatars = [
     { src: "/personal_img/abdullah.jpg", position: "top-left", delay: 0 },
     {
-      src: "/personal_img/ababil-vai.png",
+      src: "/personal_img/rashedul.jpeg",
       position: "bottom-left",
       delay: 75,
     },
@@ -35,11 +35,17 @@ const SoundCard = () => {
       ref={sectionRef}
       className="col-span-1 md:col-span-6 lg:col-span-7 lg:row-span-5 h-full">
       {/* Main Card */}
-      <motion.a
+      <motion.div
+        onClick={() =>
+          window.dispatchEvent(
+            new CustomEvent("open-modal", {
+              detail: { view: "contact" },
+            }),
+          )
+        }
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-        href="/contact"
         className="relative w-full h-full flex flex-col items-center justify-end pb-8 md:pb-10 overflow-hidden group cursor-pointer rounded-2xl ring-1 ring-border shadow-sm transition-all hover:ring-indigo-500/30 min-h-72 bg-background"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}>
@@ -61,7 +67,7 @@ const SoundCard = () => {
             whileHover={{ scale: 1.05 }}
             className="absolute z-20 w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-background overflow-hidden ring-2 ring-transparent transition-all duration-700 group-hover:ring-indigo-500/50 shadow-xl shadow-indigo-500/20">
             <Image
-              src="/personal_img/rashedul-2.jpeg"
+              src="/personal_img/ababil-vai.png"
               alt="Rashedul Islam"
               width={150}
               height={150}
@@ -150,7 +156,7 @@ const SoundCard = () => {
 
         {/* Click hint overlay */}
         <div className="absolute inset-0 z-5 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 rounded-2xl" />
-      </motion.a>
+      </motion.div>
     </div>
   );
 };

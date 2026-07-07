@@ -41,7 +41,7 @@ const TextTooltip = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 rounded-xl bg-card border border-border shadow-xl z-50 pointer-events-none flex flex-col gap-2">
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-xl bg-card border border-border shadow-xl z-50 pointer-events-none flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <div className="p-1.5 rounded-md bg-accent/50 text-primary">
                 <Icon className="w-4 h-4" />
@@ -67,8 +67,8 @@ export default function AboutSection() {
   const stats = [
     { label: "Projects", value: "5+" },
     { label: "Clients", value: "4+" },
-    { label: "Experience", value: "2+ Years" },
-    { label: "Countries", value: "10+" },
+    { label: "Experience", value: "2+ Yrs" },
+    { label: "Countries", value: "1" },
   ];
 
   return (
@@ -76,7 +76,12 @@ export default function AboutSection() {
       ref={sectionRef}
       className="relative w-full py-16 md:py-24 overflow-hidden bg-background"
       id="about">
-      <div className="max-w-6xl mx-auto px-4">
+      {/* --- Premium Grid Background --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_80%_60%_at_50%_0%,#000_40%,transparent_100%)]" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -102,18 +107,18 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="w-full max-w-md lg:w-[45%] relative">
             {/* The Outer Frame Layer */}
-            <div className="relative p-2 rounded-3xl bg-card border border-border/50 shadow-2xl">
+            <div className="relative p-2.5 rounded-3xl bg-card border border-border/60 shadow-2xl">
               {/* Image Container */}
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-muted">
+              <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-muted">
                 <Image
-                  src="/personal_img/rashedul-2.jpeg"
+                  src="/personal_img/rashedul-about.jpeg"
                   alt="Rashedul Islam - Full Stack Developer"
                   fill
                   className="object-cover transition-transform duration-700 hover:scale-105"
                   priority
                 />
                 {/* Subtle Inner Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               </div>
 
               {/* Floating Badge - Experience */}
@@ -121,7 +126,7 @@ export default function AboutSection() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.4, type: "spring" }}
-                className="absolute -bottom-6 -right-6 lg:-right-10 bg-card rounded-2xl shadow-xl border border-border p-4 flex items-center gap-4">
+                className="absolute -bottom-6 -right-6 lg:-right-8 bg-card rounded-2xl shadow-xl border border-border p-4 flex items-center gap-4 hover:-translate-y-1 transition-transform">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                   <Code className="w-6 h-6 text-primary" />
                 </div>
@@ -135,7 +140,7 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* Right - Content & Bio */}
+          {/* Right - Content & Bio (Simplified English) */}
           <div className="w-full lg:w-[55%] space-y-8 mt-8 lg:mt-0">
             {/* Title */}
             <motion.div
@@ -154,49 +159,47 @@ export default function AboutSection() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="space-y-5 text-muted-foreground text-base leading-relaxed">
               <p>
-                I am a proactive developer passionate about creating dynamic,
-                end-to-end web experiences. From crafting pixel-perfect
-                interfaces with{" "}
+                I am a passionate web developer who loves building user-friendly
+                and fast web applications. From designing clean interfaces with{" "}
                 <TextTooltip
                   title="Frontend Engineering"
-                  description="Building responsive, accessible UIs using Tailwind CSS and shadcn/ui."
+                  description="Building responsive UIs using Tailwind CSS and React."
                   icon={MonitorSmartphone}>
                   modern UI tools
                 </TextTooltip>{" "}
-                to architecting robust scalable backends, I thrive on solving
-                complex problems with clean, efficient code.
+                to developing secure backends, I enjoy writing clean code to
+                solve real-world problems.
               </p>
 
               <p>
-                My core expertise lies in the{" "}
+                My main skills include the{" "}
                 <TextTooltip
                   title="MERN Stack"
-                  description="MongoDB, Express.js, React, and Node.js for building full-stack applications."
+                  description="MongoDB, Express.js, React, and Node.js for building web apps."
                   icon={Layers}>
                   MERN Stack
                 </TextTooltip>{" "}
                 and{" "}
                 <TextTooltip
                   title="Next.js"
-                  description="The React framework for production-grade, SEO-friendly applications."
+                  description="The React framework for fast, SEO-friendly websites."
                   icon={Server}>
                   Next.js
                 </TextTooltip>
-                , strictly utilizing TypeScript for type safety. While advancing
-                my academic journey, I am actively expanding my horizons into{" "}
+                , always using TypeScript to keep my code safe and bug-free.
+                Alongside my studies, I am also learning{" "}
                 <TextTooltip
                   title="DevOps"
-                  description="Streamlining deployments using Docker, Nginx, Linux, and Cloud Infrastructure."
+                  description="Using Docker, Linux, and Cloud to manage and deploy apps smoothly."
                   icon={Terminal}>
                   DevOps engineering
                 </TextTooltip>{" "}
-                to ensure the applications I build not only look good but deploy
-                flawlessly.
+                so I can deploy and manage my applications properly.
               </p>
 
               <p className="text-foreground font-medium border-l-2 border-primary pl-4 py-1">
-                I believe in waking up each day eager to learn, build, and make
-                a meaningful difference through technology.
+                I wake up every day excited to learn new things, build great
+                products, and grow as a developer.
               </p>
             </motion.div>
 
@@ -209,7 +212,7 @@ export default function AboutSection() {
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center justify-center p-4 rounded-2xl bg-accent/30 border border-border/50 hover:bg-accent/50 transition-colors">
+                  className="flex flex-col items-center justify-center p-4 rounded-2xl bg-accent/30 border border-border/40 hover:bg-accent/50 transition-colors">
                   <p className="text-2xl font-bold text-foreground mb-1">
                     {stat.value}
                   </p>
@@ -221,18 +224,71 @@ export default function AboutSection() {
             </motion.div>
 
             {/* CTA Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="pt-2">
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-all hover:gap-3 shadow-sm">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() =>
+                window.dispatchEvent(
+                  new CustomEvent("open-modal", {
+                    detail: { view: "contact" },
+                  }),
+                )
+              }
+              className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/20 bg-black/10 py-1 pr-1 pl-4 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/40 hover:bg-black hover:opacity-100 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20">
+              <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">
                 Let&apos;s Connect
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </motion.div>
+              </span>
+              <span
+                aria-hidden="true"
+                className="absolute inset-y-1 right-1 w-10 rounded-full bg-black transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)] dark:bg-white"
+              />
+              <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-black p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent dark:bg-white">
+                <svg
+                  fill="none"
+                  height={24}
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-4.5 text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                  <path
+                    d="M18.5 12L4.99997 12"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+                <svg
+                  fill="none"
+                  height={24}
+                  viewBox="0 0 24 24"
+                  width={24}
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="absolute size-4.5 -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                  <path
+                    d="M18.5 12L4.99997 12"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+              </span>
+            </motion.button>
           </div>
         </div>
       </div>

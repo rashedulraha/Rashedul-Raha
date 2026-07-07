@@ -105,7 +105,7 @@ const Usesd = () => {
         </div>
 
         {/* Hover gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-gradient-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
+        <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
 
         {/* Arrow Button */}
         <motion.div

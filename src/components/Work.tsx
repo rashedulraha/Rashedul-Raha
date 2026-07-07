@@ -200,7 +200,7 @@ export default function Work() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-16 md:py-24 bg-background"
+      className="relative w-full py-8 md:py-16 bg-background"
       id="work">
       {/* Header */}
       <motion.div
@@ -230,57 +230,64 @@ export default function Work() {
           {/* Left - Sticky Image Container */}
           <div className="w-full lg:w-[45%]">
             {/* The flex and items-center here ensure exact vertical middle alignment */}
-            <div className="lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center pb-8 lg:pb-0">
-              <div className="relative w-full h-[50vh] lg:h-[60vh] rounded-2xl overflow-hidden shadow-2xl border border-border/50 bg-card">
-                {projects.map((project, index) => (
-                  <motion.div
-                    key={project.id}
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: activeIndex === index ? 1 : 0,
-                      scale: activeIndex === index ? 1 : 1.05,
-                    }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="absolute inset-0">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 45vw"
-                      priority={index === 0}
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
-                  </motion.div>
-                ))}
-                {/* Overlay Details */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-white/70 text-xs font-semibold uppercase tracking-wider">
-                        {projects[activeIndex]?.type}
-                      </span>
-                      <p className="text-white font-medium text-base mt-1">
-                        {projects[activeIndex]?.stats}
-                      </p>
-                    </div>
-                    <span className="px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-medium border border-white/20">
-                      {projects[activeIndex]?.badge}
-                    </span>
-                  </div>
-                </div>
-                {/* Progress indicators */}
-                <div className="absolute top-6 right-6 flex flex-col gap-2">
-                  {projects.map((_, index) => (
-                    <div
-                      key={index}
-                      className={`w-1.5 rounded-full transition-all duration-500 ${
-                        activeIndex === index
-                          ? "h-8 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-                          : "h-2 bg-white/40 hover:bg-white/60"
-                      }`}
-                    />
+            <div className="lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center pb-8 lg:pb-0 z-10">
+              {/* The Outer Premium Frame Layer */}
+              <div className="relative w-full max-w-xl mx-auto p-2.5 md:p-3 rounded-[2rem] bg-card border border-border/60 shadow-2xl transition-all duration-700 hover:shadow-primary/5">
+                {/* Inner Image Container */}
+                <div className="relative w-full h-[50vh] lg:h-[60vh] rounded-[1.5rem] overflow-hidden bg-muted">
+                  {projects.map((project, index) => (
+                    <motion.div
+                      key={project.id}
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: activeIndex === index ? 1 : 0,
+                        scale: activeIndex === index ? 1 : 1.05,
+                      }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="absolute inset-0">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 45vw"
+                        priority={index === 0}
+                      />
+                      {/* Smooth Premium Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    </motion.div>
                   ))}
+
+                  {/* Overlay Details with Liquid Glass Effect */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="text-white/70 text-[10px] md:text-xs font-bold uppercase tracking-widest drop-shadow-md">
+                          {projects[activeIndex]?.type}
+                        </span>
+                        <p className="text-white font-semibold text-sm md:text-base mt-1 drop-shadow-md">
+                          {projects[activeIndex]?.stats}
+                        </p>
+                      </div>
+                      <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white/90 text-xs font-semibold tracking-wide border border-white/20 shadow-lg">
+                        {projects[activeIndex]?.badge}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Progress Indicators (Premium Pill Design) */}
+                  <div className="absolute top-6 right-6 flex flex-col gap-2 p-2.5 rounded-full bg-black/20 backdrop-blur-md border border-white/10 shadow-lg">
+                    {projects.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`w-1.5 rounded-full transition-all duration-500 ease-out ${
+                          activeIndex === index
+                            ? "h-6 bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]"
+                            : "h-1.5 bg-white/40 hover:bg-white/60"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

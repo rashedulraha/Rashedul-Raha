@@ -16,7 +16,6 @@ import {
   Download,
 } from "lucide-react";
 
-// --- DUMMY IMAGES — Location & Date added ---
 const avatarSlides = [
   {
     src: "/personal_img/protfolio.jpeg",
@@ -145,7 +144,7 @@ function CenterGalleryModal({
         }`}
         onClick={(e) => e.stopPropagation()}>
         {/* Top Controls Bar */}
-        <div className="absolute top-0 left-0 right-0 z-30 flex justify-between items-center p-3 sm:p-4 bg-gradient-to-b from-black/70 to-transparent">
+        <div className="absolute top-0 left-0 right-0 z-30 flex justify-between items-center p-3 sm:p-4 bg-linear-to-b from-black/70 to-transparent">
           {/* Image Counter */}
           <div className="bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full text-white/90 text-xs font-medium border border-white/10">
             {currentIndex + 1} / {avatarSlides.length}
@@ -183,7 +182,7 @@ function CenterGalleryModal({
 
         {/* Main Image Area (Draggable) */}
         <div
-          className={`relative w-full overflow-hidden bg-black ${isFullscreen ? "flex-1" : "aspect-[16/10]"}`}>
+          className={`relative w-full overflow-hidden bg-black ${isFullscreen ? "flex-1" : "aspect-16/10"}`}>
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.div
               key={currentIndex}
@@ -235,7 +234,7 @@ function CenterGalleryModal({
               />
 
               {/* Overlay Gradient for Text readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/0 to-black/0 pointer-events-none" />
 
               {/* Location and Date Badge */}
               <div className="absolute bottom-4 left-4 right-12 z-20 flex flex-wrap gap-2 pointer-events-none">
@@ -522,7 +521,7 @@ export default function Hero() {
                   viewBox="0 0 24 24"
                   width={24}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="size-[18px] text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                  className="size-4.5 text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
                   <path
                     d="M18.5 12L4.99997 12"
                     stroke="currentColor"

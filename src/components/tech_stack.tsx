@@ -158,7 +158,7 @@ function TechModal({
             {/* Header */}
             <div className="p-6 border-b border-white/5">
               <h2 className="text-2xl font-semibold text-foreground flex items-center gap-3">
-                <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
                   My Tech Stack
                 </span>
                 <span className="text-sm font-normal text-muted-foreground">
@@ -189,7 +189,7 @@ function TechModal({
                     <div
                       key={tool.name}
                       className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
                       <span className="text-foreground/80">{tool.name}</span>
                       <span className="text-muted-foreground/60 text-[10px]">
                         — {tool.desc}
@@ -219,7 +219,7 @@ function TechModal({
                     <div
                       key={tool.name}
                       className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
                       <span className="text-foreground/80">{tool.name}</span>
                       <span className="text-muted-foreground/60 text-[10px]">
                         — {tool.desc}
@@ -249,7 +249,7 @@ function TechModal({
                     <div
                       key={tool.name}
                       className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
                       <span className="text-foreground/80">{tool.name}</span>
                       <span className="text-muted-foreground/60 text-[10px]">
                         — {tool.desc}
@@ -279,7 +279,7 @@ function TechModal({
                     <div
                       key={tool.name}
                       className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
                       <span className="text-foreground/80">{tool.name}</span>
                       <span className="text-muted-foreground/60 text-[10px]">
                         — {tool.desc}
@@ -351,7 +351,7 @@ const TechStack = () => {
               initial={{ x: 20, opacity: 0 }}
               animate={isInView ? { x: 0, opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex w-max animate-marquee-right gap-3 hover:[animation-play-state:paused]">
+              className="flex w-max animate-marquee-right gap-3 hover:paused">
               {[...row2, ...row2].map((tech, i) => (
                 <motion.div
                   key={i}
@@ -373,7 +373,7 @@ const TechStack = () => {
               initial={{ x: -20, opacity: 0 }}
               animate={isInView ? { x: 0, opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex w-max animate-marquee-left gap-3 hover:[animation-play-state:paused]">
+              className="flex w-max animate-marquee-left gap-3 hover:paused">
               {[...row3, ...row3].map((tech, i) => (
                 <motion.div
                   key={i}
@@ -437,7 +437,7 @@ const TechStack = () => {
           </div>
 
           {/* Hover gradient overlay */}
-          <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-gradient-to-br from-transparent via-transparent to-indigo-500/5 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
+          <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-500/5 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
         </motion.div>
       </div>
 

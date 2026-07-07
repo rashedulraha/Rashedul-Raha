@@ -227,7 +227,7 @@ export default function ServicesBox() {
                           duration: 0.5,
                           ease: [0.34, 1.56, 0.64, 1],
                         }}
-                        className="absolute flex items-center gap-1.5 rounded-md border border-white/[0.06] bg-white/[0.05] px-2 py-1"
+                        className="absolute flex items-center gap-1.5 rounded-md border border-white/6 bg-white/5 px-2 py-1"
                         style={{
                           left: pos.left,
                           bottom: pos.bottom,

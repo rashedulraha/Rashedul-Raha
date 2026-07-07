@@ -277,7 +277,7 @@ export default function Navbar() {
             onMouseLeave={scheduleCloseDropdown}
             className="relative flex flex-col bg-background/80 shadow-[0_8px_30px_rgb(0,0,0,0.25)] border border-white/10 backdrop-blur-xl overflow-hidden">
             {/* Top Row - Always Visible with fixed height */}
-            <div className="flex items-center gap-1 p-1.5 min-h-[48px]">
+            <div className="flex items-center gap-1 p-1.5 min-h-12">
               {/* GREETING - Only shows on reload */}
               <AnimatePresence mode="wait">
                 {showGreeting && (
@@ -292,7 +292,7 @@ export default function Navbar() {
                     }}
                     className="flex items-center justify-center w-full px-4 py-1">
                     <span className="text-primary text-lg mr-2">✨</span>
-                    <span className="text-base font-semibold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                    <span className="text-base font-semibold bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                       {greeting}
                     </span>
                     <span className="text-sm text-muted-foreground ml-2">
