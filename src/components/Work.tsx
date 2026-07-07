@@ -213,7 +213,7 @@ export default function Work() {
         </p>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
           Featured{" "}
-          <span className="bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-primary to-purple-500 bg-clip-text text-transparent">
             Projects
           </span>
         </h2>
@@ -250,10 +250,9 @@ export default function Work() {
                       sizes="(max-width: 1024px) 100vw, 45vw"
                       priority={index === 0}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                   </motion.div>
                 ))}
-
                 {/* Overlay Details */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="flex items-center justify-between">
@@ -270,7 +269,6 @@ export default function Work() {
                     </span>
                   </div>
                 </div>
-
                 {/* Progress indicators */}
                 <div className="absolute top-6 right-6 flex flex-col gap-2">
                   {projects.map((_, index) => (
@@ -306,7 +304,7 @@ export default function Work() {
                     <span className="text-3xl font-bold text-muted-foreground/30 font-mono">
                       {(index + 1).toString().padStart(2, "0")}
                     </span>
-                    <div className="h-[2px] flex-1 bg-border" />
+                    <div className="h-0.5 flex-1 bg-border" />
                   </div>
 
                   {/* Title */}
@@ -328,7 +326,7 @@ export default function Work() {
                       <div
                         key={idx}
                         className="flex items-start gap-3 text-sm text-foreground/80">
-                        <ChevronRight className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                        <ChevronRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                         <span>{feature}</span>
                       </div>
                     ))}
@@ -398,7 +396,7 @@ export default function Work() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="flex justify-center mt-16 lg:mt-0 relative z-10">
+        className="flex justify-center mt-6 md:mt-10  relative z-10">
         <a
           href="/projects"
           className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-card border border-border text-foreground text-sm font-semibold hover:bg-accent hover:text-accent-foreground transition-all shadow-sm">

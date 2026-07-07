@@ -12,19 +12,19 @@ const SoundCard = () => {
 
   // Outer avatars data
   const outerAvatars = [
-    { src: "/personal_img/protfolio.jpeg", position: "top-left", delay: 0 },
+    { src: "/personal_img/abdullah.jpg", position: "top-left", delay: 0 },
     {
-      src: "/personal_img/rashedul-2.jpeg",
+      src: "/personal_img/ababil-vai.png",
       position: "bottom-left",
       delay: 75,
     },
     {
-      src: "/personal_img/rashedul.jpeg",
+      src: "/personal_img/romman.jpg",
       position: "top-right",
       delay: 150,
     },
     {
-      src: "/personal_img/rashedul-2.jpeg",
+      src: "/personal_img/sojib-vai.webp",
       position: "bottom-right",
       delay: 200,
     },

@@ -4,37 +4,61 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
-import { X, ChevronLeft, ChevronRight, Grid3x3, Maximize2 } from "lucide-react";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Grid3x3,
+  Maximize2,
+  Minimize2,
+  MapPin,
+  Calendar,
+  Download,
+} from "lucide-react";
 
-// --- DUMMY IMAGES — replace these src values with your own real photos ---
+// --- DUMMY IMAGES — Location & Date added ---
 const avatarSlides = [
   {
     src: "/personal_img/protfolio.jpeg",
     alt: "Portfolio Photo",
     title: "Workspace",
-    description: "My creative workspace setup",
+    description: "My creative workspace setup where the magic happens.",
+    location: "Dhaka, BD",
+    date: "Oct 2025",
   },
   {
     src: "/personal_img/rashedul-2.jpeg",
     alt: "Rashedul Photo 2",
     title: "Portrait",
-    description: "Professional headshot",
+    description: "Professional headshot for the portfolio.",
+    location: "Studio 101",
+    date: "Nov 2025",
   },
   {
     src: "/personal_img/rashedul.jpeg",
     alt: "Rashedul Photo 1",
     title: "Creative",
-    description: "Creative session in action",
+    description: "Brainstorming and creative session in action.",
+    location: "Paharpur, BD",
+    date: "Dec 2025",
   },
   {
     src: "/personal_img/rashedul-2.jpeg",
     alt: "Rashedul Photo 4",
-    title: "Studio",
-    description: "Studio vibes",
+    title: "Vibes",
+    description: "Late night coding and studio vibes.",
+    location: "Home Workspace",
+    date: "Jan 2026",
   },
 ];
 
-// --- Premium Compact Gallery Modal ---
+// --- Swipe Configuration ---
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};
+
+// --- Advanced Premium Gallery Modal ---
 function CenterGalleryModal({
   isOpen,
   onClose,
@@ -67,14 +91,17 @@ function CenterGalleryModal({
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        if (isFullscreen) setIsFullscreen(false);
+        else onClose();
+      }
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
       if (e.key === "f") setIsFullscreen((prev) => !prev);
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, currentIndex, onClose, next, prev]);
+  }, [isOpen, isFullscreen, onClose, next, prev]);
 
   // Prevent body scroll
   useEffect(() => {
@@ -88,137 +115,199 @@ function CenterGalleryModal({
     };
   }, [isOpen]);
 
-  // Reset to first image when opened
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (isOpen) setCurrentIndex(0);
-  }, [isOpen]);
-
   if (!isOpen) return null;
+
+  const currentSlide = avatarSlides[currentIndex];
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-100 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className={`fixed inset-0 z-100 flex items-center justify-center bg-black/80 backdrop-blur-md ${
+        isFullscreen ? "p-0" : "p-4 md:p-6"
+      }`}
       onClick={onClose}>
       <motion.div
         ref={modalRef}
-        initial={{ scale: 0.92, opacity: 0, y: 20 }}
+        initial={{ scale: 0.95, opacity: 0, y: 10 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.92, opacity: 0, y: 20 }}
+        exit={{ scale: 0.95, opacity: 0, y: 10 }}
         transition={{
-          duration: 0.3,
-          ease: [0.4, 0, 0.2, 1],
-          type: "spring",
-          stiffness: 350,
-          damping: 28,
+          duration: 0.4,
+          ease: [0.25, 0.1, 0.25, 1],
         }}
-        className={`relative w-full max-w-3xl bg-background/98 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden transition-all duration-300 ${
-          isFullscreen ? "max-w-6xl" : "max-w-3xl"
+        className={`relative bg-background shadow-2xl overflow-hidden transition-all duration-500 flex flex-col ${
+          isFullscreen
+            ? "w-screen h-screen rounded-none border-0"
+            : "w-full max-w-2xl max-h-[90vh] rounded-2xl border border-white/10"
         }`}
         onClick={(e) => e.stopPropagation()}>
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 z-20 p-1.5 rounded-full bg-black/40 hover:bg-black/60 transition-all text-white/70 hover:text-white hover:scale-105">
-          <X className="w-4 h-4" />
-        </button>
+        {/* Top Controls Bar */}
+        <div className="absolute top-0 left-0 right-0 z-30 flex justify-between items-center p-3 sm:p-4 bg-gradient-to-b from-black/70 to-transparent">
+          {/* Image Counter */}
+          <div className="bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full text-white/90 text-xs font-medium border border-white/10">
+            {currentIndex + 1} / {avatarSlides.length}
+          </div>
 
-        {/* Fullscreen toggle */}
-        <button
-          onClick={() => setIsFullscreen(!isFullscreen)}
-          className="absolute top-3 right-12 z-20 p-1.5 rounded-full bg-black/40 hover:bg-black/60 transition-all text-white/70 hover:text-white hover:scale-105">
-          <Maximize2 className="w-4 h-4" />
-        </button>
+          <div className="flex items-center gap-2">
+            {/* Download Button */}
+            <a
+              href={currentSlide.src}
+              download
+              className="p-2 rounded-full bg-black/50 backdrop-blur-md hover:bg-white/20 transition-all text-white/80 hover:text-white border border-white/10"
+              title="Download Image">
+              <Download className="w-4 h-4" />
+            </a>
 
-        {/* Main Image Area - Smaller */}
+            {/* Fullscreen Toggle */}
+            <button
+              onClick={() => setIsFullscreen(!isFullscreen)}
+              className="p-2 rounded-full bg-black/50 backdrop-blur-md hover:bg-white/20 transition-all text-white/80 hover:text-white border border-white/10">
+              {isFullscreen ? (
+                <Minimize2 className="w-4 h-4" />
+              ) : (
+                <Maximize2 className="w-4 h-4" />
+              )}
+            </button>
+
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full bg-red-500/80 backdrop-blur-md hover:bg-red-500 transition-all text-white border border-red-400/50 ml-1">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Main Image Area (Draggable) */}
         <div
-          className={`relative w-full ${isFullscreen ? "aspect-[16/9]" : "aspect-[4/3]"} bg-black/20`}>
-          <AnimatePresence initial={false} mode="wait">
+          className={`relative w-full overflow-hidden bg-black ${isFullscreen ? "flex-1" : "aspect-[16/10]"}`}>
+          <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.div
               key={currentIndex}
-              initial={{
-                opacity: 0,
-                x: direction > 0 ? 40 : -40,
-                scale: 0.95,
+              custom={direction}
+              variants={{
+                enter: (dir: number) => ({
+                  x: dir > 0 ? "100%" : "-100%",
+                  opacity: 0,
+                  scale: 0.9,
+                }),
+                center: {
+                  x: 0,
+                  opacity: 1,
+                  scale: 1,
+                },
+                exit: (dir: number) => ({
+                  x: dir < 0 ? "100%" : "-100%",
+                  opacity: 0,
+                  scale: 0.9,
+                }),
               }}
-              animate={{
-                opacity: 1,
-                x: 0,
-                scale: 1,
-              }}
-              exit={{
-                opacity: 0,
-                x: direction > 0 ? -40 : 40,
-                scale: 0.95,
-              }}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{
-                duration: 0.25,
-                ease: [0.4, 0, 0.2, 1],
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.2 },
+                scale: { duration: 0.4 },
               }}
-              className="absolute inset-0">
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={1}
+              onDragEnd={(e, { offset, velocity }) => {
+                const swipe = swipePower(offset.x, velocity.x);
+                if (swipe < -swipeConfidenceThreshold) next();
+                else if (swipe > swipeConfidenceThreshold) prev();
+              }}
+              className="absolute inset-0 cursor-grab active:cursor-grabbing group">
               <Image
-                src={avatarSlides[currentIndex].src}
-                alt={avatarSlides[currentIndex].alt}
+                src={currentSlide.src}
+                alt={currentSlide.alt}
                 fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
+                sizes={
+                  isFullscreen ? "100vw" : "(max-width: 1024px) 100vw, 800px"
+                }
                 priority
+                draggable={false}
               />
-              {/* Gradient overlay for text readability */}
-              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+              {/* Overlay Gradient for Text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-black/0 pointer-events-none" />
+
+              {/* Location and Date Badge */}
+              <div className="absolute bottom-4 left-4 right-12 z-20 flex flex-wrap gap-2 pointer-events-none">
+                {currentSlide.location && (
+                  <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-md text-white/90 text-xs border border-white/10">
+                    <MapPin className="w-3 h-3 text-indigo-400" />
+                    {currentSlide.location}
+                  </div>
+                )}
+                {currentSlide.date && (
+                  <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-md text-white/90 text-xs border border-white/10">
+                    <Calendar className="w-3 h-3 text-emerald-400" />
+                    {currentSlide.date}
+                  </div>
+                )}
+              </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Arrows - Smaller */}
+          {/* Navigation Arrows (Middle) */}
           <button
             onClick={(e) => {
               e.stopPropagation();
               prev();
             }}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/40 hover:bg-black/60 transition-all text-white/70 hover:text-white hover:scale-105">
-            <ChevronLeft className="w-5 h-5" />
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/20 hover:bg-black/60 backdrop-blur-sm transition-all text-white/70 hover:text-white hover:scale-110 border border-transparent hover:border-white/20">
+            <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={(e) => {
               e.stopPropagation();
               next();
             }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/40 hover:bg-black/60 transition-all text-white/70 hover:text-white hover:scale-105">
-            <ChevronRight className="w-5 h-5" />
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/20 hover:bg-black/60 backdrop-blur-sm transition-all text-white/70 hover:text-white hover:scale-110 border border-transparent hover:border-white/20">
+            <ChevronRight className="w-6 h-6" />
           </button>
-
-          {/* Image Counter - Smaller */}
-          <div className="absolute bottom-3 left-3 z-10 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full text-white/80 text-[10px] font-medium">
-            {currentIndex + 1} / {avatarSlides.length}
-          </div>
-
-          {/* Image Title - Smaller */}
-          <div className="absolute bottom-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full text-white/80 text-[10px] font-medium">
-            {avatarSlides[currentIndex].title}
-          </div>
         </div>
 
-        {/* Bottom Section - More Compact */}
-        <div className="p-3 bg-background/90">
-          {/* Thumbnail Strip - Smaller */}
-          <div className="flex gap-1.5 overflow-x-auto pb-1.5 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent justify-center">
+        {/* Bottom Details Section */}
+        <div className="p-4 sm:p-5 bg-card border-t border-border flex flex-col gap-4">
+          {/* Title & Description */}
+          <div>
+            <motion.h3
+              key={`title-${currentIndex}`}
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-lg font-semibold text-foreground">
+              {currentSlide.title}
+            </motion.h3>
+            <motion.p
+              key={`desc-${currentIndex}`}
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 }}
+              className="mt-1 text-sm text-muted-foreground leading-relaxed">
+              {currentSlide.description}
+            </motion.p>
+          </div>
+
+          {/* Thumbnail Strip */}
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
             {avatarSlides.map((img, idx) => (
-              <motion.button
+              <button
                 key={idx}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
                   e.stopPropagation();
                   goTo(idx);
                 }}
-                className={`relative flex-shrink-0 w-14 h-10 rounded-lg overflow-hidden transition-all duration-200 ${
+                className={`relative shrink-0 w-16 h-12 rounded-lg overflow-hidden transition-all duration-300 ${
                   idx === currentIndex
-                    ? "ring-2 ring-white/80 scale-105"
-                    : "ring-1 ring-white/10 hover:ring-white/30"
+                    ? "ring-2 ring-primary scale-105 shadow-md"
+                    : "ring-1 ring-border opacity-50 hover:opacity-100 hover:scale-105"
                 }`}>
                 <Image
                   src={img.src}
@@ -226,42 +315,8 @@ function CenterGalleryModal({
                   fill
                   className="object-cover"
                 />
-                {idx === currentIndex && (
-                  <div className="absolute inset-0 bg-white/5" />
-                )}
-              </motion.button>
+              </button>
             ))}
-          </div>
-
-          {/* Image Description - Smaller */}
-          <motion.p
-            key={currentIndex}
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.15 }}
-            className="mt-1 text-center text-[11px] text-muted-foreground font-light">
-            {avatarSlides[currentIndex].description}
-          </motion.p>
-
-          {/* Bottom keyboard hint */}
-          <div className="mt-1.5 flex items-center justify-center gap-2 text-[9px] text-muted-foreground/40">
-            <span className="flex items-center gap-1">
-              <kbd className="px-1 py-0.5 bg-white/5 rounded text-[8px]">←</kbd>
-              <kbd className="px-1 py-0.5 bg-white/5 rounded text-[8px]">→</kbd>
-              <span>Navigate</span>
-            </span>
-            <span className="w-px h-3 bg-white/5" />
-            <span className="flex items-center gap-1">
-              <kbd className="px-1 py-0.5 bg-white/5 rounded text-[8px]">F</kbd>
-              <span>Fullscreen</span>
-            </span>
-            <span className="w-px h-3 bg-white/5" />
-            <span className="flex items-center gap-1">
-              <kbd className="px-1 py-0.5 bg-white/5 rounded text-[8px]">
-                ESC
-              </kbd>
-              <span>Close</span>
-            </span>
           </div>
         </div>
       </motion.div>
@@ -328,7 +383,7 @@ export default function Hero() {
         />
 
         <div className="container relative z-20 mx-auto mb-8 flex w-full flex-col items-center justify-center gap-y-4 md:mb-14 md:gap-y-6">
-          {/* New badge - improved */}
+          {/* New badge */}
           <motion.a
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -401,7 +456,7 @@ export default function Hero() {
                 <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="mx-2 inline-block w-14 overflow-hidden rounded-full shadow-lg shadow-indigo-500/20 transition-shadow hover:shadow-xl hover:shadow-indigo-500/30 md:w-18 lg:mx-3 ring-2 ring-white/20 hover:ring-indigo-400/50 transition-all duration-300">
+                  className="mx-2 inline-block w-14 overflow-hidden rounded shadow-lg shadow-indigo-500/20 transition-shadow hover:shadow-xl hover:shadow-indigo-500/30 md:w-18 lg:mx-3 ring-2 ring-white/20 hover:ring-indigo-400/50 duration-300">
                   <Image
                     alt="Rashedul Islam — Full Stack Developer"
                     fetchPriority="high"
@@ -413,7 +468,7 @@ export default function Hero() {
                   />
                 </motion.span>
 
-                {/* Click hint - More subtle */}
+                {/* Click hint */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -489,7 +544,7 @@ export default function Hero() {
                   viewBox="0 0 24 24"
                   width={24}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="absolute size-[18px] -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                  className="absolute size-4.5 -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
                   <path
                     d="M18.5 12L4.99997 12"
                     stroke="currentColor"
@@ -567,7 +622,7 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* Center Modal Gallery - Compact & Premium */}
+      {/* Center Modal Gallery - Advanced & Interactive */}
       <AnimatePresence>
         {isModalOpen && (
           <CenterGalleryModal
