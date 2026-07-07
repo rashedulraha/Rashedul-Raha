@@ -3,6 +3,7 @@
 import SoundCard from "./SoundCard";
 import TechStack from "./tech_stack";
 import Usesd from "./Usesd";
+import Work from "./Work";
 
 export default function Features() {
   return (
