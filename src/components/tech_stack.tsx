@@ -146,7 +146,7 @@ function TechModal({
               stiffness: 300,
               damping: 25,
             }}
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-background/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl"
+            className="relative w-full max-w-4xl min-h-72 max-h-[90vh] overflow-y-auto bg-background/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl"
             onClick={(e) => e.stopPropagation()}>
             {/* Close Button */}
             <button
