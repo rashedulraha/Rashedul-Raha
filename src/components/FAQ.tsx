@@ -32,7 +32,7 @@ export default function FAQ() {
         { src: "/images/image_11.jpg", alt: "Arc", delay: 100 },
         { src: "/images/image_3.jpg", alt: "Linear", delay: 200 },
       ],
-      icon: "🛠️",
+      icon: "",
     },
     {
       id: "about",
@@ -40,14 +40,12 @@ export default function FAQ() {
       description: "Journey, skills & experience",
       href: "/about",
       image: "/images/image_8.jpg",
-      icon: "👨‍💻",
     },
     {
       id: "guestbook",
       title: "Guestbook",
       description: "Let me know you were here",
       href: "/guestbook",
-      icon: "📝",
     },
   ];
 

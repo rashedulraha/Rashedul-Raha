@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/purity */
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Grid3x3, Maximize2 } from "lucide-react";
 
 // --- DUMMY IMAGES — replace these src values with your own real photos ---
 const avatarSlides = [
@@ -34,7 +34,7 @@ const avatarSlides = [
   },
 ];
 
-// --- Center Modal Gallery ---
+// --- Premium Compact Gallery Modal ---
 function CenterGalleryModal({
   isOpen,
   onClose,
@@ -44,6 +44,7 @@ function CenterGalleryModal({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
   const goTo = (index: number) => {
@@ -51,16 +52,16 @@ function CenterGalleryModal({
     setCurrentIndex(index);
   };
 
-  const next = () => {
+  const next = useCallback(() => {
     const nextIndex = (currentIndex + 1) % avatarSlides.length;
     goTo(nextIndex);
-  };
+  }, [currentIndex]);
 
-  const prev = () => {
+  const prev = useCallback(() => {
     const prevIndex =
       (currentIndex - 1 + avatarSlides.length) % avatarSlides.length;
     goTo(prevIndex);
-  };
+  }, [currentIndex]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -69,10 +70,11 @@ function CenterGalleryModal({
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
+      if (e.key === "f") setIsFullscreen((prev) => !prev);
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, currentIndex]);
+  }, [isOpen, currentIndex, onClose, next, prev]);
 
   // Prevent body scroll
   useEffect(() => {
@@ -99,38 +101,48 @@ function CenterGalleryModal({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-md p-4"
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-100 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
       onClick={onClose}>
       <motion.div
         ref={modalRef}
-        initial={{ scale: 0.9, opacity: 0, y: 30 }}
+        initial={{ scale: 0.92, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 30 }}
+        exit={{ scale: 0.92, opacity: 0, y: 20 }}
         transition={{
-          duration: 0.35,
+          duration: 0.3,
           ease: [0.4, 0, 0.2, 1],
           type: "spring",
           stiffness: 350,
           damping: 28,
         }}
-        className="relative w-full max-w-5xl bg-background/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
+        className={`relative w-full max-w-3xl bg-background/98 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden transition-all duration-300 ${
+          isFullscreen ? "max-w-6xl" : "max-w-3xl"
+        }`}
         onClick={(e) => e.stopPropagation()}>
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors text-white/80 hover:text-white">
-          <X className="w-5 h-5" />
+          className="absolute top-3 right-3 z-20 p-1.5 rounded-full bg-black/40 hover:bg-black/60 transition-all text-white/70 hover:text-white hover:scale-105">
+          <X className="w-4 h-4" />
         </button>
 
-        {/* Main Image Area */}
-        <div className="relative w-full aspect-[16/9] bg-black/30">
+        {/* Fullscreen toggle */}
+        <button
+          onClick={() => setIsFullscreen(!isFullscreen)}
+          className="absolute top-3 right-12 z-20 p-1.5 rounded-full bg-black/40 hover:bg-black/60 transition-all text-white/70 hover:text-white hover:scale-105">
+          <Maximize2 className="w-4 h-4" />
+        </button>
+
+        {/* Main Image Area - Smaller */}
+        <div
+          className={`relative w-full ${isFullscreen ? "aspect-[16/9]" : "aspect-[4/3]"} bg-black/20`}>
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={currentIndex}
               initial={{
                 opacity: 0,
-                x: direction > 0 ? 60 : -60,
+                x: direction > 0 ? 40 : -40,
                 scale: 0.95,
               }}
               animate={{
@@ -140,11 +152,11 @@ function CenterGalleryModal({
               }}
               exit={{
                 opacity: 0,
-                x: direction > 0 ? -60 : 60,
+                x: direction > 0 ? -40 : 40,
                 scale: 0.95,
               }}
               transition={{
-                duration: 0.3,
+                duration: 0.25,
                 ease: [0.4, 0, 0.2, 1],
               }}
               className="absolute inset-0">
@@ -152,57 +164,60 @@ function CenterGalleryModal({
                 src={avatarSlides[currentIndex].src}
                 alt={avatarSlides[currentIndex].alt}
                 fill
-                className="object-contain"
+                className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 priority
               />
+              {/* Gradient overlay for text readability */}
+              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows - Smaller */}
           <button
             onClick={(e) => {
               e.stopPropagation();
               prev();
             }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2.5 rounded-full bg-black/50 hover:bg-black/70 transition-all duration-200 text-white/80 hover:text-white hover:scale-105">
-            <ChevronLeft className="w-6 h-6" />
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/40 hover:bg-black/60 transition-all text-white/70 hover:text-white hover:scale-105">
+            <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={(e) => {
               e.stopPropagation();
               next();
             }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2.5 rounded-full bg-black/50 hover:bg-black/70 transition-all duration-200 text-white/80 hover:text-white hover:scale-105">
-            <ChevronRight className="w-6 h-6" />
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/40 hover:bg-black/60 transition-all text-white/70 hover:text-white hover:scale-105">
+            <ChevronRight className="w-5 h-5" />
           </button>
 
-          {/* Image Counter */}
-          <div className="absolute bottom-4 left-4 z-10 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full text-white/90 text-sm font-medium">
+          {/* Image Counter - Smaller */}
+          <div className="absolute bottom-3 left-3 z-10 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full text-white/80 text-[10px] font-medium">
             {currentIndex + 1} / {avatarSlides.length}
           </div>
 
-          {/* Image Title */}
-          <div className="absolute bottom-4 right-4 z-10 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full text-white/90 text-sm font-medium">
+          {/* Image Title - Smaller */}
+          <div className="absolute bottom-3 right-3 z-10 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full text-white/80 text-[10px] font-medium">
             {avatarSlides[currentIndex].title}
           </div>
         </div>
 
-        {/* Thumbnail Strip */}
-        <div className="p-4 bg-background/80">
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent justify-center">
+        {/* Bottom Section - More Compact */}
+        <div className="p-3 bg-background/90">
+          {/* Thumbnail Strip - Smaller */}
+          <div className="flex gap-1.5 overflow-x-auto pb-1.5 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent justify-center">
             {avatarSlides.map((img, idx) => (
               <motion.button
                 key={idx}
-                whileHover={{ scale: 1.08 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
                   e.stopPropagation();
                   goTo(idx);
                 }}
-                className={`relative flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden transition-all duration-200 ${
+                className={`relative flex-shrink-0 w-14 h-10 rounded-lg overflow-hidden transition-all duration-200 ${
                   idx === currentIndex
-                    ? "ring-2 ring-primary scale-105 shadow-lg shadow-primary/20"
+                    ? "ring-2 ring-white/80 scale-105"
                     : "ring-1 ring-white/10 hover:ring-white/30"
                 }`}>
                 <Image
@@ -212,21 +227,42 @@ function CenterGalleryModal({
                   className="object-cover"
                 />
                 {idx === currentIndex && (
-                  <div className="absolute inset-0 bg-primary/10" />
+                  <div className="absolute inset-0 bg-white/5" />
                 )}
               </motion.button>
             ))}
           </div>
 
-          {/* Image Description */}
+          {/* Image Description - Smaller */}
           <motion.p
             key={currentIndex}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="mt-2 text-center text-sm text-muted-foreground font-light">
+            transition={{ duration: 0.15 }}
+            className="mt-1 text-center text-[11px] text-muted-foreground font-light">
             {avatarSlides[currentIndex].description}
           </motion.p>
+
+          {/* Bottom keyboard hint */}
+          <div className="mt-1.5 flex items-center justify-center gap-2 text-[9px] text-muted-foreground/40">
+            <span className="flex items-center gap-1">
+              <kbd className="px-1 py-0.5 bg-white/5 rounded text-[8px]">←</kbd>
+              <kbd className="px-1 py-0.5 bg-white/5 rounded text-[8px]">→</kbd>
+              <span>Navigate</span>
+            </span>
+            <span className="w-px h-3 bg-white/5" />
+            <span className="flex items-center gap-1">
+              <kbd className="px-1 py-0.5 bg-white/5 rounded text-[8px]">F</kbd>
+              <span>Fullscreen</span>
+            </span>
+            <span className="w-px h-3 bg-white/5" />
+            <span className="flex items-center gap-1">
+              <kbd className="px-1 py-0.5 bg-white/5 rounded text-[8px]">
+                ESC
+              </kbd>
+              <span>Close</span>
+            </span>
+          </div>
         </div>
       </motion.div>
     </motion.div>
@@ -243,11 +279,11 @@ export default function Hero() {
   };
 
   // Floating particles for background
-  const particles = Array.from({ length: 25 }, (_, i) => ({
+  const particles = Array.from({ length: 20 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    size: Math.random() * 3 + 1,
+    size: Math.random() * 2.5 + 1,
     duration: Math.random() * 20 + 15,
     delay: Math.random() * 10,
   }));
@@ -302,7 +338,7 @@ export default function Hero() {
             referrerPolicy="no-referrer"
             rel="noreferrer"
             target="_blank">
-            <span className="mx-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-xs font-medium text-white shadow-sm">
+            <span className="mx-1 rounded-full bg-linear-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-xs font-medium text-white shadow-sm">
               New
             </span>
             <span className="relative px-2 py-0.5 text-sm text-black/70 transition-colors duration-300 group-hover:text-black dark:text-white/70 dark:group-hover:text-white">
@@ -325,7 +361,7 @@ export default function Hero() {
             </motion.svg>
           </motion.a>
 
-          {/* Main heading - improved with better animation and styling */}
+          {/* Main heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -350,7 +386,7 @@ export default function Hero() {
             </motion.span>
           </motion.h1>
 
-          {/* Subtitle - improved with better visual hierarchy */}
+          {/* Subtitle */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -365,25 +401,28 @@ export default function Hero() {
                 <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="mx-2 inline-block w-16 overflow-hidden rounded-3xl shadow-lg transition-shadow hover:shadow-xl md:w-20 lg:mx-3">
+                  className="mx-2 inline-block w-14 overflow-hidden rounded-full shadow-lg shadow-indigo-500/20 transition-shadow hover:shadow-xl hover:shadow-indigo-500/30 md:w-18 lg:mx-3 ring-2 ring-white/20 hover:ring-indigo-400/50 transition-all duration-300">
                   <Image
                     alt="Rashedul Islam — Full Stack Developer"
                     fetchPriority="high"
                     width={2459}
                     height={1262}
                     className="transition-transform duration-300 ease-out hover:scale-110 group-hover:rotate-3"
-                    sizes="(min-width: 768px) 80px, 80px"
+                    sizes="(min-width: 768px) 72px, 56px"
                     src="/personal_img/rashedul-2.jpeg"
                   />
                 </motion.span>
 
-                {/* Click hint */}
+                {/* Click hint - More subtle */}
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.5, duration: 0.5 }}
-                  className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-muted-foreground whitespace-nowrap bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                  Click to view gallery
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.5, duration: 0.4 }}
+                  className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] text-white/60 whitespace-nowrap bg-black/30 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/5">
+                  <span className="flex items-center gap-1">
+                    <Grid3x3 className="w-2.5 h-2.5" />
+                    Gallery
+                  </span>
                 </motion.div>
               </span>
             </span>
@@ -397,7 +436,7 @@ export default function Hero() {
             </motion.span>
           </motion.h2>
 
-          {/* CTAs - improved with better animations */}
+          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -503,7 +542,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Footer glow - improved with better animation */}
+        {/* Footer glow */}
         <div className="absolute inset-x-0 bottom-0 h-56">
           <div aria-hidden="true" className="relative h-60 w-full z-19 mt-4">
             <div className="absolute bottom-0 left-1/2 z-0 -translate-x-1/2 h-125 w-300 mask-[linear-gradient(to_right,transparent,black_30%,black_70%,transparent)]">
@@ -528,7 +567,7 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* Center Modal Gallery */}
+      {/* Center Modal Gallery - Compact & Premium */}
       <AnimatePresence>
         {isModalOpen && (
           <CenterGalleryModal

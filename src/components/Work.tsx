@@ -9,8 +9,7 @@ export default function Work() {
           style={{
             textShadow:
               "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
-          }}
-        >
+          }}>
           <p className="mb-4 font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
             CASE STUDIES
           </p>
@@ -24,8 +23,7 @@ export default function Work() {
                 WebkitMaskSize: "0% 100%",
                 WebkitMaskPosition: "left",
                 WebkitMaskRepeat: "no-repeat",
-              }}
-            >
+              }}>
               work
             </span>
           </span>
@@ -46,8 +44,7 @@ export default function Work() {
                   </div>
                   <a
                     className="group flex items-center gap-2"
-                    href="/projects/keythm"
-                  >
+                    href="/projects/keythm">
                     <h2 className="font-bluu font-bold text-2xl text-neutral-900 leading-tight dark:text-white">
                       Keythm
                     </h2>
@@ -56,8 +53,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
-                >
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400">
                   Q2 2026
                 </span>
               </div>
@@ -65,8 +61,7 @@ export default function Work() {
             <a
               aria-label="View Details of Keythm"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              href="/projects/keythm"
-            >
+              href="/projects/keythm">
               <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 hidden h-px bg-[linear-gradient(90deg,rgba(0,0,0,0)_5%,rgba(255,255,255,0.8)_35%,rgb(255,255,255)_50%,rgba(255,255,255,0.8)_65%,rgba(0,0,0,0)_95%)] dark:block"
@@ -95,8 +90,7 @@ export default function Work() {
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block"
-                  >
+                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block">
                     <path
                       d="M18.5 12L4.99997 12"
                       stroke="currentColor"
@@ -296,8 +290,7 @@ export default function Work() {
                   </div>
                   <a
                     className="group flex items-center gap-2"
-                    href="/projects/nextdemy"
-                  >
+                    href="/projects/nextdemy">
                     <h2 className="font-bluu font-bold text-2xl text-neutral-900 leading-tight dark:text-white">
                       Nextdemy
                     </h2>
@@ -306,8 +299,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
-                >
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400">
                   Q4 2024
                 </span>
               </div>
@@ -315,8 +307,7 @@ export default function Work() {
             <a
               aria-label="View Details of Nextdemy"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              href="/projects/nextdemy"
-            >
+              href="/projects/nextdemy">
               <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 hidden h-px bg-[linear-gradient(90deg,rgba(0,0,0,0)_5%,rgba(255,255,255,0.8)_35%,rgb(255,255,255)_50%,rgba(255,255,255,0.8)_65%,rgba(0,0,0,0)_95%)] dark:block"
@@ -345,8 +336,7 @@ export default function Work() {
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block"
-                  >
+                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block">
                     <path
                       d="M18.5 12L4.99997 12"
                       stroke="currentColor"
@@ -618,8 +608,7 @@ export default function Work() {
                   </div>
                   <a
                     className="group flex items-center gap-2"
-                    href="/projects/venture-den"
-                  >
+                    href="/projects/venture-den">
                     <h2 className="font-bluu font-bold text-2xl text-neutral-900 leading-tight dark:text-white">
                       VentureDen
                     </h2>
@@ -628,8 +617,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
-                >
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400">
                   Q1 2025
                 </span>
               </div>
@@ -637,8 +625,7 @@ export default function Work() {
             <a
               aria-label="View Details of VentureDen"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              href="/projects/venture-den"
-            >
+              href="/projects/venture-den">
               <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 hidden h-px bg-[linear-gradient(90deg,rgba(0,0,0,0)_5%,rgba(255,255,255,0.8)_35%,rgb(255,255,255)_50%,rgba(255,255,255,0.8)_65%,rgba(0,0,0,0)_95%)] dark:block"
@@ -667,8 +654,7 @@ export default function Work() {
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block"
-                  >
+                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block">
                     <path
                       d="M18.5 12L4.99997 12"
                       stroke="currentColor"
@@ -919,8 +905,7 @@ export default function Work() {
                   </div>
                   <a
                     className="group flex items-center gap-2"
-                    href="/projects/finote"
-                  >
+                    href="/projects/finote">
                     <h2 className="font-bluu font-bold text-2xl text-neutral-900 leading-tight dark:text-white">
                       Finote
                     </h2>
@@ -929,8 +914,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
-                >
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400">
                   Q4 2025
                 </span>
               </div>
@@ -938,8 +922,7 @@ export default function Work() {
             <a
               aria-label="View Details of Finote"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              href="/projects/finote"
-            >
+              href="/projects/finote">
               <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 hidden h-px bg-[linear-gradient(90deg,rgba(0,0,0,0)_5%,rgba(255,255,255,0.8)_35%,rgb(255,255,255)_50%,rgba(255,255,255,0.8)_65%,rgba(0,0,0,0)_95%)] dark:block"
@@ -968,8 +951,7 @@ export default function Work() {
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block"
-                  >
+                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block">
                     <path
                       d="M18.5 12L4.99997 12"
                       stroke="currentColor"
@@ -1149,8 +1131,7 @@ export default function Work() {
                   </div>
                   <a
                     className="group flex items-center gap-2"
-                    href="/projects/star-forge"
-                  >
+                    href="/projects/star-forge">
                     <h2 className="font-bluu font-bold text-2xl text-neutral-900 leading-tight dark:text-white">
                       StarForge
                     </h2>
@@ -1159,8 +1140,7 @@ export default function Work() {
                 <span
                   data-slot="badge"
                   data-variant="secondary"
-                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400"
-                >
+                  className="Aborder inline-flex w-fit items-center justify-center gap-2 overflow-hidden whitespace-nowrap py-1 shadow-border transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none border-hairline bg-secondary [a&]:hover:bg-secondary/90 shrink-0 rounded-full px-3 text-[10px] text-neutral-600 dark:bg-neutral-900 dark:text-neutral-400">
                   Q1 2024
                 </span>
               </div>
@@ -1168,8 +1148,7 @@ export default function Work() {
             <a
               aria-label="View Details of StarForge"
               className="group relative block aspect-16/11 w-full cursor-pointer overflow-hidden rounded-2xl bg-white p-1 shadow-border sm:aspect-video md:aspect-16/10 lg:aspect-16/11 lg:rounded-3xl lg:p-2 dark:bg-white/6 transition-transform duration-300 ease-in-out hover:-translate-y-2"
-              href="/projects/star-forge"
-            >
+              href="/projects/star-forge">
               <div
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 hidden h-px bg-[linear-gradient(90deg,rgba(0,0,0,0)_5%,rgba(255,255,255,0.8)_35%,rgb(255,255,255)_50%,rgba(255,255,255,0.8)_65%,rgba(0,0,0,0)_95%)] dark:block"
@@ -1198,8 +1177,7 @@ export default function Work() {
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block"
-                  >
+                    className="hidden size-5 shrink-0 transition-transform duration-200 ease-out group-hover:translate-x-1 sm:block">
                     <path
                       d="M18.5 12L4.99997 12"
                       stroke="currentColor"
@@ -1338,8 +1316,7 @@ export default function Work() {
         {/*/$*/}
         <a
           className="group flex w-fit items-center justify-center gap-2 font-mono text-neutral-800 text-xs uppercase transition-colors hover:text-black dark:text-white/80 mx-auto mt-pagebuilder"
-          href="/projects"
-        >
+          href="/projects">
           See more projects
           <div className="relative size-[25px] overflow-hidden rounded-lg border border-neutral-300 border-dashed bg-overlay-soft transition-colors duration-500 group-hover:bg-neutral-200 dark:border-white/10 dark:group-hover:bg-white/10">
             <span className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-in-out group-hover:translate-x-0 group-hover:translate-y-0 -translate-x-full">
@@ -1349,8 +1326,7 @@ export default function Work() {
                 viewBox="0 0 24 24"
                 width={24}
                 xmlns="http://www.w3.org/2000/svg"
-                className="size-[14px]"
-              >
+                className="size-[14px]">
                 <path
                   d="M18.5 12L4.99997 12"
                   stroke="currentColor"
@@ -1374,8 +1350,7 @@ export default function Work() {
                 viewBox="0 0 24 24"
                 width={24}
                 xmlns="http://www.w3.org/2000/svg"
-                className="size-[14px]"
-              >
+                className="size-[14px]">
                 <path
                   d="M18.5 12L4.99997 12"
                   stroke="currentColor"
