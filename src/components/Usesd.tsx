@@ -51,10 +51,10 @@ const Usesd = () => {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
         whileHover={{ y: -4 }}
-        className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-72"
+        className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer  h-full min-h-72"
         href="/uses">
         {/* Background gradient on hover */}
-        <div className="pointer-events-none absolute inset-0 z-0 rounded-xl bg-gradient-to-br from-transparent via-transparent to-indigo-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-0 z-0 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
         <div className="size-full relative z-10">
           <div className="mt-10 flex items-center justify-center gap-3 md:mt-12">
