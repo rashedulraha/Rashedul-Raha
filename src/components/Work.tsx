@@ -200,7 +200,7 @@ export default function Work() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-8 md:py-16 bg-background"
+      className="relative w-full pt-8 md:pt-16 bg-background"
       id="work">
       {/* Header */}
       <motion.div
@@ -232,9 +232,9 @@ export default function Work() {
             {/* The flex and items-center here ensure exact vertical middle alignment */}
             <div className="lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center pb-8 lg:pb-0 z-10">
               {/* The Outer Premium Frame Layer */}
-              <div className="relative w-full max-w-xl mx-auto p-2.5 md:p-3 rounded-[2rem] bg-card border border-border/60 shadow-2xl transition-all duration-700 hover:shadow-primary/5">
+              <div className="relative w-full max-w-xl mx-auto p-2.5 md:p-3 rounded-4xl bg-card border border-border/60 shadow-2xl transition-all duration-700 hover:shadow-primary/5">
                 {/* Inner Image Container */}
-                <div className="relative w-full h-[50vh] lg:h-[60vh] rounded-[1.5rem] overflow-hidden bg-muted">
+                <div className="relative w-full h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden bg-muted">
                   {projects.map((project, index) => (
                     <motion.div
                       key={project.id}
@@ -289,6 +289,66 @@ export default function Work() {
                     ))}
                   </div>
                 </div>
+
+                {/* view all project  Button */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group relative inline-flex mt-4  cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/20 bg-black/10 py-1 pr-1 pl-4 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/40 hover:bg-black hover:opacity-100 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20 w-full">
+                  <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">
+                    View all project
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-y-1 right-1 w-10 rounded-full bg-black transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)] dark:bg-white"
+                  />
+                  <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-black p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent dark:bg-white">
+                    <svg
+                      fill="none"
+                      height={24}
+                      viewBox="0 0 24 24"
+                      width={24}
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="size-4.5 text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                      <path
+                        d="M18.5 12L4.99997 12"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                    <svg
+                      fill="none"
+                      height={24}
+                      viewBox="0 0 24 24"
+                      width={24}
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="absolute size-4.5 -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                      <path
+                        d="M18.5 12L4.99997 12"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                  </span>
+                </motion.button>
               </div>
             </div>
           </div>
@@ -396,21 +456,6 @@ export default function Work() {
           </div>
         </div>
       </div>
-
-      {/* See More */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="flex justify-center mt-6 md:mt-10  relative z-10">
-        <a
-          href="/projects"
-          className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-card border border-border text-foreground text-sm font-semibold hover:bg-accent hover:text-accent-foreground transition-all shadow-sm">
-          View All Projects
-          <ArrowRight className="w-4 h-4" />
-        </a>
-      </motion.div>
     </section>
   );
 }

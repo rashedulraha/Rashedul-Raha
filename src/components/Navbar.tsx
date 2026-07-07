@@ -249,7 +249,7 @@ export default function Navbar() {
 
   const isActive = (href: string) => pathname === href;
   const isMoreActive = [...moreCards, ...moreLinks].some((item) =>
-    pathname.startsWith(item.href),
+    pathname?.startsWith(item.href),
   );
 
   return (
