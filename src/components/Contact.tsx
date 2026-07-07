@@ -1,31 +1,28 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+
+  // Floating particles for background (client-side only to prevent hydration mismatch)
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; size: number; duration: number; delay: number }>>([]);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Rotating text animation
-  const [rotation, setRotation] = useState(0);
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRotation((prev) => (prev + 1) % 360);
-    }, 50);
-    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setParticles(
+      Array.from({ length: 15 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 2 + 1,
+        duration: Math.random() * 15 + 10,
+        delay: Math.random() * 8,
+      }))
+    );
   }, []);
-
-  // Floating particles for background
-  const particles = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 15 + 10,
-    delay: Math.random() * 8,
-  }));
 
   return (
     <>

@@ -93,7 +93,7 @@ export default async function BlogDetail({
               </p>
               
               <p>
-                When building a robust web application, maintaining a clean architecture is essential. One of the most important aspects is how you structure your folders and manage your secrets. Let's dive into the optimal setup.
+                When building a robust web application, maintaining a clean architecture is essential. One of the most important aspects is how you structure your folders and manage your secrets. Let&apos;s dive into the optimal setup.
               </p>
 
               <h2>Clean Architecture Setup</h2>

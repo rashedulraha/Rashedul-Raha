@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import { Timeline } from "@/components/ui/timeline";
-import { Heart, Type, Image as ImageIcon, Code, Sparkles, ArrowUpRight } from "lucide-react";
+import { Heart, Type, Code, Sparkles, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Attribution | Rashedul Islam",

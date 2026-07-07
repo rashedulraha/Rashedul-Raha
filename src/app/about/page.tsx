@@ -2,8 +2,6 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AboutSection from "@/components/AboutSection";
-import TechStack from "@/components/tech_stack";
-import { WorldMapNetwork } from "@/components/WorldMapNetwork";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

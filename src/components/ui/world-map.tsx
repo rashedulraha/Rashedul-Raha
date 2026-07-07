@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useAnimation } from "motion/react";
+import { useRef } from "react";
+import { motion } from "motion/react";
+import Image from "next/image";
 import DottedMap from "dotted-map";
 import { useTheme } from "next-themes";
 
@@ -72,12 +73,12 @@ export default function WorldMap({
   return (
     <div className="w-full dark:bg-black bg-white rounded-lg relative font-sans overflow-hidden">
       {/* Map Image */}
-      <img
+      <Image
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className="h-full w-full mask-[linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
         alt="world map"
-        height="495"
-        width="1056"
+        height={495}
+        width={1056}
         draggable={false}
       />
 

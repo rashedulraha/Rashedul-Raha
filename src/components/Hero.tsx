@@ -70,21 +70,21 @@ function CenterGalleryModal({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const goTo = (index: number) => {
+  const goTo = useCallback((index: number) => {
     setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
-  };
+  }, [currentIndex]);
 
   const next = useCallback(() => {
     const nextIndex = (currentIndex + 1) % avatarSlides.length;
     goTo(nextIndex);
-  }, [currentIndex]);
+  }, [currentIndex, goTo]);
 
   const prev = useCallback(() => {
     const prevIndex =
       (currentIndex - 1 + avatarSlides.length) % avatarSlides.length;
     goTo(prevIndex);
-  }, [currentIndex]);
+  }, [currentIndex, goTo]);
 
   // Keyboard navigation
   useEffect(() => {

@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export default function FAQ() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -143,14 +144,12 @@ export default function FAQ() {
                       <div
                         className={`rounded-[20px] border-2 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 size-24 delay-[${img.delay}ms]`}>
                         <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-white/[0.06] dark:bg-white/[0.04] dark:group-hover:bg-indigo-500/10">
-                          <img
+                          <Image
                             alt={img.alt}
-                            loading="lazy"
+                            src={img.src}
                             width={50}
                             height={50}
-                            className="h-10 w-10 object-contain"
-                            style={{ color: "transparent" }}
-                            src={img.src}
+                            className="size-10 transition-transform duration-500 group-hover:scale-110"
                           />
                         </div>
                       </div>

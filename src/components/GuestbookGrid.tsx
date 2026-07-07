@@ -104,8 +104,8 @@ export default function GuestbookGrid({ initialMessages }: { initialMessages: Re
         <div key={msg.id} className="break-inside-avoid relative rounded-3xl overflow-hidden border border-white/5 shadow-2xl bg-[#141414] group hover:-translate-y-1 transition-transform duration-300">
           <div className={`relative min-h-[220px] ${msg.bgColor} flex flex-col items-center justify-center p-8 text-center`}>
             {/* Abstract Doodles */}
-            <div className={msg.doodles}></div>
-            <div className={msg.doodle2}></div>
+            <div className={msg.doodles as string}></div>
+            <div className={msg.doodle2 as string}></div>
             
             <p className="text-white text-lg font-bold leading-relaxed relative z-10 drop-shadow-md">
               {msg.message}
@@ -116,7 +116,7 @@ export default function GuestbookGrid({ initialMessages }: { initialMessages: Re
           <div className="h-20 bg-[#141414] relative z-20 flex items-center justify-between px-6">
             <div className="flex items-center gap-3">
               <div className={`flex items-center justify-center w-8 h-8 rounded-full ${msg.avatarBg} text-white font-bold text-xs uppercase shadow-lg`}>
-                {msg.name.charAt(0)}
+                {String(msg.name).charAt(0)}
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-xs font-bold text-white uppercase tracking-wider">{msg.name}</span>

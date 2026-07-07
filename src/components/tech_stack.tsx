@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Code,
   Box,
@@ -116,13 +116,17 @@ function TechModal({
   };
 
   // Prevent body scroll
-  if (isOpen) {
-    // eslint-disable-next-line react-hooks/immutability
-    document.body.style.overflow = "hidden";
-  } else {
-    // eslint-disable-next-line react-hooks/immutability
-    document.body.style.overflow = "";
-  }
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
