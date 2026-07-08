@@ -3,9 +3,9 @@ import WorldMap from "@/components/ui/world-map";
 
 export function WorldMapNetwork() {
   return (
-    <div className="w-full min-h-72  h-full relative bg-background flex items-center justify-center">
+    <div className="w-full min-h-72  h-full relative bg-background flex items-start justify-center">
       <WorldMap
-        dots={[
+        connections={[
           // --- Main Global Loop ---
           {
             start: { lat: 40.7128, lng: -74.006 }, // New York
