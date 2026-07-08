@@ -2,6 +2,7 @@ import React from "react";
 
 import Footer from "@/components/Footer";
 import AboutSection from "@/components/AboutSection";
+import Experience from "@/components/Experience";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -41,6 +42,9 @@ export default function AboutPage() {
               <div className="relative col-span-1 min-w-0">
                 {/* About Section */}
                 <AboutSection />
+                
+                {/* Experience Section */}
+                <Experience />
               </div>
 
               <div
