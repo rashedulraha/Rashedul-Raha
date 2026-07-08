@@ -79,7 +79,7 @@ export default function Experience() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/12 bg-white/5 backdrop-blur-xl mb-6"
           >
             <Briefcase className="w-4 h-4 text-primary" />
-            <span className="font-medium text-xs uppercase tracking-widest text-primary-foreground">
+            <span className="font-medium text-xs uppercase tracking-widest">
               Professional Journey
             </span>
           </motion.div>

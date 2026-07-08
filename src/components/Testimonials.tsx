@@ -128,7 +128,7 @@ export default function Testimonials() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <p className="font-medium text-xs uppercase tracking-widest text-primary-foreground">
+            <p className="font-medium text-xs uppercase tracking-widest">
               Client Love
             </p>
           </div>
