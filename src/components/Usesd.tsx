@@ -71,8 +71,8 @@ const Usesd = () => {
                 className="inline-block text-center">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className={`rounded-[20px] border-2 border-white/10 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 ${tool.size} delay-[${tool.delay}ms]`}>
-                  <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-white/6 dark:bg-white/4 dark:group-hover:bg-indigo-500/10">
+                  className={`rounded-[20px] border-2 border-foreground/10 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 ${tool.size} delay-[${tool.delay}ms]`}>
+                  <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-foreground/6 dark:bg-white/4 dark:group-hover:bg-indigo-500/10">
                     <Image
                       alt={tool.name}
                       loading="lazy"
@@ -96,10 +96,10 @@ const Usesd = () => {
 
         {/* Content Overlay */}
         <div className="pointer-events-none z-10 flex flex-col gap-0.5 p-5 w-full text-center">
-          <p className="text-[10px] text-neutral-400 uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+          <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
             Uses
           </p>
-          <p className="text-sm text-neutral-600 tracking-wide dark:text-neutral-400 group-hover:text-neutral-800 dark:group-hover:text-neutral-200 transition-colors duration-500">
+          <p className="text-sm text-muted-foreground tracking-wide dark:text-muted-foreground group-hover:text-foreground dark:group-hover:text-foreground transition-colors duration-500">
             Check out my favorite tools
           </p>
         </div>
@@ -112,8 +112,8 @@ const Usesd = () => {
           initial={{ y: 0, opacity: 0 }}
           whileHover={{ y: -2, opacity: 1 }}
           transition={{ duration: 0.2 }}
-          className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/5 hover:bg-black/10 max-md:border dark:bg-white/5 dark:hover:bg-white/10 transition-all duration-300 ease-out">
-          <ArrowRight className="size-4.5 text-neutral-600 dark:text-neutral-300" />
+          className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-background/5 hover:bg-background/10 max-md:border dark:bg-foreground/5 dark:hover:bg-foreground/10 transition-all duration-300 ease-out">
+          <ArrowRight className="size-4.5 text-muted-foreground dark:text-muted-foreground" />
         </motion.div>
 
         {/* Tool count badge */}
@@ -123,7 +123,7 @@ const Usesd = () => {
           transition={{ duration: 0.3, delay: 0.4 }}
           className="absolute bottom-4 left-4 z-10 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
           <span className="w-1 h-1 rounded-full bg-indigo-500" />
-          <span className="text-[9px] text-neutral-400/60 uppercase tracking-wider font-medium">
+          <span className="text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
             {tools.length} Tools
           </span>
         </motion.div>

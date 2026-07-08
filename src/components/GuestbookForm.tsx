@@ -16,13 +16,13 @@ export default function GuestbookForm() {
         type="text" 
         placeholder="Your Name" 
         required
-        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/12 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
+        className="w-full px-4 py-3 rounded-xl bg-foreground/5 border border-foreground/12 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all"
       />
       <textarea 
         placeholder="Your Message..." 
         required
         rows={3}
-        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/12 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all resize-none"
+        className="w-full px-4 py-3 rounded-xl bg-foreground/5 border border-foreground/12 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all resize-none"
       />
       <div className="flex justify-end mt-2">
         <button 

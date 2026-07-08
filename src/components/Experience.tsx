@@ -76,7 +76,7 @@ export default function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/12 bg-white/5 backdrop-blur-xl mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-foreground/12 bg-foreground/5 backdrop-blur-xl mb-6"
           >
             <Briefcase className="w-4 h-4 text-primary" />
             <span className="font-medium text-xs uppercase tracking-widest">
@@ -97,7 +97,7 @@ export default function Experience() {
         {/* Timeline Container */}
         <div ref={containerRef} className="relative">
           {/* Center Line (Desktop) / Left Line (Mobile) */}
-          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2 rounded-full overflow-hidden">
+          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px bg-foreground/10 md:-translate-x-1/2 rounded-full overflow-hidden">
             <motion.div
               className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary/80 via-primary to-primary/80 origin-top"
               style={{ height: lineHeight }}
@@ -146,7 +146,7 @@ function ExperienceItem({ exp, index }: { exp: Experience; index: number }) {
           initial={{ opacity: 0, x: isEven ? 50 : -50 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-          className="relative rounded-3xl overflow-hidden border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6 sm:p-8 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 group-hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)]"
+          className="relative rounded-3xl overflow-hidden border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] p-6 sm:p-8 hover:border-foreground/20 transition-all duration-300 hover:-translate-y-1 group-hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)]"
         >
           {/* Header */}
           <div className={`flex flex-col gap-2 mb-6 ${isEven ? "md:items-end" : "items-start"}`}>
@@ -182,7 +182,7 @@ function ExperienceItem({ exp, index }: { exp: Experience; index: number }) {
             {exp.skills.map((skill, i) => (
               <span
                 key={i}
-                className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-foreground/80 hover:bg-white/10 transition-colors"
+                className="px-3 py-1 text-xs font-medium rounded-full bg-foreground/5 border border-foreground/10 text-foreground/80 hover:bg-foreground/10 transition-colors"
               >
                 {skill}
               </span>

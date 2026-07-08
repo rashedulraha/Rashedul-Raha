@@ -128,7 +128,7 @@ const SoundCard = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.3, delay: 0.5 }}
-            className="text-sm md:text-base text-neutral-600 tracking-wide dark:text-neutral-400 group-hover:text-neutral-800 dark:group-hover:text-neutral-200 transition-colors duration-500">
+            className="text-sm md:text-base text-muted-foreground tracking-wide dark:text-muted-foreground group-hover:text-foreground dark:group-hover:text-foreground transition-colors duration-500">
             Clear communication, fast iterations, no surprises
           </motion.h3>
         </div>
@@ -149,13 +149,13 @@ const SoundCard = () => {
           transition={{ duration: 0.3, delay: 0.6 }}
           className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
           <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-[8px] md:text-[9px] text-neutral-400/60 uppercase tracking-wider font-medium">
+          <span className="text-[8px] md:text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
             Available
           </span>
         </motion.div>
 
         {/* Click hint overlay */}
-        <div className="absolute inset-0 z-5 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 rounded-2xl" />
+        <div className="absolute inset-0 z-5 bg-background/0 group-hover:bg-background/5 transition-colors duration-300 rounded-2xl" />
       </motion.div>
     </div>
   );

@@ -7,10 +7,10 @@ const Network = () => {
       <div className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-colors duration-300 hover:bg-white dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border h-full min-h-72">
         <WorldMapNetwork />
         <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 absolute bottom-0 left-0 text-left">
-          <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+          <p className="text-muted-foreground text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
             Flexible With Timezones
           </p>
-          <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
+          <p className="text-lg text-muted-foreground tracking-wide dark:text-muted-foreground">
             Based in Bangladesh, available globally
           </p>
         </div>

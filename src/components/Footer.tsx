@@ -59,7 +59,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="relative border border-white/12 rounded-2xl overflow-hidden bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+          className="relative border border-foreground/12 rounded-2xl overflow-hidden bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(var(--foreground), 0.3)]">
           {/* Decorative gradient blobs */}
           <div className="absolute inset-0 z-0 pointer-events-none">
             <div className="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primary/5 blur-3xl" />
@@ -94,7 +94,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 ease-out text-muted-foreground hover:text-primary">
+                      className="p-2 rounded-full bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 hover:border-foreground/20 transition-all duration-300 ease-out text-muted-foreground hover:text-primary">
                       <social.icon className="w-4 h-4" />
                     </motion.a>
                   ))}
@@ -182,7 +182,7 @@ export default function Footer() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.3, delay: 0.5 }}
-            className="relative z-10 flex flex-col items-center justify-center gap-3 border-t border-white/12 p-4 md:flex-row">
+            className="relative z-10 flex flex-col items-center justify-center gap-3 border-t border-foreground/12 p-4 md:flex-row">
             <div className="flex flex-col items-center gap-2 text-center md:flex-row md:gap-4">
               <p className="text-xs text-muted-foreground">
                 © {new Date().getFullYear()}{" "}
@@ -221,7 +221,7 @@ export default function Footer() {
             </div>
 
             {/* Built with badge */}
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/12">
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-foreground/5 border border-foreground/12">
               <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">
                 Built with Next.js
               </span>
@@ -231,7 +231,7 @@ export default function Footer() {
           {/* Decorative pattern at bottom */}
           <div
             aria-hidden="true"
-            className="relative z-10 h-6 w-full border-t border-white/12 bg-size-[6px_6px] bg-[linear-gradient(-45deg,rgba(255,255,255,0.05)_12.5%,transparent_12.5%,transparent_50%,rgba(255,255,255,0.05)_50%,rgba(255,255,255,0.05)_62.5%,transparent_62.5%,transparent_100%)] opacity-50"
+            className="relative z-10 h-6 w-full border-t border-foreground/12 bg-size-[6px_6px] bg-[linear-gradient(-45deg,rgba(255,255,255,0.05)_12.5%,transparent_12.5%,transparent_50%,rgba(255,255,255,0.05)_50%,rgba(255,255,255,0.05)_62.5%,transparent_62.5%,transparent_100%)] opacity-50"
           />
         </motion.div>
       </footer>

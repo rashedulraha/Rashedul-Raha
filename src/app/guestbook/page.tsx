@@ -31,10 +31,10 @@ export default async function GuestbookPage() {
             
             {/* Header */}
             <div className="mb-20 text-center pt-12">
-              <p className="mb-4 font-semibold text-neutral-400 text-[10px] sm:text-xs uppercase tracking-[0.3em]">
+              <p className="mb-4 font-semibold text-muted-foreground text-[10px] sm:text-xs uppercase tracking-[0.3em]">
                 THE WALL REMEMBERS
               </p>
-              <h1 className="font-serif text-5xl md:text-7xl tracking-tight text-white">
+              <h1 className="font-serif text-5xl md:text-7xl tracking-tight text-foreground">
                 Words That Echo{" "}
                 <span
                   className="italic font-instrument-serif font-light tracking-normal"

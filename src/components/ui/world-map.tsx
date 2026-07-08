@@ -194,7 +194,7 @@ export default function WorldMap({
   }
 
   return (
-    <div className="w-full dark:bg-black bg-white rounded-lg relative font-sans overflow-hidden">
+    <div className="w-full dark:bg-background bg-white rounded-lg relative font-sans overflow-hidden">
       {/* Map Image */}
       <Image
         src={svgMap}

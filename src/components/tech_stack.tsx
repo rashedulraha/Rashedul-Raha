@@ -136,7 +136,7 @@ function TechModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/60 backdrop-blur-sm p-4"
           onClick={handleOutsideClick}>
           <motion.div
             ref={modalRef}
@@ -150,17 +150,17 @@ function TechModal({
               stiffness: 300,
               damping: 25,
             }}
-            className="relative w-full max-w-4xl min-h-72 max-h-[90vh] overflow-y-auto bg-background/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl"
+            className="relative w-full max-w-4xl min-h-72 max-h-[90vh] overflow-y-auto bg-background/95 backdrop-blur-xl rounded-2xl border border-foreground/10 shadow-2xl"
             onClick={(e) => e.stopPropagation()}>
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/5 hover:bg-black/10 transition-colors text-muted-foreground hover:text-foreground">
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/5 hover:bg-background/10 transition-colors text-muted-foreground hover:text-foreground">
               <X className="w-5 h-5" />
             </button>
 
             {/* Header */}
-            <div className="p-6 border-b border-white/5">
+            <div className="p-6 border-b border-foreground/5">
               <h2 className="text-2xl font-semibold text-foreground flex items-center gap-3">
                 <span className="bg-linear-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
                   My Tech Stack
@@ -178,7 +178,7 @@ function TechModal({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="group p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-300">
+                className="group p-4 rounded-xl border border-foreground/5 bg-foreground/5 hover:bg-foreground/10 transition-all duration-300">
                 <div className="flex items-center gap-2 mb-2">
                   <Layout className="w-4 h-4 text-blue-400" />
                   <h3 className="font-semibold text-sm text-foreground">
@@ -208,7 +208,7 @@ function TechModal({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="group p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-300">
+                className="group p-4 rounded-xl border border-foreground/5 bg-foreground/5 hover:bg-foreground/10 transition-all duration-300">
                 <div className="flex items-center gap-2 mb-2">
                   <Server className="w-4 h-4 text-purple-400" />
                   <h3 className="font-semibold text-sm text-foreground">
@@ -238,7 +238,7 @@ function TechModal({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="group p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-300">
+                className="group p-4 rounded-xl border border-foreground/5 bg-foreground/5 hover:bg-foreground/10 transition-all duration-300">
                 <div className="flex items-center gap-2 mb-2">
                   <Terminal className="w-4 h-4 text-orange-400" />
                   <h3 className="font-semibold text-sm text-foreground">
@@ -268,7 +268,7 @@ function TechModal({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
-                className="group p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-300">
+                className="group p-4 rounded-xl border border-foreground/5 bg-foreground/5 hover:bg-foreground/10 transition-all duration-300">
                 <div className="flex items-center gap-2 mb-2">
                   <Monitor className="w-4 h-4 text-cyan-400" />
                   <h3 className="font-semibold text-sm text-foreground">
@@ -295,7 +295,7 @@ function TechModal({
             </div>
 
             {/* Footer */}
-            <div className="p-4 border-t border-white/5 text-center">
+            <div className="p-4 border-t border-foreground/5 text-center">
               <p className="text-[10px] text-muted-foreground">
                 {Object.values(techDetails).reduce(
                   (acc, curr) => acc + curr.tools.length,
@@ -325,7 +325,7 @@ const TechStack = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white/5 dark:bg-card/15 dark:hover:bg-card/10 ring-1 ring-border h-full min-h-72">
+          className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-foreground/5 dark:bg-card/15 dark:hover:bg-card/10 ring-1 ring-border h-full min-h-72">
           {/* Tech Stack Marquee */}
           <div className="absolute inset-0 z-0 flex flex-col justify-center gap-3 overflow-hidden pt-12 mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             {/* Row 1 - Marquee Left */}
@@ -408,7 +408,7 @@ const TechStack = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.3, delay: 0.5 }}
-              className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
+              className="text-lg text-muted-foreground tracking-wide dark:text-muted-foreground">
               The stack behind everything I ship
             </motion.p>
           </div>
@@ -434,7 +434,7 @@ const TechStack = () => {
             {/* Tool count */}
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
               <span className="w-1 h-1 rounded-full bg-indigo-500" />
-              <span className="text-[9px] text-neutral-400/60 uppercase tracking-wider font-medium">
+              <span className="text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
                 {row1.length + row2.length + row3.length}+ Tools
               </span>
             </div>

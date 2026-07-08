@@ -311,7 +311,7 @@ export default function Navbar() {
                 WebkitBackdropFilter: "blur(24px) saturate(180%)",
                 border: "1px solid rgba(255,255,255,0.12)",
                 boxShadow: `
-                  0 8px 32px rgba(0,0,0,0.3),
+                  0 8px 32px rgba(var(--foreground), 0.3),
                   0 2px 8px rgba(0,0,0,0.2),
                   inset 0 1px 0 rgba(255,255,255,0.1),
                   inset 0 -1px 0 rgba(255,255,255,0.05)
@@ -451,7 +451,7 @@ export default function Navbar() {
                         className={`md:hidden flex items-center justify-center rounded-full p-2 transition-all duration-500 ${
                           isMobileMenuOpen
                             ? "bg-primary text-primary-foreground shadow-lg"
-                            : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
+                            : "text-muted-foreground hover:bg-foreground/10 hover:text-foreground"
                         }`}
                         aria-label="Toggle mobile menu"
                         aria-expanded={isMobileMenuOpen}
@@ -701,10 +701,10 @@ export default function Navbar() {
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                               <div className="absolute bottom-0 left-0 right-0 p-4">
-                                <h3 className="font-semibold text-white text-base mb-1">
+                                <h3 className="font-semibold text-foreground text-base mb-1">
                                   {card.title}
                                 </h3>
-                                <p className="text-sm text-gray-300">{card.desc}</p>
+                                <p className="text-sm text-muted-foreground">{card.desc}</p>
                               </div>
                             </Link>
                           </motion.div>
@@ -712,8 +712,8 @@ export default function Navbar() {
                       </div>
 
                       {/* Divider */}
-                      <div className="hidden lg:block w-px bg-white/10" />
-                      <div className="block lg:hidden h-px bg-white/10" />
+                      <div className="hidden lg:block w-px bg-foreground/10" />
+                      <div className="block lg:hidden h-px bg-foreground/10" />
 
                       {/* Right - Links */}
                       <div className="flex flex-col gap-1 w-full lg:w-[280px]">
@@ -734,7 +734,7 @@ export default function Navbar() {
                             <Link
                               href={link.href}
                               onClick={() => setIsDropdownOpen(false)}
-                              className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-500 group"
+                              className="flex items-center gap-3 p-3 rounded-xl hover:bg-foreground/5 transition-all duration-500 group"
                             >
                               <motion.div
                                 className="h-10 w-10 flex shrink-0 items-center justify-center rounded-lg text-muted-foreground group-hover:text-primary transition-all duration-500"
@@ -803,7 +803,7 @@ export default function Navbar() {
                 WebkitBackdropFilter: "blur(24px) saturate(180%)",
                 border: "1px solid rgba(255,255,255,0.12)",
                 boxShadow: `
-                  0 8px 32px rgba(0,0,0,0.3),
+                  0 8px 32px rgba(var(--foreground), 0.3),
                   0 2px 8px rgba(0,0,0,0.2),
                   inset 0 1px 0 rgba(255,255,255,0.1)
                 `,
@@ -853,7 +853,7 @@ export default function Navbar() {
                     WebkitBackdropFilter: "blur(20px) saturate(180%)",
                     border: "1px solid rgba(255,255,255,0.15)",
                     boxShadow: `
-                      0 8px 32px rgba(0,0,0,0.3),
+                      0 8px 32px rgba(var(--foreground), 0.3),
                       inset 0 1px 0 rgba(255,255,255,0.1)
                     `,
                   }}
@@ -915,7 +915,7 @@ export default function Navbar() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[-1] md:hidden"
+                className="fixed inset-0 bg-background/60 backdrop-blur-sm z-[-1] md:hidden"
                 onClick={() => setIsMobileMenuOpen(false)}
               />
 
@@ -996,7 +996,7 @@ export default function Navbar() {
                     </motion.div>
                   ))}
 
-                  <div className="my-3 h-px bg-white/10" />
+                  <div className="my-3 h-px bg-foreground/10" />
 
                   {[...moreCards, ...moreLinks].map((item, index) => (
                     <motion.div
@@ -1018,7 +1018,7 @@ export default function Navbar() {
                       <Link
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-500"
+                        className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all duration-500"
                       >
                         {"icon" in item && <item.icon className="h-5 w-5" />}
                         {"title" in item ? item.title : item.label}
@@ -1027,7 +1027,7 @@ export default function Navbar() {
                   ))}
 
                   <motion.div
-                    className="mt-3 pt-3 border-t border-white/10"
+                    className="mt-3 pt-3 border-t border-foreground/10"
                     initial={{ opacity: 0, y: 12 }}
                     animate={{
                       opacity: 1,

@@ -109,9 +109,9 @@ export default function Blog() {
               whileHover={{ y: -6 }}
               onMouseEnter={() => setHoveredCard(post.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              className="group flex h-full flex-col rounded-3xl p-2.5 border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+              className="group flex h-full flex-col rounded-3xl p-2.5 border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-foreground/20 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)]">
               {/* Image */}
-              <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-white/5">
+              <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-foreground/5">
                 <motion.img
                   alt={post.title}
                   loading="lazy"
@@ -127,13 +127,13 @@ export default function Blog() {
 
                 {/* Category Badge */}
                 <div className="absolute top-3 left-3 z-10">
-                  <span className="px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-[10px] font-medium uppercase tracking-wider border border-white/10">
+                  <span className="px-2.5 py-1 rounded-full bg-background/50 backdrop-blur-sm text-foreground text-[10px] font-medium uppercase tracking-wider border border-foreground/10">
                     {post.category}
                   </span>
                 </div>
 
                 <div className="absolute inset-0 flex items-center justify-center p-6">
-                  <span className="text-balance text-center font-normal text-white text-xl leading-snug tracking-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
+                  <span className="text-balance text-center font-normal text-foreground text-xl leading-snug tracking-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
                     {post.title.split(" ").slice(0, 4).join(" ")}
                     {post.title.split(" ").length > 4 && "..."}
                   </span>
@@ -150,13 +150,13 @@ export default function Blog() {
                 </p>
 
                 {/* Footer */}
-                <div className="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-white/12">
+                <div className="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-foreground/12">
                   <div className="flex items-center gap-3 text-[11px] text-muted-foreground uppercase tracking-wide">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       {post.readTime}
                     </span>
-                    <span className="text-white/20">
+                    <span className="text-foreground/20">
                       ·
                     </span>
                     <span className="flex items-center gap-1">
@@ -170,7 +170,7 @@ export default function Blog() {
                     whileTap={{ scale: 0.95 }}
                     className="flex shrink-0 items-center gap-2 text-muted-foreground text-xs tracking-wide transition-colors duration-300 group-hover:text-primary">
                     <span className="hidden sm:inline">Read article</span>
-                    <div className="size-7 overflow-hidden rounded-lg border border-white/12 border-dashed bg-white/5 transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
+                    <div className="size-7 overflow-hidden rounded-lg border border-foreground/12 border-dashed bg-foreground/5 transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
                       <motion.div
                         initial={{ x: -8 }}
                         animate={{ x: 0 }}
@@ -206,7 +206,7 @@ export default function Blog() {
           <motion.div
             whileHover={{ rotate: 45 }}
             transition={{ duration: 0.2 }}
-            className="relative size-7 overflow-hidden rounded-lg border border-white/12 border-dashed bg-white/5 transition-colors duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
+            className="relative size-7 overflow-hidden rounded-lg border border-foreground/12 border-dashed bg-foreground/5 transition-colors duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
             <motion.span
               initial={{ x: -20 }}
               animate={{ x: 0 }}

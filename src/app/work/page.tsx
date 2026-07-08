@@ -34,10 +34,10 @@ export default function WorkPage() {
             
             {/* Hero Header */}
             <div className="mb-12 text-center pt-8">
-              <p className="mb-4 font-semibold text-neutral-400 text-xs uppercase tracking-[0.2em]">
+              <p className="mb-4 font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em]">
                 PORTFOLIO
               </p>
-              <h1 className="font-instrument-serif text-5xl md:text-6xl lg:text-7xl tracking-tight text-white">
+              <h1 className="font-instrument-serif text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground">
                 Featured{" "}
                 <span
                   className="italic"

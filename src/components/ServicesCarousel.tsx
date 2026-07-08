@@ -90,7 +90,6 @@ export default function ServicesBox() {
     setBoxItems([i]);
   }, []);
 
-  // Calculate grid position for each item
   const getItemPosition = (index: number) => {
     const col = index % 3;
     const row = Math.floor(index / 3);
@@ -106,17 +105,22 @@ export default function ServicesBox() {
         initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/6 bg-[#09090b] min-h-72"
+        className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-border bg-card min-h-72 shadow-sm hover:shadow-md transition-shadow duration-500"
         onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}>
-        <div className="pointer-events-none absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-white/3 blur-3xl transition-opacity duration-700 group-hover:opacity-100 opacity-0" />
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/* Top Glow - Theme aware */}
+        <div className="pointer-events-none absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl transition-opacity duration-700 group-hover:opacity-100 opacity-0" />
+
+        {/* Inner gradient overlay */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-background/50 via-transparent to-muted/30" />
 
         <div className="relative z-10 flex flex-1 flex-col px-5 pt-5 pb-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             What You Get
           </p>
 
-          <h3 className="mt-1.5 text-base font-semibold leading-snug text-neutral-200 mb-5">
+          <h3 className="mt-1.5 text-base font-semibold leading-snug text-foreground mb-5">
             Clean code, pixel-perfect UI, deployed&nbsp;&amp;&nbsp;scaling
           </h3>
 
@@ -133,79 +137,83 @@ export default function ServicesBox() {
                     duration: 0.35,
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
-                  className="flex items-center gap-2 rounded-full border border-white/8 bg-white/4 px-3 py-1.5 shadow-lg backdrop-blur-md">
+                  className="flex items-center gap-2 rounded-full border border-border bg-background/80 backdrop-blur-md px-3 py-1.5 shadow-md"
+                >
                   <span
                     className="flex h-5 w-5 items-center justify-center rounded-full"
                     style={{
-                      backgroundColor: `${cur.color}18`,
-                      boxShadow: `0 0 8px ${cur.color}20`,
-                    }}>
-                    <cur.icon
-                      className="h-3 w-3"
-                      style={{ color: cur.color }}
-                    />
+                      backgroundColor: `${cur.color}20`,
+                      boxShadow: `0 0 8px ${cur.color}30`,
+                    }}
+                  >
+                    <cur.icon className="h-3 w-3" style={{ color: cur.color }} />
                   </span>
-                  <span className="text-[11px] font-medium text-neutral-200">
+                  <span className="text-[11px] font-medium text-foreground">
                     {cur.title}
                   </span>
-                  <span className="text-[10px] text-neutral-500">
+                  <span className="text-[10px] text-muted-foreground">
                     {cur.desc}
                   </span>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* 3D Box */}
-            <div
-              className="relative w-full max-w-75"
-              style={{ perspective: 600 }}>
+            {/* 3D Box - SVG with theme-aware colors */}
+            <div className="relative w-full max-w-75" style={{ perspective: 600 }}>
               <svg
                 viewBox="0 0 300 130"
                 className="w-full"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Back wall */}
                 <rect
                   x="40"
                   y="28"
                   width="220"
                   height="75"
                   rx="2"
-                  fill="#141416"
-                  stroke="#27272a"
+                  fill="hsl(var(--muted))"
+                  stroke="hsl(var(--border))"
                   strokeWidth="0.75"
                 />
+                {/* Left flap */}
                 <path
                   d="M40 28 L12 14 L12 20 L40 34Z"
-                  fill="#18181b"
-                  stroke="#27272a"
+                  fill="hsl(var(--muted) / 0.8)"
+                  stroke="hsl(var(--border))"
                   strokeWidth="0.75"
                 />
+                {/* Right flap */}
                 <path
                   d="M260 28 L288 14 L288 20 L260 34Z"
-                  fill="#18181b"
-                  stroke="#27272a"
+                  fill="hsl(var(--muted) / 0.8)"
+                  stroke="hsl(var(--border))"
                   strokeWidth="0.75"
                 />
+                {/* Front wall */}
                 <path
                   d="M18 52 L282 52 L260 103 L40 103Z"
-                  fill="#18181b"
-                  stroke="#27272a"
+                  fill="hsl(var(--card))"
+                  stroke="hsl(var(--border))"
                   strokeWidth="0.75"
                 />
+                {/* Front top edge highlight */}
                 <line
                   x1="18"
                   y1="52"
                   x2="282"
                   y2="52"
-                  stroke="#3f3f46"
+                  stroke="hsl(var(--foreground) / 0.15)"
                   strokeWidth="1"
                 />
+                {/* Back edge highlight */}
                 <line
                   x1="40"
                   y1="28"
                   x2="260"
                   y2="28"
-                  stroke="#3f3f46"
+                  stroke="hsl(var(--foreground) / 0.1)"
                   strokeWidth="0.75"
                 />
               </svg>
@@ -227,17 +235,18 @@ export default function ServicesBox() {
                           duration: 0.5,
                           ease: [0.34, 1.56, 0.64, 1],
                         }}
-                        className="absolute flex items-center gap-1.5 rounded-md border border-white/6 bg-white/5 px-2 py-1"
+                        className="absolute flex items-center gap-1.5 rounded-md border border-border bg-background/60 backdrop-blur-sm px-2 py-1 shadow-sm"
                         style={{
                           left: pos.left,
                           bottom: pos.bottom,
                           width: "30%",
-                        }}>
+                        }}
+                      >
                         <s.icon
                           className="h-3 w-3 shrink-0"
                           style={{ color: s.color }}
                         />
-                        <span className="text-[9px] font-medium text-neutral-300 truncate">
+                        <span className="text-[9px] font-medium text-foreground truncate">
                           {s.title}
                         </span>
                       </motion.div>
@@ -246,20 +255,21 @@ export default function ServicesBox() {
                 </AnimatePresence>
               </div>
 
-              <div className="absolute -bottom-1 left-1/2 h-3 w-24 -translate-x-1/2 rounded-full bg-white/2 blur-xl" />
+              {/* Bottom glow */}
+              <div className="absolute -bottom-1 left-1/2 h-3 w-24 -translate-x-1/2 rounded-full bg-primary/10 blur-xl" />
             </div>
 
             {/* Dots */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 mt-3">
               {services.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => goTo(i)}
                   aria-label={services[i].title}
-                  className={`h-1 rounded-full transition-all duration-400 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 ${
+                  className={`h-1 rounded-full transition-all duration-400 ease-out focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ${
                     idx === i
-                      ? "w-4 bg-white/30"
-                      : "w-1 bg-white/8 hover:bg-white/15"
+                      ? "w-4 bg-primary"
+                      : "w-1 bg-muted-foreground/30 hover:bg-muted-foreground/50"
                   }`}
                 />
               ))}

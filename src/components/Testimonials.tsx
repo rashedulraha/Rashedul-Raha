@@ -123,7 +123,7 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/12 bg-white/5 backdrop-blur-xl mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-foreground/12 bg-foreground/5 backdrop-blur-xl mb-6">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -153,7 +153,7 @@ export default function Testimonials() {
             return (
               <article
                 key={testimonial.id}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl p-8 snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:-translate-y-1">
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl p-8 snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] transition-all duration-300 hover:border-foreground/20 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] hover:-translate-y-1">
                 {/* Quote Icon */}
                 <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
                   <svg
@@ -161,7 +161,7 @@ export default function Testimonials() {
                     height="40"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="text-white">
+                    className="text-foreground">
                     <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49 2.752-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49 2.752-1.179z" />
                   </svg>
                 </div>
@@ -175,14 +175,14 @@ export default function Testimonials() {
                   </p>
                 </blockquote>
 
-                <footer className="mt-auto flex items-center gap-4 relative z-10 pt-6 border-t border-white/12">
+                <footer className="mt-auto flex items-center gap-4 relative z-10 pt-6 border-t border-foreground/12">
                   <div className="relative">
                     <Image
                       alt={testimonial.name}
                       loading="lazy"
                       width={48}
                       height={48}
-                      className="size-12 rounded-full object-cover ring-2 ring-white/10"
+                      className="size-12 rounded-full object-cover ring-2 ring-foreground/10"
                       src={testimonial.avatar}
                     />
                     {/* Verified Badge */}
@@ -197,7 +197,7 @@ export default function Testimonials() {
                         strokeWidth="4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="text-white">
+                        className="text-foreground">
                         <polyline points="20 6 9 17 4 12"></polyline>
                       </svg>
                     </div>
@@ -219,13 +219,13 @@ export default function Testimonials() {
         {/* Bottom Controls */}
         <div className="flex items-center justify-center gap-4 mt-10 px-4">
           {/* Pagination Pill */}
-          <div className="flex items-center gap-2 rounded-full bg-white/5 border border-white/12 p-2 px-4 backdrop-blur-xl">
+          <div className="flex items-center gap-2 rounded-full bg-foreground/5 border border-foreground/12 p-2 px-4 backdrop-blur-xl">
             {testimonialsData.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goToSlide(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-white/20 hover:bg-white/40"}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-foreground/20 hover:bg-foreground/40"}`}
               />
             ))}
           </div>
@@ -234,7 +234,7 @@ export default function Testimonials() {
           <button
             onClick={() => setIsPaused(!isPaused)}
             aria-label={isPaused ? "Play Carousel" : "Pause Carousel"}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:scale-105 active:scale-95">
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground/5 border border-foreground/10 text-foreground backdrop-blur-sm transition-all hover:bg-foreground/10 hover:scale-105 active:scale-95">
             {isPaused ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"

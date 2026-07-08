@@ -120,14 +120,14 @@ export default function FAQ() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-1 gap-3 border-y border-white/12 md:grid-cols-12">
+          className="grid grid-cols-1 gap-3 border-y border-foreground/12 md:grid-cols-12">
           {/* Card 1 - Uses */}
           <motion.div
             whileHover={{ y: -4 }}
             transition={{ duration: 0.2 }}
             className="col-span-1 md:col-span-6 lg:col-span-4">
             <a
-              className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] cursor-pointer h-72"
+              className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-foreground/20 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] cursor-pointer h-72"
               href="/uses">
               <div className="size-full">
                 <div className="mt-10 flex items-center justify-center gap-3 md:mt-12">
@@ -143,7 +143,7 @@ export default function FAQ() {
                       className="inline-block text-center">
                       <div
                         className={`rounded-[20px] border-2 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 size-24 delay-[${img.delay}ms]`}>
-                        <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-white/[0.06] dark:bg-white/[0.04] dark:group-hover:bg-indigo-500/10">
+                        <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-foreground/[0.06] dark:bg-white/[0.04] dark:group-hover:bg-indigo-500/10">
                           <Image
                             alt={img.alt}
                             src={img.src}
@@ -173,7 +173,7 @@ export default function FAQ() {
                 initial={{ y: 0, opacity: 0 }}
                 whileHover={{ y: -2, opacity: 1 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
+                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-foreground/12 bg-foreground/5 transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
                 <ArrowRight className="size-[18px] text-primary transition-colors duration-300" />
               </motion.div>
             </a>
@@ -185,7 +185,7 @@ export default function FAQ() {
             transition={{ duration: 0.2 }}
             className="col-span-1 md:col-span-6 lg:col-span-4">
             <a
-              className="group relative flex w-full flex-col justify-between rounded-xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] cursor-pointer h-72 overflow-hidden"
+              className="group relative flex w-full flex-col justify-between rounded-xl border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-foreground/20 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] cursor-pointer h-72 overflow-hidden"
               href="/about">
               <div className="size-full">
                 <div className="absolute inset-x-0 -bottom-4 flex justify-center">
@@ -201,8 +201,8 @@ export default function FAQ() {
                       initial={{ scale: 0.9, opacity: 0 }}
                       animate={isInView ? { scale: 1, opacity: 1 } : {}}
                       transition={{ duration: 0.4, delay: 0.5 }}
-                      className="absolute inset-0 scale-105 rounded-2xl border border-neutral-300 p-2 transition-all duration-500 ease-out group-hover:border-indigo-400/60 dark:border-neutral-600 dark:group-hover:border-indigo-400/60">
-                      <div className="h-full w-full rounded-xl border-2 border-neutral-200/10 bg-[#dfe0e1] shadow-inner dark:border-neutral-500/20 dark:bg-neutral-700" />
+                      className="absolute inset-0 scale-105 rounded-2xl border border-border p-2 transition-all duration-500 ease-out group-hover:border-indigo-400/60 dark:border-border dark:group-hover:border-indigo-400/60">
+                      <div className="h-full w-full rounded-xl border-2 border-neutral-200/10 bg-[#dfe0e1] shadow-inner dark:border-neutral-500/20 dark:bg-muted" />
                     </motion.div>
                     <motion.img
                       initial={{ scale: 0.8, opacity: 0, rotate: -8 }}
@@ -236,7 +236,7 @@ export default function FAQ() {
                 initial={{ y: 0, opacity: 0 }}
                 whileHover={{ y: -2, opacity: 1 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
+                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-foreground/12 bg-foreground/5 transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
                 <ArrowRight className="size-[18px] text-primary transition-colors duration-300" />
               </motion.div>
             </a>
@@ -249,7 +249,7 @@ export default function FAQ() {
             className="col-span-1 md:col-span-6 lg:col-span-4">
             <div className="relative w-full h-72">
               <a
-                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] cursor-pointer size-full"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-foreground/20 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] cursor-pointer size-full"
                 href="/guestbook">
                 <div className="size-full">
                   <motion.div
@@ -540,7 +540,7 @@ export default function FAQ() {
                   initial={{ y: 0, opacity: 0 }}
                   whileHover={{ y: -2, opacity: 1 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
+                  className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-foreground/12 bg-foreground/5 transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
                   <ArrowRight className="size-4.5 text-primary transition-colors duration-300" />
                 </motion.div>
               </a>
@@ -549,7 +549,7 @@ export default function FAQ() {
         </motion.div>
 
         {/* Bottom decorative line */}
-        <div aria-hidden="true" className="w-full border-t border-white/12 mt-8" />
+        <div aria-hidden="true" className="w-full border-t border-foreground/12 mt-8" />
       </section>
     </>
   );

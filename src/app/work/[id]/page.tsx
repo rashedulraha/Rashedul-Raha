@@ -44,9 +44,9 @@ export default async function ProjectDetail({
             {/* Back to Work */}
             <Link 
               href="/work" 
-              className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors mb-8 group"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 group"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all group-hover:bg-white/10">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-foreground/10 bg-foreground/5 transition-all group-hover:bg-foreground/10">
                 <ArrowLeft className="h-4 w-4" />
               </div>
               Back to Projects
@@ -55,7 +55,7 @@ export default async function ProjectDetail({
             {/* Header / Meta */}
             <div className="mb-10">
               <div className="flex items-center gap-4 mb-6">
-                <span className="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-medium uppercase tracking-wider border border-white/20">
+                <span className="px-3 py-1 rounded-full bg-foreground/10 text-foreground text-xs font-medium uppercase tracking-wider border border-foreground/20">
                   {project.type}
                 </span>
                 <span className="text-primary text-xs font-bold uppercase tracking-widest">
@@ -63,17 +63,17 @@ export default async function ProjectDetail({
                 </span>
               </div>
               
-              <h1 className="font-instrument-serif text-5xl md:text-6xl lg:text-7xl text-white leading-tight tracking-tight mb-4">
+              <h1 className="font-instrument-serif text-5xl md:text-6xl lg:text-7xl text-foreground leading-tight tracking-tight mb-4">
                 {project.title}
               </h1>
               
-              <p className="text-xl md:text-2xl text-neutral-400 font-medium max-w-2xl">
+              <p className="text-xl md:text-2xl text-muted-foreground font-medium max-w-2xl">
                 {project.subtitle}
               </p>
             </div>
 
             {/* Hero Image */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-[2.5rem] mb-16 border border-white/10 bg-[#121212] shadow-2xl">
+            <div className="relative aspect-video w-full overflow-hidden rounded-[2.5rem] mb-16 border border-foreground/10 bg-[hsl(var(--background))] shadow-2xl">
               <Image
                 src={project.image}
                 alt={project.title}
@@ -91,21 +91,21 @@ export default async function ProjectDetail({
               {/* Left Column: Description & Features */}
               <div className="md:col-span-2 space-y-6">
                 {/* Description Card */}
-                <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
-                  <h3 className="text-lg font-bold text-white mb-4">About the Project</h3>
-                  <p className="text-neutral-400 text-base leading-relaxed">
+                <div className="p-8 rounded-3xl bg-foreground/5 border border-foreground/10">
+                  <h3 className="text-lg font-bold text-foreground mb-4">About the Project</h3>
+                  <p className="text-muted-foreground text-base leading-relaxed">
                     {project.description}
                   </p>
                 </div>
                 
                 {/* Features Card */}
-                <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
-                  <h3 className="text-lg font-bold text-white mb-6">Key Features</h3>
+                <div className="p-8 rounded-3xl bg-foreground/5 border border-foreground/10">
+                  <h3 className="text-lg font-bold text-foreground mb-6">Key Features</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {project.features.map((feature, idx) => (
                       <div key={idx} className="flex items-start gap-3">
                         <ChevronRight className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                        <span className="text-sm text-neutral-300">{feature}</span>
+                        <span className="text-sm text-muted-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -118,15 +118,15 @@ export default async function ProjectDetail({
                 {/* Stats Card */}
                 <div className="p-8 rounded-3xl bg-gradient-to-br from-primary/20 to-purple-500/20 border border-primary/20 flex flex-col items-center justify-center text-center">
                   <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">Impact</p>
-                  <p className="text-4xl font-bold text-white tracking-tight">{project.stats}</p>
+                  <p className="text-4xl font-bold text-foreground tracking-tight">{project.stats}</p>
                 </div>
                 
                 {/* Tags Card */}
-                <div className="p-8 rounded-3xl bg-white/5 border border-white/10">
-                  <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-4">Tech Stack</h3>
+                <div className="p-8 rounded-3xl bg-foreground/5 border border-foreground/10">
+                  <h3 className="text-sm font-bold text-foreground uppercase tracking-widest mb-4">Tech Stack</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1.5 rounded-full bg-black/40 border border-white/10 text-neutral-300 text-[10px] font-mono tracking-wider uppercase">
+                      <span key={tag} className="px-3 py-1.5 rounded-full bg-background/40 border border-foreground/10 text-muted-foreground text-[10px] font-mono tracking-wider uppercase">
                         {tag}
                       </span>
                     ))}
@@ -134,12 +134,12 @@ export default async function ProjectDetail({
                 </div>
                 
                 {/* Links Card */}
-                <div className="p-8 rounded-3xl bg-white/5 border border-white/10 flex flex-col gap-4">
+                <div className="p-8 rounded-3xl bg-foreground/5 border border-foreground/10 flex flex-col gap-4">
                   <a
                     href={project.links.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between w-full px-5 py-4 rounded-2xl bg-white text-black font-semibold hover:bg-neutral-200 transition-colors"
+                    className="flex items-center justify-between w-full px-5 py-4 rounded-2xl bg-white text-foreground font-semibold hover:bg-secondary transition-colors"
                   >
                     <span>View Live Site</span>
                     <ExternalLink className="w-4 h-4" />
@@ -149,7 +149,7 @@ export default async function ProjectDetail({
                     href={project.links.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between w-full px-5 py-4 rounded-2xl bg-black border border-white/20 text-white font-semibold hover:bg-white/5 transition-colors"
+                    className="flex items-center justify-between w-full px-5 py-4 rounded-2xl bg-background border border-foreground/20 text-foreground font-semibold hover:bg-foreground/5 transition-colors"
                   >
                     <span>Source Code</span>
                     <FaGithub className="w-5 h-5" />

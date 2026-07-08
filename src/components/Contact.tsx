@@ -58,13 +58,13 @@ export default function Contact() {
           ))}
         </div>
 
-        <div aria-hidden="true" className="w-full border-t border-white/12" />
+        <div aria-hidden="true" className="w-full border-t border-foreground/12" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="relative w-full overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+          className="relative w-full overflow-hidden rounded-2xl border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(var(--foreground), 0.3)]"
         >
           <div className="relative z-10 mx-auto flex w-full flex-col items-center justify-center gap-y-2 py-16 sm:py-20 text-center px-4">
             {/* Rotating Badge */}
@@ -188,7 +188,7 @@ export default function Contact() {
                     })
                   )
                 }
-                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-white/12 bg-white/5 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-white/20 hover:bg-white/10 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] active:scale-[0.98] my-10"
+                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-foreground/12 bg-foreground/5 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-foreground/20 hover:bg-foreground/10 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] active:scale-[0.98] my-10"
               >
                 <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
                   Get In Touch
@@ -285,16 +285,16 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 1 }}
               className="flex gap-2 mt-4"
             >
-              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-foreground text-xs font-medium">
+              <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-foreground text-xs font-medium">
                 React
               </span>
-              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-foreground text-xs font-medium">
+              <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-foreground text-xs font-medium">
                 Next.js
               </span>
-              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-foreground text-xs font-medium">
+              <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-foreground text-xs font-medium">
                 TypeScript
               </span>
-              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-foreground text-xs font-medium">
+              <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-foreground text-xs font-medium">
                 Tailwind
               </span>
             </motion.div>
@@ -389,7 +389,7 @@ export default function Contact() {
           </svg>
         </motion.span>
 
-        <div aria-hidden="true" className="w-full border-t border-white/12" />
+        <div aria-hidden="true" className="w-full border-t border-foreground/12" />
       </section>
     </>
   );

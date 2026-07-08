@@ -38,7 +38,7 @@ export default function BucketListPage() {
       title: "Completed",
       content: (
         <div>
-          <p className="text-neutral-300 text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
+          <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
             The milestones I&apos;ve already achieved. Looking back at these keeps me motivated to push forward on the rest of the list.
           </p>
           <div className="space-y-4">
@@ -52,10 +52,10 @@ export default function BucketListPage() {
                     <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors">
+                    <h3 className="text-lg font-bold text-foreground mb-1 group-hover:text-emerald-400 transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-neutral-500 font-medium uppercase tracking-widest">
+                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest">
                       {item.category}
                     </p>
                   </div>
@@ -75,19 +75,19 @@ export default function BucketListPage() {
       title: "Career & Tech",
       content: (
         <div>
-          <p className="text-neutral-300 text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
+          <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
             Professional goals focused on building impactful products, sharing knowledge, and pushing my technical boundaries.
           </p>
           <div className="space-y-4">
             {bucketListItems.filter(item => !item.completed && item.category === "Career").map((item, idx) => (
               <div 
                 key={idx} 
-                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-[#121212] border border-white/5 hover:border-blue-500/30 hover:bg-gradient-to-r hover:from-blue-900/10 hover:to-transparent transition-all duration-300"
+                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-[hsl(var(--background))] border border-foreground/5 hover:border-blue-500/30 hover:bg-gradient-to-r hover:from-blue-900/10 hover:to-transparent transition-all duration-300"
               >
                 <div className="mt-1 shrink-0">
-                  <Circle className="w-5 h-5 text-neutral-600 group-hover:text-blue-500 transition-colors" />
+                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-blue-500 transition-colors" />
                 </div>
-                <h3 className="text-lg font-medium text-neutral-300 group-hover:text-white transition-colors">
+                <h3 className="text-lg font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {item.title}
                 </h3>
               </div>
@@ -100,19 +100,19 @@ export default function BucketListPage() {
       title: "Travel & Adventure",
       content: (
         <div>
-          <p className="text-neutral-300 text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
+          <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
             Places I want to see and experiences I want to have around the globe.
           </p>
           <div className="space-y-4">
             {bucketListItems.filter(item => !item.completed && item.category === "Travel").map((item, idx) => (
               <div 
                 key={idx} 
-                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-[#121212] border border-white/5 hover:border-purple-500/30 hover:bg-gradient-to-r hover:from-purple-900/10 hover:to-transparent transition-all duration-300"
+                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-[hsl(var(--background))] border border-foreground/5 hover:border-purple-500/30 hover:bg-gradient-to-r hover:from-purple-900/10 hover:to-transparent transition-all duration-300"
               >
                 <div className="mt-1 shrink-0">
-                  <Circle className="w-5 h-5 text-neutral-600 group-hover:text-purple-500 transition-colors" />
+                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-purple-500 transition-colors" />
                 </div>
-                <h3 className="text-lg font-medium text-neutral-300 group-hover:text-white transition-colors">
+                <h3 className="text-lg font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {item.title}
                 </h3>
               </div>
@@ -125,19 +125,19 @@ export default function BucketListPage() {
       title: "Life & Experiences",
       content: (
         <div>
-          <p className="text-neutral-300 text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
+          <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
             Personal growth, physical challenges, and giving back to the community.
           </p>
           <div className="space-y-4">
             {bucketListItems.filter(item => !item.completed && item.category === "Life").map((item, idx) => (
               <div 
                 key={idx} 
-                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-[#121212] border border-white/5 hover:border-pink-500/30 hover:bg-gradient-to-r hover:from-pink-900/10 hover:to-transparent transition-all duration-300"
+                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-[hsl(var(--background))] border border-foreground/5 hover:border-pink-500/30 hover:bg-gradient-to-r hover:from-pink-900/10 hover:to-transparent transition-all duration-300"
               >
                 <div className="mt-1 shrink-0">
-                  <Circle className="w-5 h-5 text-neutral-600 group-hover:text-pink-500 transition-colors" />
+                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-pink-500 transition-colors" />
                 </div>
-                <h3 className="text-lg font-medium text-neutral-300 group-hover:text-white transition-colors">
+                <h3 className="text-lg font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {item.title}
                 </h3>
               </div>
@@ -165,12 +165,12 @@ export default function BucketListPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
               <div className="max-w-2xl">
                 <div className="inline-flex items-center justify-center mb-6">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[#121212] border border-white/10 shadow-lg relative">
+                  <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[hsl(var(--background))] border border-foreground/10 shadow-lg relative">
                     <Target className="w-6 h-6 text-primary" />
                     <div className="absolute inset-0 rounded-full border border-primary/20 animate-ping opacity-20" />
                   </div>
                 </div>
-                <h1 className="font-instrument-serif text-5xl md:text-7xl tracking-tight text-white mb-6">
+                <h1 className="font-instrument-serif text-5xl md:text-7xl tracking-tight text-foreground mb-6">
                   The{" "}
                   <span
                     className="italic"
@@ -182,29 +182,29 @@ export default function BucketListPage() {
                     Bucket List
                   </span>
                 </h1>
-                <p className="text-neutral-400 text-lg leading-relaxed">
+                <p className="text-muted-foreground text-lg leading-relaxed">
                   A running list of things I want to do, see, and achieve in my lifetime. It&apos;s a mix of professional milestones, crazy adventures, and personal growth goals.
                 </p>
               </div>
 
               {/* Progress Bar Widget */}
-              <div className="w-full md:w-72 shrink-0 p-6 rounded-[2rem] bg-[#121212] border border-white/10 shadow-2xl relative overflow-hidden">
+              <div className="w-full md:w-72 shrink-0 p-6 rounded-[2rem] bg-[hsl(var(--background))] border border-foreground/10 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <Trophy className="w-4 h-4 text-emerald-400" />
-                      <span className="text-sm font-bold text-white uppercase tracking-wider">Progress</span>
+                      <span className="text-sm font-bold text-foreground uppercase tracking-wider">Progress</span>
                     </div>
                     <span className="text-xl font-bold text-emerald-400">{progressPercentage}%</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden mb-3">
+                  <div className="w-full h-2 rounded-full bg-foreground/5 overflow-hidden mb-3">
                     <div 
                       className="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-1000 ease-out"
                       style={{ width: `${progressPercentage}%` }}
                     />
                   </div>
-                  <p className="text-xs text-neutral-400 font-medium">
+                  <p className="text-xs text-muted-foreground font-medium">
                     {completedItems} completed out of {totalItems} goals
                   </p>
                 </div>

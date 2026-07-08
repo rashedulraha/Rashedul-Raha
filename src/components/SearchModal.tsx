@@ -16,6 +16,7 @@ import {
   Link as LinkIcon,
   ArrowUpRight,
   Moon,
+  Sun,
   X,
   ChevronLeft,
   Mail,
@@ -23,11 +24,13 @@ import {
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 type ViewState = "search" | "contact" | "full-form";
 
 export default function SearchModal() {
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [currentView, setCurrentView] = useState<ViewState>("search");
   const [message, setMessage] = useState("");
@@ -79,7 +82,7 @@ export default function SearchModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           />
 
@@ -90,7 +93,7 @@ export default function SearchModal() {
             exit={{ opacity: 0, scale: 0.96, y: -10 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
             className="relative w-full max-w-2xl px-4 z-50 overflow-hidden">
-            <div className="bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl border border-white/12 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-xl w-full max-w-2xl flex flex-col min-h-[400px] max-h-[80vh]">
+            <div className="bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl border border-foreground/12 shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] rounded-xl w-full max-w-2xl flex flex-col min-h-[400px] max-h-[80vh]">
               <AnimatePresence mode="wait">
                 {currentView === "search" && (
                   <motion.div
@@ -105,7 +108,7 @@ export default function SearchModal() {
                       label="Global Command Menu"
                       shouldFilter={true}>
                       {/* Top Row: Search Input and Buttons */}
-                      <div className="flex items-center border-b border-white/12 px-4">
+                      <div className="flex items-center border-b border-foreground/12 px-4">
                         <Search className="mr-3 h-5 w-5 text-muted-foreground" />
                         <Command.Input
                           autoFocus
@@ -121,9 +124,9 @@ export default function SearchModal() {
                             <Phone className="h-4 w-4" />
                           </button>
                           <button
-                            onClick={() => {}}
+                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                             className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-primary hover:bg-accent">
-                            <Moon className="h-4 w-4" />
+                            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                           </button>
                           <button
                             onClick={() => setIsOpen(false)}
@@ -160,7 +163,7 @@ export default function SearchModal() {
 
                         <Command.Group
                           heading={
-                            <div className="px-2 pb-2 pt-4 text-xs text-muted-foreground border-t border-white/12">
+                            <div className="px-2 pb-2 pt-4 text-xs text-muted-foreground border-t border-foreground/12">
                               Pages
                             </div>
                           }>
@@ -277,7 +280,7 @@ export default function SearchModal() {
 
                         <Command.Group
                           heading={
-                            <div className="px-2 pb-2 pt-4 text-xs text-muted-foreground border-t border-white/12">
+                            <div className="px-2 pb-2 pt-4 text-xs text-muted-foreground border-t border-foreground/12">
                               Connect
                             </div>
                           }>
@@ -355,9 +358,9 @@ export default function SearchModal() {
                     </div>
 
                     {/* Message Card */}
-                    <div className="bg-white/5 border border-white/12 rounded-xl flex flex-col mb-4 overflow-hidden focus-within:ring-1 focus-within:ring-primary/20 transition-shadow">
-                      <div className="p-4 border-b border-white/12 flex items-center gap-3 bg-white/5">
-                        <div className="h-8 w-8 rounded-full overflow-hidden bg-white/10 border border-white/10">
+                    <div className="bg-foreground/5 border border-foreground/12 rounded-xl flex flex-col mb-4 overflow-hidden focus-within:ring-1 focus-within:ring-primary/20 transition-shadow">
+                      <div className="p-4 border-b border-foreground/12 flex items-center gap-3 bg-foreground/5">
+                        <div className="h-8 w-8 rounded-full overflow-hidden bg-foreground/10 border border-foreground/10">
                           <Image
                             src="https://i.pravatar.cc/100?img=4"
                             alt="Rashedul"
@@ -384,7 +387,7 @@ export default function SearchModal() {
                         onChange={(e) => setMessage(e.target.value)}
                       />
 
-                      <div className="p-3 border-t border-white/12 flex items-center justify-between bg-white/5">
+                      <div className="p-3 border-t border-foreground/12 flex items-center justify-between bg-foreground/5">
                         <div className="flex items-center gap-3 text-[10px] text-muted-foreground font-medium">
                           <span>Enter to continue</span>
                           <span>Shift+Enter new line</span>
@@ -402,9 +405,9 @@ export default function SearchModal() {
                       {/* Book a call */}
                       <button
                         onClick={() => runCommand(() => router.push("/book"))}
-                        className="flex flex-col items-start p-4 bg-white/5 border border-white/12 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 group text-left">
+                        className="flex flex-col items-start p-4 bg-foreground/5 border border-foreground/12 rounded-xl hover:bg-foreground/10 hover:border-foreground/20 transition-all duration-300 group text-left">
                         <div className="flex items-center mb-3">
-                          <div className="h-8 w-8 rounded-full overflow-hidden bg-white/5 border-2 border-white/10 z-10">
+                          <div className="h-8 w-8 rounded-full overflow-hidden bg-foreground/5 border-2 border-foreground/10 z-10">
                             <Image
                               src="https://i.pravatar.cc/100?img=4"
                               alt="Rashedul"
@@ -434,8 +437,8 @@ export default function SearchModal() {
                                 "mailto:hello@rashedul.com"),
                           )
                         }
-                        className="flex flex-col items-start p-4 bg-white/5 border border-white/12 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 group text-left">
-                        <div className="h-8 w-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-3 text-muted-foreground group-hover:text-primary group-hover:bg-white/10 transition-colors">
+                        className="flex flex-col items-start p-4 bg-foreground/5 border border-foreground/12 rounded-xl hover:bg-foreground/10 hover:border-foreground/20 transition-all duration-300 group text-left">
+                        <div className="h-8 w-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center mb-3 text-muted-foreground group-hover:text-primary group-hover:bg-foreground/10 transition-colors">
                           <Mail className="h-4 w-4" />
                         </div>
                         <span className="text-sm font-medium text-primary mb-1 group-hover:text-primary transition-colors">
@@ -519,7 +522,7 @@ export default function SearchModal() {
                           <input
                             type="text"
                             placeholder="John Doe"
-                            className="bg-white/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-white/20 transition-all"
+                            className="bg-foreground/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-all"
                           />
                         </div>
                         <div className="flex flex-col gap-1.5">
@@ -529,7 +532,7 @@ export default function SearchModal() {
                           <input
                             type="email"
                             placeholder="john@example.com"
-                            className="bg-white/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-white/20 transition-all"
+                            className="bg-foreground/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-all"
                           />
                         </div>
                       </div>
@@ -542,7 +545,7 @@ export default function SearchModal() {
                           <input
                             type="tel"
                             placeholder="+1 (555) 000-0000"
-                            className="bg-white/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-white/20 transition-all"
+                            className="bg-foreground/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-all"
                           />
                         </div>
                         <div className="flex flex-col gap-1.5">
@@ -552,7 +555,7 @@ export default function SearchModal() {
                           <input
                             type="text"
                             placeholder="Project Inquiry"
-                            className="bg-white/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-white/20 transition-all"
+                            className="bg-foreground/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-all"
                           />
                         </div>
                       </div>
@@ -562,7 +565,7 @@ export default function SearchModal() {
                           Description
                         </label>
                         <textarea
-                          className="bg-white/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-white/20 transition-all h-32 resize-none"
+                          className="bg-foreground/5 border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20 transition-all h-32 resize-none"
                           placeholder="Hey Rashedul, I have a project idea..."
                           value={message}
                           onChange={(e) => setMessage(e.target.value)}

@@ -76,10 +76,10 @@ export default function LinksPage() {
             
             {/* Header */}
             <div className="mb-16 text-center pt-8">
-              <p className="mb-4 font-semibold text-neutral-400 text-xs uppercase tracking-[0.2em]">
+              <p className="mb-4 font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em]">
                 NETWORK
               </p>
-              <h1 className="font-instrument-serif text-5xl md:text-6xl tracking-tight text-white">
+              <h1 className="font-instrument-serif text-5xl md:text-6xl tracking-tight text-foreground">
                 Connect With{" "}
                 <span
                   className="italic"
@@ -97,15 +97,15 @@ export default function LinksPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative">
               
               {/* Vertical Dashed Line Divider (desktop only) */}
-              <div className="hidden lg:block absolute top-0 bottom-0 left-[30%] w-px border-l border-dashed border-white/10" />
+              <div className="hidden lg:block absolute top-0 bottom-0 left-[30%] w-px border-l border-dashed border-foreground/10" />
 
               {/* Left Column: Profile Card */}
               <div className="lg:col-span-4">
-                <div className="p-8 rounded-[2rem] bg-[#121212] border border-white/5 shadow-2xl flex flex-col items-center sticky top-24">
+                <div className="p-8 rounded-[2rem] bg-[hsl(var(--background))] border border-foreground/5 shadow-2xl flex flex-col items-center sticky top-24">
                   
                   {/* Avatar */}
                   <div className="relative mb-6">
-                    <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-white/10 bg-neutral-800 ">
+                    <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-foreground/10 bg-muted ">
                       {/* You can replace this placeholder with an actual Image component once you have the photo */}
                       <Image
                         alt="Rashedul Islam — Full Stack Developer"
@@ -118,35 +118,35 @@ export default function LinksPage() {
                       />
                     </div>
                     {/* Online Dot */}
-                    <div className="absolute bottom-1 right-1 w-6 h-6 rounded-full bg-[#121212] flex items-center justify-center">
-                      <div className="w-4 h-4 rounded-full bg-emerald-500 border border-[#121212]" />
+                    <div className="absolute bottom-1 right-1 w-6 h-6 rounded-full bg-[hsl(var(--background))] flex items-center justify-center">
+                      <div className="w-4 h-4 rounded-full bg-emerald-500 border border-[hsl(var(--background))]" />
                     </div>
                   </div>
 
                   {/* Name & Badges */}
-                  <h2 className="text-2xl font-bold text-white mb-4 font-instrument-serif tracking-wide">
+                  <h2 className="text-2xl font-bold text-foreground mb-4 font-instrument-serif tracking-wide">
                     Rashedul Islam
                   </h2>
                   <div className="flex items-center gap-3 mb-8">
-                    <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-400 font-medium">
+                    <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-xs text-muted-foreground font-medium">
                       Developer
                     </span>
-                    <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-400 font-medium">
+                    <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-xs text-muted-foreground font-medium">
                       Freelancer
                     </span>
                   </div>
 
                   {/* Dashed Separator */}
-                  <div className="w-full border-t border-dashed border-white/20 mb-8" />
+                  <div className="w-full border-t border-dashed border-foreground/20 mb-8" />
 
                   {/* Details */}
                   <div className="w-full space-y-4 mb-8">
-                    <div className="flex items-center gap-3 text-sm text-neutral-400">
-                      <MapPin className="w-4 h-4 text-neutral-500" />
+                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                      <MapPin className="w-4 h-4 text-muted-foreground" />
                       <span>Dhaka, Bangladesh</span>
                     </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-400">
-                      <Mail className="w-4 h-4 text-neutral-500" />
+                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                      <Mail className="w-4 h-4 text-muted-foreground" />
                       <span>rashedulraha.bd@gmail.com</span>
                     </div>
                   </div>
@@ -155,28 +155,28 @@ export default function LinksPage() {
                   <div className="w-full space-y-3">
                     <a 
                       href="/contact" 
-                      className="w-full flex items-center justify-between p-3 rounded-xl bg-white text-black hover:bg-neutral-200 transition-colors"
+                      className="w-full flex items-center justify-between p-3 rounded-xl bg-white text-foreground hover:bg-secondary transition-colors"
                     >
                       <div className="flex items-center gap-2 font-semibold text-sm">
                         <BookOpen className="w-4 h-4" />
                         Book a Call
                       </div>
-                      <ArrowUpRight className="w-4 h-4 text-neutral-500" />
+                      <ArrowUpRight className="w-4 h-4 text-muted-foreground" />
                     </a>
                     
                     <div className="flex items-center gap-3 w-full">
                       <Link 
                         href="/" 
-                        className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/5 text-white hover:bg-white/10 transition-colors text-sm font-medium"
+                        className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-foreground/5 border border-foreground/5 text-foreground hover:bg-foreground/10 transition-colors text-sm font-medium"
                       >
-                        <Globe className="w-4 h-4 text-neutral-400" />
+                        <Globe className="w-4 h-4 text-muted-foreground" />
                         Website
                       </Link>
                       <a 
                         href="mailto:rashedulraha.bd@gmail.com" 
-                        className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/5 text-white hover:bg-white/10 transition-colors text-sm font-medium"
+                        className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-foreground/5 border border-foreground/5 text-foreground hover:bg-foreground/10 transition-colors text-sm font-medium"
                       >
-                        <Mail className="w-4 h-4 text-neutral-400" />
+                        <Mail className="w-4 h-4 text-muted-foreground" />
                         Email
                       </a>
                     </div>
@@ -191,10 +191,10 @@ export default function LinksPage() {
                 {/* Code & Craft Section */}
                 <section>
                   <div className="flex items-center gap-4 mb-6">
-                    <h3 className="text-xs font-semibold text-neutral-500 uppercase tracking-widest shrink-0">
+                    <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest shrink-0">
                       CODE & CRAFT
                     </h3>
-                    <div className="w-full border-t border-dashed border-white/10" />
+                    <div className="w-full border-t border-dashed border-foreground/10" />
                   </div>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -206,16 +206,16 @@ export default function LinksPage() {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/5 hover:border-white/10 transition-all duration-300"
+                          className="group flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-foreground/5 hover:bg-foreground/5 hover:border-foreground/10 transition-all duration-300"
                         >
-                          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors shrink-0">
-                            <Icon className="w-5 h-5 text-neutral-400 group-hover:text-white transition-colors" />
+                          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground/5 border border-foreground/10 group-hover:bg-foreground/10 transition-colors shrink-0">
+                            <Icon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                           </div>
                           <div className="min-w-0">
-                            <h4 className="text-sm font-semibold text-white mb-1 truncate">
+                            <h4 className="text-sm font-semibold text-foreground mb-1 truncate">
                               {link.title}
                             </h4>
-                            <p className="text-xs text-neutral-500 font-mono truncate">
+                            <p className="text-xs text-muted-foreground font-mono truncate">
                               {link.subtitle}
                             </p>
                           </div>
@@ -228,10 +228,10 @@ export default function LinksPage() {
                 {/* Connect Section */}
                 <section>
                   <div className="flex items-center gap-4 mb-6">
-                    <h3 className="text-xs font-semibold text-neutral-500 uppercase tracking-widest shrink-0">
+                    <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest shrink-0">
                       CONNECT
                     </h3>
-                    <div className="w-full border-t border-dashed border-white/10" />
+                    <div className="w-full border-t border-dashed border-foreground/10" />
                   </div>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -243,16 +243,16 @@ export default function LinksPage() {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:bg-white/5 hover:border-white/10 transition-all duration-300"
+                          className="group flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-foreground/5 hover:bg-foreground/5 hover:border-foreground/10 transition-all duration-300"
                         >
-                          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors shrink-0">
-                            <Icon className="w-5 h-5 text-neutral-400 group-hover:text-white transition-colors" />
+                          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-foreground/5 border border-foreground/10 group-hover:bg-foreground/10 transition-colors shrink-0">
+                            <Icon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                           </div>
                           <div className="min-w-0">
-                            <h4 className="text-sm font-semibold text-white mb-1 truncate">
+                            <h4 className="text-sm font-semibold text-foreground mb-1 truncate">
                               {link.title}
                             </h4>
-                            <p className="text-xs text-neutral-500 font-mono truncate">
+                            <p className="text-xs text-muted-foreground font-mono truncate">
                               {link.subtitle}
                             </p>
                           </div>
