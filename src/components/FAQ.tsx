@@ -92,7 +92,7 @@ export default function FAQ() {
             textShadow:
               "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
           }}>
-          <p className="mb-4 font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
+          <p className="mb-4 font-semibold text-primary text-xs uppercase tracking-widest">
             Explore My Site
           </p>
           <span className="inline-block">
@@ -120,14 +120,14 @@ export default function FAQ() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-1 gap-3 border-y md:grid-cols-12">
+          className="grid grid-cols-1 gap-3 border-y border-white/12 md:grid-cols-12">
           {/* Card 1 - Uses */}
           <motion.div
             whileHover={{ y: -4 }}
             transition={{ duration: 0.2 }}
             className="col-span-1 md:col-span-6 lg:col-span-4">
             <a
-              className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-72"
+              className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] cursor-pointer h-72"
               href="/uses">
               <div className="size-full">
                 <div className="mt-10 flex items-center justify-center gap-3 md:mt-12">
@@ -159,22 +159,22 @@ export default function FAQ() {
               </div>
 
               <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 w-full text-center">
-                <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+                <p className="text-muted-foreground text-xs uppercase transition-colors duration-500 group-hover:text-primary/80">
                   {cards[0].icon} {cards[0].title}
                 </p>
-                <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
+                <p className="text-lg text-foreground tracking-wide">
                   {cards[0].description}
                 </p>
               </div>
 
-              <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
+              <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-gradient-to-br from-transparent via-transparent to-white/5 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
 
               <motion.div
                 initial={{ y: 0, opacity: 0 }}
                 whileHover={{ y: -2, opacity: 1 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/10 max-md:border dark:bg-white/10 transition-all duration-300 ease-out">
-                <ArrowRight className="size-[18px] text-neutral-700 dark:text-neutral-200" />
+                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
+                <ArrowRight className="size-[18px] text-primary transition-colors duration-300" />
               </motion.div>
             </a>
           </motion.div>
@@ -185,7 +185,7 @@ export default function FAQ() {
             transition={{ duration: 0.2 }}
             className="col-span-1 md:col-span-6 lg:col-span-4">
             <a
-              className="group relative flex w-full flex-col justify-between rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-72 overflow-hidden"
+              className="group relative flex w-full flex-col justify-between rounded-xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] cursor-pointer h-72 overflow-hidden"
               href="/about">
               <div className="size-full">
                 <div className="absolute inset-x-0 -bottom-4 flex justify-center">
@@ -222,22 +222,22 @@ export default function FAQ() {
               </div>
 
               <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 absolute top-0 left-0 w-full text-center">
-                <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+                <p className="text-muted-foreground text-xs uppercase transition-colors duration-500 group-hover:text-primary/80">
                   {cards[1].icon} {cards[1].title}
                 </p>
-                <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
+                <p className="text-lg text-foreground tracking-wide">
                   {cards[1].description}
                 </p>
               </div>
 
-              <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
+              <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-gradient-to-br from-transparent via-transparent to-white/5 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
 
               <motion.div
                 initial={{ y: 0, opacity: 0 }}
                 whileHover={{ y: -2, opacity: 1 }}
                 transition={{ duration: 0.2 }}
-                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/10 max-md:border dark:bg-white/10 transition-all duration-300 ease-out">
-                <ArrowRight className="size-[18px] text-neutral-700 dark:text-neutral-200" />
+                className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
+                <ArrowRight className="size-[18px] text-primary transition-colors duration-300" />
               </motion.div>
             </a>
           </motion.div>
@@ -249,7 +249,7 @@ export default function FAQ() {
             className="col-span-1 md:col-span-6 lg:col-span-4">
             <div className="relative w-full h-72">
               <a
-                className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer size-full"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] cursor-pointer size-full"
                 href="/guestbook">
                 <div className="size-full">
                   <motion.div
@@ -526,22 +526,22 @@ export default function FAQ() {
                 </div>
 
                 <div className="pointer-events-none z-10 flex flex-col gap-1 p-5 w-full text-center">
-                  <p className="text-neutral-400 text-xs uppercase transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+                  <p className="text-muted-foreground text-xs uppercase transition-colors duration-500 group-hover:text-primary/80">
                     {cards[2].icon} {cards[2].title}
                   </p>
-                  <p className="text-lg text-neutral-700 tracking-wide dark:text-neutral-300">
+                  <p className="text-lg text-foreground tracking-wide">
                     {cards[2].description}
                   </p>
                 </div>
 
-                <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
+                <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-gradient-to-br from-transparent via-transparent to-white/5 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100" />
 
                 <motion.div
                   initial={{ y: 0, opacity: 0 }}
                   whileHover={{ y: -2, opacity: 1 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border-dashed bg-black/10 max-md:border dark:bg-white/10 transition-all duration-300 ease-out">
-                  <ArrowRight className="size-4.5 text-neutral-700 dark:text-neutral-200" />
+                  className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-white/12 bg-white/5 transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
+                  <ArrowRight className="size-4.5 text-primary transition-colors duration-300" />
                 </motion.div>
               </a>
             </div>
@@ -549,7 +549,7 @@ export default function FAQ() {
         </motion.div>
 
         {/* Bottom decorative line */}
-        <div aria-hidden="true" className="w-full border-t mt-8" />
+        <div aria-hidden="true" className="w-full border-t border-white/12 mt-8" />
       </section>
     </>
   );

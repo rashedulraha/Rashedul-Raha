@@ -64,7 +64,7 @@ export default function Blog() {
             textShadow:
               "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
           }}>
-          <p className="mb-4 font-normal text-black/80 text-xs uppercase tracking-widest dark:text-white/70">
+          <p className="mb-4 font-semibold text-primary text-xs uppercase tracking-widest">
             FROM THE DESK
           </p>
           <span className="inline-block">
@@ -109,9 +109,9 @@ export default function Blog() {
               whileHover={{ y: -6 }}
               onMouseEnter={() => setHoveredCard(post.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              className="group flex h-full flex-col rounded-3xl p-2.5 ring-1 ring-border transition-all duration-300 hover:bg-neutral-50 hover:shadow-xl dark:hover:bg-neutral-900/40">
+              className="group flex h-full flex-col rounded-3xl p-2.5 border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
               {/* Image */}
-              <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-900">
+              <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-white/5">
                 <motion.img
                   alt={post.title}
                   loading="lazy"
@@ -142,21 +142,21 @@ export default function Blog() {
 
               {/* Content */}
               <div className="flex flex-1 flex-col px-2 pt-4 pb-3">
-                <h3 className="font-semibold text-lg text-neutral-900 leading-snug transition-colors duration-300 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
+                <h3 className="font-semibold text-lg text-foreground leading-snug transition-all duration-300 ease-out group-hover:text-primary">
                   {post.title}
                 </h3>
-                <p className="mt-2 line-clamp-3 text-neutral-600 text-sm leading-relaxed dark:text-neutral-400">
+                <p className="mt-2 line-clamp-3 text-muted-foreground text-sm leading-relaxed">
                   {post.description}
                 </p>
 
                 {/* Footer */}
-                <div className="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-neutral-100 dark:border-neutral-800">
-                  <div className="flex items-center gap-3 text-[11px] text-neutral-500 uppercase tracking-wide dark:text-neutral-500">
+                <div className="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-white/12">
+                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground uppercase tracking-wide">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       {post.readTime}
                     </span>
-                    <span className="text-neutral-300 dark:text-neutral-700">
+                    <span className="text-white/20">
                       ·
                     </span>
                     <span className="flex items-center gap-1">
@@ -168,9 +168,9 @@ export default function Blog() {
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex shrink-0 items-center gap-2 text-neutral-600 text-xs tracking-wide transition-colors duration-300 group-hover:text-indigo-600 dark:text-neutral-400 dark:group-hover:text-indigo-400">
+                    className="flex shrink-0 items-center gap-2 text-muted-foreground text-xs tracking-wide transition-colors duration-300 group-hover:text-primary">
                     <span className="hidden sm:inline">Read article</span>
-                    <div className="size-7 overflow-hidden rounded-lg border border-neutral-300 border-dashed bg-overlay-soft transition-all duration-500 group-hover:border-indigo-400 group-hover:bg-indigo-50 dark:border-white/10 dark:group-hover:border-indigo-400/30 dark:group-hover:bg-indigo-500/10">
+                    <div className="size-7 overflow-hidden rounded-lg border border-white/12 border-dashed bg-white/5 transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
                       <motion.div
                         initial={{ x: -8 }}
                         animate={{ x: 0 }}
@@ -200,13 +200,13 @@ export default function Blog() {
           transition={{ duration: 0.5, delay: 0.6 }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="group flex w-fit items-center justify-center gap-2 text-neutral-800 text-xs uppercase transition-colors hover:text-indigo-600 dark:text-white/80 mx-auto mt-pagebuilder my-5"
+          className="group flex w-fit items-center justify-center gap-2 text-muted-foreground text-xs uppercase transition-colors hover:text-primary mx-auto mt-pagebuilder my-5"
           href="/blog">
           Read more posts
           <motion.div
             whileHover={{ rotate: 45 }}
             transition={{ duration: 0.2 }}
-            className="relative size-7 overflow-hidden rounded-lg border border-neutral-300 border-dashed bg-overlay-soft transition-colors duration-500 group-hover:border-indigo-400 group-hover:bg-indigo-50 dark:border-white/10 dark:group-hover:border-indigo-400/30 dark:group-hover:bg-indigo-500/10">
+            className="relative size-7 overflow-hidden rounded-lg border border-white/12 border-dashed bg-white/5 transition-colors duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
             <motion.span
               initial={{ x: -20 }}
               animate={{ x: 0 }}

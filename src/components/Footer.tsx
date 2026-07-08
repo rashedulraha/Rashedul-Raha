@@ -59,11 +59,11 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="relative border rounded-2xl overflow-hidden bg-gradient-to-br from-background via-background/90 to-background/80">
+          className="relative border border-white/12 rounded-2xl overflow-hidden bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
           {/* Decorative gradient blobs */}
           <div className="absolute inset-0 z-0 pointer-events-none">
-            <div className="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-blue-500/5 blur-3xl" />
-            <div className="absolute -bottom-20 -left-20 w-48 h-48 rounded-full bg-purple-500/5 blur-3xl" />
+            <div className="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primary/5 blur-3xl" />
+            <div className="absolute -bottom-20 -left-20 w-48 h-48 rounded-full bg-primary/5 blur-3xl" />
           </div>
 
           {/* Main Content */}
@@ -76,11 +76,11 @@ export default function Footer() {
               className="hidden w-full flex-col justify-between px-6 py-8 text-sm max-lg:border-b lg:flex lg:w-[44%] lg:border-e lg:px-8 lg:pr-6">
               <div className="grow space-y-4">
                 <div className="flex items-center gap-3">
-                  <h2 className="text-lg font-semibold text-neutral-700 tracking-wide dark:text-neutral-300">
+                  <h2 className="text-lg font-semibold text-foreground tracking-wide">
                     Rashedul Islam
                   </h2>
                 </div>
-                <p className="w-60 text-sm text-neutral-500 leading-relaxed dark:text-neutral-400">
+                <p className="w-60 text-sm text-muted-foreground leading-relaxed">
                   A full-stack developer, freelancer &amp; problem solver.
                   Thanks for checking out my site!
                 </p>
@@ -94,7 +94,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="p-2 rounded-full bg-neutral-100/50 hover:bg-neutral-200/50 dark:bg-neutral-800/50 dark:hover:bg-neutral-700/50 transition-all duration-300 text-neutral-600 hover:text-indigo-600 dark:text-neutral-400 dark:hover:text-indigo-400">
+                      className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 ease-out text-muted-foreground hover:text-primary">
                       <social.icon className="w-4 h-4" />
                     </motion.a>
                   ))}
@@ -111,7 +111,7 @@ export default function Footer() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.3, delay: 0.2 }}
                   className="flex flex-col gap-3">
-                  <h4 className="px-2 text-[10px] text-neutral-400 uppercase tracking-[0.2em] font-semibold">
+                  <h4 className="px-2 text-xs text-muted-foreground/60 uppercase tracking-wider font-semibold">
                     General
                   </h4>
                   <ul className="flex flex-col flex-wrap items-start gap-y-2 text-sm">
@@ -119,7 +119,7 @@ export default function Footer() {
                       <li key={link.name}>
                         <a
                           href={link.href}
-                          className="group relative inline-flex items-center px-2 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors duration-300">
+                          className="group relative inline-flex items-center px-2 text-muted-foreground hover:text-primary transition-all duration-300 ease-out">
                           {link.name}
                           <ArrowRight className="w-3 h-3 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                         </a>
@@ -134,7 +134,7 @@ export default function Footer() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.3, delay: 0.3 }}
                   className="flex flex-col gap-3">
-                  <h4 className="px-2 text-[10px] text-neutral-400 uppercase tracking-[0.2em] font-semibold">
+                  <h4 className="px-2 text-xs text-muted-foreground/60 uppercase tracking-wider font-semibold">
                     Specifics
                   </h4>
                   <ul className="flex flex-col flex-wrap items-start gap-y-2 text-sm">
@@ -142,7 +142,7 @@ export default function Footer() {
                       <li key={link.name}>
                         <a
                           href={link.href}
-                          className="group relative inline-flex items-center px-2 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors duration-300">
+                          className="group relative inline-flex items-center px-2 text-muted-foreground hover:text-primary transition-all duration-300 ease-out">
                           {link.name}
                           <ArrowRight className="w-3 h-3 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                         </a>
@@ -157,7 +157,7 @@ export default function Footer() {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.3, delay: 0.4 }}
                   className="flex flex-col gap-3">
-                  <h4 className="px-2 text-[10px] text-neutral-400 uppercase tracking-[0.2em] font-semibold">
+                  <h4 className="px-2 text-xs text-muted-foreground/60 uppercase tracking-wider font-semibold">
                     More
                   </h4>
                   <ul className="flex flex-col flex-wrap items-start gap-y-2 text-sm">
@@ -165,7 +165,7 @@ export default function Footer() {
                       <li key={link.name}>
                         <a
                           href={link.href}
-                          className="group relative inline-flex items-center px-2 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors duration-300">
+                          className="group relative inline-flex items-center px-2 text-muted-foreground hover:text-primary transition-all duration-300 ease-out">
                           {link.name}
                           <ArrowRight className="w-3 h-3 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                         </a>
@@ -182,12 +182,12 @@ export default function Footer() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.3, delay: 0.5 }}
-            className="relative z-10 flex flex-col items-center justify-center gap-3 border-t p-4 md:flex-row">
+            className="relative z-10 flex flex-col items-center justify-center gap-3 border-t border-white/12 p-4 md:flex-row">
             <div className="flex flex-col items-center gap-2 text-center md:flex-row md:gap-4">
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-xs text-muted-foreground">
                 © {new Date().getFullYear()}{" "}
                 <a
-                  className="font-medium text-neutral-700 transition-colors hover:text-indigo-600 hover:underline hover:underline-offset-4 dark:text-neutral-300 dark:hover:text-indigo-400"
+                  className="font-medium text-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
                   rel="noopener noreferrer"
                   target="_blank"
                   href="https://github.com/rashedulraha">
@@ -197,23 +197,23 @@ export default function Footer() {
               </p>
               <div className="flex items-center gap-3 text-xs">
                 <a
-                  className="text-neutral-500 transition-colors hover:text-indigo-600 hover:underline hover:underline-offset-4 dark:text-neutral-400 dark:hover:text-indigo-400"
+                  className="text-muted-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
                   href="/legal/privacy">
                   Privacy
                 </a>
-                <span className="text-neutral-300 dark:text-neutral-700">
+                <span className="text-muted-foreground/30">
                   ·
                 </span>
                 <a
-                  className="text-neutral-500 transition-colors hover:text-indigo-600 hover:underline hover:underline-offset-4 dark:text-neutral-400 dark:hover:text-indigo-400"
+                  className="text-muted-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
                   href="/legal/terms">
                   Terms
                 </a>
-                <span className="text-neutral-300 dark:text-neutral-700">
+                <span className="text-muted-foreground/30">
                   ·
                 </span>
                 <a
-                  className="text-neutral-500 transition-colors hover:text-indigo-600 hover:underline hover:underline-offset-4 dark:text-neutral-400 dark:hover:text-indigo-400"
+                  className="text-muted-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
                   href="/sitemap.xml">
                   Sitemap
                 </a>
@@ -221,8 +221,8 @@ export default function Footer() {
             </div>
 
             {/* Built with badge */}
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-neutral-100/50 dark:bg-neutral-800/50 border border-neutral-200/50 dark:border-neutral-700/50">
-              <span className="text-[9px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-medium">
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/12">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">
                 Built with Next.js
               </span>
             </div>
@@ -231,7 +231,7 @@ export default function Footer() {
           {/* Decorative pattern at bottom */}
           <div
             aria-hidden="true"
-            className="relative z-10 h-6 w-full border-t bg-size-[6px_6px] bg-[linear-gradient(-45deg,var(--color-neutral-200)_12.5%,transparent_12.5%,transparent_50%,var(--color-neutral-200)_50%,var(--color-neutral-200)_62.5%,transparent_62.5%,transparent_100%)] dark:bg-[linear-gradient(-45deg,var(--color-neutral-800)_12.5%,transparent_12.5%,transparent_50%,var(--color-neutral-800)_50%,var(--color-neutral-800)_62.5%,transparent_62.5%,transparent_100%)] opacity-50"
+            className="relative z-10 h-6 w-full border-t border-white/12 bg-size-[6px_6px] bg-[linear-gradient(-45deg,rgba(255,255,255,0.05)_12.5%,transparent_12.5%,transparent_50%,rgba(255,255,255,0.05)_50%,rgba(255,255,255,0.05)_62.5%,transparent_62.5%,transparent_100%)] opacity-50"
           />
         </motion.div>
       </footer>

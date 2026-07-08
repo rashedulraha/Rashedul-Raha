@@ -60,7 +60,7 @@ export default function Work() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full pt-8 md:pt-16 bg-background"
+      className="relative w-full pt-8 md:pt-16"
       id="work">
       {/* Header */}
       <motion.div
@@ -92,9 +92,9 @@ export default function Work() {
             {/* The flex and items-center here ensure exact vertical middle alignment */}
             <div className="lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center pb-8 lg:pb-0 z-10">
               {/* The Outer Premium Frame Layer */}
-              <div className="relative w-full max-w-xl mx-auto p-2.5 md:p-3 rounded-4xl bg-card border border-border/60 shadow-2xl transition-all duration-700 hover:shadow-primary/5">
+              <div className="relative w-full max-w-xl mx-auto p-2.5 md:p-3 rounded-4xl bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl border border-white/12 shadow-[0_8px_32px_rgba(0,0,0,0.3)] transition-all duration-700 hover:border-white/20">
                 {/* Inner Image Container */}
-                <div className="relative w-full h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden bg-muted">
+                <div className="relative w-full h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden bg-white/5">
                   {projects.map((project, index) => (
                     <motion.div
                       key={project.id}
@@ -153,23 +153,23 @@ export default function Work() {
                 {/* view all project Button */}
                 <Link
                   href="/work"
-                  className="group relative inline-flex mt-4 cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/20 bg-black/10 py-1 pr-1 pl-4 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/40 hover:bg-black hover:opacity-100 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20 w-full block text-center"
+                  className="group relative inline-flex mt-4 cursor-pointer items-center justify-between overflow-hidden rounded-full border border-white/12 bg-white/5 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-white/20 hover:bg-white/10 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] active:scale-[0.98] w-full block text-center"
                 >
-                  <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">
+                  <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
                     View all projects
                   </span>
                   <span
                     aria-hidden="true"
-                    className="absolute inset-y-1 right-1 w-10 rounded-full bg-black transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)] dark:bg-white"
+                    className="absolute inset-y-1 right-1 w-10 rounded-full bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)]"
                   />
-                  <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-black p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent dark:bg-white">
+                  <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-primary p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent">
                     <svg
                       fill="none"
                       height={24}
                       viewBox="0 0 24 24"
                       width={24}
                       xmlns="http://www.w3.org/2000/svg"
-                      className="size-4.5 text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                      className="size-4.5 text-primary-foreground transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
                     >
                       <path
                         d="M18.5 12L4.99997 12"
@@ -192,7 +192,7 @@ export default function Work() {
                       viewBox="0 0 24 24"
                       width={24}
                       xmlns="http://www.w3.org/2000/svg"
-                      className="absolute size-4.5 -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                      className="absolute size-4.5 -translate-x-6 text-primary-foreground opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
                     >
                       <path
                         d="M18.5 12L4.99997 12"
@@ -268,7 +268,7 @@ export default function Work() {
                       return (
                         <span
                           key={tag}
-                          className="flex items-center gap-1.5 rounded-full bg-accent/50 border border-border/50 px-3 py-1.5">
+                          className="flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-3 py-1.5">
                           {icon && (
                             <Image
                               alt={`${tag} icon`}
@@ -299,7 +299,7 @@ export default function Work() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity shadow-sm">
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all duration-300 hover:scale-[1.03] shadow-sm">
                       View Live
                       <ExternalLink className="w-4 h-4" />
                     </a>
@@ -307,7 +307,7 @@ export default function Work() {
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-medium hover:bg-accent/80 border border-border transition-colors shadow-sm">
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 text-sm font-medium transition-all duration-300 hover:scale-[1.03] shadow-sm">
                       <FaGithub className="w-4 h-4" />
                       Code
                     </a>

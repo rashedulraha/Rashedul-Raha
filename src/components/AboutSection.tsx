@@ -40,9 +40,9 @@ const TextTooltip = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-xl bg-card border border-border shadow-xl z-50 pointer-events-none flex flex-col gap-2">
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-xl bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl border border-white/12 shadow-[0_8px_32px_rgba(0,0,0,0.3)] z-50 pointer-events-none flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-md bg-accent/50 text-primary">
+              <div className="p-1.5 rounded-md bg-white/5 border border-white/10 text-primary">
                 <Icon className="w-4 h-4" />
               </div>
               <span className="text-sm font-semibold text-foreground">
@@ -106,9 +106,9 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="w-full max-w-md lg:w-[45%] relative">
             {/* The Outer Frame Layer */}
-            <div className="relative p-2.5 rounded-3xl bg-card border border-border/60 shadow-2xl">
+            <div className="relative p-2.5 rounded-3xl bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl border border-white/12 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-white/20 transition-colors duration-300">
               {/* Image Container */}
-              <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-muted">
+              <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-white/5">
                 <Image
                   src="/personal_img/rashedul-about.jpeg"
                   alt="Rashedul Islam - Full Stack Developer"
@@ -125,8 +125,8 @@ export default function AboutSection() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.4, type: "spring" }}
-                className="absolute -bottom-6 -right-6 lg:-right-8 bg-card rounded-2xl shadow-xl border border-border p-4 flex items-center gap-4 hover:-translate-y-1 transition-transform">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                className="absolute -bottom-6 -right-6 lg:-right-8 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/12 hover:border-white/20 p-4 flex items-center gap-4 hover:-translate-y-1 transition-all duration-300">
+                <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
                   <Code className="w-6 h-6 text-primary" />
                 </div>
                 <div>
@@ -211,7 +211,7 @@ export default function AboutSection() {
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center justify-center p-4 rounded-2xl bg-accent/30 border border-border/40 hover:bg-accent/50 transition-colors">
+                  className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 ease-out">
                   <p className="text-2xl font-bold text-foreground mb-1">
                     {stat.value}
                   </p>
@@ -233,22 +233,22 @@ export default function AboutSection() {
                   }),
                 )
               }
-              className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/20 bg-black/10 py-1 pr-1 pl-4 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/40 hover:bg-black hover:opacity-100 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20">
-              <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">
+              className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-white/12 bg-white/5 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-white/20 hover:bg-white/10 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] active:scale-[0.98]">
+              <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
                 Let&apos;s Connect
               </span>
               <span
                 aria-hidden="true"
-                className="absolute inset-y-1 right-1 w-10 rounded-full bg-black transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)] dark:bg-white"
+                className="absolute inset-y-1 right-1 w-10 rounded-full bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)]"
               />
-              <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-black p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent dark:bg-white">
+              <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-primary p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent">
                 <svg
                   fill="none"
                   height={24}
                   viewBox="0 0 24 24"
                   width={24}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="size-4.5 text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                  className="size-4.5 text-primary-foreground transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 ease-[cubic-bezier(0.25,0.1,0.25,1)]">
                   <path
                     d="M18.5 12L4.99997 12"
                     stroke="currentColor"
@@ -270,7 +270,7 @@ export default function AboutSection() {
                   viewBox="0 0 24 24"
                   width={24}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="absolute size-4.5 -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                  className="absolute size-4.5 -translate-x-6 text-primary-foreground opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 ease-[cubic-bezier(0.25,0.1,0.25,1)]">
                   <path
                     d="M18.5 12L4.99997 12"
                     stroke="currentColor"

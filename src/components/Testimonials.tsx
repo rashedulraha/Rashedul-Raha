@@ -117,27 +117,27 @@ export default function Testimonials() {
       className="py-16 lg:py-20  relative overflow-hidden"
       id="testimonials">
       {/* Background Gradients for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-500/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/12 bg-white/5 backdrop-blur-xl mb-6">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <p className="font-medium text-xs uppercase tracking-widest text-purple-200">
+            <p className="font-medium text-xs uppercase tracking-widest text-primary-foreground">
               Client Love
             </p>
           </div>
-          <h2 className="text-balance font-medium text-4xl tracking-tight sm:text-5xl md:text-6xl text-white">
+          <h2 className="text-balance font-medium text-4xl tracking-tight sm:text-5xl md:text-6xl text-foreground">
             Don&apos;t just take{" "}
-            <span className="italic text-purple-300">my word</span>
+            <span className="italic text-primary">my word</span>
             <br className="hidden sm:block" /> for it.
           </h2>
-          <p className="mt-6 text-lg text-white/60 leading-relaxed">
+          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
             Here’s what founders, marketers, and creative directors have to say
             about working together.
           </p>
@@ -153,7 +153,7 @@ export default function Testimonials() {
             return (
               <article
                 key={testimonial.id}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm p-8 snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04] hover:-translate-y-1 hover:shadow-2xl hover:shadow-purple-500/5">
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl p-8 snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] transition-all duration-300 hover:border-white/20 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:-translate-y-1">
                 {/* Quote Icon */}
                 <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
                   <svg
@@ -167,15 +167,15 @@ export default function Testimonials() {
                 </div>
 
                 <blockquote className="relative z-10 flex flex-col grow">
-                  <h3 className="mb-4 font-semibold text-xl text-white tracking-wide leading-snug">
+                  <h3 className="mb-4 font-semibold text-xl text-foreground tracking-wide leading-snug transition-colors duration-300 group-hover:text-primary">
                     &quot;{testimonial.title}&quot;
                   </h3>
-                  <p className="mb-8 font-light text-white/70 leading-relaxed text-sm sm:text-base flex-grow">
+                  <p className="mb-8 font-light text-muted-foreground leading-relaxed text-sm sm:text-base flex-grow">
                     {testimonial.message}
                   </p>
                 </blockquote>
 
-                <footer className="mt-auto flex items-center gap-4 relative z-10 pt-6 border-t border-white/5">
+                <footer className="mt-auto flex items-center gap-4 relative z-10 pt-6 border-t border-white/12">
                   <div className="relative">
                     <Image
                       alt={testimonial.name}
@@ -203,10 +203,10 @@ export default function Testimonials() {
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <cite className="font-medium text-white not-italic tracking-wide text-sm">
+                    <cite className="font-medium text-foreground not-italic tracking-wide text-sm">
                       {testimonial.name}
                     </cite>
-                    <p className="text-xs text-white/50 mt-0.5">
+                    <p className="text-xs text-muted-foreground/60 mt-0.5">
                       {testimonial.role}
                     </p>
                   </div>
@@ -219,13 +219,13 @@ export default function Testimonials() {
         {/* Bottom Controls */}
         <div className="flex items-center justify-center gap-4 mt-10 px-4">
           {/* Pagination Pill */}
-          <div className="flex items-center gap-2 rounded-full bg-black/40 border border-white/10 p-2 px-4 backdrop-blur-md ">
+          <div className="flex items-center gap-2 rounded-full bg-white/5 border border-white/12 p-2 px-4 backdrop-blur-xl">
             {testimonialsData.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goToSlide(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? "w-6 bg-purple-400" : "w-1.5 bg-white/20 hover:bg-white/40"}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-white/20 hover:bg-white/40"}`}
               />
             ))}
           </div>

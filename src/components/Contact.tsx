@@ -58,13 +58,13 @@ export default function Contact() {
           ))}
         </div>
 
-        <div aria-hidden="true" className="w-full border-t" />
+        <div aria-hidden="true" className="w-full border-t border-white/12" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="relative w-full overflow-hidden rounded-2xl ring-1 ring-border bg-gradient-to-b from-background/50 via-background to-background/80"
+          className="relative w-full overflow-hidden rounded-2xl border border-white/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
         >
           <div className="relative z-10 mx-auto flex w-full flex-col items-center justify-center gap-y-2 py-16 sm:py-20 text-center px-4">
             {/* Rotating Badge */}
@@ -188,23 +188,23 @@ export default function Contact() {
                     })
                   )
                 }
-                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-accent py-1 pr-1 pl-3 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-border hover:bg-primary hover:opacity-100 hover:shadow-black/20 hover:shadow-lg active:scale-[0.98] dark:border-border dark:bg-accent dark:hover:border-border dark:hover:bg-card  my-10"
+                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-white/12 bg-white/5 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-white/20 hover:bg-white/10 hover:shadow-[0_8px_32px_rgba(0,0,0,0.3)] active:scale-[0.98] my-10"
               >
-                <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-foreground dark:text-foreground dark:group-hover:text-foreground">
+                <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
                   Get In Touch
                 </span>
                 <span
                   aria-hidden="true"
-                  className="absolute inset-y-1 right-1 w-10 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)]"
+                  className="absolute inset-y-1 right-1 w-10 rounded-full bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)]"
                 />
-                <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent">
+                <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-primary p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent">
                   <svg
                     fill="none"
                     height={24}
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="size-[18px] text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                    className="size-[18px] text-primary-foreground transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
                   >
                     <path
                       d="M18.5 12L4.99997 12"
@@ -227,7 +227,7 @@ export default function Contact() {
                     viewBox="0 0 24 24"
                     width={24}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute size-[18px] -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                    className="absolute size-[18px] -translate-x-6 text-primary-foreground opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
                   >
                     <path
                       d="M18.5 12L4.99997 12"
@@ -285,16 +285,16 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 1 }}
               className="flex gap-2 mt-4"
             >
-              <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 text-xs font-medium border border-blue-500/20">
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-foreground text-xs font-medium">
                 React
               </span>
-              <span className="px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 text-xs font-medium border border-purple-500/20">
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-foreground text-xs font-medium">
                 Next.js
               </span>
-              <span className="px-3 py-1 rounded-full bg-pink-500/10 text-pink-600 text-xs font-medium border border-pink-500/20">
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-foreground text-xs font-medium">
                 TypeScript
               </span>
-              <span className="px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-600 text-xs font-medium border border-indigo-500/20">
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-foreground text-xs font-medium">
                 Tailwind
               </span>
             </motion.div>
@@ -389,7 +389,7 @@ export default function Contact() {
           </svg>
         </motion.span>
 
-        <div aria-hidden="true" className="w-full border-t" />
+        <div aria-hidden="true" className="w-full border-t border-white/12" />
       </section>
     </>
   );
