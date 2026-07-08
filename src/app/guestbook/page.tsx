@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
+
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import GuestbookGrid from "@/components/GuestbookGrid";
@@ -16,7 +16,7 @@ export default async function GuestbookPage() {
   return (
     <>
       <div className="bg-[#0b0b0b] min-h-screen text-foreground selection:bg-primary/30 relative">
-        <Navbar />
+
         
         {/* Crumpled paper texture background overlay (simulated with CSS pattern) */}
         <div className="fixed inset-0 z-0 pointer-events-none opacity-20"

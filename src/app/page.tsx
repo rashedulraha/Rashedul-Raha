@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Work from "@/components/Work";
@@ -28,7 +28,6 @@ export default function Home() {
             userSelect: "none",
           }}
         />
-        <Navbar />
         <main>
           <Hero />
           <div className="container relative flex flex-col max-sm:px-1 mx-auto ">

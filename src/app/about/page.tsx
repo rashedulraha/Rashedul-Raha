@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
+
 import Footer from "@/components/Footer";
 import AboutSection from "@/components/AboutSection";
 import { Metadata } from "next";
@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <>
       <div>
-        <Navbar />
+
         
         {/* Background gradient (glow) */}
         <div

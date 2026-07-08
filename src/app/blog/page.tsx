@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
+
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/lib/blog-data";
 import { Metadata } from "next";
@@ -14,7 +14,7 @@ export default function BlogPage() {
   return (
     <>
       <div className="bg-[#0b0b0b] min-h-screen text-foreground selection:bg-primary/30">
-        <Navbar />
+
         
         {/* Background gradient from hero */}
         <div

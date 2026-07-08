@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
+
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import { MapPin, Mail, Globe, ArrowUpRight, BookOpen, Send } from "lucide-react";
@@ -69,7 +69,7 @@ export default function LinksPage() {
           }}
         />
 
-        <Navbar />
+
 
         <main className="pt-32 pb-20 relative z-10">
           <div className="container mx-auto max-w-6xl px-4 sm:px-6">

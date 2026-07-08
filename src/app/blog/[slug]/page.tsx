@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
+
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
@@ -24,7 +24,7 @@ export default async function BlogDetail({
   return (
     <>
       <div>
-        <Navbar />
+
         
         {/* Background gradient from hero */}
         <div

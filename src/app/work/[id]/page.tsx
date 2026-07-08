@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
+
 import Footer from "@/components/Footer";
 import { projects } from "@/lib/work-data";
 import { notFound } from "next/navigation";
@@ -23,7 +23,7 @@ export default async function ProjectDetail({
   return (
     <>
       <div className="bg-[#0b0b0b] min-h-screen text-foreground selection:bg-primary/30">
-        <Navbar />
+
         
         {/* Background gradient from hero */}
         <div

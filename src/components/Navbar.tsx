@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -19,11 +19,12 @@ import {
   ListTodo,
   Laptop,
 } from "lucide-react";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import SearchModal from "./SearchModal";
 import { Button } from "./ui/button";
 
-// --- Data Configuration ---
+// ── Data Configuration ─────────────────────────────────
+
 const mainLinks = [
   { href: "/", label: "Home", icon: Home },
   { href: "/about", label: "About", icon: User },
@@ -69,46 +70,52 @@ const moreLinks = [
   },
 ];
 
-// Animation variants
+// ── Animation Variants ─────────────────────────────────
+
 const dropdownVariants: Variants = {
   hidden: {
     opacity: 0,
     height: 0,
-    transition: {
-      duration: 0.3,
-      ease: [0.4, 0, 0.2, 1],
-    },
+    transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] },
   },
   visible: {
     opacity: 1,
     height: "auto",
-    transition: {
-      duration: 0.4,
-      ease: [0.4, 0, 0.2, 1],
-    },
+    transition: { duration: 0.45, ease: [0.32, 0.72, 0, 1] },
   },
 };
 
 const mobileMenuVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: -8,
-    scale: 0.98,
-    transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
+    y: -12,
+    scale: 0.96,
+    filter: "blur(8px)",
+    transition: { duration: 0.25, ease: [0.32, 0.72, 0, 1] },
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.4,
+      ease: [0.32, 0.72, 0, 1],
+      type: "spring",
+      stiffness: 260,
+      damping: 24,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -8,
+    scale: 0.98,
+    filter: "blur(4px)",
+    transition: { duration: 0.2, ease: [0.32, 0.72, 0, 1] },
   },
 };
 
-const iconVariants: Variants = {
-  initial: { scale: 1, rotate: 0 },
-  hover: { scale: 1.08, rotate: 3, transition: { duration: 0.2 } },
-  tap: { scale: 0.95, transition: { duration: 0.1 } },
-};
+// ── Liquid Glass Navbar Component ──────────────────────
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -118,54 +125,43 @@ export default function Navbar() {
   const [showGreeting, setShowGreeting] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
   const navRef = useRef<HTMLElement>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasShownGreetingRef = useRef(false);
+  const prevPathnameRef = useRef(pathname);
 
-  // --- Get dynamic greeting based on time ---
-  const getGreeting = () => {
+  // ── Dynamic greeting based on time ─────────────────
+  const getGreeting = useMemo(() => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning";
     if (hour < 17) return "Good Afternoon";
     return "Good Evening";
-  };
+  }, []);
 
-  // --- Handle greeting display on reload only ---
+  // ── Greeting Logic: Only on RELOAD, not on navigation ─
   useEffect(() => {
-    // Check if this is a page reload
-    const isReload = window.performance?.navigation?.type === 1;
+    // Detect reload using modern Navigation API
+    const navEntries = performance.getEntriesByType(
+      "navigation"
+    ) as PerformanceNavigationTiming[];
+    const isReload = navEntries[0]?.type === "reload";
 
-    // Check if we've already shown greeting in this session
-    const greetingShown = sessionStorage.getItem("greetingShown");
-
-    // Only show greeting if:
-    // 1. It's a page reload
-    // 2. We haven't shown it yet in this session
-    if (isReload && !greetingShown && !hasShownGreetingRef.current) {
-      // Show greeting
-      const currentGreeting = getGreeting();
-      setGreeting(currentGreeting);
+    if (isReload && !hasShownGreetingRef.current) {
+      // It's a reload - show greeting
+      setGreeting(getGreeting);
       setShowGreeting(true);
       setIsNavVisible(false);
       hasShownGreetingRef.current = true;
 
-      // Hide greeting after 3 seconds
       const greetingTimer = setTimeout(() => {
         setShowGreeting(false);
-        setIsNavVisible(true);
-        // Mark that greeting has been shown in this session
-        sessionStorage.setItem("greetingShown", "true");
-      }, 3000);
+        setTimeout(() => setIsNavVisible(true), 100);
+      }, 2800);
 
-      // Show tooltip after 5 seconds
-      const tooltipTimer = setTimeout(() => {
-        setShowTooltip(true);
-      }, 5000);
-
-      // Hide tooltip after 3 more seconds
-      const hideTooltipTimer = setTimeout(() => {
-        setShowTooltip(false);
-      }, 8000);
+      const tooltipTimer = setTimeout(() => setShowTooltip(true), 4500);
+      const hideTooltipTimer = setTimeout(() => setShowTooltip(false), 7500);
 
       return () => {
         clearTimeout(greetingTimer);
@@ -173,13 +169,46 @@ export default function Navbar() {
         clearTimeout(hideTooltipTimer);
       };
     } else {
-      // Normal navigation or already shown - show navbar directly
-      setShowGreeting(false);
+      // Normal load or navigation - show navbar directly
       setIsNavVisible(true);
+      hasShownGreetingRef.current = true;
+    }
+  }, [getGreeting]);
+
+  // ── Handle pathname change (page navigation) ───────
+  useEffect(() => {
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname;
+      // On page change, just ensure navbar is visible (no greeting)
+      if (!showGreeting) {
+        setIsNavVisible(true);
+      }
+      // Close any open menus
+      setIsDropdownOpen(false);
+      setIsMobileMenuOpen(false);
+    }
+  }, [pathname, showGreeting]);
+
+  // ── Mouse tracking for liquid glass effect ─────────
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (navRef.current) {
+        const rect = navRef.current.getBoundingClientRect();
+        setMousePos({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        });
+      }
+    };
+
+    const nav = navRef.current;
+    if (nav) {
+      nav.addEventListener("mousemove", handleMouseMove);
+      return () => nav.removeEventListener("mousemove", handleMouseMove);
     }
   }, []);
 
-  // --- Hover handling with smooth delay ---
+  // ── Dropdown hover handling ────────────────────────
   const openDropdown = () => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -192,10 +221,10 @@ export default function Navbar() {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     closeTimeoutRef.current = setTimeout(() => {
       setIsDropdownOpen(false);
-    }, 200);
+    }, 250);
   };
 
-  // Close menus on Escape key press
+  // ── Keyboard & outside click handlers ──────────────
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -207,36 +236,27 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     };
-
     if (isDropdownOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isDropdownOpen]);
 
-  // Prevent body scroll when mobile menu is open
+  // ── Prevent body scroll when mobile menu open ──────
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
-  // Cleanup timeouts on unmount
+  // ── Cleanup ────────────────────────────────────────
   useEffect(() => {
     return () => {
       if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
@@ -249,85 +269,179 @@ export default function Navbar() {
 
   const isActive = (href: string) => pathname === href;
   const isMoreActive = [...moreCards, ...moreLinks].some((item) =>
-    pathname?.startsWith(item.href),
+    pathname?.startsWith(item.href)
   );
 
   return (
     <>
-      <header className="fixed top-4 sm:top-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-5xl px-4">
+      <header className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-5xl px-4">
         <div className="flex items-start justify-center gap-3 relative">
-          {/* Main Navbar Pill */}
+          {/* ═══════════════════════════════════════════════
+              MAIN NAVBAR - LIQUID GLASS
+          ═══════════════════════════════════════════════ */}
           <motion.nav
             ref={navRef}
             layout
             initial={false}
             animate={{
-              borderRadius: isDropdownOpen ? 24 : 9999,
+              borderRadius: isDropdownOpen ? 28 : 9999,
             }}
             transition={{
-              layout: {
-                duration: 0.4,
-                ease: [0.4, 0, 0.2, 1],
-              },
-              borderRadius: {
-                duration: 0.3,
-                ease: [0.4, 0, 0.2, 1],
-              },
+              layout: { duration: 0.5, ease: [0.32, 0.72, 0, 1] },
+              borderRadius: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
             }}
             onMouseLeave={scheduleCloseDropdown}
-            className="relative flex flex-col bg-background/80 shadow-[0_8px_30px_rgb(0,0,0,0.25)] border border-white/10 backdrop-blur-xl overflow-hidden">
-            {/* Top Row - Always Visible with fixed height */}
-            <div className="flex items-center gap-1 p-1.5 min-h-12">
-              {/* GREETING - Only shows on reload */}
+            className="relative flex flex-col overflow-hidden"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)",
+              backdropFilter: "blur(24px) saturate(180%)",
+              WebkitBackdropFilter: "blur(24px) saturate(180%)",
+              border: "1px solid rgba(255,255,255,0.12)",
+              boxShadow: `
+                0 8px 32px rgba(0,0,0,0.3),
+                0 2px 8px rgba(0,0,0,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                inset 0 -1px 0 rgba(255,255,255,0.05)
+              `,
+            }}
+          >
+            {/* Liquid Glass - Specular Highlight (top edge glow) */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, rgba(255,255,255,0.3) 20%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 80%, transparent)",
+              }}
+            />
+
+            {/* Liquid Glass - Inner glow gradient */}
+            <div
+              className="pointer-events-none absolute inset-0 opacity-40"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 60%)",
+              }}
+            />
+
+            {/* Liquid Glass - Mouse-following highlight */}
+            <motion.div
+              className="pointer-events-none absolute w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style={{
+                left: mousePos.x - 80,
+                top: mousePos.y - 80,
+                background:
+                  "radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)",
+              }}
+              animate={{
+                left: mousePos.x - 80,
+                top: mousePos.y - 80,
+              }}
+              transition={{ type: "spring", stiffness: 500, damping: 40 }}
+            />
+
+            {/* Liquid Glass - Bottom reflection */}
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.08) 70%, transparent)",
+              }}
+            />
+
+            {/* ── Top Row ── */}
+            <div className="flex items-center gap-1 p-1.5 min-h-12 relative z-10">
+              {/* GREETING - Only on reload */}
               <AnimatePresence mode="wait">
                 {showGreeting && (
                   <motion.div
                     key="greeting"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{
-                      duration: 0.5,
-                      ease: [0.4, 0, 0.2, 1],
+                    initial={{ opacity: 0, scale: 0.9, filter: "blur(8px)" }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      filter: "blur(0px)",
+                      transition: {
+                        duration: 0.6,
+                        ease: [0.32, 0.72, 0, 1],
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 20,
+                      },
                     }}
-                    className="flex items-center justify-center w-full px-4 py-1">
-                    <span className="text-primary text-lg mr-2">✨</span>
-                    <span className="text-base font-semibold bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                    exit={{
+                      opacity: 0,
+                      scale: 1.05,
+                      filter: "blur(4px)",
+                      transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
+                    }}
+                    className="flex items-center justify-center w-full px-4 py-1"
+                  >
+                    <motion.span
+                      className="text-xl mr-2"
+                      animate={{
+                        rotate: [0, 15, -15, 10, -10, 0],
+                        scale: [1, 1.2, 1, 1.1, 1],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatDelay: 1,
+                      }}
+                    >
+                      ✨
+                    </motion.span>
+                    <span className="text-base font-semibold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
                       {greeting}
                     </span>
-                    <span className="text-sm text-muted-foreground ml-2">
+                    <motion.span
+                      className="text-sm ml-2"
+                      animate={{
+                        rotate: [0, 20, -10, 20, -10, 0],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatDelay: 0.5,
+                      }}
+                    >
                       👋
-                    </span>
+                    </motion.span>
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              {/* FULL NAVBAR - Shows after greeting hides */}
+              {/* FULL NAVBAR */}
               <AnimatePresence mode="wait">
-                {isNavVisible && (
+                {isNavVisible && !showGreeting && (
                   <motion.div
                     key="navbar"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 0.3,
-                      ease: [0.4, 0, 0.2, 1],
+                    initial={{ opacity: 0, filter: "blur(8px)" }}
+                    animate={{
+                      opacity: 1,
+                      filter: "blur(0px)",
+                      transition: {
+                        duration: 0.5,
+                        ease: [0.32, 0.72, 0, 1],
+                      },
                     }}
-                    className="flex items-center gap-1 w-full">
+                    exit={{ opacity: 0, filter: "blur(4px)" }}
+                    className="flex items-center gap-1 w-full"
+                  >
                     {/* Mobile Menu Trigger */}
                     <motion.button
                       onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                      variants={iconVariants}
-                      initial="initial"
-                      whileHover="hover"
-                      whileTap="tap"
-                      className={`md:hidden flex items-center justify-center rounded-full p-2 transition-colors duration-200 ${
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      className={`md:hidden flex items-center justify-center rounded-full p-2 transition-all duration-300 ${
                         isMobileMenuOpen
-                          ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                          ? "bg-primary text-primary-foreground shadow-lg"
+                          : "text-muted-foreground hover:bg-white/10 hover:text-foreground"
                       }`}
                       aria-label="Toggle mobile menu"
-                      aria-expanded={isMobileMenuOpen}>
+                      aria-expanded={isMobileMenuOpen}
+                    >
                       <AnimatePresence mode="wait" initial={false}>
                         {isMobileMenuOpen ? (
                           <motion.div
@@ -336,9 +450,10 @@ export default function Navbar() {
                             animate={{ rotate: 0, opacity: 1 }}
                             exit={{ rotate: 90, opacity: 0 }}
                             transition={{
-                              duration: 0.2,
-                              ease: [0.4, 0, 0.2, 1],
-                            }}>
+                              duration: 0.25,
+                              ease: [0.32, 0.72, 0, 1],
+                            }}
+                          >
                             <X className="h-5 w-5" />
                           </motion.div>
                         ) : (
@@ -348,9 +463,10 @@ export default function Navbar() {
                             animate={{ rotate: 0, opacity: 1 }}
                             exit={{ rotate: -90, opacity: 0 }}
                             transition={{
-                              duration: 0.2,
-                              ease: [0.4, 0, 0.2, 1],
-                            }}>
+                              duration: 0.25,
+                              ease: [0.32, 0.72, 0, 1],
+                            }}
+                          >
                             <Menu className="h-5 w-5" />
                           </motion.div>
                         )}
@@ -359,60 +475,126 @@ export default function Navbar() {
 
                     {/* Desktop Links */}
                     <div className="hidden md:flex items-center gap-0.5">
-                      {mainLinks.map((link) => (
-                        <motion.div
-                          key={link.href}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{ duration: 0.15 }}>
-                          <Link
-                            href={link.href}
-                            className={`relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-200 ${
-                              isActive(link.href)
-                                ? "bg-accent text-primary shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
-                                : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
-                            }`}>
-                            {link.label}
-                          </Link>
-                        </motion.div>
-                      ))}
+                      {mainLinks.map((link) => {
+                        const active = isActive(link.href);
+                        return (
+                          <motion.div
+                            key={link.href}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 400,
+                              damping: 17,
+                            }}
+                          >
+                            <Link
+                              href={link.href}
+                              className={`relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ${
+                                active
+                                  ? "text-primary"
+                                  : "text-muted-foreground hover:text-foreground"
+                              }`}
+                            >
+                              {/* Active indicator - liquid glass pill */}
+                              {active && (
+                                <motion.div
+                                  layoutId="activeNavPill"
+                                  className="absolute inset-0 rounded-full"
+                                  style={{
+                                    background:
+                                      "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)",
+                                    border: "1px solid rgba(255,255,255,0.15)",
+                                    boxShadow: `
+                                      inset 0 1px 0 rgba(255,255,255,0.15),
+                                      0 2px 8px rgba(0,0,0,0.15)
+                                    `,
+                                  }}
+                                  transition={{
+                                    type: "spring",
+                                    stiffness: 380,
+                                    damping: 30,
+                                  }}
+                                />
+                              )}
+                              <span className="relative z-10">{link.label}</span>
+                            </Link>
+                          </motion.div>
+                        );
+                      })}
 
                       {/* More Button */}
                       <div className="relative">
                         <motion.button
                           onClick={() => setIsDropdownOpen((prev) => !prev)}
                           onMouseEnter={openDropdown}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{ duration: 0.15 }}
-                          className={`flex items-center gap-0.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors duration-200 ${
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 17,
+                          }}
+                          className={`relative flex items-center gap-0.5 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ${
                             isDropdownOpen || isMoreActive
-                              ? "bg-accent text-primary shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]"
-                              : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+                              ? "text-primary"
+                              : "text-muted-foreground hover:text-foreground"
                           }`}
-                          aria-expanded={isDropdownOpen}>
-                          More
+                          aria-expanded={isDropdownOpen}
+                        >
+                          {/* Active indicator */}
+                          {(isDropdownOpen || isMoreActive) && (
+                            <motion.div
+                              layoutId="activeNavPill"
+                              className="absolute inset-0 rounded-full"
+                              style={{
+                                background:
+                                  "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)",
+                                border: "1px solid rgba(255,255,255,0.15)",
+                                boxShadow: `
+                                  inset 0 1px 0 rgba(255,255,255,0.15),
+                                  0 2px 8px rgba(0,0,0,0.15)
+                                `,
+                              }}
+                              transition={{
+                                type: "spring",
+                                stiffness: 380,
+                                damping: 30,
+                              }}
+                            />
+                          )}
+                          <span className="relative z-10">More</span>
                           <motion.div
-                            animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                            className="relative z-10"
+                            animate={{
+                              rotate: isDropdownOpen ? 180 : 0,
+                            }}
                             transition={{
-                              duration: 0.3,
-                              ease: [0.4, 0, 0.2, 1],
-                            }}>
+                              duration: 0.4,
+                              ease: [0.32, 0.72, 0, 1],
+                            }}
+                          >
                             <ChevronDown className="h-3.5 w-3.5" />
                           </motion.div>
                         </motion.button>
                       </div>
                     </div>
 
-                    {/* CTA Button - Book a Call */}
+                    {/* CTA Button */}
                     <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      transition={{ duration: 0.15 }}
-                      className="ml-auto">
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 17,
+                      }}
+                      className="ml-auto"
+                    >
                       <Button
                         onClick={() => openModal("contact")}
-                        className="rounded-full px-4 h-8 text-xs font-medium shadow-lg transition-all duration-200">
+                        className="rounded-full px-4 h-8 text-xs font-medium shadow-lg transition-all duration-300 hover:shadow-xl"
+                      >
                         Book a Call
                       </Button>
                     </motion.div>
@@ -421,7 +603,7 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            {/* Dropdown Menu */}
+            {/* ── Dropdown Menu ── */}
             <AnimatePresence>
               {isDropdownOpen && (
                 <motion.div
@@ -431,40 +613,69 @@ export default function Navbar() {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="overflow-hidden border-t border-white/10">
-                  <div className="flex flex-col lg:flex-row gap-6 p-6 w-[min(90vw,700px)]">
-                    {/* Left Section - Cards */}
+                  className="overflow-hidden relative"
+                  style={{
+                    borderTop: "1px solid rgba(255,255,255,0.08)",
+                  }}
+                >
+                  {/* Dropdown inner glow */}
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                    }}
+                  />
+
+                  <div className="relative flex flex-col lg:flex-row gap-6 p-6 w-[min(90vw,700px)]">
+                    {/* Left - Cards */}
                     <div className="flex flex-col sm:flex-row gap-4 flex-1">
                       {moreCards.map((card, index) => (
                         <motion.div
                           key={card.href}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.3,
-                            delay: index * 0.06,
-                            ease: [0.4, 0, 0.2, 1],
+                          initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                            filter: "blur(0px)",
                           }}
-                          className="flex-1">
+                          transition={{
+                            duration: 0.4,
+                            delay: index * 0.08,
+                            ease: [0.32, 0.72, 0, 1],
+                          }}
+                          className="flex-1"
+                        >
                           <Link
                             href={card.href}
                             onClick={() => setIsDropdownOpen(false)}
-                            className="relative h-32 sm:h-40 w-full rounded-xl overflow-hidden group cursor-pointer border border-white/10 hover:border-white/20 transition-all duration-300 block">
+                            className="relative h-32 sm:h-40 w-full rounded-xl overflow-hidden group cursor-pointer block"
+                            style={{
+                              border: "1px solid rgba(255,255,255,0.1)",
+                              transition: "border-color 0.3s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              (e.currentTarget as HTMLElement).style.borderColor =
+                                "rgba(255,255,255,0.25)";
+                            }}
+                            onMouseLeave={(e) => {
+                              (e.currentTarget as HTMLElement).style.borderColor =
+                                "rgba(255,255,255,0.1)";
+                            }}
+                          >
                             <Image
                               src={card.img}
                               alt={card.title}
                               fill
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                              className="object-cover transition-transform duration-700 group-hover:scale-110"
+                              className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                             <div className="absolute bottom-0 left-0 right-0 p-4">
                               <h3 className="font-semibold text-white text-base mb-1">
                                 {card.title}
                               </h3>
-                              <p className="text-sm text-gray-300">
-                                {card.desc}
-                              </p>
+                              <p className="text-sm text-gray-300">{card.desc}</p>
                             </div>
                           </Link>
                         </motion.div>
@@ -475,26 +686,42 @@ export default function Navbar() {
                     <div className="hidden lg:block w-px bg-white/10" />
                     <div className="block lg:hidden h-px bg-white/10" />
 
-                    {/* Right Section - Links */}
-                    <div className="flex flex-col gap-2 w-full lg:w-[280px]">
+                    {/* Right - Links */}
+                    <div className="flex flex-col gap-1 w-full lg:w-[280px]">
                       {moreLinks.map((link, index) => (
                         <motion.div
                           key={link.href}
-                          initial={{ opacity: 0, x: -5 }}
-                          animate={{ opacity: 1, x: 0 }}
+                          initial={{ opacity: 0, x: -8, filter: "blur(4px)" }}
+                          animate={{
+                            opacity: 1,
+                            x: 0,
+                            filter: "blur(0px)",
+                          }}
                           transition={{
-                            duration: 0.25,
-                            delay: index * 0.06 + 0.1,
-                            ease: [0.4, 0, 0.2, 1],
-                          }}>
+                            duration: 0.35,
+                            delay: index * 0.07 + 0.1,
+                            ease: [0.32, 0.72, 0, 1],
+                          }}
+                        >
                           <Link
                             href={link.href}
                             onClick={() => setIsDropdownOpen(false)}
-                            className="flex items-center gap-3 p-3 rounded-xl hover:bg-accent/50 transition-all duration-200 group">
+                            className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 group"
+                          >
                             <motion.div
-                              className="h-10 w-10 flex shrink-0 items-center justify-center rounded-lg border border-white/10 bg-background/50 group-hover:bg-background transition-all duration-200 text-muted-foreground group-hover:text-primary"
+                              className="h-10 w-10 flex shrink-0 items-center justify-center rounded-lg text-muted-foreground group-hover:text-primary transition-all duration-300"
+                              style={{
+                                border: "1px solid rgba(255,255,255,0.1)",
+                                background:
+                                  "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+                              }}
                               whileHover={{ scale: 1.05, rotate: 3 }}
-                              transition={{ duration: 0.2 }}>
+                              transition={{
+                                type: "spring",
+                                stiffness: 400,
+                                damping: 17,
+                              }}
+                            >
                               <link.icon className="h-5 w-5" />
                             </motion.div>
                             <div className="flex flex-col">
@@ -515,54 +742,133 @@ export default function Navbar() {
             </AnimatePresence>
           </motion.nav>
 
-          {/* Search Button - Outside the navbar (separate) */}
+          {/* ═══════════════════════════════════════════════
+              SEARCH BUTTON - LIQUID GLASS
+          ═══════════════════════════════════════════════ */}
           <div className="relative">
             <motion.button
               onClick={() => openModal("search")}
-              variants={iconVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
               aria-label="Search"
-              className="flex items-center justify-center rounded-full bg-background/80 shadow-[0_8px_30px_rgb(0,0,0,0.25)] border border-white/10 backdrop-blur-xl transition-all duration-300 p-2.5 hover:bg-accent/60 hover:border-white/20">
-              <Search className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors duration-200" />
+              className="relative flex items-center justify-center rounded-full p-2.5 overflow-hidden"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)",
+                backdropFilter: "blur(24px) saturate(180%)",
+                WebkitBackdropFilter: "blur(24px) saturate(180%)",
+                border: "1px solid rgba(255,255,255,0.12)",
+                boxShadow: `
+                  0 8px 32px rgba(0,0,0,0.3),
+                  0 2px 8px rgba(0,0,0,0.2),
+                  inset 0 1px 0 rgba(255,255,255,0.1)
+                `,
+              }}
+            >
+              {/* Specular highlight */}
+              <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-px"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent, rgba(255,255,255,0.4) 50%, transparent)",
+                }}
+              />
+              <Search className="relative h-4 w-4 text-muted-foreground hover:text-foreground transition-colors duration-300" />
             </motion.button>
 
-            {/* Tooltip - Only shows on hover with ⌘K */}
+            {/* Tooltip */}
             <AnimatePresence>
               {showTooltip && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.9 }}
-                  transition={{
-                    duration: 0.4,
-                    ease: [0.4, 0, 0.2, 1],
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 25,
+                  initial={{
+                    opacity: 0,
+                    y: 10,
+                    scale: 0.9,
+                    filter: "blur(4px)",
                   }}
-                  className="absolute -top-10 left-1/2 -translate-x-1/2 bg-background/95 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-1.5 shadow-xl whitespace-nowrap flex items-center gap-1.5 text-xs font-medium">
-                  <kbd className="px-1.5 py-0.5 bg-accent/50 rounded text-[10px] font-mono flex items-center gap-1">
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    filter: "blur(0px)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: 8,
+                    scale: 0.95,
+                    filter: "blur(4px)",
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.32, 0.72, 0, 1],
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 22,
+                  }}
+                  className="absolute -top-12 left-1/2 -translate-x-1/2 rounded-lg px-3 py-1.5 shadow-xl whitespace-nowrap flex items-center gap-1.5 text-xs font-medium overflow-hidden"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)",
+                    backdropFilter: "blur(20px) saturate(180%)",
+                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    boxShadow: `
+                      0 8px 32px rgba(0,0,0,0.3),
+                      inset 0 1px 0 rgba(255,255,255,0.1)
+                    `,
+                  }}
+                >
+                  {/* Tooltip specular */}
+                  <div
+                    className="pointer-events-none absolute inset-x-0 top-0 h-px"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent, rgba(255,255,255,0.3) 50%, transparent)",
+                    }}
+                  />
+
+                  <kbd className="relative px-1.5 py-0.5 rounded text-[10px] font-mono flex items-center gap-1"
+                    style={{
+                      background: "rgba(255,255,255,0.08)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                    }}
+                  >
                     <span className="text-primary text-sm">⌘</span>
                   </kbd>
-                  <span className="text-[10px] text-muted-foreground/60">
-                    +
-                  </span>
-                  <kbd className="px-1.5 py-0.5 bg-accent/50 rounded text-[10px] font-mono">
+                  <span className="text-[10px] text-muted-foreground/60">+</span>
+                  <kbd
+                    className="relative px-1.5 py-0.5 rounded text-[10px] font-mono"
+                    style={{
+                      background: "rgba(255,255,255,0.08)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                    }}
+                  >
                     K
                   </kbd>
-                  <span className="text-[10px] text-muted-foreground/50 ml-1">
+                  <span className="text-[10px] text-muted-foreground/60 ml-1">
                     to search
                   </span>
-                  <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 bg-background/95 border-r border-b border-white/10 rotate-45"></div>
+
+                  {/* Arrow */}
+                  <div
+                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      borderRight: "1px solid rgba(255,255,255,0.15)",
+                      borderBottom: "1px solid rgba(255,255,255,0.15)",
+                      backdropFilter: "blur(20px)",
+                    }}
+                  />
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* ═══════════════════════════════════════════════
+            MOBILE MENU - LIQUID GLASS
+        ═══════════════════════════════════════════════ */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <>
@@ -570,7 +876,7 @@ export default function Navbar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3 }}
                 className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[-1] md:hidden"
                 onClick={() => setIsMobileMenuOpen(false)}
               />
@@ -579,72 +885,140 @@ export default function Navbar() {
                 variants={mobileMenuVariants}
                 initial="hidden"
                 animate="visible"
-                exit="hidden"
-                className="absolute top-full mt-3 left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-md origin-top rounded-2xl bg-card/95 p-4 shadow-2xl border border-white/10 backdrop-blur-xl md:hidden">
-                {mainLinks.map((link, index) => (
+                exit="exit"
+                className="absolute top-full mt-3 left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] max-w-md origin-top rounded-3xl p-4 md:hidden overflow-hidden"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)",
+                  backdropFilter: "blur(30px) saturate(180%)",
+                  WebkitBackdropFilter: "blur(30px) saturate(180%)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  boxShadow: `
+                    0 20px 60px rgba(0,0,0,0.4),
+                    0 8px 20px rgba(0,0,0,0.2),
+                    inset 0 1px 0 rgba(255,255,255,0.1)
+                  `,
+                }}
+              >
+                {/* Specular highlight */}
+                <div
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 70%, transparent)",
+                  }}
+                />
+
+                {/* Inner glow */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-40"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 60%)",
+                  }}
+                />
+
+                <div className="relative z-10">
+                  {mainLinks.map((link, index) => (
+                    <motion.div
+                      key={link.href}
+                      initial={{
+                        opacity: 0,
+                        x: -12,
+                        filter: "blur(4px)",
+                      }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                        filter: "blur(0px)",
+                      }}
+                      transition={{
+                        duration: 0.35,
+                        delay: index * 0.05,
+                        ease: [0.32, 0.72, 0, 1],
+                      }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-300 ${
+                          isActive(link.href)
+                            ? "text-primary"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                        style={
+                          isActive(link.href)
+                            ? {
+                                background:
+                                  "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)",
+                                border: "1px solid rgba(255,255,255,0.12)",
+                              }
+                            : {}
+                        }
+                      >
+                        <link.icon className="h-5 w-5" />
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+
+                  <div className="my-3 h-px bg-white/10" />
+
+                  {[...moreCards, ...moreLinks].map((item, index) => (
+                    <motion.div
+                      key={item.href}
+                      initial={{
+                        opacity: 0,
+                        x: -12,
+                        filter: "blur(4px)",
+                      }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                        filter: "blur(0px)",
+                      }}
+                      transition={{
+                        duration: 0.35,
+                        delay: (index + mainLinks.length) * 0.05,
+                        ease: [0.32, 0.72, 0, 1],
+                      }}
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-300"
+                      >
+                        {"icon" in item && <item.icon className="h-5 w-5" />}
+                        {"title" in item ? item.title : item.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+
                   <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.2,
-                      delay: index * 0.04,
-                      ease: [0.4, 0, 0.2, 1],
-                    }}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${
-                        isActive(link.href)
-                          ? "bg-accent text-primary"
-                          : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
-                      }`}>
-                      <link.icon className="h-5 w-5" />
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
-
-                <div className="my-3 h-px bg-white/10" />
-
-                {[...moreCards, ...moreLinks].map((item, index) => (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.2,
-                      delay: (index + mainLinks.length) * 0.04,
-                      ease: [0.4, 0, 0.2, 1],
-                    }}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-accent/50 hover:text-foreground transition-colors">
-                      {"icon" in item && <item.icon className="h-5 w-5" />}
-                      {"title" in item ? item.title : item.label}
-                    </Link>
-                  </motion.div>
-                ))}
-
-                <motion.div
-                  className="mt-3 pt-3 border-t border-white/10"
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.2,
-                    delay: 0.15,
-                    ease: [0.4, 0, 0.2, 1],
-                  }}>
-                  <Button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      openModal("contact");
+                    className="mt-3 pt-3 border-t border-white/10"
+                    initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      filter: "blur(0px)",
                     }}
-                    className="w-full rounded-xl h-11 transition-all duration-200">
-                    Book a Call
-                  </Button>
-                </motion.div>
+                    transition={{
+                      duration: 0.4,
+                      delay: 0.2,
+                      ease: [0.32, 0.72, 0, 1],
+                    }}
+                  >
+                    <Button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        openModal("contact");
+                      }}
+                      className="w-full rounded-xl h-11 transition-all duration-300"
+                    >
+                      Book a Call
+                    </Button>
+                  </motion.div>
+                </div>
               </motion.div>
             </>
           )}
