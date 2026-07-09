@@ -35,6 +35,8 @@ export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentView, setCurrentView] = useState<ViewState>("search");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   // Toggle the menu when ⌘K is pressed or close on Escape
   useEffect(() => {
@@ -389,6 +391,12 @@ export default function SearchModal() {
                         autoFocus
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && !e.shiftKey) {
+                            e.preventDefault();
+                            if (message.trim()) setCurrentView("full-form");
+                          }
+                        }}
                       />
 
                       <div className="p-3 border-t border-border flex items-center justify-between bg-muted">
@@ -397,8 +405,15 @@ export default function SearchModal() {
                           <span>Shift+Enter new line</span>
                         </div>
                         <button
-                          onClick={() => setCurrentView("full-form")}
-                          className="text-xs font-medium bg-primary text-primary-foreground px-4 py-2 rounded-full hover:opacity-90 hover:scale-[1.03] transition-all duration-300">
+                          onClick={() => {
+                            if (message.trim()) setCurrentView("full-form");
+                          }}
+                          disabled={!message.trim()}
+                          className={`text-xs font-medium px-4 py-2 rounded-full transition-all duration-300 ${
+                            !message.trim() 
+                              ? "bg-muted text-muted-foreground cursor-not-allowed opacity-50" 
+                              : "bg-primary text-primary-foreground hover:opacity-90 hover:scale-[1.03]"
+                          }`}>
                           Continue &rarr;
                         </button>
                       </div>
@@ -497,93 +512,142 @@ export default function SearchModal() {
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.15 }}
                     className="flex flex-col h-full p-4">
-                    {/* Header */}
-                    <div className="flex items-center gap-2 mb-6">
-                      <button
-                        onClick={() => setCurrentView("contact")}
-                        className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors">
-                        <ChevronLeft className="h-5 w-5" />
-                      </button>
-                      <h2 className="font-medium text-primary">
-                        Send a Message
-                      </h2>
-                    </div>
-
-                    {/* Form Layout */}
-                    <form
-                      className="flex flex-col gap-4"
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        runCommand(() => {
-                          setMessage("");
-                        });
-                      }}>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-xs font-medium text-muted-foreground">
-                            Name
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="John Doe"
-                            className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
-                          />
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-xs font-medium text-muted-foreground">
-                            Email
-                          </label>
-                          <input
-                            type="email"
-                            placeholder="john@example.com"
-                            className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
-                          />
-                        </div>
+                    {isSuccess ? (
+                      <div className="flex flex-col items-center justify-center h-full p-8 min-h-[350px]">
+                        <motion.div 
+                          initial={{ scale: 0 }} 
+                          animate={{ scale: 1 }} 
+                          transition={{ type: "spring", damping: 15 }}
+                          className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-6"
+                        >
+                          <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </motion.div>
+                        <motion.h3 
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 }}
+                          className="text-2xl font-bold text-foreground"
+                        >
+                          Message Sent!
+                        </motion.h3>
+                        <motion.p 
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3 }}
+                          className="text-sm text-muted-foreground mt-2 text-center"
+                        >
+                          Thank you for reaching out. I'll get back to you as soon as possible.
+                        </motion.p>
                       </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-xs font-medium text-muted-foreground">
-                            Phone Number
-                          </label>
-                          <input
-                            type="tel"
-                            placeholder="+1 (555) 000-0000"
-                            className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
-                          />
+                    ) : (
+                      <>
+                        {/* Header */}
+                        <div className="flex items-center gap-2 mb-6">
+                          <button
+                            onClick={() => setCurrentView("contact")}
+                            className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors">
+                            <ChevronLeft className="h-5 w-5" />
+                          </button>
+                          <h2 className="font-medium text-primary">
+                            Send a Message
+                          </h2>
                         </div>
-                        <div className="flex flex-col gap-1.5">
-                          <label className="text-xs font-medium text-muted-foreground">
-                            Topic
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="Project Inquiry"
-                            className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
-                          />
-                        </div>
-                      </div>
 
-                      <div className="flex flex-col gap-1.5 mb-2">
-                        <label className="text-xs font-medium text-muted-foreground">
-                          Description
-                        </label>
-                        <textarea
-                          className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all h-32 resize-none glass"
-                          placeholder="Hey Rashedul, I have a project idea..."
-                          value={message}
-                          onChange={(e) => setMessage(e.target.value)}
-                        />
-                      </div>
+                        {/* Form Layout */}
+                        <form
+                          className="flex flex-col gap-4"
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            setIsSubmitting(true);
+                            setTimeout(() => {
+                              setIsSubmitting(false);
+                              setIsSuccess(true);
+                              setTimeout(() => {
+                                setIsSuccess(false);
+                                setIsOpen(false);
+                                setMessage("");
+                                setCurrentView("search");
+                              }, 2500);
+                            }, 1500);
+                          }}>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="flex flex-col gap-1.5">
+                              <label className="text-xs font-medium text-muted-foreground">
+                                Name
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="e.g. John Doe"
+                                required
+                                className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
+                              />
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                              <label className="text-xs font-medium text-muted-foreground">
+                                Email
+                              </label>
+                              <input
+                                type="email"
+                                placeholder="john@example.com"
+                                required
+                                className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
+                              />
+                            </div>
+                          </div>
 
-                      <div className="flex justify-end mt-2">
-                        <button
-                          type="submit"
-                          className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-medium text-sm hover:opacity-90 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.25)]">
-                          Send Message
-                        </button>
-                      </div>
-                    </form>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="flex flex-col gap-1.5">
+                              <label className="text-xs font-medium text-muted-foreground">
+                                Phone Number
+                              </label>
+                              <input
+                                type="tel"
+                                placeholder="+1 (555) 000-0000"
+                                className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
+                              />
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                              <label className="text-xs font-medium text-muted-foreground">
+                                Topic
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="Project Inquiry"
+                                className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col gap-1.5 mb-2">
+                            <label className="text-xs font-medium text-muted-foreground">
+                              Description
+                            </label>
+                            <textarea
+                              className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all h-32 resize-none glass"
+                              placeholder="Hey Rashedul, I have a project idea..."
+                              required
+                              value={message}
+                              onChange={(e) => setMessage(e.target.value)}
+                            />
+                          </div>
+
+                          <div className="flex justify-end mt-2">
+                            <button
+                              type="submit"
+                              disabled={isSubmitting}
+                              className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-medium text-sm hover:opacity-90 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.25)] disabled:opacity-70 disabled:scale-100 disabled:cursor-not-allowed min-w-[140px]">
+                              {isSubmitting ? (
+                                <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                              ) : (
+                                "Send Message"
+                              )}
+                            </button>
+                          </div>
+                        </form>
+                      </>
+                    )}
                   </motion.div>
                 )}
 
