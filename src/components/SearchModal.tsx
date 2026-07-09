@@ -21,6 +21,9 @@ import {
   ChevronLeft,
   Mail,
   Lock,
+  CheckCircle2,
+  Terminal,
+  LogIn
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -280,6 +283,15 @@ export default function SearchModal() {
                                 <LinkIcon className="h-4 w-4" />
                               </div>
                               Links
+                            </Command.Item>
+
+                            <Command.Item
+                              onSelect={() => setCurrentView("login")}
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border bg-cyan-500/10 border-cyan-500/20">
+                                <Terminal className="h-4 w-4 text-cyan-400" />
+                              </div>
+                              Admin Terminal
                             </Command.Item>
                           </div>
                         </Command.Group>
@@ -658,68 +670,74 @@ export default function SearchModal() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.15 }}
-                    className="flex flex-col h-full p-4">
-                    <div className="flex items-center gap-2 mb-6">
+                    className="flex flex-col h-full p-4 relative overflow-hidden">
+                    
+                    {/* Optional: subtle background glow */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+                    <div className="flex items-center gap-2 mb-6 relative z-10">
                       <button
                         onClick={() => setCurrentView("search")}
                         className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors">
                         <ChevronLeft className="h-5 w-5" />
                       </button>
                       <h2 className="font-medium text-primary">
-                        Admin Access
+                        Go Back
                       </h2>
                     </div>
 
                     <form
-                      className="flex flex-col gap-4 flex-1 justify-center max-w-sm mx-auto w-full my-10"
+                      className="flex flex-col gap-4 flex-1 justify-center max-w-sm mx-auto w-full my-8 relative z-10"
                       onSubmit={(e) => {
                         e.preventDefault();
                         const formData = new FormData(e.currentTarget);
                         const email = formData.get("email");
                         const password = formData.get("password");
-                        if (email === "admin@example.com" && password === "password123") {
+                        // Simulating auth for demo
+                        if (email && password) {
                           setIsOpen(false);
                           router.push("/dashboard");
-                        } else {
-                          alert("Invalid credentials. Try admin@example.com / password123");
                         }
                       }}>
                       <div className="text-center mb-4">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-4">
-                          <Lock className="w-6 h-6" />
+                        <div className="mx-auto w-14 h-14 rounded-2xl bg-black/40 border border-[#3b82f6]/20 shadow-[0_0_30px_rgba(59,130,246,0.15)] flex items-center justify-center text-cyan-400 mb-6 backdrop-blur-sm">
+                          <Terminal className="w-6 h-6" />
                         </div>
-                        <h3 className="text-xl font-semibold text-foreground">Welcome Back</h3>
-                        <p className="text-sm text-muted-foreground mt-1">Enter your credentials to access the dashboard</p>
+                        <h3 className="text-2xl font-bold text-white mb-2">Dashboard Terminal</h3>
+                        <p className="text-sm text-[#a1a1aa] leading-relaxed max-w-[280px] mx-auto">
+                          Provide authorization credentials to access database and write portfolio modules.
+                        </p>
                       </div>
                       
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-xs font-medium text-muted-foreground">
-                          Email
+                      <div className="flex flex-col gap-2">
+                        <label className="text-[10px] font-bold tracking-widest text-[#a1a1aa] uppercase pl-1">
+                          Admin Email
                         </label>
                         <input
                           type="email"
                           name="email"
                           required
-                          defaultValue="admin@example.com"
-                          className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
+                          placeholder="admin@example.com"
+                          className="bg-[#121212] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-[#52525b] focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all shadow-inner"
                         />
                       </div>
-                      <div className="flex flex-col gap-1.5 mb-4">
-                        <label className="text-xs font-medium text-muted-foreground">
-                          Password
+                      <div className="flex flex-col gap-2 mb-2">
+                        <label className="text-[10px] font-bold tracking-widest text-[#a1a1aa] uppercase pl-1">
+                          Security Passphrase
                         </label>
                         <input
                           type="password"
                           name="password"
                           required
-                          defaultValue="password123"
-                          className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
+                          placeholder="Enter administrator password"
+                          className="bg-[#121212] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-[#52525b] focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all shadow-inner"
                         />
                       </div>
                       <button
                         type="submit"
-                        className="w-full bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-medium text-sm hover:opacity-90 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.25)]">
-                        Login to Dashboard
+                        className="w-full mt-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-6 py-3.5 rounded-xl font-semibold text-sm hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] flex items-center justify-center gap-2">
+                        <LogIn className="w-4 h-4" />
+                        Access Dashboard
                       </button>
                     </form>
                   </motion.div>

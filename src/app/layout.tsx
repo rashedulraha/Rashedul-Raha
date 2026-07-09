@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import AntiInspect from "@/components/AntiInspect";
 
 export default function RootLayout({
   children,
@@ -33,6 +34,7 @@ export default function RootLayout({
           {children}
           <Toaster />
         </ThemeProvider>
+        <AntiInspect />
       </body>
     </html>
   );
