@@ -20,13 +20,14 @@ import {
   X,
   ChevronLeft,
   Mail,
+  Lock,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 
-type ViewState = "search" | "contact" | "full-form";
+type ViewState = "search" | "contact" | "full-form" | "login";
 
 export default function SearchModal() {
   const router = useRouter();
@@ -582,6 +583,80 @@ export default function SearchModal() {
                           Send Message
                         </button>
                       </div>
+                    </form>
+                  </motion.div>
+                )}
+
+                {currentView === "login" && (
+                  <motion.div
+                    key="login-view"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ duration: 0.15 }}
+                    className="flex flex-col h-full p-4">
+                    <div className="flex items-center gap-2 mb-6">
+                      <button
+                        onClick={() => setCurrentView("search")}
+                        className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors">
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <h2 className="font-medium text-primary">
+                        Admin Access
+                      </h2>
+                    </div>
+
+                    <form
+                      className="flex flex-col gap-4 flex-1 justify-center max-w-sm mx-auto w-full my-10"
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        const formData = new FormData(e.currentTarget);
+                        const email = formData.get("email");
+                        const password = formData.get("password");
+                        if (email === "admin@example.com" && password === "password123") {
+                          setIsOpen(false);
+                          router.push("/dashboard");
+                        } else {
+                          alert("Invalid credentials. Try admin@example.com / password123");
+                        }
+                      }}>
+                      <div className="text-center mb-4">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-4">
+                          <Lock className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-foreground">Welcome Back</h3>
+                        <p className="text-sm text-muted-foreground mt-1">Enter your credentials to access the dashboard</p>
+                      </div>
+                      
+                      <div className="flex flex-col gap-1.5">
+                        <label className="text-xs font-medium text-muted-foreground">
+                          Email
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          defaultValue="admin@example.com"
+                          className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1.5 mb-4">
+                        <label className="text-xs font-medium text-muted-foreground">
+                          Password
+                        </label>
+                        <input
+                          type="password"
+                          name="password"
+                          required
+                          defaultValue="password123"
+                          className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        className="w-full bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-medium text-sm hover:opacity-90 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.25)]">
+                        Login to Dashboard
+                      </button>
                     </form>
                   </motion.div>
                 )}
