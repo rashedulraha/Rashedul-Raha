@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Aayush Bharti - Developer, Freelancer & Problem Solver",
+  title: "Rashedul Raha - Developer, Freelancer & Problem Solver",
   description:
     "Full-Stack Developer specializing in Next.js, React, TypeScript, and Sanity CMS. I build fast, accessible web apps and help founders ship products that users love.",
 };

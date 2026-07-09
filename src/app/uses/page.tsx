@@ -126,7 +126,7 @@ export default function UsesPage() {
 
   return (
     <>
-      <div className="bg-[#0b0b0b] min-h-screen text-foreground selection:bg-primary/30 relative">
+      <div className="bg-background min-h-screen text-foreground selection:bg-primary/30 relative">
 
 
         <main className="w-full relative z-10 pt-20">

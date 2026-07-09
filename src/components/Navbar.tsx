@@ -22,6 +22,7 @@ import {
 import { AnimatePresence, motion, LayoutGroup, Variants } from "framer-motion";
 import SearchModal from "./SearchModal";
 import { Button } from "@base-ui/react";
+import { ThemeToggle } from "./ThemeToggle";
 
 // ── Data Configuration ─────────────────────────────────
 
@@ -606,7 +607,7 @@ export default function Navbar() {
                         </div>
                       </div>
 
-                      {/* CTA Button */}
+                      {/* CTA Button & Theme Toggle */}
                       <motion.div
                         whileHover={{ 
                           scale: 1.05,
@@ -621,8 +622,9 @@ export default function Navbar() {
                           stiffness: 200,
                           damping: 15,
                         }}
-                        className="ml-auto"
+                        className="ml-auto flex items-center gap-2"
                       >
+                        <ThemeToggle />
                         <Button
                           onClick={() => openModal("contact")}
                           className="rounded-full px-4 h-8 text-xs font-medium shadow-lg transition-all duration-500 hover:shadow-xl"

@@ -178,7 +178,7 @@ export default function AttributionPage() {
 
   return (
     <>
-      <div className="bg-[#0b0b0b] min-h-screen text-foreground selection:bg-primary/30 relative">
+      <div className="bg-background min-h-screen text-foreground selection:bg-primary/30 relative">
 
         
         {/* Abstract Background Elements */}
