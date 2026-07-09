@@ -111,11 +111,11 @@ export default function UsesPage() {
             </div>
             <div className="rounded-2xl overflow-hidden border border-foreground/10 shadow-2xl bg-[hsl(var(--background))] p-6 flex flex-col justify-center">
               <div className="flex flex-wrap gap-3">
-                <span className="px-4 py-2 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium border border-blue-500/20">TypeScript</span>
-                <span className="px-4 py-2 rounded-full bg-cyan-500/10 text-cyan-400 text-sm font-medium border border-cyan-500/20">Tailwind CSS</span>
-                <span className="px-4 py-2 rounded-full bg-purple-500/10 text-purple-400 text-sm font-medium border border-purple-500/20">Framer Motion</span>
-                <span className="px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium border border-emerald-500/20">Supabase</span>
-                <span className="px-4 py-2 rounded-full bg-orange-500/10 text-orange-400 text-sm font-medium border border-orange-500/20">Cloudflare</span>
+                <span className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20 glass">TypeScript</span>
+                <span className="px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-medium border border-secondary/20 glass">Tailwind CSS</span>
+                <span className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20 glass">Framer Motion</span>
+                <span className="px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-medium border border-secondary/20 glass">Supabase</span>
+                <span className="px-4 py-2 rounded-full bg-accent text-accent-foreground text-sm font-medium border border-border glass">Cloudflare</span>
               </div>
             </div>
           </div>

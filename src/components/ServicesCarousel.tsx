@@ -105,7 +105,7 @@ export default function ServicesBox() {
         initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-border bg-card min-h-72 shadow-sm hover:shadow-md transition-shadow duration-500"
+        className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl min-h-72 transition-shadow duration-500 card-premium"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
@@ -113,7 +113,7 @@ export default function ServicesBox() {
         <div className="pointer-events-none absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl transition-opacity duration-700 group-hover:opacity-100 opacity-0" />
 
         {/* Inner gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-background/50 via-transparent to-muted/30" />
+        {/* inner gradient overlay removed */}
 
         <div className="relative z-10 flex flex-1 flex-col px-5 pt-5 pb-4">
           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -137,7 +137,7 @@ export default function ServicesBox() {
                     duration: 0.35,
                     ease: [0.25, 0.46, 0.45, 0.94],
                   }}
-                  className="flex items-center gap-2 rounded-full border border-border bg-background/80 backdrop-blur-md px-3 py-1.5 shadow-md"
+                  className="flex items-center gap-2 rounded-full border border-border bg-muted/80 backdrop-blur-md px-3 py-1.5 shadow-md glass"
                 >
                   <span
                     className="flex h-5 w-5 items-center justify-center rounded-full"
@@ -235,7 +235,7 @@ export default function ServicesBox() {
                           duration: 0.5,
                           ease: [0.34, 1.56, 0.64, 1],
                         }}
-                        className="absolute flex items-center gap-1.5 rounded-md border border-border bg-background/60 backdrop-blur-sm px-2 py-1 shadow-sm"
+                        className="absolute flex items-center gap-1.5 rounded-md border border-border bg-muted/60 backdrop-blur-sm px-2 py-1 shadow-sm glass"
                         style={{
                           left: pos.left,
                           bottom: pos.bottom,

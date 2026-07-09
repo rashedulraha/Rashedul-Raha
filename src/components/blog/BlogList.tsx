@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, Rss, ArrowRight } from "lucide-react";
+import { Search, Rss, ArrowRight, Clock, Calendar } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { BlogPost } from "@/lib/blog-data";
@@ -183,21 +183,57 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                   <Link
                     key={post.id}
                     href={`/blog/${post.slug}`}
-                    className="group relative block aspect-[4/3] rounded-3xl overflow-hidden border border-foreground/10 hover:border-foreground/20 transition-all hover:shadow-xl hover:shadow-white/5"
+                    className="group flex flex-col h-full rounded-3xl p-3 transition-all duration-300 card-premium"
                   >
-                    <Image
-                      alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      src={post.image}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-                    
-                    <div className="absolute inset-0 flex items-center justify-center p-6">
-                      <span className="text-balance text-center font-medium text-foreground text-xl md:text-2xl leading-snug tracking-tight drop-shadow-md">
+                    {/* Image */}
+                    <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-muted">
+                      <Image
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        src={post.image}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                      
+                      {/* Category Badge */}
+                      <div className="absolute top-3 left-3 z-10">
+                        <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-medium uppercase tracking-wider border border-primary/20 glass">
+                          {post.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex flex-1 flex-col px-2 pt-5 pb-3">
+                      <h3 className="font-semibold text-lg text-foreground leading-snug transition-colors duration-300 group-hover:text-primary">
                         {post.title}
-                      </span>
+                      </h3>
+                      <p className="mt-3 line-clamp-3 text-muted-foreground text-sm leading-relaxed">
+                        {post.description}
+                      </p>
+
+                      {/* Footer */}
+                      <div className="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-border">
+                        <div className="flex items-center gap-3 text-[11px] text-muted-foreground uppercase tracking-wide font-medium">
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5" />
+                            {post.readTime}
+                          </span>
+                          <span className="text-border">·</span>
+                          <span className="flex items-center gap-1.5">
+                            <Calendar className="w-3.5 h-3.5" />
+                            <time dateTime={post.date}>{post.date}</time>
+                          </span>
+                        </div>
+
+                        <div className="flex shrink-0 items-center gap-2 text-muted-foreground text-[10px] font-medium uppercase tracking-wide transition-colors duration-300 group-hover:text-primary">
+                          <span className="hidden xl:inline">Read</span>
+                          <div className="flex size-7 items-center justify-center rounded-lg border border-border border-dashed bg-muted transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/10 group-hover:translate-x-1">
+                            <ArrowRight className="size-3.5" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </Link>
                 ))}

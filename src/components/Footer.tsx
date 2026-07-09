@@ -59,7 +59,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="relative border border-foreground/12 rounded-2xl overflow-hidden bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(var(--foreground), 0.3)]">
+          className="relative rounded-2xl overflow-hidden card-premium">
           {/* Decorative gradient blobs */}
           <div className="absolute inset-0 z-0 pointer-events-none">
             <div className="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primary/5 blur-3xl" />
@@ -94,7 +94,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="p-2 rounded-full bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 hover:border-foreground/20 transition-all duration-300 ease-out text-muted-foreground hover:text-primary">
+                      className="p-2 rounded-full bg-muted border border-border hover:bg-accent hover:border-border transition-all duration-300 ease-out text-muted-foreground hover:text-foreground">
                       <social.icon className="w-4 h-4" />
                     </motion.a>
                   ))}

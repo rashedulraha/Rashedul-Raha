@@ -82,10 +82,10 @@ export default function BucketListPage() {
             {bucketListItems.filter(item => !item.completed && item.category === "Career").map((item, idx) => (
               <div 
                 key={idx} 
-                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-[hsl(var(--background))] border border-foreground/5 hover:border-blue-500/30 hover:bg-gradient-to-r hover:from-blue-900/10 hover:to-transparent transition-all duration-300"
+                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-card border border-border hover:border-primary/30 transition-all duration-300 card-premium"
               >
                 <div className="mt-1 shrink-0">
-                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-blue-500 transition-colors" />
+                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
                 <h3 className="text-lg font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {item.title}
@@ -107,10 +107,10 @@ export default function BucketListPage() {
             {bucketListItems.filter(item => !item.completed && item.category === "Travel").map((item, idx) => (
               <div 
                 key={idx} 
-                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-[hsl(var(--background))] border border-foreground/5 hover:border-purple-500/30 hover:bg-gradient-to-r hover:from-purple-900/10 hover:to-transparent transition-all duration-300"
+                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-card border border-border hover:border-primary/30 transition-all duration-300 card-premium"
               >
                 <div className="mt-1 shrink-0">
-                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-purple-500 transition-colors" />
+                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
                 <h3 className="text-lg font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {item.title}
@@ -132,10 +132,10 @@ export default function BucketListPage() {
             {bucketListItems.filter(item => !item.completed && item.category === "Life").map((item, idx) => (
               <div 
                 key={idx} 
-                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-[hsl(var(--background))] border border-foreground/5 hover:border-pink-500/30 hover:bg-gradient-to-r hover:from-pink-900/10 hover:to-transparent transition-all duration-300"
+                className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-card border border-border hover:border-primary/30 transition-all duration-300 card-premium"
               >
                 <div className="mt-1 shrink-0">
-                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-pink-500 transition-colors" />
+                  <Circle className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
                 <h3 className="text-lg font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {item.title}
@@ -155,7 +155,7 @@ export default function BucketListPage() {
 
         {/* Abstract Background Elements */}
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-30">
-          <div className="absolute top-[20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[120px]" />
+          <div className="absolute top-[20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px]" />
           <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/10 blur-[120px]" />
         </div>
 
@@ -175,7 +175,7 @@ export default function BucketListPage() {
                   <span
                     className="italic"
                     style={{
-                      backgroundImage: "linear-gradient(to right, #38bdf8, #818cf8, #e879f9)",
+                      backgroundImage: "linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)))",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                     }}>

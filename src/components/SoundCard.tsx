@@ -34,13 +34,10 @@ const SoundCard = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-        className="relative w-full h-full flex flex-col items-center justify-end pb-8 md:pb-10 overflow-hidden group cursor-pointer rounded-2xl ring-1 ring-border shadow-sm transition-all hover:ring-indigo-500/30 min-h-72 bg-background"
+        className="relative w-full h-full flex flex-col items-center justify-end pb-8 md:pb-10 overflow-hidden group cursor-pointer rounded-2xl transition-all min-h-72 card-premium"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}>
-        {/* Background */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-background via-background/90 to-background/80" />
-        </div>
+        {/* Background removed for card-premium */}
 
         {/* Connection Lines SVG */}
         <svg
@@ -250,7 +247,7 @@ const SoundCard = () => {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.3, delay: 0.6 }}
           className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
-          <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="w-1 h-1 rounded-full bg-secondary animate-pulse" />
           <span className="text-[8px] md:text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
             Available
           </span>

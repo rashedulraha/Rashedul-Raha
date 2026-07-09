@@ -150,7 +150,7 @@ function TechModal({
               stiffness: 300,
               damping: 25,
             }}
-            className="relative w-full max-w-4xl min-h-72 max-h-[90vh] overflow-y-auto bg-background/95 backdrop-blur-xl rounded-2xl border border-foreground/10 shadow-2xl"
+            className="relative w-full max-w-4xl min-h-72 max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl card-premium"
             onClick={(e) => e.stopPropagation()}>
             {/* Close Button */}
             <button
@@ -160,9 +160,9 @@ function TechModal({
             </button>
 
             {/* Header */}
-            <div className="p-6 border-b border-foreground/5">
+            <div className="p-6 border-b border-border">
               <h2 className="text-2xl font-semibold text-foreground flex items-center gap-3">
-                <span className="bg-linear-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                <span className="text-primary font-bold">
                   My Tech Stack
                 </span>
                 <span className="text-sm font-normal text-muted-foreground">
@@ -178,9 +178,9 @@ function TechModal({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="group p-4 rounded-xl border border-foreground/5 bg-foreground/5 hover:bg-foreground/10 transition-all duration-300">
+                className="group p-4 rounded-xl border border-border bg-muted hover:bg-accent transition-all duration-300 glass">
                 <div className="flex items-center gap-2 mb-2">
-                  <Layout className="w-4 h-4 text-blue-400" />
+                  <Layout className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-sm text-foreground">
                     Frontend
                   </h3>
@@ -193,7 +193,7 @@ function TechModal({
                     <div
                       key={tool.name}
                       className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-secondary shrink-0" />
                       <span className="text-foreground/80">{tool.name}</span>
                       <span className="text-muted-foreground/60 text-[10px]">
                         — {tool.desc}
@@ -208,9 +208,9 @@ function TechModal({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 }}
-                className="group p-4 rounded-xl border border-foreground/5 bg-foreground/5 hover:bg-foreground/10 transition-all duration-300">
+                className="group p-4 rounded-xl border border-border bg-muted hover:bg-accent transition-all duration-300 glass">
                 <div className="flex items-center gap-2 mb-2">
-                  <Server className="w-4 h-4 text-purple-400" />
+                  <Server className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-sm text-foreground">
                     Backend
                   </h3>
@@ -223,7 +223,7 @@ function TechModal({
                     <div
                       key={tool.name}
                       className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-secondary shrink-0" />
                       <span className="text-foreground/80">{tool.name}</span>
                       <span className="text-muted-foreground/60 text-[10px]">
                         — {tool.desc}
@@ -238,9 +238,9 @@ function TechModal({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="group p-4 rounded-xl border border-foreground/5 bg-foreground/5 hover:bg-foreground/10 transition-all duration-300">
+                className="group p-4 rounded-xl border border-border bg-muted hover:bg-accent transition-all duration-300 glass">
                 <div className="flex items-center gap-2 mb-2">
-                  <Terminal className="w-4 h-4 text-orange-400" />
+                  <Terminal className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-sm text-foreground">
                     DevOps & Tools
                   </h3>
@@ -253,7 +253,7 @@ function TechModal({
                     <div
                       key={tool.name}
                       className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-secondary shrink-0" />
                       <span className="text-foreground/80">{tool.name}</span>
                       <span className="text-muted-foreground/60 text-[10px]">
                         — {tool.desc}
@@ -268,9 +268,9 @@ function TechModal({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
-                className="group p-4 rounded-xl border border-foreground/5 bg-foreground/5 hover:bg-foreground/10 transition-all duration-300">
+                className="group p-4 rounded-xl border border-border bg-muted hover:bg-accent transition-all duration-300 glass">
                 <div className="flex items-center gap-2 mb-2">
-                  <Monitor className="w-4 h-4 text-cyan-400" />
+                  <Monitor className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-sm text-foreground">
                     Operating Systems
                   </h3>
@@ -283,7 +283,7 @@ function TechModal({
                     <div
                       key={tool.name}
                       className="flex items-center gap-2 text-xs">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-3 h-3 text-secondary shrink-0" />
                       <span className="text-foreground/80">{tool.name}</span>
                       <span className="text-muted-foreground/60 text-[10px]">
                         — {tool.desc}
@@ -295,7 +295,7 @@ function TechModal({
             </div>
 
             {/* Footer */}
-            <div className="p-4 border-t border-foreground/5 text-center">
+            <div className="p-4 border-t border-border text-center">
               <p className="text-[10px] text-muted-foreground">
                 {Object.values(techDetails).reduce(
                   (acc, curr) => acc + curr.tools.length,
@@ -325,7 +325,7 @@ const TechStack = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-foreground/5 dark:bg-card/15 dark:hover:bg-card/10 ring-1 ring-border h-full min-h-72">
+          className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl transition-all duration-300 h-full min-h-72 card-premium">
           {/* Tech Stack Marquee */}
           <div className="absolute inset-0 z-0 flex flex-col justify-center gap-3 overflow-hidden pt-12 mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             {/* Row 1 - Marquee Left */}
@@ -341,8 +341,8 @@ const TechStack = () => {
                     scale: 1.05,
                     transition: { duration: 0.15 },
                   }}
-                  className="flex items-center gap-2 rounded-full border border-border/50 bg-card/30 px-3.5 py-1.5 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-indigo-500/30 hover:bg-card/50 hover:shadow-indigo-500/10">
-                  <tech.icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-indigo-500 transition-colors duration-200" />
+                  className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-3.5 py-1.5 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent hover:shadow-primary/10 glass">
+                  <tech.icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
                   <span className="text-xs font-medium text-foreground/70 group-hover:text-foreground transition-colors duration-200">
                     {tech.name}
                   </span>
@@ -363,8 +363,8 @@ const TechStack = () => {
                     scale: 1.05,
                     transition: { duration: 0.15 },
                   }}
-                  className="flex items-center gap-2 rounded-full border border-border/50 bg-card/30 px-3.5 py-1.5 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-indigo-500/30 hover:bg-card/50 hover:shadow-indigo-500/10">
-                  <tech.icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-indigo-500 transition-colors duration-200" />
+                  className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-3.5 py-1.5 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent hover:shadow-primary/10 glass">
+                  <tech.icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
                   <span className="text-xs font-medium text-foreground/70 group-hover:text-foreground transition-colors duration-200">
                     {tech.name}
                   </span>
@@ -385,8 +385,8 @@ const TechStack = () => {
                     scale: 1.05,
                     transition: { duration: 0.15 },
                   }}
-                  className="flex items-center gap-2 rounded-full border border-border/50 bg-card/30 px-3.5 py-1.5 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-indigo-500/30 hover:bg-card/50 hover:shadow-indigo-500/10">
-                  <tech.icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-indigo-500 transition-colors duration-200" />
+                  className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-3.5 py-1.5 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent hover:shadow-primary/10 glass">
+                  <tech.icon className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
                   <span className="text-xs font-medium text-foreground/70 group-hover:text-foreground transition-colors duration-200">
                     {tech.name}
                   </span>
@@ -423,7 +423,7 @@ const TechStack = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 hover:border-indigo-500/40 transition-all duration-200 text-indigo-500 text-[10px] font-medium">
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-200 text-primary text-[10px] font-medium glass">
               <span>View Full Stack</span>
               <ChevronRight className="w-3 h-3" />
             </motion.button>
@@ -433,7 +433,7 @@ const TechStack = () => {
 
             {/* Tool count */}
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
-              <span className="w-1 h-1 rounded-full bg-indigo-500" />
+              <span className="w-1 h-1 rounded-full bg-primary" />
               <span className="text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
                 {row1.length + row2.length + row3.length}+ Tools
               </span>
@@ -441,7 +441,7 @@ const TechStack = () => {
           </div>
 
           {/* Hover gradient overlay */}
-          <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-500/5 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
+          <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-primary/5 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
         </motion.div>
       </div>
 

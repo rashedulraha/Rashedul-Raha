@@ -71,8 +71,8 @@ const Usesd = () => {
                 className="inline-block text-center">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className={`rounded-[20px] border-2 border-foreground/10 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-indigo-400/60 ${tool.size} delay-[${tool.delay}ms]`}>
-                  <div className="grid h-full place-items-center rounded-xl border-2 border-[#A5AEB81F]/10 bg-[#EDEEF0] shadow-inner transition-colors duration-500 group-hover:bg-indigo-50 dark:border-foreground/6 dark:bg-white/4 dark:group-hover:bg-indigo-500/10">
+                  className={`rounded-[20px] border-2 border-foreground/10 p-2 transition-all duration-500 group-hover:-translate-y-3 group-hover:border-primary/60 ${tool.size} delay-[${tool.delay}ms]`}>
+                  <div className="grid h-full place-items-center rounded-xl border border-border bg-muted/50 shadow-inner transition-colors duration-500 group-hover:bg-primary/10 glass">
                     <Image
                       alt={tool.name}
                       loading="lazy"
@@ -96,7 +96,7 @@ const Usesd = () => {
 
         {/* Content Overlay */}
         <div className="pointer-events-none z-10 flex flex-col gap-0.5 p-5 w-full text-center">
-          <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-indigo-500/80 dark:group-hover:text-indigo-300">
+          <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-primary/80">
             Uses
           </p>
           <p className="text-sm text-muted-foreground tracking-wide dark:text-muted-foreground group-hover:text-foreground dark:group-hover:text-foreground transition-colors duration-500">
@@ -105,7 +105,7 @@ const Usesd = () => {
         </div>
 
         {/* Hover gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-400/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
+        <div className="pointer-events-none absolute inset-0 z-10 rounded-xl bg-linear-to-br from-transparent via-transparent to-primary/20 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 dark:to-white/5" />
 
         {/* Arrow Button */}
         <motion.div
@@ -122,7 +122,7 @@ const Usesd = () => {
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.3, delay: 0.4 }}
           className="absolute bottom-4 left-4 z-10 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
-          <span className="w-1 h-1 rounded-full bg-indigo-500" />
+          <span className="w-1 h-1 rounded-full bg-primary" />
           <span className="text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
             {tools.length} Tools
           </span>

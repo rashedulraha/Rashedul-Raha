@@ -123,7 +123,7 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-foreground/12 bg-foreground/5 backdrop-blur-xl mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted/50 mb-6 glass">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -153,7 +153,7 @@ export default function Testimonials() {
             return (
               <article
                 key={testimonial.id}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl p-8 snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] transition-all duration-300 hover:border-foreground/20 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] hover:-translate-y-1">
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-8 snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] transition-all duration-300 hover:-translate-y-1 card-premium">
                 {/* Quote Icon */}
                 <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
                   <svg
@@ -182,11 +182,11 @@ export default function Testimonials() {
                       loading="lazy"
                       width={48}
                       height={48}
-                      className="size-12 rounded-full object-cover ring-2 ring-foreground/10"
+                      className="size-12 rounded-full object-cover ring-2 ring-border"
                       src={testimonial.avatar}
                     />
                     {/* Verified Badge */}
-                    <div className="absolute -bottom-1 -right-1 size-4 bg-green-500 rounded-full border-2 border-[#0a0a0a] flex items-center justify-center">
+                    <div className="absolute -bottom-1 -right-1 size-4 bg-primary rounded-full border-2 border-background flex items-center justify-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="8"
@@ -219,13 +219,13 @@ export default function Testimonials() {
         {/* Bottom Controls */}
         <div className="flex items-center justify-center gap-4 mt-10 px-4">
           {/* Pagination Pill */}
-          <div className="flex items-center gap-2 rounded-full bg-foreground/5 border border-foreground/12 p-2 px-4 backdrop-blur-xl">
+          <div className="flex items-center gap-2 rounded-full bg-muted border border-border p-2 px-4 glass">
             {testimonialsData.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goToSlide(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-foreground/20 hover:bg-foreground/40"}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/60"}`}
               />
             ))}
           </div>
@@ -234,7 +234,7 @@ export default function Testimonials() {
           <button
             onClick={() => setIsPaused(!isPaused)}
             aria-label={isPaused ? "Play Carousel" : "Pause Carousel"}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground/5 border border-foreground/10 text-foreground backdrop-blur-sm transition-all hover:bg-foreground/10 hover:scale-105 active:scale-95">
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-muted border border-border text-foreground transition-all hover:bg-accent hover:scale-105 active:scale-95 glass">
             {isPaused ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"

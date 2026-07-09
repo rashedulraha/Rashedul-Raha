@@ -36,7 +36,7 @@ export default function Contact() {
           {particles.map((p) => (
             <motion.div
               key={p.id}
-              className="absolute rounded-full bg-indigo-500/10 dark:bg-indigo-400/5"
+              className="absolute rounded-full bg-primary/10"
               style={{
                 left: `${p.x}%`,
                 top: `${p.y}%`,
@@ -64,7 +64,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="relative w-full overflow-hidden rounded-2xl border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(var(--foreground), 0.3)]"
+          className="relative w-full overflow-hidden rounded-2xl card-premium"
         >
           <div className="relative z-10 mx-auto flex w-full flex-col items-center justify-center gap-y-2 py-16 sm:py-20 text-center px-4">
             {/* Rotating Badge */}
@@ -90,7 +90,7 @@ export default function Contact() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 p-1.5 font-medium leading-none shadow-lg shadow-blue-500/20"
+                className="relative rounded-full bg-gradient-to-r from-primary to-primary/80 p-1.5 font-medium leading-none shadow-lg shadow-primary/20"
               >
                 <div className="relative size-23.75 rounded-full bg-background p-2 text-foreground">
                   <div className="absolute top-1/2 left-1/2 size-20 -translate-x-1/2 -translate-y-1/2 rounded-full">
@@ -151,7 +151,7 @@ export default function Contact() {
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.5 }}
-                  className="font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+                  className="font-extrabold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
                 >
                   CREATION
                 </motion.span>
@@ -162,7 +162,7 @@ export default function Contact() {
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.6 }}
-                  className="font-extrabold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                  className="font-extrabold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
                 >
                   HAPPEN!
                 </motion.span>
@@ -188,7 +188,7 @@ export default function Contact() {
                     })
                   )
                 }
-                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-foreground/12 bg-foreground/5 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-foreground/20 hover:bg-foreground/10 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] active:scale-[0.98] my-10"
+                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98] my-10"
               >
                 <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
                   Get In Touch
@@ -256,11 +256,11 @@ export default function Contact() {
               className="font-semibold text-base sm:text-xl lg:text-2xl text-foreground"
             >
               I&apos;m available for{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <span className="text-primary font-bold">
                 full-time roles
               </span>{" "}
               &amp;{" "}
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="text-primary font-bold">
                 freelance projects
               </span>
               .
@@ -285,16 +285,16 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 1 }}
               className="flex gap-2 mt-4"
             >
-              <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-foreground text-xs font-medium">
+              <span className="px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-medium glass">
                 React
               </span>
-              <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-foreground text-xs font-medium">
+              <span className="px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-medium glass">
                 Next.js
               </span>
-              <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-foreground text-xs font-medium">
+              <span className="px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-medium glass">
                 TypeScript
               </span>
-              <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-foreground text-xs font-medium">
+              <span className="px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-medium glass">
                 Tailwind
               </span>
             </motion.div>

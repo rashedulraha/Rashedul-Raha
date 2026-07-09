@@ -32,7 +32,7 @@ export default function Blog() {
           {particles.map((p) => (
             <motion.div
               key={p.id}
-              className="absolute rounded-full bg-indigo-500/10 dark:bg-indigo-400/5"
+              className="absolute rounded-full bg-primary/10"
               style={{
                 left: `${p.x}%`,
                 top: `${p.y}%`,
@@ -76,7 +76,7 @@ export default function Blog() {
               className="px-1 pb-1 text-shadow-none italic"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, #6366f1, #8b5cf6, #a855f7)",
+                  "linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)))",
                 backgroundSize: "200% 100%",
                 backgroundPosition: "0% 100%",
                 WebkitBackgroundClip: "text",
@@ -109,9 +109,9 @@ export default function Blog() {
               whileHover={{ y: -6 }}
               onMouseEnter={() => setHoveredCard(post.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              className="group flex h-full flex-col rounded-3xl p-2.5 border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl transition-all duration-300 hover:border-foreground/20 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)]">
+              className="group flex h-full flex-col rounded-3xl p-2.5 transition-all duration-300 card-premium">
               {/* Image */}
-              <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-foreground/5">
+              <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-muted">
                 <motion.img
                   alt={post.title}
                   loading="lazy"
@@ -127,7 +127,7 @@ export default function Blog() {
 
                 {/* Category Badge */}
                 <div className="absolute top-3 left-3 z-10">
-                  <span className="px-2.5 py-1 rounded-full bg-background/50 backdrop-blur-sm text-foreground text-[10px] font-medium uppercase tracking-wider border border-foreground/10">
+                  <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-medium uppercase tracking-wider border border-primary/20 glass">
                     {post.category}
                   </span>
                 </div>
@@ -170,7 +170,7 @@ export default function Blog() {
                     whileTap={{ scale: 0.95 }}
                     className="flex shrink-0 items-center gap-2 text-muted-foreground text-xs tracking-wide transition-colors duration-300 group-hover:text-primary">
                     <span className="hidden sm:inline">Read article</span>
-                    <div className="size-7 overflow-hidden rounded-lg border border-foreground/12 border-dashed bg-foreground/5 transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
+                    <div className="size-7 overflow-hidden rounded-lg border border-border border-dashed bg-muted transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
                       <motion.div
                         initial={{ x: -8 }}
                         animate={{ x: 0 }}
@@ -206,7 +206,7 @@ export default function Blog() {
           <motion.div
             whileHover={{ rotate: 45 }}
             transition={{ duration: 0.2 }}
-            className="relative size-7 overflow-hidden rounded-lg border border-foreground/12 border-dashed bg-foreground/5 transition-colors duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
+            className="relative size-7 overflow-hidden rounded-lg border border-border border-dashed bg-muted transition-colors duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
             <motion.span
               initial={{ x: -20 }}
               animate={{ x: 0 }}

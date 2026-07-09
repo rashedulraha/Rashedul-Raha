@@ -40,9 +40,9 @@ const TextTooltip = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-xl bg-linear-to-br from-white/8 to-white/2 backdrop-blur-xl border border-foreground/12 shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] z-50 pointer-events-none flex flex-col gap-2">
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-xl z-50 pointer-events-none flex flex-col gap-2 card-premium">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-md bg-foreground/5 border border-foreground/10 text-primary">
+              <div className="p-1.5 rounded-md bg-muted border border-border text-primary">
                 <Icon className="w-4 h-4" />
               </div>
               <span className="text-sm font-semibold text-foreground">
@@ -106,9 +106,9 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="w-full max-w-md lg:w-[45%] relative">
             {/* The Outer Frame Layer */}
-            <div className="relative p-2.5 rounded-3xl bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl border border-foreground/12 shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] hover:border-foreground/20 transition-colors duration-300">
+            <div className="relative p-2.5 rounded-3xl transition-colors duration-300 card-premium">
               {/* Image Container */}
-              <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-foreground/5">
+              <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-muted">
                 <Image
                   src="/personal_img/rashedul-about.jpeg"
                   alt="Rashedul Islam - Full Stack Developer"
@@ -125,8 +125,8 @@ export default function AboutSection() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.4, type: "spring" }}
-                className="absolute -bottom-6 -right-6 lg:-right-8 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] border border-foreground/12 hover:border-foreground/20 p-4 flex items-center gap-4 hover:-translate-y-1 transition-all duration-300">
-                <div className="w-12 h-12 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center">
+                className="absolute -bottom-6 -right-6 lg:-right-8 p-4 flex items-center gap-4 hover:-translate-y-1 transition-all duration-300 card-premium">
+                <div className="w-12 h-12 rounded-full bg-muted border border-border flex items-center justify-center">
                   <Code className="w-6 h-6 text-primary" />
                 </div>
                 <div>
@@ -211,7 +211,7 @@ export default function AboutSection() {
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center justify-center p-4 rounded-2xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 hover:border-foreground/20 transition-all duration-300 ease-out">
+                  className="flex flex-col items-center justify-center p-4 rounded-2xl bg-muted/30 border border-border hover:bg-muted/50 hover:border-primary/30 transition-all duration-300 ease-out">
                   <p className="text-2xl font-bold text-foreground mb-1">
                     {stat.value}
                   </p>
@@ -233,7 +233,7 @@ export default function AboutSection() {
                   }),
                 )
               }
-              className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-foreground/12 bg-foreground/5 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-foreground/20 hover:bg-foreground/10 hover:shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] active:scale-[0.98]">
+              className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98]">
               <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
                 Let&apos;s Connect
               </span>

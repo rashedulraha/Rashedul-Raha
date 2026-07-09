@@ -18,6 +18,7 @@ import {
   MessageSquare,
   ListTodo,
   Laptop,
+  KeyIcon,
 } from "lucide-react";
 import { AnimatePresence, motion, LayoutGroup, Variants } from "framer-motion";
 import SearchModal from "./SearchModal";
@@ -304,29 +305,8 @@ export default function Navbar() {
                 borderRadius: { duration: 0.6, ease: [0.32, 0.72, 0, 1] },
               }}
               onMouseLeave={scheduleCloseDropdown}
-              className="relative flex flex-col overflow-hidden"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)",
-                backdropFilter: "blur(24px) saturate(180%)",
-                WebkitBackdropFilter: "blur(24px) saturate(180%)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                boxShadow: `
-                  0 8px 32px rgba(var(--foreground), 0.3),
-                  0 2px 8px rgba(0,0,0,0.2),
-                  inset 0 1px 0 rgba(255,255,255,0.1),
-                  inset 0 -1px 0 rgba(255,255,255,0.05)
-                `,
-              }}
+              className="relative flex flex-col overflow-hidden glass glass-shadow"
             >
-              {/* Specular Highlight */}
-              <div
-                className="pointer-events-none absolute inset-x-0 top-0 h-px"
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent, rgba(255,255,255,0.3) 20%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 80%, transparent)",
-                }}
-              />
 
               {/* Inner glow */}
               <div
@@ -520,16 +500,7 @@ export default function Navbar() {
                                 {active && (
                                   <motion.div
                                     layoutId="activeNavPill"
-                                    className="absolute inset-0 rounded-full"
-                                    style={{
-                                      background:
-                                        "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)",
-                                      border: "1px solid rgba(255,255,255,0.15)",
-                                      boxShadow: `
-                                        inset 0 1px 0 rgba(255,255,255,0.15),
-                                        0 2px 8px rgba(0,0,0,0.15)
-                                      `,
-                                    }}
+                                    className="absolute inset-0 rounded-full bg-primary/10 border border-primary/20"
                                     transition={{
                                       type: "spring",
                                       stiffness: 200,
@@ -572,16 +543,7 @@ export default function Navbar() {
                             {(isDropdownOpen || isMoreActive) && (
                               <motion.div
                                 layoutId="activeNavPill"
-                                className="absolute inset-0 rounded-full"
-                                style={{
-                                  background:
-                                    "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)",
-                                  border: "1px solid rgba(255,255,255,0.15)",
-                                  boxShadow: `
-                                    inset 0 1px 0 rgba(255,255,255,0.15),
-                                    0 2px 8px rgba(0,0,0,0.15)
-                                  `,
-                                }}
+                                className="absolute inset-0 rounded-full bg-primary/10 border border-primary/20"
                                 transition={{
                                   type: "spring",
                                   stiffness: 200,
@@ -625,9 +587,10 @@ export default function Navbar() {
                         className="ml-auto flex items-center gap-2"
                       >
                         <ThemeToggle />
+                     
                         <Button
                           onClick={() => openModal("contact")}
-                          className="rounded-full px-4 h-8 text-xs font-medium shadow-lg transition-all duration-500 hover:shadow-xl"
+                          className="rounded-full px-4 h-8 text-xs font-medium bg-primary text-primary-foreground shadow-lg transition-all duration-500 hover:shadow-xl"
                         >
                           Book a Call
                         </Button>
@@ -797,19 +760,7 @@ export default function Navbar() {
                 damping: 15,
               }}
               aria-label="Search"
-              className="relative flex items-center justify-center rounded-full p-2.5 overflow-hidden"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)",
-                backdropFilter: "blur(24px) saturate(180%)",
-                WebkitBackdropFilter: "blur(24px) saturate(180%)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                boxShadow: `
-                  0 8px 32px rgba(var(--foreground), 0.3),
-                  0 2px 8px rgba(0,0,0,0.2),
-                  inset 0 1px 0 rgba(255,255,255,0.1)
-                `,
-              }}
+              className="relative flex items-center justify-center rounded-full p-2.5 overflow-hidden glass"
             >
               <div
                 className="pointer-events-none absolute inset-x-0 top-0 h-px"
@@ -822,87 +773,90 @@ export default function Navbar() {
             </motion.button>
 
             {/* Tooltip */}
-            <AnimatePresence>
-              {showTooltip && (
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    y: 12,
-                    scale: 0.85,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    y: 10,
-                    scale: 0.9,
-                  }}
-                  transition={{
-                    duration: 0.7,
-                    ease: [0.32, 0.72, 0, 1],
-                    type: "spring",
-                    stiffness: 180,
-                    damping: 20,
-                  }}
-                  className="absolute -top-12 left-1/2 -translate-x-1/2 rounded-lg px-3 py-1.5 shadow-xl whitespace-nowrap flex items-center gap-1.5 text-xs font-medium overflow-hidden"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)",
-                    backdropFilter: "blur(20px) saturate(180%)",
-                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    boxShadow: `
-                      0 8px 32px rgba(var(--foreground), 0.3),
-                      inset 0 1px 0 rgba(255,255,255,0.1)
-                    `,
-                  }}
-                >
-                  <div
-                    className="pointer-events-none absolute inset-x-0 top-0 h-px"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, transparent, rgba(255,255,255,0.3) 50%, transparent)",
-                    }}
-                  />
+           {/* Tooltip */}
+<AnimatePresence>
+  {showTooltip && (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: -12,
+        scale: 0.85,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }}
+      exit={{
+        opacity: 0,
+        y: -10,
+        scale: 0.9,
+      }}
+      transition={{
+        duration: 0.7,
+        ease: [0.32, 0.72, 0, 1],
+        type: "spring",
+        stiffness: 180,
+        damping: 20,
+      }}
+      className="absolute -bottom-12 left-1/2 -translate-x-1/2 rounded-lg px-3 py-1.5 shadow-xl whitespace-nowrap flex items-center gap-1.5 text-xs font-medium overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)",
+        backdropFilter: "blur(20px) saturate(180%)",
+        WebkitBackdropFilter: "blur(20px) saturate(180%)",
+        border: "1px solid rgba(255,255,255,0.15)",
+        boxShadow: `
+          0 8px 32px rgba(var(--foreground), 0.3),
+          inset 0 1px 0 rgba(255,255,255,0.1)
+        `,
+      }}
+    >
+      {/* Specular highlight - now at top */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(255,255,255,0.3) 50%, transparent)",
+        }}
+      />
 
-                  <kbd
-                    className="relative px-1.5 py-0.5 rounded text-[10px] font-mono flex items-center gap-1"
-                    style={{
-                      background: "rgba(255,255,255,0.08)",
-                      border: "1px solid rgba(255,255,255,0.1)",
-                    }}
-                  >
-                    <span className="text-primary text-sm">⌘</span>
-                  </kbd>
-                  <span className="text-[10px] text-muted-foreground/60">+</span>
-                  <kbd
-                    className="relative px-1.5 py-0.5 rounded text-[10px] font-mono"
-                    style={{
-                      background: "rgba(255,255,255,0.08)",
-                      border: "1px solid rgba(255,255,255,0.1)",
-                    }}
-                  >
-                    K
-                  </kbd>
-                  <span className="text-[10px] text-muted-foreground/60 ml-1">
-                    to search
-                  </span>
+      <kbd
+        className="relative px-1.5 py-0.5 rounded text-[10px] font-mono flex items-center gap-1"
+        style={{
+          background: "rgba(255,255,255,0.08)",
+          border: "1px solid rgba(255,255,255,0.1)",
+        }}
+      >
+        <span className="text-primary text-sm">⌘</span>
+      </kbd>
+      <span className="text-[10px] text-muted-foreground/60">+</span>
+      <kbd
+        className="relative px-1.5 py-0.5 rounded text-[10px] font-mono"
+        style={{
+          background: "rgba(255,255,255,0.08)",
+          border: "1px solid rgba(255,255,255,0.1)",
+        }}
+      >
+        K
+      </kbd>
+      <span className="text-[10px] text-muted-foreground/60 ml-1">
+        to search
+      </span>
 
-                  <div
-                    className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
-                    style={{
-                      background: "rgba(255,255,255,0.05)",
-                      borderRight: "1px solid rgba(255,255,255,0.15)",
-                      borderBottom: "1px solid rgba(255,255,255,0.15)",
-                      backdropFilter: "blur(20px)",
-                    }}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+      {/* Arrow - now pointing UP (towards the button) */}
+      <div
+        className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
+        style={{
+          background: "rgba(255,255,255,0.05)",
+          borderLeft: "1px solid rgba(255,255,255,0.15)",
+          borderTop: "1px solid rgba(255,255,255,0.15)",
+          backdropFilter: "blur(20px)",
+        }}
+      />
+    </motion.div>
+  )}
+</AnimatePresence>
           </div>
         </div>
 
