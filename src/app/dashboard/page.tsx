@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Sidebar, TabId } from "@/components/dashboard/Sidebar";
 import { OverviewTab } from "@/components/dashboard/OverviewTab";
 import { ProfileTab } from "@/components/dashboard/ProfileTab";
+import { MessagesTab } from "@/components/dashboard/MessagesTab";
 import { ProjectsTab } from "@/components/dashboard/ProjectsTab";
 import { SkillsTab } from "@/components/dashboard/SkillsTab";
 import { ExperienceTab } from "@/components/dashboard/ExperienceTab";
@@ -18,6 +19,7 @@ export default function DashboardPage() {
   const renderTabContent = () => {
     switch (activeTab) {
       case "overview": return <OverviewTab />;
+      case "messages": return <MessagesTab />;
       case "profile": return <ProfileTab />;
       case "projects": return <ProjectsTab />;
       case "skills": return <SkillsTab />;
@@ -54,7 +56,7 @@ export default function DashboardPage() {
             className="md:hidden fixed inset-0 z-30 pt-16 bg-background/95 backdrop-blur-3xl"
           >
             <div className="p-4 flex flex-col gap-2">
-              {["overview", "profile", "projects", "skills", "experience", "settings"].map((tab) => (
+              {["overview", "messages", "profile", "projects", "skills", "experience", "settings"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => {
