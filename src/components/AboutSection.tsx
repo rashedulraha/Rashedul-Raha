@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
 import {
   Code,
   Server,
@@ -14,6 +14,53 @@ import {
   Cloud,
   Sparkles
 } from "lucide-react";
+
+const TextTooltip = ({
+  children,
+  title,
+  description,
+  icon: Icon,
+}: {
+  children: React.ReactNode;
+  title: string;
+  description: string;
+  icon: React.ElementType;
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <span
+      className="relative inline-block cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}>
+      <strong className="font-semibold text-foreground underline decoration-primary/50 underline-offset-4 hover:decoration-primary transition-colors">
+        {children}
+      </strong>
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-xl z-50 pointer-events-none flex flex-col gap-2 bg-background/95 backdrop-blur-xl border border-white/10 shadow-2xl">
+            <div className="flex items-center gap-2">
+              <div className="p-1.5 rounded-md bg-primary/10 border border-primary/20 text-primary">
+                <Icon className="w-4 h-4" />
+              </div>
+              <span className="text-sm font-semibold text-foreground">
+                {title}
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              {description}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </span>
+  );
+};
 
 const SKILLS = [
   { name: "Next.js 14/15", icon: Server },
@@ -37,7 +84,7 @@ export default function AboutSection() {
     { label: "Code Commits", value: "1K+" },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -47,7 +94,7 @@ export default function AboutSection() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 15 },
     visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } },
   };
@@ -138,7 +185,39 @@ export default function AboutSection() {
                 </p>
                 
                 <p>
-                  My expertise is rooted in the <strong>Next.js Ecosystem</strong> and <strong>TypeScript</strong>. From designing pixel-perfect UIs with Tailwind CSS to architecting robust backends and integrating modern AI capabilities, I handle the entire product lifecycle. I am also experienced in Cloud deployments and DevOps, ensuring that applications are delivered securely and reliably.
+                  My expertise is rooted in the{" "}
+                  <TextTooltip
+                    title="Next.js 14/15"
+                    description="Building Server Components and high-SEO applications."
+                    icon={Server}
+                  >
+                    Next.js Ecosystem
+                  </TextTooltip>{" "}
+                  and{" "}
+                  <TextTooltip
+                    title="TypeScript"
+                    description="Writing strictly typed, bug-free, and scalable code."
+                    icon={Code}
+                  >
+                    TypeScript
+                  </TextTooltip>
+                  . From designing pixel-perfect UIs with{" "}
+                  <TextTooltip
+                    title="Tailwind CSS v4"
+                    description="Rapid UI development using utility-first styling."
+                    icon={MonitorSmartphone}
+                  >
+                    Tailwind CSS
+                  </TextTooltip>{" "}
+                  to architecting robust backends and integrating modern AI capabilities, I handle the entire product lifecycle. I am also experienced in{" "}
+                  <TextTooltip
+                    title="Cloud & DevOps"
+                    description="Docker, AWS, and Vercel for reliable deployments."
+                    icon={Cloud}
+                  >
+                    Cloud deployments and DevOps
+                  </TextTooltip>
+                  , ensuring that applications are delivered securely and reliably.
                 </p>
 
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-muted/30 border border-border mt-6">
