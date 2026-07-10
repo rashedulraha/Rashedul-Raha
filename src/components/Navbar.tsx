@@ -19,7 +19,8 @@ import {
   ListTodo,
   Laptop,
   KeyIcon,
-  Globe
+  Globe,
+  Award
 } from "lucide-react";
 import { AnimatePresence, motion, LayoutGroup, Variants } from "framer-motion";
 import SearchModal from "./SearchModal";
@@ -61,6 +62,11 @@ const moreCards = [
 ];
 
 const moreLinks = [
+  {
+    id: "certificates",
+    href: "/certificates",
+    icon: Award,
+  },
   {
     id: "links",
     href: "/links",

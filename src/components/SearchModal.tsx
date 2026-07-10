@@ -253,6 +253,18 @@ export default function SearchModal() {
                             </Command.Item>
 
                             <Command.Item
+                              value={`certificates awards achievements`}
+                              onSelect={() =>
+                                runCommand(() => router.push(`/${locale}/certificates`))
+                              }
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
+                                <Award className="h-4 w-4" />
+                              </div>
+                              Certificates
+                            </Command.Item>
+
+                            <Command.Item
                               value={`book a call meeting contact hire ${t("bookCall")}`}
                               onSelect={() => setCurrentView("contact")}
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">

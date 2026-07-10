@@ -594,7 +594,7 @@
       "partner": {
         "title": "Life Partner",
         "desc": "A few thoughts about my dream life partner.",
-        "letter": "Dear Queen,\n\nWarmest greetings and best wishes from the bottom of my heart. I hope you are doing well by the infinite mercy of Allah.\n\nI am writing this letter to you today to talk about a very important chapter of our lives. I have some dreams, some expectations, and some promises regarding our marriage and future life that I want to share with you today. I believe the foundation of a beautiful and lasting relationship is getting to know each other's thoughts from the very beginning.\n\nI want a life partner who will not only be the light of my home but also my companion on the path to Jannah. I sincerely want our future family to be guided by the pleasure of Allah and the Sunnah of the Messenger (PBUH). As a Muslim woman, I have deep respect for your modesty, pardah, humility, and obedience to Allah. I dream that together we will build a family where it will be easy to follow Allah's commands, and there will be no shadow of sin in our home.\n\nAfter marriage, protecting your religion, your honor, and your rights is a huge trust and responsibility placed upon me by Allah. I promise you:\n\n1. I will gladly take full responsibility for your maintenance, housing, medical care, and clothing.\n2. You will never have to suffer from an inferiority complex for anything in our family. I will keep you by my side not as a maid or a domestic worker, but as the better half of my life and the queen of my heart.\n3. I will look at any of your minor mistakes with forgiveness and will never treat you harshly or disrespectfully. Following the Sunnah of the Messenger (PBUH), I will protect you with the utmost love and care.\n4. I will always encourage and support you to make your religious life more beautiful.\n\nI do not want to force anything on you. But I want you to think deeply about these matters. If we both try to walk on the beautiful path shown by Islam, Allah will bless our family, and our love will not be limited to this world only, but will keep us together in Jannah in the afterlife as well.\n\nPlease take some time to read and consider these words with a calm mind. If you consent from your heart to walk together in this ideal and loving family, only then will we be bound in this sacred bond of our lives. I am waiting for your beautiful decision.\n\nMay Allah guide us both and gift us a blessed life.\n\nSincerely,\nRashedul Islam"
+        "letter": "Dear Queen,Warmest greetings and best wishes from the bottom of my heart. I hope you are doing well by the infinite mercy of Allah.I am writing this letter to you today to talk about a very important chapter of our lives. I have some dreams, some expectations, and some promises regarding our marriage and future life that I want to share with you today. I believe the foundation of a beautiful and lasting relationship is getting to know each other's thoughts from the very beginning.I want a life partner who will not only be the light of my home but also my companion on the path to Jannah. I sincerely want our future family to be guided by the pleasure of Allah and the Sunnah of the Messenger (PBUH). As a Muslim woman, I have deep respect for your modesty, pardah, humility, and obedience to Allah. I dream that together we will build a family where it will be easy to follow Allah's commands, and there will be no shadow of sin in our home.After marriage, protecting your religion, your honor, and your rights is a huge trust and responsibility placed upon me by Allah. I promise you:1. I will gladly take full responsibility for your maintenance, housing, medical care, and clothing.2. You will never have to suffer from an inferiority complex for anything in our family. I will keep you by my side not as a maid or a domestic worker, but as the better half of my life and the queen of my heart.3. I will look at any of your minor mistakes with forgiveness and will never treat you harshly or disrespectfully. Following the Sunnah of the Messenger (PBUH), I will protect you with the utmost love and care.4. I will always encourage and support you to make your religious life more beautiful.I do not want to force anything on you. But I want you to think deeply about these matters. If we both try to walk on the beautiful path shown by Islam, Allah will bless our family, and our love will not be limited to this world only, but will keep us together in Jannah in the afterlife as well.Please take some time to read and consider these words with a calm mind. If you consent from your heart to walk together in this ideal and loving family, only then will we be bound in this sacred bond of our lives. I am waiting for your beautiful decision.May Allah guide us both and gift us a blessed life.Sincerely,Rashedul Islam"
       }
     },
     "items": {
@@ -647,5 +647,74 @@
         "title": "Become a Software Developer"
       }
     }
+  },
+  "CertificatesPage": {
+    "header": {
+      "title1": "My",
+      "titleHighlight": "Certificates",
+      "description": "A collection of certificates and achievements from my web development journey and other continuous learning experiences."
+    },
+    "sections": {
+      "webDev": "Web Development Journey",
+      "other": "Other Achievements"
+    },
+    "viewDetails": "View Details",
+    "certificates": {
+      "programming-hero-level-1": {
+        "title": "Programming Hero Level 1",
+        "description": "Learned the fundamentals of web development including HTML, CSS, and basic JavaScript. Built several projects to strengthen core concepts.",
+        "skills": "HTML, CSS, JavaScript"
+      },
+      "programming-hero-level-2": {
+        "title": "Programming Hero Level 2",
+        "description": "Advanced web development with React, Node.js, Express, and MongoDB. Built full-stack applications with authentication and database integration.",
+        "skills": "React, Node.js, Express, MongoDB"
+      },
+      "phitron": {
+        "title": "Phitron",
+        "description": "Comprehensive understanding of data structures, algorithms, and problem-solving techniques.",
+        "skills": "C, C++, Data Structures, Algorithms"
+      },
+      "meta-social-media-management": {
+        "title": "Social media management",
+        "description": "Social media management is the process of overseeing and managing a brand's social media presence. This includes everything from creating and publishing content, to engaging with followers, to monitoring social media trends, and reporting on account performance.",
+        "skills": "Social Media, Management, Strategy"
+      },
+      "meta-social-media-marketing": {
+        "title": "Meta Social media marketing Certificate",
+        "description": "The Introduction to Social Media Marketing Certificate is designed to teach you the essential skills and knowledge you need to create and manage successful social media marketing campaigns.",
+        "skills": "Social Media Marketing, Campaigns"
+      },
+      "hubspot-social-media": {
+        "title": "Social media certificate Hubspot Academy",
+        "description": "The HubSpot Social Media Certification is a free online certification that teaches you how to use social media to build your brand, generate leads, and drive sales.",
+        "skills": "Social Media, Branding, Lead Generation"
+      },
+      "hubspot-digital-marketing": {
+        "title": "Digital marketing on Hubspot academy",
+        "description": "The Digital Marketing Certification on HubSpot Academy is a free online certification that teaches you the fundamentals of digital marketing.",
+        "skills": "Digital Marketing, SEO, Content"
+      },
+      "hubspot-content-marketing": {
+        "title": "Content marketing on Hubspot Academy",
+        "description": "The Content Marketing Certification on HubSpot Academy is a free online certification that teaches you how to create and promote content that attracts.",
+        "skills": "Content Marketing, Promotion"
+      },
+      "meta-measure-optimize": {
+        "title": "measure optimize social media",
+        "description": "Measuring and optimizing social media is a crucial aspect of any effective social media strategy. It involves tracking key metrics, analyzing data, and making adjustments.",
+        "skills": "Analytics, Optimization, Tracking"
+      },
+      "meta-advertising": {
+        "title": "Advertising with meta",
+        "description": "Advertising with Meta refers to the use of Meta's advertising platforms, including Facebook Ads, Instagram Ads, Messenger Ads, and Audience Network.",
+        "skills": "Facebook Ads, Instagram Ads, Meta"
+      },
+      "meta-fundamentals-advertising": {
+        "title": "Fundamentals of Social Media Advertising",
+        "description": "Social media advertising is a form of online marketing that involves placing paid ads on social media platforms like Facebook, Instagram, Twitter, and LinkedIn.",
+        "skills": "Online Marketing, Paid Ads"
+      }
+    }
   }
-}\n
+}
