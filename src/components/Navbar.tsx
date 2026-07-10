@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React, { useState, useEffect, useRef, useMemo, useTransition } from "react";
+import { Link, usePathname, useRouter } from "../routing";
+import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import {
   ChevronDown,
@@ -19,12 +19,22 @@ import {
   ListTodo,
   Laptop,
   KeyIcon,
+  Globe
 } from "lucide-react";
 import { AnimatePresence, motion, LayoutGroup, Variants } from "framer-motion";
 import SearchModal from "./SearchModal";
 import { Button } from "@base-ui/react";
 import { ThemeToggle } from "./ThemeToggle";
-import LanguageSwitcher from "./LanguageSwitcher";
+
+const languages = [
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "bn", label: "বাংলা", flag: "🇧🇩" },
+  { code: "ja", label: "日本語", flag: "🇯🇵" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+];
 
 // ── Data Configuration ─────────────────────────────────
 
@@ -120,7 +130,13 @@ const mobileMenuVariants: Variants = {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const t = useTranslations('Navbar');
+  const locale = useLocale();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [greeting, setGreeting] = useState("");
   const [showGreeting, setShowGreeting] = useState(false);
@@ -219,13 +235,24 @@ export default function Navbar() {
       closeTimeoutRef.current = null;
     }
     setIsDropdownOpen(true);
+    setIsLangDropdownOpen(false);
   };
 
   const scheduleCloseDropdown = () => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     closeTimeoutRef.current = setTimeout(() => {
       setIsDropdownOpen(false);
+      setIsLangDropdownOpen(false);
     }, 300);
+  };
+
+  const openLangDropdown = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsLangDropdownOpen(true);
+    setIsDropdownOpen(false);
   };
 
   // ── Keyboard & outside click ───────────────────────
@@ -248,9 +275,10 @@ export default function Navbar() {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
+        setIsLangDropdownOpen(false);
       }
     };
-    if (isDropdownOpen) {
+    if (isDropdownOpen || isLangDropdownOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -299,7 +327,7 @@ export default function Navbar() {
               layout
               initial={false}
               animate={{
-                borderRadius: isDropdownOpen ? 28 : 9999,
+                borderRadius: isDropdownOpen || isLangDropdownOpen ? 28 : 9999,
               }}
               transition={{
                 layout: { duration: 0.7, ease: [0.32, 0.72, 0, 1] },
@@ -510,7 +538,7 @@ export default function Navbar() {
                                     }}
                                   />
                                 )}
-                                <span className="relative z-10">{link.label}</span>
+                                <span className="relative z-10">{t(link.label.toLowerCase() as any)}</span>
                               </Link>
                             </motion.div>
                           );
@@ -553,7 +581,7 @@ export default function Navbar() {
                                 }}
                               />
                             )}
-                            <span className="relative z-10">More</span>
+                            <span className="relative z-10">{t('more')}</span>
                             <motion.div
                               className="relative z-10"
                               animate={{
@@ -571,23 +599,21 @@ export default function Navbar() {
                       </div>
 
                       {/* CTA Button & Theme Toggle */}
-                      <motion.div
-                        whileHover={{ 
-                          scale: 1.05,
-                          transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] }
-                        }}
-                        whileTap={{ 
-                          scale: 0.95,
-                          transition: { duration: 0.3 }
-                        }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 200,
-                          damping: 15,
-                        }}
-                        className="ml-auto flex items-center gap-2"
-                      >
-                        <LanguageSwitcher />
+                      <div className="ml-auto flex items-center gap-2">
+                        {/* Language Dropdown Trigger */}
+                        <div className="relative">
+                          <button
+                            onMouseEnter={openLangDropdown}
+                            onClick={() => setIsLangDropdownOpen((prev) => !prev)}
+                            className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-500 ${
+                              isLangDropdownOpen ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                            }`}
+                            aria-label="Change Language"
+                          >
+                            <Globe className="h-4 w-4" />
+                          </button>
+                        </div>
+
                         <ThemeToggle />
                         
                         <button
@@ -602,9 +628,9 @@ export default function Navbar() {
                           onClick={() => openModal("contact")}
                           className="rounded-full px-4 h-8 text-xs font-medium bg-primary text-primary-foreground shadow-lg transition-all duration-500 hover:shadow-xl"
                         >
-                          Book a Call
+                          {t('bookACall')}
                         </Button>
-                      </motion.div>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -743,6 +769,92 @@ export default function Navbar() {
                           </motion.div>
                         ))}
                       </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* ── Language Dropdown ── */}
+                {isLangDropdownOpen && (
+                  <motion.div
+                    key="lang-dropdown"
+                    onMouseEnter={openLangDropdown}
+                    variants={dropdownVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    className="overflow-hidden relative"
+                    style={{
+                      borderTop: "1px solid rgba(255,255,255,0.08)",
+                    }}
+                  >
+                    <div
+                      className="pointer-events-none absolute inset-0"
+                      style={{
+                        background:
+                          "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                      }}
+                    />
+                    <div className="relative p-6 w-[min(90vw,500px)] grid grid-cols-2 gap-2 mx-auto">
+                      {languages.map((lang, index) => (
+                        <motion.button
+                          key={lang.code}
+                          onClick={() => {
+                            startTransition(() => {
+                              router.replace(pathname, { locale: lang.code });
+                            });
+                            setIsLangDropdownOpen(false);
+                          }}
+                          disabled={isPending}
+                          initial={{ opacity: 0, x: -12 }}
+                          animate={{
+                            opacity: 1,
+                            x: 0,
+                            transition: {
+                              duration: 0.5,
+                              delay: index * 0.05 + 0.3,
+                              ease: [0.32, 0.72, 0, 1],
+                            },
+                          }}
+                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-foreground/5 transition-all duration-500 group text-left"
+                        >
+                          <motion.div
+                            className={`h-10 w-10 flex shrink-0 items-center justify-center rounded-lg transition-all duration-500 ${
+                              locale === lang.code ? "text-primary bg-primary/10 border border-primary/30" : "text-muted-foreground group-hover:text-primary"
+                            }`}
+                            style={
+                              locale !== lang.code ? {
+                                border: "1px solid rgba(255,255,255,0.1)",
+                                background:
+                                  "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+                              } : undefined
+                            }
+                            whileHover={{ 
+                              scale: 1.08, 
+                              rotate: 4,
+                              transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] }
+                            }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 200,
+                              damping: 15,
+                            }}
+                          >
+                            <span className="text-xl">{lang.flag}</span>
+                          </motion.div>
+                          <div className="flex flex-col">
+                            <span className={`font-medium text-sm transition-colors duration-500 ${
+                              locale === lang.code ? "text-primary" : "text-foreground group-hover:text-primary"
+                            }`}>
+                              {lang.label}
+                            </span>
+                            {locale === lang.code && (
+                              <span className="text-[10px] uppercase tracking-wider font-semibold text-primary/70">
+                                Active
+                              </span>
+                            )}
+                          </div>
+                        </motion.button>
+                      ))}
                     </div>
                   </motion.div>
                 )}
@@ -957,7 +1069,7 @@ export default function Navbar() {
                         }
                       >
                         <link.icon className="h-5 w-5" />
-                        {link.label}
+                        {t(link.label.toLowerCase() as any)}
                       </Link>
                     </motion.div>
                   ))}
@@ -1012,7 +1124,7 @@ export default function Navbar() {
                       }}
                       className="w-full rounded-xl h-11 transition-all duration-500"
                     >
-                      Book a Call
+                      {t('bookACall')}
                     </Button>
                   </motion.div>
                 </div>

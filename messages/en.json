@@ -1,10 +1,14 @@
 {
   "Navbar": {
+    "home": "Home",
     "about": "About",
     "work": "Work",
+    "blog": "Blog",
+    "more": "More",
     "services": "Services",
     "resume": "Resume",
     "bucketList": "Bucket List",
-    "language": "Language"
+    "language": "Language",
+    "bookACall": "Book a Call"
   }
 }

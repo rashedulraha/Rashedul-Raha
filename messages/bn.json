@@ -1,10 +1,14 @@
 {
   "Navbar": {
+    "home": "হোম",
     "about": "সম্পর্কে",
     "work": "কাজ",
+    "blog": "ব্লগ",
+    "more": "আরও",
     "services": "সেবাসমূহ",
     "resume": "জীবনবৃত্তান্ত",
     "bucketList": "বাকেট লিস্ট",
-    "language": "ভাষা"
+    "language": "ভাষা",
+    "bookACall": "কল বুক করুন"
   }
 }
