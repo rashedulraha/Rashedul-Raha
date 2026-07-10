@@ -4,29 +4,31 @@ import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import { Timeline } from "@/components/ui/timeline";
 import { Target, CheckCircle2, Circle, Trophy } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Bucket list | Rashedul Islam",
   description: "Explore the bucket list of Rashedul Islam, a Full-Stack Developer specializing in Next.js and React Native.",
 };
 
-export default function BucketListPage() {
+export default async function BucketListPage({ params }: { params: Promise<{ locale: string }> }) {
+  const t = await getTranslations("BucketListPage");
   const bucketListItems = [
-    { title: "Contribute to a major open-source project", completed: true, year: "2023", category: "Career" },
-    { title: "Go skydiving", completed: true, year: "2022", category: "Adventure" },
-    { title: "Build my dream home workspace", completed: true, year: "2024", category: "Life" },
-    { title: "Build a profitable SaaS business", completed: false, year: null, category: "Career" },
-    { title: "Speak at a major tech conference", completed: false, year: null, category: "Career" },
-    { title: "Reach 1,000 GitHub stars on a personal repository", completed: false, year: null, category: "Career" },
-    { title: "Start a tech blog and reach 10k monthly readers", completed: false, year: null, category: "Career" },
-    { title: "Visit Japan and experience the cherry blossoms", completed: false, year: null, category: "Travel" },
-    { title: "Backpack across Europe", completed: false, year: null, category: "Travel" },
-    { title: "See the Northern Lights", completed: false, year: null, category: "Travel" },
-    { title: "Live in a different country for at least 6 months", completed: false, year: null, category: "Travel" },
-    { title: "Run a full marathon", completed: false, year: null, category: "Life" },
-    { title: "Learn to play the piano fluently", completed: false, year: null, category: "Life" },
-    { title: "Read 100 books in a single year", completed: false, year: null, category: "Life" },
-    { title: "Mentorship: Help 10 junior developers get their first job", completed: false, year: null, category: "Life" },
+    { title: t("items.item0.title"), completed: true, year: "2023", category: t("categories.Career") },
+    { title: t("items.item1.title"), completed: true, year: "2022", category: t("categories.Adventure") },
+    { title: t("items.item2.title"), completed: true, year: "2024", category: t("categories.Life") },
+    { title: t("items.item3.title"), completed: false, year: null, category: t("categories.Career") },
+    { title: t("items.item4.title"), completed: false, year: null, category: t("categories.Career") },
+    { title: t("items.item5.title"), completed: false, year: null, category: t("categories.Career") },
+    { title: t("items.item6.title"), completed: false, year: null, category: t("categories.Career") },
+    { title: t("items.item7.title"), completed: false, year: null, category: t("categories.Travel") },
+    { title: t("items.item8.title"), completed: false, year: null, category: t("categories.Travel") },
+    { title: t("items.item9.title"), completed: false, year: null, category: t("categories.Travel") },
+    { title: t("items.item10.title"), completed: false, year: null, category: t("categories.Travel") },
+    { title: t("items.item11.title"), completed: false, year: null, category: t("categories.Life") },
+    { title: t("items.item12.title"), completed: false, year: null, category: t("categories.Life") },
+    { title: t("items.item13.title"), completed: false, year: null, category: t("categories.Life") },
+    { title: t("items.item14.title"), completed: false, year: null, category: t("categories.Life") },
   ];
 
   const totalItems = bucketListItems.length;
@@ -35,11 +37,11 @@ export default function BucketListPage() {
 
   const data = [
     {
-      title: "Completed",
+      title: t("sections.completed.title"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            The milestones I&apos;ve already achieved. Looking back at these keeps me motivated to push forward on the rest of the list.
+            {t("sections.completed.desc")}
           </p>
           <div className="space-y-4">
             {bucketListItems.filter(item => item.completed).map((item, idx) => (
@@ -72,14 +74,14 @@ export default function BucketListPage() {
       ),
     },
     {
-      title: "Career & Tech",
+      title: t("sections.career.title"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            Professional goals focused on building impactful products, sharing knowledge, and pushing my technical boundaries.
+            {t("sections.career.desc")}
           </p>
           <div className="space-y-4">
-            {bucketListItems.filter(item => !item.completed && item.category === "Career").map((item, idx) => (
+            {bucketListItems.filter(item => !item.completed && item.category === t("categories.Career")).map((item, idx) => (
               <div 
                 key={idx} 
                 className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-card border border-border hover:border-primary/30 transition-all duration-300 card-premium"
@@ -97,14 +99,14 @@ export default function BucketListPage() {
       ),
     },
     {
-      title: "Travel & Adventure",
+      title: t("sections.travel.title"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            Places I want to see and experiences I want to have around the globe.
+            {t("sections.travel.desc")}
           </p>
           <div className="space-y-4">
-            {bucketListItems.filter(item => !item.completed && item.category === "Travel").map((item, idx) => (
+            {bucketListItems.filter(item => !item.completed && item.category === t("categories.Travel")).map((item, idx) => (
               <div 
                 key={idx} 
                 className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-card border border-border hover:border-primary/30 transition-all duration-300 card-premium"
@@ -122,14 +124,14 @@ export default function BucketListPage() {
       ),
     },
     {
-      title: "Life & Experiences",
+      title: t("sections.life.title"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            Personal growth, physical challenges, and giving back to the community.
+            {t("sections.life.desc")}
           </p>
           <div className="space-y-4">
-            {bucketListItems.filter(item => !item.completed && item.category === "Life").map((item, idx) => (
+            {bucketListItems.filter(item => !item.completed && item.category === t("categories.Life")).map((item, idx) => (
               <div 
                 key={idx} 
                 className="group flex items-start gap-4 p-5 md:p-6 rounded-3xl bg-card border border-border hover:border-primary/30 transition-all duration-300 card-premium"
@@ -171,7 +173,7 @@ export default function BucketListPage() {
                   </div>
                 </div>
                 <h1 className="font-instrument-serif text-5xl md:text-7xl tracking-tight text-foreground mb-6">
-                  The{" "}
+                  {t("header.title1")}{" "}
                   <span
                     className="italic"
                     style={{
@@ -179,11 +181,11 @@ export default function BucketListPage() {
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                     }}>
-                    Bucket List
+                    {t("header.titleHighlight")}
                   </span>
                 </h1>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  A running list of things I want to do, see, and achieve in my lifetime. It&apos;s a mix of professional milestones, crazy adventures, and personal growth goals.
+                  {t("header.description")}
                 </p>
               </div>
 
@@ -194,7 +196,7 @@ export default function BucketListPage() {
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <Trophy className="w-4 h-4 text-emerald-400" />
-                      <span className="text-sm font-bold text-foreground uppercase tracking-wider">Progress</span>
+                      <span className="text-sm font-bold text-foreground uppercase tracking-wider">{t("progress.title")}</span>
                     </div>
                     <span className="text-xl font-bold text-emerald-400">{progressPercentage}%</span>
                   </div>
@@ -205,7 +207,7 @@ export default function BucketListPage() {
                     />
                   </div>
                   <p className="text-xs text-muted-foreground font-medium">
-                    {completedItems} completed out of {totalItems} goals
+                    {completedItems} {t("progress.completedText")} {totalItems} {t("progress.goalsText")}
                   </p>
                 </div>
               </div>
