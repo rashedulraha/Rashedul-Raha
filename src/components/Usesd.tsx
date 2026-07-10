@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const tools = [
   {
@@ -39,6 +40,7 @@ const tools = [
 ];
 
 const Usesd = () => {
+  const t = useTranslations("Features.Uses");
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
@@ -97,10 +99,10 @@ const Usesd = () => {
         {/* Content Overlay */}
         <div className="pointer-events-none z-10 flex flex-col gap-0.5 p-5 w-full text-center">
           <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-primary/80">
-            Uses
+            {t('badge')}
           </p>
           <p className="text-sm text-muted-foreground tracking-wide dark:text-muted-foreground group-hover:text-foreground dark:group-hover:text-foreground transition-colors duration-500">
-            Check out my favorite tools
+            {t('title')}
           </p>
         </div>
 
@@ -124,7 +126,7 @@ const Usesd = () => {
           className="absolute bottom-4 left-4 z-10 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
           <span className="w-1 h-1 rounded-full bg-primary" />
           <span className="text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
-            {tools.length} Tools
+            {tools.length} {t('toolsCount')}
           </span>
         </motion.div>
       </motion.a>

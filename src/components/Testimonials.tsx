@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 type Testimonial = {
   id: number;
@@ -70,6 +71,7 @@ const testimonialsData: Testimonial[] = [
 ];
 
 export default function Testimonials() {
+  const t = useTranslations("Testimonials");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -129,17 +131,16 @@ export default function Testimonials() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
             <p className="font-medium text-xs uppercase tracking-widest">
-              Client Love
+              {t('badge')}
             </p>
           </div>
           <h2 className="text-balance font-medium text-4xl tracking-tight sm:text-5xl md:text-6xl text-foreground">
-            Don&apos;t just take{" "}
-            <span className="italic text-primary">my word</span>
-            <br className="hidden sm:block" /> for it.
+            {t('titlePrefix')}
+            <span className="italic text-primary">{t('titleHighlight')}</span>
+            <br className="hidden sm:block" /> {t('titleSuffix')}
           </h2>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            Here’s what founders, marketers, and creative directors have to say
-            about working together.
+            {t('description')}
           </p>
         </div>
 
@@ -168,10 +169,10 @@ export default function Testimonials() {
 
                 <blockquote className="relative z-10 flex flex-col grow">
                   <h3 className="mb-4 font-semibold text-xl text-foreground tracking-wide leading-snug transition-colors duration-300 group-hover:text-primary">
-                    &quot;{testimonial.title}&quot;
+                    &quot;{t(`items.item${testimonial.id}.title`)}&quot;
                   </h3>
                   <p className="mb-8 font-light text-muted-foreground leading-relaxed text-sm sm:text-base flex-grow">
-                    {testimonial.message}
+                    {t(`items.item${testimonial.id}.message`)}
                   </p>
                 </blockquote>
 
@@ -204,10 +205,10 @@ export default function Testimonials() {
                   </div>
                   <div className="flex flex-col">
                     <cite className="font-medium text-foreground not-italic tracking-wide text-sm">
-                      {testimonial.name}
+                      {t(`items.item${testimonial.id}.name`)}
                     </cite>
                     <p className="text-xs text-muted-foreground/60 mt-0.5">
-                      {testimonial.role}
+                      {t(`items.item${testimonial.id}.role`)}
                     </p>
                   </div>
                 </footer>

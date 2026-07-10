@@ -3,10 +3,11 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
-
 import { blogPosts } from "@/lib/blog-data";
+import { useTranslations } from "next-intl";
 
 export default function Blog() {
+  const t = useTranslations("Blog");
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -65,10 +66,10 @@ export default function Blog() {
               "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
           }}>
           <p className="mb-4 font-semibold text-primary text-xs uppercase tracking-widest">
-            FROM THE DESK
+            {t('badge')}
           </p>
           <span className="inline-block">
-            Thoughts &amp;{" "}
+            {t('titlePrefix')}
             <motion.span
               initial={{ backgroundPosition: "0% 100%" }}
               animate={isInView ? { backgroundPosition: "100% 100%" } : {}}
@@ -82,7 +83,7 @@ export default function Blog() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}>
-              writings
+              {t('titleHighlight')}
             </motion.span>
           </span>
         </motion.div>
@@ -128,14 +129,14 @@ export default function Blog() {
                 {/* Category Badge */}
                 <div className="absolute top-3 left-3 z-10">
                   <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-medium uppercase tracking-wider border border-primary/20 glass">
-                    {post.category}
+                    {t(`posts.post${post.id}.category`)}
                   </span>
                 </div>
 
                 <div className="absolute inset-0 flex items-center justify-center p-6">
                   <span className="text-balance text-center font-normal text-foreground text-xl leading-snug tracking-tight drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]">
-                    {post.title.split(" ").slice(0, 4).join(" ")}
-                    {post.title.split(" ").length > 4 && "..."}
+                    {t(`posts.post${post.id}.title`).split(" ").slice(0, 4).join(" ")}
+                    {t(`posts.post${post.id}.title`).split(" ").length > 4 && "..."}
                   </span>
                 </div>
               </div>
@@ -143,10 +144,10 @@ export default function Blog() {
               {/* Content */}
               <div className="flex flex-1 flex-col px-2 pt-4 pb-3">
                 <h3 className="font-semibold text-lg text-foreground leading-snug transition-all duration-300 ease-out group-hover:text-primary">
-                  {post.title}
+                  {t(`posts.post${post.id}.title`)}
                 </h3>
                 <p className="mt-2 line-clamp-3 text-muted-foreground text-sm leading-relaxed">
-                  {post.description}
+                  {t(`posts.post${post.id}.description`)}
                 </p>
 
                 {/* Footer */}
@@ -154,14 +155,14 @@ export default function Blog() {
                   <div className="flex items-center gap-3 text-[11px] text-muted-foreground uppercase tracking-wide">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
-                      {post.readTime}
+                      {t(`posts.post${post.id}.readTime`)}
                     </span>
                     <span className="text-foreground/20">
                       ·
                     </span>
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      <time dateTime={post.date}>{post.date}</time>
+                      <time dateTime={post.date}>{t(`posts.post${post.id}.date`)}</time>
                     </span>
                   </div>
 
@@ -169,7 +170,7 @@ export default function Blog() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="flex shrink-0 items-center gap-2 text-muted-foreground text-xs tracking-wide transition-colors duration-300 group-hover:text-primary">
-                    <span className="hidden sm:inline">Read article</span>
+                    <span className="hidden sm:inline">{t('readArticle')}</span>
                     <div className="size-7 overflow-hidden rounded-lg border border-border border-dashed bg-muted transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/10">
                       <motion.div
                         initial={{ x: -8 }}
@@ -202,7 +203,7 @@ export default function Blog() {
           whileTap={{ scale: 0.98 }}
           className="group flex w-fit items-center justify-center gap-2 text-muted-foreground text-xs uppercase transition-colors hover:text-primary mx-auto mt-pagebuilder my-5"
           href="/blog">
-          Read more posts
+          {t('readMore')}
           <motion.div
             whileHover={{ rotate: 45 }}
             transition={{ duration: 0.2 }}

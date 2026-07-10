@@ -4,8 +4,10 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function FAQ() {
+  const t = useTranslations("Explore");
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
@@ -23,8 +25,8 @@ export default function FAQ() {
   const cards = [
     {
       id: "uses",
-      title: "Uses",
-      description: "Check out my favorite tools",
+      title: t('cards.uses.title'),
+      description: t('cards.uses.description'),
       href: "/uses",
       images: [
         { src: "/images/image_1.jpg", alt: "Zed", delay: 200 },
@@ -37,15 +39,15 @@ export default function FAQ() {
     },
     {
       id: "about",
-      title: "Behind The Code",
-      description: "Journey, skills & experience",
+      title: t('cards.about.title'),
+      description: t('cards.about.description'),
       href: "/about",
       image: "/images/image_8.jpg",
     },
     {
       id: "guestbook",
-      title: "Guestbook",
-      description: "Let me know you were here",
+      title: t('cards.guestbook.title'),
+      description: t('cards.guestbook.description'),
       href: "/guestbook",
     },
   ];
@@ -93,10 +95,10 @@ export default function FAQ() {
               "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
           }}>
           <p className="mb-4 font-semibold text-primary text-xs uppercase tracking-widest">
-            Explore My Site
+            {t('badge')}
           </p>
           <span className="inline-block">
-            Explore, experiment{" "}
+            {t('titlePrefix')}
             <motion.span
               initial={{ backgroundPosition: "0% 100%" }}
               animate={isInView ? { backgroundPosition: "100% 100%" } : {}}
@@ -110,7 +112,7 @@ export default function FAQ() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}>
-              &amp;&amp; say hello
+              {t('titleHighlight')}
             </motion.span>
           </span>
         </motion.div>

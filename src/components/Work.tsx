@@ -7,8 +7,10 @@ import { ExternalLink, ChevronRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { projects } from "@/lib/work-data";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function Work() {
+  const t = useTranslations("Work");
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
@@ -69,16 +71,16 @@ export default function Work() {
         transition={{ duration: 0.5 }}
         className="text-center  px-4">
         <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
-          Portfolio
+          {t('badge')}
         </p>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
-          Featured{" "}
+          {t('titlePrefix')}
           <span className="text-primary">
-            Projects
+            {t('titleHighlight')}
           </span>
         </h2>
         <p className="text-base text-muted-foreground mt-4 max-w-xl mx-auto">
-          Scroll to explore some of my recent work and technical achievements.
+          {t('description')}
         </p>
       </motion.div>
 
@@ -123,14 +125,14 @@ export default function Work() {
                     <div className="flex items-center justify-between">
                       <div>
                         <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest drop-shadow-md">
-                          {projects[activeIndex]?.type}
+                          {projects[activeIndex] ? t(`projects.${projects[activeIndex].id}.type`) : ""}
                         </span>
                         <p className="text-foreground font-semibold text-sm md:text-base mt-1 drop-shadow-md">
-                          {projects[activeIndex]?.stats}
+                          {projects[activeIndex] ? t(`projects.${projects[activeIndex].id}.stats`) : ""}
                         </p>
                       </div>
                       <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide border border-primary/20 shadow-lg glass">
-                        {projects[activeIndex]?.badge}
+                        {projects[activeIndex] ? t(`projects.${projects[activeIndex].id}.badge`) : ""}
                       </span>
                     </div>
                   </div>
@@ -156,7 +158,7 @@ export default function Work() {
                   className="group relative inline-flex mt-4 cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98] w-full block text-center"
                 >
                   <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
-                    View all projects
+                    {t('viewAll')}
                   </span>
                   <span
                     aria-hidden="true"
@@ -238,25 +240,25 @@ export default function Work() {
 
                   {/* Title */}
                   <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                    {project.title}
+                    {t(`projects.${project.id}.title`)}
                   </h3>
                   <p className="text-primary text-base font-medium mb-5">
-                    {project.subtitle}
+                    {t(`projects.${project.id}.subtitle`)}
                   </p>
 
                   {/* Description */}
                   <p className="text-muted-foreground text-base leading-relaxed mb-6">
-                    {project.description}
+                    {t(`projects.${project.id}.description`)}
                   </p>
 
                   {/* Features */}
                   <div className="space-y-2.5 mb-6">
-                    {project.features.map((feature, idx) => (
+                    {project.features.map((_, idx) => (
                       <div
                         key={idx}
                         className="flex items-start gap-3 text-sm text-foreground/80">
                         <ChevronRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                        <span>{feature}</span>
+                        <span>{t(`projects.${project.id}.features${idx}`)}</span>
                       </div>
                     ))}
                   </div>
@@ -288,7 +290,7 @@ export default function Work() {
                     })}
                     {project.tags.length > 6 && (
                       <span className="flex items-center text-xs text-muted-foreground font-medium px-2">
-                        +{project.tags.length - 6} more
+                        +{project.tags.length - 6} {t('more')}
                       </span>
                     )}
                   </div>
@@ -300,7 +302,7 @@ export default function Work() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all duration-300 hover:scale-[1.03] shadow-sm">
-                      View Live
+                      {t('viewLive')}
                       <ExternalLink className="w-4 h-4" />
                     </a>
                     <a
@@ -309,7 +311,7 @@ export default function Work() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-muted border border-border hover:border-primary/30 hover:bg-accent text-sm font-medium transition-all duration-300 hover:scale-[1.03] shadow-sm">
                       <FaGithub className="w-4 h-4" />
-                      Code
+                      {t('code')}
                     </a>
                   </div>
                 </motion.div>

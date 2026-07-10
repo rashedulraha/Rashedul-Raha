@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function Contact() {
+  const t = useTranslations("Contact");
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
@@ -117,7 +119,7 @@ export default function Contact() {
                             fill: "currentColor",
                           }}
                         >
-                          OPEN TO WORK · OPEN TO WORK ·
+                          {t('rotatingBadge')}
                         </textPath>
                       </text>
                     </svg>
@@ -134,7 +136,7 @@ export default function Contact() {
                     <path d="M12 1C12 1 12 8 10 10C8 12 1 12 1 12C1 12 8 12 10 14C12 16 12 23 12 23C12 23 12 16 14 14C16 12 23 12 23 12C23 12 16 12 14 10C12 8 12 1 12 1Z" />
                   </motion.svg>
                 </div>
-                <span className="sr-only">OPEN TO WORK · OPEN TO WORK ·</span>
+                <span className="sr-only">{t('rotatingBadge')}</span>
               </motion.div>
             </motion.div>
 
@@ -146,25 +148,25 @@ export default function Contact() {
               className="mt-12 lg:mt-0"
             >
               <h3 className="text-2xl sm:text-3xl lg:text-5xl font-light text-foreground tracking-wide">
-                FROM CONCEPT TO{" "}
+                {t('concept')}
                 <motion.span
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="font-extrabold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
                 >
-                  CREATION
+                  {t('creation')}
                 </motion.span>
               </h3>
               <h3 className="mt-3 text-2xl sm:text-3xl lg:text-5xl font-light text-foreground tracking-wide">
-                LET&apos;S MAKE IT{" "}
+                {t('makeIt')}
                 <motion.span
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.6 }}
                   className="font-extrabold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
                 >
-                  HAPPEN!
+                  {t('happen')}
                 </motion.span>
               </h3>
             </motion.div>
@@ -191,7 +193,7 @@ export default function Contact() {
                 className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98] my-10"
               >
                 <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
-                  Get In Touch
+                  {t('getInTouch')}
                 </span>
                 <span
                   aria-hidden="true"
@@ -255,15 +257,15 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 0.8 }}
               className="font-semibold text-base sm:text-xl lg:text-2xl text-foreground"
             >
-              I&apos;m available for{" "}
+              {t('availableFor')}
               <span className="text-primary font-bold">
-                full-time roles
-              </span>{" "}
-              &amp;{" "}
-              <span className="text-primary font-bold">
-                freelance projects
+                {t('fullTime')}
               </span>
-              .
+              {t('and')}
+              <span className="text-primary font-bold">
+                {t('freelance')}
+              </span>
+              {t('dot')}
             </motion.p>
 
             {/* Description */}
@@ -273,9 +275,9 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 0.9 }}
               className="my-2 text-balance font-extralight text-sm tracking-wide opacity-75 lg:text-xl text-muted-foreground"
             >
-              I thrive on crafting dynamic web applications, and
+              {t('desc1')}
               <br className="hidden sm:block" />
-              delivering seamless user experiences.
+              {t('desc2')}
             </motion.p>
 
             {/* Decorative Elements */}
@@ -285,18 +287,11 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 1 }}
               className="flex gap-2 mt-4"
             >
-              <span className="px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-medium glass">
-                React
-              </span>
-              <span className="px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-medium glass">
-                Next.js
-              </span>
-              <span className="px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-medium glass">
-                TypeScript
-              </span>
-              <span className="px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-medium glass">
-                Tailwind
-              </span>
+              {t.raw('tags').map((tag: string) => (
+                <span key={tag} className="px-3 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-medium glass">
+                  {tag}
+                </span>
+              ))}
             </motion.div>
           </div>
         </motion.div>

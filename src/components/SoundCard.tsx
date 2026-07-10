@@ -4,8 +4,10 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const SoundCard = () => {
+  const t = useTranslations("Features.SoundCard");
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [isHovered, setIsHovered] = useState(false);
@@ -220,14 +222,14 @@ const SoundCard = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.3, delay: 0.4 }}
             className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-primary/80 font-semibold">
-            Let&apos;s Build Together
+            {t('subtitle')}
           </motion.p>
           <motion.h3
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.3, delay: 0.5 }}
             className="text-sm md:text-base text-foreground tracking-wide transition-colors duration-500">
-            Clear communication, fast iterations, no surprises
+            {t('title')}
           </motion.h3>
         </div>
 
@@ -249,7 +251,7 @@ const SoundCard = () => {
           className="absolute bottom-6 left-6 md:bottom-10 md:left-10 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
           <span className="w-1 h-1 rounded-full bg-secondary animate-pulse" />
           <span className="text-[8px] md:text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
-            Available
+            {t('status')}
           </span>
         </motion.div>
 

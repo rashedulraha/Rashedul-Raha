@@ -6,30 +6,32 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("Footer");
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const footerLinks = {
     general: [
-      { name: "Home", href: "/" },
-      { name: "About", href: "/about" },
-      { name: "Projects", href: "/projects" },
-      { name: "Blog", href: "/blog" },
+      { name: t('general.home'), href: "/" },
+      { name: t('general.about'), href: "/about" },
+      { name: t('general.projects'), href: "/projects" },
+      { name: t('general.blog'), href: "/blog" },
     ],
     specifics: [
-      { name: "Guest Book", href: "/guestbook" },
-      { name: "Bucket List", href: "/bucket-list" },
-      { name: "Uses", href: "/uses" },
-      { name: "Attribution", href: "/attribution" },
+      { name: t('specifics.guestbook'), href: "/guestbook" },
+      { name: t('specifics.bucketList'), href: "/bucket-list" },
+      { name: t('specifics.uses'), href: "/uses" },
+      { name: t('specifics.attribution'), href: "/attribution" },
     ],
     more: [
-      { name: "Book a Call", href: "/contact" },
-      { name: "Links", href: "/links" },
-      { name: "RSS", href: "/rss" },
-      { name: "Privacy", href: "/legal/privacy" },
-      { name: "Terms", href: "/legal/terms" },
+      { name: t('more.bookCall'), href: "/contact" },
+      { name: t('more.links'), href: "/links" },
+      { name: t('more.rss'), href: "/rss" },
+      { name: t('more.privacy'), href: "/legal/privacy" },
+      { name: t('more.terms'), href: "/legal/terms" },
     ],
   };
 
@@ -81,8 +83,9 @@ export default function Footer() {
                   </h2>
                 </div>
                 <p className="w-60 text-sm text-muted-foreground leading-relaxed">
-                  A full-stack developer, freelancer &amp; problem solver.
-                  Thanks for checking out my site!
+                  {t('desc1')}
+                  <br />
+                  {t('desc2')}
                 </p>
                 <div className="flex items-center gap-3 pt-2">
                   {socialLinks.map((social, idx) => (
@@ -112,7 +115,7 @@ export default function Footer() {
                   transition={{ duration: 0.3, delay: 0.2 }}
                   className="flex flex-col gap-3">
                   <h4 className="px-2 text-xs text-muted-foreground/60 uppercase tracking-wider font-semibold">
-                    General
+                    {t('generalTitle')}
                   </h4>
                   <ul className="flex flex-col flex-wrap items-start gap-y-2 text-sm">
                     {footerLinks.general.map((link) => (
@@ -135,7 +138,7 @@ export default function Footer() {
                   transition={{ duration: 0.3, delay: 0.3 }}
                   className="flex flex-col gap-3">
                   <h4 className="px-2 text-xs text-muted-foreground/60 uppercase tracking-wider font-semibold">
-                    Specifics
+                    {t('specificsTitle')}
                   </h4>
                   <ul className="flex flex-col flex-wrap items-start gap-y-2 text-sm">
                     {footerLinks.specifics.map((link) => (
@@ -158,7 +161,7 @@ export default function Footer() {
                   transition={{ duration: 0.3, delay: 0.4 }}
                   className="flex flex-col gap-3">
                   <h4 className="px-2 text-xs text-muted-foreground/60 uppercase tracking-wider font-semibold">
-                    More
+                    {t('moreTitle')}
                   </h4>
                   <ul className="flex flex-col flex-wrap items-start gap-y-2 text-sm">
                     {footerLinks.more.map((link) => (
@@ -193,13 +196,13 @@ export default function Footer() {
                   href="https://github.com/rashedulraha">
                   Rashedul Islam
                 </a>
-                . All rights reserved
+                . {t('allRights')}
               </p>
               <div className="flex items-center gap-3 text-xs">
                 <a
                   className="text-muted-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
                   href="/legal/privacy">
-                  Privacy
+                  {t('privacy')}
                 </a>
                 <span className="text-muted-foreground/30">
                   ·
@@ -207,7 +210,7 @@ export default function Footer() {
                 <a
                   className="text-muted-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
                   href="/legal/terms">
-                  Terms
+                  {t('terms')}
                 </a>
                 <span className="text-muted-foreground/30">
                   ·
@@ -215,7 +218,7 @@ export default function Footer() {
                 <a
                   className="text-muted-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
                   href="/sitemap.xml">
-                  Sitemap
+                  {t('sitemap')}
                 </a>
               </div>
             </div>
@@ -223,7 +226,7 @@ export default function Footer() {
             {/* Built with badge */}
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-foreground/5 border border-foreground/12">
               <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">
-                Built with Next.js
+                {t('builtWith')}
               </span>
             </div>
           </motion.div>

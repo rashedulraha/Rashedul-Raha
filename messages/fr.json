@@ -76,5 +76,273 @@
     "stat3Label": "Code Commits",
     "stat3Value": "1K+",
     "cta": "Let's Connect"
+  },
+  "Features": {
+    "SoundCard": {
+      "subtitle": "Let's Build Together",
+      "title": "Clear communication, fast iterations, no surprises",
+      "status": "Available"
+    },
+    "TechStack": {
+      "modalTitle": "My Tech Stack",
+      "modalSubtitle": "Everything I use to ship products",
+      "frontendTitle": "Frontend",
+      "frontendDesc": "Modern, responsive, and performant UIs",
+      "backendTitle": "Backend",
+      "backendDesc": "Scalable, secure, high-performance APIs",
+      "devopsTitle": "DevOps & Tools",
+      "devopsDesc": "Streamlined deployment & development workflow",
+      "osTitle": "Operating Systems",
+      "osDesc": "My preferred development environments",
+      "toolsAcross": "tools across",
+      "categories": "categories",
+      "badge": "Tech Stack",
+      "description": "The stack behind everything I ship",
+      "viewBtn": "View Full Stack",
+      "toolsCount": "Tools"
+    },
+    "Services": {
+      "badge": "What You Get",
+      "title": "Clean code, pixel-perfect UI, deployed & scaling",
+      "items0Title": "SEO & AEO",
+      "items0Desc": "SSR, SSG, semantic",
+      "items1Title": "Performance",
+      "items1Desc": "Lighthouse 95+, CWV",
+      "items2Title": "Security",
+      "items2Desc": "HTTPS, CSP, XSS",
+      "items3Title": "Deployment",
+      "items3Desc": "CI/CD, Vercel, AWS",
+      "items4Title": "Global Reach",
+      "items4Desc": "CDN, edge, multi-region",
+      "items5Title": "AI Ready",
+      "items5Desc": "OpenAI, Gemini, vector"
+    },
+    "Network": {
+      "badge": "Flexible With Timezones",
+      "title": "Based in Bangladesh, available globally"
+    },
+    "Uses": {
+      "badge": "Uses",
+      "title": "Check out my favorite tools",
+      "toolsCount": "Tools"
+    }
+  },
+  "Work": {
+    "badge": "Portfolio",
+    "titlePrefix": "Featured ",
+    "titleHighlight": "Projects",
+    "description": "Scroll to explore some of my recent work and technical achievements.",
+    "viewAll": "View all projects",
+    "more": "more",
+    "viewLive": "View Live",
+    "code": "Code",
+    "projects": {
+      "keythm": {
+        "title": "Keythm",
+        "subtitle": "Typing Test Reimagined",
+        "description": "Keychron meets typing test — every key has its own sound, every stat tracked",
+        "badge": "Q2 2026",
+        "type": "Web App",
+        "stats": "4,367 checks",
+        "features0": "Per-key mechanical audio via Web Audio API",
+        "features1": "Four modes with live WPM & accuracy tracking",
+        "features2": "Statistical anti-cheat with 13 checks",
+        "features3": "Offline-first PWA with Serwist precaching"
+      },
+      "nextdemy": {
+        "title": "Nextdemy",
+        "subtitle": "Learning Platform",
+        "description": "A monorepo-powered learning platform with real payments, real auth, and real content delivery",
+        "badge": "Q4 2024",
+        "type": "Web App",
+        "stats": "1,200+ learners",
+        "features0": "Monorepo with Turborepo for scalable code",
+        "features1": "Real payment processing with Razorpay",
+        "features2": "JWT authentication with session management",
+        "features3": "Optimized content delivery & caching"
+      },
+      "venture-den": {
+        "title": "VentureDen",
+        "subtitle": "AI Pitch Platform",
+        "description": "Where founders pitch ideas, get instant AI feedback, and get discovered by investors",
+        "badge": "Q1 2025",
+        "type": "Web App",
+        "stats": "500+ pitches",
+        "features0": "AI-powered pitch analysis with instant feedback",
+        "features1": "Investor discovery & matching algorithm",
+        "features2": "Sanity CMS for content management",
+        "features3": "Real-time analytics & engagement tracking"
+      },
+      "finote": {
+        "title": "Finote",
+        "subtitle": "Finance Tracker",
+        "description": "An intuitive mobile companion for organizing your digital wallets and analyzing your financial health",
+        "badge": "Q4 2025",
+        "type": "Mobile App",
+        "stats": "10K+ downloads",
+        "features0": "React Native with Expo framework",
+        "features1": "Wallet organization & expense tracking",
+        "features2": "Financial health analytics with charts",
+        "features3": "Optimized media with Cloudinary"
+      },
+      "star-forge": {
+        "title": "StarForge",
+        "subtitle": "AI SaaS Landing",
+        "description": "A sleek AI SaaS landing page with a user-friendly design that enhances engagement.",
+        "badge": "Q1 2024",
+        "type": "Web App",
+        "stats": "3x conversion",
+        "features0": "Modern AI SaaS landing page design",
+        "features1": "Parallax scrolling & smooth animations",
+        "features2": "Optimized performance with Vercel",
+        "features3": "User-friendly Tailwind CSS interface"
+      }
+    }
+  },
+  "Blog": {
+    "badge": "FROM THE DESK",
+    "titlePrefix": "Thoughts & ",
+    "titleHighlight": "writings",
+    "readArticle": "Read article",
+    "readMore": "Read more posts",
+    "posts": {
+      "post1": {
+        "title": "How to Optimise a Next.js Web App",
+        "description": "Practical techniques to fix your Next.js Lighthouse score — bundle analysis, caching strategies, React Compiler, and the next.config flags nobody talks about.",
+        "category": "Performance",
+        "readTime": "15 min read",
+        "date": "Apr 14, 2026"
+      },
+      "post2": {
+        "title": "Every Tool in My Terminal-First Dev Setup",
+        "description": "Neovim, Wezterm, Tmux, and the rest — what survived two years of daily use and why I picked each one over the obvious alternatives.",
+        "category": "Tools",
+        "readTime": "12 min read",
+        "date": "Oct 19, 2025"
+      },
+      "post3": {
+        "title": "Build a Blog with Next.js and MDX from Scratch",
+        "description": "File-based content, zero database, full control. A complete walkthrough of building a statically-generated blog with Next.js, MDX, and gray-matter.",
+        "category": "Tutorial",
+        "readTime": "11 min read",
+        "date": "Mar 12, 2025"
+      }
+    }
+  },
+  "Testimonials": {
+    "badge": "Client Love",
+    "titlePrefix": "Don't just take ",
+    "titleHighlight": "my word",
+    "titleSuffix": " for it.",
+    "description": "Here’s what founders, marketers, and creative directors have to say about working together.",
+    "items": {
+      "item1": {
+        "title": "We went from Figma to production in 11 days",
+        "message": "We'd been sitting on designs for two months because our last dev kept pushing timelines. Aayush had a staging link in 4 days and we were live in 11. The site loads in under a second and our bounce rate dropped 35% the first week. Wish we'd found him sooner.",
+        "name": "Marcus T.",
+        "role": "Marketing Director, SaaS startup"
+      },
+      "item2": {
+        "title": "Finally a developer who actually listens",
+        "message": "I'm not technical at all, and past devs made me feel stupid for asking questions. Aayush sent Loom walkthroughs after every milestone so I always knew exactly where things stood. When I changed my mind about the checkout flow halfway through, he didn't push back — just adjusted and shipped it better than what I originally asked for.",
+        "name": "Lauren K.",
+        "role": "Founder, DTC skincare brand"
+      },
+      "item3": {
+        "title": "Our Core Web Vitals went from red to green overnight",
+        "message": "We hired Aayush to rebuild our marketing site on Next.js. The old WordPress site was scoring 38 on PageSpeed. His build scores 97. He set up the CMS integration so our content team can publish without touching code. Solid architecture, clean codebase — the kind of work I'd expect from a senior engineer.",
+        "name": "Daniel R.",
+        "role": "CTO, fintech startup"
+      },
+      "item4": {
+        "title": "He caught problems we didn't even know we had",
+        "message": "We hired him to redesign our product pages. During the build he noticed our image pipeline was serving uncompressed files and our mobile nav was broken on Safari. Fixed both without being asked. That's the kind of developer you want — someone who cares about the whole product, not just their ticket.",
+        "name": "James L.",
+        "role": "Co-founder, e-commerce brand"
+      },
+      "item5": {
+        "title": "He turned our messy brief into something beautiful",
+        "message": "We gave Aayush a mood board and some rough wireframes — honestly, they were half-baked. He came back with a prototype that was cleaner and more thoughtful than what we'd imagined. The animations feel intentional, the typography is perfect, and three clients have asked us who built it.",
+        "name": "Sofia M.",
+        "role": "Creative Director, branding agency"
+      },
+      "item6": {
+        "title": "We've shipped 4 projects together now",
+        "message": "First project was a simple landing page. Then he rebuilt our client portal, added a blog with headless CMS, and just finished an analytics dashboard. Every project is ahead of schedule. He's basically our dev team at this point. If you're a small agency that needs a reliable build partner, stop looking.",
+        "name": "Ryan H.",
+        "role": "Founder, B2B agency"
+      }
+    }
+  },
+  "Explore": {
+    "badge": "Explore My Site",
+    "titlePrefix": "Explore, experiment ",
+    "titleHighlight": "&& say hello",
+    "cards": {
+      "uses": {
+        "title": "Uses",
+        "description": "Check out my favorite tools"
+      },
+      "about": {
+        "title": "Behind The Code",
+        "description": "Journey, skills & experience"
+      },
+      "guestbook": {
+        "title": "Guestbook",
+        "description": "Let me know you were here"
+      }
+    }
+  },
+  "Contact": {
+    "rotatingBadge": "OPEN TO WORK · OPEN TO WORK · ",
+    "concept": "FROM CONCEPT TO ",
+    "creation": "CREATION",
+    "makeIt": "LET'S MAKE IT ",
+    "happen": "HAPPEN!",
+    "getInTouch": "Get In Touch",
+    "availableFor": "I'm available for ",
+    "fullTime": "full-time roles",
+    "and": " & ",
+    "freelance": "freelance projects",
+    "dot": ".",
+    "desc1": "I thrive on crafting dynamic web applications, and",
+    "desc2": "delivering seamless user experiences.",
+    "tags": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind"
+    ]
+  },
+  "Footer": {
+    "desc1": "A full-stack developer, freelancer & problem solver.",
+    "desc2": "Thanks for checking out my site!",
+    "generalTitle": "General",
+    "general": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "blog": "Blog"
+    },
+    "specificsTitle": "Specifics",
+    "specifics": {
+      "guestbook": "Guest Book",
+      "bucketList": "Bucket List",
+      "uses": "Uses",
+      "attribution": "Attribution"
+    },
+    "moreTitle": "More",
+    "more": {
+      "bookCall": "Book a Call",
+      "links": "Links",
+      "rss": "RSS",
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "allRights": "All rights reserved",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "sitemap": "Sitemap",
+    "builtWith": "Built with Next.js"
   }
 }

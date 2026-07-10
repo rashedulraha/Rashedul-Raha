@@ -16,6 +16,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const row1 = [
   { name: "Next.js", icon: Layout },
@@ -106,6 +107,7 @@ function TechModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const t = useTranslations("Features.TechStack");
   const modalRef = useRef<HTMLDivElement>(null);
 
   // Close on outside click
@@ -163,10 +165,10 @@ function TechModal({
             <div className="p-6 border-b border-border">
               <h2 className="text-2xl font-semibold text-foreground flex items-center gap-3">
                 <span className="text-primary font-bold">
-                  My Tech Stack
+                  {t('modalTitle')}
                 </span>
                 <span className="text-sm font-normal text-muted-foreground">
-                  Everything I use to ship products
+                  {t('modalSubtitle')}
                 </span>
               </h2>
             </div>
@@ -182,11 +184,11 @@ function TechModal({
                 <div className="flex items-center gap-2 mb-2">
                   <Layout className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-sm text-foreground">
-                    Frontend
+                    {t('frontendTitle')}
                   </h3>
                 </div>
                 <p className="text-xs text-muted-foreground mb-3">
-                  Modern, responsive, and performant UIs
+                  {t('frontendDesc')}
                 </p>
                 <div className="space-y-1.5">
                   {techDetails.frontend.tools.map((tool) => (
@@ -212,11 +214,11 @@ function TechModal({
                 <div className="flex items-center gap-2 mb-2">
                   <Server className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-sm text-foreground">
-                    Backend
+                    {t('backendTitle')}
                   </h3>
                 </div>
                 <p className="text-xs text-muted-foreground mb-3">
-                  Scalable, secure, high-performance APIs
+                  {t('backendDesc')}
                 </p>
                 <div className="space-y-1.5">
                   {techDetails.backend.tools.map((tool) => (
@@ -242,11 +244,11 @@ function TechModal({
                 <div className="flex items-center gap-2 mb-2">
                   <Terminal className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-sm text-foreground">
-                    DevOps & Tools
+                    {t('devopsTitle')}
                   </h3>
                 </div>
                 <p className="text-xs text-muted-foreground mb-3">
-                  Streamlined deployment & development workflow
+                  {t('devopsDesc')}
                 </p>
                 <div className="space-y-1.5">
                   {techDetails.devops.tools.map((tool) => (
@@ -272,11 +274,11 @@ function TechModal({
                 <div className="flex items-center gap-2 mb-2">
                   <Monitor className="w-4 h-4 text-primary" />
                   <h3 className="font-semibold text-sm text-foreground">
-                    Operating Systems
+                    {t('osTitle')}
                   </h3>
                 </div>
                 <p className="text-xs text-muted-foreground mb-3">
-                  My preferred development environments
+                  {t('osDesc')}
                 </p>
                 <div className="space-y-1.5">
                   {techDetails.os.tools.map((tool) => (
@@ -301,7 +303,7 @@ function TechModal({
                   (acc, curr) => acc + curr.tools.length,
                   0,
                 )}{" "}
-                tools across {Object.keys(techDetails).length} categories
+                {t('toolsAcross')} {Object.keys(techDetails).length} {t('categories')}
               </p>
             </div>
           </motion.div>
@@ -312,6 +314,7 @@ function TechModal({
 }
 
 const TechStack = () => {
+  const t = useTranslations("Features.TechStack");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
@@ -402,14 +405,14 @@ const TechStack = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.3, delay: 0.4 }}
               className="text-[0px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold">
-              Tech Stack
+              {t('badge')}
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.3, delay: 0.5 }}
               className="text-lg text-muted-foreground tracking-wide dark:text-muted-foreground">
-              The stack behind everything I ship
+              {t('description')}
             </motion.p>
           </div>
 
@@ -424,7 +427,7 @@ const TechStack = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsModalOpen(true)}
               className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-200 text-primary text-[10px] font-medium glass">
-              <span>View Full Stack</span>
+              <span>{t('viewBtn')}</span>
               <ChevronRight className="w-3 h-3" />
             </motion.button>
 
@@ -435,7 +438,7 @@ const TechStack = () => {
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
               <span className="w-1 h-1 rounded-full bg-primary" />
               <span className="text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
-                {row1.length + row2.length + row3.length}+ Tools
+                {row1.length + row2.length + row3.length}+ {t('toolsCount')}
               </span>
             </div>
           </div>

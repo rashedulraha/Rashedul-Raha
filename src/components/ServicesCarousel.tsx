@@ -11,6 +11,7 @@ import {
   Cpu,
   type LucideIcon,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface Service {
   icon: LucideIcon;
@@ -59,6 +60,7 @@ const services: Service[] = [
 ];
 
 export default function ServicesBox() {
+  const t = useTranslations("Features.Services");
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
   const [idx, setIdx] = useState(0);
@@ -117,11 +119,11 @@ export default function ServicesBox() {
 
         <div className="relative z-10 flex flex-1 flex-col px-5 pt-5 pb-4">
           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            What You Get
+            {t('badge')}
           </p>
 
           <h3 className="mt-1.5 text-base font-semibold leading-snug text-foreground mb-5">
-            Clean code, pixel-perfect UI, deployed&nbsp;&amp;&nbsp;scaling
+            {t('title')}
           </h3>
 
           <div className="mt-auto flex flex-col items-center">
@@ -149,10 +151,10 @@ export default function ServicesBox() {
                     <cur.icon className="h-3 w-3" style={{ color: cur.color }} />
                   </span>
                   <span className="text-[11px] font-medium text-foreground">
-                    {cur.title}
+                    {t(`items${idx}Title`)}
                   </span>
                   <span className="text-[10px] text-muted-foreground">
-                    {cur.desc}
+                    {t(`items${idx}Desc`)}
                   </span>
                 </motion.div>
               </AnimatePresence>
@@ -247,7 +249,7 @@ export default function ServicesBox() {
                           style={{ color: s.color }}
                         />
                         <span className="text-[9px] font-medium text-foreground truncate">
-                          {s.title}
+                          {t(`items${si}Title`)}
                         </span>
                       </motion.div>
                     );
