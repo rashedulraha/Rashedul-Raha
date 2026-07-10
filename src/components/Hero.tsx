@@ -351,6 +351,18 @@ export default function Hero() {
         aria-label="Introduction"
         className="relative flex max-h-250 min-h-dvh w-full flex-col items-center justify-center overflow-hidden py-pagebuilder"
         id="hero-section">
+        
+        {/* Subtle Grid Background */}
+        <div 
+          className="absolute inset-0 z-0 pointer-events-none text-foreground/5"
+          style={{
+            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+            backgroundSize: '40px 40px',
+            maskImage: 'radial-gradient(ellipse 60% 80% at 50% 20%, black 30%, transparent 100%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 60% 80% at 50% 20%, black 30%, transparent 100%)'
+          }}
+        />
+
         {/* Background particles */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           {particles.map((p) => (

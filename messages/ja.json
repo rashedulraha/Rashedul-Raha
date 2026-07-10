@@ -495,149 +495,151 @@
       "Tutorials": "チュートリアル"
     }
   },
+
   "LinksPage": {
-    "network": "NETWORK",
-    "connectWith": "Connect with",
-    "me": "Me",
-    "developer": "Full-Stack Developer",
-    "freelancer": "Freelancer",
-    "location": "Dhaka, Bangladesh",
-    "bookCall": "Book a Call",
-    "website": "Website",
-    "email": "Email",
-    "codeCraft": "Code & Craft",
-    "connect": "Connect",
-    "leaveMark": "leaveMark"
+    "network": "ネットワーク",
+    "connectWith": "つながる",
+    "me": "私と",
+    "developer": "フルスタック開発者",
+    "freelancer": "フリーランサー",
+    "location": "バングラデシュ、ダッカ",
+    "bookCall": "通話を予約する",
+    "website": "ウェブサイト",
+    "email": "メール",
+    "codeCraft": "コードと職人技",
+    "connect": "つながる",
+    "leaveMark": "足跡を残す"
   },
   "UsesPage": {
-    "hardware": "Hardware & Desk Setup",
-    "hardwareDesc": "The physical tools I use daily to write code and stay productive.",
-    "macTitle": "14\" MacBook Pro",
-    "macDesc": "M2 Pro, 16GB RAM — My primary workstation for everything.",
+    "hardware": "ハードウェアとデスク環境",
+    "hardwareDesc": "毎日コードを書き、生産性を保つために使っている物理的なツールです。",
+    "macTitle": "14インチ MacBook Pro",
+    "macDesc": "M2 Pro、16GB RAM — すべての作業のメイン環境です。",
     "keychronTitle": "Keychron K2V2",
-    "keychronDesc": "Mechanical keyboard with brown switches. Tactile and reliable.",
-    "devTools": "Development Tools",
-    "devToolsDesc": "The software that powers my daily workflow.",
+    "keychronDesc": "茶軸のメカニカルキーボード。タッチ感があり、信頼性も高いです。",
+    "devTools": "開発ツール",
+    "devToolsDesc": "日々の作業を支えるソフトウェアです。",
     "neovimTitle": "Neovim",
-    "neovimDesc": "My editor of choice. Fast, modal, and heavily customized.",
+    "neovimDesc": "私が選んだエディター。高速で、モーダルで、カスタマイズも豊富です。",
     "weztermTitle": "Wezterm",
-    "weztermDesc": "GPU-accelerated terminal emulator.",
-    "arcTitle": "Arc Browser",
-    "arcDesc": "For testing and daily browsing.",
-    "techStack": "Tech Stack",
-    "techStackDesc": "The core technologies I use to build scalable web applications.",
+    "weztermDesc": "GPUを活用したターミナルエミュレーターです。",
+    "arcTitle": "Arc ブラウザ",
+    "arcDesc": "テストや日常的なブラウジングに使っています。",
+    "techStack": "技術スタック",
+    "techStackDesc": "スケーラブルなWebアプリケーションを構築するために使っている主要な技術です。",
     "reactTitle": "React & Next.js",
-    "reactDesc": "For building fast, SEO-friendly user interfaces."
+    "reactDesc": "高速でSEOに強いユーザーインターフェースを構築するために使っています。"
   },
   "AttributionPage": {
-    "creditWhere": "Credit Where",
-    "creditDue": "Credit is Due",
-    "creditDesc": "Building this site wasn't a solo effort. It stands on the shoulders of incredible open-source tools, beautiful design systems, and amazing creators. Here are the tools and inspirations that made this possible.",
-    "typography": "Typography",
-    "typographyDesc": "The fonts that give this site its character.",
-    "viewSource": "View Source",
-    "frameworks": "Core Technologies",
-    "frameworksDesc": "The foundational frameworks and libraries powering the site.",
-    "nextjsDesc": "The React Framework for production. It powers the server-side rendering, routing, and overall architecture of this site.",
-    "tailwindDesc": "A utility-first CSS framework that makes styling incredibly fast and maintainable.",
-    "framerDesc": "A production-ready motion library for React that powers all the fluid animations, page transitions, and interactive elements across the site.",
-    "inspiration": "Design Inspiration",
-    "inspirationDesc": "Incredible resources that inspired the UI components.",
-    "aceternityDesc": "Amazing collection of modern, animated Tailwind CSS components. Several elements in this site were inspired by their designs.",
-    "magicuiDesc": "Beautiful, animated React components. Their approach to modern, engaging web design heavily influenced this portfolio."
+    "creditWhere": "クレジット",
+    "creditDue": "おかげさま",
+    "creditDesc": "このサイトの構築は一人でできたものではありません。素晴らしいオープンソースツール、美しいデザインシステム、そして素晴らしいクリエイターたちの肩の上に成り立っています。ここでは、それを可能にしてくれたツールやインスピレーションを紹介します。",
+    "typography": "タイポグラフィ",
+    "typographyDesc": "このサイトの個性を引き出すフォントです。",
+    "viewSource": "ソースを見る",
+    "frameworks": "コアテクノロジー",
+    "frameworksDesc": "このサイトを支える基盤となるフレームワークとライブラリです。",
+    "nextjsDesc": "本番環境に対応したReactフレームワークです。サーバーサイドレンダリング、ルーティング、そしてサイト全体のアーキテクチャを支えています。",
+    "tailwindDesc": "ユーティリティファーストのCSSフレームワークで、スタイリングを驚くほど速く、メンテナンスしやすくしてくれます。",
+    "framerDesc": "React向けの本番環境対応モーションライブラリで、サイト全体の滑らかなアニメーション、ページトランジション、インタラクティブな要素を動かしています。",
+    "inspiration": "デザインのインスピレーション",
+    "inspirationDesc": "UIコンポーネントのインスピレーションとなった素晴らしいリソースです。",
+    "aceternityDesc": "モダンでアニメーション付きのTailwind CSSコンポーネントの素晴らしいコレクションです。このサイトのいくつかの要素は、彼らのデザインに触発されました。",
+    "magicuiDesc": "美しくアニメーションするReactコンポーネントです。モダンで魅力的なWebデザインへの彼らのアプローチは、このポートフォリオに大きな影響を与えました。"
   },
   "GuestbookPage": {
-    "subtitle": "THE WALL REMEMBERS",
-    "title1": "Words That Echo",
-    "titleHighlight": "Always"
+    "subtitle": "壁は覚えている",
+    "title1": "響く言葉は",
+    "titleHighlight": "いつまでも"
   },
   "GuestbookForm": {
-    "namePlaceholder": "Your Name",
-    "messagePlaceholder": "Your Message...",
-    "sign": "Sign",
-    "alert": "This is a static mockup of the guestbook! Database integration is required to post actual messages."
+    "namePlaceholder": "あなたの名前",
+    "messagePlaceholder": "あなたのメッセージ...",
+    "sign": "署名する",
+    "alert": "これはゲストブックの静的モックアップです！実際のメッセージを投稿するにはデータベースの統合が必要です。"
   },
   "BucketListPage": {
     "header": {
-      "title1": "The",
-      "titleHighlight": "Bucket List",
-      "description": "A running list of things I want to do, see, and achieve in my lifetime. It's a mix of professional milestones, crazy adventures, and personal growth goals."
+      "title1": "人生の",
+      "titleHighlight": "バケットリスト",
+      "description": "人生でやりたいこと、見たいこと、達成したいことのリストです。仕事の目標、冒険、そして自己成長の目標が混ざっています。"
     },
     "progress": {
-      "title": "Progress",
-      "completedText": "completed out of",
-      "goalsText": "goals"
+      "title": "進捗状況",
+      "completedText": "件完了 /",
+      "goalsText": "ゴール中"
     },
     "categories": {
-      "Career": "Career",
-      "Adventure": "Adventure",
-      "Life": "Life",
-      "Travel": "Travel"
+      "Career": "キャリア",
+      "Adventure": "冒険",
+      "Life": "ライフ",
+      "Travel": "旅行"
     },
     "sections": {
       "completed": {
-        "title": "Completed",
-        "desc": "The milestones I've already achieved. Looking back at these keeps me motivated to push forward on the rest of the list."
+        "title": "達成済み",
+        "desc": "すでに達成したマイルストーンです。これらを振り返ると、残りのリストを前に進めるモチベーションになります。"
       },
       "career": {
-        "title": "Career & Tech",
-        "desc": "Professional goals focused on building impactful products, sharing knowledge, and pushing my technical boundaries."
+        "title": "キャリアとテクノロジー",
+        "desc": "影響力のある製品を作り、知識を共有し、技術の限界に挑戦することに焦点を当てた仕事の目標です。"
       },
       "travel": {
-        "title": "Travel & Adventure",
-        "desc": "Places I want to see and experiences I want to have around the globe."
+        "title": "旅行と冒険",
+        "desc": "世界中で見たい場所と体験したいことです。"
       },
       "life": {
-        "title": "Life & Experiences",
-        "desc": "Personal growth, physical challenges, and giving back to the community."
+        "title": "ライフと経験",
+        "desc": "自己成長、身体的な挑戦、そして社会貢献です。"
       }
     },
     "items": {
       "item0": {
-        "title": "Contribute to a major open-source project"
+        "title": "主要なオープンソースプロジェクトに貢献する"
       },
       "item1": {
-        "title": "Go skydiving"
+        "title": "スカイダイビングをする"
       },
       "item2": {
-        "title": "Build my dream home workspace"
+        "title": "夢のホームワークスペースを作る"
       },
       "item3": {
-        "title": "Build a profitable SaaS business"
+        "title": "収益性の高いSaaSビジネスを立ち上げる"
       },
       "item4": {
-        "title": "Speak at a major tech conference"
+        "title": "主要な技術カンファレンスで講演する"
       },
       "item5": {
-        "title": "Reach 1,000 GitHub stars on a personal repository"
+        "title": "個人リポジトリでGitHubスター1000を達成する"
       },
       "item6": {
-        "title": "Start a tech blog and reach 10k monthly readers"
+        "title": "技術ブログを始めて月間読者1万人を達成する"
       },
       "item7": {
-        "title": "Visit Japan and experience the cherry blossoms"
+        "title": "日本を訪れて桜を楽しむ"
       },
       "item8": {
-        "title": "Backpack across Europe"
+        "title": "ヨーロッパをバックパックで旅する"
       },
       "item9": {
-        "title": "See the Northern Lights"
+        "title": "オーロラを見る"
       },
       "item10": {
-        "title": "Live in a different country for at least 6 months"
+        "title": "少なくとも6ヶ月間、別の国に住む"
       },
       "item11": {
-        "title": "Run a full marathon"
+        "title": "フルマラソンを完走する"
       },
       "item12": {
-        "title": "Learn to play the piano fluently"
+        "title": "ピアノを流暢に弾けるようになる"
       },
       "item13": {
-        "title": "Read 100 books in a single year"
+        "title": "1年間で100冊の本を読む"
       },
       "item14": {
-        "title": "Mentorship: Help 10 junior developers get their first job"
+        "title": "メンターシップ：10人のジュニア開発者が初めての仕事を得るのを手助けする"
       }
     }
   }
+
 }

@@ -7,6 +7,7 @@ import { ArrowRight, Mail } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import { Link } from "@/routing";
 
 export default function Footer() {
   const t = useTranslations("Footer");
@@ -120,12 +121,12 @@ export default function Footer() {
                   <ul className="flex flex-col flex-wrap items-start gap-y-2 text-sm">
                     {footerLinks.general.map((link) => (
                       <li key={link.name}>
-                        <a
+                        <Link
                           href={link.href}
                           className="group relative inline-flex items-center px-2 text-muted-foreground hover:text-primary transition-all duration-300 ease-out">
                           {link.name}
                           <ArrowRight className="w-3 h-3 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -143,12 +144,12 @@ export default function Footer() {
                   <ul className="flex flex-col flex-wrap items-start gap-y-2 text-sm">
                     {footerLinks.specifics.map((link) => (
                       <li key={link.name}>
-                        <a
+                        <Link
                           href={link.href}
                           className="group relative inline-flex items-center px-2 text-muted-foreground hover:text-primary transition-all duration-300 ease-out">
                           {link.name}
                           <ArrowRight className="w-3 h-3 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -166,12 +167,12 @@ export default function Footer() {
                   <ul className="flex flex-col flex-wrap items-start gap-y-2 text-sm">
                     {footerLinks.more.map((link) => (
                       <li key={link.name}>
-                        <a
+                        <Link
                           href={link.href}
                           className="group relative inline-flex items-center px-2 text-muted-foreground hover:text-primary transition-all duration-300 ease-out">
                           {link.name}
                           <ArrowRight className="w-3 h-3 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
