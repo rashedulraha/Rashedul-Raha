@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Search, Rss, ArrowRight, Clock, Calendar } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/routing";
 import Image from "next/image";
 import { BlogPost } from "@/lib/blog-data";
 import { useTranslations } from "next-intl";
@@ -120,6 +120,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                       src={featuredPost.image}
                       alt={featuredPost.title}
                       fill
+                      sizes="(max-width: 1024px) 100vw, 60vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       priority
                     />

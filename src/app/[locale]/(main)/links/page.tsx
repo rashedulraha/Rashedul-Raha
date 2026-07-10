@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import { MapPin, Mail, Globe, ArrowUpRight, BookOpen, Send } from "lucide-react";
 import { FaGithub, FaXTwitter, FaLinkedin, FaBluesky } from "react-icons/fa6";
-import Link from "next/link";
+import { Link } from "@/routing";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 

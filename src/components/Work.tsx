@@ -6,7 +6,7 @@ import { motion, useInView, useScroll } from "framer-motion";
 import { ExternalLink, ChevronRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { projects } from "@/lib/work-data";
-import Link from "next/link";
+import { Link } from "@/routing";
 import { useTranslations } from "next-intl";
 
 export default function Work() {

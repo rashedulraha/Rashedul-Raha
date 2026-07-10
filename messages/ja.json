@@ -22,7 +22,7 @@
   },
   "Hero": {
     "badgeNew": "New",
-    "badgeText": "Keythm — 指先で感じるすべてのキー入力",
+    "badgeText": "Silicon Pvt - 今すぐアクセス",
     "title1": "デザインされた",
     "titleHighlight": "コードを。",
     "title2": "",
@@ -496,66 +496,66 @@
     }
   },
   "LinksPage": {
-    "network": "NETWORK",
-    "connectWith": "Connect with",
-    "me": "Me",
-    "developer": "Full-Stack Developer",
-    "freelancer": "Freelancer",
-    "location": "Dhaka, Bangladesh",
-    "bookCall": "Book a Call",
-    "website": "Website",
-    "email": "Email",
-    "codeCraft": "Code & Craft",
-    "connect": "Connect",
-    "leaveMark": "leaveMark"
+    "network": "ネットワーク",
+    "connectWith": "つながる",
+    "me": "私と",
+    "developer": "フルスタック開発者",
+    "freelancer": "フリーランサー",
+    "location": "バングラデシュ、ダッカ",
+    "bookCall": "通話を予約する",
+    "website": "ウェブサイト",
+    "email": "メール",
+    "codeCraft": "コードと職人技",
+    "connect": "つながる",
+    "leaveMark": "足跡を残す"
   },
   "UsesPage": {
-    "hardware": "Hardware & Desk Setup",
-    "hardwareDesc": "The physical tools I use daily to write code and stay productive.",
-    "macTitle": "14\" MacBook Pro",
-    "macDesc": "M2 Pro, 16GB RAM — My primary workstation for everything.",
+    "hardware": "ハードウェアとデスク環境",
+    "hardwareDesc": "毎日コードを書き、生産性を保つために使っている物理的なツールです。",
+    "macTitle": "14インチ MacBook Pro",
+    "macDesc": "M2 Pro、16GB RAM — すべての作業のメイン環境です。",
     "keychronTitle": "Keychron K2V2",
-    "keychronDesc": "Mechanical keyboard with brown switches. Tactile and reliable.",
-    "devTools": "Development Tools",
-    "devToolsDesc": "The software that powers my daily workflow.",
+    "keychronDesc": "茶軸のメカニカルキーボード。タッチ感があり、信頼性も高いです。",
+    "devTools": "開発ツール",
+    "devToolsDesc": "日々の作業を支えるソフトウェアです。",
     "neovimTitle": "Neovim",
-    "neovimDesc": "My editor of choice. Fast, modal, and heavily customized.",
+    "neovimDesc": "私が選んだエディター。高速で、モーダルで、カスタマイズも豊富です。",
     "weztermTitle": "Wezterm",
-    "weztermDesc": "GPU-accelerated terminal emulator.",
-    "arcTitle": "Arc Browser",
-    "arcDesc": "For testing and daily browsing.",
-    "techStack": "Tech Stack",
-    "techStackDesc": "The core technologies I use to build scalable web applications.",
+    "weztermDesc": "GPUを活用したターミナルエミュレーターです。",
+    "arcTitle": "Arc ブラウザ",
+    "arcDesc": "テストや日常的なブラウジングに使っています。",
+    "techStack": "技術スタック",
+    "techStackDesc": "スケーラブルなWebアプリケーションを構築するために使っている主要な技術です。",
     "reactTitle": "React & Next.js",
-    "reactDesc": "For building fast, SEO-friendly user interfaces."
+    "reactDesc": "高速でSEOに強いユーザーインターフェースを構築するために使っています。"
   },
   "AttributionPage": {
-    "creditWhere": "Credit Where",
-    "creditDue": "Credit is Due",
-    "creditDesc": "Building this site wasn't a solo effort. It stands on the shoulders of incredible open-source tools, beautiful design systems, and amazing creators. Here are the tools and inspirations that made this possible.",
-    "typography": "Typography",
-    "typographyDesc": "The fonts that give this site its character.",
-    "viewSource": "View Source",
-    "frameworks": "Core Technologies",
-    "frameworksDesc": "The foundational frameworks and libraries powering the site.",
-    "nextjsDesc": "The React Framework for production. It powers the server-side rendering, routing, and overall architecture of this site.",
-    "tailwindDesc": "A utility-first CSS framework that makes styling incredibly fast and maintainable.",
-    "framerDesc": "A production-ready motion library for React that powers all the fluid animations, page transitions, and interactive elements across the site.",
-    "inspiration": "Design Inspiration",
-    "inspirationDesc": "Incredible resources that inspired the UI components.",
-    "aceternityDesc": "Amazing collection of modern, animated Tailwind CSS components. Several elements in this site were inspired by their designs.",
-    "magicuiDesc": "Beautiful, animated React components. Their approach to modern, engaging web design heavily influenced this portfolio."
+    "creditWhere": "クレジット",
+    "creditDue": "おかげさま",
+    "creditDesc": "このサイトの構築は一人でできたものではありません。素晴らしいオープンソースツール、美しいデザインシステム、そして素晴らしいクリエイターたちの肩の上に成り立っています。ここでは、それを可能にしてくれたツールやインスピレーションを紹介します。",
+    "typography": "タイポグラフィ",
+    "typographyDesc": "このサイトの個性を引き出すフォントです。",
+    "viewSource": "ソースを見る",
+    "frameworks": "コアテクノロジー",
+    "frameworksDesc": "このサイトを支える基盤となるフレームワークとライブラリです。",
+    "nextjsDesc": "本番環境に対応したReactフレームワークです。サーバーサイドレンダリング、ルーティング、そしてサイト全体のアーキテクチャを支えています。",
+    "tailwindDesc": "ユーティリティファーストのCSSフレームワークで、スタイリングを驚くほど速く、メンテナンスしやすくしてくれます。",
+    "framerDesc": "React向けの本番環境対応モーションライブラリで、サイト全体の滑らかなアニメーション、ページトランジション、インタラクティブな要素を動かしています。",
+    "inspiration": "デザインのインスピレーション",
+    "inspirationDesc": "UIコンポーネントのインスピレーションとなった素晴らしいリソースです。",
+    "aceternityDesc": "モダンでアニメーション付きのTailwind CSSコンポーネントの素晴らしいコレクションです。このサイトのいくつかの要素は、彼らのデザインに触発されました。",
+    "magicuiDesc": "美しくアニメーションするReactコンポーネントです。モダンで魅力的なWebデザインへの彼らのアプローチは、このポートフォリオに大きな影響を与えました。"
   },
   "GuestbookPage": {
-    "subtitle": "THE WALL REMEMBERS",
-    "title1": "Words That Echo",
-    "titleHighlight": "Always"
+    "subtitle": "壁は覚えている",
+    "title1": "響く言葉は",
+    "titleHighlight": "いつまでも"
   },
   "GuestbookForm": {
-    "namePlaceholder": "Your Name",
-    "messagePlaceholder": "Your Message...",
-    "sign": "Sign",
-    "alert": "This is a static mockup of the guestbook! Database integration is required to post actual messages."
+    "namePlaceholder": "あなたの名前",
+    "messagePlaceholder": "あなたのメッセージ...",
+    "sign": "署名する",
+    "alert": "これはゲストブックの静的モックアップです！実際のメッセージを投稿するにはデータベースの統合が必要です。"
   },
   "BucketListPage": {
     "header": {
@@ -590,6 +590,11 @@
       "life": {
         "title": "Life & Experiences",
         "desc": "Personal growth, physical challenges, and giving back to the community."
+      },
+      "partner": {
+        "title": "Life Partner",
+        "desc": "A few thoughts about my dream life partner.",
+        "letter": "Dear Queen,\n\nWarmest greetings and best wishes from the bottom of my heart. I hope you are doing well by the infinite mercy of Allah.\n\nI am writing this letter to you today to talk about a very important chapter of our lives. I have some dreams, some expectations, and some promises regarding our marriage and future life that I want to share with you today. I believe the foundation of a beautiful and lasting relationship is getting to know each other's thoughts from the very beginning.\n\nI want a life partner who will not only be the light of my home but also my companion on the path to Jannah. I sincerely want our future family to be guided by the pleasure of Allah and the Sunnah of the Messenger (PBUH). As a Muslim woman, I have deep respect for your modesty, pardah, humility, and obedience to Allah. I dream that together we will build a family where it will be easy to follow Allah's commands, and there will be no shadow of sin in our home.\n\nAfter marriage, protecting your religion, your honor, and your rights is a huge trust and responsibility placed upon me by Allah. I promise you:\n\n1. I will gladly take full responsibility for your maintenance, housing, medical care, and clothing.\n2. You will never have to suffer from an inferiority complex for anything in our family. I will keep you by my side not as a maid or a domestic worker, but as the better half of my life and the queen of my heart.\n3. I will look at any of your minor mistakes with forgiveness and will never treat you harshly or disrespectfully. Following the Sunnah of the Messenger (PBUH), I will protect you with the utmost love and care.\n4. I will always encourage and support you to make your religious life more beautiful.\n\nI do not want to force anything on you. But I want you to think deeply about these matters. If we both try to walk on the beautiful path shown by Islam, Allah will bless our family, and our love will not be limited to this world only, but will keep us together in Jannah in the afterlife as well.\n\nPlease take some time to read and consider these words with a calm mind. If you consent from your heart to walk together in this ideal and loving family, only then will we be bound in this sacred bond of our lives. I am waiting for your beautiful decision.\n\nMay Allah guide us both and gift us a blessed life.\n\nSincerely,\nRashedul Islam"
       }
     },
     "items": {
@@ -618,13 +623,13 @@
         "title": "Visit Japan and experience the cherry blossoms"
       },
       "item8": {
-        "title": "Backpack across Europe"
+        "title": "Get lost in the clouds at Sajek Valley"
       },
       "item9": {
-        "title": "See the Northern Lights"
+        "title": "Vacation at Cox's Bazar sea beach"
       },
       "item10": {
-        "title": "Live in a different country for at least 6 months"
+        "title": "Explore the Sundarbans mangrove forest"
       },
       "item11": {
         "title": "Run a full marathon"
@@ -637,6 +642,9 @@
       },
       "item14": {
         "title": "Mentorship: Help 10 junior developers get their first job"
+      },
+      "item15": {
+        "title": "Become a Software Developer"
       }
     }
   }

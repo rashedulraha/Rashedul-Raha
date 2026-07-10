@@ -29,6 +29,7 @@ export default async function BucketListPage({ params }: { params: Promise<{ loc
     { title: t("items.item12.title"), completed: false, year: null, category: t("categories.Life") },
     { title: t("items.item13.title"), completed: false, year: null, category: t("categories.Life") },
     { title: t("items.item14.title"), completed: false, year: null, category: t("categories.Life") },
+    { title: t("items.item15.title"), completed: true, year: "2023", category: t("categories.Career") },
   ];
 
   const totalItems = bucketListItems.length;
@@ -144,6 +145,23 @@ export default async function BucketListPage({ params }: { params: Promise<{ loc
                 </h3>
               </div>
             ))}
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: t("sections.partner.title"),
+      content: (
+        <div>
+          <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
+            {t("sections.partner.desc")}
+          </p>
+          <div className="p-6 md:p-10 rounded-3xl bg-card border border-border shadow-lg card-premium overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+            <p className="whitespace-pre-wrap text-sm md:text-base text-foreground font-serif leading-loose italic relative z-10">
+              {t("sections.partner.letter")}
+            </p>
           </div>
         </div>
       ),

@@ -351,6 +351,18 @@ export default function Hero() {
         aria-label="Introduction"
         className="relative flex max-h-250 min-h-dvh w-full flex-col items-center justify-center overflow-hidden py-pagebuilder"
         id="hero-section">
+        
+        {/* Subtle Grid Background */}
+        <div 
+          className="absolute inset-0 z-0 pointer-events-none text-foreground/5"
+          style={{
+            backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+            backgroundSize: '40px 40px',
+            maskImage: 'radial-gradient(ellipse 60% 80% at 50% 20%, black 30%, transparent 100%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 60% 80% at 50% 20%, black 30%, transparent 100%)'
+          }}
+        />
+
         {/* Background particles */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           {particles.map((p) => (
@@ -391,7 +403,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="group flex cursor-pointer items-center rounded-full border border-black/5 bg-black/5 px-1 py-0.5 text-sm backdrop-blur-xs transition-all duration-300 ease-in hover:bg-black/10 hover:border-black/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.99] lg:text-base dark:border-white/5 dark:bg-white/5 dark:hover:border-white/15 dark:hover:bg-white/10"
-            href="https://rashedulraha.com/"
+            href="https://siliconpvt.vercel.app"
             referrerPolicy="no-referrer"
             rel="noreferrer"
             target="_blank">

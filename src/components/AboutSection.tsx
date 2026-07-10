@@ -10,10 +10,10 @@ import {
   Layers,
   Terminal,
   MonitorSmartphone,
-  Cpu,
   Database,
   Cloud,
   Sparkles,
+  User,
 } from "lucide-react";
 
 const TextTooltip = ({
@@ -123,9 +123,9 @@ export default function AboutSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16">
           <p className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-primary uppercase tracking-widest mb-4 rounded-full bg-primary/10 border border-primary/20">
-            <Cpu className="w-3.5 h-3.5" /> {t('badge')}
+            <User className="w-3.5 h-3.5" /> {t('badge')}
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
+          <h2 className="text-center font-instrument-serif text-3xl text-zinc-700 leading-tight md:text-4xl lg:text-5xl dark:text-zinc-100">
             {t('title1')} {" "}
             <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500 font-serif italic">
@@ -141,12 +141,13 @@ export default function AboutSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="w-full max-w-md lg:w-[45%] relative">
-            <div className="relative p-2.5 rounded-3xl transition-colors duration-300 bg-background/50 backdrop-blur-xl border border-border shadow-2xl">
+            <div className="relative p-2.5 rounded-3xl flex flex-col space-y-3 md:space-y-5 transition-colors duration-300 bg-background/50 backdrop-blur-xl border border-border shadow-2xl ">
               <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-muted">
                 <Image
                   src="/personal_img/rashedul-about.jpeg"
                   alt="Rashedul Islam - Full Stack Developer"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 hover:scale-105"
                   priority
                 />
@@ -169,7 +170,76 @@ export default function AboutSection() {
                   </p>
                 </div>
               </motion.div>
+
+              {/* CTA Button */}
+              <motion.button
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() =>
+                  window.dispatchEvent(
+                    new CustomEvent("open-modal", {
+                      detail: { view: "contact" },
+                    }),
+                  )
+                }
+                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98] ">
+                <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground ">
+                  {t('cta')}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-y-1 right-1 w-10 rounded-full bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)]"
+                />
+                <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-primary p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent">
+                  <svg
+                    fill="none"
+                    height={24}
+                    viewBox="0 0 24 24"
+                    width={24}
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="size-4.5 text-primary-foreground transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                    <path
+                      d="M18.5 12L4.99997 12"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                    />
+                  </svg>
+                  <svg
+                    fill="none"
+                    height={24}
+                    viewBox="0 0 24 24"
+                    width={24}
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute size-4.5 -translate-x-6 text-primary-foreground opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                    <path
+                      d="M18.5 12L4.99997 12"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                    />
+                  </svg>
+                </span>
+              </motion.button>
             </div>
+
           </motion.div>
 
           {/* Right - Content & Bio */}
@@ -272,73 +342,6 @@ export default function AboutSection() {
                 ))}
               </motion.div>
 
-              {/* CTA Button */}
-              <motion.button
-                variants={itemVariants}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() =>
-                  window.dispatchEvent(
-                    new CustomEvent("open-modal", {
-                      detail: { view: "contact" },
-                    }),
-                  )
-                }
-                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98]">
-                <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
-                  {t('cta')}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-y-1 right-1 w-10 rounded-full bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)]"
-                />
-                <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-primary p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent">
-                  <svg
-                    fill="none"
-                    height={24}
-                    viewBox="0 0 24 24"
-                    width={24}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-4.5 text-primary-foreground transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 ease-[cubic-bezier(0.25,0.1,0.25,1)]">
-                    <path
-                      d="M18.5 12L4.99997 12"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                    <path
-                      d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
-                  <svg
-                    fill="none"
-                    height={24}
-                    viewBox="0 0 24 24"
-                    width={24}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="absolute size-4.5 -translate-x-6 text-primary-foreground opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 ease-[cubic-bezier(0.25,0.1,0.25,1)]">
-                    <path
-                      d="M18.5 12L4.99997 12"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                    <path
-                      d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
-                </span>
-              </motion.button>
             </motion.div>
           </div>
         </div>

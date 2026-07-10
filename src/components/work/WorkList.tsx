@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import { Search, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/routing";
 import Image from "next/image";
 import { Project } from "@/lib/work-data";
 import { useTranslations } from "next-intl";

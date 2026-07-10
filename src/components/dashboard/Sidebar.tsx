@@ -14,7 +14,7 @@ import {
   PanelLeftOpen,
   MessageSquare
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/routing";
 
 export type TabId = "overview" | "messages" | "profile" | "projects" | "skills" | "experience" | "settings";
 

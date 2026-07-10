@@ -5,7 +5,7 @@ import { projects } from "@/lib/work-data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ArrowLeft, ExternalLink, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/routing";
 import { FaGithub } from "react-icons/fa6";
 
 export default async function ProjectDetail({
