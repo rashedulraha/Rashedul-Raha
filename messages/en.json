@@ -25,12 +25,10 @@
   "Hero": {
     "badgeNew": "New",
     "badgeText": "Silicon Pvt - Visit Now",
-
     "title1": "Future-Ready ",
     "titleHighlight": "Engineering",
     "title2": ".",
     "subtitle": "Building secure and scalable software.",
-
     "greeting": "Hi, I'm Rashedul Islam",
     "role": " Full Stack Developer",
     "galleryHint": "Gallery",
@@ -320,7 +318,12 @@
     "dot": ".",
     "desc1": "I enjoy building dynamic web apps and",
     "desc2": "creating great user experiences.",
-    "tags": ["React", "Next.js", "TypeScript", "Tailwind"]
+    "tags": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind"
+    ]
   },
   "Footer": {
     "desc1": "Full-stack developer and problem solver.",
@@ -593,7 +596,7 @@
       "partner": {
         "title": "Life Partner",
         "desc": "A few thoughts about my dream life partner.",
-        "letter": "Dear Queen,Warmest greetings and best wishes from the bottom of my heart. I hope you are doing well by the infinite mercy of Allah.I am writing this letter to you today to talk about a very important chapter of our lives. I have some dreams, some expectations, and some promises regarding our marriage and future life that I want to share with you today. I believe the foundation of a beautiful and lasting relationship is getting to know each other's thoughts from the very beginning.I want a life partner who will not only be the light of my home but also my companion on the path to Jannah. I sincerely want our future family to be guided by the pleasure of Allah and the Sunnah of the Messenger (PBUH). As a Muslim woman, I have deep respect for your modesty, pardah, humility, and obedience to Allah. I dream that together we will build a family where it will be easy to follow Allah's commands, and there will be no shadow of sin in our home.After marriage, protecting your religion, your honor, and your rights is a huge trust and responsibility placed upon me by Allah. I promise you:1. I will gladly take full responsibility for your maintenance, housing, medical care, and clothing.2. You will never have to suffer from an inferiority complex for anything in our family. I will keep you by my side not as a maid or a domestic worker, but as the better half of my life and the queen of my heart.3. I will look at any of your minor mistakes with forgiveness and will never treat you harshly or disrespectfully. Following the Sunnah of the Messenger (PBUH), I will protect you with the utmost love and care.4. I will always encourage and support you to make your religious life more beautiful.I do not want to force anything on you. But I want you to think deeply about these matters. If we both try to walk on the beautiful path shown by Islam, Allah will bless our family, and our love will not be limited to this world only, but will keep us together in Jannah in the afterlife as well.Please take some time to read and consider these words with a calm mind. If you consent from your heart to walk together in this ideal and loving family, only then will we be bound in this sacred bond of our lives. I am waiting for your beautiful decision.May Allah guide us both and gift us a blessed life.Sincerely,Rashedul Islam"
+        "letter": "I want a life partner who will not only be the light of my home but also my companion on the path to Jannah. I sincerely want our future family to be guided by the pleasure of Allah and the Sunnah of the Messenger (PBUH). As a Muslim woman, I have deep respect for her modesty, pardah, humility, and obedience to Allah. I dream that together we will build a family where it will be easy to follow Allah's commands, and there will be no shadow of sin in our home. After marriage, protecting her religion, her honor, and her rights is a huge trust and responsibility placed upon me by Allah. I promise: 1. I will gladly take full responsibility for her maintenance, housing, medical care, and clothing. 2. She will never have to suffer from an inferiority complex for anything in our family. I will keep her by my side not as a maid or a domestic worker, but as the better half of my life and the queen of my heart. 3. I will look at any of her minor mistakes with forgiveness and will never treat her harshly or disrespectfully. Following the Sunnah of the Messenger (PBUH), I will protect her with the utmost love and care. 4. I will always encourage and support her to make her religious life more beautiful."
       }
     },
     "items": {
