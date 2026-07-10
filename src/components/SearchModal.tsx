@@ -25,16 +25,17 @@ import {
   Terminal,
   LogIn
 } from "lucide-react";
-import { useRouter } from "@/routing";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 type ViewState = "search" | "contact" | "full-form" | "login";
 
 export default function SearchModal() {
   const t = useTranslations("SearchModal");
+  const locale = useLocale();
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
@@ -180,120 +181,131 @@ export default function SearchModal() {
                           }>
                           <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
                             <Command.Item
+                              value={`home index ${t("home")}`}
                               onSelect={() =>
-                                runCommand(() => router.push("/"))
+                                runCommand(() => router.push(`/${locale}`))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Home className="h-4 w-4" />
                               </div>
-                              Home
+                              {t("home")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`about me profile resume ${t("about")}`}
                               onSelect={() =>
-                                runCommand(() => router.push("/about"))
+                                runCommand(() => router.push(`/${locale}/about`))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <User className="h-4 w-4" />
                               </div>
-                              About
+                              {t("about")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`work project projects portfolio ${t("work")}`}
                               onSelect={() =>
-                                runCommand(() => router.push("/work"))
+                                runCommand(() => router.push(`/${locale}/work`))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Folder className="h-4 w-4" />
                               </div>
-                              Work
+                              {t("work")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`blog writing posts article ${t("blog")}`}
                               onSelect={() =>
-                                runCommand(() => router.push("/blog"))
+                                runCommand(() => router.push(`/${locale}/blog`))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <FileText className="h-4 w-4" />
                               </div>
-                              Blog
+                              {t("blog")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`guestbook comments sign message ${t("guestbook")}`}
                               onSelect={() =>
-                                runCommand(() => router.push("/guestbook"))
+                                runCommand(() => router.push(`/${locale}/guestbook`))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <BookOpen className="h-4 w-4" />
                               </div>
-                              Guestbook
+                              {t("guestbook")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`bucket list goals ${t("bucketList")}`}
                               onSelect={() =>
-                                runCommand(() => router.push("/bucket-list"))
+                                runCommand(() => router.push(`/${locale}/bucket-list`))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <List className="h-4 w-4" />
                               </div>
-                              Bucket List
+                              {t("bucketList")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`book a call meeting contact hire ${t("bookCall")}`}
                               onSelect={() => setCurrentView("contact")}
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Phone className="h-4 w-4" />
                               </div>
-                              Book a call
+                              {t("bookCall")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`uses gear hardware tools ${t("uses")}`}
                               onSelect={() =>
-                                runCommand(() => router.push("/uses"))
+                                runCommand(() => router.push(`/${locale}/uses`))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Laptop className="h-4 w-4" />
                               </div>
-                              Uses
+                              {t("uses")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`attribution credits inspiration thanks ${t("attribution")}`}
                               onSelect={() =>
-                                runCommand(() => router.push("/attribution"))
+                                runCommand(() => router.push(`/${locale}/attribution`))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Award className="h-4 w-4" />
                               </div>
-                              Attribution
+                              {t("attribution")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`links social connect network ${t("links")}`}
                               onSelect={() =>
-                                runCommand(() => router.push("/links"))
+                                runCommand(() => router.push(`/${locale}/links`))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <LinkIcon className="h-4 w-4" />
                               </div>
-                              Links
+                              {t("links")}
                             </Command.Item>
 
                             <Command.Item
+                              value={`admin terminal login terminal ${t("adminTerminal")}`}
                               onSelect={() => setCurrentView("login")}
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border bg-cyan-500/10 border-cyan-500/20">
                                 <Terminal className="h-4 w-4 text-cyan-400" />
                               </div>
-                              Admin Terminal
+                              {t("adminTerminal")}
                             </Command.Item>
                           </div>
                         </Command.Group>
