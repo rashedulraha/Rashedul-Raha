@@ -5,8 +5,12 @@ import { Search, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Project } from "@/lib/work-data";
+import { useTranslations } from "next-intl";
 
 export default function WorkList({ initialProjects }: { initialProjects: Project[] }) {
+  const tPage = useTranslations("WorkPage");
+  const tWork = useTranslations("Work");
+  
   const [activeCategory, setActiveCategory] = useState("All Projects");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -23,9 +27,15 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
       project.type === activeCategory ||
       project.tags.includes(activeCategory);
     
-    const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          project.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          project.description.toLowerCase().includes(searchQuery.toLowerCase());
+    // Search using the translated fields
+    const translatedTitle = tWork(`projects.${project.id}.title`).toLowerCase();
+    const translatedSubtitle = tWork(`projects.${project.id}.subtitle`).toLowerCase();
+    const translatedDesc = tWork(`projects.${project.id}.description`).toLowerCase();
+    
+    const searchLower = searchQuery.toLowerCase();
+    const matchesSearch = translatedTitle.includes(searchLower) || 
+                          translatedSubtitle.includes(searchLower) ||
+                          translatedDesc.includes(searchLower);
 
     return matchesCategory && matchesSearch;
   });
@@ -48,7 +58,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                   : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
               }`}
             >
-              {category}
+              {category === "All Projects" ? tPage("allProjects") : category}
             </button>
           ))}
         </div>
@@ -63,7 +73,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search projects"
+              placeholder={tPage("searchPlaceholder")}
               className="block w-full md:w-64 pl-10 pr-12 py-2 bg-transparent border border-foreground/10 rounded-full text-sm text-foreground placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 transition-all"
             />
             <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none">
@@ -82,7 +92,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
 
       {filteredProjects.length === 0 ? (
         <div className="text-center text-muted-foreground py-20">
-          <p>No projects found matching your criteria.</p>
+          <p>{tPage("noProjects")}</p>
         </div>
       ) : (
         <>
@@ -90,7 +100,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
           {featuredProject && (
             <div className="mb-20">
               <p className="text-center text-xs font-semibold text-muted-foreground uppercase tracking-[0.2em] mb-8">
-                FEATURED WORK
+                {tPage("featuredWork")}
               </p>
               
               <Link 
@@ -102,7 +112,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                   <div className="relative w-full lg:w-[55%] aspect-video lg:aspect-auto overflow-hidden">
                     <Image
                       src={featuredProject.image}
-                      alt={featuredProject.title}
+                      alt={tWork(`projects.${featuredProject.id}.title`)}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       priority
@@ -118,22 +128,22 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                     <div className="relative z-10">
                       <div className="flex items-center justify-between mb-6">
                         <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                          {featuredProject.type}
+                          {tWork(`projects.${featuredProject.id}.type`)}
                         </span>
                         <span className="px-3 py-1 rounded-full bg-foreground/10 text-foreground text-[10px] font-bold tracking-wider">
-                          {featuredProject.badge}
+                          {tWork(`projects.${featuredProject.id}.badge`)}
                         </span>
                       </div>
                       
                       <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/70 transition-all">
-                        {featuredProject.title}
+                        {tWork(`projects.${featuredProject.id}.title`)}
                       </h2>
                       <p className="text-primary text-sm font-medium mb-4">
-                        {featuredProject.subtitle}
+                        {tWork(`projects.${featuredProject.id}.subtitle`)}
                       </p>
                       
                       <p className="text-muted-foreground text-sm leading-relaxed mb-8">
-                        {featuredProject.description}
+                        {tWork(`projects.${featuredProject.id}.description`)}
                       </p>
                       
                       {/* Tags */}
@@ -145,7 +155,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                         ))}
                         {featuredProject.tags.length > 4 && (
                           <span className="px-2 text-muted-foreground text-[10px] font-mono tracking-wider">
-                            +{featuredProject.tags.length - 4} MORE
+                            +{featuredProject.tags.length - 4} {tPage("more")}
                           </span>
                         )}
                       </div>
@@ -153,10 +163,10 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                     
                     <div className="flex justify-between items-center mt-auto relative z-10">
                       <div className="text-xs font-mono text-muted-foreground">
-                        {featuredProject.stats}
+                        {tWork(`projects.${featuredProject.id}.stats`)}
                       </div>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                        View Details
+                        {tPage("viewDetails")}
                         <div className="flex items-center justify-center w-8 h-8 rounded-full border border-foreground/10 bg-foreground/5 group-hover:bg-foreground/10 transition-colors">
                           <ArrowRight className="h-4 w-4" />
                         </div>
@@ -172,7 +182,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
           {latestProjects.length > 0 && (
             <div>
               <p className="text-center text-xs font-semibold text-muted-foreground uppercase tracking-[0.2em] mb-8">
-                MORE PROJECTS
+                {tPage("moreProjects")}
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -180,37 +190,62 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                   <Link
                     key={project.id}
                     href={`/work/${project.id}`}
-                    className="group relative block aspect-[4/3] rounded-3xl overflow-hidden border border-foreground/10 hover:border-foreground/20 transition-all hover:shadow-xl hover:shadow-white/5 bg-[hsl(var(--background))]"
+                    className="group flex h-full flex-col rounded-3xl p-2.5 transition-all duration-300 card-premium"
                   >
-                    <Image
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      src={project.image}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent transition-opacity duration-300" />
-                    
-                    <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-                          {project.type}
+                    <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-muted">
+                      <Image
+                        alt={tWork(`projects.${project.id}.title`)}
+                        fill
+                        className="size-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        src={project.image}
+                      />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                      
+                      <div className="absolute top-3 left-3 z-10">
+                        <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-medium uppercase tracking-wider border border-primary/20 glass">
+                          {tWork(`projects.${project.id}.type`)}
                         </span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-1 flex-col px-2 pt-4 pb-3">
+                      <div className="flex items-center justify-between mb-2">
                         <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                          {project.badge}
+                          {tWork(`projects.${project.id}.badge`)}
                         </span>
                       </div>
                       
-                      <h3 className="font-bold text-foreground text-2xl leading-snug tracking-tight drop-shadow-md mb-1">
-                        {project.title}
+                      <h3 className="font-semibold text-lg text-foreground leading-snug transition-all duration-300 ease-out group-hover:text-primary">
+                        {tWork(`projects.${project.id}.title`)}
                       </h3>
-                      <p className="text-muted-foreground text-xs line-clamp-2">
-                        {project.subtitle}
+                      <p className="mt-2 line-clamp-1 text-primary text-xs font-medium">
+                        {tWork(`projects.${project.id}.subtitle`)}
                       </p>
                       
-                      <div className="mt-4 flex items-center justify-between border-t border-foreground/10 pt-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                        <span className="text-xs text-foreground">Explore</span>
-                        <ArrowRight className="w-4 h-4 text-foreground" />
+                      <div className="mt-3 border-t border-foreground/12 pt-3 opacity-90 transform transition-all duration-300">
+                        <p className="line-clamp-2 text-muted-foreground text-xs leading-relaxed mb-3">
+                           {tWork(`projects.${project.id}.description`)}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5 mb-2">
+                          {project.tags.slice(0, 3).map(tag => (
+                            <span key={tag} className="px-2 py-0.5 rounded-md bg-foreground/5 text-[9px] text-muted-foreground uppercase tracking-wider">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-foreground/12">
+                        <span className="text-[10px] font-mono text-muted-foreground">
+                          {tWork(`projects.${project.id}.stats`)}
+                        </span>
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground group-hover:text-primary transition-colors">
+                          {tPage("explore")}
+                          <div className="flex items-center justify-center w-5 h-5 rounded-md border border-border border-dashed bg-muted group-hover:border-primary/50 group-hover:bg-primary/10 transition-colors">
+                            <ArrowRight className="h-2.5 w-2.5" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </Link>
