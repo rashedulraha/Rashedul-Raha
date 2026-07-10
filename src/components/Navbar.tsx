@@ -606,7 +606,9 @@ export default function Navbar() {
                             aria-label="Change Language"
                           >
                             <Globe className="h-4 w-4" />
-                            <span className="text-xs font-semibold uppercase">{locale}</span>
+                            <span className="text-xs font-semibold uppercase">
+                              {languages.find((l) => l.code === locale)?.label || locale}
+                            </span>
                           </button>
                         </div>
 
