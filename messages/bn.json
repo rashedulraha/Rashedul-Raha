@@ -18,7 +18,9 @@
     "uses": "টুলস",
     "usesDesc": "আমার কাজের সরঞ্জাম",
     "attribution": "কৃতজ্ঞতা",
-    "attributionDesc": "এই সাইট তৈরির নেপথ্যে"
+    "attributionDesc": "এই সাইট তৈরির নেপথ্যে",
+    "certificates": "সার্টিফিকেটস",
+    "certificatesDesc": "আমার অর্জন ও সাফল্য"
   },
   "Hero": {
     "badgeNew": "নতুন",

@@ -18,7 +18,9 @@
     "uses": "Tech Stack",
     "usesDesc": "My digital tools and setup",
     "attribution": "Credits",
-    "attributionDesc": "How I built this site"
+    "attributionDesc": "How I built this site",
+    "certificates": "Certificates",
+    "certificatesDesc": "My achievements and awards"
   },
   "Hero": {
     "badgeNew": "New",

@@ -18,7 +18,9 @@
     "uses": "使用ツール",
     "usesDesc": "開発環境をのぞく",
     "attribution": "クレジット",
-    "attributionDesc": "サイト構築の裏側"
+    "attributionDesc": "サイト構築の裏側",
+    "certificates": "Certificates",
+    "certificatesDesc": "My achievements and awards"
   },
   "Hero": {
     "badgeNew": "New",

@@ -18,7 +18,9 @@
     "uses": "Nutzung",
     "usesDesc": "Ein Blick in mein digitales Leben...",
     "attribution": "Zuschreibung",
-    "attributionDesc": "Weg zur Erstellung dieser Seite"
+    "attributionDesc": "Weg zur Erstellung dieser Seite",
+    "certificates": "Certificates",
+    "certificatesDesc": "My achievements and awards"
   },
   "Hero": {
     "badgeNew": "Neu",

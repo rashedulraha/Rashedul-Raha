@@ -18,7 +18,9 @@
     "uses": "Cosa uso",
     "usesDesc": "Uno sguardo alla mia vita digitale...",
     "attribution": "Ringraziamenti",
-    "attributionDesc": "Il viaggio per creare questo sito"
+    "attributionDesc": "Il viaggio per creare questo sito",
+    "certificates": "Certificates",
+    "certificatesDesc": "My achievements and awards"
   },
   "Hero": {
     "badgeNew": "Nuovo",
