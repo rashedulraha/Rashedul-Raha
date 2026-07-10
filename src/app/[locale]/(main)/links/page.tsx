@@ -74,7 +74,7 @@ export default function LinksPage() {
 
       <div>
             {/* Header */}
-            <div className="mb-16 text-center pt-8">
+            <div className="mb-16 text-center">
               <p className="mb-4 font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em]">
                 {t("network")}
               </p>

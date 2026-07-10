@@ -34,7 +34,7 @@ export default function PageWrapper({
       >
         <div
           className={cn(
-            "max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-32 pb-20",
+            "max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-40 pb-20",
             className
           )}
         >

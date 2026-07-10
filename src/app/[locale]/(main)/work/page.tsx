@@ -17,7 +17,7 @@ export default function WorkPage() {
   return (
     <PageWrapper>
       {/* Hero Header */}
-      <div className="mb-12 text-center pt-8">
+      <div className="mb-12 text-center">
         <p className="mb-4 font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em]">
           {t("portfolio")}
         </p>

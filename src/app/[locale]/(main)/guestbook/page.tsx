@@ -28,7 +28,7 @@ export default async function GuestbookPage({ params }: { params: Promise<{ loca
 
       <div>
         {/* Header */}
-        <div className="mb-20 text-center pt-12">
+        <div className="mb-20 text-center">
               <p className="mb-4 font-semibold text-muted-foreground text-[10px] sm:text-xs uppercase tracking-[0.3em]">
                 {t("subtitle")}
               </p>
