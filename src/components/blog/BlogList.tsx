@@ -5,6 +5,7 @@ import { Search, Rss, ArrowRight, Clock, Calendar } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { BlogPost } from "@/lib/blog-data";
+import { useTranslations } from "next-intl";
 
 const categories = [
   "All Posts",
@@ -21,6 +22,7 @@ const categories = [
 ];
 
 export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] }) {
+  const t = useTranslations("BlogPage");
   const [activeCategory, setActiveCategory] = useState("All Posts");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -30,8 +32,12 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
       activeCategory === "All Posts" ||
       post.category.toLowerCase() === activeCategory.toLowerCase();
     
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          post.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const translatedTitle = t(`posts.${post.id}.title`).toLowerCase();
+    const translatedDesc = t(`posts.${post.id}.desc`).toLowerCase();
+    const searchLower = searchQuery.toLowerCase();
+    
+    const matchesSearch = translatedTitle.includes(searchLower) || 
+                          translatedDesc.includes(searchLower);
 
     return matchesCategory && matchesSearch;
   });
@@ -54,7 +60,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                   : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
               }`}
             >
-              {category}
+              {category === "All Posts" ? t("allPosts") : category}
             </button>
           ))}
         </div>
@@ -69,7 +75,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search posts"
+              placeholder={t("searchPosts")}
               className="block w-full md:w-64 pl-10 pr-12 py-2 bg-transparent border border-foreground/10 rounded-full text-sm text-foreground placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 transition-all"
             />
             <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none">
@@ -91,7 +97,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
 
       {filteredPosts.length === 0 ? (
         <div className="text-center text-muted-foreground py-20">
-          <p>No posts found matching your criteria.</p>
+          <p>{t("noPosts")}</p>
         </div>
       ) : (
         <>
@@ -99,7 +105,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
           {featuredPost && (
             <div className="mb-20">
               <p className="text-center text-xs font-semibold text-muted-foreground uppercase tracking-[0.2em] mb-8">
-                FEATURED ARTICLES
+                {t("featuredArticles")}
               </p>
               
               <Link 
@@ -121,7 +127,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                     {/* Image Text Overlay */}
                     <div className="absolute inset-0 flex items-center justify-center p-6 bg-gradient-to-t from-black/60 via-transparent to-transparent">
                       <h3 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight drop-shadow-lg text-center text-balance transition-transform duration-500 group-hover:scale-105">
-                        {featuredPost.title.replace("How to Optimise a", "Optimise Your")}
+                        {t(`posts.${featuredPost.id}.title`).replace("How to Optimise a", "Optimise Your")}
                       </h3>
                     </div>
                   </div>
@@ -131,20 +137,20 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                     <div>
                       <div className="flex items-center gap-2 mb-6">
                         <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                          FEATURED
+                          {t("featured")}
                         </span>
                       </div>
                       
                       <div className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">
-                        {featuredPost.readTime.toUpperCase()} &middot; {featuredPost.date.toUpperCase()}
+                        {t(`posts.${featuredPost.id}.readTime`).toUpperCase()} &middot; {featuredPost.date.toUpperCase()}
                       </div>
                       
                       <h2 className="text-2xl md:text-3xl font-bold text-foreground leading-tight mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/70 transition-all">
-                        {featuredPost.title}
+                        {t(`posts.${featuredPost.id}.title`)}
                       </h2>
                       
                       <p className="text-muted-foreground text-sm leading-relaxed mb-8">
-                        {featuredPost.description}
+                        {t(`posts.${featuredPost.id}.desc`)}
                       </p>
                       
                       {/* Tags */}
@@ -159,7 +165,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                     
                     <div className="flex justify-end mt-auto">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                        Read article
+                        {t("readArticle")}
                         <div className="flex items-center justify-center w-8 h-8 rounded-full border border-foreground/10 bg-foreground/5 group-hover:bg-foreground/10 transition-colors">
                           <ArrowRight className="h-4 w-4" />
                         </div>
@@ -175,7 +181,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
           {latestPosts.length > 0 && (
             <div>
               <p className="text-center text-xs font-semibold text-muted-foreground uppercase tracking-[0.2em] mb-8">
-                LATEST ARTICLES
+                {t("latestArticles")}
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -199,7 +205,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                       {/* Category Badge */}
                       <div className="absolute top-3 left-3 z-10">
                         <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-medium uppercase tracking-wider border border-primary/20 glass">
-                          {post.category}
+                          {t(`posts.${post.id}.category`)}
                         </span>
                       </div>
                     </div>
@@ -207,10 +213,10 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                     {/* Content */}
                     <div className="flex flex-1 flex-col px-2 pt-5 pb-3">
                       <h3 className="font-semibold text-lg text-foreground leading-snug transition-colors duration-300 group-hover:text-primary">
-                        {post.title}
+                        {t(`posts.${post.id}.title`)}
                       </h3>
                       <p className="mt-3 line-clamp-3 text-muted-foreground text-sm leading-relaxed">
-                        {post.description}
+                        {t(`posts.${post.id}.desc`)}
                       </p>
 
                       {/* Footer */}
@@ -218,7 +224,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                         <div className="flex items-center gap-3 text-[11px] text-muted-foreground uppercase tracking-wide font-medium">
                           <span className="flex items-center gap-1.5">
                             <Clock className="w-3.5 h-3.5" />
-                            {post.readTime}
+                            {t(`posts.${post.id}.readTime`)}
                           </span>
                           <span className="text-border">·</span>
                           <span className="flex items-center gap-1.5">
@@ -228,7 +234,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                         </div>
 
                         <div className="flex shrink-0 items-center gap-2 text-muted-foreground text-[10px] font-medium uppercase tracking-wide transition-colors duration-300 group-hover:text-primary">
-                          <span className="hidden xl:inline">Read</span>
+                          <span className="hidden xl:inline">{t("read")}</span>
                           <div className="flex size-7 items-center justify-center rounded-lg border border-border border-dashed bg-muted transition-all duration-500 group-hover:border-primary/50 group-hover:bg-primary/10 group-hover:translate-x-1">
                             <ArrowRight className="size-3.5" />
                           </div>

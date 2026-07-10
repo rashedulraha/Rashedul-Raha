@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { blogPosts } from "@/lib/blog-data";
 import { Metadata } from "next";
 import BlogList from "@/components/blog/BlogList";
+import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Blog | Aayush Bharti",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const t = useTranslations("BlogPage");
   return (
     <>
       <div className="bg-background min-h-screen text-foreground selection:bg-primary/30">
@@ -35,10 +37,10 @@ export default function BlogPage() {
             {/* Hero Header */}
             <div className="mb-12 text-center pt-8">
               <p className="mb-4 font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                THE PENSIEVE
+                {t("pageSubtitle")}
               </p>
               <h1 className="font-instrument-serif text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground">
-                Handpicked{" "}
+                {t("pageTitle1")}{" "}
                 <span
                   className="italic"
                   style={{
@@ -46,7 +48,7 @@ export default function BlogPage() {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}>
-                  Insights
+                  {t("pageTitle2")}
                 </span>
               </h1>
             </div>
