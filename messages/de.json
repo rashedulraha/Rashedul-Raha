@@ -442,7 +442,13 @@
     "uses": "Verwendet",
     "attribution": "Namensnennung",
     "links": "Links",
-    "adminTerminal": "Admin-Terminal"
+    "adminTerminal": "Admin-Terminal",
+    "searchPlaceholder": "Seiten, Beiträge, Projekte suchen...",
+    "noResults": "Keine Ergebnisse gefunden.",
+    "recent": "Kürzlich",
+    "clear": "Löschen",
+    "pagesGroup": "Seiten",
+    "connectGroup": "Verbinden"
   },
   "BlogPage": {
     "pageSubtitle": "DER DENKRIEMEN",

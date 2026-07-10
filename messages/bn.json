@@ -442,7 +442,13 @@
     "uses": "ব্যবহার",
     "attribution": "স্বীকৃতি",
     "links": "লিঙ্কসমূহ",
-    "adminTerminal": "অ্যাডমিন টার্মিনাল"
+    "adminTerminal": "অ্যাডমিন টার্মিনাল",
+    "searchPlaceholder": "পেজ, পোস্ট বা প্রজেক্ট খুঁজুন...",
+    "noResults": "কিছু পাওয়া যায়নি।",
+    "recent": "সাম্প্রতিক",
+    "clear": "মুছুন",
+    "pagesGroup": "পেজসমূহ",
+    "connectGroup": "যোগাযোগ"
   },
   "BlogPage": {
     "pageSubtitle": "ব্লগ",

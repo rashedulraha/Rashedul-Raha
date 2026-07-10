@@ -442,7 +442,13 @@
     "uses": "Uses",
     "attribution": "Attribution",
     "links": "Links",
-    "adminTerminal": "Admin Terminal"
+    "adminTerminal": "Admin Terminal",
+    "searchPlaceholder": "Search pages, posts, projects...",
+    "noResults": "No results found.",
+    "recent": "Recent",
+    "clear": "Clear",
+    "pagesGroup": "Pages",
+    "connectGroup": "Connect"
   },
   "BlogPage": {
     "pageSubtitle": "THE PENSIEVE",

@@ -125,7 +125,7 @@ export default function SearchModal() {
                         <Command.Input
                           autoFocus
                           className="flex h-14 w-full bg-transparent text-[15px] text-primary placeholder:text-muted-foreground !outline-none !ring-0 !border-none focus:!outline-none focus:!ring-0 focus-visible:!outline-none focus-visible:!ring-0 [box-shadow:none]"
-                          placeholder="Search pages, posts, projects..."
+                          placeholder={t("searchPlaceholder")}
                         />
 
                         {/* Action Buttons within the top bar */}
@@ -151,15 +151,15 @@ export default function SearchModal() {
                       {/* Dropdown Results container */}
                       <Command.List className="flex-1 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent h-[440px]">
                         <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
-                          No results found.
+                          {t("noResults")}
                         </Command.Empty>
 
                         <Command.Group
                           heading={
                             <div className="flex items-center justify-between px-2 py-3 text-xs text-muted-foreground">
-                              <span>Recent</span>
+                              <span>{t("recent")}</span>
                               <button className="text-muted-foreground hover:text-primary">
-                                Clear
+                                {t("clear")}
                               </button>
                             </div>
                           }>
@@ -176,7 +176,7 @@ export default function SearchModal() {
                         <Command.Group
                           heading={
                             <div className="px-2 pb-2 pt-4 text-xs text-muted-foreground border-t border-border">
-                              Pages
+                              {t("pagesGroup")}
                             </div>
                           }>
                           <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
@@ -313,7 +313,7 @@ export default function SearchModal() {
                         <Command.Group
                           heading={
                             <div className="px-2 pb-2 pt-4 text-xs text-muted-foreground border-t border-border">
-                              Connect
+                              {t("connectGroup")}
                             </div>
                           }>
                           <div className="grid grid-cols-1 gap-1 sm:grid-cols-3">

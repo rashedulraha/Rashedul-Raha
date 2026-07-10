@@ -442,7 +442,13 @@
     "uses": "Usi",
     "attribution": "Attribuzione",
     "links": "Link",
-    "adminTerminal": "Terminale di amministrazione"
+    "adminTerminal": "Terminale di amministrazione",
+    "searchPlaceholder": "Cerca pagine, post, progetti...",
+    "noResults": "Nessun risultato trovato.",
+    "recent": "Recente",
+    "clear": "Cancella",
+    "pagesGroup": "Pagine",
+    "connectGroup": "Connetti"
   },
   "BlogPage": {
     "pageSubtitle": "IL PENSATOIO",

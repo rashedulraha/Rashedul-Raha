@@ -442,7 +442,13 @@
     "uses": "使用",
     "attribution": "帰属",
     "links": "リンク",
-    "adminTerminal": "管理ターミナル"
+    "adminTerminal": "管理ターミナル",
+    "searchPlaceholder": "ページ、投稿、プロジェクトを検索...",
+    "noResults": "結果が見つかりません。",
+    "recent": "最近",
+    "clear": "クリア",
+    "pagesGroup": "ページ",
+    "connectGroup": "接続"
   },
   "BlogPage": {
     "pageSubtitle": "ブログ",

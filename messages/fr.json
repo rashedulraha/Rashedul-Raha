@@ -442,7 +442,13 @@
     "uses": "Utilisations",
     "attribution": "Attribution",
     "links": "Liens",
-    "adminTerminal": "Terminal d'administration"
+    "adminTerminal": "Terminal d'administration",
+    "searchPlaceholder": "Rechercher des pages, articles, projets...",
+    "noResults": "Aucun résultat trouvé.",
+    "recent": "Récent",
+    "clear": "Effacer",
+    "pagesGroup": "Pages",
+    "connectGroup": "Connecter"
   },
   "BlogPage": {
     "pageSubtitle": "LA PENSINE",

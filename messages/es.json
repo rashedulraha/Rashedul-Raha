@@ -442,7 +442,13 @@
     "uses": "Usos",
     "attribution": "Atribución",
     "links": "Enlaces",
-    "adminTerminal": "Terminal de administración"
+    "adminTerminal": "Terminal de administración",
+    "searchPlaceholder": "Buscar páginas, publicaciones, proyectos...",
+    "noResults": "No se encontraron resultados.",
+    "recent": "Reciente",
+    "clear": "Borrar",
+    "pagesGroup": "Páginas",
+    "connectGroup": "Conectar"
   },
   "BlogPage": {
     "pageSubtitle": "EL PENSADERO",
