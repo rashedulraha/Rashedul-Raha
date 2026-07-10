@@ -49,13 +49,13 @@ const Usesd = () => {
     <div
       ref={sectionRef}
       className="col-span-1 md:col-span-12 lg:col-span-4 lg:row-span-6">
-      <Link href="/uses" passHref legacyBehavior>
-        <motion.a
+      <Link href="/uses" className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-full min-h-72">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           whileHover={{ y: -4 }}
-          className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer  h-full min-h-72"
+          className="w-full h-full flex flex-col justify-between"
           >
           {/* Background gradient on hover */}
           <div className="pointer-events-none absolute inset-0 z-0 rounded-xl bg-linear-to-br from-transparent via-transparent to-indigo-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -131,7 +131,7 @@ const Usesd = () => {
             {tools.length} {t('toolsCount')}
           </span>
         </motion.div>
-      </motion.a>
+      </motion.div>
       </Link>
     </div>
   );

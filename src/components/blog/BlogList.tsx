@@ -120,6 +120,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                       src={featuredPost.image}
                       alt={featuredPost.title}
                       fill
+                      sizes="(max-width: 1024px) 100vw, 60vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       priority
                     />

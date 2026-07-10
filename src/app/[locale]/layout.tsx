@@ -63,8 +63,9 @@ export default async function RootLayout({
     <html
       lang={locale}
       className={cn("font-sans", geist.variable)}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning>
-      <body>
+      <body suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
