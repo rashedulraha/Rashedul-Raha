@@ -2,6 +2,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
 import {
@@ -65,6 +66,7 @@ function CenterGalleryModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const t = useTranslations("Hero");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -241,13 +243,13 @@ function CenterGalleryModal({
                 {currentSlide.location && (
                   <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-md text-white/90 text-xs border border-white/10">
                     <MapPin className="w-3 h-3 text-indigo-400" />
-                    {currentSlide.location}
+                    {t(`slide${currentIndex}Loc`)}
                   </div>
                 )}
                 {currentSlide.date && (
                   <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-md text-white/90 text-xs border border-white/10">
                     <Calendar className="w-3 h-3 text-emerald-400" />
-                    {currentSlide.date}
+                    {t(`slide${currentIndex}Date`)}
                   </div>
                 )}
               </div>
@@ -282,7 +284,7 @@ function CenterGalleryModal({
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-lg font-semibold text-foreground">
-              {currentSlide.title}
+              {t(`slide${currentIndex}Title`)}
             </motion.h3>
             <motion.p
               key={`desc-${currentIndex}`}
@@ -290,7 +292,7 @@ function CenterGalleryModal({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 }}
               className="mt-1 text-sm text-muted-foreground leading-relaxed">
-              {currentSlide.description}
+              {t(`slide${currentIndex}Desc`)}
             </motion.p>
           </div>
 
@@ -324,12 +326,13 @@ function CenterGalleryModal({
 }
 
 export default function Hero() {
+  const t = useTranslations("Hero");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const avatarRef = useRef<HTMLSpanElement>(null);
 
   const copyEmail = async () => {
     await navigator.clipboard.writeText("rashedulraha.bd@gmail.com");
-    toast.success("Email copied to clipboard!");
+    toast.success(t('copied'));
   };
 
   // Floating particles for background
@@ -393,10 +396,10 @@ export default function Hero() {
             rel="noreferrer"
             target="_blank">
             <span className="mx-1 rounded-full bg-linear-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-xs font-medium text-white shadow-sm">
-              New
+              {t('badgeNew')}
             </span>
             <span className="relative px-2 py-0.5 text-sm text-black/70 transition-colors duration-300 group-hover:text-black dark:text-white/70 dark:group-hover:text-white">
-              Keythm — feel every keystroke
+              {t('badgeText')}
             </span>
             <motion.svg
               fill="none"
@@ -421,22 +424,22 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-full text-balance text-center font-instrument-serif text-4xl text-zinc-700 leading-tight md:text-5xl lg:text-6xl dark:text-zinc-100">
-            Code that{" "}
+            {t('title1')}
             <motion.em
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               className="bg-linear-to-b from-zinc-500 via-zinc-600 to-zinc-900 bg-clip-text text-transparent not-italic tracking-tight dark:from-zinc-700 dark:via-zinc-200 dark:to-zinc-50">
-              feels
-            </motion.em>{" "}
-            designed.
+              {t('titleHighlight')}
+            </motion.em>
+            {t('title2')}
             <br className="block" />
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               className="bg-linear-to-b from-zinc-500 via-zinc-600 to-zinc-900 bg-clip-text font-instrument-serif text-transparent italic tracking-tight dark:from-zinc-700 dark:via-zinc-200 dark:to-zinc-50">
-              Engineering that actually ships.
+              {t('subtitle')}
             </motion.span>
           </motion.h1>
 
@@ -447,7 +450,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="grad-white relative z-20 flex flex-col items-center justify-center text-center font-normal text-lg tracking-tight sm:flex-row sm:text-xl lg:text-2xl">
             <span className="flex items-center justify-center">
-              Hello, I&apos;m Rashedul Islam
+              {t('greeting')}
               <span
                 ref={avatarRef}
                 className="group relative z-30 cursor-pointer"
@@ -475,7 +478,7 @@ export default function Hero() {
                   className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] text-white/60 whitespace-nowrap bg-black/30 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/5">
                   <span className="flex items-center gap-1">
                     <Grid3x3 className="w-2.5 h-2.5" />
-                    Gallery
+                    {t('galleryHint')}
                   </span>
                 </motion.div>
               </span>
@@ -485,8 +488,7 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
               className="leading-relaxed">
-              {" "}
-              a Full Stack Developer
+              {t('role')}
             </motion.span>
           </motion.h2>
 
@@ -508,7 +510,7 @@ export default function Hero() {
               }
               className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/20 bg-black/10 py-1 pr-1 pl-4 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/40 hover:bg-black hover:opacity-100 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20">
               <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">
-                Let&apos;s Connect
+                {t('ctaConnect')}
               </span>
               <span
                 aria-hidden="true"
@@ -581,7 +583,7 @@ export default function Hero() {
               </span>
               <span className="relative grid select-none text-left">
                 <span className="invisible col-start-1 row-start-1">
-                  Copied to clipboard
+                  {t('copied')}
                 </span>
                 <span className="invisible col-start-1 row-start-1">
                   hello@aayushbharti.in
