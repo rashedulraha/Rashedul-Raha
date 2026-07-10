@@ -47,16 +47,14 @@ const mainLinks = [
 
 const moreCards = [
   {
+    id: "guestbook",
     href: "/guestbook",
-    title: "Guestbook",
-    desc: "Let me know you were here",
     img: "https://images.unsplash.com/photo-1517842645767-c639042777db?q=80&w=600&auto=format&fit=crop",
     icon: MessageSquare,
   },
   {
+    id: "bucketList",
     href: "/bucket-list",
-    title: "Bucket List",
-    desc: "Dreams with a deadline",
     img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600&auto=format&fit=crop",
     icon: ListTodo,
   },
@@ -64,21 +62,18 @@ const moreCards = [
 
 const moreLinks = [
   {
+    id: "links",
     href: "/links",
-    label: "Links",
-    desc: "All my links are here",
     icon: LinkIcon,
   },
   {
+    id: "uses",
     href: "/uses",
-    label: "Uses",
-    desc: "A peek into my digital...",
     icon: Laptop,
   },
   {
+    id: "attribution",
     href: "/attribution",
-    label: "Attribution",
-    desc: "Journey to create this site",
     icon: CreditCard,
   },
 ];
@@ -695,7 +690,7 @@ export default function Navbar() {
                             >
                               <Image
                                 src={card.img}
-                                alt={card.title}
+                                alt={t(card.id as any)}
                                 fill
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
@@ -703,9 +698,9 @@ export default function Navbar() {
                               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                               <div className="absolute bottom-0 left-0 right-0 p-4">
                                 <h3 className="font-semibold text-foreground text-base mb-1">
-                                  {card.title}
+                                  {t(card.id as any)}
                                 </h3>
-                                <p className="text-sm text-muted-foreground">{card.desc}</p>
+                                <p className="text-sm text-muted-foreground">{t(`${card.id}Desc` as any)}</p>
                               </div>
                             </Link>
                           </motion.div>
@@ -759,10 +754,10 @@ export default function Navbar() {
                               </motion.div>
                               <div className="flex flex-col">
                                 <span className="font-medium text-sm text-foreground">
-                                  {link.label}
+                                  {t(link.id as any)}
                                 </span>
                                 <span className="text-xs text-muted-foreground">
-                                  {link.desc}
+                                  {t(`${link.id}Desc` as any)}
                                 </span>
                               </div>
                             </Link>
@@ -1099,7 +1094,7 @@ export default function Navbar() {
                         className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all duration-500"
                       >
                         {"icon" in item && <item.icon className="h-5 w-5" />}
-                        {"title" in item ? item.title : item.label}
+                        {t(item.id as any)}
                       </Link>
                     </motion.div>
                   ))}
