@@ -165,7 +165,7 @@ export default function SearchModal() {
                               GitHub
                             </span>
                             <span className="cursor-pointer rounded-full border border-border bg-muted px-3 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
-                              Projects
+                              Work
                             </span>
                           </div>
                         </Command.Group>
@@ -201,13 +201,13 @@ export default function SearchModal() {
 
                             <Command.Item
                               onSelect={() =>
-                                runCommand(() => router.push("/projects"))
+                                runCommand(() => router.push("/work"))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Folder className="h-4 w-4" />
                               </div>
-                              Projects
+                              Work
                             </Command.Item>
 
                             <Command.Item
