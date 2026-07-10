@@ -6,8 +6,8 @@ import { Timeline } from "@/components/ui/timeline";
 import { Target, CheckCircle2, Circle, Trophy } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Bucket List | Rashedul Islam",
-  description: "A timeline of things I want to do, see, and achieve in my lifetime.",
+  title: "Bucket list | Rashedul Islam",
+  description: "Explore the bucket list of Rashedul Islam, a Full-Stack Developer specializing in Next.js and React Native.",
 };
 
 export default function BucketListPage() {

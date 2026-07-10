@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Links | Rashedul Islam",
-  description: "Connect with me across the web.",
+  description: "Explore the links of Rashedul Islam, a Full-Stack Developer specializing in Next.js and React Native.",
 };
 
 const codeAndCraftLinks = [

@@ -6,8 +6,8 @@ import Experience from "@/components/Experience";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About | Aayush Bharti",
-  description: "Learn more about my background, experience, and the tools I use.",
+  title: "About | Rashedul Islam",
+  description: "Learn more about Rashedul Islam, a Full-Stack Developer specializing in Next.js and React Native.",
 };
 
 export default function AboutPage() {

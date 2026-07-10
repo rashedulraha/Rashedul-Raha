@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Uses | Rashedul Islam",
-  description: "A comprehensive timeline of the hardware and software I use for my development workflow.",
+  description: "Explore the uses of Rashedul Islam, a Full-Stack Developer specializing in Next.js and React Native.",
 };
 
 export default function UsesPage() {

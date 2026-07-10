@@ -7,7 +7,7 @@ import { getGuestbookMessages } from "@/actions/guestbook";
 
 export const metadata: Metadata = {
   title: "Guestbook | Rashedul Islam",
-  description: "Words that echo always.",
+  description: "Explore the guestbook of Rashedul Islam, a Full-Stack Developer specializing in Next.js and React Native.",
 };
 
 export default async function GuestbookPage() {

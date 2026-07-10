@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Attribution | Rashedul Islam",
-  description: "Giving credit to the amazing creators and open-source projects that make this site possible.",
+  description: "Explore the attribution of Rashedul Islam, a Full-Stack Developer specializing in Next.js and React Native.",
 };
 
 export default function AttributionPage() {
