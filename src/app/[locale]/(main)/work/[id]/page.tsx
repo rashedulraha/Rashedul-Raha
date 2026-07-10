@@ -1,4 +1,5 @@
 import React from "react";
+import PageWrapper from "@/components/PageWrapper";
 
 import Footer from "@/components/Footer";
 import { projects } from "@/lib/work-data";
@@ -21,27 +22,10 @@ export default async function ProjectDetail({
   }
 
   return (
-    <>
-      <div className="bg-background min-h-screen text-foreground selection:bg-primary/30">
-
+    <PageWrapper className="max-w-5xl">
+      <article>
         
-        {/* Background gradient from hero */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed left-0 z-40 h-22.5 w-full select-none lg:h-25 top-0"
-          style={{
-            maskImage: "linear-gradient(to bottom, black 50%, transparent)",
-            WebkitBackdropFilter: "blur(2px)",
-            backdropFilter: "blur(2px)",
-            WebkitUserSelect: "none",
-            userSelect: "none",
-          }}
-        />
-
-        <main className="pt-32 pb-20">
-          <article className="container relative mx-auto max-w-5xl px-4 sm:px-6">
-            
-            {/* Back to Work */}
+        {/* Back to Work */}
             <Link 
               href="/work" 
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 group"
@@ -158,12 +142,8 @@ export default async function ProjectDetail({
                 
               </div>
             </div>
-            
-          </article>
-        </main>
-        
-        <Footer />
-      </div>
-    </>
+      </article>
+      <Footer />
+    </PageWrapper>
   );
 }

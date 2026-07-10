@@ -1,4 +1,5 @@
 import React from "react";
+import PageWrapper from "@/components/PageWrapper";
 
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/lib/blog-data";
@@ -22,27 +23,10 @@ export default async function BlogDetail({
   }
 
   return (
-    <>
-      <div>
-
+    <PageWrapper className="max-w-3xl">
+      <article>
         
-        {/* Background gradient from hero */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed left-0 z-40 h-22.5 w-full select-none lg:h-25 top-0"
-          style={{
-            maskImage: "linear-gradient(to bottom, black 50%, transparent)",
-            WebkitBackdropFilter: "blur(2px)",
-            backdropFilter: "blur(2px)",
-            WebkitUserSelect: "none",
-            userSelect: "none",
-          }}
-        />
-
-        <main className="min-h-screen pt-32 pb-20">
-          <article className="container relative mx-auto max-w-3xl px-4 sm:px-6">
-            
-            {/* Back to Blog */}
+        {/* Back to Blog */}
             <Link 
               href="/blog" 
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 group"
@@ -182,12 +166,8 @@ CLOUDINARY_API_SECRET="your-api-secret"`}
                 Remember to add <code>.env</code> to your <code>.gitignore</code> and provide a <code>.env.example</code> for your fellow developers. Keep shipping!
               </p>
             </div>
-            
-          </article>
-        </main>
-        
-        <Footer />
-      </div>
-    </>
+      </article>
+      <Footer />
+    </PageWrapper>
   );
 }
