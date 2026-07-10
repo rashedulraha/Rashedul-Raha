@@ -714,9 +714,6 @@ export default function SearchModal() {
                         }
                       }}>
                       <div className="text-center mb-6">
-                        <div className="mx-auto w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 shadow-[0_0_30px_rgba(var(--primary),0.15)] flex items-center justify-center text-primary mb-6 backdrop-blur-sm">
-                          <Terminal className="w-8 h-8" />
-                        </div>
                         <h3 className="text-2xl font-bold text-primary mb-2">{t("dashboardTerminal")}</h3>
                         <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mx-auto">
                           {t("dashboardDesc")}
