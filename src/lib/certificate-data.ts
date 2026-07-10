@@ -6,6 +6,7 @@ export interface Certificate {
   image: string;
   issuer: string;
   date: string;
+  credentialUrl?: string;
 }
 
 export const certificatesData: Certificate[] = [
