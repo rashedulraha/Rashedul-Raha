@@ -426,5 +426,38 @@
     "securityPassphrase": "Phrase de sécurité",
     "passwordPlaceholder": "Entrer le mot de passe admin",
     "accessDashboard": "Accéder au Tableau de Bord"
+  },
+  "BlogPage": {
+    "pageSubtitle": "LA PENSINE",
+    "pageTitle1": "Aperçus ",
+    "pageTitle2": "Sélectionnés",
+    "allPosts": "Tous",
+    "searchPosts": "Rechercher",
+    "noPosts": "Aucun article trouvé.",
+    "featuredArticles": "ARTICLES EN VEDETTE",
+    "featured": "EN VEDETTE",
+    "readArticle": "Lire l'article",
+    "latestArticles": "DERNIERS ARTICLES",
+    "read": "Lire",
+    "posts": {
+      "1": {
+        "title": "Comment optimiser une application Next.js",
+        "desc": "Techniques pour améliorer votre score Lighthouse.",
+        "category": "Performance",
+        "readTime": "15 min"
+      },
+      "2": {
+        "title": "Ma configuration de développement Terminal",
+        "desc": "Neovim, Wezterm, Tmux et le reste.",
+        "category": "Outils",
+        "readTime": "12 min"
+      },
+      "3": {
+        "title": "Créer un blog avec Next.js et MDX de zéro",
+        "desc": "Contenu basé sur des fichiers, sans base de données.",
+        "category": "Tutoriel",
+        "readTime": "11 min"
+      }
+    }
   }
 }

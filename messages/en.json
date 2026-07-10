@@ -426,5 +426,38 @@
     "securityPassphrase": "Security Passphrase",
     "passwordPlaceholder": "Enter administrator password",
     "accessDashboard": "Access Dashboard"
+  },
+  "BlogPage": {
+    "pageSubtitle": "THE PENSIEVE",
+    "pageTitle1": "Handpicked ",
+    "pageTitle2": "Insights",
+    "allPosts": "All Posts",
+    "searchPosts": "Search posts",
+    "noPosts": "No posts found matching your criteria.",
+    "featuredArticles": "FEATURED ARTICLES",
+    "featured": "FEATURED",
+    "readArticle": "Read article",
+    "latestArticles": "LATEST ARTICLES",
+    "read": "Read",
+    "posts": {
+      "1": {
+        "title": "How to Optimise a Next.js Web App",
+        "desc": "Practical techniques to fix your Next.js Lighthouse score — bundle analysis, caching strategies, React Compiler, and the next.config flags nobody talks about.",
+        "category": "Performance",
+        "readTime": "15 min read"
+      },
+      "2": {
+        "title": "Every Tool in My Terminal-First Dev Setup",
+        "desc": "Neovim, Wezterm, Tmux, and the rest — what survived two years of daily use and why I picked each one over the obvious alternatives.",
+        "category": "Tools",
+        "readTime": "12 min read"
+      },
+      "3": {
+        "title": "Build a Blog with Next.js and MDX from Scratch",
+        "desc": "File-based content, zero database, full control. A complete walkthrough of building a statically-generated blog with Next.js, MDX, and gray-matter.",
+        "category": "Tutorial",
+        "readTime": "11 min read"
+      }
+    }
   }
 }

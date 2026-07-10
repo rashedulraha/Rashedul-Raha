@@ -426,5 +426,38 @@
     "securityPassphrase": "Frase de seguridad",
     "passwordPlaceholder": "Introduce contraseña de administrador",
     "accessDashboard": "Acceder al panel"
+  },
+  "BlogPage": {
+    "pageSubtitle": "EL PENSADERO",
+    "pageTitle1": "Perspectivas ",
+    "pageTitle2": "Seleccionadas",
+    "allPosts": "Todos",
+    "searchPosts": "Buscar",
+    "noPosts": "No se encontraron publicaciones.",
+    "featuredArticles": "ARTÍCULOS DESTACADOS",
+    "featured": "DESTACADO",
+    "readArticle": "Leer artículo",
+    "latestArticles": "ÚLTIMOS ARTÍCULOS",
+    "read": "Leer",
+    "posts": {
+      "1": {
+        "title": "Cómo optimizar una aplicación web Next.js",
+        "desc": "Técnicas para mejorar tu puntaje Lighthouse.",
+        "category": "Rendimiento",
+        "readTime": "15 min"
+      },
+      "2": {
+        "title": "Mi configuración de desarrollo basada en terminal",
+        "desc": "Neovim, Wezterm, Tmux y el resto de mis herramientas.",
+        "category": "Herramientas",
+        "readTime": "12 min"
+      },
+      "3": {
+        "title": "Crea un blog con Next.js y MDX desde cero",
+        "desc": "Contenido basado en archivos, sin base de datos.",
+        "category": "Tutorial",
+        "readTime": "11 min"
+      }
+    }
   }
 }

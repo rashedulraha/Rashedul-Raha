@@ -426,5 +426,38 @@
     "securityPassphrase": "Sicherheits-Passphrase",
     "passwordPlaceholder": "Administrator-Passwort eingeben",
     "accessDashboard": "Auf Dashboard zugreifen"
+  },
+  "BlogPage": {
+    "pageSubtitle": "DER DENKRIEMEN",
+    "pageTitle1": "Ausgewählte ",
+    "pageTitle2": "Einblicke",
+    "allPosts": "Alle",
+    "searchPosts": "Suchen",
+    "noPosts": "Keine Beiträge gefunden.",
+    "featuredArticles": "VORGESTELLTE ARTIKEL",
+    "featured": "VORGESTELLT",
+    "readArticle": "Artikel lesen",
+    "latestArticles": "NEUESTE ARTIKEL",
+    "read": "Lesen",
+    "posts": {
+      "1": {
+        "title": "Wie man eine Next.js Web App optimiert",
+        "desc": "Techniken zur Verbesserung Ihres Lighthouse-Scores.",
+        "category": "Leistung",
+        "readTime": "15 min"
+      },
+      "2": {
+        "title": "Mein Terminal-First Dev Setup",
+        "desc": "Neovim, Wezterm, Tmux und der Rest.",
+        "category": "Werkzeuge",
+        "readTime": "12 min"
+      },
+      "3": {
+        "title": "Ein Blog mit Next.js und MDX erstellen",
+        "desc": "Dateibasierter Inhalt, keine Datenbank.",
+        "category": "Tutorial",
+        "readTime": "11 min"
+      }
+    }
   }
 }

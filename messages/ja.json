@@ -426,5 +426,38 @@
     "securityPassphrase": "セキュリティ パスフレーズ",
     "passwordPlaceholder": "管理者パスワードを入力",
     "accessDashboard": "ダッシュボードにアクセス"
+  },
+  "BlogPage": {
+    "pageSubtitle": "ブログ",
+    "pageTitle1": "厳選された",
+    "pageTitle2": "洞察",
+    "allPosts": "すべての投稿",
+    "searchPosts": "投稿を検索",
+    "noPosts": "条件に一致する投稿が見つかりませんでした。",
+    "featuredArticles": "注目の記事",
+    "featured": "注目",
+    "readArticle": "記事を読む",
+    "latestArticles": "最新の記事",
+    "read": "読む",
+    "posts": {
+      "1": {
+        "title": "Next.js Web アプリの最適化方法",
+        "desc": "Next.js の Lighthouse スコアを修正するための実践的なテクニック — バンドル分析、キャッシュ戦略、React Compiler、そして誰も語らない next.config のフラグについて。",
+        "category": "パフォーマンス",
+        "readTime": "15分で読める"
+      },
+      "2": {
+        "title": "私のターミナルファースト開発セットアップの全ツール",
+        "desc": "Neovim、Wezterm、Tmux など — 2年間の日常使用を生き延びたものと、なぜそれらを選んだのか。",
+        "category": "ツール",
+        "readTime": "12分で読める"
+      },
+      "3": {
+        "title": "Next.js と MDX を使ってゼロからブログを構築する",
+        "desc": "ファイルベースのコンテンツ、データベースなし、完全な制御。Next.js、MDX、gray-matter を使用した静的生成ブログの構築の完全なチュートリアル。",
+        "category": "チュートリアル",
+        "readTime": "11分で読める"
+      }
+    }
   }
 }
