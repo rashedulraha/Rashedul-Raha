@@ -4,6 +4,8 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 
+import { useTranslations } from "next-intl";
+
 type Experience = {
   id: number;
   role: string;
@@ -14,49 +16,8 @@ type Experience = {
   skills: string[];
 };
 
-const experiences: Experience[] = [
-  {
-    id: 1,
-    role: "Senior Frontend Engineer",
-    company: "TechCorp Inc.",
-    duration: "2023 - Present",
-    location: "Remote",
-    description: [
-      "Led the migration of a legacy monolithic architecture to a modern Next.js stack, improving page load speeds by 40%.",
-      "Architected and implemented a scalable design system using Tailwind CSS and Radix UI.",
-      "Mentored junior developers and established code review best practices.",
-    ],
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    id: 2,
-    role: "UI/UX Developer",
-    company: "Creative Studio",
-    duration: "2021 - 2023",
-    location: "New York, NY",
-    description: [
-      "Collaborated closely with designers to build pixel-perfect, highly interactive web applications.",
-      "Implemented complex animations using Framer Motion and GSAP.",
-      "Reduced CSS payload by 60% by refactoring styles into functional utility classes.",
-    ],
-    skills: ["JavaScript", "React", "Framer Motion", "CSS/SCSS"],
-  },
-  {
-    id: 3,
-    role: "Frontend Developer",
-    company: "Startup Hub",
-    duration: "2019 - 2021",
-    location: "San Francisco, CA",
-    description: [
-      "Developed the initial MVP for a B2B SaaS platform, securing $2M in seed funding.",
-      "Integrated RESTful APIs and managed complex state using Redux.",
-      "Ensured cross-browser compatibility and responsive design across all devices.",
-    ],
-    skills: ["HTML", "CSS", "React", "Redux"],
-  },
-];
-
 export default function Experience() {
+  const t = useTranslations("AboutExperience");
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -64,6 +25,36 @@ export default function Experience() {
   });
 
   const lineHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", "100%"]);
+
+  const translatedExperiences: Experience[] = [
+    {
+      id: 1,
+      role: t("exp1.role"),
+      company: t("exp1.company"),
+      duration: t("exp1.duration"),
+      location: t("exp1.location"),
+      description: [t("exp1.desc1"), t("exp1.desc2"), t("exp1.desc3")],
+      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    },
+    {
+      id: 2,
+      role: t("exp2.role"),
+      company: t("exp2.company"),
+      duration: t("exp2.duration"),
+      location: t("exp2.location"),
+      description: [t("exp2.desc1"), t("exp2.desc2"), t("exp2.desc3")],
+      skills: ["JavaScript", "React", "Framer Motion", "CSS/SCSS"],
+    },
+    {
+      id: 3,
+      role: t("exp3.role"),
+      company: t("exp3.company"),
+      duration: t("exp3.duration"),
+      location: t("exp3.location"),
+      description: [t("exp3.desc1"), t("exp3.desc2"), t("exp3.desc3")],
+      skills: ["HTML", "CSS", "React", "Redux"],
+    },
+  ];
 
   return (
     <section className="relative py-24 overflow-hidden" id="experience">
@@ -80,7 +71,7 @@ export default function Experience() {
           >
             <Briefcase className="w-4 h-4 text-primary" />
             <span className="font-medium text-xs uppercase tracking-widest">
-              Professional Journey
+              {t("badge")}
             </span>
           </motion.div>
           <motion.h2
@@ -90,7 +81,7 @@ export default function Experience() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-balance font-medium text-4xl tracking-tight sm:text-5xl md:text-6xl text-foreground"
           >
-            Work Experience
+            {t("title")}
           </motion.h2>
         </div>
 
@@ -105,7 +96,7 @@ export default function Experience() {
           </div>
 
           <div className="space-y-16">
-            {experiences.map((exp, index) => (
+            {translatedExperiences.map((exp, index) => (
               <ExperienceItem key={exp.id} exp={exp} index={index} />
             ))}
           </div>
