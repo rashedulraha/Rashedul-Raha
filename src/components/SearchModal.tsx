@@ -25,7 +25,7 @@ import {
   Terminal,
   LogIn
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/routing";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useTheme } from "next-themes";
