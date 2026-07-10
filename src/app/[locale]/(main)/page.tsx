@@ -8,6 +8,7 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import AboutSection from "@/components/AboutSection";
+import CertificatesSection from "@/components/CertificatesSection";
 
 export default function Home() {
   return (
@@ -41,6 +42,7 @@ export default function Home() {
                 <AboutSection />
                 <Work />
                 <Blog />
+                <CertificatesSection />
                 <Testimonials />
                 <FAQ />
               </div>
