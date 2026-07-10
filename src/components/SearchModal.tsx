@@ -94,7 +94,7 @@ export default function SearchModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/20 dark:bg-black/60 backdrop-blur-md"
             onClick={() => setIsOpen(false)}
           />
 
@@ -105,7 +105,7 @@ export default function SearchModal() {
             exit={{ opacity: 0, scale: 0.96, y: -10 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
             className="relative w-full max-w-2xl px-4 z-50 overflow-hidden">
-            <div className="rounded-xl w-full max-w-2xl flex flex-col min-h-[400px] max-h-[80vh] card-premium">
+            <div className="rounded-2xl w-full max-w-2xl flex flex-col min-h-[400px] max-h-[80vh] bg-background/80 dark:bg-zinc-900/80 backdrop-blur-3xl border border-foreground/10 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
               <AnimatePresence mode="wait">
                 {currentView === "search" && (
                   <motion.div
@@ -149,8 +149,8 @@ export default function SearchModal() {
                       </div>
 
                       {/* Dropdown Results container */}
-                      <Command.List className="flex-1 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent h-[440px]">
-                        <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
+                      <Command.List className="flex-1 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-foreground/10 scrollbar-track-transparent h-[440px]">
+                        <Command.Empty className="py-12 text-center text-sm text-muted-foreground">
                           {t("noResults")}
                         </Command.Empty>
 
@@ -299,13 +299,13 @@ export default function SearchModal() {
                             </Command.Item>
 
                             <Command.Item
-                              value={`admin terminal login terminal ${t("adminTerminal")}`}
+                              value={`dashboard admin terminal login ${t("dashboardTerminal")}`}
                               onSelect={() => setCurrentView("login")}
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border bg-cyan-500/10 border-cyan-500/20">
                                 <Terminal className="h-4 w-4 text-cyan-400" />
                               </div>
-                              {t("adminTerminal")}
+                              {t("dashboardTerminal")}
                             </Command.Item>
                           </div>
                         </Command.Group>
