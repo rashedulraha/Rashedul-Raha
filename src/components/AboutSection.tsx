@@ -12,7 +12,7 @@ import {
   Cpu,
   Database,
   Cloud,
-  Sparkles
+  Sparkles,
 } from "lucide-react";
 
 const TextTooltip = ({
@@ -96,7 +96,11 @@ export default function AboutSection() {
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 300, damping: 24 },
+    },
   };
 
   return (
@@ -120,7 +124,8 @@ export default function AboutSection() {
             <Cpu className="w-3.5 h-3.5" /> About Me
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
-            Engineering digital solutions that <br className="hidden md:block" />
+            Engineering digital solutions that{" "}
+            <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500 font-serif italic">
               drive business growth.
             </span>
@@ -171,76 +176,84 @@ export default function AboutSection() {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={containerVariants}
-              className="space-y-8"
-            >
+              className="space-y-8">
               <motion.div variants={itemVariants}>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground leading-tight">
                   Hi, I&apos;m Rashedul Islam.
                 </h3>
               </motion.div>
 
-              <motion.div variants={itemVariants} className="space-y-5 text-muted-foreground text-base leading-relaxed">
+              <motion.div
+                variants={itemVariants}
+                className="space-y-5 text-muted-foreground text-base leading-relaxed">
                 <p>
-                  I engineer high-performance web applications that solve complex business problems. With a deep focus on clean architecture and modern user experiences, I build products that are fast, accessible, and ready to scale.
+                  I engineer high-performance web applications that solve
+                  complex business problems. With a deep focus on clean
+                  architecture and modern user experiences, I build products
+                  that are fast, accessible, and ready to scale.
                 </p>
-                
+
                 <p>
                   My expertise is rooted in the{" "}
                   <TextTooltip
                     title="Next.js 14/15"
                     description="Building Server Components and high-SEO applications."
-                    icon={Server}
-                  >
+                    icon={Server}>
                     Next.js Ecosystem
                   </TextTooltip>{" "}
                   and{" "}
                   <TextTooltip
                     title="TypeScript"
                     description="Writing strictly typed, bug-free, and scalable code."
-                    icon={Code}
-                  >
+                    icon={Code}>
                     TypeScript
                   </TextTooltip>
                   . From designing pixel-perfect UIs with{" "}
                   <TextTooltip
                     title="Tailwind CSS v4"
                     description="Rapid UI development using utility-first styling."
-                    icon={MonitorSmartphone}
-                  >
+                    icon={MonitorSmartphone}>
                     Tailwind CSS
                   </TextTooltip>{" "}
-                  to architecting robust backends and integrating modern AI capabilities, I handle the entire product lifecycle. I am also experienced in{" "}
+                  to architecting robust backends and integrating modern AI
+                  capabilities, I handle the entire product lifecycle. I am also
+                  experienced in{" "}
                   <TextTooltip
                     title="Cloud & DevOps"
                     description="Docker, AWS, and Vercel for reliable deployments."
-                    icon={Cloud}
-                  >
+                    icon={Cloud}>
                     Cloud deployments and DevOps
                   </TextTooltip>
-                  , ensuring that applications are delivered securely and reliably.
+                  , ensuring that applications are delivered securely and
+                  reliably.
                 </p>
 
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-muted/30 border border-border mt-6">
                   <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                   <p className="text-foreground font-medium text-sm leading-relaxed">
-                    I wake up every day excited to learn new things, build great products, and grow as a developer. Delivering code that buyers and teams love is my ultimate goal.
+                    I wake up every day excited to learn new things, build great
+                    products, and grow as a developer. Delivering code that
+                    buyers and teams love is my ultimate goal.
                   </p>
                 </div>
               </motion.div>
 
               {/* Modern Tech Stack Grid */}
               <motion.div variants={itemVariants} className="space-y-3 pt-2">
-                <p className="text-xs font-semibold text-foreground uppercase tracking-widest">Tech Stack</p>
+                <p className="text-xs font-semibold text-foreground uppercase tracking-widest">
+                  Tech Stack
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {SKILLS.map((skill, index) => {
                     const Icon = skill.icon;
                     return (
-                      <div 
-                        key={index} 
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/50 border border-border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-default"
-                      >
+                      <div
+                        key={index}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/50 border border-border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-default">
                         <Icon className="w-3.5 h-3.5 text-primary" />
-                        <span className="text-xs font-medium text-foreground">{skill.name}</span>
+                        <span className="text-xs font-medium text-foreground">
+                          {skill.name}
+                        </span>
                       </div>
                     );
                   })}
@@ -248,7 +261,9 @@ export default function AboutSection() {
               </motion.div>
 
               {/* Stats Grid */}
-              <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+              <motion.div
+                variants={itemVariants}
+                className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
                 {stats.map((stat, index) => (
                   <div
                     key={index}

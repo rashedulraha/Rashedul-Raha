@@ -24,6 +24,7 @@ import { AnimatePresence, motion, LayoutGroup, Variants } from "framer-motion";
 import SearchModal from "./SearchModal";
 import { Button } from "@base-ui/react";
 import { ThemeToggle } from "./ThemeToggle";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 // ── Data Configuration ─────────────────────────────────
 
@@ -586,6 +587,7 @@ export default function Navbar() {
                         }}
                         className="ml-auto flex items-center gap-2"
                       >
+                        <LanguageSwitcher />
                         <ThemeToggle />
                         
                         <button

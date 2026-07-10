@@ -1,0 +1,10 @@
+{
+  "Navbar": {
+    "about": "À propos",
+    "work": "Travail",
+    "services": "Services",
+    "resume": "CV",
+    "bucketList": "Liste de souhaits",
+    "language": "Langue"
+  }
+}
