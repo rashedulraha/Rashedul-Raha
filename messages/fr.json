@@ -431,7 +431,18 @@
     "adminEmail": "E-mail Admin",
     "securityPassphrase": "Phrase de sécurité",
     "passwordPlaceholder": "Entrer le mot de passe admin",
-    "accessDashboard": "Accéder au Tableau de Bord"
+    "accessDashboard": "Accéder au Tableau de Bord",
+    "home": "Accueil",
+    "about": "À propos",
+    "work": "Travail",
+    "blog": "Blog",
+    "guestbook": "Livre d'or",
+    "bucketList": "Liste de souhaits",
+    "bookCall": "Réserver un appel",
+    "uses": "Utilisations",
+    "attribution": "Attribution",
+    "links": "Liens",
+    "adminTerminal": "Terminal d'administration"
   },
   "BlogPage": {
     "pageSubtitle": "LA PENSINE",

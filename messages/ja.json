@@ -431,7 +431,18 @@
     "adminEmail": "管理者メール",
     "securityPassphrase": "セキュリティ パスフレーズ",
     "passwordPlaceholder": "管理者パスワードを入力",
-    "accessDashboard": "ダッシュボードにアクセス"
+    "accessDashboard": "ダッシュボードにアクセス",
+    "home": "ホーム",
+    "about": "概要",
+    "work": "作品",
+    "blog": "ブログ",
+    "guestbook": "ゲストブック",
+    "bucketList": "バケットリスト",
+    "bookCall": "通話を予約",
+    "uses": "使用",
+    "attribution": "帰属",
+    "links": "リンク",
+    "adminTerminal": "管理ターミナル"
   },
   "BlogPage": {
     "pageSubtitle": "ブログ",

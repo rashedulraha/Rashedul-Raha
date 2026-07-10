@@ -431,7 +431,18 @@
     "adminEmail": "Admin Email",
     "securityPassphrase": "Security Passphrase",
     "passwordPlaceholder": "Enter administrator password",
-    "accessDashboard": "Access Dashboard"
+    "accessDashboard": "Access Dashboard",
+    "home": "Home",
+    "about": "About",
+    "work": "Work",
+    "blog": "Blog",
+    "guestbook": "Guestbook",
+    "bucketList": "Bucket List",
+    "bookCall": "Book a call",
+    "uses": "Uses",
+    "attribution": "Attribution",
+    "links": "Links",
+    "adminTerminal": "Admin Terminal"
   },
   "BlogPage": {
     "pageSubtitle": "THE PENSIEVE",

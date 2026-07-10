@@ -431,7 +431,18 @@
     "adminEmail": "Correo de administrador",
     "securityPassphrase": "Frase de seguridad",
     "passwordPlaceholder": "Introduce contraseña de administrador",
-    "accessDashboard": "Acceder al panel"
+    "accessDashboard": "Acceder al panel",
+    "home": "Inicio",
+    "about": "Acerca de",
+    "work": "Trabajo",
+    "blog": "Blog",
+    "guestbook": "Libro de visitas",
+    "bucketList": "Lista de deseos",
+    "bookCall": "Reservar llamada",
+    "uses": "Usos",
+    "attribution": "Atribución",
+    "links": "Enlaces",
+    "adminTerminal": "Terminal de administración"
   },
   "BlogPage": {
     "pageSubtitle": "EL PENSADERO",

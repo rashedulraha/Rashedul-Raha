@@ -431,7 +431,18 @@
     "adminEmail": "Admin-E-Mail",
     "securityPassphrase": "Sicherheits-Passphrase",
     "passwordPlaceholder": "Administrator-Passwort eingeben",
-    "accessDashboard": "Auf Dashboard zugreifen"
+    "accessDashboard": "Auf Dashboard zugreifen",
+    "home": "Startseite",
+    "about": "Über",
+    "work": "Arbeit",
+    "blog": "Blog",
+    "guestbook": "Gästebuch",
+    "bucketList": "Bucket List",
+    "bookCall": "Anruf buchen",
+    "uses": "Verwendet",
+    "attribution": "Namensnennung",
+    "links": "Links",
+    "adminTerminal": "Admin-Terminal"
   },
   "BlogPage": {
     "pageSubtitle": "DER DENKRIEMEN",

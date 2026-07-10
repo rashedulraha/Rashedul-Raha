@@ -431,7 +431,18 @@
     "adminEmail": "Email Amministratore",
     "securityPassphrase": "Passphrase di sicurezza",
     "passwordPlaceholder": "Inserisci password amministratore",
-    "accessDashboard": "Accedi alla Dashboard"
+    "accessDashboard": "Accedi alla Dashboard",
+    "home": "Home",
+    "about": "Chi sono",
+    "work": "Lavoro",
+    "blog": "Blog",
+    "guestbook": "Libro degli ospiti",
+    "bucketList": "Lista dei desideri",
+    "bookCall": "Prenota chiamata",
+    "uses": "Usi",
+    "attribution": "Attribuzione",
+    "links": "Link",
+    "adminTerminal": "Terminale di amministrazione"
   },
   "BlogPage": {
     "pageSubtitle": "IL PENSATOIO",
