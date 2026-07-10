@@ -1,10 +1,14 @@
 {
   "Navbar": {
+    "home": "ホーム",
     "about": "約",
     "work": "仕事",
+    "blog": "ブログ",
+    "more": "もっと",
     "services": "サービス",
     "resume": "履歴書",
     "bucketList": "バケットリスト",
-    "language": "言語"
+    "language": "言語",
+    "bookACall": "通話を予約"
   }
 }

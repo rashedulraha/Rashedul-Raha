@@ -1,10 +1,14 @@
 {
   "Navbar": {
+    "home": "Inicio",
     "about": "Acerca de",
     "work": "Trabajo",
+    "blog": "Blog",
+    "more": "Más",
     "services": "Servicios",
     "resume": "Currículum",
     "bucketList": "Lista de deseos",
-    "language": "Idioma"
+    "language": "Idioma",
+    "bookACall": "Reservar"
   }
 }
