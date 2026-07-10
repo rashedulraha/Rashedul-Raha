@@ -29,10 +29,12 @@ import { useRouter } from "@/routing";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 
 type ViewState = "search" | "contact" | "full-form" | "login";
 
 export default function SearchModal() {
+  const t = useTranslations("SearchModal");
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
@@ -372,7 +374,7 @@ export default function SearchModal() {
                         className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors">
                         <ChevronLeft className="h-5 w-5" />
                       </button>
-                      <h2 className="font-medium text-primary">Reach out</h2>
+                      <h2 className="font-medium text-primary">{t("reachOut")}</h2>
                     </div>
 
                     {/* Message Card */}
@@ -389,17 +391,17 @@ export default function SearchModal() {
                         </div>
                         <div className="flex flex-col">
                           <span className="text-sm font-medium text-primary leading-none">
-                            Send Rashedul a message
+                            {t("sendMessage")}
                           </span>
                           <span className="text-xs text-muted-foreground mt-1">
-                            I read every one
+                            {t("readEveryOne")}
                           </span>
                         </div>
                       </div>
 
                       <textarea
                         className="w-full h-32 p-4 bg-transparent resize-none text-sm text-primary placeholder:text-muted-foreground focus:outline-none"
-                        placeholder="Hey Rashedul, I have a project idea..."
+                        placeholder={t("messagePlaceholder")}
                         autoFocus
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
@@ -413,8 +415,8 @@ export default function SearchModal() {
 
                       <div className="p-3 border-t border-border flex items-center justify-between bg-muted">
                         <div className="flex items-center gap-3 text-[10px] text-muted-foreground font-medium">
-                          <span>Enter to continue</span>
-                          <span>Shift+Enter new line</span>
+                          <span>{t("enterToContinue")}</span>
+                          <span>{t("shiftEnter")}</span>
                         </div>
                         <button
                           onClick={() => {
@@ -426,7 +428,7 @@ export default function SearchModal() {
                               ? "bg-muted text-muted-foreground cursor-not-allowed opacity-50" 
                               : "bg-primary text-primary-foreground hover:opacity-90 hover:scale-[1.03]"
                           }`}>
-                          Continue &rarr;
+                          {t("continueBtn")}
                         </button>
                       </div>
                     </div>
@@ -452,10 +454,10 @@ export default function SearchModal() {
                           </div>
                         </div>
                         <span className="text-sm font-medium text-primary mb-1 group-hover:text-primary transition-colors">
-                          Book a call
+                          {t("bookACall")}
                         </span>
                         <span className="text-xs text-muted-foreground">
-                          30 min • no strings
+                          {t("bookCallDesc")}
                         </span>
                       </button>
 
@@ -473,10 +475,10 @@ export default function SearchModal() {
                           <Mail className="h-4 w-4" />
                         </div>
                         <span className="text-sm font-medium text-primary mb-1 group-hover:text-primary transition-colors">
-                          Email me
+                          {t("emailMe")}
                         </span>
                         <span className="text-xs text-muted-foreground">
-                          hello@rashedul.com
+                          {t("emailAddress")}
                         </span>
                       </button>
                     </div>
@@ -542,7 +544,7 @@ export default function SearchModal() {
                           transition={{ delay: 0.2 }}
                           className="text-2xl font-bold text-foreground"
                         >
-                          Message Sent!
+                          {t("messageSent")}
                         </motion.h3>
                         <motion.p 
                           initial={{ opacity: 0, y: 10 }}
@@ -550,7 +552,7 @@ export default function SearchModal() {
                           transition={{ delay: 0.3 }}
                           className="text-sm text-muted-foreground mt-2 text-center"
                         >
-                          Thank you for reaching out. I'll get back to you as soon as possible.
+                          {t("thankYou")}
                         </motion.p>
                       </div>
                     ) : (
@@ -563,7 +565,7 @@ export default function SearchModal() {
                             <ChevronLeft className="h-5 w-5" />
                           </button>
                           <h2 className="font-medium text-primary">
-                            Send a Message
+                            {t("sendAMessage")}
                           </h2>
                         </div>
 
@@ -587,18 +589,18 @@ export default function SearchModal() {
                           <div className="grid grid-cols-2 gap-4">
                             <div className="flex flex-col gap-1.5">
                               <label className="text-xs font-medium text-muted-foreground">
-                                Name
+                                {t("name")}
                               </label>
                               <input
                                 type="text"
-                                placeholder="e.g. John Doe"
+                                placeholder={t("namePlaceholder")}
                                 required
                                 className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
                               />
                             </div>
                             <div className="flex flex-col gap-1.5">
                               <label className="text-xs font-medium text-muted-foreground">
-                                Email
+                                {t("email")}
                               </label>
                               <input
                                 type="email"
@@ -612,7 +614,7 @@ export default function SearchModal() {
                           <div className="grid grid-cols-2 gap-4">
                             <div className="flex flex-col gap-1.5">
                               <label className="text-xs font-medium text-muted-foreground">
-                                Phone Number
+                                {t("phone")}
                               </label>
                               <input
                                 type="tel"
@@ -622,11 +624,11 @@ export default function SearchModal() {
                             </div>
                             <div className="flex flex-col gap-1.5">
                               <label className="text-xs font-medium text-muted-foreground">
-                                Topic
+                                {t("topic")}
                               </label>
                               <input
                                 type="text"
-                                placeholder="Project Inquiry"
+                                placeholder={t("topicPlaceholder")}
                                 className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
                               />
                             </div>
@@ -634,11 +636,11 @@ export default function SearchModal() {
 
                           <div className="flex flex-col gap-1.5 mb-2">
                             <label className="text-xs font-medium text-muted-foreground">
-                              Description
+                              {t("description")}
                             </label>
                             <textarea
                               className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all h-32 resize-none glass"
-                              placeholder="Hey Rashedul, I have a project idea..."
+                              placeholder={t("messagePlaceholder")}
                               required
                               value={message}
                               onChange={(e) => setMessage(e.target.value)}
@@ -653,7 +655,7 @@ export default function SearchModal() {
                               {isSubmitting ? (
                                 <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
                               ) : (
-                                "Send Message"
+                                t("sendAMessage")
                               )}
                             </button>
                           </div>
@@ -682,7 +684,7 @@ export default function SearchModal() {
                         <ChevronLeft className="h-5 w-5" />
                       </button>
                       <h2 className="font-medium text-primary">
-                        Go Back
+                        {t("goBack")}
                       </h2>
                     </div>
 
@@ -703,15 +705,15 @@ export default function SearchModal() {
                         <div className="mx-auto w-14 h-14 rounded-2xl bg-black/40 border border-[#3b82f6]/20 shadow-[0_0_30px_rgba(59,130,246,0.15)] flex items-center justify-center text-cyan-400 mb-6 backdrop-blur-sm">
                           <Terminal className="w-6 h-6" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">Dashboard Terminal</h3>
+                        <h3 className="text-2xl font-bold text-white mb-2">{t("dashboardTerminal")}</h3>
                         <p className="text-sm text-[#a1a1aa] leading-relaxed max-w-[280px] mx-auto">
-                          Provide authorization credentials to access database and write portfolio modules.
+                          {t("dashboardDesc")}
                         </p>
                       </div>
                       
                       <div className="flex flex-col gap-2">
                         <label className="text-[10px] font-bold tracking-widest text-[#a1a1aa] uppercase pl-1">
-                          Admin Email
+                          {t("adminEmail")}
                         </label>
                         <input
                           type="email"
@@ -723,13 +725,13 @@ export default function SearchModal() {
                       </div>
                       <div className="flex flex-col gap-2 mb-2">
                         <label className="text-[10px] font-bold tracking-widest text-[#a1a1aa] uppercase pl-1">
-                          Security Passphrase
+                          {t("securityPassphrase")}
                         </label>
                         <input
                           type="password"
                           name="password"
                           required
-                          placeholder="Enter administrator password"
+                          placeholder={t("passwordPlaceholder")}
                           className="bg-[#121212] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-[#52525b] focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all shadow-inner"
                         />
                       </div>
@@ -737,7 +739,7 @@ export default function SearchModal() {
                         type="submit"
                         className="w-full mt-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-6 py-3.5 rounded-xl font-semibold text-sm hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] flex items-center justify-center gap-2">
                         <LogIn className="w-4 h-4" />
-                        Access Dashboard
+                        {t("accessDashboard")}
                       </button>
                     </form>
                   </motion.div>
