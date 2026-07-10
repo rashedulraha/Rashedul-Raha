@@ -1,7 +1,7 @@
 {
   "Navbar": {
     "home": "Home",
-    "about": "Di",
+    "about": "Chi sono",
     "work": "Lavoro",
     "blog": "Blog",
     "more": "Altro",
@@ -9,313 +9,313 @@
     "resume": "Curriculum",
     "bucketList": "Lista dei desideri",
     "language": "Lingua",
-    "bookACall": "Prenota",
+    "bookACall": "Prenota una chiamata",
     "guestbook": "Libro degli ospiti",
     "guestbookDesc": "Fammi sapere che sei stato qui",
-    "bucketListDesc": "Sogni con una scadenza",
+    "bucketListDesc": "Sogni con scadenza",
     "links": "Link",
     "linksDesc": "Tutti i miei link sono qui",
-    "uses": "Usi",
+    "uses": "Cosa uso",
     "usesDesc": "Uno sguardo alla mia vita digitale...",
-    "attribution": "Attribuzione",
-    "attributionDesc": "Il percorso per creare questo sito"
+    "attribution": "Ringraziamenti",
+    "attributionDesc": "Il viaggio per creare questo sito"
   },
   "Hero": {
-    "badgeNew": "New",
-    "badgeText": "Keythm — feel every keystroke",
-    "title1": "Code that ",
-    "titleHighlight": "feels",
-    "title2": " designed.",
-    "subtitle": "Engineering that actually ships.",
-    "greeting": "Hello, I'm Rashedul Islam",
-    "role": " a Full Stack Developer",
-    "galleryHint": "Gallery",
-    "ctaConnect": "Let's Connect",
-    "copied": "Copied to clipboard",
-    "slide0Title": "Workspace",
-    "slide0Desc": "My creative workspace setup where the magic happens.",
-    "slide0Loc": "Dhaka, BD",
-    "slide0Date": "Oct 2025",
-    "slide1Title": "Portrait",
-    "slide1Desc": "Professional headshot for the portfolio.",
+    "badgeNew": "Nuovo",
+    "badgeText": "Keythm — senti ogni tasto",
+    "title1": "Codice che si ",
+    "titleHighlight": "sente",
+    "title2": " e si progetta.",
+    "subtitle": "Ingegneria che funziona davvero.",
+    "greeting": "Ciao, sono Rashedul Islam",
+    "role": " uno sviluppatore Full Stack",
+    "galleryHint": "Galleria",
+    "ctaConnect": "Connettiamoci",
+    "copied": "Copiato negli appunti",
+    "slide0Title": "Spazio di lavoro",
+    "slide0Desc": "Il mio spazio creativo dove avviene la magia.",
+    "slide0Loc": "Dacca, BD",
+    "slide0Date": "Ott 2025",
+    "slide1Title": "Ritratto",
+    "slide1Desc": "Foto professionale per il portfolio.",
     "slide1Loc": "Studio 101",
     "slide1Date": "Nov 2025",
-    "slide2Title": "Creative",
-    "slide2Desc": "Brainstorming and creative session in action.",
+    "slide2Title": "Creativo",
+    "slide2Desc": "Sessione di brainstorming e creatività in azione.",
     "slide2Loc": "Paharpur, BD",
-    "slide2Date": "Dec 2025",
-    "slide3Title": "Vibes",
-    "slide3Desc": "Late night coding and studio vibes.",
-    "slide3Loc": "Home Workspace",
-    "slide3Date": "Jan 2026"
+    "slide2Date": "Dic 2025",
+    "slide3Title": "Atmosfera",
+    "slide3Desc": "Coding notturno e atmosfera da studio.",
+    "slide3Loc": "Spazio di lavoro a casa",
+    "slide3Date": "Gen 2026"
   },
   "About": {
-    "badge": "About Me",
-    "title1": "Engineering digital solutions that",
-    "title2": "drive business growth.",
-    "expBadge1": "2+ Years",
-    "expBadge2": "Experience",
-    "heading": "Hi, I'm Rashedul Islam.",
-    "p1": "I engineer high-performance web applications that solve complex business problems. With a deep focus on clean architecture and modern user experiences, I build products that are fast, accessible, and ready to scale.",
-    "p2_1": "My expertise is rooted in the ",
+    "badge": "Chi sono",
+    "title1": "Creare soluzioni digitali che",
+    "title2": "fanno crescere il business.",
+    "expBadge1": "2+ Anni",
+    "expBadge2": "di esperienza",
+    "heading": "Ciao, sono Rashedul Islam.",
+    "p1": "Realizzo applicazioni web ad alte prestazioni che risolvono problemi complessi. Con un forte focus su architettura pulita ed esperienze moderne, costruisco prodotti veloci, accessibili e pronti per crescere.",
+    "p2_1": "La mia competenza si basa su ",
     "ttNextTitle": "Next.js 14/15",
-    "ttNextDesc": "Building Server Components and high-SEO applications.",
-    "ttNextText": "Next.js Ecosystem",
-    "p2_2": " and ",
+    "ttNextDesc": "Costruisco componenti server e applicazioni con un buon SEO.",
+    "ttNextText": "Ecosistema Next.js",
+    "p2_2": " e ",
     "ttTsTitle": "TypeScript",
-    "ttTsDesc": "Writing strictly typed, bug-free, and scalable code.",
+    "ttTsDesc": "Scrivo codice tipizzato, senza errori e scalabile.",
     "ttTsText": "TypeScript",
-    "p2_3": ". From designing pixel-perfect UIs with ",
+    "p2_3": ". Dalla progettazione di interfacce perfette con ",
     "ttTwTitle": "Tailwind CSS v4",
-    "ttTwDesc": "Rapid UI development using utility-first styling.",
+    "ttTwDesc": "Sviluppo rapido di interfacce con stili utility-first.",
     "ttTwText": "Tailwind CSS",
-    "p2_4": " to architecting robust backends and integrating modern AI capabilities, I handle the entire product lifecycle. I am also experienced in ",
+    "p2_4": " alla creazione di backend robusti e all'integrazione di IA moderna, gestisco l'intero ciclo di vita del prodotto. Ho anche esperienza in ",
     "ttCloudTitle": "Cloud & DevOps",
-    "ttCloudDesc": "Docker, AWS, and Vercel for reliable deployments.",
-    "ttCloudText": "Cloud deployments and DevOps",
-    "p2_5": ", ensuring that applications are delivered securely and reliably.",
-    "p3": "I wake up every day excited to learn new things, build great products, and grow as a developer. Delivering code that buyers and teams love is my ultimate goal.",
-    "techStack": "Tech Stack",
-    "stat0Label": "Projects Delivered",
+    "ttCloudDesc": "Docker, AWS e Vercel per deployment affidabili.",
+    "ttCloudText": "Deployment cloud e DevOps",
+    "p2_5": ", garantendo consegne sicure e affidabili.",
+    "p3": "Ogni giorno sono entusiasta di imparare cose nuove, costruire grandi prodotti e crescere come sviluppatore. Il mio obiettivo finale è consegnare codice che clienti e team amino.",
+    "techStack": "Tecnologie",
+    "stat0Label": "Progetti consegnati",
     "stat0Value": "10+",
-    "stat1Label": "Happy Clients",
+    "stat1Label": "Clienti soddisfatti",
     "stat1Value": "5+",
-    "stat2Label": "Years Experience",
+    "stat2Label": "Anni di esperienza",
     "stat2Value": "2+",
-    "stat3Label": "Code Commits",
+    "stat3Label": "Commit di codice",
     "stat3Value": "1K+",
-    "cta": "Let's Connect"
+    "cta": "Connettiamoci"
   },
   "Features": {
     "SoundCard": {
-      "subtitle": "Let's Build Together",
-      "title": "Clear communication, fast iterations, no surprises",
-      "status": "Available"
+      "subtitle": "Costruiamo insieme",
+      "title": "Comunicazione chiara, iterazioni rapide, senza sorprese",
+      "status": "Disponibile"
     },
     "TechStack": {
-      "modalTitle": "My Tech Stack",
-      "modalSubtitle": "Everything I use to ship products",
+      "modalTitle": "Le mie tecnologie",
+      "modalSubtitle": "Tutto ciò che uso per creare prodotti",
       "frontendTitle": "Frontend",
-      "frontendDesc": "Modern, responsive, and performant UIs",
+      "frontendDesc": "Interfacce moderne, veloci e performanti",
       "backendTitle": "Backend",
-      "backendDesc": "Scalable, secure, high-performance APIs",
-      "devopsTitle": "DevOps & Tools",
-      "devopsDesc": "Streamlined deployment & development workflow",
-      "osTitle": "Operating Systems",
-      "osDesc": "My preferred development environments",
-      "toolsAcross": "tools across",
-      "categories": "categories",
-      "badge": "Tech Stack",
-      "description": "The stack behind everything I ship",
-      "viewBtn": "View Full Stack",
-      "toolsCount": "Tools"
+      "backendDesc": "API scalabili, sicure e ad alte prestazioni",
+      "devopsTitle": "DevOps e strumenti",
+      "devopsDesc": "Flusso di lavoro ottimizzato per deployment e sviluppo",
+      "osTitle": "Sistemi operativi",
+      "osDesc": "I miei ambienti di sviluppo preferiti",
+      "toolsAcross": "strumenti in",
+      "categories": "categorie",
+      "badge": "Tecnologie",
+      "description": "Le tecnologie dietro tutto ciò che creo",
+      "viewBtn": "Vedi tutto",
+      "toolsCount": "Strumenti"
     },
     "Services": {
-      "badge": "What You Get",
-      "title": "Clean code, pixel-perfect UI, deployed & scaling",
+      "badge": "Cosa ottieni",
+      "title": "Codice pulito, interfaccia perfetta, deploy e scalabilità",
       "items0Title": "SEO & AEO",
-      "items0Desc": "SSR, SSG, semantic",
+      "items0Desc": "SSR, SSG, semantico",
       "items1Title": "Performance",
       "items1Desc": "Lighthouse 95+, CWV",
-      "items2Title": "Security",
+      "items2Title": "Sicurezza",
       "items2Desc": "HTTPS, CSP, XSS",
       "items3Title": "Deployment",
       "items3Desc": "CI/CD, Vercel, AWS",
-      "items4Title": "Global Reach",
-      "items4Desc": "CDN, edge, multi-region",
-      "items5Title": "AI Ready",
-      "items5Desc": "OpenAI, Gemini, vector"
+      "items4Title": "Copertura globale",
+      "items4Desc": "CDN, edge, multi-regione",
+      "items5Title": "Pronto per l'IA",
+      "items5Desc": "OpenAI, Gemini, vettoriale"
     },
     "Network": {
-      "badge": "Flexible With Timezones",
-      "title": "Based in Bangladesh, available globally"
+      "badge": "Flessibile con i fusi orari",
+      "title": "Con sede in Bangladesh, disponibile in tutto il mondo"
     },
     "Uses": {
-      "badge": "Uses",
-      "title": "Check out my favorite tools",
-      "toolsCount": "Tools"
+      "badge": "Cosa uso",
+      "title": "Scopri i miei strumenti preferiti",
+      "toolsCount": "Strumenti"
     }
   },
   "Work": {
     "badge": "Portfolio",
-    "titlePrefix": "Featured ",
-    "titleHighlight": "Projects",
-    "description": "Scroll to explore some of my recent work and technical achievements.",
-    "viewAll": "View all projects",
-    "more": "more",
-    "viewLive": "View Live",
-    "code": "Code",
+    "titlePrefix": "Progetti ",
+    "titleHighlight": "in evidenza",
+    "description": "Scorri per esplorare i miei lavori recenti e i risultati tecnici.",
+    "viewAll": "Vedi tutti i progetti",
+    "more": "altro",
+    "viewLive": "Vedi dal vivo",
+    "code": "Codice",
     "projects": {
       "keythm": {
         "title": "Keythm",
-        "subtitle": "Typing Test Reimagined",
-        "description": "Keychron meets typing test — every key has its own sound, every stat tracked",
+        "subtitle": "Test di digitazione reinventato",
+        "description": "Keychron incontra il test di digitazione — ogni tasto ha il suo suono, ogni statistica viene tracciata",
         "badge": "Q2 2026",
-        "type": "Web App",
-        "stats": "4,367 checks",
-        "features0": "Per-key mechanical audio via Web Audio API",
-        "features1": "Four modes with live WPM & accuracy tracking",
-        "features2": "Statistical anti-cheat with 13 checks",
-        "features3": "Offline-first PWA with Serwist precaching"
+        "type": "Applicazione Web",
+        "stats": "4.367 verifiche",
+        "features0": "Audio meccanico per tasto tramite Web Audio API",
+        "features1": "Quattro modalità con monitoraggio live di WPM e precisione",
+        "features2": "Anti-cheat statistico con 13 verifiche",
+        "features3": "PWA offline con precaricamento Serwist"
       },
       "nextdemy": {
         "title": "Nextdemy",
-        "subtitle": "Learning Platform",
-        "description": "A monorepo-powered learning platform with real payments, real auth, and real content delivery",
+        "subtitle": "Piattaforma di apprendimento",
+        "description": "Una piattaforma di apprendimento con pagamenti reali, autenticazione reale e distribuzione di contenuti reali",
         "badge": "Q4 2024",
-        "type": "Web App",
-        "stats": "1,200+ learners",
-        "features0": "Monorepo with Turborepo for scalable code",
-        "features1": "Real payment processing with Razorpay",
-        "features2": "JWT authentication with session management",
-        "features3": "Optimized content delivery & caching"
+        "type": "Applicazione Web",
+        "stats": "1.200+ studenti",
+        "features0": "Monorepo con Turborepo per codice scalabile",
+        "features1": "Elaborazione pagamenti reale con Razorpay",
+        "features2": "Autenticazione JWT con gestione delle sessioni",
+        "features3": "Distribuzione e caching ottimizzati"
       },
       "venture-den": {
         "title": "VentureDen",
-        "subtitle": "AI Pitch Platform",
-        "description": "Where founders pitch ideas, get instant AI feedback, and get discovered by investors",
+        "subtitle": "Piattaforma di pitch con IA",
+        "description": "Dove i fondatori presentano idee, ricevono feedback IA istantanei e vengono scoperti dagli investitori",
         "badge": "Q1 2025",
-        "type": "Web App",
-        "stats": "500+ pitches",
-        "features0": "AI-powered pitch analysis with instant feedback",
-        "features1": "Investor discovery & matching algorithm",
-        "features2": "Sanity CMS for content management",
-        "features3": "Real-time analytics & engagement tracking"
+        "type": "Applicazione Web",
+        "stats": "500+ pitch",
+        "features0": "Analisi pitch con IA e feedback istantanei",
+        "features1": "Algoritmo di scoperta e matching per investitori",
+        "features2": "Sanity CMS per la gestione dei contenuti",
+        "features3": "Analytics in tempo reale e tracciamento dell'engagement"
       },
       "finote": {
         "title": "Finote",
-        "subtitle": "Finance Tracker",
-        "description": "An intuitive mobile companion for organizing your digital wallets and analyzing your financial health",
+        "subtitle": "Gestore finanziario",
+        "description": "Un compagno mobile intuitivo per organizzare i tuoi portafogli digitali e analizzare la tua salute finanziaria",
         "badge": "Q4 2025",
-        "type": "Mobile App",
-        "stats": "10K+ downloads",
-        "features0": "React Native with Expo framework",
-        "features1": "Wallet organization & expense tracking",
-        "features2": "Financial health analytics with charts",
-        "features3": "Optimized media with Cloudinary"
+        "type": "Applicazione Mobile",
+        "stats": "10K+ download",
+        "features0": "React Native con framework Expo",
+        "features1": "Organizzazione dei portafogli e tracciamento delle spese",
+        "features2": "Analisi della salute finanziaria con grafici",
+        "features3": "Media ottimizzati con Cloudinary"
       },
       "star-forge": {
         "title": "StarForge",
-        "subtitle": "AI SaaS Landing",
-        "description": "A sleek AI SaaS landing page with a user-friendly design that enhances engagement.",
+        "subtitle": "Landing page SaaS con IA",
+        "description": "Una landing page elegante per SaaS con IA, con un design facile da usare che aumenta il coinvolgimento.",
         "badge": "Q1 2024",
-        "type": "Web App",
-        "stats": "3x conversion",
-        "features0": "Modern AI SaaS landing page design",
-        "features1": "Parallax scrolling & smooth animations",
-        "features2": "Optimized performance with Vercel",
-        "features3": "User-friendly Tailwind CSS interface"
+        "type": "Applicazione Web",
+        "stats": "3x conversione",
+        "features0": "Design moderno per landing page SaaS con IA",
+        "features1": "Scorrimento parallax e animazioni fluide",
+        "features2": "Performance ottimizzata con Vercel",
+        "features3": "Interfaccia facile con Tailwind CSS"
       }
     }
   },
   "Blog": {
-    "badge": "FROM THE DESK",
-    "titlePrefix": "Thoughts & ",
-    "titleHighlight": "writings",
-    "readArticle": "Read article",
-    "readMore": "Read more posts",
+    "badge": "DALLA SCRIVANIA",
+    "titlePrefix": "Pensieri e ",
+    "titleHighlight": "scritti",
+    "readArticle": "Leggi articolo",
+    "readMore": "Leggi altri articoli",
     "posts": {
       "post1": {
-        "title": "How to Optimise a Next.js Web App",
-        "description": "Practical techniques to fix your Next.js Lighthouse score — bundle analysis, caching strategies, React Compiler, and the next.config flags nobody talks about.",
+        "title": "Come ottimizzare un'app web Next.js",
+        "description": "Tecniche pratiche per migliorare il tuo punteggio Lighthouse — analisi del bundle, strategie di caching, React Compiler e i flag di next.config di cui nessuno parla.",
         "category": "Performance",
-        "readTime": "15 min read",
-        "date": "Apr 14, 2026"
+        "readTime": "15 min di lettura",
+        "date": "14 Apr 2026"
       },
       "post2": {
-        "title": "Every Tool in My Terminal-First Dev Setup",
-        "description": "Neovim, Wezterm, Tmux, and the rest — what survived two years of daily use and why I picked each one over the obvious alternatives.",
-        "category": "Tools",
-        "readTime": "12 min read",
-        "date": "Oct 19, 2025"
+        "title": "Tutti gli strumenti nel mio setup terminal-first",
+        "description": "Neovim, Wezterm, Tmux e il resto — cosa è sopravvissuto a due anni di uso quotidiano e perché ho scelto ciascuno invece delle alternative ovvie.",
+        "category": "Strumenti",
+        "readTime": "12 min di lettura",
+        "date": "19 Ott 2025"
       },
       "post3": {
-        "title": "Build a Blog with Next.js and MDX from Scratch",
-        "description": "File-based content, zero database, full control. A complete walkthrough of building a statically-generated blog with Next.js, MDX, and gray-matter.",
+        "title": "Costruisci un blog con Next.js e MDX da zero",
+        "description": "Contenuti basati su file, zero database, controllo totale. Una guida completa per costruire un blog generato staticamente con Next.js, MDX e gray-matter.",
         "category": "Tutorial",
-        "readTime": "11 min read",
-        "date": "Mar 12, 2025"
+        "readTime": "11 min di lettura",
+        "date": "12 Mar 2025"
       }
     }
   },
   "Testimonials": {
-    "badge": "Client Love",
-    "titlePrefix": "Don't just take ",
-    "titleHighlight": "my word",
-    "titleSuffix": " for it.",
-    "description": "Here’s what founders, marketers, and creative directors have to say about working together.",
+    "badge": "Recensioni dei clienti",
+    "titlePrefix": "Non fidarti solo della ",
+    "titleHighlight": "mia parola",
+    "titleSuffix": ".",
+    "description": "Ecco cosa dicono fondatori, marketer e direttori creativi sul lavorare insieme.",
     "items": {
       "item1": {
-        "title": "We went from Figma to production in 11 days",
-        "message": "We'd been sitting on designs for two months because our last dev kept pushing timelines. Aayush had a staging link in 4 days and we were live in 11. The site loads in under a second and our bounce rate dropped 35% the first week. Wish we'd found him sooner.",
+        "title": "Siamo passati da Figma alla produzione in 11 giorni",
+        "message": "Avevamo i design da due mesi perché il nostro ultimo sviluppatore continuava a posticipare. Aayush ha avuto un link di test in 4 giorni e siamo andati live in 11. Il sito carica in meno di un secondo e il nostro bounce rate è sceso del 35% la prima settimana. Vorrei averlo trovato prima.",
         "name": "Marcus T.",
-        "role": "Marketing Director, SaaS startup"
+        "role": "Direttore Marketing, startup SaaS"
       },
       "item2": {
-        "title": "Finally a developer who actually listens",
-        "message": "I'm not technical at all, and past devs made me feel stupid for asking questions. Aayush sent Loom walkthroughs after every milestone so I always knew exactly where things stood. When I changed my mind about the checkout flow halfway through, he didn't push back — just adjusted and shipped it better than what I originally asked for.",
+        "title": "Finalmente uno sviluppatore che ascolta davvero",
+        "message": "Non sono per niente tecnica, e gli sviluppatori precedenti mi facevano sentire stupida per aver fatto domande. Aayush ha inviato video esplicativi dopo ogni milestone così sapevo sempre esattamente a che punto eravamo. Quando ho cambiato idea sul flusso di checkout a metà, non ha obiettato — si è solo adattato e ha consegnato qualcosa di meglio di quello che avevo chiesto.",
         "name": "Lauren K.",
-        "role": "Founder, DTC skincare brand"
+        "role": "Fondatrice, marchio DTC di skincare"
       },
       "item3": {
-        "title": "Our Core Web Vitals went from red to green overnight",
-        "message": "We hired Aayush to rebuild our marketing site on Next.js. The old WordPress site was scoring 38 on PageSpeed. His build scores 97. He set up the CMS integration so our content team can publish without touching code. Solid architecture, clean codebase — the kind of work I'd expect from a senior engineer.",
+        "title": "I nostri Core Web Vitals sono passati dal rosso al verde in una notte",
+        "message": "Abbiamo assunto Aayush per ricostruire il nostro sito di marketing con Next.js. Il vecchio sito WordPress aveva un punteggio di 38 su PageSpeed. La sua versione ha ottenuto 97. Ha configurato l'integrazione CMS così il nostro team di contenuti può pubblicare senza toccare codice. Architettura solida, codice pulito — il tipo di lavoro che mi aspetterei da un ingegnere senior.",
         "name": "Daniel R.",
-        "role": "CTO, fintech startup"
+        "role": "CTO, startup fintech"
       },
       "item4": {
-        "title": "He caught problems we didn't even know we had",
-        "message": "We hired him to redesign our product pages. During the build he noticed our image pipeline was serving uncompressed files and our mobile nav was broken on Safari. Fixed both without being asked. That's the kind of developer you want — someone who cares about the whole product, not just their ticket.",
+        "title": "Ha individuato problemi che non sapevamo di avere",
+        "message": "Lo abbiamo assunto per riprogettare le nostre pagine prodotto. Durante lo sviluppo ha notato che il nostro pipeline di immagini serviva file non compressi e che la navigazione mobile era rotta su Safari. Ha risolto tutto senza che glielo chiedessimo. Questo è il tipo di sviluppatore che vuoi — qualcuno che si preoccupa dell'intero prodotto, non solo del proprio compito.",
         "name": "James L.",
-        "role": "Co-founder, e-commerce brand"
+        "role": "Co-fondatore, marchio e-commerce"
       },
       "item5": {
-        "title": "He turned our messy brief into something beautiful",
-        "message": "We gave Aayush a mood board and some rough wireframes — honestly, they were half-baked. He came back with a prototype that was cleaner and more thoughtful than what we'd imagined. The animations feel intentional, the typography is perfect, and three clients have asked us who built it.",
+        "title": "Ha trasformato il nostro brief disordinato in qualcosa di bello",
+        "message": "Abbiamo dato ad Aayush una mood board e dei wireframe approssimativi — onestamente, erano a metà. È tornato con un prototipo più pulito e curato di quanto avessimo immaginato. Le animazioni sono intenzionali, la tipografia è perfetta, e tre clienti ci hanno chiesto chi lo ha costruito.",
         "name": "Sofia M.",
-        "role": "Creative Director, branding agency"
+        "role": "Direttrice Creativa, agenzia di branding"
       },
       "item6": {
-        "title": "We've shipped 4 projects together now",
-        "message": "First project was a simple landing page. Then he rebuilt our client portal, added a blog with headless CMS, and just finished an analytics dashboard. Every project is ahead of schedule. He's basically our dev team at this point. If you're a small agency that needs a reliable build partner, stop looking.",
+        "title": "Abbiamo fatto 4 progetti insieme ormai",
+        "message": "Il primo progetto era una semplice landing page. Poi ha ricostruito il nostro portale clienti, aggiunto un blog con CMS headless, e ha appena finito un dashboard di analytics. Ogni progetto è in anticipo. È praticamente il nostro team di sviluppo a questo punto. Se sei una piccola agenzia che cerca un partner affidabile per costruire, smetti di cercare.",
         "name": "Ryan H.",
-        "role": "Founder, B2B agency"
+        "role": "Fondatore, agenzia B2B"
       }
     }
   },
   "Explore": {
-    "badge": "Explore My Site",
-    "titlePrefix": "Explore, experiment ",
-    "titleHighlight": "&& say hello",
+    "badge": "Esplora il mio sito",
+    "titlePrefix": "Esplora, sperimenta ",
+    "titleHighlight": "e saluta",
     "cards": {
       "uses": {
-        "title": "Uses",
-        "description": "Check out my favorite tools"
+        "title": "Cosa uso",
+        "description": "Scopri i miei strumenti preferiti"
       },
       "about": {
-        "title": "Behind The Code",
-        "description": "Journey, skills & experience"
+        "title": "Dietro il codice",
+        "description": "Il mio percorso, competenze ed esperienza"
       },
       "guestbook": {
-        "title": "Guestbook",
-        "description": "Let me know you were here"
+        "title": "Libro degli ospiti",
+        "description": "Fammi sapere che sei stato qui"
       }
     }
   },
   "Contact": {
-    "rotatingBadge": "OPEN TO WORK · OPEN TO WORK · ",
-    "concept": "FROM CONCEPT TO ",
-    "creation": "CREATION",
-    "makeIt": "LET'S MAKE IT ",
-    "happen": "HAPPEN!",
-    "getInTouch": "Get In Touch",
-    "availableFor": "I'm available for ",
-    "fullTime": "full-time roles",
-    "and": " & ",
-    "freelance": "freelance projects",
+    "rotatingBadge": "DISPONIBILE PER LAVORARE · DISPONIBILE PER LAVORARE · ",
+    "concept": "DAL CONCETTO ALLA ",
+    "creation": "CREAZIONE",
+    "makeIt": "FACCIAMOLO ",
+    "happen": "SUCCEDERE!",
+    "getInTouch": "Mettiti in contatto",
+    "availableFor": "Sono disponibile per ",
+    "fullTime": "ruoli a tempo pieno",
+    "and": " e ",
+    "freelance": "progetti freelance",
     "dot": ".",
-    "desc1": "I thrive on crafting dynamic web applications, and",
-    "desc2": "delivering seamless user experiences.",
+    "desc1": "Mi appassiono alla creazione di applicazioni web dinamiche e",
+    "desc2": "alla consegna di esperienze utente fluide.",
     "tags": [
       "React",
       "Next.js",
@@ -324,81 +324,81 @@
     ]
   },
   "Footer": {
-    "desc1": "A full-stack developer, freelancer & problem solver.",
-    "desc2": "Thanks for checking out my site!",
-    "generalTitle": "General",
+    "desc1": "Uno sviluppatore full stack, freelance e risolutore di problemi.",
+    "desc2": "Grazie per aver visitato il mio sito!",
+    "generalTitle": "Generale",
     "general": {
       "home": "Home",
-      "about": "About",
-      "projects": "Projects",
+      "about": "Chi sono",
+      "projects": "Progetti",
       "blog": "Blog"
     },
-    "specificsTitle": "Specifics",
+    "specificsTitle": "Specifiche",
     "specifics": {
-      "guestbook": "Guest Book",
-      "bucketList": "Bucket List",
-      "uses": "Uses",
-      "attribution": "Attribution"
+      "guestbook": "Libro degli ospiti",
+      "bucketList": "Lista dei desideri",
+      "uses": "Cosa uso",
+      "attribution": "Ringraziamenti"
     },
-    "moreTitle": "More",
+    "moreTitle": "Altro",
     "more": {
-      "bookCall": "Book a Call",
-      "links": "Links",
+      "bookCall": "Prenota una chiamata",
+      "links": "Link",
       "rss": "RSS",
       "privacy": "Privacy",
-      "terms": "Terms"
+      "terms": "Termini"
     },
-    "allRights": "All rights reserved",
+    "allRights": "Tutti i diritti riservati",
     "privacy": "Privacy",
-    "terms": "Terms",
-    "sitemap": "Sitemap",
-    "builtWith": "Built with Next.js"
+    "terms": "Termini",
+    "sitemap": "Mappa del sito",
+    "builtWith": "Costruito con Next.js"
   },
   "AboutExperience": {
     "badge": "Percorso Professionale",
     "title": "Esperienza Lavorativa",
     "exp1": {
-      "role": "Senior Frontend Engineer",
+      "role": "Ingegnere Frontend Senior",
       "company": "TechCorp Inc.",
       "duration": "2023 - Presente",
       "location": "Remoto",
-      "desc1": "Guidato la migrazione di un'architettura monolitica legacy a un moderno stack Next.js, migliorando la velocità di caricamento delle pagine del 40%.",
-      "desc2": "Progettato e implementato un sistema di design scalabile utilizzando Tailwind CSS e Radix UI.",
-      "desc3": "Fatto da mentore a sviluppatori junior e stabilito le migliori pratiche per la revisione del codice."
+      "desc1": "Ho guidato la migrazione di un'architettura legacy a Next.js, migliorando la velocità di caricamento del 40%.",
+      "desc2": "Ho progettato e implementato un sistema di design scalabile con Tailwind CSS e Radix UI.",
+      "desc3": "Ho fatto da mentore a sviluppatori junior e stabilito buone pratiche per le revisioni del codice."
     },
     "exp2": {
       "role": "Sviluppatore UI/UX",
       "company": "Creative Studio",
       "duration": "2021 - 2023",
       "location": "New York, NY",
-      "desc1": "Collaborato a stretto contatto con i designer per creare applicazioni web perfette al pixel e altamente interattive.",
-      "desc2": "Implementato animazioni complesse utilizzando Framer Motion e GSAP.",
-      "desc3": "Ridotto il payload CSS del 60% effettuando il refactoring degli stili in classi di utilità funzionali."
+      "desc1": "Ho collaborato a stretto contatto con i designer per creare applicazioni web interattive e perfette.",
+      "desc2": "Ho implementato animazioni complesse con Framer Motion e GSAP.",
+      "desc3": "Ho ridotto il peso del CSS del 60% passando a classi utility."
     },
     "exp3": {
       "role": "Sviluppatore Frontend",
       "company": "Startup Hub",
       "duration": "2019 - 2021",
       "location": "San Francisco, CA",
-      "desc1": "Sviluppato l'MVP iniziale per una piattaforma SaaS B2B, assicurando un finanziamento seed di 2 milioni di dollari.",
-      "desc2": "Integrato API RESTful e gestito stati complessi utilizzando Redux.",
-      "desc3": "Garantito la compatibilità cross-browser e il design responsivo su tutti i dispositivi."
+      "desc1": "Ho sviluppato l'MVP iniziale per una piattaforma SaaS B2B, ottenendo 2 milioni di dollari di finanziamento.",
+      "desc2": "Ho integrato API RESTful e gestito stati complessi con Redux.",
+      "desc3": "Ho garantito compatibilità cross-browser e design responsive su tutti i dispositivi."
     }
   },
   "WorkPage": {
-    "portfolio": "PORTAFOGLIO",
-    "featured": "In Evidenza",
+    "portfolio": "PORTFOLIO",
+    "featured": "In evidenza",
     "projects": "Progetti",
-    "allProjects": "Tutti i Progetti",
+    "allProjects": "Tutti i progetti",
     "searchPlaceholder": "Cerca progetti",
-    "noProjects": "Nessun progetto trovato corrispondente ai tuoi criteri.",
+    "noProjects": "Nessun progetto trovato che corrisponda ai tuoi criteri.",
     "featuredWork": "LAVORO IN EVIDENZA",
     "moreProjects": "ALTRI PROGETTI",
-    "explore": "Esplorare",
-    "viewDetails": "Visualizza dettagli",
+    "explore": "Esplora",
+    "viewDetails": "Vedi dettagli",
     "categories": {
-      "WebApp": "Web App",
-      "MobileApp": "Mobile App",
+      "WebApp": "App Web",
+      "MobileApp": "App Mobile",
       "Nextjs": "Next.js",
       "ReactNative": "React Native"
     }
@@ -409,13 +409,13 @@
     "readEveryOne": "Li leggo tutti",
     "messagePlaceholder": "Ciao Rashedul, ho un'idea per un progetto...",
     "enterToContinue": "Invio per continuare",
-    "shiftEnter": "Maiusc+Invio nuova riga",
+    "shiftEnter": "Maiusc+Invio per nuova riga",
     "continueBtn": "Continua →",
     "bookACall": "Prenota una chiamata",
-    "bookCallDesc": "30 min • senza impegni",
+    "bookCallDesc": "30 min • senza impegno",
     "emailMe": "Mandami un'email",
     "emailAddress": "hello@rashedul.com",
-    "sendAMessage": "Invia un Messaggio",
+    "sendAMessage": "Invia un messaggio",
     "name": "Nome",
     "namePlaceholder": "es. Mario Rossi",
     "email": "Email",
@@ -423,15 +423,15 @@
     "topic": "Argomento",
     "topicPlaceholder": "Richiesta progetto",
     "description": "Descrizione",
-    "messageSent": "Messaggio Inviato!",
+    "messageSent": "Messaggio inviato!",
     "thankYou": "Grazie per avermi contattato. Ti risponderò al più presto.",
     "goBack": "Indietro",
     "dashboardTerminal": "Terminale Dashboard",
     "dashboardDesc": "Fornisci le credenziali per accedere al database.",
-    "adminEmail": "Email Amministratore",
-    "securityPassphrase": "Passphrase di sicurezza",
+    "adminEmail": "Email amministratore",
+    "securityPassphrase": "Frase di sicurezza",
     "passwordPlaceholder": "Inserisci password amministratore",
-    "accessDashboard": "Accedi alla Dashboard",
+    "accessDashboard": "Accedi alla dashboard",
     "home": "Home",
     "about": "Chi sono",
     "work": "Lavoro",
@@ -439,8 +439,8 @@
     "guestbook": "Libro degli ospiti",
     "bucketList": "Lista dei desideri",
     "bookCall": "Prenota chiamata",
-    "uses": "Usi",
-    "attribution": "Attribuzione",
+    "uses": "Cosa uso",
+    "attribution": "Ringraziamenti",
     "links": "Link",
     "adminTerminal": "Terminale di amministrazione",
     "searchPlaceholder": "Cerca pagine, post, progetti...",
@@ -453,8 +453,8 @@
   "BlogPage": {
     "pageSubtitle": "IL PENSATOIO",
     "pageTitle1": "Approfondimenti ",
-    "pageTitle2": "Selezionati",
-    "allPosts": "Tutti i post",
+    "pageTitle2": "selezionati",
+    "allPosts": "Tutti",
     "searchPosts": "Cerca",
     "noPosts": "Nessun post trovato.",
     "featuredArticles": "ARTICOLI IN EVIDENZA",
@@ -466,7 +466,7 @@
       "1": {
         "title": "Come ottimizzare un'app Next.js",
         "desc": "Tecniche per migliorare il tuo punteggio Lighthouse.",
-        "category": "Prestazioni",
+        "category": "Performance",
         "readTime": "15 min"
       },
       "2": {
@@ -476,7 +476,7 @@
         "readTime": "12 min"
       },
       "3": {
-        "title": "Crea un blog con Next.js e MDX da zero",
+        "title": "Costruisci un blog con Next.js e MDX da zero",
         "desc": "Contenuto basato su file, nessun database.",
         "category": "Tutorial",
         "readTime": "11 min"
@@ -485,9 +485,9 @@
     "categories": {
       "Nextjs": "Nextjs",
       "React": "React",
-      "Performance": "Prestazioni",
+      "Performance": "Performance",
       "Web-Vitals": "Web-Vitals",
-      "Developer-Tools": "Strumenti di Sviluppo",
+      "Developer-Tools": "Strumenti di sviluppo",
       "Terminal": "Terminale",
       "Neovim": "Neovim",
       "Workflow": "Flusso di lavoro",
@@ -496,54 +496,148 @@
     }
   },
   "LinksPage": {
-    "network": "RETE",
-    "connectWith": "Connettiti con ",
+    "network": "NETWORK",
+    "connectWith": "Connect with",
     "me": "Me",
-    "developer": "Sviluppatore",
-    "freelancer": "Freelance",
-    "location": "Dacca, Bangladesh",
-    "bookCall": "Prenota una chiamata",
-    "website": "Sito Web",
+    "developer": "Full-Stack Developer",
+    "freelancer": "Freelancer",
+    "location": "Dhaka, Bangladesh",
+    "bookCall": "Book a Call",
+    "website": "Website",
     "email": "Email",
-    "codeCraft": "CODICE & ARTE",
-    "connect": "CONNETTI",
-    "leaveMark": "Lascia un segno"
+    "codeCraft": "Code & Craft",
+    "connect": "Connect",
+    "leaveMark": "leaveMark"
   },
   "UsesPage": {
-    "hardware": "Hardware",
-    "hardwareDesc": "Il mio setup quotidiano per massimizzare la produttività.",
-    "macTitle": "MacBook Pro M2",
-    "macDesc": "La potenza dietro ogni progetto.",
-    "keychronTitle": "Keychron Mechanical",
-    "keychronDesc": "Interruttori tattili per un'esperienza di digitazione ottimale.",
-    "devTools": "Strumenti Dev",
-    "devToolsDesc": "Il mio terminale è la mia seconda casa.",
-    "neovimTitle": "Neovim & Tmux",
-    "neovimDesc": "Flusso di terminale ultra veloce.",
-    "weztermTitle": "WezTerm",
-    "weztermDesc": "Emulatore di terminale multipiattaforma.",
+    "hardware": "Hardware & Desk Setup",
+    "hardwareDesc": "The physical tools I use daily to write code and stay productive.",
+    "macTitle": "14\" MacBook Pro",
+    "macDesc": "M2 Pro, 16GB RAM — My primary workstation for everything.",
+    "keychronTitle": "Keychron K2V2",
+    "keychronDesc": "Mechanical keyboard with brown switches. Tactile and reliable.",
+    "devTools": "Development Tools",
+    "devToolsDesc": "The software that powers my daily workflow.",
+    "neovimTitle": "Neovim",
+    "neovimDesc": "My editor of choice. Fast, modal, and heavily customized.",
+    "weztermTitle": "Wezterm",
+    "weztermDesc": "GPU-accelerated terminal emulator.",
     "arcTitle": "Arc Browser",
-    "arcDesc": "Un modo migliore per usare il web.",
-    "techStack": "Stack Tecnologico",
-    "techStackDesc": "Uso strumenti moderni per interfacce sbalorditive.",
-    "reactTitle": "Next.js & React",
-    "reactDesc": "I re indiscussi dello sviluppo moderno."
+    "arcDesc": "For testing and daily browsing.",
+    "techStack": "Tech Stack",
+    "techStackDesc": "The core technologies I use to build scalable web applications.",
+    "reactTitle": "React & Next.js",
+    "reactDesc": "For building fast, SEO-friendly user interfaces."
   },
   "AttributionPage": {
-    "creditWhere": "Dare a Cesare quel",
-    "creditDue": "che è di Cesare",
-    "creditDesc": "Questo portfolio si basa su incredibili progetti open source.",
-    "typography": "Tipografia",
-    "typographyDesc": "La tipografia è la spina dorsale di questo design.",
-    "viewSource": "Visualizza origine",
-    "frameworks": "Framework",
-    "frameworksDesc": "Le incredibili librerie open source.",
-    "nextjsDesc": "Il framework React principale.",
-    "tailwindDesc": "Il framework CSS per uno stile rapido.",
-    "framerDesc": "La libreria di animazioni.",
-    "inspiration": "Ispirazione",
-    "inspirationDesc": "Il grande design raramente viene creato nel vuoto.",
-    "aceternityDesc": "Ispirazione per componenti interattivi.",
-    "magicuiDesc": "Ispirazione per animazioni moderne."
+    "creditWhere": "Credit Where",
+    "creditDue": "Credit is Due",
+    "creditDesc": "Building this site wasn't a solo effort. It stands on the shoulders of incredible open-source tools, beautiful design systems, and amazing creators. Here are the tools and inspirations that made this possible.",
+    "typography": "Typography",
+    "typographyDesc": "The fonts that give this site its character.",
+    "viewSource": "View Source",
+    "frameworks": "Core Technologies",
+    "frameworksDesc": "The foundational frameworks and libraries powering the site.",
+    "nextjsDesc": "The React Framework for production. It powers the server-side rendering, routing, and overall architecture of this site.",
+    "tailwindDesc": "A utility-first CSS framework that makes styling incredibly fast and maintainable.",
+    "framerDesc": "A production-ready motion library for React that powers all the fluid animations, page transitions, and interactive elements across the site.",
+    "inspiration": "Design Inspiration",
+    "inspirationDesc": "Incredible resources that inspired the UI components.",
+    "aceternityDesc": "Amazing collection of modern, animated Tailwind CSS components. Several elements in this site were inspired by their designs.",
+    "magicuiDesc": "Beautiful, animated React components. Their approach to modern, engaging web design heavily influenced this portfolio."
+  },
+  "GuestbookPage": {
+    "subtitle": "THE WALL REMEMBERS",
+    "title1": "Words That Echo",
+    "titleHighlight": "Always"
+  },
+  "GuestbookForm": {
+    "namePlaceholder": "Your Name",
+    "messagePlaceholder": "Your Message...",
+    "sign": "Sign",
+    "alert": "This is a static mockup of the guestbook! Database integration is required to post actual messages."
+  },
+  "BucketListPage": {
+    "header": {
+      "title1": "The",
+      "titleHighlight": "Bucket List",
+      "description": "A running list of things I want to do, see, and achieve in my lifetime. It's a mix of professional milestones, crazy adventures, and personal growth goals."
+    },
+    "progress": {
+      "title": "Progress",
+      "completedText": "completed out of",
+      "goalsText": "goals"
+    },
+    "categories": {
+      "Career": "Career",
+      "Adventure": "Adventure",
+      "Life": "Life",
+      "Travel": "Travel"
+    },
+    "sections": {
+      "completed": {
+        "title": "Completed",
+        "desc": "The milestones I've already achieved. Looking back at these keeps me motivated to push forward on the rest of the list."
+      },
+      "career": {
+        "title": "Career & Tech",
+        "desc": "Professional goals focused on building impactful products, sharing knowledge, and pushing my technical boundaries."
+      },
+      "travel": {
+        "title": "Travel & Adventure",
+        "desc": "Places I want to see and experiences I want to have around the globe."
+      },
+      "life": {
+        "title": "Life & Experiences",
+        "desc": "Personal growth, physical challenges, and giving back to the community."
+      }
+    },
+    "items": {
+      "item0": {
+        "title": "Contribute to a major open-source project"
+      },
+      "item1": {
+        "title": "Go skydiving"
+      },
+      "item2": {
+        "title": "Build my dream home workspace"
+      },
+      "item3": {
+        "title": "Build a profitable SaaS business"
+      },
+      "item4": {
+        "title": "Speak at a major tech conference"
+      },
+      "item5": {
+        "title": "Reach 1,000 GitHub stars on a personal repository"
+      },
+      "item6": {
+        "title": "Start a tech blog and reach 10k monthly readers"
+      },
+      "item7": {
+        "title": "Visit Japan and experience the cherry blossoms"
+      },
+      "item8": {
+        "title": "Backpack across Europe"
+      },
+      "item9": {
+        "title": "See the Northern Lights"
+      },
+      "item10": {
+        "title": "Live in a different country for at least 6 months"
+      },
+      "item11": {
+        "title": "Run a full marathon"
+      },
+      "item12": {
+        "title": "Learn to play the piano fluently"
+      },
+      "item13": {
+        "title": "Read 100 books in a single year"
+      },
+      "item14": {
+        "title": "Mentorship: Help 10 junior developers get their first job"
+      }
+    }
   }
 }

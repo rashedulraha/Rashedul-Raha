@@ -6,8 +6,8 @@ import WorkList from "@/components/work/WorkList";
 import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
-  title: "Work | Aayush Bharti",
-  description: "A selection of projects and technical achievements.",
+  title: "Work | Rashedul Islam",
+  description: "View the portfolio and featured projects of Rashedul Islam.",
 };
 
 export default function WorkPage() {

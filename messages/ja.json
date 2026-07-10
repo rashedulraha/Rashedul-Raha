@@ -1,321 +1,321 @@
 {
   "Navbar": {
     "home": "ホーム",
-    "about": "約",
-    "work": "仕事",
+    "about": "プロフィール",
+    "work": "実績",
     "blog": "ブログ",
-    "more": "もっと",
+    "more": "その他",
     "services": "サービス",
     "resume": "履歴書",
-    "bucketList": "バケットリスト",
+    "bucketList": "やりたいことリスト",
     "language": "言語",
     "bookACall": "通話を予約",
     "guestbook": "ゲストブック",
     "guestbookDesc": "コメントを残す",
-    "bucketListDesc": "締め切りのある夢",
+    "bucketListDesc": "期限付きの夢",
     "links": "リンク",
     "linksDesc": "すべてのリンクはこちら",
     "uses": "使用ツール",
-    "usesDesc": "デジタル環境をのぞく",
+    "usesDesc": "開発環境をのぞく",
     "attribution": "クレジット",
-    "attributionDesc": "サイト作成の道のり"
+    "attributionDesc": "サイト構築の裏側"
   },
   "Hero": {
     "badgeNew": "New",
-    "badgeText": "Keythm — feel every keystroke",
-    "title1": "Code that ",
-    "titleHighlight": "feels",
-    "title2": " designed.",
-    "subtitle": "Engineering that actually ships.",
-    "greeting": "こんにちは、私はRashedul Islamです。",
-    "role": " a Full Stack Developer",
-    "galleryHint": "Gallery",
-    "ctaConnect": "Let's Connect",
-    "copied": "Copied to clipboard",
-    "slide0Title": "Workspace",
-    "slide0Desc": "My creative workspace setup where the magic happens.",
-    "slide0Loc": "Dhaka, BD",
-    "slide0Date": "Oct 2025",
-    "slide1Title": "Portrait",
-    "slide1Desc": "Professional headshot for the portfolio.",
-    "slide1Loc": "Studio 101",
-    "slide1Date": "Nov 2025",
-    "slide2Title": "Creative",
-    "slide2Desc": "Brainstorming and creative session in action.",
-    "slide2Loc": "Paharpur, BD",
-    "slide2Date": "Dec 2025",
-    "slide3Title": "Vibes",
-    "slide3Desc": "Late night coding and studio vibes.",
-    "slide3Loc": "Home Workspace",
-    "slide3Date": "Jan 2026"
+    "badgeText": "Keythm — 指先で感じるすべてのキー入力",
+    "title1": "デザインされた",
+    "titleHighlight": "コードを。",
+    "title2": "",
+    "subtitle": "確実に届けるエンジニアリング。",
+    "greeting": "こんにちは、Rashedul Islamです。",
+    "role": "フルスタックデベロッパー",
+    "galleryHint": "ギャラリー",
+    "ctaConnect": "つながる",
+    "copied": "クリップボードにコピーしました",
+    "slide0Title": "ワークスペース",
+    "slide0Desc": "魔法が生まれるクリエイティブな作業環境。",
+    "slide0Loc": "バングラデシュ、ダッカ",
+    "slide0Date": "2025年10月",
+    "slide1Title": "ポートレート",
+    "slide1Desc": "ポートフォリオ用のプロフィール写真。",
+    "slide1Loc": "スタジオ101",
+    "slide1Date": "2025年11月",
+    "slide2Title": "クリエイティブ",
+    "slide2Desc": "ブレインストーミングと制作セッションの様子。",
+    "slide2Loc": "バングラデシュ、パハルプール",
+    "slide2Date": "2025年12月",
+    "slide3Title": "バイブス",
+    "slide3Desc": "深夜のコーディングとスタジオの空気感。",
+    "slide3Loc": "ホームワークスペース",
+    "slide3Date": "2026年1月"
   },
   "About": {
-    "badge": "About Me",
-    "title1": "Engineering digital solutions that",
-    "title2": "drive business growth.",
-    "expBadge1": "2+ Years",
-    "expBadge2": "Experience",
-    "heading": "Hi, I'm Rashedul Islam.",
-    "p1": "I engineer high-performance web applications that solve complex business problems. With a deep focus on clean architecture and modern user experiences, I build products that are fast, accessible, and ready to scale.",
-    "p2_1": "My expertise is rooted in the ",
+    "badge": "私について",
+    "title1": "ビジネスの成長を加速させる",
+    "title2": "デジタルソリューションを開発。",
+    "expBadge1": "2年以上",
+    "expBadge2": "の実務経験",
+    "heading": "こんにちは、Rashedul Islamです。",
+    "p1": "複雑なビジネス課題を解決する、高パフォーマンスなWebアプリケーションを設計・開発しています。クリーンアーキテクチャと現代的なUXを重視し、高速かつ拡張性の高いプロダクトを提供します。",
+    "p2_1": "専門領域は",
     "ttNextTitle": "Next.js 14/15",
-    "ttNextDesc": "Building Server Components and high-SEO applications.",
-    "ttNextText": "Next.js Ecosystem",
-    "p2_2": " and ",
+    "ttNextDesc": "サーバーコンポーネントとSEOに最適化されたアプリケーション構築。",
+    "ttNextText": "Next.jsエコシステム",
+    "p2_2": "、そして",
     "ttTsTitle": "TypeScript",
-    "ttTsDesc": "Writing strictly typed, bug-free, and scalable code.",
+    "ttTsDesc": "厳格な型定義により、バグが少なく拡張性の高いコードを実現。",
     "ttTsText": "TypeScript",
-    "p2_3": ". From designing pixel-perfect UIs with ",
+    "p2_3": "です。",
     "ttTwTitle": "Tailwind CSS v4",
-    "ttTwDesc": "Rapid UI development using utility-first styling.",
+    "ttTwDesc": "ユーティリティファーストによる高速なUI開発。",
     "ttTwText": "Tailwind CSS",
-    "p2_4": " to architecting robust backends and integrating modern AI capabilities, I handle the entire product lifecycle. I am also experienced in ",
-    "ttCloudTitle": "Cloud & DevOps",
-    "ttCloudDesc": "Docker, AWS, and Vercel for reliable deployments.",
-    "ttCloudText": "Cloud deployments and DevOps",
-    "p2_5": ", ensuring that applications are delivered securely and reliably.",
-    "p3": "I wake up every day excited to learn new things, build great products, and grow as a developer. Delivering code that buyers and teams love is my ultimate goal.",
-    "techStack": "Tech Stack",
-    "stat0Label": "Projects Delivered",
+    "p2_4": "を用いたピクセルパーフェクトなデザインから、堅牢なバックエンド構築、最新のAI統合まで、プロダクトのライフサイクル全体を担います。また、",
+    "ttCloudTitle": "クラウド & DevOps",
+    "ttCloudDesc": "Docker、AWS、Vercelによる信頼性の高いデプロイ環境。",
+    "ttCloudText": "クラウド環境とDevOps",
+    "p2_5": "の経験もあり、安全で信頼できるアプリケーションの納品を保証します。",
+    "p3": "日々新しい技術を学び、素晴らしいプロダクトを生み出し、エンジニアとして成長することに情熱を注いでいます。クライアントやチームに愛されるコードを提供することが私のゴールです。",
+    "techStack": "技術スタック",
+    "stat0Label": "プロジェクト完了",
     "stat0Value": "10+",
-    "stat1Label": "Happy Clients",
+    "stat1Label": "満足したクライアント",
     "stat1Value": "5+",
-    "stat2Label": "Years Experience",
+    "stat2Label": "経験年数",
     "stat2Value": "2+",
-    "stat3Label": "Code Commits",
+    "stat3Label": "コミット数",
     "stat3Value": "1K+",
-    "cta": "Let's Connect"
+    "cta": "問い合わせる"
   },
   "Features": {
     "SoundCard": {
-      "subtitle": "Let's Build Together",
-      "title": "Clear communication, fast iterations, no surprises",
-      "status": "Available"
+      "subtitle": "共に創り上げましょう",
+      "title": "明確なコミュニケーション、迅速な反復、期待を超える成果",
+      "status": "案件募集中"
     },
     "TechStack": {
-      "modalTitle": "My Tech Stack",
-      "modalSubtitle": "Everything I use to ship products",
-      "frontendTitle": "Frontend",
-      "frontendDesc": "Modern, responsive, and performant UIs",
-      "backendTitle": "Backend",
-      "backendDesc": "Scalable, secure, high-performance APIs",
-      "devopsTitle": "DevOps & Tools",
-      "devopsDesc": "Streamlined deployment & development workflow",
-      "osTitle": "Operating Systems",
-      "osDesc": "My preferred development environments",
-      "toolsAcross": "tools across",
-      "categories": "categories",
-      "badge": "Tech Stack",
-      "description": "The stack behind everything I ship",
-      "viewBtn": "View Full Stack",
-      "toolsCount": "Tools"
+      "modalTitle": "私の技術スタック",
+      "modalSubtitle": "プロダクト開発のすべて",
+      "frontendTitle": "フロントエンド",
+      "frontendDesc": "モダンでレスポンシブな高性能UI",
+      "backendTitle": "バックエンド",
+      "backendDesc": "拡張可能で安全な高性能API",
+      "devopsTitle": "DevOps & ツール",
+      "devopsDesc": "合理化されたデプロイと開発ワークフロー",
+      "osTitle": "オペレーティングシステム",
+      "osDesc": "愛用する開発環境",
+      "toolsAcross": "ツール",
+      "categories": "カテゴリー",
+      "badge": "技術スタック",
+      "description": "開発の原動力となるスタック",
+      "viewBtn": "すべて見る",
+      "toolsCount": "ツール"
     },
     "Services": {
-      "badge": "What You Get",
-      "title": "Clean code, pixel-perfect UI, deployed & scaling",
+      "badge": "提供できる価値",
+      "title": "クリーンなコード、完璧なUI、最適なデプロイメント",
       "items0Title": "SEO & AEO",
-      "items0Desc": "SSR, SSG, semantic",
-      "items1Title": "Performance",
-      "items1Desc": "Lighthouse 95+, CWV",
-      "items2Title": "Security",
-      "items2Desc": "HTTPS, CSP, XSS",
-      "items3Title": "Deployment",
+      "items0Desc": "SSR, SSG, セマンティックHTML",
+      "items1Title": "パフォーマンス",
+      "items1Desc": "Lighthouse 95+点, CWV準拠",
+      "items2Title": "セキュリティ",
+      "items2Desc": "HTTPS, CSP, XSS対策",
+      "items3Title": "デプロイメント",
       "items3Desc": "CI/CD, Vercel, AWS",
-      "items4Title": "Global Reach",
-      "items4Desc": "CDN, edge, multi-region",
-      "items5Title": "AI Ready",
-      "items5Desc": "OpenAI, Gemini, vector"
+      "items4Title": "グローバル展開",
+      "items4Desc": "CDN, エッジ, マルチリージョン",
+      "items5Title": "AI対応",
+      "items5Desc": "OpenAI, Gemini, ベクトル検索"
     },
     "Network": {
-      "badge": "Flexible With Timezones",
-      "title": "Based in Bangladesh, available globally"
+      "badge": "柔軟なタイムゾーン",
+      "title": "バングラデシュ在住、世界中どこでも対応"
     },
     "Uses": {
-      "badge": "Uses",
-      "title": "Check out my favorite tools",
-      "toolsCount": "Tools"
+      "badge": "使用ツール",
+      "title": "愛用しているツール",
+      "toolsCount": "ツール"
     }
   },
   "Work": {
-    "badge": "Portfolio",
-    "titlePrefix": "Featured ",
-    "titleHighlight": "Projects",
-    "description": "Scroll to explore some of my recent work and technical achievements.",
-    "viewAll": "View all projects",
-    "more": "more",
-    "viewLive": "View Live",
-    "code": "Code",
+    "badge": "ポートフォリオ",
+    "titlePrefix": "注目の",
+    "titleHighlight": "プロジェクト",
+    "description": "最近の制作物と技術的な成果をご覧ください。",
+    "viewAll": "すべてのプロジェクト",
+    "more": "もっと見る",
+    "viewLive": "サイトを見る",
+    "code": "コード",
     "projects": {
       "keythm": {
         "title": "Keythm",
-        "subtitle": "Typing Test Reimagined",
-        "description": "Keychron meets typing test — every key has its own sound, every stat tracked",
-        "badge": "Q2 2026",
-        "type": "Web App",
-        "stats": "4,367 checks",
-        "features0": "Per-key mechanical audio via Web Audio API",
-        "features1": "Four modes with live WPM & accuracy tracking",
-        "features2": "Statistical anti-cheat with 13 checks",
-        "features3": "Offline-first PWA with Serwist precaching"
+        "subtitle": "タイピングテストの再定義",
+        "description": "Keychronの打鍵感とタイピングテストの融合。すべてのキー音を再現し、詳細な統計を追跡。",
+        "badge": "2026 Q2",
+        "type": "Web アプリ",
+        "stats": "4,367回試行",
+        "features0": "Web Audio APIによるキーごとのメカニカル音",
+        "features1": "リアルタイムのWPMと精度追跡",
+        "features2": "統計的アンチチート機能",
+        "features3": "Serwistによるオフラインファースト対応PWA"
       },
       "nextdemy": {
         "title": "Nextdemy",
-        "subtitle": "Learning Platform",
-        "description": "A monorepo-powered learning platform with real payments, real auth, and real content delivery",
-        "badge": "Q4 2024",
-        "type": "Web App",
-        "stats": "1,200+ learners",
-        "features0": "Monorepo with Turborepo for scalable code",
-        "features1": "Real payment processing with Razorpay",
-        "features2": "JWT authentication with session management",
-        "features3": "Optimized content delivery & caching"
+        "subtitle": "学習プラットフォーム",
+        "description": "決済・認証・コンテンツ配信機能を備えたTurborepoベースの学習プラットフォーム。",
+        "badge": "2024 Q4",
+        "type": "Web アプリ",
+        "stats": "1,200人以上の受講生",
+        "features0": "スケーラブルなモノレポ構造",
+        "features1": "Razorpayによるリアルタイム決済処理",
+        "features2": "JWT認証とセッション管理",
+        "features3": "最適化されたコンテンツ配信とキャッシュ"
       },
       "venture-den": {
         "title": "VentureDen",
-        "subtitle": "AI Pitch Platform",
-        "description": "Where founders pitch ideas, get instant AI feedback, and get discovered by investors",
-        "badge": "Q1 2025",
-        "type": "Web App",
-        "stats": "500+ pitches",
-        "features0": "AI-powered pitch analysis with instant feedback",
-        "features1": "Investor discovery & matching algorithm",
-        "features2": "Sanity CMS for content management",
-        "features3": "Real-time analytics & engagement tracking"
+        "subtitle": "AIピッチプラットフォーム",
+        "description": "起業家がアイデアをプレゼンし、AIのフィードバックと投資家とのマッチングを実現。",
+        "badge": "2025 Q1",
+        "type": "Web アプリ",
+        "stats": "500件以上のピッチ",
+        "features0": "AI駆動のプレゼン分析と即時フィードバック",
+        "features1": "投資家マッチングアルゴリズム",
+        "features2": "Sanity CMSによるコンテンツ管理",
+        "features3": "リアルタイムの分析とエンゲージメント追跡"
       },
       "finote": {
         "title": "Finote",
-        "subtitle": "Finance Tracker",
-        "description": "An intuitive mobile companion for organizing your digital wallets and analyzing your financial health",
-        "badge": "Q4 2025",
-        "type": "Mobile App",
-        "stats": "10K+ downloads",
-        "features0": "React Native with Expo framework",
-        "features1": "Wallet organization & expense tracking",
-        "features2": "Financial health analytics with charts",
-        "features3": "Optimized media with Cloudinary"
+        "subtitle": "家計簿アプリ",
+        "description": "デジタルウォレットの管理と財務分析ができる直感的なモバイルアプリ。",
+        "badge": "2025 Q4",
+        "type": "モバイル アプリ",
+        "stats": "1万件以上のダウンロード",
+        "features0": "React Native (Expo) 使用",
+        "features1": "ウォレット管理と支出追跡",
+        "features2": "グラフを用いた財務分析",
+        "features3": "Cloudinaryによるメディア最適化"
       },
       "star-forge": {
         "title": "StarForge",
-        "subtitle": "AI SaaS Landing",
-        "description": "A sleek AI SaaS landing page with a user-friendly design that enhances engagement.",
-        "badge": "Q1 2024",
-        "type": "Web App",
-        "stats": "3x conversion",
-        "features0": "Modern AI SaaS landing page design",
-        "features1": "Parallax scrolling & smooth animations",
-        "features2": "Optimized performance with Vercel",
-        "features3": "User-friendly Tailwind CSS interface"
+        "subtitle": "AI SaaS ランディングページ",
+        "description": "エンゲージメントを高める、ユーザーフレンドリーな洗練されたデザイン。",
+        "badge": "2024 Q1",
+        "type": "Web アプリ",
+        "stats": "コンバージョン3倍",
+        "features0": "モダンなAI SaaSデザイン",
+        "features1": "パララックススクロールと滑らかなアニメーション",
+        "features2": "Vercelによるパフォーマンス最適化",
+        "features3": "Tailwind CSSによるインターフェース"
       }
     }
   },
   "Blog": {
-    "badge": "FROM THE DESK",
-    "titlePrefix": "Thoughts & ",
-    "titleHighlight": "writings",
-    "readArticle": "Read article",
-    "readMore": "Read more posts",
+    "badge": "ブログより",
+    "titlePrefix": "考察と",
+    "titleHighlight": "執筆録",
+    "readArticle": "記事を読む",
+    "readMore": "もっと見る",
     "posts": {
       "post1": {
-        "title": "How to Optimise a Next.js Web App",
-        "description": "Practical techniques to fix your Next.js Lighthouse score — bundle analysis, caching strategies, React Compiler, and the next.config flags nobody talks about.",
-        "category": "Performance",
-        "readTime": "15 min read",
-        "date": "Apr 14, 2026"
+        "title": "Next.js Web アプリの最適化方法",
+        "description": "Lighthouseスコアを改善するための実践的テクニック。バンドル分析、キャッシュ戦略、React Compilerなど。",
+        "category": "パフォーマンス",
+        "readTime": "15分",
+        "date": "2026年4月14日"
       },
       "post2": {
-        "title": "Every Tool in My Terminal-First Dev Setup",
-        "description": "Neovim, Wezterm, Tmux, and the rest — what survived two years of daily use and why I picked each one over the obvious alternatives.",
-        "category": "Tools",
-        "readTime": "12 min read",
-        "date": "Oct 19, 2025"
+        "title": "ターミナル重視の開発環境を支える全ツール",
+        "description": "Neovim, Wezterm, Tmuxなど。2年間の実務を経て生き残ったツールとその選定理由。",
+        "category": "ツール",
+        "readTime": "12分",
+        "date": "2025年10月19日"
       },
       "post3": {
-        "title": "Build a Blog with Next.js and MDX from Scratch",
-        "description": "File-based content, zero database, full control. A complete walkthrough of building a statically-generated blog with Next.js, MDX, and gray-matter.",
-        "category": "Tutorial",
-        "readTime": "11 min read",
-        "date": "Mar 12, 2025"
+        "title": "Next.js と MDX でブログをゼロから構築する",
+        "description": "データベース不要のファイルベース管理。Next.jsとMDXによる静的ブログ構築の全工程。",
+        "category": "チュートリアル",
+        "readTime": "11分",
+        "date": "2025年3月12日"
       }
     }
   },
   "Testimonials": {
-    "badge": "Client Love",
-    "titlePrefix": "Don't just take ",
-    "titleHighlight": "my word",
-    "titleSuffix": " for it.",
-    "description": "Here’s what founders, marketers, and creative directors have to say about working together.",
+    "badge": "クライアントの声",
+    "titlePrefix": "クライアントからの",
+    "titleHighlight": "評価",
+    "titleSuffix": "",
+    "description": "創業者、マーケター、クリエイティブディレクターからのメッセージ。",
     "items": {
       "item1": {
-        "title": "We went from Figma to production in 11 days",
-        "message": "We'd been sitting on designs for two months because our last dev kept pushing timelines. Aayush had a staging link in 4 days and we were live in 11. The site loads in under a second and our bounce rate dropped 35% the first week. Wish we'd found him sooner.",
+        "title": "Figmaから本番まで11日で完了",
+        "message": "デザインは2ヶ月も放置されていたが、彼に依頼して4日でステージング環境が完成し、11日でリリースできた。読み込みも1秒以内で、直帰率も35%改善した。",
         "name": "Marcus T.",
-        "role": "Marketing Director, SaaS startup"
+        "role": "マーケティングディレクター, SaaS startup"
       },
       "item2": {
-        "title": "Finally a developer who actually listens",
-        "message": "I'm not technical at all, and past devs made me feel stupid for asking questions. Aayush sent Loom walkthroughs after every milestone so I always knew exactly where things stood. When I changed my mind about the checkout flow halfway through, he didn't push back — just adjusted and shipped it better than what I originally asked for.",
+        "title": "しっかりと意見を聞いてくれる稀有なエンジニア",
+        "message": "専門知識がない私にも親身になってLoomで説明してくれた。途中で決済フローを変更した時も、嫌な顔一つせず、期待以上のものを作り上げてくれた。",
         "name": "Lauren K.",
-        "role": "Founder, DTC skincare brand"
+        "role": "創業者, DTCスキンケアブランド"
       },
       "item3": {
-        "title": "Our Core Web Vitals went from red to green overnight",
-        "message": "We hired Aayush to rebuild our marketing site on Next.js. The old WordPress site was scoring 38 on PageSpeed. His build scores 97. He set up the CMS integration so our content team can publish without touching code. Solid architecture, clean codebase — the kind of work I'd expect from a senior engineer.",
+        "title": "Core Web Vitalsが劇的に改善",
+        "message": "WordPressからNext.jsへの移行を依頼。PageSpeedで38点だったのが97点に。シニアエンジニアらしい堅牢なアーキテクチャと綺麗なコードには感銘を受けた。",
         "name": "Daniel R.",
-        "role": "CTO, fintech startup"
+        "role": "CTO, フィンテックスタートアップ"
       },
       "item4": {
-        "title": "He caught problems we didn't even know we had",
-        "message": "We hired him to redesign our product pages. During the build he noticed our image pipeline was serving uncompressed files and our mobile nav was broken on Safari. Fixed both without being asked. That's the kind of developer you want — someone who cares about the whole product, not just their ticket.",
+        "title": "潜在的な問題まで先回りして解決してくれた",
+        "message": "プロダクトページの刷新を依頼した際、頼んでいない画像の最適化やSafariでの不具合まで修正してくれた。プロダクト全体を大切にしてくれるエンジニア。",
         "name": "James L.",
-        "role": "Co-founder, e-commerce brand"
+        "role": "共同創業者, Eコマースブランド"
       },
       "item5": {
-        "title": "He turned our messy brief into something beautiful",
-        "message": "We gave Aayush a mood board and some rough wireframes — honestly, they were half-baked. He came back with a prototype that was cleaner and more thoughtful than what we'd imagined. The animations feel intentional, the typography is perfect, and three clients have asked us who built it.",
+        "title": "曖昧な指示を美しい成果物に変えてくれた",
+        "message": "ムードボードと大まかな指示から、想像以上のプロトタイプを作り上げてくれた。アニメーションもタイポグラフィも完璧で、多くのクライアントから称賛されている。",
         "name": "Sofia M.",
-        "role": "Creative Director, branding agency"
+        "role": "クリエイティブディレクター, ブランドエージェンシー"
       },
       "item6": {
-        "title": "We've shipped 4 projects together now",
-        "message": "First project was a simple landing page. Then he rebuilt our client portal, added a blog with headless CMS, and just finished an analytics dashboard. Every project is ahead of schedule. He's basically our dev team at this point. If you're a small agency that needs a reliable build partner, stop looking.",
+        "title": "すでに4つのプロジェクトを完遂",
+        "message": "landingページ、クライアントポータル、ブログ、分析ダッシュボードと、すべて予定より早く納品してくれた。信頼できる開発パートナー。",
         "name": "Ryan H.",
-        "role": "Founder, B2B agency"
+        "role": "創業者, B2Bエージェンシー"
       }
     }
   },
   "Explore": {
-    "badge": "Explore My Site",
-    "titlePrefix": "Explore, experiment ",
-    "titleHighlight": "&& say hello",
+    "badge": "サイトを探索",
+    "titlePrefix": "探索、実験、",
+    "titleHighlight": "そして挨拶を",
     "cards": {
       "uses": {
-        "title": "Uses",
-        "description": "Check out my favorite tools"
+        "title": "使用ツール",
+        "description": "愛用している開発ツール"
       },
       "about": {
-        "title": "Behind The Code",
-        "description": "Journey, skills & experience"
+        "title": "コードの裏側",
+        "description": "経歴、スキル、経験について"
       },
       "guestbook": {
-        "title": "Guestbook",
-        "description": "Let me know you were here"
+        "title": "ゲストブック",
+        "description": "ぜひ一言残してください"
       }
     }
   },
   "Contact": {
-    "rotatingBadge": "OPEN TO WORK · OPEN TO WORK · ",
-    "concept": "FROM CONCEPT TO ",
-    "creation": "CREATION",
-    "makeIt": "LET'S MAKE IT ",
-    "happen": "HAPPEN!",
-    "getInTouch": "Get In Touch",
-    "availableFor": "I'm available for ",
-    "fullTime": "full-time roles",
-    "and": " & ",
-    "freelance": "freelance projects",
+    "rotatingBadge": "案件募集中 · 案件募集中 · ",
+    "concept": "コンセプトから ",
+    "creation": "創造まで",
+    "makeIt": "一緒に",
+    "happen": "実現しましょう！",
+    "getInTouch": "問い合わせる",
+    "availableFor": "対応可能な範囲: ",
+    "fullTime": "フルタイム",
+    "and": " / ",
+    "freelance": "フリーランス",
     "dot": ".",
-    "desc1": "I thrive on crafting dynamic web applications, and",
-    "desc2": "delivering seamless user experiences.",
+    "desc1": "ダイナミックなWebアプリケーション開発と、",
+    "desc2": "シームレスなユーザー体験の提供を強みとしています。",
     "tags": [
       "React",
       "Next.js",
@@ -324,75 +324,75 @@
     ]
   },
   "Footer": {
-    "desc1": "A full-stack developer, freelancer & problem solver.",
-    "desc2": "Thanks for checking out my site!",
-    "generalTitle": "General",
+    "desc1": "フルスタックデベロッパー、フリーランス、課題解決人。",
+    "desc2": "サイトをご覧いただきありがとうございます！",
+    "generalTitle": "一般",
     "general": {
-      "home": "Home",
-      "about": "About",
-      "projects": "Projects",
-      "blog": "Blog"
+      "home": "ホーム",
+      "about": "プロフィール",
+      "projects": "プロジェクト",
+      "blog": "ブログ"
     },
-    "specificsTitle": "Specifics",
+    "specificsTitle": "詳細",
     "specifics": {
-      "guestbook": "Guest Book",
-      "bucketList": "Bucket List",
-      "uses": "Uses",
-      "attribution": "Attribution"
+      "guestbook": "ゲストブック",
+      "bucketList": "やりたいことリスト",
+      "uses": "使用ツール",
+      "attribution": "クレジット"
     },
-    "moreTitle": "More",
+    "moreTitle": "その他",
     "more": {
-      "bookCall": "Book a Call",
-      "links": "Links",
+      "bookCall": "通話を予約",
+      "links": "リンク",
       "rss": "RSS",
-      "privacy": "Privacy",
-      "terms": "Terms"
+      "privacy": "プライバシー",
+      "terms": "利用規約"
     },
     "allRights": "All rights reserved",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "sitemap": "Sitemap",
-    "builtWith": "Built with Next.js"
+    "privacy": "プライバシー",
+    "terms": "利用規約",
+    "sitemap": "サイトマップ",
+    "builtWith": "Next.js で構築"
   },
   "AboutExperience": {
-    "badge": "プロフェッショナルジャーニー",
+    "badge": "経歴",
     "title": "職務経歴",
     "exp1": {
       "role": "シニアフロントエンドエンジニア",
       "company": "TechCorp Inc.",
       "duration": "2023 - 現在",
       "location": "リモート",
-      "desc1": "レガシーなモノリシックアーキテクチャからモダンなNext.jsスタックへの移行を主導し、ページロード速度を40%向上させました。",
-      "desc2": "Tailwind CSSとRadix UIを使用してスケーラブルなデザインシステムを構築・実装しました。",
-      "desc3": "ジュニア開発者のメンタリングを行い、コードレビューのベストプラクティスを確立しました。"
+      "desc1": "レガシーなモノリスからモダンなNext.jsへの移行を主導し、読み込み速度を40%改善。",
+      "desc2": "Tailwind CSSとRadix UIを用いたスケーラブルなデザインシステムを構築。",
+      "desc3": "ジュニアメンバーのメンタリングとコードレビューの体制を確立。"
     },
     "exp2": {
       "role": "UI/UX開発者",
       "company": "Creative Studio",
       "duration": "2021 - 2023",
-      "location": "ニューヨーク、NY",
-      "desc1": "デザイナーと緊密に協力し、ピクセルパーフェクトで高度にインタラクティブなWebアプリケーションを構築しました。",
-      "desc2": "Framer MotionとGSAPを使用して複雑なアニメーションを実装しました。",
-      "desc3": "スタイルを関数型ユーティリティクラスにリファクタリングすることでCSSペイロードを60%削減しました。"
+      "location": "米国ニューヨーク",
+      "desc1": "デザイナーと連携し、高度にインタラクティブなWebアプリを実装。",
+      "desc2": "Framer MotionとGSAPによる複雑なアニメーションの実装。",
+      "desc3": "CSSリファクタリングによりCSSペイロードを60%削減。"
     },
     "exp3": {
       "role": "フロントエンド開発者",
       "company": "Startup Hub",
       "duration": "2019 - 2021",
-      "location": "サンフランシスコ、CA",
-      "desc1": "B2B SaaSプラットフォームの初期MVPを開発し、200万ドルのシード資金を獲得しました。",
-      "desc2": "RESTful APIを統合し、Reduxを使用して複雑な状態を管理しました。",
-      "desc3": "すべてのデバイスでクロスブラウザの互換性とレスポンシブデザインを確保しました。"
+      "location": "米国サンフランシスコ",
+      "desc1": "B2B SaaSのMVP開発を主導し、200万ドルのシード調達に貢献。",
+      "desc2": "RESTful API統合とReduxによる複雑な状態管理。",
+      "desc3": "クロスブラウザ対応とレスポンシブデザインの最適化。"
     }
   },
   "WorkPage": {
     "portfolio": "ポートフォリオ",
-    "featured": "注目の",
+    "featured": "注目",
     "projects": "プロジェクト",
     "allProjects": "すべてのプロジェクト",
-    "searchPlaceholder": "プロジェクトを検索",
-    "noProjects": "条件に一致するプロジェクトは見つかりませんでした。",
-    "featuredWork": "注目の仕事",
+    "searchPlaceholder": "プロジェクトを検索...",
+    "noProjects": "該当するプロジェクトはありません。",
+    "featuredWork": "注目の実績",
     "moreProjects": "その他のプロジェクト",
     "explore": "探索",
     "viewDetails": "詳細を見る",
@@ -406,57 +406,57 @@
   "SearchModal": {
     "reachOut": "連絡する",
     "sendMessage": "Rashedulにメッセージを送る",
-    "readEveryOne": "すべて読んでいます",
-    "messagePlaceholder": "こんにちは、Rashedul。プロジェクトのアイデアがあります...",
-    "enterToContinue": "Enterで続行",
+    "readEveryOne": "すべて目を通しています",
+    "messagePlaceholder": "こんにちは、Rashedul。プロジェクトの相談があります...",
+    "enterToContinue": "Enterで次へ",
     "shiftEnter": "Shift+Enterで改行",
-    "continueBtn": "続行 →",
+    "continueBtn": "次へ →",
     "bookACall": "通話を予約",
-    "bookCallDesc": "30分 • 条件なし",
+    "bookCallDesc": "30分 • 無料相談",
     "emailMe": "メールを送る",
     "emailAddress": "hello@rashedul.com",
     "sendAMessage": "メッセージを送信",
     "name": "名前",
     "namePlaceholder": "例: 山田 太郎",
-    "email": "メール",
+    "email": "メールアドレス",
     "phone": "電話番号",
     "topic": "トピック",
-    "topicPlaceholder": "プロジェクトの問い合わせ",
-    "description": "説明",
-    "messageSent": "メッセージ送信完了！",
-    "thankYou": "ご連絡ありがとうございます。できるだけ早くお返事いたします。",
+    "topicPlaceholder": "プロジェクトについて",
+    "description": "内容",
+    "messageSent": "送信しました！",
+    "thankYou": "ご連絡ありがとうございます。早急にお返事いたします。",
     "goBack": "戻る",
-    "dashboardTerminal": "ダッシュボード ターミナル",
-    "dashboardDesc": "データベースにアクセスしてポートフォリオを書き込むための認証情報を提供してください。",
+    "dashboardTerminal": "ダッシュボードターミナル",
+    "dashboardDesc": "データベース認証情報を入力してください。",
     "adminEmail": "管理者メール",
-    "securityPassphrase": "セキュリティ パスフレーズ",
-    "passwordPlaceholder": "管理者パスワードを入力",
+    "securityPassphrase": "パスフレーズ",
+    "passwordPlaceholder": "パスワードを入力",
     "accessDashboard": "ダッシュボードにアクセス",
     "home": "ホーム",
-    "about": "概要",
-    "work": "作品",
+    "about": "プロフィール",
+    "work": "実績",
     "blog": "ブログ",
     "guestbook": "ゲストブック",
-    "bucketList": "バケットリスト",
+    "bucketList": "やりたいことリスト",
     "bookCall": "通話を予約",
-    "uses": "使用",
-    "attribution": "帰属",
+    "uses": "使用ツール",
+    "attribution": "クレジット",
     "links": "リンク",
     "adminTerminal": "管理ターミナル",
-    "searchPlaceholder": "ページ、投稿、プロジェクトを検索...",
+    "searchPlaceholder": "検索...",
     "noResults": "結果が見つかりません。",
-    "recent": "最近",
+    "recent": "最近の検索",
     "clear": "クリア",
     "pagesGroup": "ページ",
-    "connectGroup": "接続"
+    "connectGroup": "コンタクト"
   },
   "BlogPage": {
     "pageSubtitle": "ブログ",
     "pageTitle1": "厳選された",
-    "pageTitle2": "洞察",
+    "pageTitle2": "知見",
     "allPosts": "すべての投稿",
-    "searchPosts": "投稿を検索",
-    "noPosts": "条件に一致する投稿が見つかりませんでした。",
+    "searchPosts": "投稿を検索...",
+    "noPosts": "該当する投稿はありません。",
     "featuredArticles": "注目の記事",
     "featured": "注目",
     "readArticle": "記事を読む",
@@ -465,21 +465,21 @@
     "posts": {
       "1": {
         "title": "Next.js Web アプリの最適化方法",
-        "desc": "Next.js の Lighthouse スコアを修正するための実践的なテクニック — バンドル分析、キャッシュ戦略、React Compiler、そして誰も語らない next.config のフラグについて。",
+        "desc": "Lighthouseスコアを改善するための実践的テクニック。バンドル分析、キャッシュ戦略など。",
         "category": "パフォーマンス",
-        "readTime": "15分で読める"
+        "readTime": "15分"
       },
       "2": {
-        "title": "私のターミナルファースト開発セットアップの全ツール",
-        "desc": "Neovim、Wezterm、Tmux など — 2年間の日常使用を生き延びたものと、なぜそれらを選んだのか。",
+        "title": "ターミナル重視の開発環境を支える全ツール",
+        "desc": "Neovim, Wezterm, Tmuxなど。2年間の実務を経て生き残ったツール選定。",
         "category": "ツール",
-        "readTime": "12分で読める"
+        "readTime": "12分"
       },
       "3": {
-        "title": "Next.js と MDX を使ってゼロからブログを構築する",
-        "desc": "ファイルベースのコンテンツ、データベースなし、完全な制御。Next.js、MDX、gray-matter を使用した静的生成ブログの構築の完全なチュートリアル。",
+        "title": "Next.js と MDX でブログをゼロから構築する",
+        "desc": "データベース不要。Next.jsとMDXによる静的ブログ構築の全工程。",
         "category": "チュートリアル",
-        "readTime": "11分で読める"
+        "readTime": "11分"
       }
     },
     "categories": {
@@ -496,54 +496,148 @@
     }
   },
   "LinksPage": {
-    "network": "ネットワーク",
-    "connectWith": "連絡を",
-    "me": "取る",
-    "developer": "開発者",
-    "freelancer": "フリーランス",
-    "location": "ダッカ、バングラデシュ",
-    "bookCall": "通話を予約",
-    "website": "ウェブサイト",
-    "email": "メール",
-    "codeCraft": "コードとクラフト",
-    "connect": "つながる",
-    "leaveMark": "足跡を残す"
+    "network": "NETWORK",
+    "connectWith": "Connect with",
+    "me": "Me",
+    "developer": "Full-Stack Developer",
+    "freelancer": "Freelancer",
+    "location": "Dhaka, Bangladesh",
+    "bookCall": "Book a Call",
+    "website": "Website",
+    "email": "Email",
+    "codeCraft": "Code & Craft",
+    "connect": "Connect",
+    "leaveMark": "leaveMark"
   },
   "UsesPage": {
-    "hardware": "ハードウェア",
-    "hardwareDesc": "生産性を最大化しつつ、ミニマルな美しさを維持するセットアップ。",
-    "macTitle": "MacBook Pro M2",
-    "macDesc": "すべてのプロジェクトを支える強力なマシン。",
-    "keychronTitle": "Keychron メカニカル",
-    "keychronDesc": "最高のタイピング体験を提供するタクタイルスイッチ。",
-    "devTools": "開発ツール",
-    "devToolsDesc": "ターミナルは私の第二の家です。",
-    "neovimTitle": "Neovim & Tmux",
-    "neovimDesc": "超高速でカスタマイズされたターミナルワークフロー。",
-    "weztermTitle": "WezTerm",
-    "weztermDesc": "GPUアクセラレーション対応のターミナルエミュレータ。",
+    "hardware": "Hardware & Desk Setup",
+    "hardwareDesc": "The physical tools I use daily to write code and stay productive.",
+    "macTitle": "14\" MacBook Pro",
+    "macDesc": "M2 Pro, 16GB RAM — My primary workstation for everything.",
+    "keychronTitle": "Keychron K2V2",
+    "keychronDesc": "Mechanical keyboard with brown switches. Tactile and reliable.",
+    "devTools": "Development Tools",
+    "devToolsDesc": "The software that powers my daily workflow.",
+    "neovimTitle": "Neovim",
+    "neovimDesc": "My editor of choice. Fast, modal, and heavily customized.",
+    "weztermTitle": "Wezterm",
+    "weztermDesc": "GPU-accelerated terminal emulator.",
     "arcTitle": "Arc Browser",
-    "arcDesc": "ウェブを活用する新しい方法。",
-    "techStack": "技術スタック",
-    "techStackDesc": "最高に最適化されたユーザーインターフェースを構築する最新ツール。",
-    "reactTitle": "Next.js & React",
-    "reactDesc": "現代ウェブ開発の王道。"
+    "arcDesc": "For testing and daily browsing.",
+    "techStack": "Tech Stack",
+    "techStackDesc": "The core technologies I use to build scalable web applications.",
+    "reactTitle": "React & Next.js",
+    "reactDesc": "For building fast, SEO-friendly user interfaces."
   },
   "AttributionPage": {
-    "creditWhere": "クレジット",
-    "creditDue": "一覧",
-    "creditDesc": "このポートフォリオは、素晴らしいオープンソースプロジェクトに支えられています。",
-    "typography": "タイポグラフィ",
-    "typographyDesc": "プレミアムな印象を与える書体。",
-    "viewSource": "ソースを見る",
-    "frameworks": "フレームワーク",
-    "frameworksDesc": "スタイリングとアニメーションを支えるオープンソースライブラリ。",
-    "nextjsDesc": "アプリケーションのルーティングを管理するReactフレームワーク。",
-    "tailwindDesc": "高速でレスポンシブなスタイリングを実現するCSSフレームワーク。",
-    "framerDesc": "スムーズなアニメーションを実現するライブラリ。",
-    "inspiration": "インスピレーション",
-    "inspirationDesc": "このポートフォリオに大きな影響を与えたクリエイターたち。",
-    "aceternityDesc": "インタラクティブなコンポーネントのインスピレーション。",
-    "magicuiDesc": "洗練されたアニメーションのインスピレーション。"
+    "creditWhere": "Credit Where",
+    "creditDue": "Credit is Due",
+    "creditDesc": "Building this site wasn't a solo effort. It stands on the shoulders of incredible open-source tools, beautiful design systems, and amazing creators. Here are the tools and inspirations that made this possible.",
+    "typography": "Typography",
+    "typographyDesc": "The fonts that give this site its character.",
+    "viewSource": "View Source",
+    "frameworks": "Core Technologies",
+    "frameworksDesc": "The foundational frameworks and libraries powering the site.",
+    "nextjsDesc": "The React Framework for production. It powers the server-side rendering, routing, and overall architecture of this site.",
+    "tailwindDesc": "A utility-first CSS framework that makes styling incredibly fast and maintainable.",
+    "framerDesc": "A production-ready motion library for React that powers all the fluid animations, page transitions, and interactive elements across the site.",
+    "inspiration": "Design Inspiration",
+    "inspirationDesc": "Incredible resources that inspired the UI components.",
+    "aceternityDesc": "Amazing collection of modern, animated Tailwind CSS components. Several elements in this site were inspired by their designs.",
+    "magicuiDesc": "Beautiful, animated React components. Their approach to modern, engaging web design heavily influenced this portfolio."
+  },
+  "GuestbookPage": {
+    "subtitle": "THE WALL REMEMBERS",
+    "title1": "Words That Echo",
+    "titleHighlight": "Always"
+  },
+  "GuestbookForm": {
+    "namePlaceholder": "Your Name",
+    "messagePlaceholder": "Your Message...",
+    "sign": "Sign",
+    "alert": "This is a static mockup of the guestbook! Database integration is required to post actual messages."
+  },
+  "BucketListPage": {
+    "header": {
+      "title1": "The",
+      "titleHighlight": "Bucket List",
+      "description": "A running list of things I want to do, see, and achieve in my lifetime. It's a mix of professional milestones, crazy adventures, and personal growth goals."
+    },
+    "progress": {
+      "title": "Progress",
+      "completedText": "completed out of",
+      "goalsText": "goals"
+    },
+    "categories": {
+      "Career": "Career",
+      "Adventure": "Adventure",
+      "Life": "Life",
+      "Travel": "Travel"
+    },
+    "sections": {
+      "completed": {
+        "title": "Completed",
+        "desc": "The milestones I've already achieved. Looking back at these keeps me motivated to push forward on the rest of the list."
+      },
+      "career": {
+        "title": "Career & Tech",
+        "desc": "Professional goals focused on building impactful products, sharing knowledge, and pushing my technical boundaries."
+      },
+      "travel": {
+        "title": "Travel & Adventure",
+        "desc": "Places I want to see and experiences I want to have around the globe."
+      },
+      "life": {
+        "title": "Life & Experiences",
+        "desc": "Personal growth, physical challenges, and giving back to the community."
+      }
+    },
+    "items": {
+      "item0": {
+        "title": "Contribute to a major open-source project"
+      },
+      "item1": {
+        "title": "Go skydiving"
+      },
+      "item2": {
+        "title": "Build my dream home workspace"
+      },
+      "item3": {
+        "title": "Build a profitable SaaS business"
+      },
+      "item4": {
+        "title": "Speak at a major tech conference"
+      },
+      "item5": {
+        "title": "Reach 1,000 GitHub stars on a personal repository"
+      },
+      "item6": {
+        "title": "Start a tech blog and reach 10k monthly readers"
+      },
+      "item7": {
+        "title": "Visit Japan and experience the cherry blossoms"
+      },
+      "item8": {
+        "title": "Backpack across Europe"
+      },
+      "item9": {
+        "title": "See the Northern Lights"
+      },
+      "item10": {
+        "title": "Live in a different country for at least 6 months"
+      },
+      "item11": {
+        "title": "Run a full marathon"
+      },
+      "item12": {
+        "title": "Learn to play the piano fluently"
+      },
+      "item13": {
+        "title": "Read 100 books in a single year"
+      },
+      "item14": {
+        "title": "Mentorship: Help 10 junior developers get their first job"
+      }
+    }
   }
 }

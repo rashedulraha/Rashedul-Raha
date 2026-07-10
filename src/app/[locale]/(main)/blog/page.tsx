@@ -7,8 +7,8 @@ import BlogList from "@/components/blog/BlogList";
 import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
-  title: "Blog | Aayush Bharti",
-  description: "Handpicked insights on design, engineering, and everything in between.",
+  title: "Blog | Rashedul Islam",
+  description: "Read articles on web development, Next.js, and React Native by Rashedul Islam.",
 };
 
 export default function BlogPage() {

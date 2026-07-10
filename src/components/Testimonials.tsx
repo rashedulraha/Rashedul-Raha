@@ -21,7 +21,7 @@ const testimonialsData: Testimonial[] = [
     avatar: "https://i.pravatar.cc/150?img=11",
     title: "We went from Figma to production in 11 days",
     message:
-      "We'd been sitting on designs for two months because our last dev kept pushing timelines. Aayush had a staging link in 4 days and we were live in 11. The site loads in under a second and our bounce rate dropped 35% the first week. Wish we'd found him sooner.",
+      "We'd been sitting on designs for two months because our last dev kept pushing timelines. Rashedul had a staging link in 4 days and we were live in 11. The site loads in under a second and our bounce rate dropped 35% the first week. Wish we'd found him sooner.",
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const testimonialsData: Testimonial[] = [
     avatar: "https://i.pravatar.cc/150?img=9",
     title: "Finally a developer who actually listens",
     message:
-      "I'm not technical at all, and past devs made me feel stupid for asking questions. Aayush sent Loom walkthroughs after every milestone so I always knew exactly where things stood. When I changed my mind about the checkout flow halfway through, he didn't push back — just adjusted and shipped it better than what I originally asked for.",
+      "I'm not technical at all, and past devs made me feel stupid for asking questions. Rashedul sent Loom walkthroughs after every milestone so I always knew exactly where things stood. When I changed my mind about the checkout flow halfway through, he didn't push back — just adjusted and shipped it better than what I originally asked for.",
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const testimonialsData: Testimonial[] = [
     avatar: "https://i.pravatar.cc/150?img=12",
     title: "Our Core Web Vitals went from red to green overnight",
     message:
-      "We hired Aayush to rebuild our marketing site on Next.js. The old WordPress site was scoring 38 on PageSpeed. His build scores 97. He set up the CMS integration so our content team can publish without touching code. Solid architecture, clean codebase — the kind of work I'd expect from a senior engineer.",
+      "We hired Rashedul to rebuild our marketing site on Next.js. The old WordPress site was scoring 38 on PageSpeed. His build scores 97. He set up the CMS integration so our content team can publish without touching code. Solid architecture, clean codebase — the kind of work I'd expect from a senior engineer.",
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ const testimonialsData: Testimonial[] = [
     avatar: "https://i.pravatar.cc/150?img=20",
     title: "He turned our messy brief into something beautiful",
     message:
-      "We gave Aayush a mood board and some rough wireframes — honestly, they were half-baked. He came back with a prototype that was cleaner and more thoughtful than what we'd imagined. The animations feel intentional, the typography is perfect, and three clients have asked us who built it.",
+      "We gave Rashedul a mood board and some rough wireframes — honestly, they were half-baked. He came back with a prototype that was cleaner and more thoughtful than what we'd imagined. The animations feel intentional, the typography is perfect, and three clients have asked us who built it.",
   },
   {
     id: 6,

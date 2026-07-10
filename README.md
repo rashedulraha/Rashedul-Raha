@@ -1,50 +1,44 @@
 # Rashedul Islam - Personal Portfolio
 
-This repository contains the source code for the personal portfolio website of **Rashedul Islam**. It is a modern, fast, and fully localized web application showcasing my projects, experiences, and technical blog.
+Welcome to the source code of my personal portfolio and blog. 
+This project is built using modern web technologies to be blazing fast, accessible, and multilingual.
 
-## ⚠️ Copyright & License Notice (Strictly Enforced)
+## Tech Stack
 
-**© 2026 Rashedul Islam. All rights reserved.**
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS & Framer Motion
+- **Internationalization**: next-intl (Supports English, Bengali, Japanese, German, Italian, French, Spanish)
+- **Deployment**: Vercel / Cloudflare Pages
 
-This repository and all of its contents (including but not limited to source code, design assets, UI/UX patterns, animations, text, and structure) are the exclusive intellectual property of Rashedul Islam. 
+## Features
 
-- **NO COPYING:** You are strictly prohibited from copying, cloning, modifying, distributing, or using any part of this code or design for your own personal or commercial projects.
-- **NO FORKING FOR REUSE:** You may not use this repository as a template or starting point for your own website.
-- **COPYRIGHT VIOLATION:** Any unauthorized use, reproduction, or distribution of this code or design will be considered a direct violation of copyright law and will be subject to legal action and DMCA takedown notices.
+- **Full Multilingual Support**: The site is fully translated and supports dynamic routing based on the selected language (`/[locale]`).
+- **Global Command Menu**: A custom `cmdk` powered search menu that allows users to navigate the site, search for blogs, or contact me directly. It even supports searching in localized languages (e.g., typing 'সম্পর্কে' will bring up the 'About' page).
+- **Dark/Light Mode**: First-class support for theming with next-themes, featuring custom gradient backgrounds and glassmorphism.
+- **Dynamic Guestbook**: Leave your mark on the digital wall.
+- **Bucket List**: A tracking system for my lifetime goals.
 
-*By viewing this repository, you agree to these terms.*
+## Future Enhancements (Roadmap)
 
----
+- **Database Integration**: Connect the Guestbook to a real-time database (e.g., Supabase, Firebase) to store user messages permanently.
+- **CMS Integration**: Migrate the hardcoded blog posts (`lib/blog-data.ts`) to a Headless CMS (like Sanity or Contentful) for easier content management.
+- **Analytics**: Add privacy-preserving analytics to track page views and interactions.
+- **Admin Dashboard**: Implement an authenticated dashboard for managing content.
 
-## 🛠️ How It Was Built (Tech Stack)
+## Copyright & Licensing
 
-This project was engineered with modern web development standards, focusing on performance, smooth animations, and global accessibility:
+**© 2026 Rashedul Islam. All Rights Reserved.**
 
-- **Framework:** [Next.js](https://nextjs.org/) (App Router)
-- **Library:** [React](https://react.dev/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/) for fluid UI transitions and micro-interactions.
-- **Internationalization (i18n):** `next-intl` (Fully localized in 7 languages including English, Bengali, Japanese, Spanish, German, French, and Italian).
-- **Icons:** [Lucide React](https://lucide.dev/)
-- **Typography:** Instrument Serif & Sans-serif system fonts.
+This repository and its contents, including but not limited to source code, design elements, graphics, text, and overall architecture, are the intellectual property of Rashedul Islam. 
 
-## 🚀 Features
+**You may NOT:**
+- Copy, clone, or duplicate this website's design or code for your own portfolio or commercial use.
+- Distribute, modify, or create derivative works based on this codebase without explicit written permission.
+- Use the content, branding, or personal images found in this repository.
 
-- **Multi-Language Support:** Seamlessly switch between 7 different languages dynamically without page reloads.
-- **Premium UI/UX:** Glassmorphism effects, smooth page transitions, and interactive components.
-- **Dynamic Projects & Blog:** Content is driven by data files and deeply integrated with localization.
-- **Interactive Search/Command Modal:** A `cmd+k` styled global search and reach-out terminal.
+If you are interested in how a specific feature was built, you are welcome to read the source code for educational purposes, but you may not copy the code verbatim.
 
-## 🔮 Future Enhancements (What can be added next)
+## Contact
 
-The architecture of this site is highly scalable. The following features are planned or can be easily integrated:
-
-1. **Full MDX Blog System:** Transition from static data arrays to a fully parsed MDX blog system using `next-mdx-remote` or `Contentlayer` for rich text formatting.
-2. **Database Integration:** Connect a database (e.g., PostgreSQL with Prisma or Supabase) to make the **Guestbook** fully functional where users can leave live comments.
-3. **Authentication:** Implement `NextAuth.js` to secure the **Dashboard Terminal** (currently a UI mockup) for admin-only content management.
-4. **Headless CMS:** Integrate Sanity or Strapi to manage projects and blog posts dynamically without deploying code changes.
-5. **Newsletter Subscription:** Add an API route to collect emails and integrate with Resend or Mailchimp.
-
----
-
-*For inquiries or permission requests, please contact me through the 'Reach Out' section on the website.*
+If you have any questions or would like to collaborate, feel free to reach out to me at `rashedulraha.bd@gmail.com` or via the Contact Modal on the website.
