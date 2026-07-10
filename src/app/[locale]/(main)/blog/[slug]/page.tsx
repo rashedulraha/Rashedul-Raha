@@ -5,7 +5,7 @@ import { blogPosts } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Clock, Calendar, ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/routing";
 import FolderStructure from "@/components/blog/FolderStructure";
 import EnvBlock from "@/components/blog/EnvBlock";
 

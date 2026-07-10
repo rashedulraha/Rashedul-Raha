@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Search, Rss, ArrowRight, Clock, Calendar } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/routing";
 import Image from "next/image";
 import { BlogPost } from "@/lib/blog-data";
 import { useTranslations } from "next-intl";
