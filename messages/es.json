@@ -545,5 +545,107 @@
     "inspirationDesc": "El gran diseño rara vez se crea en un vacío.",
     "aceternityDesc": "Inspiración para componentes interactivos.",
     "magicuiDesc": "Inspiración para animaciones modernas."
+  },
+  "GuestbookPage": {
+    "subtitle": "THE WALL REMEMBERS",
+    "title1": "Words That Echo",
+    "titleHighlight": "Always"
+  },
+  "GuestbookForm": {
+    "namePlaceholder": "Your Name",
+    "messagePlaceholder": "Your Message...",
+    "sign": "Sign",
+    "alert": "This is a static mockup of the guestbook! Database integration is required to post actual messages."
+  },
+  "BucketListPage": {
+    "header": {
+      "title1": "The",
+      "titleHighlight": "Bucket List",
+      "description": "A running list of things I want to do, see, and achieve in my lifetime. It's a mix of professional milestones, crazy adventures, and personal growth goals."
+    },
+    "progress": {
+      "title": "Progress",
+      "completedText": "completed out of",
+      "goalsText": "goals"
+    },
+    "categories": {
+      "Career": "Career",
+      "Adventure": "Adventure",
+      "Life": "Life",
+      "Travel": "Travel"
+    },
+    "sections": {
+      "completed": {
+        "title": "Completed",
+        "desc": "The milestones I've already achieved. Looking back at these keeps me motivated to push forward on the rest of the list."
+      },
+      "career": {
+        "title": "Career & Tech",
+        "desc": "Professional goals focused on building impactful products, sharing knowledge, and pushing my technical boundaries."
+      },
+      "travel": {
+        "title": "Travel & Adventure",
+        "desc": "Places I want to see and experiences I want to have around the globe."
+      },
+      "life": {
+        "title": "Life & Experiences",
+        "desc": "Personal growth, physical challenges, and giving back to the community."
+      },
+      "partner": {
+        "title": "Life Partner",
+        "desc": "A few thoughts about my dream life partner.",
+        "letter": "Dear Queen,\n\nWarmest greetings and best wishes from the bottom of my heart. I hope you are doing well by the infinite mercy of Allah.\n\nI am writing this letter to you today to talk about a very important chapter of our lives. I have some dreams, some expectations, and some promises regarding our marriage and future life that I want to share with you today. I believe the foundation of a beautiful and lasting relationship is getting to know each other's thoughts from the very beginning.\n\nI want a life partner who will not only be the light of my home but also my companion on the path to Jannah. I sincerely want our future family to be guided by the pleasure of Allah and the Sunnah of the Messenger (PBUH). As a Muslim woman, I have deep respect for your modesty, pardah, humility, and obedience to Allah. I dream that together we will build a family where it will be easy to follow Allah's commands, and there will be no shadow of sin in our home.\n\nAfter marriage, protecting your religion, your honor, and your rights is a huge trust and responsibility placed upon me by Allah. I promise you:\n\n1. I will gladly take full responsibility for your maintenance, housing, medical care, and clothing.\n2. You will never have to suffer from an inferiority complex for anything in our family. I will keep you by my side not as a maid or a domestic worker, but as the better half of my life and the queen of my heart.\n3. I will look at any of your minor mistakes with forgiveness and will never treat you harshly or disrespectfully. Following the Sunnah of the Messenger (PBUH), I will protect you with the utmost love and care.\n4. I will always encourage and support you to make your religious life more beautiful.\n\nI do not want to force anything on you. But I want you to think deeply about these matters. If we both try to walk on the beautiful path shown by Islam, Allah will bless our family, and our love will not be limited to this world only, but will keep us together in Jannah in the afterlife as well.\n\nPlease take some time to read and consider these words with a calm mind. If you consent from your heart to walk together in this ideal and loving family, only then will we be bound in this sacred bond of our lives. I am waiting for your beautiful decision.\n\nMay Allah guide us both and gift us a blessed life.\n\nSincerely,\nRashedul Islam"
+      }
+    },
+    "items": {
+      "item0": {
+        "title": "Contribute to a major open-source project"
+      },
+      "item1": {
+        "title": "Go skydiving"
+      },
+      "item2": {
+        "title": "Build my dream home workspace"
+      },
+      "item3": {
+        "title": "Build a profitable SaaS business"
+      },
+      "item4": {
+        "title": "Speak at a major tech conference"
+      },
+      "item5": {
+        "title": "Reach 1,000 GitHub stars on a personal repository"
+      },
+      "item6": {
+        "title": "Start a tech blog and reach 10k monthly readers"
+      },
+      "item7": {
+        "title": "Visit Japan and experience the cherry blossoms"
+      },
+      "item8": {
+        "title": "Get lost in the clouds at Sajek Valley"
+      },
+      "item9": {
+        "title": "Vacation at Cox's Bazar sea beach"
+      },
+      "item10": {
+        "title": "Explore the Sundarbans mangrove forest"
+      },
+      "item11": {
+        "title": "Run a full marathon"
+      },
+      "item12": {
+        "title": "Learn to play the piano fluently"
+      },
+      "item13": {
+        "title": "Read 100 books in a single year"
+      },
+      "item14": {
+        "title": "Mentorship: Help 10 junior developers get their first job"
+      },
+      "item15": {
+        "title": "Become a Software Developer"
+      }
+    }
   }
-}
+}\n

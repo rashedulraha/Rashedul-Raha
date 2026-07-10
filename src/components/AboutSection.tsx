@@ -10,10 +10,10 @@ import {
   Layers,
   Terminal,
   MonitorSmartphone,
-  Cpu,
   Database,
   Cloud,
   Sparkles,
+  User,
 } from "lucide-react";
 
 const TextTooltip = ({
@@ -123,9 +123,9 @@ export default function AboutSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16">
           <p className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-primary uppercase tracking-widest mb-4 rounded-full bg-primary/10 border border-primary/20">
-            <Cpu className="w-3.5 h-3.5" /> {t('badge')}
+            <User className="w-3.5 h-3.5" /> {t('badge')}
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
+          <h2 className="text-center font-instrument-serif text-3xl text-zinc-700 leading-tight md:text-4xl lg:text-5xl dark:text-zinc-100">
             {t('title1')} {" "}
             <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500 font-serif italic">

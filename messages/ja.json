@@ -495,7 +495,6 @@
       "Tutorials": "チュートリアル"
     }
   },
-
   "LinksPage": {
     "network": "ネットワーク",
     "connectWith": "つながる",
@@ -560,86 +559,93 @@
   },
   "BucketListPage": {
     "header": {
-      "title1": "人生の",
-      "titleHighlight": "バケットリスト",
-      "description": "人生でやりたいこと、見たいこと、達成したいことのリストです。仕事の目標、冒険、そして自己成長の目標が混ざっています。"
+      "title1": "The",
+      "titleHighlight": "Bucket List",
+      "description": "A running list of things I want to do, see, and achieve in my lifetime. It's a mix of professional milestones, crazy adventures, and personal growth goals."
     },
     "progress": {
-      "title": "進捗状況",
-      "completedText": "件完了 /",
-      "goalsText": "ゴール中"
+      "title": "Progress",
+      "completedText": "completed out of",
+      "goalsText": "goals"
     },
     "categories": {
-      "Career": "キャリア",
-      "Adventure": "冒険",
-      "Life": "ライフ",
-      "Travel": "旅行"
+      "Career": "Career",
+      "Adventure": "Adventure",
+      "Life": "Life",
+      "Travel": "Travel"
     },
     "sections": {
       "completed": {
-        "title": "達成済み",
-        "desc": "すでに達成したマイルストーンです。これらを振り返ると、残りのリストを前に進めるモチベーションになります。"
+        "title": "Completed",
+        "desc": "The milestones I've already achieved. Looking back at these keeps me motivated to push forward on the rest of the list."
       },
       "career": {
-        "title": "キャリアとテクノロジー",
-        "desc": "影響力のある製品を作り、知識を共有し、技術の限界に挑戦することに焦点を当てた仕事の目標です。"
+        "title": "Career & Tech",
+        "desc": "Professional goals focused on building impactful products, sharing knowledge, and pushing my technical boundaries."
       },
       "travel": {
-        "title": "旅行と冒険",
-        "desc": "世界中で見たい場所と体験したいことです。"
+        "title": "Travel & Adventure",
+        "desc": "Places I want to see and experiences I want to have around the globe."
       },
       "life": {
-        "title": "ライフと経験",
-        "desc": "自己成長、身体的な挑戦、そして社会貢献です。"
+        "title": "Life & Experiences",
+        "desc": "Personal growth, physical challenges, and giving back to the community."
+      },
+      "partner": {
+        "title": "Life Partner",
+        "desc": "A few thoughts about my dream life partner.",
+        "letter": "Dear Queen,\n\nWarmest greetings and best wishes from the bottom of my heart. I hope you are doing well by the infinite mercy of Allah.\n\nI am writing this letter to you today to talk about a very important chapter of our lives. I have some dreams, some expectations, and some promises regarding our marriage and future life that I want to share with you today. I believe the foundation of a beautiful and lasting relationship is getting to know each other's thoughts from the very beginning.\n\nI want a life partner who will not only be the light of my home but also my companion on the path to Jannah. I sincerely want our future family to be guided by the pleasure of Allah and the Sunnah of the Messenger (PBUH). As a Muslim woman, I have deep respect for your modesty, pardah, humility, and obedience to Allah. I dream that together we will build a family where it will be easy to follow Allah's commands, and there will be no shadow of sin in our home.\n\nAfter marriage, protecting your religion, your honor, and your rights is a huge trust and responsibility placed upon me by Allah. I promise you:\n\n1. I will gladly take full responsibility for your maintenance, housing, medical care, and clothing.\n2. You will never have to suffer from an inferiority complex for anything in our family. I will keep you by my side not as a maid or a domestic worker, but as the better half of my life and the queen of my heart.\n3. I will look at any of your minor mistakes with forgiveness and will never treat you harshly or disrespectfully. Following the Sunnah of the Messenger (PBUH), I will protect you with the utmost love and care.\n4. I will always encourage and support you to make your religious life more beautiful.\n\nI do not want to force anything on you. But I want you to think deeply about these matters. If we both try to walk on the beautiful path shown by Islam, Allah will bless our family, and our love will not be limited to this world only, but will keep us together in Jannah in the afterlife as well.\n\nPlease take some time to read and consider these words with a calm mind. If you consent from your heart to walk together in this ideal and loving family, only then will we be bound in this sacred bond of our lives. I am waiting for your beautiful decision.\n\nMay Allah guide us both and gift us a blessed life.\n\nSincerely,\nRashedul Islam"
       }
     },
     "items": {
       "item0": {
-        "title": "主要なオープンソースプロジェクトに貢献する"
+        "title": "Contribute to a major open-source project"
       },
       "item1": {
-        "title": "スカイダイビングをする"
+        "title": "Go skydiving"
       },
       "item2": {
-        "title": "夢のホームワークスペースを作る"
+        "title": "Build my dream home workspace"
       },
       "item3": {
-        "title": "収益性の高いSaaSビジネスを立ち上げる"
+        "title": "Build a profitable SaaS business"
       },
       "item4": {
-        "title": "主要な技術カンファレンスで講演する"
+        "title": "Speak at a major tech conference"
       },
       "item5": {
-        "title": "個人リポジトリでGitHubスター1000を達成する"
+        "title": "Reach 1,000 GitHub stars on a personal repository"
       },
       "item6": {
-        "title": "技術ブログを始めて月間読者1万人を達成する"
+        "title": "Start a tech blog and reach 10k monthly readers"
       },
       "item7": {
-        "title": "日本を訪れて桜を楽しむ"
+        "title": "Visit Japan and experience the cherry blossoms"
       },
       "item8": {
-        "title": "ヨーロッパをバックパックで旅する"
+        "title": "Get lost in the clouds at Sajek Valley"
       },
       "item9": {
-        "title": "オーロラを見る"
+        "title": "Vacation at Cox's Bazar sea beach"
       },
       "item10": {
-        "title": "少なくとも6ヶ月間、別の国に住む"
+        "title": "Explore the Sundarbans mangrove forest"
       },
       "item11": {
-        "title": "フルマラソンを完走する"
+        "title": "Run a full marathon"
       },
       "item12": {
-        "title": "ピアノを流暢に弾けるようになる"
+        "title": "Learn to play the piano fluently"
       },
       "item13": {
-        "title": "1年間で100冊の本を読む"
+        "title": "Read 100 books in a single year"
       },
       "item14": {
-        "title": "メンターシップ：10人のジュニア開発者が初めての仕事を得るのを手助けする"
+        "title": "Mentorship: Help 10 junior developers get their first job"
+      },
+      "item15": {
+        "title": "Become a Software Developer"
       }
     }
   }
-
-}
+}\n
