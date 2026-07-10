@@ -15,8 +15,21 @@ export default async function CertificatesPage({ params }: { params: Promise<{ l
   const t = await getTranslations("CertificatesPage");
 
   return (
-    <main className="min-h-screen bg-background selection:bg-primary/30">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-12">
+    <>
+      {/* Background gradient (glow) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed left-0 z-40 h-22.5 w-full select-none lg:h-25 top-0"
+        style={{
+          maskImage: "linear-gradient(to bottom, black 50%, transparent)",
+          WebkitBackdropFilter: "blur(2px)",
+          backdropFilter: "blur(2px)",
+          WebkitUserSelect: "none",
+          userSelect: "none",
+        }}
+      />
+      <main className="min-h-screen bg-background selection:bg-primary/30">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 pt-32 pb-20">
         {/* Header Section */}
         <div className="relative mb-16 md:mb-20">
           <div className="absolute -top-10 left-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
@@ -49,5 +62,6 @@ export default async function CertificatesPage({ params }: { params: Promise<{ l
       </div>
       <Footer />
     </main>
+    </>
   );
 }
