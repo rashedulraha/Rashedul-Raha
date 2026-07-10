@@ -600,12 +600,13 @@ export default function Navbar() {
                           <button
                             onMouseEnter={openLangDropdown}
                             onClick={() => setIsLangDropdownOpen((prev) => !prev)}
-                            className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-500 ${
+                            className={`flex h-8 items-center justify-center gap-1.5 px-2.5 rounded-full transition-colors duration-500 ${
                               isLangDropdownOpen ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
                             }`}
                             aria-label="Change Language"
                           >
                             <Globe className="h-4 w-4" />
+                            <span className="text-xs font-semibold uppercase">{locale}</span>
                           </button>
                         </div>
 
