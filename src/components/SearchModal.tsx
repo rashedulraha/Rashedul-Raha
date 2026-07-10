@@ -686,8 +686,8 @@ export default function SearchModal() {
                     transition={{ duration: 0.15 }}
                     className="flex flex-col h-full p-4 relative overflow-hidden">
                     
-                    {/* Optional: subtle background glow */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+                    {/* Subtle background glow adapted for both themes */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
 
                     <div className="flex items-center gap-2 mb-6 relative z-10">
                       <button
@@ -701,7 +701,7 @@ export default function SearchModal() {
                     </div>
 
                     <form
-                      className="flex flex-col gap-4 flex-1 justify-center max-w-sm mx-auto w-full my-8 relative z-10"
+                      className="flex flex-col gap-5 flex-1 justify-center max-w-sm mx-auto w-full my-8 relative z-10"
                       onSubmit={(e) => {
                         e.preventDefault();
                         const formData = new FormData(e.currentTarget);
@@ -713,18 +713,18 @@ export default function SearchModal() {
                           router.push("/dashboard");
                         }
                       }}>
-                      <div className="text-center mb-4">
-                        <div className="mx-auto w-14 h-14 rounded-2xl bg-black/40 border border-[#3b82f6]/20 shadow-[0_0_30px_rgba(59,130,246,0.15)] flex items-center justify-center text-cyan-400 mb-6 backdrop-blur-sm">
-                          <Terminal className="w-6 h-6" />
+                      <div className="text-center mb-6">
+                        <div className="mx-auto w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 shadow-[0_0_30px_rgba(var(--primary),0.15)] flex items-center justify-center text-primary mb-6 backdrop-blur-sm">
+                          <Terminal className="w-8 h-8" />
                         </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">{t("dashboardTerminal")}</h3>
-                        <p className="text-sm text-[#a1a1aa] leading-relaxed max-w-[280px] mx-auto">
+                        <h3 className="text-2xl font-bold text-primary mb-2">{t("dashboardTerminal")}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mx-auto">
                           {t("dashboardDesc")}
                         </p>
                       </div>
                       
                       <div className="flex flex-col gap-2">
-                        <label className="text-[10px] font-bold tracking-widest text-[#a1a1aa] uppercase pl-1">
+                        <label className="text-[11px] font-bold tracking-widest text-muted-foreground uppercase pl-1">
                           {t("adminEmail")}
                         </label>
                         <input
@@ -732,11 +732,11 @@ export default function SearchModal() {
                           name="email"
                           required
                           placeholder="admin@example.com"
-                          className="bg-[#121212] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-[#52525b] focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all shadow-inner"
+                          className="bg-muted/50 border border-border rounded-xl px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-sm"
                         />
                       </div>
-                      <div className="flex flex-col gap-2 mb-2">
-                        <label className="text-[10px] font-bold tracking-widest text-[#a1a1aa] uppercase pl-1">
+                      <div className="flex flex-col gap-2 mb-4">
+                        <label className="text-[11px] font-bold tracking-widest text-muted-foreground uppercase pl-1">
                           {t("securityPassphrase")}
                         </label>
                         <input
@@ -744,12 +744,12 @@ export default function SearchModal() {
                           name="password"
                           required
                           placeholder={t("passwordPlaceholder")}
-                          className="bg-[#121212] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-[#52525b] focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all shadow-inner"
+                          className="bg-muted/50 border border-border rounded-xl px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-sm"
                         />
                       </div>
                       <button
                         type="submit"
-                        className="w-full mt-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-6 py-3.5 rounded-xl font-semibold text-sm hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] flex items-center justify-center gap-2">
+                        className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-xl font-semibold text-sm hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
                         <LogIn className="w-4 h-4" />
                         {t("accessDashboard")}
                       </button>
