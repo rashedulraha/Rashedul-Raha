@@ -9,7 +9,16 @@
     "resume": "জীবনবৃত্তান্ত",
     "bucketList": "বাকেট লিস্ট",
     "language": "ভাষা",
-    "bookACall": "কল বুক করুন"
+    "bookACall": "কল বুক করুন",
+    "guestbook": "গেস্টবুক",
+    "guestbookDesc": "এখানে আপনার মন্তব্য দিন",
+    "bucketListDesc": "জীবনের কিছু স্বপ্ন",
+    "links": "লিংকসমূহ",
+    "linksDesc": "আমার সমস্ত লিংক",
+    "uses": "ব্যবহারসমূহ",
+    "usesDesc": "আমার ডিজিটাল জীবন",
+    "attribution": "স্বীকৃতি",
+    "attributionDesc": "এই সাইট তৈরির যাত্রা"
   },
   "Hero": {
     "badgeNew": "নতুন",
@@ -387,5 +396,35 @@
     "moreProjects": "আরও প্রজেক্ট",
     "explore": "বিস্তারিত দেখুন",
     "viewDetails": "বিস্তারিত দেখুন"
+  },
+  "SearchModal": {
+    "reachOut": "যোগাযোগ করুন",
+    "sendMessage": "রাশেদুলকে মেসেজ পাঠান",
+    "readEveryOne": "আমি সব মেসেজ পড়ি",
+    "messagePlaceholder": "হ্যালো রাশেদুল, আমার একটি প্রজেক্ট আইডিয়া আছে...",
+    "enterToContinue": "এন্টার চাপুন",
+    "shiftEnter": "শিফট+এন্টার দিলে নতুন লাইন",
+    "continueBtn": "চালিয়ে যান →",
+    "bookACall": "কল বুক করুন",
+    "bookCallDesc": "৩০ মিনিট • কোনো শর্ত নেই",
+    "emailMe": "ইমেইল করুন",
+    "emailAddress": "hello@rashedul.com",
+    "sendAMessage": "মেসেজ পাঠান",
+    "name": "নাম",
+    "namePlaceholder": "যেমন: জন ডো",
+    "email": "ইমেইল",
+    "phone": "ফোন নম্বর",
+    "topic": "বিষয়",
+    "topicPlaceholder": "প্রজেক্ট সম্পর্কিত",
+    "description": "বিবরণ",
+    "messageSent": "মেসেজ পাঠানো হয়েছে!",
+    "thankYou": "যোগাযোগ করার জন্য ধন্যবাদ। আমি খুব দ্রুত আপনার সাথে যোগাযোগ করব।",
+    "goBack": "ফিরে যান",
+    "dashboardTerminal": "ড্যাশবোর্ড টার্মিনাল",
+    "dashboardDesc": "পোর্টফোলিও মডিউল লিখতে ডেটাবেস অ্যাক্সেসের জন্য শংসাপত্র প্রদান করুন।",
+    "adminEmail": "অ্যাডমিন ইমেইল",
+    "securityPassphrase": "নিরাপত্তা পাসফ্রেজ",
+    "passwordPlaceholder": "অ্যাডমিনিস্ট্রেটর পাসওয়ার্ড দিন",
+    "accessDashboard": "ড্যাশবোর্ডে প্রবেশ করুন"
   }
 }

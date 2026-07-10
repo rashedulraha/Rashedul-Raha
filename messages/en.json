@@ -9,7 +9,16 @@
     "resume": "Resume",
     "bucketList": "Bucket List",
     "language": "Language",
-    "bookACall": "Book a Call"
+    "bookACall": "Book a Call",
+    "guestbook": "Guestbook",
+    "guestbookDesc": "Let me know you were here",
+    "bucketListDesc": "Dreams with a deadline",
+    "links": "Links",
+    "linksDesc": "All my links are here",
+    "uses": "Uses",
+    "usesDesc": "A peek into my digital...",
+    "attribution": "Attribution",
+    "attributionDesc": "Journey to create this site"
   },
   "Hero": {
     "badgeNew": "New",
@@ -387,5 +396,35 @@
     "moreProjects": "MORE PROJECTS",
     "explore": "Explore",
     "viewDetails": "View Details"
+  },
+  "SearchModal": {
+    "reachOut": "Reach out",
+    "sendMessage": "Send Rashedul a message",
+    "readEveryOne": "I read every one",
+    "messagePlaceholder": "Hey Rashedul, I have a project idea...",
+    "enterToContinue": "Enter to continue",
+    "shiftEnter": "Shift+Enter new line",
+    "continueBtn": "Continue →",
+    "bookACall": "Book a call",
+    "bookCallDesc": "30 min • no strings",
+    "emailMe": "Email me",
+    "emailAddress": "hello@rashedul.com",
+    "sendAMessage": "Send a Message",
+    "name": "Name",
+    "namePlaceholder": "e.g. John Doe",
+    "email": "Email",
+    "phone": "Phone Number",
+    "topic": "Topic",
+    "topicPlaceholder": "Project Inquiry",
+    "description": "Description",
+    "messageSent": "Message Sent!",
+    "thankYou": "Thank you for reaching out. I'll get back to you as soon as possible.",
+    "goBack": "Go Back",
+    "dashboardTerminal": "Dashboard Terminal",
+    "dashboardDesc": "Provide authorization credentials to access database and write portfolio modules.",
+    "adminEmail": "Admin Email",
+    "securityPassphrase": "Security Passphrase",
+    "passwordPlaceholder": "Enter administrator password",
+    "accessDashboard": "Access Dashboard"
   }
 }

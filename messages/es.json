@@ -9,7 +9,16 @@
     "resume": "Currículum",
     "bucketList": "Lista de deseos",
     "language": "Idioma",
-    "bookACall": "Reservar"
+    "bookACall": "Reservar",
+    "guestbook": "Libro de visitas",
+    "guestbookDesc": "Déjame saber que estuviste aquí",
+    "bucketListDesc": "Sueños con fecha límite",
+    "links": "Enlaces",
+    "linksDesc": "Todos mis enlaces están aquí",
+    "uses": "Usos",
+    "usesDesc": "Un vistazo a mi vida digital...",
+    "attribution": "Atribución",
+    "attributionDesc": "Viaje para crear este sitio"
   },
   "Hero": {
     "badgeNew": "New",
@@ -387,5 +396,35 @@
     "moreProjects": "MÁS PROYECTOS",
     "explore": "Explorar",
     "viewDetails": "Ver Detalles"
+  },
+  "SearchModal": {
+    "reachOut": "Contactar",
+    "sendMessage": "Enviar un mensaje a Rashedul",
+    "readEveryOne": "Leo todos",
+    "messagePlaceholder": "Hola Rashedul, tengo una idea de proyecto...",
+    "enterToContinue": "Enter para continuar",
+    "shiftEnter": "Shift+Enter nueva línea",
+    "continueBtn": "Continuar →",
+    "bookACall": "Reservar llamada",
+    "bookCallDesc": "30 min • sin compromisos",
+    "emailMe": "Envíame un correo",
+    "emailAddress": "hello@rashedul.com",
+    "sendAMessage": "Enviar un Mensaje",
+    "name": "Nombre",
+    "namePlaceholder": "ej. John Doe",
+    "email": "Correo electrónico",
+    "phone": "Número de teléfono",
+    "topic": "Tema",
+    "topicPlaceholder": "Consulta sobre proyecto",
+    "description": "Descripción",
+    "messageSent": "¡Mensaje Enviado!",
+    "thankYou": "Gracias por contactarme. Te responderé lo antes posible.",
+    "goBack": "Regresar",
+    "dashboardTerminal": "Terminal del Panel",
+    "dashboardDesc": "Proporcione credenciales para acceder a la base de datos.",
+    "adminEmail": "Correo de administrador",
+    "securityPassphrase": "Frase de seguridad",
+    "passwordPlaceholder": "Introduce contraseña de administrador",
+    "accessDashboard": "Acceder al panel"
   }
 }

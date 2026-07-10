@@ -9,7 +9,16 @@
     "resume": "Curriculum",
     "bucketList": "Lista dei desideri",
     "language": "Lingua",
-    "bookACall": "Prenota"
+    "bookACall": "Prenota",
+    "guestbook": "Libro degli ospiti",
+    "guestbookDesc": "Fammi sapere che sei stato qui",
+    "bucketListDesc": "Sogni con una scadenza",
+    "links": "Link",
+    "linksDesc": "Tutti i miei link sono qui",
+    "uses": "Usi",
+    "usesDesc": "Uno sguardo alla mia vita digitale...",
+    "attribution": "Attribuzione",
+    "attributionDesc": "Il percorso per creare questo sito"
   },
   "Hero": {
     "badgeNew": "New",
@@ -387,5 +396,35 @@
     "moreProjects": "ALTRI PROGETTI",
     "explore": "Esplorare",
     "viewDetails": "Visualizza dettagli"
+  },
+  "SearchModal": {
+    "reachOut": "Contatta",
+    "sendMessage": "Invia un messaggio a Rashedul",
+    "readEveryOne": "Li leggo tutti",
+    "messagePlaceholder": "Ciao Rashedul, ho un'idea per un progetto...",
+    "enterToContinue": "Invio per continuare",
+    "shiftEnter": "Maiusc+Invio nuova riga",
+    "continueBtn": "Continua →",
+    "bookACall": "Prenota una chiamata",
+    "bookCallDesc": "30 min • senza impegni",
+    "emailMe": "Mandami un'email",
+    "emailAddress": "hello@rashedul.com",
+    "sendAMessage": "Invia un Messaggio",
+    "name": "Nome",
+    "namePlaceholder": "es. Mario Rossi",
+    "email": "Email",
+    "phone": "Numero di telefono",
+    "topic": "Argomento",
+    "topicPlaceholder": "Richiesta progetto",
+    "description": "Descrizione",
+    "messageSent": "Messaggio Inviato!",
+    "thankYou": "Grazie per avermi contattato. Ti risponderò al più presto.",
+    "goBack": "Indietro",
+    "dashboardTerminal": "Terminale Dashboard",
+    "dashboardDesc": "Fornisci le credenziali per accedere al database.",
+    "adminEmail": "Email Amministratore",
+    "securityPassphrase": "Passphrase di sicurezza",
+    "passwordPlaceholder": "Inserisci password amministratore",
+    "accessDashboard": "Accedi alla Dashboard"
   }
 }

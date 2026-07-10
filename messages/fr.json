@@ -9,7 +9,16 @@
     "resume": "CV",
     "bucketList": "Liste de souhaits",
     "language": "Langue",
-    "bookACall": "Réserver"
+    "bookACall": "Réserver",
+    "guestbook": "Livre d'or",
+    "guestbookDesc": "Fais-moi savoir que tu étais là",
+    "bucketListDesc": "Des rêves avec une date limite",
+    "links": "Liens",
+    "linksDesc": "Tous mes liens sont ici",
+    "uses": "Utilisations",
+    "usesDesc": "Un aperçu de ma vie numérique...",
+    "attribution": "Attribution",
+    "attributionDesc": "Parcours de création du site"
   },
   "Hero": {
     "badgeNew": "New",
@@ -387,5 +396,35 @@
     "moreProjects": "PLUS DE PROJETS",
     "explore": "Explorer",
     "viewDetails": "Voir les détails"
+  },
+  "SearchModal": {
+    "reachOut": "Contacter",
+    "sendMessage": "Envoyer un message à Rashedul",
+    "readEveryOne": "Je les lis tous",
+    "messagePlaceholder": "Bonjour Rashedul, j'ai une idée de projet...",
+    "enterToContinue": "Entrée pour continuer",
+    "shiftEnter": "Maj+Entrée nouvelle ligne",
+    "continueBtn": "Continuer →",
+    "bookACall": "Réserver un appel",
+    "bookCallDesc": "30 min • sans engagement",
+    "emailMe": "Envoyez-moi un e-mail",
+    "emailAddress": "hello@rashedul.com",
+    "sendAMessage": "Envoyer un Message",
+    "name": "Nom",
+    "namePlaceholder": "ex. Jean Dupont",
+    "email": "E-mail",
+    "phone": "Numéro de téléphone",
+    "topic": "Sujet",
+    "topicPlaceholder": "Demande de projet",
+    "description": "Description",
+    "messageSent": "Message Envoyé !",
+    "thankYou": "Merci de m'avoir contacté. Je vous répondrai dès que possible.",
+    "goBack": "Retour",
+    "dashboardTerminal": "Terminal du Tableau de Bord",
+    "dashboardDesc": "Fournissez des identifiants pour accéder à la base de données.",
+    "adminEmail": "E-mail Admin",
+    "securityPassphrase": "Phrase de sécurité",
+    "passwordPlaceholder": "Entrer le mot de passe admin",
+    "accessDashboard": "Accéder au Tableau de Bord"
   }
 }
