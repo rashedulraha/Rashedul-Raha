@@ -394,7 +394,7 @@ export default function SearchModal() {
                       <div className="p-4 border-b border-border flex items-center gap-3 bg-muted">
                         <div className="h-8 w-8 rounded-full overflow-hidden bg-muted-foreground/10 border border-border">
                           <Image
-                            src="https://i.pravatar.cc/100?img=4"
+                            src="/personal_img/rashedul-2.jpeg"
                             alt="Rashedul"
                             width={32}
                             height={32}
@@ -454,7 +454,7 @@ export default function SearchModal() {
                         <div className="flex items-center mb-3">
                           <div className="h-8 w-8 rounded-full overflow-hidden bg-muted border-2 border-border z-10">
                             <Image
-                              src="https://i.pravatar.cc/100?img=4"
+                              src="/personal_img/rashedul-2.jpeg"
                               alt="Rashedul"
                               width={32}
                               height={32}
