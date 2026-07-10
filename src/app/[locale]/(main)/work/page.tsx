@@ -1,9 +1,9 @@
 import React from "react";
-
 import Footer from "@/components/Footer";
 import { projects } from "@/lib/work-data";
 import { Metadata } from "next";
 import WorkList from "@/components/work/WorkList";
+import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Work | Aayush Bharti",
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function WorkPage() {
+  const t = useTranslations("WorkPage");
   return (
     <>
       <div className="bg-background min-h-screen text-foreground selection:bg-primary/30">
@@ -35,10 +36,10 @@ export default function WorkPage() {
             {/* Hero Header */}
             <div className="mb-12 text-center pt-8">
               <p className="mb-4 font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                PORTFOLIO
+                {t("portfolio")}
               </p>
               <h1 className="font-instrument-serif text-5xl md:text-6xl lg:text-7xl tracking-tight text-foreground">
-                Featured{" "}
+                {t("featured")}{" "}
                 <span
                   className="italic"
                   style={{
@@ -46,7 +47,7 @@ export default function WorkPage() {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}>
-                  Projects
+                  {t("projects")}
                 </span>
               </h1>
             </div>
