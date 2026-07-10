@@ -1,4 +1,5 @@
 import React from "react";
+import PageWrapper from "@/components/PageWrapper";
 
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
@@ -127,16 +128,9 @@ export default function UsesPage() {
   ];
 
   return (
-    <>
-      <div className="bg-background min-h-screen text-foreground selection:bg-primary/30 relative">
-
-
-        <main className="w-full relative z-10 pt-20">
-          <Timeline data={data} />
-        </main>
-        
-        <Footer />
-      </div>
-    </>
+    <PageWrapper>
+      <Timeline data={data} />
+      <Footer />
+    </PageWrapper>
   );
 }

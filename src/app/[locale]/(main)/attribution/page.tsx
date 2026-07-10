@@ -1,4 +1,5 @@
 import React from "react";
+import PageWrapper from "@/components/PageWrapper";
 
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
@@ -179,19 +180,14 @@ export default function AttributionPage() {
   ];
 
   return (
-    <>
-      <div className="bg-background min-h-screen text-foreground selection:bg-primary/30 relative">
+    <PageWrapper>
+      {/* Abstract Background Elements */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-50">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/5 blur-[120px]" />
+      </div>
 
-        
-        {/* Abstract Background Elements */}
-        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden opacity-50">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/5 blur-[120px]" />
-        </div>
-
-        <main className="w-full relative z-10 pt-20">
-          
-          <div className="max-w-7xl mx-auto px-4 md:px-8 pt-8 md:pt-12">
+      <div>
              <div className="inline-flex items-center justify-center mb-6">
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-[hsl(var(--background))] border border-foreground/10 shadow-[0_0_40px_rgba(248,113,113,0.1)] relative">
                   <Heart className="w-6 h-6 text-red-400" />
@@ -213,13 +209,10 @@ export default function AttributionPage() {
               <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed mb-8">
                 {t("creditDesc")}
               </p>
-          </div>
-
-          <Timeline data={data} />
-        </main>
-        
-        <Footer />
       </div>
-    </>
+
+      <Timeline data={data} />
+      <Footer />
+    </PageWrapper>
   );
 }

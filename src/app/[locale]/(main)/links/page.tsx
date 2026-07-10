@@ -1,4 +1,5 @@
 import React from "react";
+import PageWrapper from "@/components/PageWrapper";
 
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
@@ -59,24 +60,19 @@ export default function LinksPage() {
   const t = useTranslations("LinksPage");
   
   return (
-    <>
-      <div className="bg-background min-h-screen text-foreground selection:bg-primary/30 relative">
-        {/* Subtle grid background (like the image) */}
-        <div 
-          className="absolute inset-0 z-0 pointer-events-none opacity-20"
-          style={{
-            backgroundImage: "linear-gradient(to right, #ffffff10 1px, transparent 1px), linear-gradient(to bottom, #ffffff10 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-            maskImage: "linear-gradient(to bottom, black 40%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 40%, transparent 100%)"
-          }}
-        />
+    <PageWrapper className="max-w-6xl">
+      {/* Subtle grid background (like the image) */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage: "linear-gradient(to right, #ffffff10 1px, transparent 1px), linear-gradient(to bottom, #ffffff10 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          maskImage: "linear-gradient(to bottom, black 40%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 40%, transparent 100%)"
+        }}
+      />
 
-
-
-        <main className="pt-32 pb-20 relative z-10">
-          <div className="container mx-auto max-w-6xl px-4 sm:px-6">
-            
+      <div>
             {/* Header */}
             <div className="mb-16 text-center pt-8">
               <p className="mb-4 font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em]">
@@ -268,11 +264,8 @@ export default function LinksPage() {
               </div>
 
             </div>
-          </div>
-        </main>
-        
-        <Footer />
       </div>
-    </>
+      <Footer />
+    </PageWrapper>
   );
 }

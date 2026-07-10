@@ -1,4 +1,5 @@
 import React from "react";
+import PageWrapper from "@/components/PageWrapper";
 
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
@@ -16,23 +17,18 @@ export default async function GuestbookPage({ params }: { params: Promise<{ loca
   const initialMessages = await getGuestbookMessages();
 
   return (
-    <>
-      <div className="bg-background min-h-screen text-foreground selection:bg-primary/30 relative">
+    <PageWrapper className="max-w-6xl">
+      {/* Crumpled paper texture background overlay (simulated with CSS pattern) */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-20"
+           style={{
+             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+             mixBlendMode: "overlay"
+           }}
+      />
 
-        
-        {/* Crumpled paper texture background overlay (simulated with CSS pattern) */}
-        <div className="fixed inset-0 z-0 pointer-events-none opacity-20"
-             style={{
-               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-               mixBlendMode: "overlay"
-             }}
-        />
-
-        <main className="pt-32 pb-20 relative z-10">
-          <div className="container relative mx-auto max-w-6xl px-4 sm:px-6">
-            
-            {/* Header */}
-            <div className="mb-20 text-center pt-12">
+      <div>
+        {/* Header */}
+        <div className="mb-20 text-center pt-12">
               <p className="mb-4 font-semibold text-muted-foreground text-[10px] sm:text-xs uppercase tracking-[0.3em]">
                 {t("subtitle")}
               </p>
@@ -52,11 +48,8 @@ export default async function GuestbookPage({ params }: { params: Promise<{ loca
 
             {/* Interactive Masonry Grid */}
             <GuestbookGrid initialMessages={initialMessages} />
-          </div>
-        </main>
-        
-        <Footer />
       </div>
-    </>
+      <Footer />
+    </PageWrapper>
   );
 }
