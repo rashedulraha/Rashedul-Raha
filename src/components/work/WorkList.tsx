@@ -58,7 +58,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                   : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
               }`}
             >
-              {category === "All Projects" ? tPage("allProjects") : category}
+              {category === "All Projects" ? tPage("allProjects") : tPage(`categories.${category.replace(/[ .]/g, "")}`)}
             </button>
           ))}
         </div>

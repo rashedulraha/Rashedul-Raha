@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import { Timeline } from "@/components/ui/timeline";
 import { Heart, Type, Code, Sparkles, ArrowUpRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Attribution | Rashedul Islam",
@@ -11,13 +12,14 @@ export const metadata: Metadata = {
 };
 
 export default function AttributionPage() {
+  const t = useTranslations("AttributionPage");
   const data = [
     {
-      title: "Typography",
+      title: t("typography"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            Typography forms the backbone of this portfolio&apos;s premium feel. I chose typefaces that blend editorial elegance with modern digital aesthetics.
+            {t("typographyDesc")}
           </p>
           <div className="grid grid-cols-1 gap-4">
             <a 
@@ -36,7 +38,7 @@ export default function AttributionPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                View Source <ArrowUpRight className="w-4 h-4" />
+                {t("viewSource")} <ArrowUpRight className="w-4 h-4" />
               </div>
             </a>
             
@@ -56,7 +58,7 @@ export default function AttributionPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-muted-foreground transition-colors">
-                View Source <ArrowUpRight className="w-4 h-4" />
+                {t("viewSource")} <ArrowUpRight className="w-4 h-4" />
               </div>
             </a>
           </div>
@@ -64,11 +66,11 @@ export default function AttributionPage() {
       ),
     },
     {
-      title: "Frameworks",
+      title: t("frameworks"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            The incredible open-source frameworks and libraries that power the core logic, styling, and fluid animations of the entire application.
+            {t("frameworksDesc")}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <a 
@@ -85,7 +87,7 @@ export default function AttributionPage() {
               </div>
               <h4 className="text-foreground font-bold text-xl mb-1">Next.js</h4>
               <p className="text-muted-foreground text-sm mb-4">by Vercel</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">The core React framework powering the entire application architecture and routing.</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{t("nextjsDesc")}</p>
             </a>
 
             <a 
@@ -102,7 +104,7 @@ export default function AttributionPage() {
               </div>
               <h4 className="text-foreground font-bold text-xl mb-1">Tailwind CSS</h4>
               <p className="text-muted-foreground text-sm mb-4">by Tailwind Labs</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">The utility-first CSS framework used for all rapid and responsive styling.</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{t("tailwindDesc")}</p>
             </a>
 
             <a 
@@ -123,18 +125,18 @@ export default function AttributionPage() {
                 </div>
                 <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-xl">The incredible animation library used for the fluid interactions, scroll reveals, and liquid glass page transitions.</p>
+              <p className="text-muted-foreground text-sm leading-relaxed max-w-xl">{t("framerDesc")}</p>
             </a>
           </div>
         </div>
       ),
     },
     {
-      title: "Inspiration",
+      title: t("inspiration"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            Great design is rarely created in a vacuum. These are the amazing creators and platforms that heavily inspired the visual direction of this portfolio.
+            {t("inspirationDesc")}
           </p>
           <div className="flex flex-col space-y-4">
             <a 
@@ -150,7 +152,7 @@ export default function AttributionPage() {
                   <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                 </div>
                 <p className="text-muted-foreground text-sm mb-4">by Manu Arora</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">Massive inspiration for many of the premium, interactive components like this very Timeline and the World Map.</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{t("aceternityDesc")}</p>
               </div>
             </a>
             
@@ -167,7 +169,7 @@ export default function AttributionPage() {
                   <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
                 <p className="text-muted-foreground text-sm mb-4">by Magic UI</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">Inspiration for the sleek, modern animations, borders, and glassmorphism micro-interactions.</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{t("magicuiDesc")}</p>
               </div>
             </a>
           </div>
@@ -197,7 +199,7 @@ export default function AttributionPage() {
                 </div>
               </div>
               <h1 className="font-instrument-serif text-5xl md:text-7xl tracking-tight text-foreground mb-6">
-                Credit Where <br className="hidden md:block" />
+                {t("creditWhere")} <br className="hidden md:block" />
                 <span
                   className="italic"
                   style={{
@@ -205,11 +207,11 @@ export default function AttributionPage() {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}>
-                  Credit is Due
+                  {t("creditDue")}
                 </span>
               </h1>
               <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed mb-8">
-                This portfolio stands on the shoulders of giants. Here are the amazing creators, open-source projects, and tools that made building this possible.
+                {t("creditDesc")}
               </p>
           </div>
 

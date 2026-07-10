@@ -395,7 +395,13 @@
     "featuredWork": "TRABAJO DESTACADO",
     "moreProjects": "MÁS PROYECTOS",
     "explore": "Explorar",
-    "viewDetails": "Ver Detalles"
+    "viewDetails": "Ver Detalles",
+    "categories": {
+      "WebApp": "App Web",
+      "MobileApp": "App Móvil",
+      "Nextjs": "Next.js",
+      "ReactNative": "React Native"
+    }
   },
   "SearchModal": {
     "reachOut": "Contactar",
@@ -458,6 +464,69 @@
         "category": "Tutorial",
         "readTime": "11 min"
       }
+    },
+    "categories": {
+      "Nextjs": "Nextjs",
+      "React": "React",
+      "Performance": "Rendimiento",
+      "Web-Vitals": "Web-Vitals",
+      "Developer-Tools": "Herramientas",
+      "Terminal": "Terminal",
+      "Neovim": "Neovim",
+      "Workflow": "Flujo de Trabajo",
+      "Mdx": "Mdx",
+      "Tutorials": "Tutoriales"
     }
+  },
+  "LinksPage": {
+    "network": "RED",
+    "connectWith": "Conecta ",
+    "me": "Conmigo",
+    "developer": "Desarrollador",
+    "freelancer": "Freelancer",
+    "location": "Daca, Bangladesh",
+    "bookCall": "Reservar Llamada",
+    "website": "Sitio Web",
+    "email": "Correo",
+    "codeCraft": "CÓDIGO Y ARTE",
+    "connect": "CONECTAR",
+    "leaveMark": "Deja tu marca"
+  },
+  "UsesPage": {
+    "hardware": "Hardware",
+    "hardwareDesc": "Mi configuración diaria para maximizar la productividad.",
+    "macTitle": "MacBook Pro M2",
+    "macDesc": "La potencia detrás de todo.",
+    "keychronTitle": "Keychron Mechanical",
+    "keychronDesc": "Interruptores táctiles para escribir.",
+    "devTools": "Herramientas Dev",
+    "devToolsDesc": "La terminal es mi segundo hogar.",
+    "neovimTitle": "Neovim & Tmux",
+    "neovimDesc": "Flujo de terminal ultrarrápido.",
+    "weztermTitle": "WezTerm",
+    "weztermDesc": "Emulador de terminal multiplataforma.",
+    "arcTitle": "Arc Browser",
+    "arcDesc": "Una forma mejor de usar la web.",
+    "techStack": "Stack Tecnológico",
+    "techStackDesc": "Uso herramientas modernas para interfaces impresionantes.",
+    "reactTitle": "Next.js & React",
+    "reactDesc": "Los reyes indiscutibles del desarrollo moderno."
+  },
+  "AttributionPage": {
+    "creditWhere": "Reconocimientos",
+    "creditDue": " ",
+    "creditDesc": "Este portafolio es posible gracias a increíbles proyectos de código abierto.",
+    "typography": "Tipografía",
+    "typographyDesc": "La tipografía es el pilar de este diseño.",
+    "viewSource": "Ver fuente",
+    "frameworks": "Frameworks",
+    "frameworksDesc": "Las increíbles bibliotecas de código abierto.",
+    "nextjsDesc": "El framework principal de React.",
+    "tailwindDesc": "El framework de CSS para estilos rápidos.",
+    "framerDesc": "La biblioteca de animaciones.",
+    "inspiration": "Inspiración",
+    "inspirationDesc": "El gran diseño rara vez se crea en un vacío.",
+    "aceternityDesc": "Inspiración para componentes interactivos.",
+    "magicuiDesc": "Inspiración para animaciones modernas."
   }
 }

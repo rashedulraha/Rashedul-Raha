@@ -60,7 +60,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                   : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
               }`}
             >
-              {category === "All Posts" ? t("allPosts") : category}
+              {category === "All Posts" ? t("allPosts") : t(`categories.${category}`)}
             </button>
           ))}
         </div>

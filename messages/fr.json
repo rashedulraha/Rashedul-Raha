@@ -395,7 +395,13 @@
     "featuredWork": "TRAVAIL EN VEDETTE",
     "moreProjects": "PLUS DE PROJETS",
     "explore": "Explorer",
-    "viewDetails": "Voir les détails"
+    "viewDetails": "Voir les détails",
+    "categories": {
+      "WebApp": "App Web",
+      "MobileApp": "App Mobile",
+      "Nextjs": "Next.js",
+      "ReactNative": "React Native"
+    }
   },
   "SearchModal": {
     "reachOut": "Contacter",
@@ -458,6 +464,69 @@
         "category": "Tutoriel",
         "readTime": "11 min"
       }
+    },
+    "categories": {
+      "Nextjs": "Nextjs",
+      "React": "React",
+      "Performance": "Performance",
+      "Web-Vitals": "Web-Vitals",
+      "Developer-Tools": "Outils de Dév",
+      "Terminal": "Terminal",
+      "Neovim": "Neovim",
+      "Workflow": "Flux de travail",
+      "Mdx": "Mdx",
+      "Tutorials": "Tutoriels"
     }
+  },
+  "LinksPage": {
+    "network": "RÉSEAU",
+    "connectWith": "Connectez-vous avec ",
+    "me": "Moi",
+    "developer": "Développeur",
+    "freelancer": "Indépendant",
+    "location": "Dacca, Bangladesh",
+    "bookCall": "Réserver un appel",
+    "website": "Site Web",
+    "email": "E-mail",
+    "codeCraft": "CODE & ARTISANAT",
+    "connect": "CONNECTER",
+    "leaveMark": "Laissez une trace"
+  },
+  "UsesPage": {
+    "hardware": "Matériel",
+    "hardwareDesc": "Ma configuration quotidienne pour maximiser la productivité.",
+    "macTitle": "MacBook Pro M2",
+    "macDesc": "La puissance derrière chaque projet.",
+    "keychronTitle": "Keychron Mechanical",
+    "keychronDesc": "Interrupteurs tactiles pour la frappe.",
+    "devTools": "Outils de Dév",
+    "devToolsDesc": "Mon terminal est ma deuxième maison.",
+    "neovimTitle": "Neovim & Tmux",
+    "neovimDesc": "Flux de terminal ultra-rapide.",
+    "weztermTitle": "WezTerm",
+    "weztermDesc": "Émulateur de terminal multiplateforme.",
+    "arcTitle": "Arc Browser",
+    "arcDesc": "Une meilleure façon d'utiliser le web.",
+    "techStack": "Stack Technologique",
+    "techStackDesc": "J'utilise des outils modernes pour des interfaces époustouflantes.",
+    "reactTitle": "Next.js & React",
+    "reactDesc": "Les rois incontestés du développement moderne."
+  },
+  "AttributionPage": {
+    "creditWhere": "Rendre à César ce qui",
+    "creditDue": "appartient à César",
+    "creditDesc": "Ce portfolio repose sur des projets open source incroyables.",
+    "typography": "Typographie",
+    "typographyDesc": "La typographie est l'épine dorsale de ce design.",
+    "viewSource": "Voir la source",
+    "frameworks": "Frameworks",
+    "frameworksDesc": "Les bibliothèques open source incroyables.",
+    "nextjsDesc": "Le framework React principal.",
+    "tailwindDesc": "Le framework CSS pour un style rapide.",
+    "framerDesc": "La bibliothèque d'animations.",
+    "inspiration": "Inspiration",
+    "inspirationDesc": "Le grand design se crée rarement dans le vide.",
+    "aceternityDesc": "Inspiration pour les composants interactifs.",
+    "magicuiDesc": "Inspiration pour les animations modernes."
   }
 }

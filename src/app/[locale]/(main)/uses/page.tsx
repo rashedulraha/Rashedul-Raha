@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import { Timeline } from "@/components/ui/timeline";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Uses | Rashedul Islam",
@@ -11,13 +12,14 @@ export const metadata: Metadata = {
 };
 
 export default function UsesPage() {
+  const t = useTranslations("UsesPage");
   const data = [
     {
-      title: "Hardware",
+      title: t("hardware"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            My daily driver setup is focused on maximizing productivity while maintaining a clean, minimal aesthetic. A powerful machine, combined with the right peripherals, makes long coding sessions a breeze.
+            {t("hardwareDesc")}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-2xl overflow-hidden border border-foreground/10 shadow-2xl bg-background group">
@@ -29,8 +31,8 @@ export default function UsesPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                  <h4 className="text-foreground font-bold text-lg">MacBook Pro M2</h4>
-                  <p className="text-muted-foreground text-sm">The powerhouse behind every project.</p>
+                  <h4 className="text-foreground font-bold text-lg">{t("macTitle")}</h4>
+                  <p className="text-muted-foreground text-sm">{t("macDesc")}</p>
                 </div>
               </div>
             </div>
@@ -43,8 +45,8 @@ export default function UsesPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                  <h4 className="text-foreground font-bold text-lg">Keychron Mechanical</h4>
-                  <p className="text-muted-foreground text-sm">Tactile switches for the ultimate typing experience.</p>
+                  <h4 className="text-foreground font-bold text-lg">{t("keychronTitle")}</h4>
+                  <p className="text-muted-foreground text-sm">{t("keychronDesc")}</p>
                 </div>
               </div>
             </div>
@@ -53,11 +55,11 @@ export default function UsesPage() {
       ),
     },
     {
-      title: "Dev Tools",
+      title: t("devTools"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            My terminal is my second home. I heavily rely on a keyboard-centric workflow to navigate codebase, write code, and manage server infrastructure without ever touching the mouse.
+            {t("devToolsDesc")}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-2xl overflow-hidden border border-foreground/10 shadow-2xl bg-background group">
@@ -69,18 +71,18 @@ export default function UsesPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                  <h4 className="text-foreground font-bold text-lg">Neovim & Tmux</h4>
-                  <p className="text-muted-foreground text-sm">Blazing fast, highly customized terminal workflow.</p>
+                  <h4 className="text-foreground font-bold text-lg">{t("neovimTitle")}</h4>
+                  <p className="text-muted-foreground text-sm">{t("neovimDesc")}</p>
                 </div>
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden border border-foreground/10 shadow-2xl bg-background group">
               <div className="relative h-48 md:h-64 w-full bg-[hsl(var(--background))] p-8 flex flex-col justify-center border-t border-foreground/5">
-                <h4 className="text-foreground font-bold text-lg mb-2">WezTerm</h4>
-                <p className="text-muted-foreground text-sm mb-4">A GPU-accelerated cross-platform terminal emulator.</p>
+                <h4 className="text-foreground font-bold text-lg mb-2">{t("weztermTitle")}</h4>
+                <p className="text-muted-foreground text-sm mb-4">{t("weztermDesc")}</p>
                 <div className="h-px w-full bg-foreground/10 mb-4" />
-                <h4 className="text-foreground font-bold text-lg mb-2">Arc Browser</h4>
-                <p className="text-muted-foreground text-sm">A fundamentally better way to use the web and manage spaces.</p>
+                <h4 className="text-foreground font-bold text-lg mb-2">{t("arcTitle")}</h4>
+                <p className="text-muted-foreground text-sm">{t("arcDesc")}</p>
               </div>
             </div>
           </div>
@@ -88,11 +90,11 @@ export default function UsesPage() {
       ),
     },
     {
-      title: "Tech Stack",
+      title: t("techStack"),
       content: (
         <div>
           <p className="text-muted-foreground text-sm md:text-base font-normal mb-8 leading-relaxed max-w-2xl">
-            I love building with modern tools that provide great developer experience and deliver highly optimized, accessible, and stunning user interfaces.
+            {t("techStackDesc")}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-2xl overflow-hidden border border-foreground/10 shadow-2xl bg-background group">
@@ -104,8 +106,8 @@ export default function UsesPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
-                  <h4 className="text-foreground font-bold text-lg">Next.js & React</h4>
-                  <p className="text-muted-foreground text-sm">The undisputed kings of modern web development.</p>
+                  <h4 className="text-foreground font-bold text-lg">{t("reactTitle")}</h4>
+                  <p className="text-muted-foreground text-sm">{t("reactDesc")}</p>
                 </div>
               </div>
             </div>

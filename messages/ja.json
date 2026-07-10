@@ -395,7 +395,13 @@
     "featuredWork": "注目の仕事",
     "moreProjects": "その他のプロジェクト",
     "explore": "探索",
-    "viewDetails": "詳細を見る"
+    "viewDetails": "詳細を見る",
+    "categories": {
+      "WebApp": "Web アプリ",
+      "MobileApp": "モバイル アプリ",
+      "Nextjs": "Next.js",
+      "ReactNative": "React Native"
+    }
   },
   "SearchModal": {
     "reachOut": "連絡する",
@@ -458,6 +464,69 @@
         "category": "チュートリアル",
         "readTime": "11分で読める"
       }
+    },
+    "categories": {
+      "Nextjs": "Next.js",
+      "React": "React",
+      "Performance": "パフォーマンス",
+      "Web-Vitals": "Web-Vitals",
+      "Developer-Tools": "開発ツール",
+      "Terminal": "ターミナル",
+      "Neovim": "Neovim",
+      "Workflow": "ワークフロー",
+      "Mdx": "MDX",
+      "Tutorials": "チュートリアル"
     }
+  },
+  "LinksPage": {
+    "network": "ネットワーク",
+    "connectWith": "連絡を",
+    "me": "取る",
+    "developer": "開発者",
+    "freelancer": "フリーランス",
+    "location": "ダッカ、バングラデシュ",
+    "bookCall": "通話を予約",
+    "website": "ウェブサイト",
+    "email": "メール",
+    "codeCraft": "コードとクラフト",
+    "connect": "つながる",
+    "leaveMark": "足跡を残す"
+  },
+  "UsesPage": {
+    "hardware": "ハードウェア",
+    "hardwareDesc": "生産性を最大化しつつ、ミニマルな美しさを維持するセットアップ。",
+    "macTitle": "MacBook Pro M2",
+    "macDesc": "すべてのプロジェクトを支える強力なマシン。",
+    "keychronTitle": "Keychron メカニカル",
+    "keychronDesc": "最高のタイピング体験を提供するタクタイルスイッチ。",
+    "devTools": "開発ツール",
+    "devToolsDesc": "ターミナルは私の第二の家です。",
+    "neovimTitle": "Neovim & Tmux",
+    "neovimDesc": "超高速でカスタマイズされたターミナルワークフロー。",
+    "weztermTitle": "WezTerm",
+    "weztermDesc": "GPUアクセラレーション対応のターミナルエミュレータ。",
+    "arcTitle": "Arc Browser",
+    "arcDesc": "ウェブを活用する新しい方法。",
+    "techStack": "技術スタック",
+    "techStackDesc": "最高に最適化されたユーザーインターフェースを構築する最新ツール。",
+    "reactTitle": "Next.js & React",
+    "reactDesc": "現代ウェブ開発の王道。"
+  },
+  "AttributionPage": {
+    "creditWhere": "クレジット",
+    "creditDue": "一覧",
+    "creditDesc": "このポートフォリオは、素晴らしいオープンソースプロジェクトに支えられています。",
+    "typography": "タイポグラフィ",
+    "typographyDesc": "プレミアムな印象を与える書体。",
+    "viewSource": "ソースを見る",
+    "frameworks": "フレームワーク",
+    "frameworksDesc": "スタイリングとアニメーションを支えるオープンソースライブラリ。",
+    "nextjsDesc": "アプリケーションのルーティングを管理するReactフレームワーク。",
+    "tailwindDesc": "高速でレスポンシブなスタイリングを実現するCSSフレームワーク。",
+    "framerDesc": "スムーズなアニメーションを実現するライブラリ。",
+    "inspiration": "インスピレーション",
+    "inspirationDesc": "このポートフォリオに大きな影響を与えたクリエイターたち。",
+    "aceternityDesc": "インタラクティブなコンポーネントのインスピレーション。",
+    "magicuiDesc": "洗練されたアニメーションのインスピレーション。"
   }
 }

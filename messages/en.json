@@ -395,7 +395,13 @@
     "featuredWork": "FEATURED WORK",
     "moreProjects": "MORE PROJECTS",
     "explore": "Explore",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "categories": {
+      "WebApp": "Web App",
+      "MobileApp": "Mobile App",
+      "Nextjs": "Next.js",
+      "ReactNative": "React Native"
+    }
   },
   "SearchModal": {
     "reachOut": "Reach out",
@@ -458,6 +464,69 @@
         "category": "Tutorial",
         "readTime": "11 min read"
       }
+    },
+    "categories": {
+      "Nextjs": "Nextjs",
+      "React": "React",
+      "Performance": "Performance",
+      "Web-Vitals": "Web-Vitals",
+      "Developer-Tools": "Developer Tools",
+      "Terminal": "Terminal",
+      "Neovim": "Neovim",
+      "Workflow": "Workflow",
+      "Mdx": "Mdx",
+      "Tutorials": "Tutorials"
     }
+  },
+  "LinksPage": {
+    "network": "NETWORK",
+    "connectWith": "Connect With ",
+    "me": "Me",
+    "developer": "Developer",
+    "freelancer": "Freelancer",
+    "location": "Dhaka, Bangladesh",
+    "bookCall": "Book a Call",
+    "website": "Website",
+    "email": "Email",
+    "codeCraft": "CODE & CRAFT",
+    "connect": "CONNECT",
+    "leaveMark": "Leave a mark"
+  },
+  "UsesPage": {
+    "hardware": "Hardware",
+    "hardwareDesc": "My daily driver setup is focused on maximizing productivity while maintaining a clean, minimal aesthetic. A powerful machine, combined with the right peripherals, makes long coding sessions a breeze.",
+    "macTitle": "MacBook Pro M2",
+    "macDesc": "The powerhouse behind every project.",
+    "keychronTitle": "Keychron Mechanical",
+    "keychronDesc": "Tactile switches for the ultimate typing experience.",
+    "devTools": "Dev Tools",
+    "devToolsDesc": "My terminal is my second home. I heavily rely on a keyboard-centric workflow to navigate codebase, write code, and manage server infrastructure without ever touching the mouse.",
+    "neovimTitle": "Neovim & Tmux",
+    "neovimDesc": "Blazing fast, highly customized terminal workflow.",
+    "weztermTitle": "WezTerm",
+    "weztermDesc": "A GPU-accelerated cross-platform terminal emulator.",
+    "arcTitle": "Arc Browser",
+    "arcDesc": "A fundamentally better way to use the web and manage spaces.",
+    "techStack": "Tech Stack",
+    "techStackDesc": "I love building with modern tools that provide great developer experience and deliver highly optimized, accessible, and stunning user interfaces.",
+    "reactTitle": "Next.js & React",
+    "reactDesc": "The undisputed kings of modern web development."
+  },
+  "AttributionPage": {
+    "creditWhere": "Credit Where ",
+    "creditDue": "Credit is Due",
+    "creditDesc": "This portfolio stands on the shoulders of giants. Here are the amazing creators, open-source projects, and tools that made building this possible.",
+    "typography": "Typography",
+    "typographyDesc": "Typography forms the backbone of this portfolio's premium feel. I chose typefaces that blend editorial elegance with modern digital aesthetics.",
+    "viewSource": "View Source",
+    "frameworks": "Frameworks",
+    "frameworksDesc": "The incredible open-source frameworks and libraries that power the core logic, styling, and fluid animations of the entire application.",
+    "nextjsDesc": "The core React framework powering the entire application architecture and routing.",
+    "tailwindDesc": "The utility-first CSS framework used for all rapid and responsive styling.",
+    "framerDesc": "The incredible animation library used for the fluid interactions, scroll reveals, and liquid glass page transitions.",
+    "inspiration": "Inspiration",
+    "inspirationDesc": "Great design is rarely created in a vacuum. These are the amazing creators and platforms that heavily inspired the visual direction of this portfolio.",
+    "aceternityDesc": "Massive inspiration for many of the premium, interactive components like this very Timeline and the World Map.",
+    "magicuiDesc": "Inspiration for the sleek, modern animations, borders, and glassmorphism micro-interactions."
   }
 }

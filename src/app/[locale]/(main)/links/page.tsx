@@ -6,6 +6,7 @@ import { MapPin, Mail, Globe, ArrowUpRight, BookOpen, Send } from "lucide-react"
 import { FaGithub, FaXTwitter, FaLinkedin, FaBluesky } from "react-icons/fa6";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Links | Rashedul Islam",
@@ -21,7 +22,7 @@ const codeAndCraftLinks = [
   },
   {
     title: "Guestbook",
-    subtitle: "Leave a mark",
+    subtitle: "leaveMark",
     href: "/guestbook",
     icon: BookOpen,
   },
@@ -55,6 +56,8 @@ const connectLinks = [
 ];
 
 export default function LinksPage() {
+  const t = useTranslations("LinksPage");
+  
   return (
     <>
       <div className="bg-background min-h-screen text-foreground selection:bg-primary/30 relative">
@@ -77,10 +80,10 @@ export default function LinksPage() {
             {/* Header */}
             <div className="mb-16 text-center pt-8">
               <p className="mb-4 font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                NETWORK
+                {t("network")}
               </p>
               <h1 className="font-instrument-serif text-5xl md:text-6xl tracking-tight text-foreground">
-                Connect With{" "}
+                {t("connectWith")}{" "}
                 <span
                   className="italic"
                   style={{
@@ -88,7 +91,7 @@ export default function LinksPage() {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}>
-                  Me
+                  {t("me")}
                 </span>
               </h1>
             </div>
@@ -129,10 +132,10 @@ export default function LinksPage() {
                   </h2>
                   <div className="flex items-center gap-3 mb-8">
                     <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-xs text-muted-foreground font-medium">
-                      Developer
+                      {t("developer")}
                     </span>
                     <span className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-xs text-muted-foreground font-medium">
-                      Freelancer
+                      {t("freelancer")}
                     </span>
                   </div>
 
@@ -143,7 +146,7 @@ export default function LinksPage() {
                   <div className="w-full space-y-4 mb-8">
                     <div className="flex items-center gap-3 text-sm text-muted-foreground">
                       <MapPin className="w-4 h-4 text-muted-foreground" />
-                      <span>Dhaka, Bangladesh</span>
+                      <span>{t("location")}</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-muted-foreground">
                       <Mail className="w-4 h-4 text-muted-foreground" />
@@ -159,7 +162,7 @@ export default function LinksPage() {
                     >
                       <div className="flex items-center gap-2 font-semibold text-sm">
                         <BookOpen className="w-4 h-4" />
-                        Book a Call
+                        {t("bookCall")}
                       </div>
                       <ArrowUpRight className="w-4 h-4 text-muted-foreground" />
                     </a>
@@ -170,14 +173,14 @@ export default function LinksPage() {
                         className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-foreground/5 border border-foreground/5 text-foreground hover:bg-foreground/10 transition-colors text-sm font-medium"
                       >
                         <Globe className="w-4 h-4 text-muted-foreground" />
-                        Website
+                        {t("website")}
                       </Link>
                       <a 
                         href="mailto:rashedulraha.bd@gmail.com" 
                         className="flex-1 flex items-center justify-center gap-2 p-3 rounded-xl bg-foreground/5 border border-foreground/5 text-foreground hover:bg-foreground/10 transition-colors text-sm font-medium"
                       >
                         <Mail className="w-4 h-4 text-muted-foreground" />
-                        Email
+                        {t("email")}
                       </a>
                     </div>
                   </div>
@@ -192,7 +195,7 @@ export default function LinksPage() {
                 <section>
                   <div className="flex items-center gap-4 mb-6">
                     <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest shrink-0">
-                      CODE & CRAFT
+                      {t("codeCraft")}
                     </h3>
                     <div className="w-full border-t border-dashed border-foreground/10" />
                   </div>
@@ -216,7 +219,7 @@ export default function LinksPage() {
                               {link.title}
                             </h4>
                             <p className="text-xs text-muted-foreground font-mono truncate">
-                              {link.subtitle}
+                              {link.subtitle === "leaveMark" ? t("leaveMark") : link.subtitle}
                             </p>
                           </div>
                         </a>
@@ -229,7 +232,7 @@ export default function LinksPage() {
                 <section>
                   <div className="flex items-center gap-4 mb-6">
                     <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest shrink-0">
-                      CONNECT
+                      {t("connect")}
                     </h3>
                     <div className="w-full border-t border-dashed border-foreground/10" />
                   </div>
