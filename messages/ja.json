@@ -344,5 +344,48 @@
     "terms": "Terms",
     "sitemap": "Sitemap",
     "builtWith": "Built with Next.js"
+  },
+  "AboutExperience": {
+    "badge": "プロフェッショナルジャーニー",
+    "title": "職務経歴",
+    "exp1": {
+      "role": "シニアフロントエンドエンジニア",
+      "company": "TechCorp Inc.",
+      "duration": "2023 - 現在",
+      "location": "リモート",
+      "desc1": "レガシーなモノリシックアーキテクチャからモダンなNext.jsスタックへの移行を主導し、ページロード速度を40%向上させました。",
+      "desc2": "Tailwind CSSとRadix UIを使用してスケーラブルなデザインシステムを構築・実装しました。",
+      "desc3": "ジュニア開発者のメンタリングを行い、コードレビューのベストプラクティスを確立しました。"
+    },
+    "exp2": {
+      "role": "UI/UX開発者",
+      "company": "Creative Studio",
+      "duration": "2021 - 2023",
+      "location": "ニューヨーク、NY",
+      "desc1": "デザイナーと緊密に協力し、ピクセルパーフェクトで高度にインタラクティブなWebアプリケーションを構築しました。",
+      "desc2": "Framer MotionとGSAPを使用して複雑なアニメーションを実装しました。",
+      "desc3": "スタイルを関数型ユーティリティクラスにリファクタリングすることでCSSペイロードを60%削減しました。"
+    },
+    "exp3": {
+      "role": "フロントエンド開発者",
+      "company": "Startup Hub",
+      "duration": "2019 - 2021",
+      "location": "サンフランシスコ、CA",
+      "desc1": "B2B SaaSプラットフォームの初期MVPを開発し、200万ドルのシード資金を獲得しました。",
+      "desc2": "RESTful APIを統合し、Reduxを使用して複雑な状態を管理しました。",
+      "desc3": "すべてのデバイスでクロスブラウザの互換性とレスポンシブデザインを確保しました。"
+    }
+  },
+  "WorkPage": {
+    "portfolio": "ポートフォリオ",
+    "featured": "注目の",
+    "projects": "プロジェクト",
+    "allProjects": "すべてのプロジェクト",
+    "searchPlaceholder": "プロジェクトを検索",
+    "noProjects": "条件に一致するプロジェクトは見つかりませんでした。",
+    "featuredWork": "注目の仕事",
+    "moreProjects": "その他のプロジェクト",
+    "explore": "探索",
+    "viewDetails": "詳細を見る"
   }
 }

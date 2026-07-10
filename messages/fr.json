@@ -344,5 +344,48 @@
     "terms": "Terms",
     "sitemap": "Sitemap",
     "builtWith": "Built with Next.js"
+  },
+  "AboutExperience": {
+    "badge": "Parcours Professionnel",
+    "title": "Expérience Professionnelle",
+    "exp1": {
+      "role": "Ingénieur Frontend Senior",
+      "company": "TechCorp Inc.",
+      "duration": "2023 - Présent",
+      "location": "À distance",
+      "desc1": "Direction de la migration d'une architecture monolithique existante vers une pile Next.js moderne, améliorant les vitesses de chargement des pages de 40 %.",
+      "desc2": "Architecture et implémentation d'un système de conception évolutif utilisant Tailwind CSS et Radix UI.",
+      "desc3": "Encadrement de développeurs juniors et mise en place des meilleures pratiques de révision de code."
+    },
+    "exp2": {
+      "role": "Développeur UI/UX",
+      "company": "Creative Studio",
+      "duration": "2021 - 2023",
+      "location": "New York, NY",
+      "desc1": "Collaboration étroite avec les concepteurs pour créer des applications Web au pixel près et hautement interactives.",
+      "desc2": "Implémentation d'animations complexes à l'aide de Framer Motion et GSAP.",
+      "desc3": "Réduction de la charge utile CSS de 60 % en refactorisant les styles en classes d'utilitaires fonctionnelles."
+    },
+    "exp3": {
+      "role": "Développeur Frontend",
+      "company": "Startup Hub",
+      "duration": "2019 - 2021",
+      "location": "San Francisco, CA",
+      "desc1": "Développement du MVP initial pour une plateforme SaaS B2B, obtenant un financement d'amorçage de 2 millions de dollars.",
+      "desc2": "Intégration d'API RESTful et gestion d'états complexes à l'aide de Redux.",
+      "desc3": "Garantie d'une compatibilité multi-navigateurs et d'une conception réactive sur tous les appareils."
+    }
+  },
+  "WorkPage": {
+    "portfolio": "PORTEFEUILLE",
+    "featured": "En Vedette",
+    "projects": "Projets",
+    "allProjects": "Tous les Projets",
+    "searchPlaceholder": "Rechercher des projets",
+    "noProjects": "Aucun projet trouvé correspondant à vos critères.",
+    "featuredWork": "TRAVAIL EN VEDETTE",
+    "moreProjects": "PLUS DE PROJETS",
+    "explore": "Explorer",
+    "viewDetails": "Voir les détails"
   }
 }

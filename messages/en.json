@@ -344,5 +344,48 @@
     "terms": "Terms",
     "sitemap": "Sitemap",
     "builtWith": "Built with Next.js"
+  },
+  "AboutExperience": {
+    "badge": "Professional Journey",
+    "title": "Work Experience",
+    "exp1": {
+      "role": "Senior Frontend Engineer",
+      "company": "TechCorp Inc.",
+      "duration": "2023 - Present",
+      "location": "Remote",
+      "desc1": "Led the migration of a legacy monolithic architecture to a modern Next.js stack, improving page load speeds by 40%.",
+      "desc2": "Architected and implemented a scalable design system using Tailwind CSS and Radix UI.",
+      "desc3": "Mentored junior developers and established code review best practices."
+    },
+    "exp2": {
+      "role": "UI/UX Developer",
+      "company": "Creative Studio",
+      "duration": "2021 - 2023",
+      "location": "New York, NY",
+      "desc1": "Collaborated closely with designers to build pixel-perfect, highly interactive web applications.",
+      "desc2": "Implemented complex animations using Framer Motion and GSAP.",
+      "desc3": "Reduced CSS payload by 60% by refactoring styles into functional utility classes."
+    },
+    "exp3": {
+      "role": "Frontend Developer",
+      "company": "Startup Hub",
+      "duration": "2019 - 2021",
+      "location": "San Francisco, CA",
+      "desc1": "Developed the initial MVP for a B2B SaaS platform, securing $2M in seed funding.",
+      "desc2": "Integrated RESTful APIs and managed complex state using Redux.",
+      "desc3": "Ensured cross-browser compatibility and responsive design across all devices."
+    }
+  },
+  "WorkPage": {
+    "portfolio": "PORTFOLIO",
+    "featured": "Featured",
+    "projects": "Projects",
+    "allProjects": "All Projects",
+    "searchPlaceholder": "Search projects",
+    "noProjects": "No projects found matching your criteria.",
+    "featuredWork": "FEATURED WORK",
+    "moreProjects": "MORE PROJECTS",
+    "explore": "Explore",
+    "viewDetails": "View Details"
   }
 }

@@ -344,5 +344,48 @@
     "terms": "Terms",
     "sitemap": "Sitemap",
     "builtWith": "Built with Next.js"
+  },
+  "AboutExperience": {
+    "badge": "Percorso Professionale",
+    "title": "Esperienza Lavorativa",
+    "exp1": {
+      "role": "Senior Frontend Engineer",
+      "company": "TechCorp Inc.",
+      "duration": "2023 - Presente",
+      "location": "Remoto",
+      "desc1": "Guidato la migrazione di un'architettura monolitica legacy a un moderno stack Next.js, migliorando la velocità di caricamento delle pagine del 40%.",
+      "desc2": "Progettato e implementato un sistema di design scalabile utilizzando Tailwind CSS e Radix UI.",
+      "desc3": "Fatto da mentore a sviluppatori junior e stabilito le migliori pratiche per la revisione del codice."
+    },
+    "exp2": {
+      "role": "Sviluppatore UI/UX",
+      "company": "Creative Studio",
+      "duration": "2021 - 2023",
+      "location": "New York, NY",
+      "desc1": "Collaborato a stretto contatto con i designer per creare applicazioni web perfette al pixel e altamente interattive.",
+      "desc2": "Implementato animazioni complesse utilizzando Framer Motion e GSAP.",
+      "desc3": "Ridotto il payload CSS del 60% effettuando il refactoring degli stili in classi di utilità funzionali."
+    },
+    "exp3": {
+      "role": "Sviluppatore Frontend",
+      "company": "Startup Hub",
+      "duration": "2019 - 2021",
+      "location": "San Francisco, CA",
+      "desc1": "Sviluppato l'MVP iniziale per una piattaforma SaaS B2B, assicurando un finanziamento seed di 2 milioni di dollari.",
+      "desc2": "Integrato API RESTful e gestito stati complessi utilizzando Redux.",
+      "desc3": "Garantito la compatibilità cross-browser e il design responsivo su tutti i dispositivi."
+    }
+  },
+  "WorkPage": {
+    "portfolio": "PORTAFOGLIO",
+    "featured": "In Evidenza",
+    "projects": "Progetti",
+    "allProjects": "Tutti i Progetti",
+    "searchPlaceholder": "Cerca progetti",
+    "noProjects": "Nessun progetto trovato corrispondente ai tuoi criteri.",
+    "featuredWork": "LAVORO IN EVIDENZA",
+    "moreProjects": "ALTRI PROGETTI",
+    "explore": "Esplorare",
+    "viewDetails": "Visualizza dettagli"
   }
 }

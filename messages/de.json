@@ -344,5 +344,48 @@
     "terms": "Terms",
     "sitemap": "Sitemap",
     "builtWith": "Built with Next.js"
+  },
+  "AboutExperience": {
+    "badge": "Berufliche Laufbahn",
+    "title": "Berufserfahrung",
+    "exp1": {
+      "role": "Senior Frontend Engineer",
+      "company": "TechCorp Inc.",
+      "duration": "2023 - Heute",
+      "location": "Remote",
+      "desc1": "Leitete die Migration einer monolithischen Legacy-Architektur zu einem modernen Next.js-Stack, wodurch die Seitenladezeiten um 40 % verbessert wurden.",
+      "desc2": "Entwarf und implementierte ein skalierbares Designsystem mit Tailwind CSS und Radix UI.",
+      "desc3": "Betreute Junior-Entwickler und etablierte Best Practices für Code-Reviews."
+    },
+    "exp2": {
+      "role": "UI/UX Entwickler",
+      "company": "Creative Studio",
+      "duration": "2021 - 2023",
+      "location": "New York, NY",
+      "desc1": "Arbeitete eng mit Designern zusammen, um pixelgenaue, hochinteraktive Webanwendungen zu erstellen.",
+      "desc2": "Implementierte komplexe Animationen mit Framer Motion und GSAP.",
+      "desc3": "Reduzierte die CSS-Nutzlast um 60 % durch Refaktorierung von Stilen in funktionale Utility-Klassen."
+    },
+    "exp3": {
+      "role": "Frontend Entwickler",
+      "company": "Startup Hub",
+      "duration": "2019 - 2021",
+      "location": "San Francisco, CA",
+      "desc1": "Entwickelte das anfängliche MVP für eine B2B-SaaS-Plattform und sicherte eine Seed-Finanzierung in Höhe von 2 Millionen US-Dollar.",
+      "desc2": "Integrierte RESTful-APIs und verwaltete komplexe Zustände mit Redux.",
+      "desc3": "Stellte browserübergreifende Kompatibilität und responsives Design auf allen Geräten sicher."
+    }
+  },
+  "WorkPage": {
+    "portfolio": "PORTFOLIO",
+    "featured": "Empfohlene",
+    "projects": "Projekte",
+    "allProjects": "Alle Projekte",
+    "searchPlaceholder": "Projekte suchen",
+    "noProjects": "Keine Projekte gefunden, die Ihren Kriterien entsprechen.",
+    "featuredWork": "HERAUSRAGENDE ARBEIT",
+    "moreProjects": "WEITERE PROJEKTE",
+    "explore": "Erkunden",
+    "viewDetails": "Details ansehen"
   }
 }

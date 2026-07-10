@@ -344,5 +344,48 @@
     "terms": "Terms",
     "sitemap": "Sitemap",
     "builtWith": "Built with Next.js"
+  },
+  "AboutExperience": {
+    "badge": "Trayectoria Profesional",
+    "title": "Experiencia Laboral",
+    "exp1": {
+      "role": "Ingeniero Frontend Senior",
+      "company": "TechCorp Inc.",
+      "duration": "2023 - Presente",
+      "location": "Remoto",
+      "desc1": "Lideró la migración de una arquitectura monolítica heredada a una pila moderna de Next.js, mejorando la velocidad de carga de la página en un 40%.",
+      "desc2": "Diseñó e implementó un sistema de diseño escalable utilizando Tailwind CSS y Radix UI.",
+      "desc3": "Asesoró a desarrolladores junior y estableció las mejores prácticas de revisión de código."
+    },
+    "exp2": {
+      "role": "Desarrollador UI/UX",
+      "company": "Creative Studio",
+      "duration": "2021 - 2023",
+      "location": "Nueva York, NY",
+      "desc1": "Colaboró estrechamente con diseñadores para crear aplicaciones web interactivas y con píxeles perfectos.",
+      "desc2": "Implementó animaciones complejas usando Framer Motion y GSAP.",
+      "desc3": "Redujo la carga útil de CSS en un 60% al refactorizar los estilos en clases de utilidad funcionales."
+    },
+    "exp3": {
+      "role": "Desarrollador Frontend",
+      "company": "Startup Hub",
+      "duration": "2019 - 2021",
+      "location": "San Francisco, CA",
+      "desc1": "Desarrolló el MVP inicial para una plataforma SaaS B2B, asegurando $ 2M en financiamiento semilla.",
+      "desc2": "Integró API RESTful y gestionó estados complejos con Redux.",
+      "desc3": "Aseguró la compatibilidad entre navegadores y el diseño receptivo en todos los dispositivos."
+    }
+  },
+  "WorkPage": {
+    "portfolio": "PORTAFOLIO",
+    "featured": "Destacados",
+    "projects": "Proyectos",
+    "allProjects": "Todos los Proyectos",
+    "searchPlaceholder": "Buscar proyectos",
+    "noProjects": "No se encontraron proyectos que coincidan con sus criterios.",
+    "featuredWork": "TRABAJO DESTACADO",
+    "moreProjects": "MÁS PROYECTOS",
+    "explore": "Explorar",
+    "viewDetails": "Ver Detalles"
   }
 }
