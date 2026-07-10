@@ -316,7 +316,12 @@
     "dot": ".",
     "desc1": "ダイナミックなWebアプリケーション開発と、",
     "desc2": "シームレスなユーザー体験の提供を強みとしています。",
-    "tags": ["React", "Next.js", "TypeScript", "Tailwind"]
+    "tags": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind"
+    ]
   },
   "Footer": {
     "desc1": "フルスタックデベロッパー、フリーランス、課題解決人。",
@@ -491,54 +496,148 @@
     }
   },
   "LinksPage": {
-    "network": "ネットワーク",
-    "connectWith": "連絡を",
-    "me": "取る",
-    "developer": "エンジニア",
-    "freelancer": "フリーランス",
-    "location": "バングラデシュ、ダッカ",
-    "bookCall": "通話を予約",
-    "website": "ウェブサイト",
-    "email": "メール",
-    "codeCraft": "コードと技術",
-    "connect": "つながる",
-    "leaveMark": "足跡を残す"
+    "network": "NETWORK",
+    "connectWith": "Connect with",
+    "me": "Me",
+    "developer": "Full-Stack Developer",
+    "freelancer": "Freelancer",
+    "location": "Dhaka, Bangladesh",
+    "bookCall": "Book a Call",
+    "website": "Website",
+    "email": "Email",
+    "codeCraft": "Code & Craft",
+    "connect": "Connect",
+    "leaveMark": "leaveMark"
   },
   "UsesPage": {
-    "hardware": "ハードウェア",
-    "hardwareDesc": "生産性を最大化するミニマルなセットアップ。",
-    "macTitle": "MacBook Pro M2",
-    "macDesc": "すべてのプロジェクトを支える強力な相棒。",
-    "keychronTitle": "Keychron メカニカル",
-    "keychronDesc": "最高の打鍵感を提供するタクタイルスイッチ。",
-    "devTools": "開発ツール",
-    "devToolsDesc": "ターミナルは私の第二の家です。",
-    "neovimTitle": "Neovim & Tmux",
-    "neovimDesc": "超高速でカスタマイズされた作業環境。",
-    "weztermTitle": "WezTerm",
-    "weztermDesc": "GPU加速対応のターミナル。",
+    "hardware": "Hardware & Desk Setup",
+    "hardwareDesc": "The physical tools I use daily to write code and stay productive.",
+    "macTitle": "14\" MacBook Pro",
+    "macDesc": "M2 Pro, 16GB RAM — My primary workstation for everything.",
+    "keychronTitle": "Keychron K2V2",
+    "keychronDesc": "Mechanical keyboard with brown switches. Tactile and reliable.",
+    "devTools": "Development Tools",
+    "devToolsDesc": "The software that powers my daily workflow.",
+    "neovimTitle": "Neovim",
+    "neovimDesc": "My editor of choice. Fast, modal, and heavily customized.",
+    "weztermTitle": "Wezterm",
+    "weztermDesc": "GPU-accelerated terminal emulator.",
     "arcTitle": "Arc Browser",
-    "arcDesc": "次世代のブラウジング体験。",
-    "techStack": "技術スタック",
-    "techStackDesc": "最適化されたUIを構築するモダンツール。",
-    "reactTitle": "Next.js & React",
-    "reactDesc": "現代Web開発の王道。"
+    "arcDesc": "For testing and daily browsing.",
+    "techStack": "Tech Stack",
+    "techStackDesc": "The core technologies I use to build scalable web applications.",
+    "reactTitle": "React & Next.js",
+    "reactDesc": "For building fast, SEO-friendly user interfaces."
   },
   "AttributionPage": {
-    "creditWhere": "クレジット",
-    "creditDue": "一覧",
-    "creditDesc": "このサイトは素晴らしいオープンソースプロジェクトの恩恵を受けています。",
-    "typography": "タイポグラフィ",
-    "typographyDesc": "プレミアムな質感を演出する書体。",
-    "viewSource": "ソースを見る",
-    "frameworks": "フレームワーク",
-    "frameworksDesc": "スタイリングとアニメーションを支えるライブラリ群。",
-    "nextjsDesc": "アプリケーションのルーティングを管理。",
-    "tailwindDesc": "高速でレスポンシブなスタイリング。",
-    "framerDesc": "滑らかなアニメーションを実現。",
-    "inspiration": "インスピレーション",
-    "inspirationDesc": "このポートフォリオに影響を与えたクリエイターたち。",
-    "aceternityDesc": "対話型コンポーネントのインスピレーション。",
-    "magicuiDesc": "洗練されたアニメーションのインスピレーション。"
+    "creditWhere": "Credit Where",
+    "creditDue": "Credit is Due",
+    "creditDesc": "Building this site wasn't a solo effort. It stands on the shoulders of incredible open-source tools, beautiful design systems, and amazing creators. Here are the tools and inspirations that made this possible.",
+    "typography": "Typography",
+    "typographyDesc": "The fonts that give this site its character.",
+    "viewSource": "View Source",
+    "frameworks": "Core Technologies",
+    "frameworksDesc": "The foundational frameworks and libraries powering the site.",
+    "nextjsDesc": "The React Framework for production. It powers the server-side rendering, routing, and overall architecture of this site.",
+    "tailwindDesc": "A utility-first CSS framework that makes styling incredibly fast and maintainable.",
+    "framerDesc": "A production-ready motion library for React that powers all the fluid animations, page transitions, and interactive elements across the site.",
+    "inspiration": "Design Inspiration",
+    "inspirationDesc": "Incredible resources that inspired the UI components.",
+    "aceternityDesc": "Amazing collection of modern, animated Tailwind CSS components. Several elements in this site were inspired by their designs.",
+    "magicuiDesc": "Beautiful, animated React components. Their approach to modern, engaging web design heavily influenced this portfolio."
+  },
+  "GuestbookPage": {
+    "subtitle": "THE WALL REMEMBERS",
+    "title1": "Words That Echo",
+    "titleHighlight": "Always"
+  },
+  "GuestbookForm": {
+    "namePlaceholder": "Your Name",
+    "messagePlaceholder": "Your Message...",
+    "sign": "Sign",
+    "alert": "This is a static mockup of the guestbook! Database integration is required to post actual messages."
+  },
+  "BucketListPage": {
+    "header": {
+      "title1": "The",
+      "titleHighlight": "Bucket List",
+      "description": "A running list of things I want to do, see, and achieve in my lifetime. It's a mix of professional milestones, crazy adventures, and personal growth goals."
+    },
+    "progress": {
+      "title": "Progress",
+      "completedText": "completed out of",
+      "goalsText": "goals"
+    },
+    "categories": {
+      "Career": "Career",
+      "Adventure": "Adventure",
+      "Life": "Life",
+      "Travel": "Travel"
+    },
+    "sections": {
+      "completed": {
+        "title": "Completed",
+        "desc": "The milestones I've already achieved. Looking back at these keeps me motivated to push forward on the rest of the list."
+      },
+      "career": {
+        "title": "Career & Tech",
+        "desc": "Professional goals focused on building impactful products, sharing knowledge, and pushing my technical boundaries."
+      },
+      "travel": {
+        "title": "Travel & Adventure",
+        "desc": "Places I want to see and experiences I want to have around the globe."
+      },
+      "life": {
+        "title": "Life & Experiences",
+        "desc": "Personal growth, physical challenges, and giving back to the community."
+      }
+    },
+    "items": {
+      "item0": {
+        "title": "Contribute to a major open-source project"
+      },
+      "item1": {
+        "title": "Go skydiving"
+      },
+      "item2": {
+        "title": "Build my dream home workspace"
+      },
+      "item3": {
+        "title": "Build a profitable SaaS business"
+      },
+      "item4": {
+        "title": "Speak at a major tech conference"
+      },
+      "item5": {
+        "title": "Reach 1,000 GitHub stars on a personal repository"
+      },
+      "item6": {
+        "title": "Start a tech blog and reach 10k monthly readers"
+      },
+      "item7": {
+        "title": "Visit Japan and experience the cherry blossoms"
+      },
+      "item8": {
+        "title": "Backpack across Europe"
+      },
+      "item9": {
+        "title": "See the Northern Lights"
+      },
+      "item10": {
+        "title": "Live in a different country for at least 6 months"
+      },
+      "item11": {
+        "title": "Run a full marathon"
+      },
+      "item12": {
+        "title": "Learn to play the piano fluently"
+      },
+      "item13": {
+        "title": "Read 100 books in a single year"
+      },
+      "item14": {
+        "title": "Mentorship: Help 10 junior developers get their first job"
+      }
+    }
   }
 }
