@@ -665,7 +665,7 @@ export default function Navbar() {
 
                     <div className="relative flex flex-col lg:flex-row gap-6 p-6 w-[min(90vw,700px)]">
                       {/* Left - Cards */}
-                      <div className="flex flex-col sm:flex-row gap-4 flex-1">
+                      <div className="flex flex-col gap-4 flex-1">
                         {moreCards.map((card, index) => (
                           <motion.div
                             key={card.href}
@@ -684,7 +684,7 @@ export default function Navbar() {
                             <Link
                               href={card.href}
                               onClick={() => setIsDropdownOpen(false)}
-                              className="relative h-32 sm:h-40 w-full rounded-xl overflow-hidden group cursor-pointer block"
+                              className="relative h-28 sm:h-32 w-full rounded-xl overflow-hidden group cursor-pointer block"
                               style={{
                                 border: "1px solid rgba(255,255,255,0.1)",
                               }}
