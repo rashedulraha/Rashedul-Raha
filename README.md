@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rashedul Islam - Personal Portfolio
 
-## Getting Started
+This repository contains the source code for the personal portfolio website of **Rashedul Islam**. It is a modern, fast, and fully localized web application showcasing my projects, experiences, and technical blog.
 
-First, run the development server:
+## ⚠️ Copyright & License Notice (Strictly Enforced)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**© 2026 Rashedul Islam. All rights reserved.**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This repository and all of its contents (including but not limited to source code, design assets, UI/UX patterns, animations, text, and structure) are the exclusive intellectual property of Rashedul Islam. 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **NO COPYING:** You are strictly prohibited from copying, cloning, modifying, distributing, or using any part of this code or design for your own personal or commercial projects.
+- **NO FORKING FOR REUSE:** You may not use this repository as a template or starting point for your own website.
+- **COPYRIGHT VIOLATION:** Any unauthorized use, reproduction, or distribution of this code or design will be considered a direct violation of copyright law and will be subject to legal action and DMCA takedown notices.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+*By viewing this repository, you agree to these terms.*
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ How It Was Built (Tech Stack)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project was engineered with modern web development standards, focusing on performance, smooth animations, and global accessibility:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Library:** [React](https://react.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/) for fluid UI transitions and micro-interactions.
+- **Internationalization (i18n):** `next-intl` (Fully localized in 7 languages including English, Bengali, Japanese, Spanish, German, French, and Italian).
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Typography:** Instrument Serif & Sans-serif system fonts.
 
-## Deploy on Vercel
+## 🚀 Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Multi-Language Support:** Seamlessly switch between 7 different languages dynamically without page reloads.
+- **Premium UI/UX:** Glassmorphism effects, smooth page transitions, and interactive components.
+- **Dynamic Projects & Blog:** Content is driven by data files and deeply integrated with localization.
+- **Interactive Search/Command Modal:** A `cmd+k` styled global search and reach-out terminal.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔮 Future Enhancements (What can be added next)
+
+The architecture of this site is highly scalable. The following features are planned or can be easily integrated:
+
+1. **Full MDX Blog System:** Transition from static data arrays to a fully parsed MDX blog system using `next-mdx-remote` or `Contentlayer` for rich text formatting.
+2. **Database Integration:** Connect a database (e.g., PostgreSQL with Prisma or Supabase) to make the **Guestbook** fully functional where users can leave live comments.
+3. **Authentication:** Implement `NextAuth.js` to secure the **Dashboard Terminal** (currently a UI mockup) for admin-only content management.
+4. **Headless CMS:** Integrate Sanity or Strapi to manage projects and blog posts dynamically without deploying code changes.
+5. **Newsletter Subscription:** Add an API route to collect emails and integrate with Resend or Mailchimp.
+
+---
+
+*For inquiries or permission requests, please contact me through the 'Reach Out' section on the website.*
