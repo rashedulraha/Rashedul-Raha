@@ -1,4 +1,10 @@
-import projectJson from '../../public/project/project.json';
+import projectJsonEn from '../../public/project/project_en.json';
+import projectJsonBn from '../../public/project/project_bn.json';
+import projectJsonEs from '../../public/project/project_es.json';
+import projectJsonFr from '../../public/project/project_fr.json';
+import projectJsonDe from '../../public/project/project_de.json';
+import projectJsonIt from '../../public/project/project_it.json';
+import projectJsonJa from '../../public/project/project_ja.json';
 
 export interface ProjectData {
   id: string;
@@ -29,10 +35,20 @@ export interface ProjectData {
   security_features?: string[];
 }
 
-export function getAllProjects(): ProjectData[] {
+export function getAllProjects(locale: string = 'en'): ProjectData[] {
+  let projectJson;
+  switch (locale) {
+    case 'bn': projectJson = projectJsonBn; break;
+    case 'es': projectJson = projectJsonEs; break;
+    case 'fr': projectJson = projectJsonFr; break;
+    case 'de': projectJson = projectJsonDe; break;
+    case 'it': projectJson = projectJsonIt; break;
+    case 'ja': projectJson = projectJsonJa; break;
+    default: projectJson = projectJsonEn;
+  }
+
   const allProjects: ProjectData[] = [];
   
-  // projectJson has properties like projects1, projects2, projects3, projects4
   if ('projects1' in projectJson) {
     allProjects.push(...(projectJson as any).projects1);
   }
@@ -49,20 +65,16 @@ export function getAllProjects(): ProjectData[] {
   return allProjects;
 }
 
-export function getProjectById(id: string): ProjectData | undefined {
-  const allProjects = getAllProjects();
+export function getProjectById(id: string, locale: string = 'en'): ProjectData | undefined {
+  const allProjects = getAllProjects(locale);
   return allProjects.find(p => p.id === id);
 }
 
 export function getProjectBanner(project: ProjectData): string {
-  // Dynamically find any key that ends with '_img_banner'
   const bannerKey = Object.keys(project).find(key => key.endsWith('_img_banner'));
-  
   if (bannerKey && (project as any)[bannerKey]) {
     const imgPath = (project as any)[bannerKey];
-    // Ensure it starts with a slash
     return imgPath.startsWith('/') ? imgPath : `/${imgPath}`;
   }
-  
-  return '/images/placeholder.svg'; // Fallback
+  return '/images/placeholder.svg';
 }
