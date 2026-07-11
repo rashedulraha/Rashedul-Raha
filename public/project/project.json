@@ -8,7 +8,7 @@
       "live_demo": "https://siliconpvt.vercel.app",
       "github_repo": "https://github.com/rashedulraha/siliconPvt",
       "case_study": "https://yourportfolio.com/case-studies/silicon-real-estate",
-      "silicon_img_banner":"project_img/silicon-img.png",
+      "silicon_img_banner":"project_img/siliconpvt_img.png",
       "screenshots": [
         "https://yourportfolio.com/assets/sre-homepage.png",
         "https://yourportfolio.com/assets/sre-projects.png",
@@ -129,7 +129,7 @@
       "live_demo": "https://gearup-equipment-rental-api.vercel.app/",
       "github_repo": "https://github.com/rashedulraha/gearup-equipment-rental-api",
       "case_study": "https://yourportfolio.com/case-studies/gearup",
-      "gearup_img_banner":"project_img/gearup.png",
+      "gearup_img_banner":"project_img/gear_up_img.png",
       "screenshots": [
         "https://yourportfolio.com/assets/gearup-api-docs.png",
         "https://yourportfolio.com/assets/gearup-database-schema.png",
@@ -350,7 +350,7 @@
       "live_demo": "https://koda-rashed.vercel.app",
       "github_repo": "https://github.com/rashedulraha/koda",
       "case_study": "https://yourportfolio.com/case-studies/koda",
-      "koda_img_banner":"project_img/koda.png",
+      "koda_img_banner":"project_img/koda_img.png",
       "screenshots": [
         "https://yourportfolio.com/assets/koda-dashboard.png",
         "https://yourportfolio.com/assets/koda-issue-board.png",
@@ -732,7 +732,7 @@
       "live_demo": "https://zopshop.vercel.app",
       "github_repo": "https://github.com/rashedulraha/zopshop-saas",
       "case_study": "https://yourportfolio.com/case-studies/zopshop",
-      "zopshop_img_banner":"project_img/zopshop.png",
+      "zopshop_img_banner":"project_img/zap_shop_img.png",
       "screenshots": [
         "https://yourportfolio.com/assets/zopshop-dashboard.png",
         "https://yourportfolio.com/assets/zopshop-inventory.png",
