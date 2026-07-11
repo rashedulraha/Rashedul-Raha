@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { getAllProjects } from "@/lib/projectData";
 import { Metadata } from "next";
 import WorkList from "@/components/work/WorkList";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import PageWrapper from "@/components/PageWrapper";
 
@@ -12,8 +12,10 @@ export const metadata: Metadata = {
   description: "View the portfolio and featured projects of Rashedul Islam.",
 };
 
-export default function WorkPage() {
-  const t = useTranslations("WorkPage");
+export default async function WorkPage({ params }: { params: Promise<{ locale: string }> }) {
+  const resolvedParams = await params;
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: "WorkPage" });
+
   return (
     <PageWrapper>
       {/* Hero Header */}
@@ -36,7 +38,7 @@ export default function WorkPage() {
       </div>
 
       {/* Filterable Work List */}
-      <WorkList initialProjects={getAllProjects()} />
+      <WorkList initialProjects={getAllProjects(resolvedParams.locale)} />
       
       <Footer />
     </PageWrapper>

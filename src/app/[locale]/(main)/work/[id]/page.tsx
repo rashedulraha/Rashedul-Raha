@@ -5,10 +5,12 @@ import { ArrowLeft, ExternalLink, Code, CheckCircle, Database, Server, Layout } 
 import { Link } from "@/routing";
 import PageWrapper from "@/components/PageWrapper";
 import Footer from "@/components/Footer";
+import { getTranslations } from "next-intl/server";
 
 export default async function ProjectDetailsPage({ params }: { params: Promise<{ id: string, locale: string }> }) {
   const resolvedParams = await params;
-  const project = getProjectById(resolvedParams.id);
+  const project = getProjectById(resolvedParams.id, resolvedParams.locale);
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: "ProjectDetails" });
 
   if (!project) {
     notFound();
@@ -35,7 +37,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
           className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-10"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to all projects
+          {t('backToAllProjects')}
         </Link>
 
         {/* Header Section */}
@@ -58,7 +60,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
                 >
-                  Visit Live Site
+                  {t('visitLiveSite')}
                   <ExternalLink className="w-4 h-4" />
                 </a>
               )}
@@ -70,7 +72,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
                   className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-accent"
                 >
                   <Code className="w-4 h-4" />
-                  Source Code
+                  {t('sourceCode')}
                 </a>
               )}
             </div>
@@ -98,7 +100,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
             <section>
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-foreground">
                 <Layout className="w-5 h-5 text-primary" />
-                Project Overview
+                {t('projectOverview')}
               </h2>
               <div className="prose prose-neutral dark:prose-invert max-w-none">
                 <p className="text-base leading-7 text-muted-foreground">
@@ -112,7 +114,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
               <section>
                 <h2 className="text-2xl font-bold mb-5 flex items-center gap-2 text-foreground">
                   <Server className="w-5 h-5 text-primary" />
-                  System Architecture
+                  {t('systemArchitecture')}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {Object.entries(project.architecture).map(([key, value]) => {
@@ -133,7 +135,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
             {/* Responsibilities or Features */}
             {project.responsibilities && project.responsibilities.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold mb-2 text-foreground">Key Responsibilities & Features</h2>
+                <h2 className="text-2xl font-bold mb-2 text-foreground">{t('keyResponsibilities')}</h2>
                 {renderList(project.responsibilities)}
               </section>
             )}
@@ -141,7 +143,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
             {/* Challenges */}
             {project.challenges && project.challenges.length > 0 && (
               <section>
-                <h2 className="text-2xl font-bold mb-4 text-foreground">Challenges Overcome</h2>
+                <h2 className="text-2xl font-bold mb-4 text-foreground">{t('challengesOvercome')}</h2>
                 <ul className="space-y-4">
                   {project.challenges.map((challenge, idx) => (
                     <li key={idx} className="flex items-start gap-3">
@@ -160,14 +162,14 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
               <section>
                 <h2 className="text-2xl font-bold mb-5 flex items-center gap-2 text-foreground">
                   <Database className="w-5 h-5 text-primary" />
-                  Database Schema
+                  {t('databaseSchema')}
                 </h2>
                 <div className="overflow-x-auto rounded-xl border border-border/50 shadow-sm">
                   <table className="w-full text-left border-collapse text-sm">
                     <thead>
                       <tr className="bg-muted/30">
-                        <th className="p-3 font-semibold text-foreground border-b border-border/50">Table Name</th>
-                        <th className="p-3 font-semibold text-foreground border-b border-border/50">Fields</th>
+                        <th className="p-3 font-semibold text-foreground border-b border-border/50">{t('tableName')}</th>
+                        <th className="p-3 font-semibold text-foreground border-b border-border/50">{t('fields')}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border/50">
@@ -196,14 +198,14 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
             <div className="bg-muted/10 border border-border/50 rounded-2xl p-6 space-y-6">
               {project.role && (
                 <div>
-                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2">My Role</h3>
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2">{t('myRole')}</h3>
                   <p className="font-medium text-foreground text-sm">{project.role}</p>
                 </div>
               )}
               
               {project.outcome_profit && project.outcome_profit.business_impact && (
                 <div>
-                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2">Business Impact</h3>
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-2">{t('businessImpact')}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{project.outcome_profit.business_impact}</p>
                 </div>
               )}
@@ -220,7 +222,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
             {/* Tech Stack */}
             {project.tech_stack && (
               <div className="bg-muted/10 border border-border/50 rounded-2xl p-6">
-                <h3 className="font-bold text-base mb-4 pb-2 border-b border-border/50 text-foreground">Tech Stack</h3>
+                <h3 className="font-bold text-base mb-4 pb-2 border-b border-border/50 text-foreground">{t('techStack')}</h3>
                 <div className="space-y-5">
                   {Object.entries(project.tech_stack).map(([category, items]) => {
                     if (!Array.isArray(items)) return null;
