@@ -5,7 +5,7 @@ This project is built using modern web technologies to be blazing fast, accessib
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
+- **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS & Framer Motion
 - **Internationalization**: next-intl (Supports English, Bengali, Japanese, German, Italian, French, Spanish)
