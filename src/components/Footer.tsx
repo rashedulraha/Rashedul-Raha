@@ -216,11 +216,11 @@ export default function Footer() {
                 <span className="text-muted-foreground/30">
                   ·
                 </span>
-                <a
+                <Link
                   className="text-muted-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
-                  href="/sitemap.xml">
+                  href="/site-map">
                   {t('sitemap')}
-                </a>
+                </Link>
               </div>
             </div>
 
