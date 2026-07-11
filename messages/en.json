@@ -208,7 +208,8 @@
         "features2": "Vercel optimized",
         "features3": "Tailwind CSS UI"
       }
-    }
+    },
+    "viewDetails": "View Details"
   },
   "Blog": {
     "badge": "From the Desk",
@@ -718,5 +719,20 @@
         "skills": "Online Marketing, Paid Ads"
       }
     }
+  },
+  "ProjectDetails": {
+    "backToAllProjects": "Back to all projects",
+    "visitLiveSite": "Visit Live Site",
+    "sourceCode": "Source Code",
+    "projectOverview": "Project Overview",
+    "systemArchitecture": "System Architecture",
+    "keyResponsibilities": "Key Responsibilities & Features",
+    "challengesOvercome": "Challenges Overcome",
+    "databaseSchema": "Database Schema",
+    "tableName": "Table Name",
+    "fields": "Fields",
+    "myRole": "My Role",
+    "businessImpact": "Business Impact",
+    "techStack": "Tech Stack"
   }
 }

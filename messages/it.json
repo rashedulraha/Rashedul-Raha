@@ -208,7 +208,8 @@
         "features2": "Performance ottimizzata con Vercel",
         "features3": "Interfaccia facile con Tailwind CSS"
       }
-    }
+    },
+    "viewDetails": "Visualizza dettagli"
   },
   "Blog": {
     "badge": "DALLA SCRIVANIA",
@@ -718,5 +719,20 @@
         "skills": "Online Marketing, Paid Ads"
       }
     }
+  },
+  "ProjectDetails": {
+    "backToAllProjects": "Torna a tutti i progetti",
+    "visitLiveSite": "Visita il sito live",
+    "sourceCode": "Codice sorgente",
+    "projectOverview": "Panoramica del progetto",
+    "systemArchitecture": "Architettura di sistema",
+    "keyResponsibilities": "Responsabilità e funzionalità chiave",
+    "challengesOvercome": "Sfide superate",
+    "databaseSchema": "Schema del database",
+    "tableName": "Nome della tabella",
+    "fields": "Campi",
+    "myRole": "Il mio ruolo",
+    "businessImpact": "Impatto aziendale",
+    "techStack": "Stack tecnologico"
   }
 }

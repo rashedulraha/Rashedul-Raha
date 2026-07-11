@@ -208,7 +208,8 @@
         "features2": "Optimierte Performance mit Vercel",
         "features3": "Benutzerfreundliches Tailwind CSS-Interface"
       }
-    }
+    },
+    "viewDetails": "Details anzeigen"
   },
   "Blog": {
     "badge": "Vom Schreibtisch",
@@ -718,5 +719,20 @@
         "skills": "Online Marketing, Paid Ads"
       }
     }
+  },
+  "ProjectDetails": {
+    "backToAllProjects": "Zurück zu allen Projekten",
+    "visitLiveSite": "Live-Website besuchen",
+    "sourceCode": "Quellcode",
+    "projectOverview": "Projektübersicht",
+    "systemArchitecture": "Systemarchitektur",
+    "keyResponsibilities": "Hauptverantwortlichkeiten & Funktionen",
+    "challengesOvercome": "Bewältigte Herausforderungen",
+    "databaseSchema": "Datenbankschema",
+    "tableName": "Tabellenname",
+    "fields": "Felder",
+    "myRole": "Meine Rolle",
+    "businessImpact": "Geschäftliche Auswirkungen",
+    "techStack": "Tech-Stack"
   }
 }

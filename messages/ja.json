@@ -208,7 +208,8 @@
         "features2": "Vercelによるパフォーマンス最適化",
         "features3": "Tailwind CSSによるインターフェース"
       }
-    }
+    },
+    "viewDetails": "詳細を見る"
   },
   "Blog": {
     "badge": "ブログより",
@@ -718,5 +719,20 @@
         "skills": "Online Marketing, Paid Ads"
       }
     }
+  },
+  "ProjectDetails": {
+    "backToAllProjects": "すべてのプロジェクトに戻る",
+    "visitLiveSite": "ライブサイトにアクセス",
+    "sourceCode": "ソースコード",
+    "projectOverview": "プロジェクト概要",
+    "systemArchitecture": "システムアーキテクチャ",
+    "keyResponsibilities": "主な責任と機能",
+    "challengesOvercome": "克服した課題",
+    "databaseSchema": "データベーススキーマ",
+    "tableName": "テーブル名",
+    "fields": "フィールド",
+    "myRole": "私の役割",
+    "businessImpact": "ビジネスへの影響",
+    "techStack": "技術スタック"
   }
 }

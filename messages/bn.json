@@ -208,7 +208,8 @@
         "features2": "দ্রুত পারফরম্যান্স",
         "features3": "Tailwind CSS স্টাইল"
       }
-    }
+    },
+    "viewDetails": "বিস্তারিত দেখুন"
   },
   "Blog": {
     "badge": "আমার ভাবনা",
@@ -718,5 +719,20 @@
         "skills": "Online Marketing, Paid Ads"
       }
     }
+  },
+  "ProjectDetails": {
+    "backToAllProjects": "সব প্রজেক্টে ফিরে যান",
+    "visitLiveSite": "লাইভ সাইট ভিজিট করুন",
+    "sourceCode": "সোর্স কোড",
+    "projectOverview": "প্রজেক্টের বিবরণ",
+    "systemArchitecture": "সিস্টেম আর্কিটেকচার",
+    "keyResponsibilities": "প্রধান দায়িত্ব ও বৈশিষ্ট্য",
+    "challengesOvercome": "যেসব বাধা অতিক্রম করেছি",
+    "databaseSchema": "ডেটাবেস স্কিমা",
+    "tableName": "টেবিলের নাম",
+    "fields": "ফিল্ডসমূহ",
+    "myRole": "আমার ভূমিকা",
+    "businessImpact": "ব্যবসায়িক প্রভাব",
+    "techStack": "টেক স্ট্যাক"
   }
 }
