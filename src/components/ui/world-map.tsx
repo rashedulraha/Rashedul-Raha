@@ -61,13 +61,13 @@ function generateMapSvg(theme: "dark" | "light"): string {
         radius: 0.22,
         color: "#FFFFFF40",
         shape: "circle",
-        backgroundColor: "black",
+        backgroundColor: "transparent",
       }),
       light: map.getSVG({
         radius: 0.22,
         color: "#00000040",
         shape: "circle",
-        backgroundColor: "white",
+        backgroundColor: "transparent",
       }),
     };
   }
@@ -194,7 +194,7 @@ export default function WorldMap({
   }
 
   return (
-    <div className="w-full dark:bg-background bg-white rounded-lg relative font-sans overflow-hidden">
+    <div className="w-full bg-transparent rounded-lg relative font-sans overflow-hidden">
       {/* Map Image */}
       <Image
         src={svgMap}

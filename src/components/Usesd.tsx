@@ -49,7 +49,7 @@ const Usesd = () => {
     <div
       ref={sectionRef}
       className="col-span-1 md:col-span-12 lg:col-span-4 lg:row-span-6">
-      <Link href="/uses" className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-surface transition-all duration-300 hover:bg-white hover:shadow-xl dark:bg-card/15 dark:hover:bg-card/5 ring-1 ring-border cursor-pointer h-full min-h-72">
+      <Link href="/uses" className="group relative flex w-full flex-col justify-between overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-xl cursor-pointer h-full min-h-72 card-premium">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
