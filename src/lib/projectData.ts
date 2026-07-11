@@ -32,7 +32,7 @@ export interface ProjectData {
 export function getAllProjects(): ProjectData[] {
   const allProjects: ProjectData[] = [];
   
-  // projectJson has properties like projects1, projects2, projects3
+  // projectJson has properties like projects1, projects2, projects3, projects4
   if ('projects1' in projectJson) {
     allProjects.push(...(projectJson as any).projects1);
   }
@@ -41,6 +41,9 @@ export function getAllProjects(): ProjectData[] {
   }
   if ('projects3' in projectJson) {
     allProjects.push(...(projectJson as any).projects3);
+  }
+  if ('projects4' in projectJson) {
+    allProjects.push(...(projectJson as any).projects4);
   }
   
   return allProjects;
