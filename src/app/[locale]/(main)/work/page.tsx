@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "@/components/Footer";
-import { projects } from "@/lib/work-data";
+import { getAllProjects } from "@/lib/projectData";
 import { Metadata } from "next";
 import WorkList from "@/components/work/WorkList";
 import { useTranslations } from "next-intl";
@@ -36,7 +36,7 @@ export default function WorkPage() {
       </div>
 
       {/* Filterable Work List */}
-      <WorkList initialProjects={projects} />
+      <WorkList initialProjects={getAllProjects()} />
       
       <Footer />
     </PageWrapper>
