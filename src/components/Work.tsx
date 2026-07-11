@@ -3,9 +3,9 @@
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useInView, useScroll } from "framer-motion";
-import { ExternalLink, ChevronRight } from "lucide-react";
+import { ExternalLink, ChevronRight, ArrowRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
-import { projects } from "@/lib/work-data";
+import { getAllProjects, getProjectBanner } from "@/lib/projectData";
 import { Link } from "@/routing";
 import { useTranslations } from "next-intl";
 
@@ -15,6 +15,8 @@ export default function Work() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const projects = getAllProjects();
 
   // Scroll tracking
   const { scrollYProgress } = useScroll({
@@ -31,33 +33,7 @@ export default function Work() {
       setActiveIndex(index);
     });
     return () => unsubscribe();
-  }, [scrollYProgress]);
-
-  // Helper to get tag icon
-  const getTagIcon = (tagName: string) => {
-    const iconMap: { [key: string]: string } = {
-      "Next.js": "/images/nextjs.svg",
-      React: "/images/react.svg",
-      TypeScript: "/images/typescript.svg",
-      "Tailwind CSS": "/images/tailwindcss.svg",
-      "Drizzle ORM": "/images/drizzle.svg",
-      "Motion.dev": "/images/motion.svg",
-      "Shadcn UI": "/images/shadcn-ui.svg",
-      Zod: "/images/zod.svg",
-      "TanStack Query": "/images/react-query.svg",
-      Zustand: "/images/zustand.svg",
-      "Express.js": "/images/expressjs.svg",
-      MongoDB: "/images/mongodb.svg",
-      Razorpay: "/images/razorpay.svg",
-      Turborepo: "/images/turborepo.svg",
-      Docker: "/images/docker.svg",
-      "Sanity CMS": "/images/sanity.svg",
-      Vercel: "/images/vercel.svg",
-      Expo: "/images/expo.svg",
-      Firebase: "/images/firebase.svg",
-    };
-    return iconMap[tagName] || null;
-  };
+  }, [scrollYProgress, projects.length]);
 
   return (
     <section
@@ -69,7 +45,7 @@ export default function Work() {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
-        className="text-center  px-4">
+        className="text-center px-4">
         <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
           {t('badge')}
         </p>
@@ -88,15 +64,12 @@ export default function Work() {
       <div
         ref={containerRef}
         className="relative max-w-6xl mx-auto px-4 md:px-6">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mt-12">
           {/* Left - Sticky Image Container */}
           <div className="w-full lg:w-[45%]">
-            {/* The flex and items-center here ensure exact vertical middle alignment */}
             <div className="lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center pb-8 lg:pb-0 z-10">
-              {/* The Outer Premium Frame Layer */}
               <div className="relative w-full max-w-xl mx-auto p-2.5 md:p-3 rounded-4xl transition-all duration-700 card-premium">
-                {/* Inner Image Container */}
-                <div className="relative w-full h-[50vh] lg:h-[60vh] rounded-3xl overflow-hidden bg-muted">
+                <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-muted">
                   {projects.map((project, index) => (
                     <motion.div
                       key={project.id}
@@ -108,36 +81,31 @@ export default function Work() {
                       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
                       className="absolute inset-0">
                       <Image
-                        src={project.image}
-                        alt={project.title}
+                        src={getProjectBanner(project)}
+                        alt={project.name}
                         fill
                         className="object-cover"
                         sizes="(max-width: 1024px) 100vw, 45vw"
                         priority={index === 0}
                       />
-                      {/* Smooth Premium Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     </motion.div>
                   ))}
 
-                  {/* Overlay Details with Liquid Glass Effect */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                     <div className="flex items-center justify-between">
                       <div>
                         <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest drop-shadow-md">
-                          {projects[activeIndex] ? t(`projects.${projects[activeIndex].id}.type`) : ""}
+                          {projects[activeIndex]?.tech_stack?.frameworks_libraries?.[0] || 'Project'}
                         </span>
-                        <p className="text-foreground font-semibold text-sm md:text-base mt-1 drop-shadow-md">
-                          {projects[activeIndex] ? t(`projects.${projects[activeIndex].id}.stats`) : ""}
+                        <p className="text-foreground font-semibold text-sm md:text-base mt-1 drop-shadow-md line-clamp-1">
+                          {projects[activeIndex]?.name}
                         </p>
                       </div>
-                      <span className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide border border-primary/20 shadow-lg glass">
-                        {projects[activeIndex] ? t(`projects.${projects[activeIndex].id}.badge`) : ""}
-                      </span>
                     </div>
                   </div>
 
-                  {/* Progress Indicators (Premium Pill Design) */}
+                  {/* Progress Indicators */}
                   <div className="absolute top-6 right-6 flex flex-col gap-2 p-2.5 rounded-full border border-border shadow-lg glass">
                     {projects.map((_, index) => (
                       <div
@@ -219,17 +187,16 @@ export default function Work() {
 
           {/* Right - Scrolling Content */}
           <div className="w-full lg:w-[55%]">
-            {/* Added padding to top and bottom to allow the first and last items to center properly */}
             <div className="space-y-12 lg:space-y-0 lg:pb-[20vh] lg:pt-[10vh]">
               {projects.map((project, index) => (
                 <motion.div
                   key={project.id}
-                  // Using h-screen to make each item snap perfectly in the middle alongside the image
-                  className="flex flex-col justify-center lg:min-h-screen py-8 lg:py-0"
+                  className="flex flex-col justify-center lg:min-h-[70vh] py-12 lg:py-0"
                   initial={{ opacity: 0.2, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.4 }}
                   transition={{ duration: 0.5 }}>
+                  
                   {/* Number */}
                   <div className="flex items-center gap-4 mb-6">
                     <span className="text-3xl font-bold text-muted-foreground/30 font-mono">
@@ -240,79 +207,48 @@ export default function Work() {
 
                   {/* Title */}
                   <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                    {t(`projects.${project.id}.title`)}
+                    {project.name}
                   </h3>
                   <p className="text-primary text-base font-medium mb-5">
-                    {t(`projects.${project.id}.subtitle`)}
+                    {project.tagline}
                   </p>
 
                   {/* Description */}
-                  <p className="text-muted-foreground text-base leading-relaxed mb-6">
-                    {t(`projects.${project.id}.description`)}
+                  <p className="text-muted-foreground text-base leading-relaxed mb-6 line-clamp-4">
+                    {project.overview}
                   </p>
-
-                  {/* Features */}
-                  <div className="space-y-2.5 mb-6">
-                    {project.features.map((_, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-start gap-3 text-sm text-foreground/80">
-                        <ChevronRight className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                        <span>{t(`projects.${project.id}.features${idx}`)}</span>
-                      </div>
-                    ))}
-                  </div>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tags.slice(0, 6).map((tag) => {
-                      const icon = getTagIcon(tag);
-                      return (
-                        <span
-                          key={tag}
-                          className="flex items-center gap-1.5 rounded-full bg-muted border border-border px-3 py-1.5">
-                          {icon && (
-                            <Image
-                              alt={`${tag} icon`}
-                              aria-hidden="true"
-                              className="w-3.5 h-3.5 object-contain"
-                              height={14}
-                              loading="lazy"
-                              src={icon}
-                              width={14}
-                            />
-                          )}
-                          <span className="font-medium text-xs text-foreground tracking-wide">
-                            {tag}
-                          </span>
+                    {project.tech_stack?.frameworks_libraries?.slice(0, 6).map((tag: string) => (
+                      <span
+                        key={tag}
+                        className="flex items-center gap-1.5 rounded-full bg-muted border border-border px-3 py-1.5">
+                        <span className="font-medium text-xs text-foreground tracking-wide">
+                          {tag}
                         </span>
-                      );
-                    })}
-                    {project.tags.length > 6 && (
-                      <span className="flex items-center text-xs text-muted-foreground font-medium px-2">
-                        +{project.tags.length - 6} {t('more')}
                       </span>
-                    )}
+                    ))}
                   </div>
 
                   {/* Buttons */}
-                  <div className="flex items-center gap-4">
-                    <a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  <div className="flex items-center gap-4 flex-wrap">
+                    <Link
+                      href={`/work/${project.id}`}
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all duration-300 hover:scale-[1.03] shadow-sm">
-                      {t('viewLive')}
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-muted border border-border hover:border-primary/30 hover:bg-accent text-sm font-medium transition-all duration-300 hover:scale-[1.03] shadow-sm">
-                      <FaGithub className="w-4 h-4" />
-                      {t('code')}
-                    </a>
+                      View Details
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                    {project.live_demo && (
+                      <a
+                        href={project.live_demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-muted border border-border hover:border-primary/30 hover:bg-accent text-sm font-medium transition-all duration-300 hover:scale-[1.03] shadow-sm">
+                        <ExternalLink className="w-4 h-4" />
+                        Live Demo
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               ))}
