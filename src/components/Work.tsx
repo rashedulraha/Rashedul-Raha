@@ -7,16 +7,17 @@ import { ExternalLink, ChevronRight, ArrowRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { getAllProjects, getProjectBanner } from "@/lib/projectData";
 import { Link } from "@/routing";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function Work() {
   const t = useTranslations("Work");
+  const locale = useLocale();
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const projects = getAllProjects();
+  const projects = getAllProjects(locale);
 
   // Scroll tracking
   const { scrollYProgress } = useScroll({
@@ -236,7 +237,7 @@ export default function Work() {
                     <Link
                       href={`/work/${project.id}`}
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all duration-300 hover:scale-[1.03] shadow-sm">
-                      View Details
+                      {t('viewDetails')}
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                     {project.live_demo && (
@@ -246,7 +247,7 @@ export default function Work() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-muted border border-border hover:border-primary/30 hover:bg-accent text-sm font-medium transition-all duration-300 hover:scale-[1.03] shadow-sm">
                         <ExternalLink className="w-4 h-4" />
-                        Live Demo
+                        {t('viewLive')}
                       </a>
                     )}
                   </div>
