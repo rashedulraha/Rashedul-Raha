@@ -64,7 +64,7 @@ export default async function CertificateDetailsPage({ params }: Props) {
         <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm mb-10">
           <div className="relative w-full aspect-[21/9] bg-muted border-b border-border">
             <Image
-              src={certificate.image}
+              src={certificate.actualCertificateImage || certificate.image}
               alt={title}
               fill
               className="object-contain p-4 md:p-6"

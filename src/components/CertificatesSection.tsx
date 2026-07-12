@@ -111,7 +111,7 @@ export default function CertificatesSection() {
         className="flex justify-center">
         <Link
           href="/certificates"
-          className="group flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 text-primary font-medium border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow">
+          className="group flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 text-primary font-medium border border-primary/20 hover:bg-primary/20 transition-all shadow-sm hover:shadow mb-3 md:mb-5">
           View All Certificates
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>

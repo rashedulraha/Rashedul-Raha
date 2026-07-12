@@ -4,6 +4,7 @@ export interface Certificate {
   id: string;
   category: CertificateCategory;
   image: string;
+  actualCertificateImage?: string;
   issuer: string;
   date: string;
   credentialUrl?: string;
@@ -15,22 +16,28 @@ export const certificatesData: Certificate[] = [
     id: "programming-hero-level-1",
     category: "Web Development Journey",
     image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80",
+    actualCertificateImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80",
     issuer: "Programming Hero",
     date: "2023",
+    credentialUrl: "https://web.programming-hero.com/",
   },
   {
     id: "programming-hero-level-2",
     category: "Web Development Journey",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+    actualCertificateImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
     issuer: "Programming Hero",
     date: "2023",
+    credentialUrl: "https://web.programming-hero.com/",
   },
   {
     id: "phitron",
     category: "Web Development Journey",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+    actualCertificateImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
     issuer: "Phitron",
     date: "2023",
+    credentialUrl: "https://phitron.io/",
   },
 
   // Other Achievements
