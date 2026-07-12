@@ -1,19 +1,20 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
-
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { Link } from "@/routing";
 
 type Experience = {
-  id: number;
+  id: string;
   role: string;
   company: string;
   duration: string;
   location: string;
   description: string[];
   skills: string[];
+  projectId: string;
 };
 
 export default function Experience() {
@@ -26,35 +27,35 @@ export default function Experience() {
 
   const lineHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", "100%"]);
 
-  const translatedExperiences: Experience[] = [
-    {
-      id: 1,
-      role: t("exp1.role"),
-      company: t("exp1.company"),
-      duration: t("exp1.duration"),
-      location: t("exp1.location"),
-      description: [t("exp1.desc1"), t("exp1.desc2"), t("exp1.desc3")],
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    },
-    {
-      id: 2,
-      role: t("exp2.role"),
-      company: t("exp2.company"),
-      duration: t("exp2.duration"),
-      location: t("exp2.location"),
-      description: [t("exp2.desc1"), t("exp2.desc2"), t("exp2.desc3")],
-      skills: ["JavaScript", "React", "Framer Motion", "CSS/SCSS"],
-    },
-    {
-      id: 3,
-      role: t("exp3.role"),
-      company: t("exp3.company"),
-      duration: t("exp3.duration"),
-      location: t("exp3.location"),
-      description: [t("exp3.desc1"), t("exp3.desc2"), t("exp3.desc3")],
-      skills: ["HTML", "CSS", "React", "Redux"],
-    },
-  ];
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+  const locale = useLocale();
+
+  useEffect(() => {
+    fetch(`/project/project_${locale}.json`)
+      .then((res) => res.json())
+      .then((data) => {
+        const projs = [
+          ...(data.projects1 || []),
+          ...(data.projects2 || []),
+          ...(data.projects3 || []),
+          ...(data.projects4 || []),
+        ];
+
+        const mappedExps = projs.map((p: any, index: number) => ({
+          id: p.id || String(index),
+          projectId: p.id,
+          role: p.role || "Developer",
+          company: p.name,
+          duration: index === 0 ? "Contract / Project" : "Personal Project",
+          location: "Remote",
+          description: p.responsibilities?.slice(0, 3) || [],
+          skills: p.tech_stack?.frameworks_libraries?.slice(0, 5) || [],
+        }));
+
+        setExperiences(mappedExps);
+      })
+      .catch((err) => console.error("Failed to load projects for experiences:", err));
+  }, [locale]);
 
   return (
     <section className="relative py-24 overflow-hidden" id="experience">
@@ -96,7 +97,7 @@ export default function Experience() {
           </div>
 
           <div className="space-y-16">
-            {translatedExperiences.map((exp, index) => (
+            {experiences.map((exp, index) => (
               <ExperienceItem key={exp.id} exp={exp} index={index} />
             ))}
           </div>
@@ -133,13 +134,14 @@ function ExperienceItem({ exp, index }: { exp: Experience; index: number }) {
 
       {/* Content Card */}
       <div className={`w-full md:w-1/2 pl-20 pr-4 md:px-12 ${isEven ? "md:text-right" : "text-left"}`}>
-        <motion.div
-          initial={{ opacity: 0, x: isEven ? 50 : -50 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-          className="relative rounded-3xl overflow-hidden border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] p-6 sm:p-8 hover:border-foreground/20 transition-all duration-300 hover:-translate-y-1 group-hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)]"
-        >
-          {/* Header */}
+        <Link href={`/work/${exp.projectId}`} className="block group/link">
+          <motion.div
+            initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+            className="relative rounded-3xl overflow-hidden border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] p-6 sm:p-8 hover:border-foreground/20 transition-all duration-300 hover:-translate-y-1 group-hover/link:shadow-[0_16px_48px_rgba(0,0,0,0.4)] cursor-pointer"
+          >
+            {/* Header */}
           <div className={`flex flex-col gap-2 mb-6 ${isEven ? "md:items-end" : "items-start"}`}>
             <h3 className="text-2xl font-semibold text-foreground tracking-tight">
               {exp.role}
@@ -181,8 +183,9 @@ function ExperienceItem({ exp, index }: { exp: Experience; index: number }) {
           </div>
           
           {/* Subtle Glow Effect inside card */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover/link:opacity-100 transition-opacity duration-500 pointer-events-none" />
         </motion.div>
+        </Link>
       </div>
     </div>
   );
