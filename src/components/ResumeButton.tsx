@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { FileText, Download } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -37,10 +43,10 @@ export function ResumeButton() {
               Select which document you'd like to view or download.
             </DialogDescription>
           </DialogHeader>
-          
+
           <div className="flex flex-col gap-4 py-4">
             <a
-              href="/resume.pdf"
+              href="/resume.html"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative flex w-full items-center justify-between rounded-xl border border-border bg-muted/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
@@ -51,8 +57,12 @@ export function ResumeButton() {
                   <FileText className="size-5" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-semibold text-foreground group-hover:text-primary transition-colors">View Resume</span>
-                  <span className="text-xs text-muted-foreground">Detailed work history and skills</span>
+                  <span className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                    View Resume
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    Detailed work history and skills
+                  </span>
                 </div>
               </div>
               <div className="rounded-full bg-background p-2 border border-border group-hover:border-primary/30 group-hover:bg-primary/10 transition-colors">
@@ -61,7 +71,7 @@ export function ResumeButton() {
             </a>
 
             <a
-              href="/cv.pdf"
+              href="/resume.html"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative flex w-full items-center justify-between rounded-xl border border-border bg-muted/50 p-4 transition-all hover:border-primary/50 hover:bg-primary/5"
@@ -72,8 +82,12 @@ export function ResumeButton() {
                   <FileText className="size-5" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-semibold text-foreground group-hover:text-primary transition-colors">View CV</span>
-                  <span className="text-xs text-muted-foreground">Comprehensive academic and professional profile</span>
+                  <span className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                    View CV
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    Comprehensive academic and professional profile
+                  </span>
                 </div>
               </div>
               <div className="rounded-full bg-background p-2 border border-border group-hover:border-primary/30 group-hover:bg-primary/10 transition-colors">

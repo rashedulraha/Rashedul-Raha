@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rashedul Islam - Full-Stack Developer Resume</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Arial,
+          sans-serif;
+        background: #eef2f7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 40px 20px;
+        color: #1e293b;
+        line-height: 1.6;
+      }
+
+      .resume {
+        max-width: 1050px;
+        width: 100%;
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.07);
+        padding: 52px 60px;
+      }
+
+      /* ---------- HEADER ---------- */
+      .header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 4px solid #2563eb;
+        padding-bottom: 24px;
+        margin-bottom: 30px;
+      }
+
+      .name-title h1 {
+        font-size: 38px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: #0f172a;
+        margin-bottom: 2px;
+      }
+
+      .name-title .title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2563eb;
+      }
+
+      .name-title .tagline {
+        font-size: 14px;
+        color: #64748b;
+        margin-top: 4px;
+        font-weight: 400;
+      }
+
+      .contact-info {
+        text-align: right;
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.8;
+      }
+
+      .contact-info a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .contact-info .icon {
+        margin-right: 6px;
+        width: 18px;
+        display: inline-block;
+        color: #2563eb;
+      }
+
+      /* ---------- SECTION ---------- */
+      .section {
+        margin-bottom: 30px;
+      }
+
+      .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #2563eb;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        border-bottom: 2px solid #e9edf2;
+        padding-bottom: 8px;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section-title i {
+        font-size: 18px;
+        color: #2563eb;
+      }
+
+      .summary-text {
+        font-size: 15px;
+        color: #334155;
+        line-height: 1.8;
+      }
+
+      .summary-text strong {
+        color: #0f172a;
+      }
+
+      /* ---------- SKILLS ---------- */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 8px 24px;
+      }
+
+      .skill-group {
+        margin-bottom: 4px;
+      }
+
+      .skill-group strong {
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 2px;
+      }
+
+      .skill-group span {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.6;
+      }
+
+      /* ---------- EXPERIENCE ---------- */
+      .entry {
+        margin-bottom: 26px;
+      }
+
+      .entry:last-child {
+        margin-bottom: 0;
+      }
+
+      .entry-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 4px;
+      }
+
+      .entry-header h3 {
+        font-size: 17px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      .entry-header .role {
+        font-weight: 600;
+        color: #2563eb;
+        font-size: 15px;
+      }
+
+      .entry-header .date {
+        font-size: 13px;
+        color: #94a3b8;
+        font-weight: 500;
+        background: #f1f5f9;
+        padding: 0 12px;
+        border-radius: 20px;
+      }
+
+      .entry ul {
+        list-style: none;
+        padding-left: 4px;
+      }
+
+      .entry ul li {
+        font-size: 14px;
+        color: #334155;
+        padding-left: 22px;
+        position: relative;
+        margin-bottom: 5px;
+        line-height: 1.7;
+      }
+
+      .entry ul li::before {
+        content: "◆";
+        color: #2563eb;
+        font-weight: 700;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 10px;
+      }
+
+      .entry ul li strong {
+        color: #0f172a;
+      }
+
+      .tech-stack {
+        font-size: 13px;
+        color: #64748b;
+        margin-top: 6px;
+      }
+
+      .tech-stack span {
+        background: #f1f5f9;
+        padding: 2px 10px;
+        border-radius: 12px;
+        margin-right: 6px;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 500;
+        color: #2563eb;
+      }
+
+      /* ---------- EDUCATION ---------- */
+      .edu-item {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .edu-item h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      .edu-item .uni {
+        font-size: 15px;
+        color: #475569;
+      }
+
+      .edu-item .year {
+        font-size: 14px;
+        color: #94a3b8;
+        font-weight: 500;
+      }
+
+      /* ---------- CERTIFICATIONS ---------- */
+      .cert-lang {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .cert-lang div {
+        font-size: 14px;
+        color: #334155;
+      }
+
+      .cert-lang strong {
+        font-weight: 600;
+        color: #0f172a;
+      }
+
+      .cert-lang ul {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 4px;
+      }
+
+      .cert-lang ul li {
+        font-size: 14px;
+        color: #334155;
+        padding: 2px 0;
+      }
+
+      .cert-lang ul li i {
+        color: #2563eb;
+        font-size: 12px;
+        margin-right: 4px;
+      }
+
+      /* ---------- RESPONSIVE ---------- */
+      @media (max-width: 768px) {
+        .resume {
+          padding: 28px 20px;
+        }
+
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+        }
+
+        .contact-info {
+          text-align: left;
+          width: 100%;
+        }
+
+        .entry-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+        }
+
+        .skills-grid {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+
+        .cert-lang {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      /* ============================================================
+         PRINT / PDF - A4 SIZE FIX
+         ============================================================ */
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        html,
+        body {
+          width: 210mm;
+          min-height: 297mm;
+          background: #ffffff;
+          padding: 0;
+          margin: 0;
+          display: block;
+        }
+
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          padding: 0;
+        }
+
+        .resume {
+          width: 210mm;
+          min-height: 297mm;
+          max-width: 210mm;
+          box-shadow: none;
+          border-radius: 0;
+          padding: 12mm 15mm;
+          background: #ffffff;
+          page-break-after: avoid;
+          page-break-inside: avoid;
+        }
+
+        .section {
+          page-break-inside: avoid;
+        }
+
+        .entry {
+          page-break-inside: avoid;
+        }
+
+        .entry-header .date {
+          background: #f1f5f9;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        .tech-stack span {
+          background: #f1f5f9;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        .section {
+          margin-bottom: 16px;
+        }
+
+        .entry {
+          margin-bottom: 14px;
+        }
+
+        .entry-header h3 {
+          font-size: 15px;
+        }
+
+        .entry ul li {
+          font-size: 12.5px;
+          margin-bottom: 3px;
+          line-height: 1.5;
+        }
+
+        .summary-text {
+          font-size: 13px;
+          line-height: 1.6;
+        }
+
+        .section-title {
+          font-size: 14px;
+          margin-bottom: 10px;
+          padding-bottom: 5px;
+        }
+
+        .contact-info {
+          font-size: 12px;
+          line-height: 1.6;
+        }
+
+        .name-title h1 {
+          font-size: 32px;
+        }
+
+        .name-title .title {
+          font-size: 16px;
+        }
+
+        .name-title .tagline {
+          font-size: 13px;
+        }
+
+        .skills-grid {
+          gap: 4px 16px;
+        }
+
+        .skill-group strong {
+          font-size: 12px;
+        }
+
+        .skill-group span {
+          font-size: 12.5px;
+          line-height: 1.5;
+        }
+
+        .tech-stack span {
+          font-size: 11px;
+          padding: 1px 8px;
+        }
+
+        .edu-item h3 {
+          font-size: 14px;
+        }
+
+        .edu-item .uni {
+          font-size: 13px;
+        }
+
+        .edu-item .year {
+          font-size: 12px;
+        }
+
+        .cert-lang div {
+          font-size: 12.5px;
+        }
+
+        .cert-lang ul li {
+          font-size: 12.5px;
+        }
+
+        .header {
+          padding-bottom: 16px;
+          margin-bottom: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="resume">
+      <!-- ============ HEADER ============ -->
+      <header class="header">
+        <div class="name-title">
+          <h1>Rashedul Islam</h1>
+          <div class="title">
+            <i class="fas fa-code" style="margin-right: 6px"></i>Full-Stack
+            Developer
+          </div>
+          <div class="tagline">
+            <i class="fas fa-rocket" style="margin-right: 4px"></i>React &bull;
+            Next.js &bull; TypeScript &bull; Node.js
+          </div>
+        </div>
+        <div class="contact-info">
+          <div><i class="fas fa-phone icon"></i>+880 1992-284845</div>
+          <div>
+            <i class="fas fa-envelope icon"></i>
+            <a href="mailto:rashedulraha.bd@gmail.com"
+              >rashedulraha.bd@gmail.com</a
+            >
+          </div>
+          <div>
+            <i class="fas fa-globe icon"></i>
+            <a target="_blank" href="https://rashedul-raha.vercel.app"
+              >rashedul-raha.vercel.app</a
+            >
+          </div>
+          <div>
+            <i class="fab fa-github icon"></i>
+            <a target="_blank" href="https://github.com/rashedulraha"
+              >github.com/rashedulraha</a
+            >
+          </div>
+          <div>
+            <i class="fab fa-linkedin icon"></i>
+            <a target="_blank" href="https://linkedin.com/in/rashedulraha"
+              >linkedin.com/in/rashedulraha</a
+            >
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ PROFESSIONAL SUMMARY ============ -->
+      <section class="section">
+        <div class="section-title">
+          <i class="fas fa-user-astronaut"></i> Professional Summary
+        </div>
+        <p class="summary-text">
+          <strong>Full-Stack Developer</strong> with
+          <strong>2+ years</strong> of experience building scalable web
+          applications using
+          <strong>React, Next.js, TypeScript, and Node.js</strong>. Specialized
+          in creating high-performance SaaS platforms, real estate portals, and
+          e-commerce solutions. Passionate about
+          <strong>clean code, UI/UX excellence</strong>, and delivering
+          <strong>measurable business impact</strong> through optimized,
+          user-centric applications.
+        </p>
+      </section>
+
+      <!-- ============ TECHNICAL SKILLS ============ -->
+      <section class="section">
+        <div class="section-title">
+          <i class="fas fa-tools"></i> Technical Skills
+        </div>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <strong>Frontend</strong>
+            <span
+              >React.js, Next.js (SSR/SSG/ISR), TypeScript, JavaScript (ES6+),
+              Tailwind CSS, Framer Motion, Redux, Zustand</span
+            >
+          </div>
+          <div class="skill-group">
+            <strong>Backend</strong>
+            <span>Node.js, Express.js, REST APIs, GraphQL, WebSockets</span>
+          </div>
+          <div class="skill-group">
+            <strong>Database</strong>
+            <span>MongoDB, PostgreSQL, Prisma, Mongoose, Redis</span>
+          </div>
+          <div class="skill-group">
+            <strong>DevOps &amp; Cloud</strong>
+            <span
+              >Docker, AWS (EC2, S3), Vercel, Netlify, GitHub Actions
+              (CI/CD)</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ EXPERIENCE & PROJECTS ============ -->
+      <section class="section">
+        <div class="section-title">
+          <i class="fas fa-briefcase"></i> Experience &amp; Projects
+        </div>
+
+        <!-- Silicon Real Estate -->
+        <div class="entry">
+          <div class="entry-header">
+            <h3>🏢 Silicon Real Estate</h3>
+            <span class="role">Lead Full-Stack Developer (Contract)</span>
+            <span class="date">Jan 2025 &ndash; Present</span>
+          </div>
+          <ul>
+            <li>
+              Built a comprehensive real estate platform using
+              <strong>Next.js, TypeScript, and Tailwind CSS</strong>, serving
+              <strong>1,000+ daily active users</strong>.
+            </li>
+            <li>
+              <strong>Reduced page load time by 42%</strong> and
+              <strong>boosted organic traffic by 65%</strong>
+              through SSR, Image Optimization, and ISR.
+            </li>
+            <li>
+              Built a custom CMS dashboard
+              <strong>cutting admin data entry time by 50%</strong>
+              for managing 500+ property listings.
+            </li>
+            <li>
+              Integrated <strong>Google Maps API</strong> and
+              <strong>WhatsApp Business API</strong>, resulting in a
+              <strong>35% increase in client inquiries</strong>.
+            </li>
+          </ul>
+          <div class="tech-stack">
+            <span>Next.js</span> <span>TypeScript</span> <span>Tailwind</span>
+            <span>Prisma</span> <span>PostgreSQL</span> <span>Socket.io</span>
+            <span>Vercel</span>
+          </div>
+        </div>
+
+        <!-- Zopshop -->
+        <div class="entry">
+          <div class="entry-header">
+            <h3>🛍️ Zopshop &mdash; Multi-Tenant SaaS Platform</h3>
+            <span class="role">Creator &amp; Full-Stack Developer</span>
+            <span class="date">Jul 2025 &ndash; Present</span>
+          </div>
+          <ul>
+            <li>
+              Engineered a
+              <strong>scalable multi-tenant SaaS architecture</strong> enabling
+              multiple businesses to launch independent online stores with
+              isolated tenant data.
+            </li>
+            <li>
+              Designed complex relational data models using
+              <strong>PostgreSQL and Prisma</strong> with
+              <strong>row-level security (RLS)</strong> for tenant isolation.
+            </li>
+            <li>
+              Built a <strong>subscription-based payment system</strong> with
+              <strong>Stripe</strong>
+              supporting tiered pricing plans.
+            </li>
+            <li>
+              Deployed on <strong>Vercel with GitHub Actions CI/CD</strong>,
+              ensuring <strong>zero-downtime deployments</strong>.
+            </li>
+          </ul>
+          <div class="tech-stack">
+            <span>Next.js</span> <span>TypeScript</span> <span>PostgreSQL</span>
+            <span>Prisma</span> <span>Stripe</span> <span>Tailwind</span>
+            <span>Vercel</span>
+          </div>
+        </div>
+
+        <!-- GearUp -->
+        <div class="entry">
+          <div class="entry-header">
+            <h3>⛺ GearUp &mdash; Sports Gear Rental</h3>
+            <span class="role">Lead Developer</span>
+            <span class="date">Mar 2024 &ndash; Jul 2024</span>
+          </div>
+          <ul>
+            <li>
+              Built a <strong>full-featured rental marketplace</strong> with
+              real-time gear availability tracking using WebSockets, reducing
+              double-bookings by <strong>95%</strong>.
+            </li>
+            <li>
+              Developed <strong>50+ responsive UI components</strong> with
+              <strong>Framer Motion</strong>, achieving a
+              <strong>4.8/5 rating</strong> from users.
+            </li>
+            <li>
+              Integrated <strong>Stripe Connect</strong> for multi-vendor
+              payouts, automating <strong>500+ monthly transactions</strong>.
+            </li>
+          </ul>
+          <div class="tech-stack">
+            <span>React</span> <span>Node.js</span> <span>Express</span>
+            <span>MongoDB</span> <span>Stripe</span> <span>WebSockets</span>
+            <span>Zustand</span>
+          </div>
+        </div>
+
+        <!-- Koda -->
+        <div class="entry">
+          <div class="entry-header">
+            <h3>📋 Koda &mdash; Project Management Tool</h3>
+            <span class="role">Developer</span>
+            <span class="date">Nov 2023 &ndash; Feb 2024</span>
+          </div>
+          <ul>
+            <li>
+              Created a <strong>Trello-like tool</strong> with drag-and-drop
+              task boards, improving team workflow efficiency by
+              <strong>45%</strong>.
+            </li>
+            <li>
+              Implemented <strong>real-time notifications</strong> with
+              WebSockets for instant team updates.
+            </li>
+            <li>
+              <strong>Optimized performance</strong> using code splitting and
+              lazy loading, reducing bundle size by <strong>35%</strong>.
+            </li>
+          </ul>
+          <div class="tech-stack">
+            <span>React</span> <span>Redux</span> <span>Node.js</span>
+            <span>Express</span> <span>MongoDB</span> <span>WebSockets</span>
+            <span>Tailwind</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ EDUCATION ============ -->
+      <section class="section">
+        <div class="section-title">
+          <i class="fas fa-graduation-cap"></i> Education
+        </div>
+        <div class="edu-item">
+          <div>
+            <h3>Higher Secondary Certificate (HSC)</h3>
+            <div class="uni">Nazipur Government College, Naogaon</div>
+            <div style="font-size: 13px; color: #64748b; margin-top: 2px">
+              <i class="fas fa-trophy" style="color: #2563eb"></i> GPA: 4.75 /
+              5.00
+            </div>
+          </div>
+          <span class="year">2020 &ndash; 2022</span>
+        </div>
+        <div class="edu-item" style="margin-top: 12px">
+          <div>
+            <h3>Secondary School Certificate (SSC)</h3>
+            <div class="uni">Kashimpur High School, Naogaon</div>
+            <div style="font-size: 13px; color: #64748b; margin-top: 2px">
+              <i class="fas fa-trophy" style="color: #2563eb"></i> GPA: 4.50 /
+              5.00
+            </div>
+          </div>
+          <span class="year">2018 &ndash; 2020</span>
+        </div>
+      </section>
+
+      <!-- ============ CERTIFICATIONS ============ -->
+      <section class="section">
+        <div class="section-title">
+          <i class="fas fa-certificate"></i> Certifications &amp; Languages
+        </div>
+        <div class="cert-lang">
+          <div>
+            <strong>📜 Certifications:</strong>
+            <ul>
+              <li>
+                <i class="fas fa-check-circle"></i> Programming Hero - Frontend
+                &amp; Backend Development
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i> PHITRON - Complete Web
+                Development
+              </li>
+            </ul>
+          </div>
+          <div>
+            <strong>🌐 Languages:</strong>
+            <ul>
+              <li>
+                <span style="font-weight: 600">Bengali</span> &mdash; Native
+              </li>
+              <li>
+                <span style="font-weight: 600">English</span> &mdash;
+                Professional Working
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
