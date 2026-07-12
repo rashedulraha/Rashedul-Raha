@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/purity */
 "use client";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "@/routing";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -11,15 +12,22 @@ export default function FAQ() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
-  // Floating particles for background
-  const particles = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 15 + 10,
-    delay: Math.random() * 8,
-  }));
+  // Floating particles for background (client-side only to prevent hydration mismatch)
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; size: number; duration: number; delay: number }>>([]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setParticles(
+      Array.from({ length: 12 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 2 + 1,
+        duration: Math.random() * 15 + 10,
+        delay: Math.random() * 8,
+      }))
+    );
+  }, []);
 
   // Card data for better structure
   const cards = [
@@ -128,7 +136,7 @@ export default function FAQ() {
             whileHover={{ y: -4 }}
             transition={{ duration: 0.2 }}
             className="col-span-1 md:col-span-6 lg:col-span-4">
-            <a
+            <Link
               className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl transition-all duration-300 cursor-pointer h-72 card-premium"
               href="/uses">
               <div className="size-full">
@@ -178,7 +186,7 @@ export default function FAQ() {
                 className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-border bg-muted transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
                 <ArrowRight className="size-[18px] text-primary transition-colors duration-300" />
               </motion.div>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Card 2 - About */}
@@ -186,7 +194,7 @@ export default function FAQ() {
             whileHover={{ y: -4 }}
             transition={{ duration: 0.2 }}
             className="col-span-1 md:col-span-6 lg:col-span-4">
-            <a
+            <Link
               className="group relative flex w-full flex-col justify-between rounded-xl transition-all duration-300 cursor-pointer h-72 overflow-hidden card-premium"
               href="/about">
               <div className="size-full">
@@ -241,7 +249,7 @@ export default function FAQ() {
                 className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-border bg-muted transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
                 <ArrowRight className="size-[18px] text-primary transition-colors duration-300" />
               </motion.div>
-            </a>
+            </Link>
           </motion.div>
 
           {/* Card 3 - Guestbook */}
@@ -250,7 +258,7 @@ export default function FAQ() {
             transition={{ duration: 0.2 }}
             className="col-span-1 md:col-span-6 lg:col-span-4">
             <div className="relative w-full h-72">
-              <a
+              <Link
                 className="group relative flex flex-col justify-between overflow-hidden rounded-xl transition-all duration-300 cursor-pointer size-full card-premium"
                 href="/guestbook">
                 <div className="size-full">
@@ -545,7 +553,7 @@ export default function FAQ() {
                   className="absolute right-4 bottom-4 z-20 flex size-9 items-center justify-center rounded-2xl border border-dashed border-border bg-muted transition-all duration-300 ease-out group-hover:border-primary/50 group-hover:bg-primary/10">
                   <ArrowRight className="size-4.5 text-primary transition-colors duration-300" />
                 </motion.div>
-              </a>
+              </Link>
             </div>
           </motion.div>
         </motion.div>

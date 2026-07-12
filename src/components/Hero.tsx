@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { Link } from "@/routing";
+import { ResumeButton } from "./ResumeButton";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
 import {
@@ -575,6 +577,7 @@ export default function Hero() {
                 </svg>
               </span>
             </motion.button>
+            <ResumeButton />
 
             <motion.button
               whileHover={{ scale: 1.02 }}

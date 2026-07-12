@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/purity */
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { Link } from "@/routing";
 import { blogPosts } from "@/lib/blog-data";
 import { useTranslations } from "next-intl";
 
@@ -12,15 +13,22 @@ export default function Blog() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  // Floating particles
-  const particles = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 15 + 10,
-    delay: Math.random() * 8,
-  }));
+  // Floating particles (client-side only to prevent hydration mismatch)
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; size: number; duration: number; delay: number }>>([]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setParticles(
+      Array.from({ length: 12 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 2 + 1,
+        duration: Math.random() * 15 + 10,
+        delay: Math.random() * 8,
+      }))
+    );
+  }, []);
 
   return (
     <>
@@ -97,9 +105,8 @@ export default function Blog() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post, index) => (
-            <motion.a
+            <motion.div
               key={post.id}
-              href={`/blog/${post.slug}`}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
@@ -110,7 +117,11 @@ export default function Blog() {
               whileHover={{ y: -6 }}
               onMouseEnter={() => setHoveredCard(post.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              className="group flex h-full flex-col rounded-3xl p-2.5 transition-all duration-300 card-premium">
+              className="h-full"
+            >
+              <Link
+                href={`/blog/${post.slug}`}
+                className="group flex h-full flex-col rounded-3xl p-2.5 transition-all duration-300 card-premium">
               {/* Image */}
               <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-muted">
                 <motion.img
@@ -188,22 +199,26 @@ export default function Blog() {
                   </motion.div>
                 </div>
               </div>
-            </motion.a>
+              </Link>
+            </motion.div>
           ))}
         </motion.div>
 
         <div aria-hidden="true" className="w-full border-t mt-8" />
 
         {/* View All Posts Button */}
-        <motion.a
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.6 }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="group flex w-fit items-center justify-center gap-2 text-muted-foreground text-xs uppercase transition-colors hover:text-primary mx-auto mt-pagebuilder my-5"
-          href="/blog">
-          {t('readMore')}
+          className="mx-auto mt-pagebuilder my-5 w-fit"
+        >
+          <Link
+            className="group flex items-center justify-center gap-2 text-muted-foreground text-xs uppercase transition-colors hover:text-primary"
+            href="/blog">
+            {t('readMore')}
           <motion.div
             whileHover={{ rotate: 45 }}
             transition={{ duration: 0.2 }}
@@ -216,7 +231,8 @@ export default function Blog() {
               <ArrowRight className="size-3.5" />
             </motion.span>
           </motion.div>
-        </motion.a>
+          </Link>
+        </motion.div>
       </section>
     </>
   );
