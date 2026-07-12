@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { ResumeButton } from "./ResumeButton";
 import {
   Code,
   Server,
@@ -33,7 +34,8 @@ const TextTooltip = ({
     <span
       className="relative inline-block cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}>
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <strong className="font-semibold text-foreground underline decoration-primary/50 underline-offset-4 hover:decoration-primary transition-colors">
         {children}
       </strong>
@@ -44,7 +46,8 @@ const TextTooltip = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-xl z-50 pointer-events-none flex flex-col gap-2 bg-background/95 backdrop-blur-xl border border-white/10 shadow-2xl">
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 rounded-xl z-50 pointer-events-none flex flex-col gap-2 bg-background/95 backdrop-blur-xl border border-white/10 shadow-2xl"
+          >
             <div className="flex items-center gap-2">
               <div className="p-1.5 rounded-md bg-primary/10 border border-primary/20 text-primary">
                 <Icon className="w-4 h-4" />
@@ -64,7 +67,7 @@ const TextTooltip = ({
 };
 
 const SKILLS = [
-  { name: "Next.js 14/15", icon: Server },
+  { name: "Next.js 16", icon: Server },
   { name: "React 19", icon: Layers },
   { name: "TypeScript", icon: Code },
   { name: "Tailwind CSS", icon: MonitorSmartphone },
@@ -80,10 +83,10 @@ export default function AboutSection() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const stats = [
-    { label: t('stat0Label'), value: t('stat0Value') },
-    { label: t('stat1Label'), value: t('stat1Value') },
-    { label: t('stat2Label'), value: t('stat2Value') },
-    { label: t('stat3Label'), value: t('stat3Value') },
+    { label: t("stat0Label"), value: t("stat0Value") },
+    { label: t("stat1Label"), value: t("stat1Value") },
+    { label: t("stat2Label"), value: t("stat2Value") },
+    { label: t("stat3Label"), value: t("stat3Value") },
   ];
 
   const containerVariants: Variants = {
@@ -109,7 +112,8 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       className="relative w-full py-16 md:py-24 overflow-hidden bg-background"
-      id="about">
+      id="about"
+    >
       {/* --- Premium Grid Background --- */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_80%_60%_at_50%_0%,#000_40%,transparent_100%)]" />
@@ -121,15 +125,15 @@ export default function AboutSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16">
+          className="text-center mb-16"
+        >
           <p className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-primary uppercase tracking-widest mb-4 rounded-full bg-primary/10 border border-primary/20">
-            <User className="w-3.5 h-3.5" /> {t('badge')}
+            <User className="w-3.5 h-3.5" /> {t("badge")}
           </p>
           <h2 className="text-center font-instrument-serif text-3xl text-zinc-700 leading-tight md:text-4xl lg:text-5xl dark:text-zinc-100">
-            {t('title1')} {" "}
-            <br className="hidden md:block" />
+            {t("title1")} <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500 font-serif italic">
-              {t('title2')}
+              {t("title2")}
             </span>
           </h2>
         </motion.div>
@@ -140,7 +144,8 @@ export default function AboutSection() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="w-full max-w-md lg:w-[45%] relative">
+            className="w-full max-w-md lg:w-[45%] relative"
+          >
             <div className="relative p-2.5 rounded-3xl flex flex-col space-y-3 md:space-y-5 transition-colors duration-300 bg-background/50 backdrop-blur-xl border border-border shadow-2xl ">
               <div className="relative aspect-4/5 rounded-2xl overflow-hidden bg-muted">
                 <Image
@@ -159,87 +164,95 @@ export default function AboutSection() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.4, delay: 0.4, type: "spring" }}
-                className="absolute -bottom-6 -right-6 lg:-right-8 p-4 flex items-center gap-4 hover:-translate-y-1 transition-all duration-300 bg-background/80 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-xl z-20">
+                className="absolute -bottom-6 -right-6 lg:-right-8 p-4 flex items-center gap-4 hover:-translate-y-1 transition-all duration-300 bg-background/80 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-xl z-20"
+              >
                 <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
                   <Code className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-foreground">{t('expBadge1')}</p>
+                  <p className="text-sm font-bold text-foreground">
+                    {t("expBadge1")}
+                  </p>
                   <p className="text-xs text-muted-foreground font-medium">
-                    {t('expBadge2')}
+                    {t("expBadge2")}
                   </p>
                 </div>
               </motion.div>
 
-              {/* CTA Button */}
-              <motion.button
-                variants={itemVariants}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() =>
-                  window.dispatchEvent(
-                    new CustomEvent("open-modal", {
-                      detail: { view: "contact" },
-                    }),
-                  )
-                }
-                className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98] ">
-                <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground ">
-                  {t('cta')}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-y-1 right-1 w-10 rounded-full bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)]"
-                />
-                <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-primary p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent">
-                  <svg
-                    fill="none"
-                    height={24}
-                    viewBox="0 0 24 24"
-                    width={24}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-4.5 text-primary-foreground transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 ease-[cubic-bezier(0.25,0.1,0.25,1)]">
-                    <path
-                      d="M18.5 12L4.99997 12"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                    <path
-                      d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
-                  <svg
-                    fill="none"
-                    height={24}
-                    viewBox="0 0 24 24"
-                    width={24}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="absolute size-4.5 -translate-x-6 text-primary-foreground opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 ease-[cubic-bezier(0.25,0.1,0.25,1)]">
-                    <path
-                      d="M18.5 12L4.99997 12"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                    <path
-                      d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
-                </span>
-              </motion.button>
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-4 items-center">
+                <motion.button
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() =>
+                    window.dispatchEvent(
+                      new CustomEvent("open-modal", {
+                        detail: { view: "contact" },
+                      }),
+                    )
+                  }
+                  className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98] "
+                >
+                  <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground ">
+                    {t("cta")}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-y-1 right-1 w-10 rounded-full bg-primary transition-[width] duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:w-[calc(100%-8px)]"
+                  />
+                  <span className="z-10 flex items-center justify-center overflow-hidden rounded-full bg-primary p-2.5 transition-colors duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:bg-transparent">
+                    <svg
+                      fill="none"
+                      height={24}
+                      viewBox="0 0 24 24"
+                      width={24}
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="size-4.5 text-primary-foreground transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                    >
+                      <path
+                        d="M18.5 12L4.99997 12"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                    <svg
+                      fill="none"
+                      height={24}
+                      viewBox="0 0 24 24"
+                      width={24}
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="absolute size-4.5 -translate-x-6 text-primary-foreground opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                    >
+                      <path
+                        d="M18.5 12L4.99997 12"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                  </span>
+                </motion.button>
+                <ResumeButton />
+              </div>
             </div>
-
           </motion.div>
 
           {/* Right - Content & Bio */}
@@ -248,56 +261,60 @@ export default function AboutSection() {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={containerVariants}
-              className="space-y-8">
+              className="space-y-8"
+            >
               <motion.div variants={itemVariants}>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground leading-tight">
-                  {t('heading')}
+                  {t("heading")}
                 </h3>
               </motion.div>
 
               <motion.div
                 variants={itemVariants}
-                className="space-y-5 text-muted-foreground text-base leading-relaxed">
-                <p>
-                  {t('p1')}
-                </p>
+                className="space-y-5 text-muted-foreground text-base leading-relaxed"
+              >
+                <p>{t("p1")}</p>
 
                 <p>
-                  {t('p2_1')}
+                  {t("p2_1")}
                   <TextTooltip
-                    title={t('ttNextTitle')}
-                    description={t('ttNextDesc')}
-                    icon={Server}>
-                    {t('ttNextText')}
+                    title={t("ttNextTitle")}
+                    description={t("ttNextDesc")}
+                    icon={Server}
+                  >
+                    {t("ttNextText")}
                   </TextTooltip>
-                  {t('p2_2')}
+                  {t("p2_2")}
                   <TextTooltip
-                    title={t('ttTsTitle')}
-                    description={t('ttTsDesc')}
-                    icon={Code}>
-                    {t('ttTsText')}
+                    title={t("ttTsTitle")}
+                    description={t("ttTsDesc")}
+                    icon={Code}
+                  >
+                    {t("ttTsText")}
                   </TextTooltip>
-                  {t('p2_3')}
+                  {t("p2_3")}
                   <TextTooltip
-                    title={t('ttTwTitle')}
-                    description={t('ttTwDesc')}
-                    icon={MonitorSmartphone}>
-                    {t('ttTwText')}
+                    title={t("ttTwTitle")}
+                    description={t("ttTwDesc")}
+                    icon={MonitorSmartphone}
+                  >
+                    {t("ttTwText")}
                   </TextTooltip>
-                  {t('p2_4')}
+                  {t("p2_4")}
                   <TextTooltip
-                    title={t('ttCloudTitle')}
-                    description={t('ttCloudDesc')}
-                    icon={Cloud}>
-                    {t('ttCloudText')}
+                    title={t("ttCloudTitle")}
+                    description={t("ttCloudDesc")}
+                    icon={Cloud}
+                  >
+                    {t("ttCloudText")}
                   </TextTooltip>
-                  {t('p2_5')}
+                  {t("p2_5")}
                 </p>
 
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-muted/30 border border-border mt-6">
                   <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                   <p className="text-foreground font-medium text-sm leading-relaxed">
-                    {t('p3')}
+                    {t("p3")}
                   </p>
                 </div>
               </motion.div>
@@ -305,7 +322,7 @@ export default function AboutSection() {
               {/* Modern Tech Stack Grid */}
               <motion.div variants={itemVariants} className="space-y-3 pt-2">
                 <p className="text-xs font-semibold text-foreground uppercase tracking-widest">
-                  {t('techStack')}
+                  {t("techStack")}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {SKILLS.map((skill, index) => {
@@ -313,7 +330,8 @@ export default function AboutSection() {
                     return (
                       <div
                         key={index}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/50 border border-border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-default">
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/50 border border-border hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-default"
+                      >
                         <Icon className="w-3.5 h-3.5 text-primary" />
                         <span className="text-xs font-medium text-foreground">
                           {skill.name}
@@ -327,11 +345,13 @@ export default function AboutSection() {
               {/* Stats Grid */}
               <motion.div
                 variants={itemVariants}
-                className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+                className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4"
+              >
                 {stats.map((stat, index) => (
                   <div
                     key={index}
-                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-gradient-to-b from-muted/30 to-background border border-white/5 hover:border-primary/30 transition-all duration-300">
+                    className="flex flex-col items-center justify-center p-3 rounded-2xl bg-gradient-to-b from-muted/30 to-background border border-white/5 hover:border-primary/30 transition-all duration-300"
+                  >
                     <p className="text-2xl font-bold text-foreground mb-1">
                       {stat.value}
                     </p>
@@ -341,7 +361,6 @@ export default function AboutSection() {
                   </div>
                 ))}
               </motion.div>
-
             </motion.div>
           </div>
         </div>
