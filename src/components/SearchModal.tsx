@@ -23,13 +23,14 @@ import {
   Lock,
   CheckCircle2,
   Terminal,
-  LogIn
+  LogIn,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useTranslations, useLocale } from "next-intl";
+import apiClient from "@/lib/axios";
 
 type ViewState = "search" | "contact" | "full-form" | "login";
 
@@ -43,6 +44,8 @@ export default function SearchModal() {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   // Toggle the menu when ⌘K is pressed or close on Escape
   useEffect(() => {
@@ -104,7 +107,8 @@ export default function SearchModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -10 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="relative w-full max-w-2xl px-4 z-50 overflow-hidden">
+            className="relative w-full max-w-2xl px-4 z-50 overflow-hidden"
+          >
             <div className="rounded-2xl w-full max-w-2xl flex flex-col min-h-[400px] max-h-[80vh] bg-background/80 dark:bg-zinc-900/80 backdrop-blur-3xl border border-foreground/10 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
               <AnimatePresence mode="wait">
                 {currentView === "search" && (
@@ -114,11 +118,13 @@ export default function SearchModal() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.15 }}
-                    className="flex flex-col h-full">
+                    className="flex flex-col h-full"
+                  >
                     <Command
                       className="w-full flex flex-col h-full"
                       label="Global Command Menu"
-                      shouldFilter={true}>
+                      shouldFilter={true}
+                    >
                       {/* Top Row: Search Input and Buttons */}
                       <div className="flex items-center border-b border-border px-4">
                         <Search className="mr-3 h-5 w-5 text-muted-foreground" />
@@ -132,17 +138,26 @@ export default function SearchModal() {
                         <div className="flex items-center gap-2 ml-4">
                           <button
                             onClick={() => setCurrentView("contact")}
-                            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-primary hover:bg-accent">
+                            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-primary hover:bg-accent"
+                          >
                             <Phone className="h-4 w-4" />
                           </button>
                           <button
-                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-primary hover:bg-accent">
-                            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                            onClick={() =>
+                              setTheme(theme === "dark" ? "light" : "dark")
+                            }
+                            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-primary hover:bg-accent"
+                          >
+                            {theme === "dark" ? (
+                              <Sun className="h-4 w-4" />
+                            ) : (
+                              <Moon className="h-4 w-4" />
+                            )}
                           </button>
                           <button
                             onClick={() => setIsOpen(false)}
-                            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-primary hover:bg-accent">
+                            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-primary hover:bg-accent"
+                          >
                             <X className="h-4 w-4" />
                           </button>
                         </div>
@@ -162,7 +177,8 @@ export default function SearchModal() {
                                 {t("clear")}
                               </button>
                             </div>
-                          }>
+                          }
+                        >
                           <div className="flex flex-wrap gap-2 px-2 pb-4">
                             <span className="cursor-pointer rounded-full border border-border bg-muted px-3 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
                               GitHub
@@ -178,14 +194,16 @@ export default function SearchModal() {
                             <div className="px-2 pb-2 pt-4 text-xs text-muted-foreground border-t border-border">
                               {t("pagesGroup")}
                             </div>
-                          }>
+                          }
+                        >
                           <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
                             <Command.Item
                               value={`home index ${t("home")}`}
                               onSelect={() =>
                                 runCommand(() => router.push(`/${locale}`))
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Home className="h-4 w-4" />
                               </div>
@@ -195,9 +213,12 @@ export default function SearchModal() {
                             <Command.Item
                               value={`about me profile resume ${t("about")}`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}/about`))
+                                runCommand(() =>
+                                  router.push(`/${locale}/about`),
+                                )
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <User className="h-4 w-4" />
                               </div>
@@ -209,7 +230,8 @@ export default function SearchModal() {
                               onSelect={() =>
                                 runCommand(() => router.push(`/${locale}/work`))
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Folder className="h-4 w-4" />
                               </div>
@@ -221,7 +243,8 @@ export default function SearchModal() {
                               onSelect={() =>
                                 runCommand(() => router.push(`/${locale}/blog`))
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <FileText className="h-4 w-4" />
                               </div>
@@ -231,9 +254,12 @@ export default function SearchModal() {
                             <Command.Item
                               value={`guestbook comments sign message ${t("guestbook")}`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}/guestbook`))
+                                runCommand(() =>
+                                  router.push(`/${locale}/guestbook`),
+                                )
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <BookOpen className="h-4 w-4" />
                               </div>
@@ -243,9 +269,12 @@ export default function SearchModal() {
                             <Command.Item
                               value={`bucket list goals ${t("bucketList")}`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}/bucket-list`))
+                                runCommand(() =>
+                                  router.push(`/${locale}/bucket-list`),
+                                )
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <List className="h-4 w-4" />
                               </div>
@@ -255,9 +284,12 @@ export default function SearchModal() {
                             <Command.Item
                               value={`certificates awards achievements`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}/certificates`))
+                                runCommand(() =>
+                                  router.push(`/${locale}/certificates`),
+                                )
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Award className="h-4 w-4" />
                               </div>
@@ -267,7 +299,8 @@ export default function SearchModal() {
                             <Command.Item
                               value={`book a call meeting contact hire ${t("bookCall")}`}
                               onSelect={() => setCurrentView("contact")}
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Phone className="h-4 w-4" />
                               </div>
@@ -279,7 +312,8 @@ export default function SearchModal() {
                               onSelect={() =>
                                 runCommand(() => router.push(`/${locale}/uses`))
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Laptop className="h-4 w-4" />
                               </div>
@@ -289,9 +323,12 @@ export default function SearchModal() {
                             <Command.Item
                               value={`attribution credits inspiration thanks ${t("attribution")}`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}/attribution`))
+                                runCommand(() =>
+                                  router.push(`/${locale}/attribution`),
+                                )
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <Award className="h-4 w-4" />
                               </div>
@@ -301,9 +338,12 @@ export default function SearchModal() {
                             <Command.Item
                               value={`links social connect network ${t("links")}`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}/links`))
+                                runCommand(() =>
+                                  router.push(`/${locale}/links`),
+                                )
                               }
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                 <LinkIcon className="h-4 w-4" />
                               </div>
@@ -313,7 +353,8 @@ export default function SearchModal() {
                             <Command.Item
                               value={`dashboard admin terminal login ${t("dashboardTerminal")}`}
                               onSelect={() => setCurrentView("login")}
-                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border bg-cyan-500/10 border-cyan-500/20">
                                 <Terminal className="h-4 w-4 text-cyan-400" />
                               </div>
@@ -327,7 +368,8 @@ export default function SearchModal() {
                             <div className="px-2 pb-2 pt-4 text-xs text-muted-foreground border-t border-border">
                               {t("connectGroup")}
                             </div>
-                          }>
+                          }
+                        >
                           <div className="grid grid-cols-1 gap-1 sm:grid-cols-3">
                             <Command.Item
                               onSelect={() =>
@@ -335,7 +377,8 @@ export default function SearchModal() {
                                   window.open("https://github.com", "_blank"),
                                 )
                               }
-                              className="group flex cursor-pointer items-center justify-between gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center justify-between gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex items-center gap-3">
                                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                   <GithubIcon className="h-4 w-4" />
@@ -351,7 +394,8 @@ export default function SearchModal() {
                                   window.open("https://linkedin.com", "_blank"),
                                 )
                               }
-                              className="group flex cursor-pointer items-center justify-between gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center justify-between gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex items-center gap-3">
                                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                   <LinkedinIcon className="h-4 w-4" />
@@ -367,7 +411,8 @@ export default function SearchModal() {
                                   window.open("https://twitter.com", "_blank"),
                                 )
                               }
-                              className="group flex cursor-pointer items-center justify-between gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground">
+                              className="group flex cursor-pointer items-center justify-between gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
+                            >
                               <div className="flex items-center gap-3">
                                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted border border-border">
                                   <XIcon className="h-4 w-4" />
@@ -390,15 +435,19 @@ export default function SearchModal() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.15 }}
-                    className="flex flex-col h-full p-4">
+                    className="flex flex-col h-full p-4"
+                  >
                     {/* Header */}
                     <div className="flex items-center gap-2 mb-6">
                       <button
                         onClick={() => setCurrentView("search")}
-                        className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors">
+                        className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                      >
                         <ChevronLeft className="h-5 w-5" />
                       </button>
-                      <h2 className="font-medium text-primary">{t("reachOut")}</h2>
+                      <h2 className="font-medium text-primary">
+                        {t("reachOut")}
+                      </h2>
                     </div>
 
                     {/* Message Card */}
@@ -448,10 +497,11 @@ export default function SearchModal() {
                           }}
                           disabled={!message.trim()}
                           className={`text-xs font-medium px-4 py-2 rounded-full transition-all duration-300 ${
-                            !message.trim() 
-                              ? "bg-muted text-muted-foreground cursor-not-allowed opacity-50" 
+                            !message.trim()
+                              ? "bg-muted text-muted-foreground cursor-not-allowed opacity-50"
                               : "bg-primary text-primary-foreground hover:opacity-90 hover:scale-[1.03]"
-                          }`}>
+                          }`}
+                        >
                           {t("continueBtn")}
                         </button>
                       </div>
@@ -462,7 +512,8 @@ export default function SearchModal() {
                       {/* Book a call */}
                       <button
                         onClick={() => runCommand(() => router.push("/book"))}
-                        className="flex flex-col items-start p-4 bg-muted border border-border rounded-xl hover:bg-accent hover:border-primary/30 transition-all duration-300 group text-left glass">
+                        className="flex flex-col items-start p-4 bg-muted border border-border rounded-xl hover:bg-accent hover:border-primary/30 transition-all duration-300 group text-left glass"
+                      >
                         <div className="flex items-center mb-3">
                           <div className="h-8 w-8 rounded-full overflow-hidden bg-muted border-2 border-border z-10">
                             <Image
@@ -494,7 +545,8 @@ export default function SearchModal() {
                                 "mailto:hello@rashedul.com"),
                           )
                         }
-                        className="flex flex-col items-start p-4 bg-muted border border-border rounded-xl hover:bg-accent hover:border-primary/30 transition-all duration-300 group text-left glass">
+                        className="flex flex-col items-start p-4 bg-muted border border-border rounded-xl hover:bg-accent hover:border-primary/30 transition-all duration-300 group text-left glass"
+                      >
                         <div className="h-8 w-8 rounded-full bg-muted border border-border flex items-center justify-center mb-3 text-muted-foreground group-hover:text-primary group-hover:bg-accent transition-colors">
                           <Mail className="h-4 w-4" />
                         </div>
@@ -515,7 +567,8 @@ export default function SearchModal() {
                             window.open("https://linkedin.com", "_blank"),
                           )
                         }
-                        className="flex items-center justify-center gap-2 py-2 px-3 bg-muted/50 hover:bg-accent rounded-full text-xs font-medium text-muted-foreground hover:text-primary transition-colors border border-border/50">
+                        className="flex items-center justify-center gap-2 py-2 px-3 bg-muted/50 hover:bg-accent rounded-full text-xs font-medium text-muted-foreground hover:text-primary transition-colors border border-border/50"
+                      >
                         <LinkedinIcon className="h-3.5 w-3.5" />
                         LinkedIn
                       </button>
@@ -525,7 +578,8 @@ export default function SearchModal() {
                             window.open("https://twitter.com", "_blank"),
                           )
                         }
-                        className="flex items-center justify-center gap-2 py-2 px-3 bg-muted/50 hover:bg-accent rounded-full text-xs font-medium text-muted-foreground hover:text-primary transition-colors border border-border/50">
+                        className="flex items-center justify-center gap-2 py-2 px-3 bg-muted/50 hover:bg-accent rounded-full text-xs font-medium text-muted-foreground hover:text-primary transition-colors border border-border/50"
+                      >
                         <XIcon className="h-3.5 w-3.5" />X (Twitter)
                       </button>
                       <button
@@ -534,7 +588,8 @@ export default function SearchModal() {
                             window.open("https://github.com", "_blank"),
                           )
                         }
-                        className="flex items-center justify-center gap-2 py-2 px-3 bg-muted/50 hover:bg-accent rounded-full text-xs font-medium text-muted-foreground hover:text-primary transition-colors border border-border/50">
+                        className="flex items-center justify-center gap-2 py-2 px-3 bg-muted/50 hover:bg-accent rounded-full text-xs font-medium text-muted-foreground hover:text-primary transition-colors border border-border/50"
+                      >
                         <GithubIcon className="h-3.5 w-3.5" />
                         GitHub
                       </button>
@@ -549,20 +604,31 @@ export default function SearchModal() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.15 }}
-                    className="flex flex-col h-full p-4">
+                    className="flex flex-col h-full p-4"
+                  >
                     {isSuccess ? (
                       <div className="flex flex-col items-center justify-center h-full p-8 min-h-[350px]">
-                        <motion.div 
-                          initial={{ scale: 0 }} 
-                          animate={{ scale: 1 }} 
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
                           transition={{ type: "spring", damping: 15 }}
                           className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-6"
                         >
-                          <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          <svg
+                            className="w-10 h-10"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={3}
+                              d="M5 13l4 4L19 7"
+                            />
                           </svg>
                         </motion.div>
-                        <motion.h3 
+                        <motion.h3
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2 }}
@@ -570,7 +636,7 @@ export default function SearchModal() {
                         >
                           {t("messageSent")}
                         </motion.h3>
-                        <motion.p 
+                        <motion.p
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.3 }}
@@ -585,7 +651,8 @@ export default function SearchModal() {
                         <div className="flex items-center gap-2 mb-6">
                           <button
                             onClick={() => setCurrentView("contact")}
-                            className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors">
+                            className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                          >
                             <ChevronLeft className="h-5 w-5" />
                           </button>
                           <h2 className="font-medium text-primary">
@@ -609,7 +676,8 @@ export default function SearchModal() {
                                 setCurrentView("search");
                               }, 2500);
                             }, 1500);
-                          }}>
+                          }}
+                        >
                           <div className="grid grid-cols-2 gap-4">
                             <div className="flex flex-col gap-1.5">
                               <label className="text-xs font-medium text-muted-foreground">
@@ -675,7 +743,8 @@ export default function SearchModal() {
                             <button
                               type="submit"
                               disabled={isSubmitting}
-                              className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-medium text-sm hover:opacity-90 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.25)] disabled:opacity-70 disabled:scale-100 disabled:cursor-not-allowed min-w-[140px]">
+                              className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-medium text-sm hover:opacity-90 hover:scale-[1.03] transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.25)] disabled:opacity-70 disabled:scale-100 disabled:cursor-not-allowed min-w-[140px]"
+                            >
                               {isSubmitting ? (
                                 <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
                               ) : (
@@ -696,15 +765,16 @@ export default function SearchModal() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.15 }}
-                    className="flex flex-col h-full p-4 relative overflow-hidden">
-                    
+                    className="flex flex-col h-full p-4 relative overflow-hidden"
+                  >
                     {/* Subtle background glow adapted for both themes */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
 
                     <div className="flex items-center gap-2 mb-6 relative z-10">
                       <button
                         onClick={() => setCurrentView("search")}
-                        className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors">
+                        className="p-1 rounded-md hover:bg-accent text-muted-foreground transition-colors"
+                      >
                         <ChevronLeft className="h-5 w-5" />
                       </button>
                       <h2 className="font-medium text-primary">
@@ -714,24 +784,60 @@ export default function SearchModal() {
 
                     <form
                       className="flex flex-col gap-5 flex-1 justify-center max-w-sm mx-auto w-full my-8 relative z-10"
-                      onSubmit={(e) => {
+                      onSubmit={async (e) => {
                         e.preventDefault();
+                        setLoginError("");
+                        setIsLoggingIn(true);
                         const formData = new FormData(e.currentTarget);
-                        const email = formData.get("email");
-                        const password = formData.get("password");
-                        // Simulating auth for demo
-                        if (email && password) {
-                          setIsOpen(false);
-                          router.push("/dashboard");
+                        const email = formData.get("email") as string;
+                        const password = formData.get("password") as string;
+                        try {
+                          const res = await apiClient.post("/auth/login", {
+                            email,
+                            password,
+                          });
+                          const data = res.data;
+                          if (data.success && data.data?.accessToken) {
+                            localStorage.setItem(
+                              "token",
+                              data.data.accessToken,
+                            );
+                            localStorage.setItem(
+                              "user",
+                              JSON.stringify(data.data.user),
+                            );
+                            setIsOpen(false);
+                            router.push(`/${locale}/dashboard`);
+                          } else {
+                            setLoginError(
+                              data.message || "Invalid email or password!",
+                            );
+                          }
+                        } catch (err: any) {
+                          setLoginError(
+                            err.response?.data?.message ||
+                              "Failed to connect to backend server.",
+                          );
+                        } finally {
+                          setIsLoggingIn(false);
                         }
-                      }}>
+                      }}
+                    >
                       <div className="text-center mb-6">
-                        <h3 className="text-2xl font-bold text-primary mb-2">{t("dashboardTerminal")}</h3>
+                        <h3 className="text-2xl font-bold text-primary mb-2">
+                          {t("dashboardTerminal")}
+                        </h3>
                         <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px] mx-auto">
                           {t("dashboardDesc")}
                         </p>
                       </div>
-                      
+
+                      {loginError && (
+                        <div className="p-3 text-xs font-medium text-red-500 bg-red-500/10 border border-red-500/20 rounded-xl text-center">
+                          {loginError}
+                        </div>
+                      )}
+
                       <div className="flex flex-col gap-2">
                         <label className="text-[11px] font-bold tracking-widest text-muted-foreground uppercase pl-1">
                           {t("adminEmail")}
@@ -740,7 +846,8 @@ export default function SearchModal() {
                           type="email"
                           name="email"
                           required
-                          placeholder="admin@example.com"
+                          defaultValue="rashedulraha.bd@gmail.com"
+                          placeholder="rashedulraha.bd@gmail.com"
                           className="bg-muted/50 border border-border rounded-xl px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-sm"
                         />
                       </div>
@@ -752,15 +859,24 @@ export default function SearchModal() {
                           type="password"
                           name="password"
                           required
-                          placeholder={t("passwordPlaceholder")}
+                          defaultValue="password123"
+                          placeholder="password123"
                           className="bg-muted/50 border border-border rounded-xl px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-sm"
                         />
                       </div>
                       <button
                         type="submit"
-                        className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-xl font-semibold text-sm hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
-                        <LogIn className="w-4 h-4" />
-                        {t("accessDashboard")}
+                        disabled={isLoggingIn}
+                        className="w-full bg-primary text-primary-foreground px-6 py-4 rounded-xl font-semibold text-sm hover:opacity-90 hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isLoggingIn ? (
+                          <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                        ) : (
+                          <>
+                            <LogIn className="w-4 h-4" />
+                            {t("accessDashboard")}
+                          </>
+                        )}
                       </button>
                     </form>
                   </motion.div>
@@ -786,7 +902,8 @@ function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
-      strokeLinejoin="round">
+      strokeLinejoin="round"
+    >
       <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
       <path d="M9 18c-4.51 2-5-2-7-2" />
     </svg>
@@ -805,7 +922,8 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
-      strokeLinejoin="round">
+      strokeLinejoin="round"
+    >
       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
       <rect width="4" height="12" x="2" y="9" />
       <circle cx="4" cy="4" r="2" />
@@ -825,7 +943,8 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
-      strokeLinejoin="round">
+      strokeLinejoin="round"
+    >
       <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
       <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
     </svg>

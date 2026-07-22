@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 import { Sidebar, TabId } from "@/components/dashboard/Sidebar";
 import { OverviewTab } from "@/components/dashboard/OverviewTab";
 import { ProfileTab } from "@/components/dashboard/ProfileTab";
@@ -12,9 +14,30 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
 
 export default function DashboardPage() {
+  const router = useRouter();
+  const locale = useLocale();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
   const [activeTab, setActiveTab] = useState<TabId>("overview");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push(`/${locale}`);
+    } else {
+      setIsAuthenticated(true);
+    }
+  }, [router, locale]);
+
+  if (isAuthenticated === null) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   const renderTabContent = () => {
     switch (activeTab) {

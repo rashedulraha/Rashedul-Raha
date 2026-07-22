@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Search, ArrowRight } from "lucide-react";
 import { Link } from "@/routing";
 import Image from "next/image";
 import { ProjectData, getProjectBanner } from "@/lib/projectData";
 import { useTranslations } from "next-intl";
+import { getProjects } from "@/services/apiService";
 
 export default function WorkList({ initialProjects }: { initialProjects: ProjectData[] }) {
   const tPage = useTranslations("WorkPage");
@@ -13,6 +14,37 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
   
   const [activeCategory, setActiveCategory] = useState("All Projects");
   const [searchQuery, setSearchQuery] = useState("");
+  const [projectsList, setProjectsList] = useState<ProjectData[]>(initialProjects);
+
+  useEffect(() => {
+    async function fetchApiProjects() {
+      try {
+        const res = await getProjects();
+        const data = res.data;
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          const apiProjects: ProjectData[] = data.data.map((item: any) => ({
+            id: item.id || item.slug,
+            name: item.title,
+            tagline: item.subtitle || item.type || "Web App",
+            overview: item.description,
+            live_demo: item.liveUrl || undefined,
+            github_repo: item.githubUrl || undefined,
+            silicon_img_banner: item.image || undefined,
+            screenshots: [],
+            tech_stack: {
+              frameworks_libraries: item.tags || [],
+              languages: item.tags || [],
+            },
+            key_features: item.features || [],
+          }));
+          setProjectsList(apiProjects);
+        }
+      } catch (e) {
+        // fallback
+      }
+    }
+    fetchApiProjects();
+  }, []);
 
   // Extract unique categories based on tech stack or generic terms
   const categories = useMemo(() => {
@@ -21,7 +53,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
   }, []);
 
   // Filter projects
-  const filteredProjects = initialProjects.filter((project) => {
+  const filteredProjects = projectsList.filter((project) => {
     const matchesCategory =
       activeCategory === "All Projects" ||
       (project.tech_stack?.frameworks_libraries && project.tech_stack.frameworks_libraries.includes(activeCategory)) ||

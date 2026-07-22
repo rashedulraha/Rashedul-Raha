@@ -111,6 +111,10 @@ export function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCollapsed }
       <div className="p-4 border-t border-border">
         <Link 
           href="/"
+          onClick={() => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+          }}
           className={`flex items-center gap-3 px-3 py-3 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors group ${isCollapsed ? "justify-center" : ""}`}
         >
           <LogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
