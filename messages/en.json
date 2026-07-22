@@ -652,6 +652,7 @@
     }
   },
   "CertificatesPage": {
+    "subtitle": "A collection of certificates and achievements from my web development journey and other continuous learning experiences.",
     "header": {
       "title1": "My",
       "titleHighlight": "Certificates",
