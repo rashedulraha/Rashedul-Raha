@@ -123,6 +123,18 @@ export const deleteContactMessage = async (id: string) => {
   return apiClient.delete(`/contact-messages/${id}`);
 };
 
+export const replyToContactMessage = async (id: string, replyMessage: string) => {
+  return apiClient.post(`/contact-messages/${id}/reply`, { replyMessage });
+};
+
+export const summarizeContactMessage = async (id: string) => {
+  return apiClient.get(`/contact-messages/${id}/summarize`);
+};
+
+export const sendChatbotAIQuery = async (messages: any[]) => {
+  return apiClient.post("/chatbot/chat", { messages });
+};
+
 // Testimonials API Calls
 export const getTestimonials = async () => {
   return apiClient.get("/testimonials");
