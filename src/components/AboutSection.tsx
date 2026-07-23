@@ -253,7 +253,12 @@ export default function AboutSection() {
                 variants={itemVariants}
                 className="space-y-5 text-muted-foreground text-base leading-relaxed"
               >
-                <p>I specialize in building scalable web and mobile applications using modern technologies. With 3+ years of experience, I focus on clean architecture, smooth UI/UX, and robust API design.</p>
+                <p>
+                  I specialize in building scalable web applications and
+                  high-performance digital systems using modern technologies. With
+                  3+ years of experience, I focus on clean architecture, smooth
+                  UI/UX, and robust API design.
+                </p>
 
                 <p>
                   I build web apps with{" "}
@@ -271,16 +276,16 @@ export default function AboutSection() {
                     icon={Code}
                   >
                     TypeScript
-                  </TextTooltip>
-                  {" "}and{" "}
+                  </TextTooltip>{" "}
+                  and{" "}
                   <TextTooltip
                     title="Tailwind CSS"
                     description="Modern utility-first styling system"
                     icon={MonitorSmartphone}
                   >
                     Tailwind CSS
-                  </TextTooltip>
-                  {" "}for responsive designs. For backend systems, I utilize{" "}
+                  </TextTooltip>{" "}
+                  for responsive designs. For backend systems, I utilize{" "}
                   <TextTooltip
                     title="Node.js & Express"
                     description="Scalable REST APIs & backend services"
@@ -294,7 +299,8 @@ export default function AboutSection() {
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-muted/30 border border-border mt-6">
                   <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                   <p className="text-foreground font-medium text-sm leading-relaxed">
-                    Focusing on modern web standards, performance optimization, and responsive design across all devices.
+                    Focusing on modern web standards, performance optimization,
+                    and responsive design across all devices.
                   </p>
                 </div>
               </motion.div>
