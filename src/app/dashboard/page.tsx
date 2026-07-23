@@ -15,6 +15,7 @@ import { BlogsTab } from "@/components/dashboard/BlogsTab";
 import { CertificatesTab } from "@/components/dashboard/CertificatesTab";
 import { GuestbookTab } from "@/components/dashboard/GuestbookTab";
 import { BucketListTab } from "@/components/dashboard/BucketListTab";
+import { SettingsTab } from "@/components/dashboard/SettingsTab";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
 
@@ -56,6 +57,7 @@ export default function DashboardPage() {
       case "certificates": return <CertificatesTab />;
       case "guestbook": return <GuestbookTab />;
       case "bucket-list": return <BucketListTab />;
+      case "settings": return <SettingsTab />;
       default: return <OverviewTab />;
     }
   };
