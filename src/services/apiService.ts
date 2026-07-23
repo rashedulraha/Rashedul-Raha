@@ -203,3 +203,12 @@ export const updateSocialLink = async (id: string, data: any) => {
 export const deleteSocialLink = async (id: string) => {
   return apiClient.delete(`/social-links/${id}`);
 };
+
+// Traffic/Analytics API Calls
+export const recordVisit = async (path: string) => {
+  return apiClient.post("/traffic/record", { path });
+};
+
+export const getTrafficStats = async () => {
+  return apiClient.get("/traffic/stats");
+};

@@ -5,6 +5,7 @@ import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import AntiInspect from "@/components/AntiInspect";
+import TrafficTracker from "@/components/TrafficTracker";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -62,6 +63,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster />
+          <TrafficTracker />
         </ThemeProvider>
         <AntiInspect />
       </body>

@@ -4,53 +4,55 @@ import React, { useState, useEffect } from "react";
 import { Users, Eye, MessageSquare, Briefcase, ArrowUpRight, ArrowDownRight, Activity, Server, Database } from "lucide-react";
 import { motion } from "framer-motion";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { getTrafficStats } from "@/services/apiService";
 
 export function OverviewTab() {
   const [mounted, setMounted] = useState(false);
+  const [statsData, setStatsData] = useState({
+    totalViews: 0,
+    uniqueVisitors: 0,
+    chatbotInteractions: 0,
+    formSubmissions: 0,
+  });
+  const [graphData, setGraphData] = useState<{ day: string; value: number }[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
+    async function loadStats() {
+      try {
+        const res = await getTrafficStats();
+        if (res.data.success && res.data.data) {
+          const {
+            totalViews,
+            uniqueVisitors,
+            chatbotInteractions,
+            formSubmissions,
+            dailyTraffic,
+          } = res.data.data;
+          
+          setStatsData({
+            totalViews,
+            uniqueVisitors,
+            chatbotInteractions,
+            formSubmissions,
+          });
+          setGraphData(dailyTraffic || []);
+        }
+      } catch (err) {
+        console.error("Failed to load traffic stats:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadStats();
   }, []);
 
   const stats = [
-    { title: "Total Views", value: "12,402", change: "+14.2%", isPositive: true, icon: Eye },
-    { title: "Unique Visitors", value: "3,842", change: "+5.4%", isPositive: true, icon: Users },
-    { title: "Chatbot Interactions", value: "842", change: "+24.3%", isPositive: true, icon: MessageSquare },
-    { title: "Form Submissions", value: "12", change: "-2.1%", isPositive: false, icon: Briefcase },
-  ];
-
-  const graphData = [
-    { day: "23", value: 3 },
-    { day: "24", value: 18 },
-    { day: "25", value: 9 },
-    { day: "26", value: 7 },
-    { day: "27", value: 13 },
-    { day: "28", value: 4 },
-    { day: "29", value: 2 },
-    { day: "30", value: 17 },
-    { day: "1", value: 0 },
-    { day: "2", value: 3 },
-    { day: "3", value: 4 },
-    { day: "4", value: 1 },
-    { day: "5", value: 1 },
-    { day: "6", value: 3 },
-    { day: "7", value: 14 },
-    { day: "8", value: 10 },
-    { day: "9", value: 34 },
-    { day: "10", value: 76 },
-    { day: "11", value: 38 },
-    { day: "12", value: 6 },
-    { day: "13", value: 0 },
-    { day: "14", value: 0 },
-    { day: "15", value: 22 },
-    { day: "16", value: 13 },
-    { day: "17", value: 0 },
-    { day: "18", value: 0 },
-    { day: "19", value: 2 },
-    { day: "20", value: 5 },
-    { day: "21", value: 0 },
-    { day: "22", value: 0 },
-    { day: "23", value: 0 },
+    { title: "Total Views", value: statsData.totalViews.toLocaleString(), icon: Eye },
+    { title: "Unique Visitors", value: statsData.uniqueVisitors.toLocaleString(), icon: Users },
+    { title: "Chatbot Interactions", value: statsData.chatbotInteractions.toLocaleString(), icon: MessageSquare },
+    { title: "Form Submissions", value: statsData.formSubmissions.toLocaleString(), icon: Briefcase },
   ];
 
   return (
@@ -79,15 +81,14 @@ export function OverviewTab() {
               >
                 <div className="flex justify-between items-center mb-3">
                   <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{stat.title}</span>
-                  <span className={`text-xs font-bold flex items-center gap-0.5 ${stat.isPositive ? 'text-emerald-500' : 'text-rose-500'}`}>
-                    {stat.change} {stat.isPositive ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
-                  </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/10 text-primary rounded-xl">
                     <Icon className="w-4 h-4" />
                   </div>
-                  <h4 className="text-3xl font-bold text-foreground tracking-tight">{stat.value}</h4>
+                  <h4 className="text-3xl font-bold text-foreground tracking-tight">
+                    {isLoading ? "..." : stat.value}
+                  </h4>
                 </div>
               </div>
             );
@@ -114,7 +115,7 @@ export function OverviewTab() {
 
             {/* Recharts Area Chart */}
             <div className="h-72 w-full pr-4 text-[10px]">
-              {mounted ? (
+              {mounted && !isLoading ? (
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart
                     data={graphData}
@@ -148,8 +149,8 @@ export function OverviewTab() {
                       }}
                     />
                     <YAxis 
-                      domain={[0, 80]} 
-                      ticks={[0, 10, 20, 30, 40, 50, 60, 70, 80]}
+                      domain={[0, "dataMax + 10"]} 
+                      allowDecimals={false}
                       tickLine={false}
                       axisLine={false}
                       stroke="#8b949e"
@@ -195,7 +196,7 @@ export function OverviewTab() {
                   </AreaChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="h-full flex items-center justify-center text-muted-foreground">
+                <div className="h-full flex items-center justify-center text-muted-foreground animate-pulse">
                   Loading Graph...
                 </div>
               )}
