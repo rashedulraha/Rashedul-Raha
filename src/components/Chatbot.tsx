@@ -17,8 +17,11 @@ import {
   Minimize2,
   ArrowLeft,
   Copy,
-  CheckCircle2
+  CheckCircle2,
+  Mail,
+  Loader2
 } from "lucide-react";
+import { sendContactMessage, sendChatbotAIQuery } from "@/services/apiService";
 
 type Message = {
   id: string;
@@ -27,7 +30,7 @@ type Message = {
   timestamp: Date;
 };
 
-type ViewState = "chat" | "settings";
+type ViewState = "chat" | "settings" | "send";
 
 const TEMPLATES = [
   "What are your core skills?",
@@ -62,6 +65,9 @@ export default function Chatbot() {
   
   // Settings State
   const [userName, setUserName] = useState("Guest");
+  const [userEmail, setUserEmail] = useState("");
+  const [isSubmittingChat, setIsSubmittingChat] = useState(false);
+  const [chatSentSuccess, setChatSentSuccess] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [themeColor, setThemeColor] = useState(THEMES[0].value);
 
@@ -95,7 +101,7 @@ export default function Chatbot() {
     }
   };
 
-  const handleSend = (text: string) => {
+  const handleSend = async (text: string) => {
     if (!text.trim()) return;
 
     const newUserMsg: Message = {
@@ -105,36 +111,61 @@ export default function Chatbot() {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, newUserMsg]);
+    const updatedMessages = [...messages, newUserMsg];
+    setMessages(updatedMessages);
     setInput("");
     playSound();
     setIsTyping(true);
 
-    setTimeout(() => {
-      let botResponse = "Thanks for your message! Rashedul will get back to you soon.";
-      
-      const lowerText = text.toLowerCase();
-      if (lowerText.includes("skills")) {
-        botResponse = "Rashedul specializes in Next.js, React, TypeScript, Node.js, and Sanity CMS. He builds highly scalable and performant web applications.";
-      } else if (lowerText.includes("hire") || lowerText.includes("freelance")) {
-        botResponse = "You can hire him by going to the Contact section or sending an email directly. He is available for freelance projects!";
-      } else if (lowerText.includes("experience")) {
-        botResponse = "He has extensive experience building full-stack applications, e-commerce platforms, and complex UI systems.";
-      } else if (lowerText.includes("next.js") || lowerText.includes("full-stack")) {
-        botResponse = "Yes! He is an expert in Next.js and the React ecosystem, capable of delivering end-to-end full-stack solutions.";
-      }
+    try {
+      // Real-time dynamic AI generation via backend LLM service
+      const res = await sendChatbotAIQuery(updatedMessages);
+      const botResponse = res.data?.data?.reply || "I am Rashedul's AI assistant. How can I help you today?";
 
+      const botMsgId = (Date.now() + 1).toString();
       const newBotMsg: Message = {
-        id: (Date.now() + 1).toString(),
+        id: botMsgId,
         sender: "bot",
-        text: botResponse,
+        text: "",
         timestamp: new Date(),
       };
 
       setMessages((prev) => [...prev, newBotMsg]);
       setIsTyping(false);
-      playSound();
-    }, 1500 + Math.random() * 1000); 
+
+      // ChatGPT style Typewriter effect
+      let i = 0;
+      const typeWriter = setInterval(() => {
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === botMsgId
+              ? { ...msg, text: botResponse.slice(0, i + 1) }
+              : msg
+          )
+        );
+        i++;
+        if (i >= botResponse.length) {
+          clearInterval(typeWriter);
+          playSound();
+        }
+      }, 15); // Typing speed in milliseconds
+
+      // Silently log conversation to dashboard database (NO emails dispatched)
+      const finalMessages = [...updatedMessages, { ...newBotMsg, text: botResponse }];
+      const formattedChat = finalMessages
+        .map((m) => `${m.sender === "user" ? userName || "Visitor" : "AI Assistant"} (${formatTime(new Date(m.timestamp))}):\n${m.text}`)
+        .join("\n\n");
+
+      sendContactMessage({
+        name: userName || "Chatbot Visitor",
+        email: userEmail || "chatbot.visitor@portfolio.local",
+        subject: "Chatbot Conversation",
+        message: formattedChat,
+      }).catch((err) => console.warn("Background chat logging:", err));
+    } catch (err) {
+      console.error("Failed to generate AI response:", err);
+      setIsTyping(false);
+    }
   };
 
   const handleClearChat = () => {
@@ -154,6 +185,35 @@ export default function Chatbot() {
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
+  const handleSubmitConversation = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userEmail.trim()) return;
+
+    setIsSubmittingChat(true);
+    try {
+      const formattedChat = messages
+        .map((m) => `${m.sender === "user" ? userName || "Visitor" : "AI Assistant"} (${formatTime(new Date(m.timestamp))}):\n${m.text}`)
+        .join("\n\n");
+
+      await sendContactMessage({
+        name: userName || "Chatbot Visitor",
+        email: userEmail,
+        subject: "Chatbot Conversation",
+        message: formattedChat,
+      });
+
+      setChatSentSuccess(true);
+      setTimeout(() => {
+        setChatSentSuccess(false);
+        setView("chat");
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to submit chatbot conversation:", err);
+    } finally {
+      setIsSubmittingChat(false);
+    }
   };
 
   return (
@@ -204,6 +264,13 @@ export default function Chatbot() {
               </div>
               <div className="flex items-center gap-1 text-foreground">
                 <button 
+                  title="Send Chat to Rashedul"
+                  onClick={() => setView(view === "send" ? "chat" : "send")}
+                  className="rounded-full p-1.5 transition-colors hover:bg-white/20 text-primary"
+                >
+                  <Mail className="h-4 w-4" />
+                </button>
+                <button 
                   title="Clear Chat"
                   onClick={handleClearChat}
                   className="rounded-full p-1.5 transition-colors hover:bg-white/20"
@@ -239,7 +306,91 @@ export default function Chatbot() {
 
             <div className="relative flex-1 overflow-hidden">
               <AnimatePresence mode="wait">
-                {view === "settings" ? (
+                {view === "send" ? (
+                  <motion.div
+                    key="send"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="absolute inset-0 flex flex-col gap-4 overflow-y-auto p-5 bg-background"
+                  >
+                    <div className="flex items-center justify-between border-b pb-3">
+                      <div>
+                        <h4 className="font-semibold text-sm text-foreground">Send Chat to Rashedul</h4>
+                        <p className="text-xs text-muted-foreground mt-0.5">Submit this conversation to Rashedul's dashboard for a personal response.</p>
+                      </div>
+                      <button
+                        onClick={() => setView("chat")}
+                        className="text-xs text-muted-foreground hover:text-foreground"
+                      >
+                        <ArrowLeft className="h-4 w-4" />
+                      </button>
+                    </div>
+
+                    {chatSentSuccess ? (
+                      <div className="flex flex-col items-center justify-center py-12 text-center space-y-3">
+                        <CheckCircle2 className="h-12 w-12 text-emerald-500 animate-bounce" />
+                        <h5 className="font-bold text-foreground">Conversation Sent!</h5>
+                        <p className="text-xs text-muted-foreground max-w-xs">
+                          Your chat log has been sent to Rashedul's dashboard inbox. He will email you back shortly!
+                        </p>
+                      </div>
+                    ) : (
+                      <form onSubmit={handleSubmitConversation} className="space-y-4 my-auto">
+                        <div className="space-y-1.5">
+                          <label className="text-xs font-medium text-foreground">Your Name</label>
+                          <input
+                            type="text"
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                            placeholder="Your Name"
+                            className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
+                          />
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <label className="text-xs font-medium text-foreground">Your Email Address <span className="text-red-500">*</span></label>
+                          <input
+                            type="email"
+                            required
+                            value={userEmail}
+                            onChange={(e) => setUserEmail(e.target.value)}
+                            placeholder="your.email@gmail.com"
+                            className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50"
+                          />
+                        </div>
+
+                        <div className="p-3 bg-muted/40 rounded-xl border text-[11px] text-muted-foreground space-y-1">
+                          <p className="font-semibold text-foreground">📋 What will be sent:</p>
+                          <p>• {messages.length} messages in this conversation</p>
+                          <p>• Automatic notification to Rashedul's email & dashboard</p>
+                        </div>
+
+                        <button
+                          type="submit"
+                          disabled={isSubmittingChat || !userEmail.trim()}
+                          className={`w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${
+                            userEmail.trim()
+                              ? "bg-primary text-primary-foreground shadow-md hover:opacity-90"
+                              : "bg-muted text-muted-foreground cursor-not-allowed"
+                          }`}
+                        >
+                          {isSubmittingChat ? (
+                            <>
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                              Sending Conversation...
+                            </>
+                          ) : (
+                            <>
+                              <Send className="h-4 w-4" />
+                              Send Chat History
+                            </>
+                          )}
+                        </button>
+                      </form>
+                    )}
+                  </motion.div>
+                ) : view === "settings" ? (
                   <motion.div
                     key="settings"
                     initial={{ opacity: 0, x: 20 }}
