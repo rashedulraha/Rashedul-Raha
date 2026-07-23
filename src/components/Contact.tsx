@@ -268,7 +268,7 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 0.9 }}
               className="my-2 text-balance font-extralight text-sm tracking-wide opacity-75 lg:text-xl text-muted-foreground"
             >
-              I'm always open to discussing new web/mobile development projects,
+              I'm always open to discussing new web/software engineering projects,
               <br className="hidden sm:block" />
               creative ideas, or opportunities to be part of your vision.
             </motion.p>
