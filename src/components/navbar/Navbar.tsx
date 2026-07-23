@@ -2,12 +2,7 @@
 
 import React, { useState, useEffect, useRef, useTransition } from "react";
 import { Link, usePathname, useRouter } from "../../routing";
-import {
-  ChevronDown,
-  Menu,
-  X,
-  KeyIcon,
-} from "lucide-react";
+import { ChevronDown, Menu, X, KeyIcon } from "lucide-react";
 import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
 import SearchModal from "../SearchModal";
 import { Button } from "@base-ui/react";
@@ -48,7 +43,7 @@ export default function Navbar() {
     if (!isMounted) return;
 
     const navEntries = performance.getEntriesByType(
-      "navigation"
+      "navigation",
     ) as PerformanceNavigationTiming[];
     const isReload = navEntries[0]?.type === "reload";
 
@@ -188,7 +183,7 @@ export default function Navbar() {
 
   const isActive = (href: string) => pathname === href;
   const isMoreActive = [...moreCards, ...moreLinks].some((item) =>
-    pathname?.startsWith(item.href)
+    pathname?.startsWith(item.href),
   );
 
   if (!isMounted) {
@@ -250,7 +245,10 @@ export default function Navbar() {
 
               {/* ── Top Row ── */}
               <div className="flex items-center gap-1 p-1.5 min-h-12 relative z-10">
-                <NavbarGreeting showGreeting={showGreeting} greeting={greeting} />
+                <NavbarGreeting
+                  showGreeting={showGreeting}
+                  greeting={greeting}
+                />
 
                 <AnimatePresence mode="wait">
                   {isNavVisible && !showGreeting && (
@@ -316,15 +314,51 @@ export default function Navbar() {
                         </AnimatePresence>
                       </motion.button>
 
-                      <div className="hidden md:flex items-center gap-0.5">
-                        {mainLinks.map((link) => {
+                      <div className="hidden md:flex items-center gap-0 sm:gap-0.5">
+                        {mainLinks.map((link, index) => {
                           const active = isActive(link.href);
+                          const Icon = link.icon;
+                          const isHome = link.href === "/";
+
+                          if (isHome) {
+                            return (
+                              <React.Fragment key={link.href}>
+                                <motion.div
+                                  whileHover={{
+                                    scale: 1.05,
+                                    transition: { duration: 0.4 },
+                                  }}
+                                  whileTap={{
+                                    scale: 0.95,
+                                    transition: { duration: 0.3 },
+                                  }}
+                                >
+                                  <Link
+                                    href={link.href}
+                                    className={`relative flex items-center justify-center w-8 h-8 rounded-full transition-all duration-500 ${
+                                      active
+                                        ? "bg-foreground/10 text-foreground"
+                                        : "bg-transparent hover:bg-foreground/5 text-muted-foreground hover:text-foreground"
+                                    }`}
+                                  >
+                                    <Icon className="w-3.5 h-3.5 relative z-10" />
+                                  </Link>
+                                </motion.div>
+                                {/* Vertical Divider after Home */}
+                                <div className="w-px h-4 bg-border/50 mx-1" />
+                              </React.Fragment>
+                            );
+                          }
+
                           return (
                             <motion.div
                               key={link.href}
                               whileHover={{
                                 scale: 1.05,
-                                transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
+                                transition: {
+                                  duration: 0.4,
+                                  ease: [0.32, 0.72, 0, 1],
+                                },
                               }}
                               whileTap={{
                                 scale: 0.95,
@@ -338,7 +372,7 @@ export default function Navbar() {
                             >
                               <Link
                                 href={link.href}
-                                className={`relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-500 ${
+                                className={`relative flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[13px] font-medium transition-all duration-500 ${
                                   active
                                     ? "text-primary"
                                     : "text-muted-foreground hover:text-foreground"
@@ -356,6 +390,7 @@ export default function Navbar() {
                                     }}
                                   />
                                 )}
+                                <Icon className="w-3.5 h-3.5 relative z-10" />
                                 <span className="relative z-10">
                                   {link.label}
                                 </span>
@@ -418,6 +453,9 @@ export default function Navbar() {
                       </div>
 
                       <div className="ml-auto flex items-center gap-2">
+                        {/* Vertical Divider before right-side tools */}
+                        <div className="w-px h-5 bg-border/50 mx-1 hidden sm:block" />
+
                         <ThemeToggle />
 
                         <button
