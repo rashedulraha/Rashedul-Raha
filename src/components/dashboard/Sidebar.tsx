@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { 
   LayoutDashboard, 
@@ -18,7 +18,7 @@ import {
   MessageSquareQuote,
   ListTodo
 } from "lucide-react";
-import { Link } from "@/routing";
+import { ConfirmModal } from "./ConfirmModal";
 
 export type TabId = 
   | "overview" 
@@ -41,6 +41,8 @@ interface SidebarProps {
 }
 
 export function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCollapsed }: SidebarProps) {
+  const [isExitModalOpen, setIsExitModalOpen] = useState(false);
+
   const tabs = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
     { id: "messages", label: "Contact Messages", icon: MessageSquare },
@@ -54,6 +56,12 @@ export function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCollapsed }
     { id: "profile", label: "Profile", icon: User },
     { id: "settings", label: "Settings", icon: Settings },
   ];
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
 
   return (
     <motion.aside
@@ -121,18 +129,24 @@ export function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCollapsed }
       </nav>
 
       <div className="p-4 border-t border-border">
-        <Link 
-          href="/"
-          onClick={() => {
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-          }}
-          className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors group ${isCollapsed ? "justify-center" : ""}`}
+        <button 
+          onClick={() => setIsExitModalOpen(true)}
+          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors group ${isCollapsed ? "justify-center" : ""}`}
         >
           <LogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           {!isCollapsed && <span className="font-medium text-xs">Exit Dashboard</span>}
-        </Link>
+        </button>
       </div>
+
+      <ConfirmModal
+        isOpen={isExitModalOpen}
+        title="Exit Dashboard"
+        message="Are you sure you want to log out and exit the admin panel?"
+        confirmText="Exit & Logout"
+        cancelText="Stay Here"
+        onConfirm={handleLogout}
+        onClose={() => setIsExitModalOpen(false)}
+      />
     </motion.aside>
   );
 }
