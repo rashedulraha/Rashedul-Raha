@@ -874,8 +874,7 @@ export default function SearchModal() {
                           type="email"
                           name="email"
                           required
-                          defaultValue="rashedulraha.bd@gmail.com"
-                          placeholder="rashedulraha.bd@gmail.com"
+                          placeholder="Enter your admin email"
                           className="bg-muted/50 border border-border rounded-xl px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-sm"
                         />
                       </div>
@@ -887,8 +886,7 @@ export default function SearchModal() {
                           type="password"
                           name="password"
                           required
-                          defaultValue="password123"
-                          placeholder="password123"
+                          placeholder="Enter your security passphrase"
                           className="bg-muted/50 border border-border rounded-xl px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all shadow-sm"
                         />
                       </div>
