@@ -113,7 +113,7 @@ export default function SearchModal() {
             transition={{ duration: 0.15, ease: "easeOut" }}
             className="relative w-full max-w-2xl px-4 z-50 overflow-hidden"
           >
-            <div className="rounded-2xl w-full max-w-2xl flex flex-col min-h-[400px] max-h-[80vh] bg-background/80 dark:bg-zinc-900/80 backdrop-blur-3xl border border-foreground/10 shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
+            <div className="rounded-2xl w-full max-w-2xl flex flex-col min-h-[400px] max-h-[80vh] glass glass-shadow">
               <AnimatePresence mode="wait">
                 {currentView === "search" && (
                   <motion.div
