@@ -2,11 +2,10 @@ import React from "react";
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { certificatesData } from "@/lib/certificate-data";
 import { Award } from "lucide-react";
 import CertificateList from "@/components/certificates/CertificateList";
-
 import PageWrapper from "@/components/PageWrapper";
+import { getCertificates } from "@/services/apiService";
 
 export const metadata: Metadata = {
   title: "Certificates | Rashedul Islam",
@@ -15,6 +14,16 @@ export const metadata: Metadata = {
 
 export default async function CertificatesPage() {
   const t = await getTranslations();
+
+  let certificates = [];
+  try {
+    const res = await getCertificates();
+    if (res.data?.success && Array.isArray(res.data?.data)) {
+      certificates = res.data.data;
+    }
+  } catch (error) {
+    console.error("Failed to fetch certificates:", error);
+  }
 
   return (
     <PageWrapper>
@@ -39,13 +48,13 @@ export default async function CertificatesPage() {
             </div>
             <div>
               <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider mb-0.5">Total Earned</p>
-              <p className="text-xl font-bold text-foreground leading-none">{certificatesData.length}</p>
+              <p className="text-xl font-bold text-foreground leading-none">{certificates.length}</p>
             </div>
           </div>
         </div>
       </div>
 
-      <CertificateList initialCertificates={certificatesData} />
+      <CertificateList initialCertificates={certificates} />
 
       <Footer />
     </PageWrapper>

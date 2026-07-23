@@ -13,6 +13,8 @@ export interface ICertificate {
   date: string;
   image: string;
   credentialUrl?: string;
+  description?: string;
+  skills?: string;
 }
 
 export function CertificatesTab() {
@@ -28,6 +30,8 @@ export function CertificatesTab() {
     date: "",
     image: "",
     credentialUrl: "",
+    description: "",
+    skills: "",
   });
 
   const fetchCertificates = async () => {
@@ -56,6 +60,8 @@ export function CertificatesTab() {
       date: "2024",
       image: "",
       credentialUrl: "",
+      description: "",
+      skills: "",
     });
     setIsModalOpen(true);
   };
@@ -180,7 +186,7 @@ export function CertificatesTab() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-background border border-border rounded-2xl p-6 w-full max-w-lg shadow-2xl space-y-4"
+              className="bg-background border border-border rounded-2xl p-6 w-full max-w-lg shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto"
             >
               <div className="flex justify-between items-center border-b border-border pb-3">
                 <h3 className="text-xl font-bold text-foreground">Add New Certificate</h3>
@@ -256,6 +262,27 @@ export function CertificatesTab() {
                     value={formData.credentialUrl}
                     onChange={(e) => setFormData({ ...formData, credentialUrl: e.target.value })}
                     placeholder="https://..."
+                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-foreground">Description (Optional)</label>
+                  <textarea
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    rows={2}
+                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-foreground">Skills (Optional, comma-separated)</label>
+                  <input
+                    type="text"
+                    value={formData.skills}
+                    onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
+                    placeholder="React, Next.js, Node.js"
                     className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                   />
                 </div>

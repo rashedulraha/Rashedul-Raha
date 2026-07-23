@@ -1,13 +1,14 @@
-export type CertificateCategory = "Web Development Journey" | "Other Achievements";
-
 export interface Certificate {
   id: string;
-  category: CertificateCategory;
+  title?: string;
+  category: string;
   image: string;
   actualCertificateImage?: string;
   issuer: string;
   date: string;
   credentialUrl?: string;
+  description?: string;
+  skills?: string;
 }
 
 export const certificatesData: Certificate[] = [
