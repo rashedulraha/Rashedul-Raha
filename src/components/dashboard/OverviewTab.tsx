@@ -1,10 +1,17 @@
 "use client";
 
-import React from "react";
-import { Users, Eye, MessageSquare, Briefcase, ArrowUpRight, ArrowDownRight, Activity, Server, Database, GitCommit } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Users, Eye, MessageSquare, Briefcase, ArrowUpRight, ArrowDownRight, Activity, Server, Database } from "lucide-react";
 import { motion } from "framer-motion";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 export function OverviewTab() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const stats = [
     { title: "Total Views", value: "12,402", change: "+14.2%", isPositive: true, icon: Eye },
     { title: "Unique Visitors", value: "3,842", change: "+5.4%", isPositive: true, icon: Users },
@@ -12,30 +19,39 @@ export function OverviewTab() {
     { title: "Form Submissions", value: "12", change: "-2.1%", isPositive: false, icon: Briefcase },
   ];
 
-  // Weeks and days for GitHub style heat map
-  const weeksCount = 28;
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
-  
-  const getLevel = (dayIndex: number, weekIndex: number) => {
-    // Generate a pseudo-random pattern for the heatmap
-    const val = (dayIndex * 3 + weekIndex * 7 + 2) % 5;
-    return val; // 0 to 4
-  };
-
-  const getLevelClass = (level: number) => {
-    switch (level) {
-      case 1:
-        return "bg-emerald-500/20 dark:bg-emerald-950/40 border border-emerald-500/10";
-      case 2:
-        return "bg-emerald-500/40 dark:bg-emerald-800/60 border border-emerald-500/20";
-      case 3:
-        return "bg-emerald-500/70 dark:bg-emerald-600/80 border border-emerald-500/30";
-      case 4:
-        return "bg-emerald-500 dark:bg-emerald-500 border border-emerald-400/30";
-      default:
-        return "bg-muted/40 dark:bg-zinc-800/30 border border-border/10";
-    }
-  };
+  const graphData = [
+    { day: "23", value: 3 },
+    { day: "24", value: 18 },
+    { day: "25", value: 9 },
+    { day: "26", value: 7 },
+    { day: "27", value: 13 },
+    { day: "28", value: 4 },
+    { day: "29", value: 2 },
+    { day: "30", value: 17 },
+    { day: "1", value: 0 },
+    { day: "2", value: 3 },
+    { day: "3", value: 4 },
+    { day: "4", value: 1 },
+    { day: "5", value: 1 },
+    { day: "6", value: 3 },
+    { day: "7", value: 14 },
+    { day: "8", value: 10 },
+    { day: "9", value: 34 },
+    { day: "10", value: 76 },
+    { day: "11", value: 38 },
+    { day: "12", value: 6 },
+    { day: "13", value: 0 },
+    { day: "14", value: 0 },
+    { day: "15", value: 22 },
+    { day: "16", value: 13 },
+    { day: "17", value: 0 },
+    { day: "18", value: 0 },
+    { day: "19", value: 2 },
+    { day: "20", value: 5 },
+    { day: "21", value: 0 },
+    { day: "22", value: 0 },
+    { day: "23", value: 0 },
+  ];
 
   return (
     <div className="space-y-6">
@@ -88,74 +104,101 @@ export function OverviewTab() {
           transition={{ delay: 0.2 }}
           className="lg:col-span-2 card-premium p-6 flex flex-col justify-between"
         >
-          <div>
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-                  <GitCommit className="w-5 h-5 text-emerald-500" />
-                  Traffic Contribution Graph
-                </h3>
-                <p className="text-xs text-muted-foreground">Visitors activity heatmap over the last 28 weeks</p>
-              </div>
-              <select className="bg-muted text-xs border border-border/50 rounded-lg px-2 py-1 outline-none">
-                <option>Last 28 weeks</option>
-                <option>This Year</option>
-              </select>
+          <div className="w-full">
+            {/* Title exact match */}
+            <div className="text-center mb-6">
+              <h3 className="text-lg font-bold text-[#58a6ff] tracking-wide">
+                Rashedul Islam's Contribution Graph
+              </h3>
             </div>
-            
-            {/* GitHub Style Contribution Graph */}
-            <div className="flex gap-3 overflow-x-auto pb-4 pt-2 scrollbar-thin">
-              {/* Row labels */}
-              <div className="flex flex-col justify-between text-[9px] text-muted-foreground pb-1 pt-5 select-none font-mono pr-1">
-                <span>Sun</span>
-                <span>Tue</span>
-                <span>Thu</span>
-                <span>Sat</span>
-              </div>
 
-              {/* Grid Column wrapper */}
-              <div className="flex-1 min-w-[340px]">
-                {/* Months labels */}
-                <div className="flex justify-between text-[9px] text-muted-foreground mb-1 select-none pr-4 font-semibold">
-                  {months.map((m, i) => (
-                    <span key={i}>{m}</span>
-                  ))}
+            {/* Recharts Area Chart */}
+            <div className="h-72 w-full pr-4 text-[10px]">
+              {mounted ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart
+                    data={graphData}
+                    margin={{ top: 10, right: 5, left: -20, bottom: 20 }}
+                  >
+                    <defs>
+                      <linearGradient id="contribGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#58a6ff" stopOpacity={0.25} />
+                        <stop offset="95%" stopColor="#58a6ff" stopOpacity={0.0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid 
+                      strokeDasharray="2 2" 
+                      vertical={true} 
+                      horizontal={true}
+                      stroke="rgba(255,255,255,0.06)" 
+                    />
+                    <XAxis 
+                      dataKey="day" 
+                      tickLine={false} 
+                      axisLine={false}
+                      stroke="#8b949e"
+                      dy={10}
+                      label={{ 
+                        value: "Days", 
+                        position: "insideBottom", 
+                        offset: -10, 
+                        fill: "#58a6ff",
+                        fontSize: 12,
+                        fontWeight: 600
+                      }}
+                    />
+                    <YAxis 
+                      domain={[0, 80]} 
+                      ticks={[0, 10, 20, 30, 40, 50, 60, 70, 80]}
+                      tickLine={false}
+                      axisLine={false}
+                      stroke="#8b949e"
+                      dx={-5}
+                      label={{ 
+                        value: "Contributions", 
+                        angle: -90, 
+                        position: "insideLeft", 
+                        offset: -5,
+                        fill: "#8b949e",
+                        fontSize: 11,
+                        fontWeight: 500
+                      }}
+                    />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: "#1f242c", 
+                        borderColor: "#30363d",
+                        borderRadius: "8px",
+                        color: "#c9d1d9"
+                      }}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="value"
+                      stroke="#58a6ff"
+                      strokeWidth={2.5}
+                      fillOpacity={1}
+                      fill="url(#contribGrad)"
+                      dot={{
+                        r: 4,
+                        fill: "#c9d1d9",
+                        stroke: "#58a6ff",
+                        strokeWidth: 2,
+                      }}
+                      activeDot={{
+                        r: 6,
+                        fill: "#ffffff",
+                        stroke: "#58a6ff",
+                        strokeWidth: 2,
+                      }}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full flex items-center justify-center text-muted-foreground">
+                  Loading Graph...
                 </div>
-
-                {/* Contribution Cells */}
-                <div className="flex gap-[3px]">
-                  {Array.from({ length: weeksCount }).map((_, weekIdx) => (
-                    <div key={weekIdx} className="flex flex-col gap-[3px]">
-                      {Array.from({ length: 7 }).map((_, dayIdx) => {
-                        const level = getLevel(dayIdx, weekIdx);
-                        const baseVisitors = level * 14 + (weekIdx * 3 + dayIdx * 2);
-                        return (
-                          <motion.div
-                            key={dayIdx}
-                            whileHover={{ scale: 1.2, zIndex: 20 }}
-                            className={`w-[11px] h-[11px] rounded-[2px] cursor-pointer transition-colors ${getLevelClass(level)}`}
-                            title={`${baseVisitors} unique visitors`}
-                          />
-                        );
-                      })}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Graph Legend */}
-          <div className="flex justify-between items-center text-[10px] text-muted-foreground mt-4 pt-3 border-t border-border/40 select-none">
-            <span>Learn how we measure traffic data</span>
-            <div className="flex items-center gap-1.5 font-medium">
-              <span>Less</span>
-              <div className="w-[10px] h-[10px] rounded-[2px] bg-muted/40 dark:bg-zinc-800/30" />
-              <div className="w-[10px] h-[10px] rounded-[2px] bg-emerald-500/20" />
-              <div className="w-[10px] h-[10px] rounded-[2px] bg-emerald-500/40" />
-              <div className="w-[10px] h-[10px] rounded-[2px] bg-emerald-500/70" />
-              <div className="w-[10px] h-[10px] rounded-[2px] bg-emerald-500" />
-              <span>More</span>
+              )}
             </div>
           </div>
         </motion.div>
