@@ -1,16 +1,26 @@
 import React from "react";
 import Footer from "@/components/Footer";
-import { blogPosts } from "@/lib/blog-data";
 import { Metadata } from "next";
 import BlogList from "@/components/blog/BlogList";
 import PageWrapper from "@/components/PageWrapper";
+import { getBlogs } from "@/services/apiService";
 
 export const metadata: Metadata = {
   title: "Blog | Rashedul Islam",
   description: "Read articles on web development, Next.js, and React Native by Rashedul Islam.",
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  let blogs = [];
+  try {
+    const res = await getBlogs();
+    if (res.data?.success && Array.isArray(res.data?.data)) {
+      blogs = res.data.data;
+    }
+  } catch (error) {
+    console.error("Failed to fetch blogs:", error);
+  }
+
   return (
     <PageWrapper>
       {/* Hero Header */}
@@ -34,7 +44,7 @@ export default function BlogPage() {
       </div>
 
       {/* Filterable Blog List */}
-      <BlogList initialPosts={blogPosts} />
+      <BlogList initialPosts={blogs} />
       
       <Footer />
     </PageWrapper>

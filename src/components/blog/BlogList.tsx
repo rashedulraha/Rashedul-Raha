@@ -23,9 +23,21 @@ const categories = [
 
 export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] }) {
   const t = useTranslations("BlogPage");
-  const tBlog = useTranslations("Blog");
   const [activeCategory, setActiveCategory] = useState("All Posts");
   const [searchQuery, setSearchQuery] = useState("");
+
+  const formatDate = (dateStr: string | undefined) => {
+    if (!dateStr) return "";
+    try {
+      return new Date(dateStr).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    } catch (e) {
+      return dateStr;
+    }
+  };
 
   // Filter posts
   const filteredPosts = initialPosts.filter((post) => {
@@ -33,12 +45,12 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
       activeCategory === "All Posts" ||
       post.category.toLowerCase() === activeCategory.toLowerCase();
     
-    const translatedTitle = tBlog(`posts.post${post.id}.title`).toLowerCase();
-    const translatedDesc = tBlog(`posts.post${post.id}.description`).toLowerCase();
+    const title = (post.title || "").toLowerCase();
+    const desc = (post.description || "").toLowerCase();
     const searchLower = searchQuery.toLowerCase();
     
-    const matchesSearch = translatedTitle.includes(searchLower) || 
-                          translatedDesc.includes(searchLower);
+    const matchesSearch = title.includes(searchLower) || 
+                          desc.includes(searchLower);
 
     return matchesCategory && matchesSearch;
   });
@@ -116,19 +128,21 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                 <div className="flex flex-col lg:flex-row h-full">
                   {/* Left: Image (takes up approx 55-60%) */}
                   <div className="relative w-full lg:w-[55%] aspect-video lg:aspect-auto overflow-hidden">
-                    <Image
-                      src={featuredPost.image}
-                      alt={featuredPost.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      priority
-                    />
+                    {featuredPost.image && (
+                      <Image
+                        src={featuredPost.image}
+                        alt={featuredPost.title}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 60vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        priority
+                      />
+                    )}
                     <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-500" />
                     
                     <div className="absolute inset-0 flex items-center justify-center p-6 bg-gradient-to-t from-black/60 via-transparent to-transparent">
                       <h3 className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight drop-shadow-lg text-center text-balance transition-transform duration-500 group-hover:scale-105">
-                        {tBlog(`posts.post${featuredPost.id}.title`).replace("How to Optimise a", "Optimise Your")}
+                        {featuredPost.title}
                       </h3>
                     </div>
                   </div>
@@ -143,15 +157,15 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                       </div>
                       
                       <div className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">
-                        {tBlog(`posts.post${featuredPost.id}.readTime`).toUpperCase()} &middot; {tBlog(`posts.post${featuredPost.id}.date`).toUpperCase()}
+                        {featuredPost.readTime.toUpperCase()} &middot; {formatDate(featuredPost.publishedAt || featuredPost.createdAt).toUpperCase()}
                       </div>
                       
                       <h2 className="text-2xl md:text-3xl font-bold text-foreground leading-tight mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/70 transition-all">
-                        {tBlog(`posts.post${featuredPost.id}.title`)}
+                        {featuredPost.title}
                       </h2>
                       
                       <p className="text-muted-foreground text-sm leading-relaxed mb-8">
-                        {tBlog(`posts.post${featuredPost.id}.description`)}
+                        {featuredPost.description}
                       </p>
                       
                       {/* Tags */}
@@ -194,19 +208,21 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                   >
                     {/* Image */}
                     <div className="relative aspect-16/11 overflow-hidden rounded-2xl bg-muted">
-                      <Image
-                        alt={post.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        src={post.image}
-                      />
+                      {post.image && (
+                        <Image
+                          alt={post.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          src={post.image}
+                        />
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
                       
                       {/* Category Badge */}
                       <div className="absolute top-3 left-3 z-10">
                         <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-medium uppercase tracking-wider border border-primary/20 glass">
-                          {tBlog(`posts.post${post.id}.category`)}
+                          {post.category}
                         </span>
                       </div>
                     </div>
@@ -214,10 +230,10 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                     {/* Content */}
                     <div className="flex flex-1 flex-col px-2 pt-5 pb-3">
                       <h3 className="font-semibold text-lg text-foreground leading-snug transition-colors duration-300 group-hover:text-primary">
-                        {tBlog(`posts.post${post.id}.title`)}
+                        {post.title}
                       </h3>
                       <p className="mt-3 line-clamp-3 text-muted-foreground text-sm leading-relaxed">
-                        {tBlog(`posts.post${post.id}.description`)}
+                        {post.description}
                       </p>
 
                       {/* Footer */}
@@ -225,12 +241,12 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
                         <div className="flex items-center gap-3 text-[11px] text-muted-foreground uppercase tracking-wide font-medium">
                           <span className="flex items-center gap-1.5">
                             <Clock className="w-3.5 h-3.5" />
-                            {tBlog(`posts.post${post.id}.readTime`)}
+                            {post.readTime}
                           </span>
                           <span className="text-border">·</span>
                           <span className="flex items-center gap-1.5">
                             <Calendar className="w-3.5 h-3.5" />
-                            <time dateTime={post.date}>{tBlog(`posts.post${post.id}.date`)}</time>
+                            <time dateTime={post.publishedAt || post.createdAt}>{formatDate(post.publishedAt || post.createdAt)}</time>
                           </span>
                         </div>
 
