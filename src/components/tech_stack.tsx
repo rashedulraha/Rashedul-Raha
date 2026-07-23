@@ -40,34 +40,6 @@ const iconMap: Record<string, React.ElementType> = {
   Sparkles,
 };
 
-const defaultRow1 = [
-  { name: "Next.js", icon: Layout },
-  { name: "TypeScript", icon: Code },
-  { name: "React", icon: Box },
-  { name: "Node.js", icon: Server },
-  { name: "Express.js", icon: Server },
-  { name: "MongoDB", icon: Database },
-  { name: "Gemini API", icon: Sparkles },
-];
-
-const defaultRow2 = [
-  { name: "Tailwind CSS", icon: Wind },
-  { name: "shadcn/ui", icon: Layers },
-  { name: "Docker", icon: Box },
-  { name: "Nginx", icon: Server },
-  { name: "Linux", icon: Terminal },
-  { name: "macOS", icon: Monitor },
-];
-
-const defaultRow3 = [
-  { name: "Redis", icon: Database },
-  { name: "GraphQL", icon: Code },
-  { name: "AWS", icon: Server },
-  { name: "Git", icon: Code },
-  { name: "Vercel", icon: Monitor },
-  { name: "Figma", icon: Layout },
-];
-
 function TechModal({
   isOpen,
   onClose,
@@ -178,24 +150,18 @@ function TechModal({
                             <span className="text-foreground/80 font-medium">{tool.name}</span>
                             {tool.description && (
                               <span className="text-muted-foreground/60 text-[10px]">
-                                — {tool.description}
+                                · {tool.description}
                               </span>
                             )}
                           </div>
                         ))
                       ) : (
-                        <p className="text-xs text-muted-foreground italic">No tools added yet.</p>
+                        <p className="text-xs text-muted-foreground italic">No tools added yet</p>
                       )}
                     </div>
                   </motion.div>
                 );
               })}
-            </div>
-
-            <div className="p-4 border-t border-border text-center">
-              <p className="text-[10px] text-muted-foreground">
-                {skills.length} tools across {categories.length} categories
-              </p>
             </div>
           </motion.div>
         </motion.div>
@@ -204,8 +170,8 @@ function TechModal({
   );
 }
 
-const TechStack = () => {
-  const t = useTranslations("Features.TechStack");
+export function TechStack() {
+  const t = useTranslations("TechStack");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [skills, setSkills] = useState<ISkillItem[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -228,7 +194,7 @@ const TechStack = () => {
   // Split skills into 3 marquee rows
   const marqueeRows = (() => {
     if (skills.length === 0) {
-      return { row1: defaultRow1, row2: defaultRow2, row3: defaultRow3 };
+      return { row1: [], row2: [], row3: [] };
     }
     const formatted = skills.map((s) => ({
       name: s.name,
@@ -243,7 +209,7 @@ const TechStack = () => {
   })();
 
   const { row1, row2, row3 } = marqueeRows;
-  const totalCount = skills.length > 0 ? skills.length : defaultRow1.length + defaultRow2.length + defaultRow3.length;
+  const totalCount = skills.length;
 
   return (
     <>
