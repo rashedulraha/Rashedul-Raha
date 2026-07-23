@@ -3,7 +3,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/routing";
 
 type Experience = {
@@ -18,7 +17,6 @@ type Experience = {
 };
 
 export default function Experience() {
-  const t = useTranslations("AboutExperience");
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -28,61 +26,55 @@ export default function Experience() {
   const lineHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", "100%"]);
 
   const [experiences, setExperiences] = useState<Experience[]>([]);
-  const locale = useLocale();
 
   useEffect(() => {
-    fetch(`/project/project_${locale}.json`)
+    fetch("/project/project.json")
       .then((res) => res.json())
       .then((data) => {
         const projs = [
           ...(data.projects1 || []),
           ...(data.projects2 || []),
           ...(data.projects3 || []),
-          ...(data.projects4 || []),
         ];
-
-        const mappedExps = projs.map((p: any, index: number) => ({
-          id: p.id || String(index),
-          projectId: p.id,
-          role: p.role || "Developer",
-          company: p.name,
-          duration: index === 0 ? "Contract / Project" : "Personal Project",
+        const exps: Experience[] = projs.map((p: any) => ({
+          id: p.id,
+          role: p.details?.role || "Full-Stack Developer",
+          company: p.title || p.name,
+          duration: p.details?.period || "2023 - Present",
           location: "Remote",
-          description: p.responsibilities?.slice(0, 3) || [],
-          skills: p.tech_stack?.frameworks_libraries?.slice(0, 5) || [],
+          description: p.details?.contributions || [p.description || p.overview],
+          skills: p.tags || p.tech_stack?.frameworks_libraries || [],
+          projectId: p.id,
         }));
-
-        setExperiences(mappedExps);
+        setExperiences(exps);
       })
-      .catch((err) => console.error("Failed to load projects for experiences:", err));
-  }, [locale]);
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
-    <section className="relative py-24 overflow-hidden" id="experience">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
-        
+    <section className="relative py-12 md:py-16 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+        <div className="mx-auto mb-10 text-center max-w-xl">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-foreground/12 bg-foreground/5 backdrop-blur-xl mb-6"
+            viewport={{ once: true }}
+            className="mb-2 font-semibold text-primary text-xs uppercase tracking-widest"
           >
-            <Briefcase className="w-4 h-4 text-primary" />
-            <span className="font-medium text-xs uppercase tracking-widest">
-              {t("badge")}
-            </span>
-          </motion.div>
+            CAREER HISTORY
+          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-balance font-medium text-4xl tracking-tight sm:text-5xl md:text-6xl text-foreground"
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold tracking-tight text-foreground"
           >
-            {t("title")}
+            Work{" "}
+            <span className="bg-gradient-to-r from-primary via-indigo-400 to-sky-400 bg-clip-text text-transparent">
+              experience.
+            </span>
           </motion.h2>
         </div>
 

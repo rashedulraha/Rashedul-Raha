@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence, Variants } from "framer-motion";
-import { useTranslations } from "next-intl";
 import { ResumeButton } from "./ResumeButton";
 import {
   Code,
@@ -78,15 +77,14 @@ const SKILLS = [
 ];
 
 export default function AboutSection() {
-  const t = useTranslations("About");
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const stats = [
-    { label: t("stat0Label"), value: t("stat0Value") },
-    { label: t("stat1Label"), value: t("stat1Value") },
-    { label: t("stat2Label"), value: t("stat2Value") },
-    { label: t("stat3Label"), value: t("stat3Value") },
+    { label: "Years Experience", value: "3+" },
+    { label: "Completed Projects", value: "25+" },
+    { label: "Satisfied Clients", value: "15+" },
+    { label: "Code Commits", value: "1.5k+" },
   ];
 
   const containerVariants: Variants = {
@@ -100,40 +98,42 @@ export default function AboutSection() {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring", stiffness: 300, damping: 24 },
+      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
     },
   };
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-16 md:py-24 overflow-hidden bg-background"
+      className="relative w-full py-12 md:py-16 overflow-hidden"
       id="about"
     >
-      {/* --- Premium Grid Background --- */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
+      {/* Background Gradients & Grid */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-80 h-80 bg-secondary/5 rounded-full blur-3xl" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_80%_60%_at_50%_0%,#000_40%,transparent_100%)]" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
-        {/* Header */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center text-center mb-6 md:mb-8"
         >
-          <p className="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-primary uppercase tracking-widest mb-4 rounded-full bg-primary/10 border border-primary/20">
-            <User className="w-3.5 h-3.5" /> {t("badge")}
-          </p>
-          <h2 className="text-center font-instrument-serif text-3xl text-zinc-700 leading-tight md:text-4xl lg:text-5xl dark:text-zinc-100">
-            {t("title1")} <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500 font-serif italic">
-              {t("title2")}
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest mb-4">
+            <User className="w-3.5 h-3.5" /> About Me
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-foreground tracking-tight max-w-3xl leading-tight">
+            Transforming ideas into{" "}
+            <span className="bg-gradient-to-r from-primary via-indigo-400 to-sky-400 bg-clip-text text-transparent">
+              high-performance web software.
             </span>
           </h2>
         </motion.div>
@@ -159,26 +159,6 @@ export default function AboutSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* Floating Badge - Experience */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.4, type: "spring" }}
-                className="absolute -bottom-6 -right-6 lg:-right-8 p-4 flex items-center gap-4 hover:-translate-y-1 transition-all duration-300 bg-background/80 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-xl z-20"
-              >
-                <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center">
-                  <Code className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-foreground">
-                    {t("expBadge1")}
-                  </p>
-                  <p className="text-xs text-muted-foreground font-medium">
-                    {t("expBadge2")}
-                  </p>
-                </div>
-              </motion.div>
-
               {/* CTA Buttons */}
               <div className="flex flex-wrap gap-4 items-center">
                 <motion.button
@@ -195,7 +175,7 @@ export default function AboutSection() {
                   className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98] "
                 >
                   <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground ">
-                    {t("cta")}
+                    Let's Work Together
                   </span>
                   <span
                     aria-hidden="true"
@@ -265,7 +245,7 @@ export default function AboutSection() {
             >
               <motion.div variants={itemVariants}>
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground leading-tight">
-                  {t("heading")}
+                  Passionate Full-Stack Developer crafting digital experiences.
                 </h3>
               </motion.div>
 
@@ -273,48 +253,48 @@ export default function AboutSection() {
                 variants={itemVariants}
                 className="space-y-5 text-muted-foreground text-base leading-relaxed"
               >
-                <p>{t("p1")}</p>
+                <p>I specialize in building scalable web and mobile applications using modern technologies. With 3+ years of experience, I focus on clean architecture, smooth UI/UX, and robust API design.</p>
 
                 <p>
-                  {t("p2_1")}
+                  I build web apps with{" "}
                   <TextTooltip
-                    title={t("ttNextTitle")}
-                    description={t("ttNextDesc")}
+                    title="Next.js & React"
+                    description="Server-side rendering, App router & reactive UI"
                     icon={Server}
                   >
-                    {t("ttNextText")}
+                    Next.js & React
                   </TextTooltip>
-                  {t("p2_2")}
+                  , using{" "}
                   <TextTooltip
-                    title={t("ttTsTitle")}
-                    description={t("ttTsDesc")}
+                    title="TypeScript"
+                    description="Strict static typing for scalable codebases"
                     icon={Code}
                   >
-                    {t("ttTsText")}
+                    TypeScript
                   </TextTooltip>
-                  {t("p2_3")}
+                  {" "}and{" "}
                   <TextTooltip
-                    title={t("ttTwTitle")}
-                    description={t("ttTwDesc")}
+                    title="Tailwind CSS"
+                    description="Modern utility-first styling system"
                     icon={MonitorSmartphone}
                   >
-                    {t("ttTwText")}
+                    Tailwind CSS
                   </TextTooltip>
-                  {t("p2_4")}
+                  {" "}for responsive designs. For backend systems, I utilize{" "}
                   <TextTooltip
-                    title={t("ttCloudTitle")}
-                    description={t("ttCloudDesc")}
+                    title="Node.js & Express"
+                    description="Scalable REST APIs & backend services"
                     icon={Cloud}
                   >
-                    {t("ttCloudText")}
+                    Node.js & Cloud Services
                   </TextTooltip>
-                  {t("p2_5")}
+                  .
                 </p>
 
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-muted/30 border border-border mt-6">
                   <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                   <p className="text-foreground font-medium text-sm leading-relaxed">
-                    {t("p3")}
+                    Focusing on modern web standards, performance optimization, and responsive design across all devices.
                   </p>
                 </div>
               </motion.div>
@@ -322,7 +302,7 @@ export default function AboutSection() {
               {/* Modern Tech Stack Grid */}
               <motion.div variants={itemVariants} className="space-y-3 pt-2">
                 <p className="text-xs font-semibold text-foreground uppercase tracking-widest">
-                  {t("techStack")}
+                  Primary Tech Stack
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {SKILLS.map((skill, index) => {
