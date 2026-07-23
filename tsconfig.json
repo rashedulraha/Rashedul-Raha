@@ -25,6 +25,12 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "next-intl": [
+        "./src/lib/i18nMock.ts"
+      ],
+      "next-intl/*": [
+        "./src/lib/i18nMock.ts"
       ]
     }
   },

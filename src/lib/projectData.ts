@@ -1,10 +1,4 @@
-import projectJsonEn from '../../public/project/project_en.json';
-import projectJsonBn from '../../public/project/project_bn.json';
-import projectJsonEs from '../../public/project/project_es.json';
-import projectJsonFr from '../../public/project/project_fr.json';
-import projectJsonDe from '../../public/project/project_de.json';
-import projectJsonIt from '../../public/project/project_it.json';
-import projectJsonJa from '../../public/project/project_ja.json';
+import projectJson from '../../public/project/project.json';
 
 export interface ProjectData {
   id: string;
@@ -35,18 +29,7 @@ export interface ProjectData {
   security_features?: string[];
 }
 
-export function getAllProjects(locale: string = 'en'): ProjectData[] {
-  let projectJson;
-  switch (locale) {
-    case 'bn': projectJson = projectJsonBn; break;
-    case 'es': projectJson = projectJsonEs; break;
-    case 'fr': projectJson = projectJsonFr; break;
-    case 'de': projectJson = projectJsonDe; break;
-    case 'it': projectJson = projectJsonIt; break;
-    case 'ja': projectJson = projectJsonJa; break;
-    default: projectJson = projectJsonEn;
-  }
-
+export function getAllProjects(): ProjectData[] {
   const allProjects: ProjectData[] = [];
   
   if ('projects1' in projectJson) {
@@ -65,8 +48,8 @@ export function getAllProjects(locale: string = 'en'): ProjectData[] {
   return allProjects;
 }
 
-export function getProjectById(id: string, locale: string = 'en'): ProjectData | undefined {
-  const allProjects = getAllProjects(locale);
+export function getProjectById(id: string): ProjectData | undefined {
+  const allProjects = getAllProjects();
   return allProjects.find(p => p.id === id);
 }
 
@@ -74,7 +57,10 @@ export function getProjectBanner(project: ProjectData): string {
   const bannerKey = Object.keys(project).find(key => key.endsWith('_img_banner'));
   if (bannerKey && (project as any)[bannerKey]) {
     const imgPath = (project as any)[bannerKey];
-    return imgPath.startsWith('/') ? imgPath : `/${imgPath}`;
+    if (imgPath.startsWith('http://') || imgPath.startsWith('https://') || imgPath.startsWith('/')) {
+      return imgPath;
+    }
+    return `/${imgPath}`;
   }
   return '/images/placeholder.svg';
 }
