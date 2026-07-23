@@ -11,8 +11,8 @@ export function ProfileTab() {
 
   const [profile, setProfile] = useState({
     name: "Rashedul Islam",
-    title: "Full-Stack Developer & UI/UX Enthusiast",
-    tagline: "Building scalable web apps & mobile applications with Next.js, React Native & Node.js",
+    title: "Full-Stack Web Developer & UI/UX Enthusiast",
+    tagline: "Building scalable web apps & robust system architectures with Next.js, TypeScript & Node.js",
     email: "contact@rashedulraha.com",
     phone: "+880 1700 000000",
     location: "Dhaka, Bangladesh",
