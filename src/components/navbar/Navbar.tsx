@@ -2,13 +2,11 @@
 
 import React, { useState, useEffect, useRef, useTransition } from "react";
 import { Link, usePathname, useRouter } from "../../routing";
-import { useTranslations, useLocale } from "next-intl";
 import {
   ChevronDown,
   Menu,
   X,
   KeyIcon,
-  Globe,
 } from "lucide-react";
 import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
 import SearchModal from "../SearchModal";
@@ -16,17 +14,14 @@ import { Button } from "@base-ui/react";
 import { ThemeToggle } from "../ThemeToggle";
 
 // Components
-import { mainLinks, moreCards, moreLinks, languages } from "./NavbarConfig";
+import { mainLinks, moreCards, moreLinks } from "./NavbarConfig";
 import NavbarGreeting from "./NavbarGreeting";
 import NavbarSearch from "./NavbarSearch";
 import NavbarDropdown from "./NavbarDropdown";
-import NavbarLangDropdown from "./NavbarLangDropdown";
 import NavbarMobileMenu from "./NavbarMobileMenu";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const t = useTranslations("Navbar");
-  const locale = useLocale();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -362,7 +357,7 @@ export default function Navbar() {
                                   />
                                 )}
                                 <span className="relative z-10">
-                                  {t(link.label.toLowerCase() as any)}
+                                  {link.label}
                                 </span>
                               </Link>
                             </motion.div>
@@ -375,7 +370,7 @@ export default function Navbar() {
                             onMouseEnter={openDropdown}
                             whileHover={{
                               scale: 1.05,
-                              transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
+                              transition: { duration: 0.3 },
                             }}
                             whileTap={{
                               scale: 0.95,
@@ -405,7 +400,7 @@ export default function Navbar() {
                                 }}
                               />
                             )}
-                            <span className="relative z-10">{t("more")}</span>
+                            <span className="relative z-10">More</span>
                             <motion.div
                               className="relative z-10"
                               animate={{
@@ -423,24 +418,6 @@ export default function Navbar() {
                       </div>
 
                       <div className="ml-auto flex items-center gap-2">
-                        <div className="relative">
-                          <button
-                            onMouseEnter={openLangDropdown}
-                            onClick={() => setIsLangDropdownOpen((prev) => !prev)}
-                            className={`flex h-8 items-center justify-center gap-1.5 px-2.5 rounded-full transition-colors duration-500 ${
-                              isLangDropdownOpen
-                                ? "bg-primary/10 text-primary"
-                                : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                            }`}
-                            aria-label="Change Language"
-                          >
-                            <Globe className="h-4 w-4" />
-                            <span className="text-xs font-semibold uppercase">
-                              {languages.find((l) => l.code === locale)?.label || locale}
-                            </span>
-                          </button>
-                        </div>
-
                         <ThemeToggle />
 
                         <button
@@ -453,9 +430,9 @@ export default function Navbar() {
 
                         <Button
                           onClick={() => openModal("contact")}
-                          className="rounded-full px-4 h-8 text-xs font-medium bg-primary text-primary-foreground shadow-lg transition-all duration-500 hover:shadow-xl"
+                          className="relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground shadow-sm hover:shadow-primary/25 cursor-pointer"
                         >
-                          {t("bookACall")}
+                          Book a Call
                         </Button>
                       </div>
                     </motion.div>
@@ -467,17 +444,6 @@ export default function Navbar() {
                 isDropdownOpen={isDropdownOpen}
                 setIsDropdownOpen={setIsDropdownOpen}
                 openDropdown={openDropdown}
-              />
-
-              <NavbarLangDropdown
-                isLangDropdownOpen={isLangDropdownOpen}
-                setIsLangDropdownOpen={setIsLangDropdownOpen}
-                openLangDropdown={openLangDropdown}
-                isPending={isPending}
-                startTransition={startTransition}
-                router={router}
-                pathname={pathname}
-                locale={locale}
               />
             </motion.nav>
           </LayoutGroup>

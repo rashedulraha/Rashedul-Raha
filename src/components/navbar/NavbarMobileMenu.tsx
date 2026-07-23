@@ -1,7 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "../../routing";
-import { useTranslations } from "next-intl";
 import { Button } from "@base-ui/react";
 import { mainLinks, moreCards, moreLinks, mobileMenuVariants } from "./NavbarConfig";
 
@@ -12,14 +11,21 @@ interface NavbarMobileMenuProps {
   openModal: (view: "contact" | "search" | "login") => void;
 }
 
+const itemLabels: Record<string, string> = {
+  guestbook: "Guestbook",
+  bucketList: "Bucket List",
+  certificates: "Certificates",
+  links: "Links",
+  uses: "Uses",
+  attribution: "Attribution",
+};
+
 export default function NavbarMobileMenu({
   isMobileMenuOpen,
   setIsMobileMenuOpen,
   isActive,
   openModal,
 }: NavbarMobileMenuProps) {
-  const t = useTranslations("Navbar");
-
   return (
     <AnimatePresence>
       {isMobileMenuOpen && (
@@ -45,29 +51,8 @@ export default function NavbarMobileMenu({
               backdropFilter: "blur(30px) saturate(180%)",
               WebkitBackdropFilter: "blur(30px) saturate(180%)",
               border: "1px solid rgba(255,255,255,0.12)",
-              boxShadow: `
-                0 20px 60px rgba(0,0,0,0.4),
-                0 8px 20px rgba(0,0,0,0.2),
-                inset 0 1px 0 rgba(255,255,255,0.1)
-              `,
             }}
           >
-            <div
-              className="pointer-events-none absolute inset-x-0 top-0 h-px"
-              style={{
-                background:
-                  "linear-gradient(90deg, transparent, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 70%, transparent)",
-              }}
-            />
-
-            <div
-              className="pointer-events-none absolute inset-0 opacity-40"
-              style={{
-                background:
-                  "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 60%)",
-              }}
-            />
-
             <div className="relative z-10">
               {mainLinks.map((link, index) => (
                 <motion.div
@@ -94,18 +79,9 @@ export default function NavbarMobileMenu({
                         ? "text-primary"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
-                    style={
-                      isActive(link.href)
-                        ? {
-                            background:
-                              "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.03) 100%)",
-                            border: "1px solid rgba(255,255,255,0.12)",
-                          }
-                        : {}
-                    }
                   >
                     <link.icon className="h-5 w-5" />
-                    {t(link.label.toLowerCase() as any)}
+                    {link.label}
                   </Link>
                 </motion.div>
               ))}
@@ -135,7 +111,7 @@ export default function NavbarMobileMenu({
                     className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all duration-500"
                   >
                     {"icon" in item && <item.icon className="h-5 w-5" />}
-                    {t(item.id as any)}
+                    {itemLabels[item.id] || item.id}
                   </Link>
                 </motion.div>
               ))}
@@ -158,9 +134,9 @@ export default function NavbarMobileMenu({
                     setIsMobileMenuOpen(false);
                     openModal("contact");
                   }}
-                  className="w-full rounded-xl h-11 transition-all duration-500"
+                  className="w-full rounded-xl h-11 transition-all duration-500 font-semibold bg-primary text-primary-foreground"
                 >
-                  {t("bookACall")}
+                  Book a Call
                 </Button>
               </motion.div>
             </div>
