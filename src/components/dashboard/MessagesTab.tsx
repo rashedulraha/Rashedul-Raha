@@ -1,232 +1,205 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, Send, MessageSquare, Clock, User, Bot, CheckCircle2 } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Search, Mail, Clock, Trash2, CheckCircle2, RefreshCw } from "lucide-react";
+import { getContactMessages, markContactMessageRead, deleteContactMessage } from "@/services/apiService";
 
-type Message = {
+export interface IContactMessage {
   id: string;
-  sender: "user" | "bot" | "admin";
-  text: string;
-  time: string;
-};
-
-type Session = {
-  id: string;
-  visitorName: string;
-  location: string;
-  status: "active" | "closed";
-  lastActive: string;
-  messages: Message[];
-};
-
-const mockSessions: Session[] = [
-  {
-    id: "sess_1",
-    visitorName: "Visitor 402",
-    location: "New York, USA",
-    status: "active",
-    lastActive: "2 min ago",
-    messages: [
-      { id: "m1", sender: "bot", text: "Hi there! I'm Rashedul's AI assistant. How can I help you today?", time: "10:00 AM" },
-      { id: "m2", sender: "user", text: "I'm looking for a freelance web developer for an e-commerce project.", time: "10:01 AM" },
-      { id: "m3", sender: "bot", text: "You've come to the right place! Rashedul specializes in building fast, scalable e-commerce platforms using Next.js. What specific features are you looking for?", time: "10:01 AM" },
-      { id: "m4", sender: "user", text: "We need something with a custom admin panel and Stripe integration.", time: "10:05 AM" },
-    ]
-  },
-  {
-    id: "sess_2",
-    visitorName: "John Smith",
-    location: "London, UK",
-    status: "closed",
-    lastActive: "1 day ago",
-    messages: [
-      { id: "m1", sender: "bot", text: "Hi there! I'm Rashedul's AI assistant. How can I help you today?", time: "09:00 AM" },
-      { id: "m2", sender: "user", text: "Do you have experience with Sanity CMS?", time: "09:05 AM" },
-      { id: "m3", sender: "bot", text: "Yes! Rashedul has built multiple projects using Sanity CMS as a headless backend.", time: "09:06 AM" },
-    ]
-  }
-];
+  name: string;
+  email: string;
+  subject?: string;
+  message: string;
+  isRead: boolean;
+  createdAt: string;
+}
 
 export function MessagesTab() {
-  const [sessions, setSessions] = useState<Session[]>(mockSessions);
-  const [activeSessionId, setActiveSessionId] = useState<string>(mockSessions[0].id);
-  const [replyText, setReplyText] = useState("");
+  const [messages, setMessages] = useState<IContactMessage[]>([]);
+  const [activeMessageId, setActiveMessageId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  const activeSession = sessions.find(s => s.id === activeSessionId);
-
-  const handleSendReply = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!replyText.trim() || !activeSession) return;
-
-    const newMessage: Message = {
-      id: Date.now().toString(),
-      sender: "admin",
-      text: replyText,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
-
-    setSessions(prev => prev.map(session => 
-      session.id === activeSessionId 
-        ? { ...session, messages: [...session.messages, newMessage], lastActive: "Just now" }
-        : session
-    ));
-    setReplyText("");
+  const fetchMessages = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getContactMessages();
+      if (res.data.success && Array.isArray(res.data.data)) {
+        setMessages(res.data.data);
+        if (res.data.data.length > 0 && !activeMessageId) {
+          setActiveMessageId(res.data.data[0].id);
+        }
+      }
+    } catch (err) {
+      console.error("Error fetching contact messages:", err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  const handleMarkAsRead = async (id: string) => {
+    try {
+      await markContactMessageRead(id);
+      setMessages((prev) =>
+        prev.map((msg) => (msg.id === id ? { ...msg, isRead: true } : msg))
+      );
+    } catch (err) {
+      console.error("Failed to mark as read:", err);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this message?")) return;
+    try {
+      await deleteContactMessage(id);
+      setMessages((prev) => prev.filter((msg) => msg.id !== id));
+      if (activeMessageId === id) {
+        setActiveMessageId(null);
+      }
+    } catch (err) {
+      console.error("Failed to delete message:", err);
+    }
+  };
+
+  const filteredMessages = messages.filter(
+    (m) =>
+      m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      m.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      m.message.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const activeMessage = messages.find((m) => m.id === activeMessageId);
+
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col">
-      <div className="mb-6">
-        <h2 className="text-3xl font-bold text-foreground mb-2">Chatbot Inbox</h2>
-        <p className="text-muted-foreground">Monitor and take over live conversations on your portfolio.</p>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="text-3xl font-bold text-foreground tracking-tight">Contact Messages</h2>
+          <p className="text-muted-foreground mt-1">
+            Real contact submissions from website visitors.
+          </p>
+        </div>
+        <button
+          onClick={fetchMessages}
+          className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-accent rounded-xl text-xs font-semibold text-foreground transition-all"
+        >
+          <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
+          Refresh
+        </button>
       </div>
 
-      <div className="flex-1 card-premium overflow-hidden flex flex-col md:flex-row h-full">
-        
-        {/* Left Sidebar - Conversation List */}
-        <div className="w-full md:w-80 border-r border-border flex flex-col bg-muted/20">
-          <div className="p-4 border-b border-border">
-            <div className="relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <input 
-                type="text" 
-                placeholder="Search visitors..." 
-                className="w-full pl-9 pr-4 py-2 bg-background border border-border rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all"
-              />
-            </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[600px]">
+        {/* Messages List Sidebar */}
+        <div className="card-premium p-4 flex flex-col h-full overflow-hidden">
+          <div className="relative mb-4">
+            <Search className="w-4 h-4 absolute left-3 top-3 text-muted-foreground" />
+            <input
+              type="text"
+              placeholder="Search messages..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-muted border border-border rounded-xl pl-9 pr-4 py-2 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50"
+            />
           </div>
-          <div className="flex-1 overflow-y-auto p-2 space-y-1">
-            {sessions.map(session => (
-              <button
-                key={session.id}
-                onClick={() => setActiveSessionId(session.id)}
-                className={`w-full text-left p-3 rounded-xl transition-all ${
-                  activeSessionId === session.id 
-                    ? "bg-primary/10 border-primary/20" 
-                    : "hover:bg-muted border-transparent"
-                } border`}
-              >
-                <div className="flex justify-between items-start mb-1">
-                  <span className="font-semibold text-sm text-foreground flex items-center gap-2">
-                    {session.visitorName}
-                    {session.status === "active" && (
-                      <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    )}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground whitespace-nowrap">{session.lastActive}</span>
-                </div>
-                <p className="text-xs text-muted-foreground truncate">
-                  {session.messages[session.messages.length - 1]?.text || "No messages yet"}
-                </p>
-                <div className="flex items-center gap-1 mt-2 text-[10px] text-muted-foreground">
-                  <User className="w-3 h-3" /> {session.location}
-                </div>
-              </button>
-            ))}
+
+          <div className="flex-1 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
+            {filteredMessages.length === 0 ? (
+              <div className="p-8 text-center text-muted-foreground text-xs">
+                No messages found.
+              </div>
+            ) : (
+              filteredMessages.map((msg) => {
+                const isActive = msg.id === activeMessageId;
+                return (
+                  <button
+                    key={msg.id}
+                    onClick={() => {
+                      setActiveMessageId(msg.id);
+                      if (!msg.isRead) handleMarkAsRead(msg.id);
+                    }}
+                    className={`w-full text-left p-3.5 rounded-xl border transition-all flex flex-col gap-1.5 ${
+                      isActive
+                        ? "bg-primary/10 border-primary/40 text-foreground shadow-sm"
+                        : "bg-muted/30 border-border hover:bg-muted/60 text-muted-foreground"
+                    }`}
+                  >
+                    <div className="flex justify-between items-center">
+                      <span className={`text-xs font-bold ${isActive ? "text-foreground" : "text-foreground/90"}`}>
+                        {msg.name}
+                      </span>
+                      {!msg.isRead && (
+                        <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                      )}
+                    </div>
+                    <span className="text-[11px] text-muted-foreground line-clamp-1">{msg.subject || "No Subject"}</span>
+                    <span className="text-[10px] text-muted-foreground/70 flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {new Date(msg.createdAt).toLocaleDateString()}
+                    </span>
+                  </button>
+                );
+              })
+            )}
           </div>
         </div>
 
-        {/* Right Panel - Chat Area */}
-        <div className="flex-1 flex flex-col bg-background/30 h-full relative">
-          {activeSession ? (
-            <>
-              {/* Chat Header */}
-              <div className="h-16 border-b border-border px-6 flex items-center justify-between bg-muted/20 shrink-0">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <User className="w-5 h-5" />
-                  </div>
+        {/* Selected Message Detail View */}
+        <div className="lg:col-span-2 card-premium p-6 flex flex-col h-full overflow-hidden">
+          {activeMessage ? (
+            <div className="flex flex-col h-full justify-between">
+              <div>
+                <div className="flex justify-between items-start border-b border-border pb-4 mb-4">
                   <div>
-                    <h3 className="font-semibold text-foreground text-sm">{activeSession.visitorName}</h3>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <span className={`w-1.5 h-1.5 rounded-full ${activeSession.status === 'active' ? 'bg-green-500' : 'bg-muted-foreground'}`} />
-                        {activeSession.status === 'active' ? 'Online' : 'Offline'}
-                      </span>
+                    <h3 className="text-xl font-bold text-foreground">{activeMessage.subject || "No Subject"}</h3>
+                    <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
+                      <span className="font-medium text-foreground">{activeMessage.name}</span>
                       <span>•</span>
-                      <span>{activeSession.location}</span>
+                      <span className="flex items-center gap-1">
+                        <Mail className="w-3.5 h-3.5" />
+                        {activeMessage.email}
+                      </span>
                     </div>
                   </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleDelete(activeMessage.id)}
+                      className="p-2 hover:bg-red-500/10 hover:text-red-500 rounded-lg text-muted-foreground transition-colors"
+                      title="Delete message"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
-                <button className="px-3 py-1.5 text-xs font-medium bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors">
-                  View Profile Info
-                </button>
+
+                <div className="text-xs text-muted-foreground mb-4">
+                  Received: {new Date(activeMessage.createdAt).toLocaleString()}
+                </div>
+
+                <div className="bg-muted/40 border border-border/50 rounded-2xl p-5 text-sm text-foreground leading-relaxed whitespace-pre-wrap">
+                  {activeMessage.message}
+                </div>
               </div>
 
-              {/* Chat Messages */}
-              <div className="flex-1 overflow-y-auto p-6 space-y-6">
-                <AnimatePresence initial={false}>
-                  {activeSession.messages.map((msg, idx) => {
-                    const isVisitor = msg.sender === "user";
-                    const isAdmin = msg.sender === "admin";
-                    const isBot = msg.sender === "bot";
-                    
-                    return (
-                      <motion.div
-                        key={msg.id}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className={`flex gap-3 max-w-[80%] ${isVisitor ? "mr-auto" : "ml-auto flex-row-reverse"}`}
-                      >
-                        <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-white ${
-                          isVisitor ? "bg-blue-500" : isAdmin ? "bg-green-500" : "bg-primary"
-                        }`}>
-                          {isVisitor ? <User className="w-4 h-4" /> : isAdmin ? <CheckCircle2 className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
-                        </div>
-                        
-                        <div className={`flex flex-col ${isVisitor ? "items-start" : "items-end"}`}>
-                          <div className={`flex items-baseline gap-2 mb-1 px-1 ${isVisitor ? "flex-row" : "flex-row-reverse"}`}>
-                            <span className="text-xs font-medium text-foreground">
-                              {isVisitor ? "Visitor" : isAdmin ? "You (Admin)" : "AI Assistant"}
-                            </span>
-                            <span className="text-[10px] text-muted-foreground">{msg.time}</span>
-                          </div>
-                          <div className={`px-4 py-2.5 rounded-2xl text-sm ${
-                            isVisitor 
-                              ? "bg-muted text-foreground rounded-tl-none border border-border" 
-                              : isAdmin 
-                                ? "bg-green-500 text-white rounded-tr-none shadow-md"
-                                : "bg-primary text-primary-foreground rounded-tr-none shadow-md"
-                          }`}>
-                            {msg.text}
-                          </div>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </AnimatePresence>
-              </div>
-
-              {/* Chat Input */}
-              <div className="p-4 border-t border-border bg-muted/20 shrink-0">
-                <form 
-                  onSubmit={handleSendReply}
-                  className="flex items-center gap-3 bg-background border border-border rounded-xl p-1 pr-2 focus-within:ring-1 focus-within:ring-primary/50 transition-all"
+              <div className="pt-4 border-t border-border flex justify-end">
+                <a
+                  href={`mailto:${activeMessage.email}?subject=Re: ${encodeURIComponent(activeMessage.subject || "Inquiry")}`}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold rounded-full hover:opacity-90 transition-all shadow-md"
                 >
-                  <input 
-                    type="text" 
-                    value={replyText}
-                    onChange={(e) => setReplyText(e.target.value)}
-                    placeholder="Take over chat and reply manually..." 
-                    className="flex-1 px-4 py-2 bg-transparent text-sm focus:outline-none"
-                  />
-                  <button 
-                    type="submit"
-                    disabled={!replyText.trim()}
-                    className="p-2 bg-primary text-primary-foreground rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors"
-                  >
-                    <Send className="w-4 h-4" />
-                  </button>
-                </form>
-                <p className="text-center text-[10px] text-muted-foreground mt-2">
-                  Sending a message will pause the AI assistant for this session.
-                </p>
+                  <Mail className="w-4 h-4" />
+                  Reply via Email
+                </a>
               </div>
-            </>
+            </div>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center text-muted-foreground h-full">
-              <MessageSquare className="w-12 h-12 mb-4 opacity-20" />
-              <p>Select a conversation to view details</p>
+            <div className="flex flex-col items-center justify-center h-full text-muted-foreground text-sm">
+              <Mail className="w-12 h-12 mb-3 text-muted-foreground/30" />
+              Select a message from the left sidebar to view details.
             </div>
           )}
         </div>
