@@ -464,8 +464,9 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="w-full max-w-2xl text-center text-sm sm:text-base md:text-lg text-muted-foreground font-normal leading-relaxed mt-3"
           >
-            Full-Stack Developer crafting fast, responsive web apps with
-            Next.js, TypeScript, React Native, and Node.js.
+            Full-Stack Web Developer specializing in building high-performance
+            web systems, robust APIs, and modern user experiences using Next.js,
+            TypeScript, and Node.js.
           </motion.p>
 
           {/* Avatar Greeting Bar */}
@@ -484,7 +485,7 @@ export default function Hero() {
               <motion.span
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="mx-1 inline-block w-8 sm:w-10 overflow-hidden rounded-full border border-primary/30 shadow-md transition-shadow"
+                className="mx-1 inline-block w-16 sm:w-20 overflow-hidden rounded border border-primary/30 shadow-md transition-shadow"
               >
                 <Image
                   alt="Rashedul Islam — Full Stack Developer"
@@ -496,7 +497,7 @@ export default function Hero() {
               </motion.span>
             </span>
             <span className="text-muted-foreground">
-              • Full-Stack Developer & Mobile Engineer
+              • Full-Stack Web & Software Engineer
             </span>
           </motion.div>
 
