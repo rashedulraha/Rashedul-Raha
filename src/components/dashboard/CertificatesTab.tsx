@@ -14,7 +14,10 @@ import {
   LayoutGrid, 
   List, 
   CheckCircle2, 
-  ShieldCheck 
+  ShieldCheck,
+  Copy,
+  Calendar,
+  Image as ImageIcon
 } from "lucide-react";
 import { getCertificates, createCertificate, updateCertificate, deleteCertificate } from "@/services/apiService";
 import { ConfirmModal } from "./ConfirmModal";
@@ -36,6 +39,7 @@ export function CertificatesTab() {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCert, setEditingCert] = useState<ICertificate | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   
   // Search, Filters & View Mode
   const [searchQuery, setSearchQuery] = useState("");
@@ -82,7 +86,7 @@ export function CertificatesTab() {
       title: "",
       category: "Web Development Journey",
       issuer: "",
-      date: "2024",
+      date: new Date().getFullYear().toString(),
       image: "",
       credentialUrl: "",
       description: "",
@@ -147,6 +151,12 @@ export function CertificatesTab() {
     }
   };
 
+  const copyToClipboard = (text: string, id: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
   const categories = useMemo(() => {
     const cats = Array.from(new Set(certificates.map((c) => c.category || "General")));
     return ["All", ...cats];
@@ -164,13 +174,13 @@ export function CertificatesTab() {
   }, [certificates, searchQuery, activeCategory]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-500">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-foreground tracking-tight">Certificates</h2>
+          <h2 className="text-3xl font-bold text-foreground tracking-tight">Certifications</h2>
           <p className="text-muted-foreground mt-1">
-            Manage and edit your certifications and verified achievements.
+            Manage your credentials, verify links, and highlight your skills.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -186,7 +196,7 @@ export function CertificatesTab() {
             className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20"
           >
             <Plus className="w-4 h-4" />
-            Add Certificate
+            Add Credential
           </button>
         </div>
       </div>
@@ -194,21 +204,21 @@ export function CertificatesTab() {
       {/* Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="card-premium p-5 flex items-center gap-4">
-          <div className="p-3 bg-primary/10 text-primary rounded-2xl">
+          <div className="p-3 bg-primary/10 border border-primary/20 text-primary rounded-2xl shadow-inner">
             <Award className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block">Total Certificates</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">Total Certificates</span>
             <h4 className="text-2xl font-extrabold text-foreground mt-0.5">{certificates.length}</h4>
           </div>
         </div>
 
         <div className="card-premium p-5 flex items-center gap-4">
-          <div className="p-3 bg-emerald-500/10 text-emerald-500 rounded-2xl">
+          <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-2xl shadow-inner">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block">Verified Credentials</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">Verified Credentials</span>
             <h4 className="text-2xl font-extrabold text-foreground mt-0.5">
               {certificates.filter((c) => c.credentialUrl).length} Links
             </h4>
@@ -216,37 +226,37 @@ export function CertificatesTab() {
         </div>
 
         <div className="card-premium p-5 flex items-center gap-4">
-          <div className="p-3 bg-blue-500/10 text-blue-500 rounded-2xl">
+          <div className="p-3 bg-blue-500/10 border border-blue-500/20 text-blue-500 rounded-2xl shadow-inner">
             <CheckCircle2 className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block">Categories</span>
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block">Skill Tracks</span>
             <h4 className="text-2xl font-extrabold text-foreground mt-0.5">{categories.length - 1 || 1} Tracks</h4>
           </div>
         </div>
       </div>
 
       {/* Controls Bar */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-card/40 border border-border/50 rounded-2xl p-3 backdrop-blur-sm">
-        <div className="relative w-full md:w-72">
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-card/40 border border-border/50 rounded-2xl p-3 backdrop-blur-sm shadow-sm">
+        <div className="relative w-full md:w-80">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search certificates..."
+            placeholder="Search by title, issuer, or category..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-muted/60 border border-border rounded-xl pl-10 pr-4 py-2 text-xs text-foreground focus:outline-none focus:border-primary/50 transition-all"
+            className="w-full bg-background border border-border rounded-xl pl-10 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-primary/50 transition-all shadow-inner"
           />
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto">
+        <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto custom-scrollbar pb-1 md:pb-0">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                 activeCategory === cat
-                  ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                  ? "bg-primary text-primary-foreground shadow-md"
                   : "bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
@@ -255,20 +265,20 @@ export function CertificatesTab() {
           ))}
         </div>
 
-        <div className="flex items-center bg-muted/60 border border-border p-1 rounded-xl gap-1 shrink-0">
+        <div className="flex items-center bg-background border border-border p-1 rounded-xl gap-1 shrink-0 shadow-inner hidden sm:flex">
           <button
             onClick={() => setViewMode("cards")}
             className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
-              viewMode === "cards" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+              viewMode === "cards" ? "bg-muted text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <LayoutGrid className="w-4 h-4" />
-            <span className="hidden sm:inline">Cards</span>
+            <span className="hidden sm:inline">Grid</span>
           </button>
           <button
             onClick={() => setViewMode("list")}
             className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
-              viewMode === "list" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+              viewMode === "list" ? "bg-muted text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <List className="w-4 h-4" />
@@ -279,62 +289,87 @@ export function CertificatesTab() {
 
       {isLoading ? (
         <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
-          <RefreshCw className="w-6 h-6 animate-spin text-primary" />
-          <span>Loading certificates...</span>
+          <RefreshCw className="w-8 h-8 animate-spin text-primary" />
+          <span className="text-sm font-medium animate-pulse">Loading credentials...</span>
         </div>
       ) : filteredCertificates.length === 0 ? (
-        <div className="card-premium p-12 text-center text-muted-foreground">
-          No certificates found matching filter criteria.
+        <div className="card-premium p-16 text-center text-muted-foreground border-dashed border-2 border-border/50 rounded-3xl flex flex-col items-center justify-center gap-4">
+           <Award className="w-12 h-12 opacity-20" />
+           <div>
+             <h3 className="text-lg font-bold text-foreground">No certificates found</h3>
+             <p className="text-sm mt-1">Add your certifications to showcase your expertise.</p>
+           </div>
+           <button onClick={openAddModal} className="mt-2 text-primary text-sm font-semibold hover:underline">Add Credential &rarr;</button>
         </div>
       ) : viewMode === "cards" ? (
         /* CARDS VIEW */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCertificates.map((cert) => (
-            <div key={cert.id} className="card-premium p-5 flex flex-col justify-between group">
+            <div key={cert.id} className="card-premium p-5 flex flex-col justify-between group rounded-2xl hover:border-primary/30 transition-colors duration-300">
               <div>
-                <div className="aspect-video w-full rounded-xl overflow-hidden bg-muted mb-4 relative">
-                  <img
-                    src={cert.image || "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80"}
-                    alt={cert.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <span className="absolute top-2 left-2 px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
+                <div className="aspect-video w-full rounded-xl overflow-hidden bg-muted mb-5 relative border border-border/50 p-2">
+                  <div className="w-full h-full rounded-lg overflow-hidden relative">
+                    <img
+                      src={cert.image || "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80"}
+                      alt={cert.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                      {cert.credentialUrl && (
+                        <a href={cert.credentialUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-md px-4 py-2 rounded-full text-white text-xs font-bold transition-colors">
+                          <ExternalLink className="w-4 h-4" /> Verify Credential
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                  <span className="absolute top-4 left-4 px-3 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-extrabold text-white uppercase tracking-wider shadow-lg">
                     {cert.category}
                   </span>
                 </div>
-                <h3 className="text-base font-bold text-foreground line-clamp-1">{cert.title}</h3>
-                <p className="text-xs text-muted-foreground mt-1">Issued by: <span className="text-foreground font-medium">{cert.issuer}</span> ({cert.date})</p>
+                <h3 className="text-base font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">{cert.title}</h3>
+                <p className="text-xs text-muted-foreground mt-2">Issued by: <span className="text-foreground font-semibold">{cert.issuer}</span> <span className="mx-1">•</span> {cert.date}</p>
                 {cert.description && (
-                  <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{cert.description}</p>
+                  <p className="text-xs text-muted-foreground mt-3 line-clamp-2 leading-relaxed bg-muted/30 p-2 rounded-lg">{cert.description}</p>
+                )}
+                {cert.skills && (
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {cert.skills.split(",").slice(0, 3).map((s, i) => (
+                      <span key={i} className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded-md">
+                        {s.trim()}
+                      </span>
+                    ))}
+                    {cert.skills.split(",").length > 3 && (
+                      <span className="px-2 py-0.5 bg-muted text-muted-foreground text-[10px] font-bold rounded-md">+{cert.skills.split(",").length - 3}</span>
+                    )}
+                  </div>
                 )}
               </div>
 
-              <div className="flex items-center justify-between pt-4 mt-4 border-t border-border/50 text-xs">
-                {cert.credentialUrl ? (
-                  <a
-                    href={cert.credentialUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-1 text-primary hover:underline font-medium"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    Verify Credential
-                  </a>
-                ) : (
-                  <span className="text-muted-foreground">Verified Record</span>
-                )}
-                
+              <div className="flex items-center justify-between pt-5 mt-5 border-t border-border/50">
+                <div className="flex items-center gap-1.5">
+                    {cert.credentialUrl ? (
+                      <button 
+                        onClick={() => copyToClipboard(cert.credentialUrl!, cert.id)}
+                        className={`flex items-center gap-1.5 text-xs font-semibold px-2 py-1.5 rounded-lg transition-colors ${copiedId === cert.id ? "bg-emerald-500/20 text-emerald-500" : "bg-muted hover:bg-accent text-foreground"}`}
+                      >
+                        {copiedId === cert.id ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                        {copiedId === cert.id ? "Copied!" : "Copy Link"}
+                      </button>
+                    ) : (
+                      <span className="text-xs text-muted-foreground font-medium flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5" /> Verified Record</span>
+                    )}
+                </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => openEditModal(cert)}
-                    className="flex items-center gap-1 px-3 py-1.5 bg-muted hover:bg-accent text-foreground rounded-lg font-medium transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-muted hover:bg-accent text-foreground text-xs rounded-lg font-semibold transition-colors"
                   >
                     <Edit2 className="w-3.5 h-3.5" />
                     Edit
                   </button>
                   <button
                     onClick={() => confirmDelete(cert.id)}
-                    className="p-2 hover:bg-red-500/10 hover:text-red-500 rounded-lg transition-colors text-muted-foreground"
+                    className="p-1.5 hover:bg-red-500/10 hover:text-red-500 rounded-lg transition-colors text-muted-foreground"
                     title="Delete certificate"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -346,43 +381,63 @@ export function CertificatesTab() {
         </div>
       ) : (
         /* LIST VIEW */
-        <div className="card-premium overflow-hidden">
+        <div className="card-premium overflow-hidden rounded-2xl border border-border/50">
           <div className="divide-y divide-border/50">
             {filteredCertificates.map((cert) => (
               <div
                 key={cert.id}
-                className="p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-muted/30 transition-colors"
+                className="p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 hover:bg-muted/30 transition-colors"
               >
-                <div className="flex items-center gap-4 min-w-0">
+                <div className="flex items-center gap-5 min-w-0 flex-1">
                   <img
                     src={cert.image || "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=80"}
                     alt={cert.title}
-                    className="w-16 h-12 object-cover rounded-lg bg-muted shrink-0 border border-border/40"
+                    className="w-24 h-16 object-cover rounded-xl bg-muted shrink-0 border border-border/40 shadow-sm"
                   />
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h4 className="text-sm font-bold text-foreground truncate">{cert.title}</h4>
-                      <span className="px-2 py-0.5 bg-primary/10 text-primary rounded-md text-[10px] font-bold">
-                        {cert.issuer}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-3 mb-1">
+                      <h4 className="text-sm font-bold text-foreground truncate hover:text-primary transition-colors cursor-pointer">{cert.title}</h4>
+                      <span className="px-2.5 py-0.5 bg-primary/10 border border-primary/20 text-primary rounded-md text-[10px] font-extrabold uppercase tracking-wider shrink-0 hidden sm:inline-block">
+                        {cert.category}
                       </span>
                     </div>
-                    <p className="text-xs text-muted-foreground truncate max-w-lg mt-0.5">
-                      {cert.category} • Issued {cert.date}
+                    <p className="text-xs text-muted-foreground truncate max-w-xl">
+                      Issued by <span className="font-semibold text-foreground">{cert.issuer}</span> • {cert.date}
                     </p>
+                    {cert.skills && (
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {cert.skills.split(",").slice(0, 4).map((s, i) => (
+                          <span key={i} className="px-2 py-0.5 bg-muted border border-border text-foreground text-[9px] font-bold rounded">
+                            {s.trim()}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 shrink-0 self-end md:self-center">
+                <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
+                  {cert.credentialUrl && (
+                     <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors"
+                        title="Verify Credential"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                  )}
                   <button
                     onClick={() => openEditModal(cert)}
-                    className="flex items-center gap-1 px-3 py-1.5 bg-muted hover:bg-accent text-xs font-semibold rounded-lg transition-colors"
+                    className="flex items-center gap-1.5 px-4 py-2 bg-muted hover:bg-accent text-foreground text-xs font-semibold rounded-lg transition-colors"
                   >
                     <Edit2 className="w-3.5 h-3.5" />
                     Edit
                   </button>
                   <button
                     onClick={() => confirmDelete(cert.id)}
-                    className="p-2 hover:bg-red-500/10 hover:text-red-500 text-muted-foreground rounded-lg transition-colors"
+                    className="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors"
                     title="Delete Certificate"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -397,138 +452,166 @@ export function CertificatesTab() {
       {/* Delete Confirmation Modal */}
       <ConfirmModal
         isOpen={Boolean(deletingId)}
-        title="Delete Certificate"
-        message="Are you sure you want to delete this certificate? This action cannot be undone."
+        title="Delete Credential"
+        message="Are you sure you want to remove this certificate? This action cannot be reversed."
         isLoading={isDeleting}
         onConfirm={handleConfirmDelete}
         onClose={() => setDeletingId(null)}
       />
 
-      {/* Add / Edit Modal */}
+      {/* Modern Split-Layout Add / Edit Modal */}
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-background border border-border rounded-2xl p-6 w-full max-w-lg shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto"
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="bg-card border border-border rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
             >
-              <div className="flex justify-between items-center border-b border-border pb-3">
-                <h3 className="text-xl font-bold text-foreground">
-                  {editingCert ? "Edit Certificate" : "Add New Certificate"}
-                </h3>
-                <button onClick={() => setIsModalOpen(false)} className="p-1 hover:bg-muted rounded-lg">
-                  <X className="w-5 h-5" />
+              <div className="flex justify-between items-center px-6 py-4 border-b border-border bg-muted/20">
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">
+                    {editingCert ? "Edit Credential" : "Add New Credential"}
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">Showcase your verified achievements and skills.</p>
+                </div>
+                <button onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-muted rounded-xl transition-colors">
+                  <X className="w-5 h-5 text-muted-foreground hover:text-foreground" />
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="text-xs font-semibold text-foreground">Title *</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                  />
-                </div>
+              <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+                  {/* Left Column: Core Details */}
+                  <div className="space-y-5">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-2"><Award className="w-3.5 h-3.5" /> Certificate Title *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.title}
+                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                        placeholder="e.g. AWS Certified Solutions Architect"
+                        className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner"
+                      />
+                    </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Category</label>
-                    <select
-                      value={formData.category}
-                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                    >
-                      <option value="Web Development Journey">Web Development Journey</option>
-                      <option value="Other Achievements">Other Achievements</option>
-                    </select>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-2"><LayoutGrid className="w-3.5 h-3.5" /> Category</label>
+                        <select
+                          value={formData.category}
+                          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                          className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner appearance-none"
+                        >
+                          <option value="Web Development Journey">Web Development Journey</option>
+                          <option value="Cloud Computing">Cloud Computing</option>
+                          <option value="Cybersecurity">Cybersecurity</option>
+                          <option value="Data Science">Data Science</option>
+                          <option value="Other Achievements">Other Achievements</option>
+                        </select>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-2"><ShieldCheck className="w-3.5 h-3.5" /> Issuer *</label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.issuer}
+                          onChange={(e) => setFormData({ ...formData, issuer: e.target.value })}
+                          placeholder="e.g. Amazon Web Services"
+                          className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-2"><Calendar className="w-3.5 h-3.5" /> Date / Year *</label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.date}
+                          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                          placeholder="e.g. October 2024"
+                          className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner"
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-2"><ExternalLink className="w-3.5 h-3.5" /> Credential URL</label>
+                        <input
+                          type="text"
+                          value={formData.credentialUrl}
+                          onChange={(e) => setFormData({ ...formData, credentialUrl: e.target.value })}
+                          placeholder="https://credly.com/..."
+                          className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Issuer *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.issuer}
-                      onChange={(e) => setFormData({ ...formData, issuer: e.target.value })}
-                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                    />
+
+                  {/* Right Column: Media & Extra Details */}
+                  <div className="space-y-5">
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-2"><ImageIcon className="w-3.5 h-3.5" /> Image URL *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.image}
+                        onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                        placeholder="https://images.unsplash.com/..."
+                        className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner"
+                      />
+                      {formData.image && (
+                         <div className="mt-3 aspect-video bg-muted rounded-xl border border-border/50 overflow-hidden">
+                            <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                         </div>
+                      )}
+                    </div>
+                    
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-2">Skills Earned</label>
+                      <input
+                        type="text"
+                        value={formData.skills}
+                        onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
+                        placeholder="e.g. React, Next.js, TypeScript (comma separated)"
+                        className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner"
+                      />
+                    </div>
+                    
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-2">Short Description</label>
+                      <textarea
+                        value={formData.description}
+                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                        rows={2}
+                        placeholder="Briefly describe what you learned or achieved..."
+                        className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner resize-none"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Year/Date *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.date}
-                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-semibold text-foreground">Image URL *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.image}
-                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                      placeholder="https://images.unsplash.com/..."
-                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-foreground">Credential URL (Optional)</label>
-                  <input
-                    type="text"
-                    value={formData.credentialUrl}
-                    onChange={(e) => setFormData({ ...formData, credentialUrl: e.target.value })}
-                    placeholder="https://..."
-                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-foreground">Description (Optional)</label>
-                  <textarea
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    rows={2}
-                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-foreground">Skills (Optional, comma-separated)</label>
-                  <input
-                    type="text"
-                    value={formData.skills}
-                    onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
-                    placeholder="React, Next.js, Node.js"
-                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                  />
-                </div>
-
-                <div className="flex justify-end gap-3 pt-4 border-t border-border">
+                <div className="flex justify-end gap-3 px-6 py-4 border-t border-border bg-muted/10">
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 bg-muted hover:bg-accent text-xs font-semibold rounded-xl"
+                    className="px-5 py-2.5 bg-muted hover:bg-accent text-sm font-semibold rounded-xl transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-6 py-2 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90"
+                    className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-bold rounded-xl hover:opacity-90 transition-all flex items-center gap-2 shadow-lg shadow-primary/20"
                   >
-                    {isSubmitting ? "Saving..." : editingCert ? "Update Certificate" : "Save Certificate"}
+                    {isSubmitting ? (
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                    ) : (
+                        <CheckCircle2 className="w-4 h-4" />
+                    )}
+                    {isSubmitting ? "Saving..." : editingCert ? "Update Credential" : "Save Credential"}
                   </button>
                 </div>
               </form>
