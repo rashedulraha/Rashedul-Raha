@@ -12,67 +12,10 @@ type Testimonial = {
   message: string;
 };
 
-const testimonialsData: Testimonial[] = [
-  {
-    id: 1,
-    name: "Marcus T.",
-    role: "Marketing Director, SaaS startup",
-    avatar: "https://i.pravatar.cc/150?img=11",
-    title: "We went from Figma to production in 11 days",
-    message:
-      "We'd been sitting on designs for two months because our last dev kept pushing timelines. Rashedul had a staging link in 4 days and we were live in 11. The site loads in under a second and our bounce rate dropped 35% the first week. Wish we'd found him sooner.",
-  },
-  {
-    id: 2,
-    name: "Lauren K.",
-    role: "Founder, DTC skincare brand",
-    avatar: "https://i.pravatar.cc/150?img=9",
-    title: "Finally a developer who actually listens",
-    message:
-      "I'm not technical at all, and past devs made me feel stupid for asking questions. Rashedul sent Loom walkthroughs after every milestone so I always knew exactly where things stood. When I changed my mind about the checkout flow halfway through, he didn't push back — just adjusted and shipped it better than what I originally asked for.",
-  },
-  {
-    id: 3,
-    name: "Daniel R.",
-    role: "CTO, fintech startup",
-    avatar: "https://i.pravatar.cc/150?img=12",
-    title: "Our Core Web Vitals went from red to green overnight",
-    message:
-      "We hired Rashedul to rebuild our marketing site on Next.js. The old WordPress site was scoring 38 on PageSpeed. His build scores 97. He set up the CMS integration so our content team can publish without touching code. Solid architecture, clean codebase — the kind of work I'd expect from a senior engineer.",
-  },
-  {
-    id: 4,
-    name: "James L.",
-    role: "Co-founder, e-commerce brand",
-    avatar: "https://i.pravatar.cc/150?img=15",
-    title: "He caught problems we didn't even know we had",
-    message:
-      "We hired him to redesign our product pages. During the build he noticed our image pipeline was serving uncompressed files and our mobile nav was broken on Safari. Fixed both without being asked. That's the kind of developer you want — someone who cares about the whole product, not just their ticket.",
-  },
-  {
-    id: 5,
-    name: "Sofia M.",
-    role: "Creative Director, branding agency",
-    avatar: "https://i.pravatar.cc/150?img=20",
-    title: "He turned our messy brief into something beautiful",
-    message:
-      "We gave Rashedul a mood board and some rough wireframes — honestly, they were half-baked. He came back with a prototype that was cleaner and more thoughtful than what we'd imagined. The animations feel intentional, the typography is perfect, and three clients have asked us who built it.",
-  },
-  {
-    id: 6,
-    name: "Ryan H.",
-    role: "Founder, B2B agency",
-    avatar: "https://i.pravatar.cc/150?img=33",
-    title: "We've shipped 4 projects together now",
-    message:
-      "First project was a simple landing page. Then he rebuilt our client portal, added a blog with headless CMS, and just finished an analytics dashboard. Every project is ahead of schedule. He's basically our dev team at this point. If you're a small agency that needs a reliable build partner, stop looking.",
-  },
-];
-
 import { getTestimonials } from "@/services/apiService";
 
 export default function Testimonials() {
-  const [items, setItems] = useState<Testimonial[]>(testimonialsData);
+  const [items, setItems] = useState<Testimonial[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -129,7 +72,7 @@ export default function Testimonials() {
   const goToSlide = (index: number) => {
     const slider = sliderRef.current;
     if (!slider) return;
-    const cardWidth = slider.scrollWidth / testimonialsData.length;
+    const cardWidth = slider.scrollWidth / items.length;
     slider.scrollTo({ left: index * cardWidth, behavior: "smooth" });
   };
 
