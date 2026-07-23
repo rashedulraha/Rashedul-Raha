@@ -179,30 +179,31 @@ export function SkillsTab() {
     return skills.filter((s) => {
       const matchesSearch =
         s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        s.category.toLowerCase().includes(searchQuery.toLowerCase());
+        s.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (s.description && s.description.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesCat = activeCategory === "All" || s.category === activeCategory;
       return matchesSearch && matchesCat;
     });
   }, [skills, searchQuery, activeCategory]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-500">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-bold text-foreground tracking-tight">
             Skills & Technologies
           </h2>
-          <p className="text-muted-foreground mt-1">
-            Manage your tech stack skills, icons, and category badges dynamically.
+          <p className="text-muted-foreground mt-1 text-sm">
+            Manage your tech stack skills, icons, and category badges dynamically in a clean tabular view.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchSkills}
-            className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-accent rounded-xl text-xs font-semibold text-foreground transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-accent rounded-xl text-xs font-semibold text-foreground transition-all shadow-sm"
           >
-            <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
+            <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin text-primary" : ""}`} />
             Refresh
           </button>
           <button
@@ -216,26 +217,26 @@ export function SkillsTab() {
       </div>
 
       {/* Controls Bar */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-card/40 border border-border/50 rounded-2xl p-3 backdrop-blur-sm">
-        <div className="relative w-full sm:w-72">
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-card/40 border border-border/50 rounded-2xl p-3 backdrop-blur-sm shadow-sm">
+        <div className="relative w-full md:w-80">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search skills..."
+            placeholder="Search tech stack by name, category or details..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-muted/60 border border-border rounded-xl pl-10 pr-4 py-2 text-xs text-foreground focus:outline-none focus:border-primary/50 transition-all"
+            className="w-full bg-background border border-border rounded-xl pl-10 pr-4 py-2.5 text-xs text-foreground focus:outline-none focus:border-primary/50 transition-all shadow-inner"
           />
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
+        <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto custom-scrollbar pb-1 md:pb-0">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                 activeCategory === cat
-                  ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                  ? "bg-primary text-primary-foreground shadow-md"
                   : "bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
@@ -251,56 +252,84 @@ export function SkillsTab() {
         </div>
       )}
 
-      {/* Skills Grid */}
+      {/* Tabular Skill List View instead of cards */}
       {isLoading ? (
         <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
-          <RefreshCw className="w-6 h-6 animate-spin text-primary" />
-          <span>Loading skills...</span>
+          <RefreshCw className="w-8 h-8 animate-spin text-primary" />
+          <span className="text-sm font-medium animate-pulse">Loading skills...</span>
         </div>
       ) : filteredSkills.length === 0 ? (
-        <div className="card-premium p-12 text-center text-muted-foreground">
-          No skills found. Add your first technology!
+        <div className="card-premium p-16 text-center text-muted-foreground border-dashed border-2 border-border/50 rounded-3xl flex flex-col items-center justify-center gap-4">
+          <Code className="w-12 h-12 opacity-20" />
+          <div>
+            <h3 className="text-lg font-bold text-foreground">No skills found</h3>
+            <p className="text-sm mt-1">Add your skills to show them in the portfolio website.</p>
+          </div>
+          <button onClick={openAddModal} className="mt-2 text-primary text-sm font-semibold hover:underline">Add your first skill &rarr;</button>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {filteredSkills.map((skill) => {
-            const IconComponent = iconMap[skill.icon || "Code"] || Code;
-            return (
-              <motion.div
-                key={skill.id}
-                layout
-                className="card-premium p-4 flex flex-col items-center text-center justify-between group relative overflow-hidden"
-              >
-                <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 mb-3 shadow-md">
-                  <IconComponent className="w-6 h-6" />
-                </div>
-
-                <div>
-                  <h3 className="text-xs font-bold text-foreground line-clamp-1">{skill.name}</h3>
-                  <span className="text-[10px] text-muted-foreground/80 mt-0.5 block font-medium">
-                    {skill.category}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2 pt-3 mt-3 border-t border-border/50 w-full justify-center">
-                  <button
-                    onClick={() => openEditModal(skill)}
-                    className="p-1.5 hover:bg-muted rounded-lg text-muted-foreground hover:text-foreground transition-colors"
-                    title="Edit Skill"
-                  >
-                    <Edit2 className="w-3.5 h-3.5" />
-                  </button>
-                  <button
-                    onClick={() => confirmDelete(skill.id)}
-                    className="p-1.5 hover:bg-red-500/10 hover:text-red-500 text-muted-foreground rounded-lg transition-colors"
-                    title="Delete Skill"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </motion.div>
-            );
-          })}
+        <div className="card-premium overflow-hidden rounded-2xl border border-border/50 shadow-md">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-left">
+              <thead>
+                <tr className="border-b border-border bg-muted/20 text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                  <th className="py-4 px-6">Skill / Technology</th>
+                  <th className="py-4 px-6">Category</th>
+                  <th className="py-4 px-6 hidden md:table-cell">Description / Notes</th>
+                  <th className="py-4 px-6 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/50 text-sm text-foreground">
+                {filteredSkills.map((skill) => {
+                  const IconComponent = iconMap[skill.icon || "Code"] || Code;
+                  return (
+                    <motion.tr
+                      key={skill.id}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="hover:bg-muted/30 transition-colors group"
+                    >
+                      <td className="py-4 px-6 font-semibold">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 rounded-xl bg-primary/10 border border-primary/20 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-sm shrink-0">
+                            <IconComponent className="w-4 h-4" />
+                          </div>
+                          <span className="truncate max-w-[180px] sm:max-w-none">{skill.name}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-6">
+                        <span className="px-2.5 py-1 bg-muted border border-border text-foreground text-[10px] font-extrabold uppercase tracking-wider rounded-md">
+                          {skill.category}
+                        </span>
+                      </td>
+                      <td className="py-4 px-6 hidden md:table-cell text-muted-foreground max-w-xs truncate">
+                        {skill.description || <span className="italic text-muted-foreground/45">No details provided</span>}
+                      </td>
+                      <td className="py-4 px-6 text-right whitespace-nowrap">
+                        <div className="flex items-center justify-end gap-2">
+                          <button
+                            onClick={() => openEditModal(skill)}
+                            className="flex items-center gap-1 px-3 py-1.5 bg-muted hover:bg-accent text-foreground text-xs rounded-lg font-semibold transition-colors"
+                            title="Edit Skill"
+                          >
+                            <Edit2 className="w-3.5 h-3.5" />
+                            <span className="hidden sm:inline">Edit</span>
+                          </button>
+                          <button
+                            onClick={() => confirmDelete(skill.id)}
+                            className="p-2 hover:bg-red-500/10 hover:text-red-500 text-muted-foreground rounded-lg transition-colors bg-background border border-border"
+                            title="Delete Skill"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </td>
+                    </motion.tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 
@@ -319,82 +348,88 @@ export function SkillsTab() {
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-background border border-border rounded-2xl p-6 w-full max-w-md shadow-2xl space-y-4"
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="bg-card border border-border rounded-2xl w-full max-w-md shadow-2xl overflow-hidden flex flex-col"
             >
-              <div className="flex justify-between items-center border-b border-border pb-3">
-                <h3 className="text-xl font-bold text-foreground">
-                  {editingSkill ? "Edit Skill" : "Add New Skill"}
-                </h3>
-                <button onClick={() => setIsModalOpen(false)} className="p-1 hover:bg-muted rounded-lg text-muted-foreground">
-                  <X className="w-5 h-5" />
+              <div className="flex justify-between items-center px-6 py-4 border-b border-border bg-muted/20">
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">
+                    {editingSkill ? "Edit Skill" : "Add New Skill"}
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">Manage your technology showcase information.</p>
+                </div>
+                <button onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-muted rounded-xl transition-colors">
+                  <X className="w-5 h-5 text-muted-foreground hover:text-foreground" />
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="text-xs font-semibold text-foreground">Skill Name *</label>
+              <form onSubmit={handleSubmit} className="p-6 space-y-5">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-foreground uppercase tracking-wider">Skill Name *</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Next.js, PostgreSQL"
-                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner"
                   />
                 </div>
 
-                <div>
-                  <label className="text-xs font-semibold text-foreground">Category *</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    placeholder="Frontend, Backend, DevOps, etc."
-                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-foreground uppercase tracking-wider">Category *</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.category}
+                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                      placeholder="e.g. Frontend, Backend"
+                      className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-foreground uppercase tracking-wider">Visual Icon</label>
+                    <select
+                      value={formData.icon}
+                      onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
+                      className="w-full bg-background border border-border rounded-xl px-4 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner appearance-none"
+                    >
+                      {Object.keys(iconMap).map((iconName) => (
+                        <option key={iconName} value={iconName}>
+                          {iconName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="text-xs font-semibold text-foreground">Icon</label>
-                  <select
-                    value={formData.icon}
-                    onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
-                  >
-                    {Object.keys(iconMap).map((iconName) => (
-                      <option key={iconName} value={iconName}>
-                        {iconName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-foreground">Description (Optional)</label>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-foreground uppercase tracking-wider">Description (Optional)</label>
                   <textarea
-                    rows={2}
+                    rows={3}
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    placeholder="Brief details about your experience with this tech..."
+                    className="w-full bg-background border border-border rounded-xl px-4 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50 shadow-inner resize-none"
                   />
                 </div>
 
-                <div className="flex justify-end gap-3 pt-4 border-t border-border">
+                <div className="flex justify-end gap-3 pt-6 border-t border-border mt-2">
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 bg-muted hover:bg-accent text-xs font-semibold rounded-xl"
+                    className="px-5 py-2.5 bg-muted hover:bg-accent text-sm font-semibold rounded-xl transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-6 py-2 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90"
+                    className="px-6 py-2.5 bg-primary text-primary-foreground text-sm font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20"
                   >
                     {isSubmitting ? "Saving..." : editingSkill ? "Update Skill" : "Add Skill"}
                   </button>
