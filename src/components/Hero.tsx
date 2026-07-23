@@ -418,16 +418,16 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="group flex cursor-pointer items-center rounded-full border border-black/5 bg-black/5 px-1 py-0.5 text-sm backdrop-blur-xs transition-all duration-300 ease-in hover:bg-black/10 hover:border-black/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.99] lg:text-base dark:border-white/5 dark:bg-white/5 dark:hover:border-white/15 dark:hover:bg-white/10"
-            href="https://siliconpvt.vercel.app"
+            href="https://zopshop.vercel.app"
             referrerPolicy="no-referrer"
             rel="noreferrer"
             target="_blank"
           >
             <span className="mx-1 rounded-full bg-linear-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-xs font-medium text-white shadow-sm">
-              Portfolio 2026
+              Zopshop 2026
             </span>
             <span className="relative px-2 py-0.5 text-sm text-black/70 transition-colors duration-300 group-hover:text-black dark:text-white/70 dark:group-hover:text-white">
-              Full-Stack & Cross-Platform Engineer
+              One POS System. For Every Business.
             </span>
             <motion.svg
               fill="none"
@@ -452,13 +452,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full max-w-4xl text-balance text-center font-sans font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight text-foreground"
+            className="w-full max-w-5xl text-balance text-center font-sans font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight text-foreground"
           >
-            Building digital{" "}
-            <span className="bg-gradient-to-r from-primary via-indigo-400 to-sky-400 bg-clip-text text-transparent">
-              experiences
-            </span>{" "}
-            that scale.
+            Building bridges between design and code
           </motion.h1>
 
           {/* Subtitle */}
@@ -468,7 +464,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="w-full max-w-2xl text-center text-sm sm:text-base md:text-lg text-muted-foreground font-normal leading-relaxed mt-3"
           >
-            Full-Stack Developer crafting fast, responsive web apps with Next.js, TypeScript, React Native, and Node.js.
+            Full-Stack Developer crafting fast, responsive web apps with
+            Next.js, TypeScript, React Native, and Node.js.
           </motion.p>
 
           {/* Avatar Greeting Bar */}
@@ -498,7 +495,9 @@ export default function Hero() {
                 />
               </motion.span>
             </span>
-            <span className="text-muted-foreground">• Full-Stack Developer & Mobile Engineer</span>
+            <span className="text-muted-foreground">
+              • Full-Stack Developer & Mobile Engineer
+            </span>
           </motion.div>
 
           {/* CTAs */}
