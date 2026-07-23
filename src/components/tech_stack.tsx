@@ -77,7 +77,6 @@ function TechModal({
   onClose: () => void;
   skills: ISkillItem[];
 }) {
-  const t = useTranslations("Features.TechStack");
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleOutsideClick = (e: React.MouseEvent) => {
@@ -98,10 +97,10 @@ function TechModal({
   }, [isOpen]);
 
   const categories = [
-    { title: t("frontendTitle"), desc: t("frontendDesc"), key: "Frontend", defaultIcon: Layout },
-    { title: t("backendTitle"), desc: t("backendDesc"), key: "Backend", defaultIcon: Server },
-    { title: t("devopsTitle"), desc: t("devopsDesc"), key: "DevOps & Tools", defaultIcon: Terminal },
-    { title: t("osTitle"), desc: t("osDesc"), key: "Operating Systems", defaultIcon: Monitor },
+    { title: "Frontend Architecture", desc: "Client-side applications, UI components, and modern web frameworks", key: "Frontend", defaultIcon: Layout },
+    { title: "Backend & Databases", desc: "RESTful APIs, PostgreSQL, Node.js, and serverless infrastructure", key: "Backend", defaultIcon: Server },
+    { title: "DevOps & Tooling", desc: "CI/CD pipelines, Docker, Git, and deployment platforms", key: "DevOps & Tools", defaultIcon: Terminal },
+    { title: "Operating Systems", desc: "Primary development environments and tools", key: "Operating Systems", defaultIcon: Monitor },
   ];
 
   return (
@@ -137,10 +136,10 @@ function TechModal({
             <div className="p-6 border-b border-border">
               <h2 className="text-2xl font-semibold text-foreground flex items-center gap-3">
                 <span className="text-primary font-bold">
-                  {t("modalTitle")}
+                  Full Tech Stack
                 </span>
                 <span className="text-sm font-normal text-muted-foreground">
-                  {t("modalSubtitle")}
+                  (Comprehensive overview of frameworks and tools)
                 </span>
               </h2>
             </div>
@@ -195,7 +194,7 @@ function TechModal({
 
             <div className="p-4 border-t border-border text-center">
               <p className="text-[10px] text-muted-foreground">
-                {skills.length} {t("toolsAcross")} {categories.length} {t("categories")}
+                {skills.length} tools across {categories.length} categories
               </p>
             </div>
           </motion.div>
@@ -338,15 +337,15 @@ const TechStack = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.3, delay: 0.4 }}
-              className="text-[0px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold">
-              {t("badge")}
+              className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold">
+              TECH STACK & TOOLS
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.3, delay: 0.5 }}
               className="text-lg text-muted-foreground tracking-wide dark:text-muted-foreground">
-              {t("description")}
+              Modern Technologies & Frameworks
             </motion.p>
           </div>
 
@@ -359,7 +358,7 @@ const TechStack = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsModalOpen(true)}
               className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-200 text-primary text-[10px] font-medium glass">
-              <span>{t("viewBtn")}</span>
+              <span>View All Tech</span>
               <ChevronRight className="w-3 h-3" />
             </motion.button>
 
@@ -368,7 +367,7 @@ const TechStack = () => {
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/30">
               <span className="w-1 h-1 rounded-full bg-primary" />
               <span className="text-[9px] text-muted-foreground/60 uppercase tracking-wider font-medium">
-                {totalCount}+ {t("toolsCount")}
+                {totalCount}+ Tools & Libraries
               </span>
             </div>
           </div>

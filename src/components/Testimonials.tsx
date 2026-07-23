@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 
 type Testimonial = {
   id: number;
@@ -70,20 +69,40 @@ const testimonialsData: Testimonial[] = [
   },
 ];
 
+import { getTestimonials } from "@/services/apiService";
+
 export default function Testimonials() {
-  const t = useTranslations("Testimonials");
+  const [items, setItems] = useState<Testimonial[]>(testimonialsData);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    async function loadTestimonials() {
+      try {
+        const res = await getTestimonials();
+        if (
+          res.data.success &&
+          Array.isArray(res.data.data) &&
+          res.data.data.length > 0
+        ) {
+          setItems(res.data.data);
+        }
+      } catch (err) {
+        console.error("Error loading testimonials:", err);
+      }
+    }
+    loadTestimonials();
+  }, []);
+
   // Auto-scroll logic
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || items.length === 0) return;
     const slider = sliderRef.current;
     if (!slider) return;
 
     const timer = setInterval(() => {
-      const cardWidth = slider.scrollWidth / testimonialsData.length;
+      const cardWidth = slider.scrollWidth / items.length;
       const maxScroll = slider.scrollWidth - slider.clientWidth;
 
       // Loop back to start if reached the end
@@ -95,16 +114,16 @@ export default function Testimonials() {
     }, 4000);
 
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, items.length]);
 
   // Update current index on manual scroll/swipe
   const handleScroll = useCallback(() => {
     const slider = sliderRef.current;
-    if (!slider) return;
-    const cardWidth = slider.scrollWidth / testimonialsData.length;
+    if (!slider || items.length === 0) return;
+    const cardWidth = slider.scrollWidth / items.length;
     const newIndex = Math.round(slider.scrollLeft / cardWidth);
     setCurrentIndex((prev) => (prev !== newIndex ? newIndex : prev));
-  }, []);
+  }, [items.length]);
 
   // Scroll to specific slide on dot click
   const goToSlide = (index: number) => {
@@ -117,7 +136,8 @@ export default function Testimonials() {
   return (
     <section
       className="py-16 lg:py-20  relative overflow-hidden"
-      id="testimonials">
+      id="testimonials"
+    >
       {/* Background Gradients for depth */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
@@ -125,22 +145,21 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-muted/50 mb-6 glass">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-widest mb-4">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <p className="font-medium text-xs uppercase tracking-widest">
-              {t('badge')}
-            </p>
+            <span>TESTIMONIALS</span>
           </div>
-          <h2 className="text-balance font-medium text-4xl tracking-tight sm:text-5xl md:text-6xl text-foreground">
-            {t('titlePrefix')}
-            <span className="italic text-primary">{t('titleHighlight')}</span>
-            <br className="hidden sm:block" /> {t('titleSuffix')}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold tracking-tight text-foreground">
+            What founders & teams{" "}
+            <span className="bg-gradient-to-r from-primary via-indigo-400 to-sky-400 bg-clip-text text-transparent">
+              say about my work.
+            </span>
           </h2>
-          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            {t('description')}
+          <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xl mx-auto">
+            Real feedback from clients, founders, and engineering teams.
           </p>
         </div>
 
@@ -149,12 +168,14 @@ export default function Testimonials() {
           ref={sliderRef}
           onScroll={handleScroll}
           className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-6 pb-4 -mx-4 px-4 hide-scrollbar"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-          {testimonialsData.map((testimonial) => {
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {items.map((testimonial) => {
             return (
               <article
                 key={testimonial.id}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-8 snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] transition-all duration-300 hover:-translate-y-1 card-premium">
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-6 md:p-8 snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] transition-all duration-300 hover:-translate-y-1 card-premium"
+              >
                 {/* Quote Icon */}
                 <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
                   <svg
@@ -162,17 +183,18 @@ export default function Testimonials() {
                     height="40"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="text-foreground">
+                    className="text-foreground"
+                  >
                     <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49 2.752-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49 2.752-1.179z" />
                   </svg>
                 </div>
 
                 <blockquote className="relative z-10 flex flex-col grow">
-                  <h3 className="mb-4 font-semibold text-xl text-foreground tracking-wide leading-snug transition-colors duration-300 group-hover:text-primary">
-                    &quot;{t(`items.item${testimonial.id}.title`)}&quot;
+                  <h3 className="mb-3 font-semibold text-base sm:text-lg text-foreground tracking-wide leading-snug transition-colors duration-300 group-hover:text-primary line-clamp-2">
+                    &quot;{testimonial.title}&quot;
                   </h3>
-                  <p className="mb-8 font-light text-muted-foreground leading-relaxed text-sm sm:text-base flex-grow">
-                    {t(`items.item${testimonial.id}.message`)}
+                  <p className="mb-6 font-light text-muted-foreground leading-relaxed text-xs sm:text-sm flex-grow line-clamp-4">
+                    {testimonial.message}
                   </p>
                 </blockquote>
 
@@ -198,17 +220,18 @@ export default function Testimonials() {
                         strokeWidth="4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="text-foreground">
+                        className="text-foreground"
+                      >
                         <polyline points="20 6 9 17 4 12"></polyline>
                       </svg>
                     </div>
                   </div>
                   <div className="flex flex-col">
                     <cite className="font-medium text-foreground not-italic tracking-wide text-sm">
-                      {t(`items.item${testimonial.id}.name`)}
+                      {testimonial.name}
                     </cite>
                     <p className="text-xs text-muted-foreground/60 mt-0.5">
-                      {t(`items.item${testimonial.id}.role`)}
+                      {testimonial.role}
                     </p>
                   </div>
                 </footer>
@@ -221,7 +244,7 @@ export default function Testimonials() {
         <div className="flex items-center justify-center gap-4 mt-10 px-4">
           {/* Pagination Pill */}
           <div className="flex items-center gap-2 rounded-full bg-muted border border-border p-2 px-4 glass">
-            {testimonialsData.map((_, i) => (
+            {items.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goToSlide(i)}
@@ -235,7 +258,8 @@ export default function Testimonials() {
           <button
             onClick={() => setIsPaused(!isPaused)}
             aria-label={isPaused ? "Play Carousel" : "Pause Carousel"}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-muted border border-border text-foreground transition-all hover:bg-accent hover:scale-105 active:scale-95 glass">
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-muted border border-border text-foreground transition-all hover:bg-accent hover:scale-105 active:scale-95 glass"
+          >
             {isPaused ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -243,7 +267,8 @@ export default function Testimonials() {
                 height="14"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="opacity-90 ml-0.5">
+                className="opacity-90 ml-0.5"
+              >
                 <path d="M5 3l14 9-14 9V3z" />
               </svg>
             ) : (
@@ -253,7 +278,8 @@ export default function Testimonials() {
                 height="14"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="opacity-90">
+                className="opacity-90"
+              >
                 <rect x="6" y="4" width="4" height="16" rx="1" />
                 <rect x="14" y="4" width="4" height="16" rx="1" />
               </svg>

@@ -5,16 +5,16 @@ import { Search, ArrowRight } from "lucide-react";
 import { Link } from "@/routing";
 import Image from "next/image";
 import { ProjectData, getProjectBanner } from "@/lib/projectData";
-import { useTranslations } from "next-intl";
 import { getProjects } from "@/services/apiService";
-
-export default function WorkList({ initialProjects }: { initialProjects: ProjectData[] }) {
-  const tPage = useTranslations("WorkPage");
-  const tWork = useTranslations("Work");
-  
+export default function WorkList({
+  initialProjects,
+}: {
+  initialProjects: ProjectData[];
+}) {
   const [activeCategory, setActiveCategory] = useState("All Projects");
   const [searchQuery, setSearchQuery] = useState("");
-  const [projectsList, setProjectsList] = useState<ProjectData[]>(initialProjects);
+  const [projectsList, setProjectsList] =
+    useState<ProjectData[]>(initialProjects);
 
   useEffect(() => {
     async function fetchApiProjects() {
@@ -48,7 +48,13 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
 
   // Extract unique categories based on tech stack or generic terms
   const categories = useMemo(() => {
-    const defaultCategories = ["All Projects", "Web App", "Full-Stack", "Backend", "Frontend"];
+    const defaultCategories = [
+      "All Projects",
+      "Web App",
+      "Full-Stack",
+      "Backend",
+      "Frontend",
+    ];
     return defaultCategories;
   }, []);
 
@@ -56,14 +62,17 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
   const filteredProjects = projectsList.filter((project) => {
     const matchesCategory =
       activeCategory === "All Projects" ||
-      (project.tech_stack?.frameworks_libraries && project.tech_stack.frameworks_libraries.includes(activeCategory)) ||
-      (project.tech_stack?.backend && project.tech_stack.backend.includes(activeCategory)) ||
-      (project.overview.toLowerCase().includes(activeCategory.toLowerCase()));
-    
+      (project.tech_stack?.frameworks_libraries &&
+        project.tech_stack.frameworks_libraries.includes(activeCategory)) ||
+      (project.tech_stack?.backend &&
+        project.tech_stack.backend.includes(activeCategory)) ||
+      project.overview.toLowerCase().includes(activeCategory.toLowerCase());
+
     const searchLower = searchQuery.toLowerCase();
-    const matchesSearch = project.name.toLowerCase().includes(searchLower) || 
-                          project.tagline.toLowerCase().includes(searchLower) ||
-                          project.overview.toLowerCase().includes(searchLower);
+    const matchesSearch =
+      project.name.toLowerCase().includes(searchLower) ||
+      project.tagline.toLowerCase().includes(searchLower) ||
+      project.overview.toLowerCase().includes(searchLower);
 
     return matchesCategory && matchesSearch;
   });
@@ -86,11 +95,11 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                   : "text-muted-foreground hover:text-foreground hover:bg-foreground/5"
               }`}
             >
-              {category === "All Projects" ? tPage("allProjects") : category}
+              {category}
             </button>
           ))}
         </div>
-        
+
         <div className="flex items-center gap-3 w-full md:w-auto shrink-0">
           <div className="hidden md:block w-px h-6 bg-foreground/10 mx-2" />
           <div className="relative group">
@@ -101,7 +110,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={tPage("searchPlaceholder")}
+              placeholder="Search projects..."
               className="block w-full md:w-64 pl-10 pr-12 py-2 bg-transparent border border-foreground/10 rounded-full text-sm text-foreground placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 transition-all"
             />
             <div className="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none">
@@ -120,7 +129,7 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
 
       {filteredProjects.length === 0 ? (
         <div className="text-center text-muted-foreground py-20">
-          <p>{tPage("noProjects")}</p>
+          <p>No projects found matching your search.</p>
         </div>
       ) : (
         <>
@@ -128,10 +137,10 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
           {featuredProject && (
             <div className="mb-20">
               <p className="text-center text-xs font-semibold text-muted-foreground uppercase tracking-[0.2em] mb-8">
-                {tPage("featuredWork")}
+                FEATURED PROJECT
               </p>
-              
-              <Link 
+
+              <Link
                 href={`/work/${featuredProject.id}`}
                 className="group block overflow-hidden rounded-3xl border border-foreground/10 bg-[hsl(var(--background))] transition-all hover:border-foreground/20 hover:shadow-2xl hover:shadow-white/5"
               >
@@ -147,38 +156,42 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                     />
                     <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-500" />
                   </div>
-                  
+
                   {/* Right: Content */}
                   <div className="w-full lg:w-[45%] flex flex-col justify-between p-8 lg:p-12 relative overflow-hidden">
                     {/* Subtle glow effect behind text */}
                     <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-primary/10 blur-[80px] rounded-full pointer-events-none" />
-                    
+
                     <div className="relative z-10">
-                      
                       <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/70 transition-all">
                         {featuredProject.name}
                       </h2>
                       <p className="text-primary text-sm font-medium mb-4">
                         {featuredProject.tagline}
                       </p>
-                      
+
                       <p className="text-muted-foreground text-sm leading-relaxed mb-8 line-clamp-3">
                         {featuredProject.overview}
                       </p>
-                      
+
                       {/* Tags */}
                       <div className="flex flex-wrap items-center gap-2 mb-8">
-                        {featuredProject.tech_stack?.languages?.slice(0, 4).map((tag: string) => (
-                          <span key={tag} className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/5 text-muted-foreground text-[10px] font-mono tracking-wider uppercase">
-                            {tag}
-                          </span>
-                        ))}
+                        {featuredProject.tech_stack?.languages
+                          ?.slice(0, 4)
+                          .map((tag: string) => (
+                            <span
+                              key={tag}
+                              className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/5 text-muted-foreground text-[10px] font-mono tracking-wider uppercase"
+                            >
+                              {tag}
+                            </span>
+                          ))}
                       </div>
                     </div>
-                    
+
                     <div className="flex justify-between items-center mt-auto relative z-10">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                        {tPage("viewDetails")}
+                        View Details
                         <div className="flex items-center justify-center w-8 h-8 rounded-full border border-foreground/10 bg-foreground/5 group-hover:bg-foreground/10 transition-colors">
                           <ArrowRight className="h-4 w-4" />
                         </div>
@@ -194,9 +207,9 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
           {latestProjects.length > 0 && (
             <div>
               <p className="text-center text-xs font-semibold text-muted-foreground uppercase tracking-[0.2em] mb-8">
-                {tPage("moreProjects")}
+                MORE PROJECTS
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {latestProjects.map((project) => (
                   <Link
@@ -214,32 +227,36 @@ export default function WorkList({ initialProjects }: { initialProjects: Project
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
                     </div>
-                    
+
                     <div className="flex flex-1 flex-col px-2 pt-4 pb-3">
-                      
-                      <h3 className="font-semibold text-lg text-foreground leading-snug transition-all duration-300 ease-out group-hover:text-primary">
+                      <h3 className="font-semibold text-base sm:text-lg text-foreground leading-snug line-clamp-1 transition-all duration-300 ease-out group-hover:text-primary">
                         {project.name}
                       </h3>
                       <p className="mt-2 line-clamp-1 text-primary text-xs font-medium">
                         {project.tagline}
                       </p>
-                      
+
                       <div className="mt-3 border-t border-foreground/12 pt-3 opacity-90 transform transition-all duration-300">
                         <p className="line-clamp-2 text-muted-foreground text-xs leading-relaxed mb-3">
-                           {project.overview}
+                          {project.overview}
                         </p>
                         <div className="flex flex-wrap gap-1.5 mb-2">
-                          {project.tech_stack?.frameworks_libraries?.slice(0, 3).map((tag: string) => (
-                            <span key={tag} className="px-2 py-0.5 rounded-md bg-foreground/5 text-[9px] text-muted-foreground uppercase tracking-wider">
-                              {tag}
-                            </span>
-                          ))}
+                          {project.tech_stack?.frameworks_libraries
+                            ?.slice(0, 3)
+                            .map((tag: string) => (
+                              <span
+                                key={tag}
+                                className="px-2 py-0.5 rounded-md bg-foreground/5 text-[9px] text-muted-foreground uppercase tracking-wider"
+                              >
+                                {tag}
+                              </span>
+                            ))}
                         </div>
                       </div>
 
                       <div className="mt-auto flex items-center justify-between gap-3 pt-4 border-t border-foreground/12">
                         <div className="flex items-center gap-1.5 text-xs text-muted-foreground group-hover:text-primary transition-colors">
-                          {tPage("explore")}
+                          View Project
                           <div className="flex items-center justify-center w-5 h-5 rounded-md border border-border border-dashed bg-muted group-hover:border-primary/50 group-hover:bg-primary/10 transition-colors">
                             <ArrowRight className="h-2.5 w-2.5" />
                           </div>

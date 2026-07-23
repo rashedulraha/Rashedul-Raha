@@ -5,7 +5,11 @@ import Image from "next/image";
 import { motion, useInView, useScroll } from "framer-motion";
 import { ExternalLink, ChevronRight, ArrowRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
-import { getAllProjects, getProjectBanner, ProjectData } from "@/lib/projectData";
+import {
+  getAllProjects,
+  getProjectBanner,
+  ProjectData,
+} from "@/lib/projectData";
 import { Link } from "@/routing";
 import { useTranslations, useLocale } from "next-intl";
 import { getProjects } from "@/services/apiService";
@@ -17,7 +21,9 @@ export default function Work() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [activeIndex, setActiveIndex] = useState(0);
-  const [projects, setProjects] = useState<ProjectData[]>(() => getAllProjects(locale));
+  const [projects, setProjects] = useState<ProjectData[]>(() =>
+    getAllProjects(),
+  );
 
   useEffect(() => {
     async function loadProjects() {
@@ -71,32 +77,36 @@ export default function Work() {
     <section
       ref={sectionRef}
       className="relative w-full pt-8 md:pt-16"
-      id="work">
+      id="work"
+    >
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5 }}
-        className="text-center px-4">
-        <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
-          {t('badge')}
+        className="text-center px-4 mb-6"
+      >
+        <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">
+          FEATURED PROJECTS
         </p>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
-          {t('titlePrefix')}
-          <span className="text-primary">
-            {t('titleHighlight')}
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-foreground tracking-tight">
+          Featured{" "}
+          <span className="bg-gradient-to-r from-primary via-indigo-400 to-sky-400 bg-clip-text text-transparent">
+            work & software.
           </span>
         </h2>
-        <p className="text-base text-muted-foreground mt-4 max-w-xl mx-auto">
-          {t('description')}
+        <p className="text-sm sm:text-base text-muted-foreground mt-2 max-w-xl mx-auto">
+          A collection of full-stack web applications and SaaS platforms built
+          with modern technology.
         </p>
       </motion.div>
 
       {/* Main Container */}
       <div
         ref={containerRef}
-        className="relative max-w-6xl mx-auto px-4 md:px-6">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mt-12">
+        className="relative max-w-6xl mx-auto px-4 md:px-6"
+      >
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mt-4">
           {/* Left - Sticky Image Container */}
           <div className="w-full lg:w-[45%]">
             <div className="lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center pb-8 lg:pb-0 z-10">
@@ -111,7 +121,8 @@ export default function Work() {
                         scale: activeIndex === index ? 1 : 1.05,
                       }}
                       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                      className="absolute inset-0">
+                      className="absolute inset-0"
+                    >
                       <Image
                         src={getProjectBanner(project)}
                         alt={project.name}
@@ -128,7 +139,8 @@ export default function Work() {
                     <div className="flex items-center justify-between">
                       <div>
                         <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest drop-shadow-md">
-                          {projects[activeIndex]?.tech_stack?.frameworks_libraries?.[0] || 'Project'}
+                          {projects[activeIndex]?.tech_stack
+                            ?.frameworks_libraries?.[0] || "Project"}
                         </span>
                         <p className="text-foreground font-semibold text-sm md:text-base mt-1 drop-shadow-md line-clamp-1">
                           {projects[activeIndex]?.name}
@@ -158,7 +170,7 @@ export default function Work() {
                   className="group relative inline-flex mt-4 cursor-pointer items-center justify-between overflow-hidden rounded-full border border-border bg-muted/50 py-1 pr-1 pl-4 font-medium text-base backdrop-blur-xl transition-all duration-300 ease-out hover:border-primary/30 hover:bg-accent active:scale-[0.98] w-full block text-center"
                 >
                   <span className="z-10 px-3 text-foreground transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-primary-foreground">
-                    {t('viewAll')}
+                    {t("viewAll")}
                   </span>
                   <span
                     aria-hidden="true"
@@ -227,8 +239,8 @@ export default function Work() {
                   initial={{ opacity: 0.2, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: false, amount: 0.4 }}
-                  transition={{ duration: 0.5 }}>
-                  
+                  transition={{ duration: 0.5 }}
+                >
                   {/* Number */}
                   <div className="flex items-center gap-4 mb-6">
                     <span className="text-3xl font-bold text-muted-foreground/30 font-mono">
@@ -238,37 +250,41 @@ export default function Work() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-2 line-clamp-2">
                     {project.name}
                   </h3>
-                  <p className="text-primary text-base font-medium mb-5">
+                  <p className="text-primary text-xs sm:text-sm md:text-base font-medium mb-3 line-clamp-2">
                     {project.tagline}
                   </p>
 
                   {/* Description */}
-                  <p className="text-muted-foreground text-base leading-relaxed mb-6 line-clamp-4">
+                  <p className="text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
                     {project.overview}
                   </p>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tech_stack?.frameworks_libraries?.slice(0, 6).map((tag: string) => (
-                      <span
-                        key={tag}
-                        className="flex items-center gap-1.5 rounded-full bg-muted border border-border px-3 py-1.5">
-                        <span className="font-medium text-xs text-foreground tracking-wide">
-                          {tag}
+                    {project.tech_stack?.frameworks_libraries
+                      ?.slice(0, 6)
+                      .map((tag: string) => (
+                        <span
+                          key={tag}
+                          className="flex items-center gap-1.5 rounded-full bg-muted border border-border px-3 py-1.5"
+                        >
+                          <span className="font-medium text-xs text-foreground tracking-wide">
+                            {tag}
+                          </span>
                         </span>
-                      </span>
-                    ))}
+                      ))}
                   </div>
 
                   {/* Buttons */}
                   <div className="flex items-center gap-4 flex-wrap">
                     <Link
                       href={`/work/${project.id}`}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all duration-300 hover:scale-[1.03] shadow-sm">
-                      {t('viewDetails')}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all duration-300 hover:scale-[1.03] shadow-sm"
+                    >
+                      {t("viewDetails")}
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                     {project.live_demo && (
@@ -276,9 +292,10 @@ export default function Work() {
                         href={project.live_demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-muted border border-border hover:border-primary/30 hover:bg-accent text-sm font-medium transition-all duration-300 hover:scale-[1.03] shadow-sm">
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-muted border border-border hover:border-primary/30 hover:bg-accent text-sm font-medium transition-all duration-300 hover:scale-[1.03] shadow-sm"
+                      >
                         <ExternalLink className="w-4 h-4" />
-                        {t('viewLive')}
+                        {t("viewLive")}
                       </a>
                     )}
                   </div>
