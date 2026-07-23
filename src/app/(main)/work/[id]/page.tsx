@@ -1,13 +1,42 @@
-import { getProjectById, getProjectBanner } from "@/lib/projectData";
+import { getProjectBanner, ProjectData } from "@/types/project";
+import { getProjectById } from "@/services/apiService";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ArrowLeft, ExternalLink, Code, CheckCircle, Database, Server, Layout } from "lucide-react";
 import { Link } from "@/routing";
 import PageWrapper from "@/components/PageWrapper";
 import Footer from "@/components/Footer";
+
 export default async function ProjectDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
-  const project = getProjectById(resolvedParams.id);
+  
+  let project: ProjectData | null = null;
+  try {
+    const res = await getProjectById(resolvedParams.id);
+    if (res.data?.success && res.data?.data) {
+      const item = res.data.data;
+      project = {
+        id: item.id || item.slug,
+        name: item.title,
+        tagline: item.subtitle || item.type || "Web App",
+        overview: item.description,
+        live_demo: item.liveUrl || undefined,
+        github_repo: item.githubUrl || undefined,
+        silicon_img_banner: item.image || undefined,
+        screenshots: [],
+        tech_stack: {
+          frameworks_libraries: item.tags || [],
+          languages: item.tags || [],
+        },
+        key_features: item.features || [],
+      } as ProjectData;
+      
+      // Merge additional fields if present in db (like architecture, etc.)
+      Object.assign(project, item);
+    }
+  } catch (err) {
+    console.error("Failed to fetch project details", err);
+  }
 
   if (!project) {
     notFound();

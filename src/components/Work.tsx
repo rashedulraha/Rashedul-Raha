@@ -5,14 +5,10 @@ import Image from "next/image";
 import { motion, useInView, useScroll } from "framer-motion";
 import { ExternalLink, ChevronRight, ArrowRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
-import {
-  getAllProjects,
-  getProjectBanner,
-  ProjectData,
-} from "@/lib/projectData";
 import { Link } from "@/routing";
 import { useTranslations, useLocale } from "next-intl";
 import { getProjects } from "@/services/apiService";
+import { ProjectData, getProjectBanner } from "@/types/project";
 
 export default function Work() {
   const t = useTranslations("Work");
@@ -21,9 +17,7 @@ export default function Work() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [activeIndex, setActiveIndex] = useState(0);
-  const [projects, setProjects] = useState<ProjectData[]>(() =>
-    getAllProjects(),
-  );
+  const [projects, setProjects] = useState<ProjectData[]>([]);
 
   useEffect(() => {
     async function loadProjects() {
@@ -49,7 +43,7 @@ export default function Work() {
           setProjects(apiProjects);
         }
       } catch (err) {
-        // keep fallback
+        console.error("Failed to load projects", err);
       }
     }
     loadProjects();

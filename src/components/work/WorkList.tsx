@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import { Search, ArrowRight } from "lucide-react";
 import { Link } from "@/routing";
 import Image from "next/image";
-import { ProjectData, getProjectBanner } from "@/lib/projectData";
+import { ProjectData, getProjectBanner } from "@/types/project";
 import { getProjects } from "@/services/apiService";
 export default function WorkList({
   initialProjects,
@@ -40,7 +40,7 @@ export default function WorkList({
           setProjectsList(apiProjects);
         }
       } catch (e) {
-        // fallback
+        console.error("Failed to fetch API projects", e);
       }
     }
     fetchApiProjects();
@@ -64,14 +64,14 @@ export default function WorkList({
       activeCategory === "All Projects" ||
       (project.tech_stack?.frameworks_libraries &&
         project.tech_stack.frameworks_libraries.includes(activeCategory)) ||
-      (project.tech_stack?.backend &&
-        project.tech_stack.backend.includes(activeCategory)) ||
+      (project.tech_stack?.languages &&
+        project.tech_stack.languages.includes(activeCategory)) ||
       project.overview.toLowerCase().includes(activeCategory.toLowerCase());
 
     const searchLower = searchQuery.toLowerCase();
     const matchesSearch =
       project.name.toLowerCase().includes(searchLower) ||
-      project.tagline.toLowerCase().includes(searchLower) ||
+      (project.tagline?.toLowerCase() || "").includes(searchLower) ||
       project.overview.toLowerCase().includes(searchLower);
 
     return matchesCategory && matchesSearch;
