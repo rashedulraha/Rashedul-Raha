@@ -2,8 +2,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { Link } from "@/routing";
 import { ResumeButton } from "./ResumeButton";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
@@ -68,16 +66,18 @@ function CenterGalleryModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const t = useTranslations("Hero");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const goTo = useCallback((index: number) => {
-    setDirection(index > currentIndex ? 1 : -1);
-    setCurrentIndex(index);
-  }, [currentIndex]);
+  const goTo = useCallback(
+    (index: number) => {
+      setDirection(index > currentIndex ? 1 : -1);
+      setCurrentIndex(index);
+    },
+    [currentIndex],
+  );
 
   const next = useCallback(() => {
     const nextIndex = (currentIndex + 1) % avatarSlides.length;
@@ -131,7 +131,8 @@ function CenterGalleryModal({
       className={`fixed inset-0 z-100 flex items-center justify-center bg-black/80 backdrop-blur-md ${
         isFullscreen ? "p-0" : "p-4 md:p-6"
       }`}
-      onClick={onClose}>
+      onClick={onClose}
+    >
       <motion.div
         ref={modalRef}
         initial={{ scale: 0.95, opacity: 0, y: 10 }}
@@ -146,7 +147,8 @@ function CenterGalleryModal({
             ? "w-screen h-screen rounded-none border-0"
             : "w-full max-w-2xl max-h-[90vh] rounded-2xl border border-white/10"
         }`}
-        onClick={(e) => e.stopPropagation()}>
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Top Controls Bar */}
         <div className="absolute top-0 left-0 right-0 z-30 flex justify-between items-center p-3 sm:p-4 bg-linear-to-b from-black/70 to-transparent">
           {/* Image Counter */}
@@ -160,14 +162,16 @@ function CenterGalleryModal({
               href={currentSlide.src}
               download
               className="p-2 rounded-full bg-black/50 backdrop-blur-md hover:bg-white/20 transition-all text-white/80 hover:text-white border border-white/10"
-              title="Download Image">
+              title="Download Image"
+            >
               <Download className="w-4 h-4" />
             </a>
 
             {/* Fullscreen Toggle */}
             <button
               onClick={() => setIsFullscreen(!isFullscreen)}
-              className="p-2 rounded-full bg-black/50 backdrop-blur-md hover:bg-white/20 transition-all text-white/80 hover:text-white border border-white/10">
+              className="p-2 rounded-full bg-black/50 backdrop-blur-md hover:bg-white/20 transition-all text-white/80 hover:text-white border border-white/10"
+            >
               {isFullscreen ? (
                 <Minimize2 className="w-4 h-4" />
               ) : (
@@ -178,7 +182,8 @@ function CenterGalleryModal({
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-red-500/80 backdrop-blur-md hover:bg-red-500 transition-all text-white border border-red-400/50 ml-1">
+              className="p-2 rounded-full bg-red-500/80 backdrop-blur-md hover:bg-red-500 transition-all text-white border border-red-400/50 ml-1"
+            >
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -186,7 +191,8 @@ function CenterGalleryModal({
 
         {/* Main Image Area (Draggable) */}
         <div
-          className={`relative w-full overflow-hidden bg-black ${isFullscreen ? "flex-1" : "aspect-16/10"}`}>
+          className={`relative w-full overflow-hidden bg-black ${isFullscreen ? "flex-1" : "aspect-16/10"}`}
+        >
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.div
               key={currentIndex}
@@ -224,7 +230,8 @@ function CenterGalleryModal({
                 if (swipe < -swipeConfidenceThreshold) next();
                 else if (swipe > swipeConfidenceThreshold) prev();
               }}
-              className="absolute inset-0 cursor-grab active:cursor-grabbing group">
+              className="absolute inset-0 cursor-grab active:cursor-grabbing group"
+            >
               <Image
                 src={currentSlide.src}
                 alt={currentSlide.alt}
@@ -245,13 +252,13 @@ function CenterGalleryModal({
                 {currentSlide.location && (
                   <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-md text-white/90 text-xs border border-white/10">
                     <MapPin className="w-3 h-3 text-indigo-400" />
-                    {t(`slide${currentIndex}Loc`)}
+                    {currentSlide.location}
                   </div>
                 )}
                 {currentSlide.date && (
                   <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-md text-white/90 text-xs border border-white/10">
                     <Calendar className="w-3 h-3 text-emerald-400" />
-                    {t(`slide${currentIndex}Date`)}
+                    {currentSlide.date}
                   </div>
                 )}
               </div>
@@ -264,7 +271,8 @@ function CenterGalleryModal({
               e.stopPropagation();
               prev();
             }}
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/20 hover:bg-black/60 backdrop-blur-sm transition-all text-white/70 hover:text-white hover:scale-110 border border-transparent hover:border-white/20">
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/20 hover:bg-black/60 backdrop-blur-sm transition-all text-white/70 hover:text-white hover:scale-110 border border-transparent hover:border-white/20"
+          >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
@@ -272,7 +280,8 @@ function CenterGalleryModal({
               e.stopPropagation();
               next();
             }}
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/20 hover:bg-black/60 backdrop-blur-sm transition-all text-white/70 hover:text-white hover:scale-110 border border-transparent hover:border-white/20">
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2.5 rounded-full bg-black/20 hover:bg-black/60 backdrop-blur-sm transition-all text-white/70 hover:text-white hover:scale-110 border border-transparent hover:border-white/20"
+          >
             <ChevronRight className="w-6 h-6" />
           </button>
         </div>
@@ -285,16 +294,18 @@ function CenterGalleryModal({
               key={`title-${currentIndex}`}
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-lg font-semibold text-foreground">
-              {t(`slide${currentIndex}Title`)}
+              className="text-lg font-semibold text-foreground"
+            >
+              {currentSlide.title}
             </motion.h3>
             <motion.p
               key={`desc-${currentIndex}`}
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 }}
-              className="mt-1 text-sm text-muted-foreground leading-relaxed">
-              {t(`slide${currentIndex}Desc`)}
+              className="mt-1 text-sm text-muted-foreground leading-relaxed"
+            >
+              {currentSlide.description}
             </motion.p>
           </div>
 
@@ -311,7 +322,8 @@ function CenterGalleryModal({
                   idx === currentIndex
                     ? "ring-2 ring-primary scale-105 shadow-md"
                     : "ring-1 ring-border opacity-50 hover:opacity-100 hover:scale-105"
-                }`}>
+                }`}
+              >
                 <Image
                   src={img.src}
                   alt={img.alt}
@@ -328,13 +340,12 @@ function CenterGalleryModal({
 }
 
 export default function Hero() {
-  const t = useTranslations("Hero");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const avatarRef = useRef<HTMLSpanElement>(null);
 
   const copyEmail = async () => {
     await navigator.clipboard.writeText("rashedulraha.bd@gmail.com");
-    toast.success(t('copied'));
+    toast.success("Email copied to clipboard!");
   };
 
   // Floating particles for background
@@ -352,16 +363,18 @@ export default function Hero() {
       <section
         aria-label="Introduction"
         className="relative flex max-h-250 min-h-dvh w-full flex-col items-center justify-center overflow-hidden py-pagebuilder"
-        id="hero-section">
-        
+        id="hero-section"
+      >
         {/* Subtle Grid Background */}
-        <div 
+        <div
           className="absolute inset-0 z-0 pointer-events-none text-foreground/5"
           style={{
             backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
-            backgroundSize: '40px 40px',
-            maskImage: 'radial-gradient(ellipse 60% 80% at 50% 20%, black 30%, transparent 100%)',
-            WebkitMaskImage: 'radial-gradient(ellipse 60% 80% at 50% 20%, black 30%, transparent 100%)'
+            backgroundSize: "40px 40px",
+            maskImage:
+              "radial-gradient(ellipse 60% 80% at 50% 20%, black 30%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 60% 80% at 50% 20%, black 30%, transparent 100%)",
           }}
         />
 
@@ -408,12 +421,13 @@ export default function Hero() {
             href="https://siliconpvt.vercel.app"
             referrerPolicy="no-referrer"
             rel="noreferrer"
-            target="_blank">
+            target="_blank"
+          >
             <span className="mx-1 rounded-full bg-linear-to-r from-blue-600 to-indigo-600 px-2 py-0.5 text-xs font-medium text-white shadow-sm">
-              {t('badgeNew')}
+              Portfolio 2026
             </span>
             <span className="relative px-2 py-0.5 text-sm text-black/70 transition-colors duration-300 group-hover:text-black dark:text-white/70 dark:group-hover:text-white">
-              {t('badgeText')}
+              Full-Stack & Cross-Platform Engineer
             </span>
             <motion.svg
               fill="none"
@@ -421,7 +435,8 @@ export default function Hero() {
               viewBox="0 0 24 24"
               width={24}
               xmlns="http://www.w3.org/2000/svg"
-              className="mr-2 size-4 text-black/50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-black dark:text-white/50 dark:group-hover:text-white">
+              className="mr-2 size-4 text-black/50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-black dark:text-white/50 dark:group-hover:text-white"
+            >
               <path
                 d="M9.00005 6C9.00005 6 15 10.4189 15 12C15 13.5812 9 18 9 18"
                 stroke="currentColor"
@@ -434,84 +449,65 @@ export default function Hero() {
 
           {/* Main heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full text-balance text-center font-instrument-serif text-4xl text-zinc-700 leading-tight md:text-5xl lg:text-6xl dark:text-zinc-100">
-            {t('title1')}
-            <motion.em
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-linear-to-b from-zinc-500 via-zinc-600 to-zinc-900 bg-clip-text text-transparent not-italic tracking-tight dark:from-zinc-700 dark:via-zinc-200 dark:to-zinc-50">
-              {t('titleHighlight')}
-            </motion.em>
-            {t('title2')}
-            <br className="block" />
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="bg-linear-to-b from-zinc-500 via-zinc-600 to-zinc-900 bg-clip-text font-instrument-serif text-transparent italic tracking-tight dark:from-zinc-700 dark:via-zinc-200 dark:to-zinc-50">
-              {t('subtitle')}
-            </motion.span>
+            className="w-full max-w-4xl text-balance text-center font-sans font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight text-foreground"
+          >
+            Building digital{" "}
+            <span className="bg-gradient-to-r from-primary via-indigo-400 to-sky-400 bg-clip-text text-transparent">
+              experiences
+            </span>{" "}
+            that scale.
           </motion.h1>
 
           {/* Subtitle */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="grad-white relative z-20 flex flex-col items-center justify-center text-center font-normal text-lg tracking-tight sm:flex-row sm:text-xl lg:text-2xl">
-            <span className="flex items-center justify-center">
-              {t('greeting')}
-              <span
-                ref={avatarRef}
-                className="group relative z-30 cursor-pointer"
-                onClick={() => setIsModalOpen(true)}>
-                <motion.span
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="mx-2 inline-block w-14 overflow-hidden rounded shadow-lg shadow-indigo-500/20 transition-shadow hover:shadow-xl hover:shadow-indigo-500/30 md:w-18 lg:mx-3 ring-2 ring-white/20 hover:ring-indigo-400/50 duration-300">
-                  <Image
-                    alt="Rashedul Islam — Full Stack Developer"
-                    fetchPriority="high"
-                    width={2459}
-                    height={1262}
-                    className="transition-transform duration-300 ease-out hover:scale-110 group-hover:rotate-3"
-                    sizes="(min-width: 768px) 72px, 56px"
-                    src="/personal_img/rashedul-2.jpeg"
-                  />
-                </motion.span>
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="w-full max-w-2xl text-center text-sm sm:text-base md:text-lg text-muted-foreground font-normal leading-relaxed mt-3"
+          >
+            Full-Stack Developer crafting fast, responsive web apps with Next.js, TypeScript, React Native, and Node.js.
+          </motion.p>
 
-                {/* Click hint */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.5, duration: 0.4 }}
-                  className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] text-white/60 whitespace-nowrap bg-black/30 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/5">
-                  <span className="flex items-center gap-1">
-                    <Grid3x3 className="w-2.5 h-2.5" />
-                    {t('galleryHint')}
-                  </span>
-                </motion.div>
-              </span>
+          {/* Avatar Greeting Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="relative z-20 flex flex-wrap items-center justify-center text-center font-medium text-xs sm:text-sm text-foreground/90 gap-2 mt-4"
+          >
+            <span>Hello! I'm Rashedul Islam</span>
+            <span
+              ref={avatarRef}
+              className="group relative z-30 cursor-pointer inline-flex items-center"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="mx-1 inline-block w-8 sm:w-10 overflow-hidden rounded-full border border-primary/30 shadow-md transition-shadow"
+              >
+                <Image
+                  alt="Rashedul Islam — Full Stack Developer"
+                  width={100}
+                  height={100}
+                  className="object-cover w-full h-full"
+                  src="/personal_img/rashedul-2.jpeg"
+                />
+              </motion.span>
             </span>
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="leading-relaxed">
-              {t('role')}
-            </motion.span>
-          </motion.h2>
+            <span className="text-muted-foreground">• Full-Stack Developer & Mobile Engineer</span>
+          </motion.div>
 
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="z-10 mt-4 flex flex-col items-center gap-4 sm:flex-row">
+            className="z-10 mt-4 flex flex-col items-center gap-4 sm:flex-row"
+          >
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -522,9 +518,10 @@ export default function Hero() {
                   }),
                 )
               }
-              className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/20 bg-black/10 py-1 pr-1 pl-4 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/40 hover:bg-black hover:opacity-100 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20">
+              className="group relative inline-flex w-fit cursor-pointer items-center justify-between overflow-hidden rounded-full border border-black/20 bg-black/10 py-1 pr-1 pl-4 font-medium text-base opacity-85 backdrop-blur-xs transition-all duration-400 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:border-black/40 hover:bg-black hover:opacity-100 hover:shadow-lg hover:shadow-black/20 active:scale-[0.98] dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white dark:hover:shadow-white/20"
+            >
               <span className="z-10 px-3 text-black transition-colors duration-450 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:text-white dark:text-white dark:group-hover:text-black">
-                {t('ctaConnect')}
+                Let's Connect
               </span>
               <span
                 aria-hidden="true"
@@ -537,7 +534,8 @@ export default function Hero() {
                   viewBox="0 0 24 24"
                   width={24}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="size-4.5 text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                  className="size-4.5 text-white transition-all duration-400 group-hover:translate-x-6 group-hover:opacity-0 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                >
                   <path
                     d="M18.5 12L4.99997 12"
                     stroke="currentColor"
@@ -559,7 +557,8 @@ export default function Hero() {
                   viewBox="0 0 24 24"
                   width={24}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="absolute size-4.5 -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]">
+                  className="absolute size-4.5 -translate-x-6 text-white opacity-0 transition-all delay-75 duration-400 group-hover:translate-x-0 group-hover:opacity-100 dark:text-black ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+                >
                   <path
                     d="M18.5 12L4.99997 12"
                     stroke="currentColor"
@@ -585,27 +584,30 @@ export default function Hero() {
               className="flex items-center gap-2 rounded-full px-4 py-2 font-light text-base text-black transition-all duration-300 hover:text-black/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:text-white/70 cursor-pointer hover:bg-black/5 dark:hover:bg-white/5 dark:hover:text-white/90"
               type="button"
               tabIndex={0}
-              onClick={copyEmail}>
+              onClick={copyEmail}
+            >
               <span className="relative size-4">
                 <svg
                   className="absolute inset-0"
                   fill="currentColor"
                   viewBox="0 0 256 256"
-                  style={{ opacity: 1, transform: "scale(1.1)" }}>
+                  style={{ opacity: 1, transform: "scale(1.1)" }}
+                >
                   <path d="M216,40V168H168V88H88V40Z" opacity="0.2" />
                   <path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z" />
                 </svg>
               </span>
               <span className="relative grid select-none text-left">
                 <span className="invisible col-start-1 row-start-1">
-                  {t('copied')}
+                  Email copied!
                 </span>
                 <span className="invisible col-start-1 row-start-1">
                   rashedulraha.bd@gmail.com
                 </span>
                 <span
                   className="col-start-1 row-start-1 text-sm"
-                  style={{ opacity: 1, transform: "none" }}>
+                  style={{ opacity: 1, transform: "none" }}
+                >
                   rashedulraha.bd@gmail.com
                 </span>
               </span>
@@ -626,7 +628,8 @@ export default function Hero() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="absolute bottom-40 left-1/2 -translate-x-1/2 h-28 w-200 overflow-hidden rounded-full blur-3xl animate-hero-glow will-change-[transform,opacity]">
+                className="absolute bottom-40 left-1/2 -translate-x-1/2 h-28 w-200 overflow-hidden rounded-full blur-3xl animate-hero-glow will-change-[transform,opacity]"
+              >
                 <div className="h-full w-[300%] bg-[linear-gradient(90deg,#06b6d4,#7c3aed,#4f46e5,#38bdf8,#06b6d4,#7c3aed,#4f46e5,#38bdf8,#7c3aed)] animate-hero-glow-shift will-change-transform" />
               </motion.div>
               <div className="absolute -right-108 -bottom-188.25 -left-113.5 h-238.75 rounded-[100%] bg-linear-to-b from-indigo-500/40 to-transparent dark:from-white" />

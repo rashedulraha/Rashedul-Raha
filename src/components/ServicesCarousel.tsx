@@ -60,7 +60,6 @@ const services: Service[] = [
 ];
 
 export default function ServicesBox() {
-  const t = useTranslations("Features.Services");
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
   const [idx, setIdx] = useState(0);
@@ -89,7 +88,6 @@ export default function ServicesBox() {
 
   const goTo = useCallback((i: number) => {
     setIdx(i);
-    setBoxItems([i]);
   }, []);
 
   const getItemPosition = (index: number) => {
@@ -102,31 +100,26 @@ export default function ServicesBox() {
   };
 
   return (
-    <div ref={ref} className="md:col-span-6 lg:col-span-4 lg:row-span-6 h-full">
+    <div className="md:col-span-6 lg:col-span-4 lg:row-span-6" ref={ref}>
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl min-h-72 transition-shadow duration-500 card-premium"
+        transition={{ duration: 0.5 }}
+        className="group relative flex h-full min-h-72 w-full flex-col justify-between overflow-hidden rounded-2xl transition-all duration-300 card-premium p-5"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        {/* Top Glow - Theme aware */}
-        <div className="pointer-events-none absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl transition-opacity duration-700 group-hover:opacity-100 opacity-0" />
-
-        {/* Inner gradient overlay */}
-        {/* inner gradient overlay removed */}
-
-        <div className="relative z-10 flex flex-1 flex-col px-5 pt-5 pb-4">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-            {t('badge')}
+        <div className="pointer-events-none z-10 flex flex-col gap-0.5 text-left">
+          <p className="text-muted-foreground text-xs uppercase tracking-widest transition-colors duration-500 group-hover:text-primary">
+            CORE CAPABILITIES
           </p>
+          <p className="text-lg font-semibold text-foreground tracking-wide">
+            Services & Solutions
+          </p>
+        </div>
 
-          <h3 className="mt-1.5 text-base font-semibold leading-snug text-foreground mb-5">
-            {t('title')}
-          </h3>
-
-          <div className="mt-auto flex flex-col items-center">
+        <div className="relative flex flex-1 flex-col items-center justify-center pt-2 pb-1">
+          <div className="flex flex-col items-center justify-center">
             {/* Floating Pill */}
             <div className="relative z-20 mb-4 h-9">
               <AnimatePresence mode="wait">
@@ -151,10 +144,10 @@ export default function ServicesBox() {
                     <cur.icon className="h-3 w-3" style={{ color: cur.color }} />
                   </span>
                   <span className="text-[11px] font-medium text-foreground">
-                    {t(`items${idx}Title`)}
+                    {cur.title}
                   </span>
                   <span className="text-[10px] text-muted-foreground">
-                    {t(`items${idx}Desc`)}
+                    {cur.desc}
                   </span>
                 </motion.div>
               </AnimatePresence>
@@ -249,7 +242,7 @@ export default function ServicesBox() {
                           style={{ color: s.color }}
                         />
                         <span className="text-[9px] font-medium text-foreground truncate">
-                          {t(`items${si}Title`)}
+                          {services[si].title}
                         </span>
                       </motion.div>
                     );

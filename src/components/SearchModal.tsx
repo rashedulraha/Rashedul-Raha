@@ -31,6 +31,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useTranslations, useLocale } from "next-intl";
 import apiClient from "@/lib/axios";
+import { sendContactMessage } from "@/services/apiService";
 
 type ViewState = "search" | "contact" | "full-form" | "login";
 
@@ -42,6 +43,9 @@ export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentView, setCurrentView] = useState<ViewState>("search");
   const [message, setMessage] = useState("");
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactTopic, setContactTopic] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [loginError, setLoginError] = useState("");
@@ -663,19 +667,33 @@ export default function SearchModal() {
                         {/* Form Layout */}
                         <form
                           className="flex flex-col gap-4"
-                          onSubmit={(e) => {
+                          onSubmit={async (e) => {
                             e.preventDefault();
                             setIsSubmitting(true);
-                            setTimeout(() => {
-                              setIsSubmitting(false);
+                            try {
+                              await sendContactMessage({
+                                name: contactName || "Anonymous Visitor",
+                                email: contactEmail || "visitor@example.com",
+                                subject: contactTopic || "General Inquiry",
+                                message: message,
+                              });
                               setIsSuccess(true);
                               setTimeout(() => {
                                 setIsSuccess(false);
                                 setIsOpen(false);
                                 setMessage("");
+                                setContactName("");
+                                setContactEmail("");
+                                setContactTopic("");
                                 setCurrentView("search");
                               }, 2500);
-                            }, 1500);
+                            } catch (err) {
+                              alert(
+                                "Failed to send message. Please try again.",
+                              );
+                            } finally {
+                              setIsSubmitting(false);
+                            }
                           }}
                         >
                           <div className="grid grid-cols-2 gap-4">
@@ -687,6 +705,8 @@ export default function SearchModal() {
                                 type="text"
                                 placeholder={t("namePlaceholder")}
                                 required
+                                value={contactName}
+                                onChange={(e) => setContactName(e.target.value)}
                                 className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
                               />
                             </div>
@@ -698,6 +718,10 @@ export default function SearchModal() {
                                 type="email"
                                 placeholder="john@example.com"
                                 required
+                                value={contactEmail}
+                                onChange={(e) =>
+                                  setContactEmail(e.target.value)
+                                }
                                 className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
                               />
                             </div>
@@ -721,6 +745,10 @@ export default function SearchModal() {
                               <input
                                 type="text"
                                 placeholder={t("topicPlaceholder")}
+                                value={contactTopic}
+                                onChange={(e) =>
+                                  setContactTopic(e.target.value)
+                                }
                                 className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
                               />
                             </div>

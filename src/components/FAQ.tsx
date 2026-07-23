@@ -5,10 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/routing";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
-
 export default function FAQ() {
-  const t = useTranslations("Explore");
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
@@ -33,8 +30,8 @@ export default function FAQ() {
   const cards = [
     {
       id: "uses",
-      title: t('cards.uses.title'),
-      description: t('cards.uses.description'),
+      title: "Uses & Gear",
+      description: "Hardware, apps, and tools I use daily",
       href: "/uses",
       images: [
         { src: "/images/image_1.jpg", alt: "Zed", delay: 200 },
@@ -47,15 +44,15 @@ export default function FAQ() {
     },
     {
       id: "about",
-      title: t('cards.about.title'),
-      description: t('cards.about.description'),
+      title: "About Me",
+      description: "My journey, background, and skill set",
       href: "/about",
       image: "/images/image_8.jpg",
     },
     {
       id: "guestbook",
-      title: t('cards.guestbook.title'),
-      description: t('cards.guestbook.description'),
+      title: "Guestbook",
+      description: "Leave a public message or say hello",
       href: "/guestbook",
     },
   ];
@@ -94,35 +91,20 @@ export default function FAQ() {
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-          className="relative z-2 mx-auto mb-pagebuilder max-w-xl text-balance font-medium text-5xl tracking-tight max-sm:px-5 sm:text-5xl md:text-6xl text-center mb-5 sm:mb-10 lg:mb-14"
-          style={{
-            textShadow:
-              "0px 4px 8px rgba(255,255,255,.05),0px 8px 30px rgba(255,255,255,.20)",
-          }}>
-          <p className="mb-4 font-semibold text-primary text-xs uppercase tracking-widest">
-            {t('badge')}
+          transition={{ duration: 0.6 }}
+          className="relative z-2 mx-auto max-w-xl text-center mb-8 md:mb-12 px-4"
+        >
+          <p className="mb-3 font-semibold text-primary text-xs uppercase tracking-widest">
+            EXPLORE MORE
           </p>
-          <span className="inline-block">
-            {t('titlePrefix')}
-            <motion.span
-              initial={{ backgroundPosition: "0% 100%" }}
-              animate={isInView ? { backgroundPosition: "100% 100%" } : {}}
-              transition={{ duration: 2, delay: 1 }}
-              className="px-1 pb-1 text-shadow-none italic animate-gradient-x text-colorfull"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)))",
-                backgroundSize: "200% 100%",
-                backgroundPosition: "0% 100%",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}>
-              {t('titleHighlight')}
-            </motion.span>
-          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold tracking-tight text-foreground">
+            Discover{" "}
+            <span className="bg-gradient-to-r from-primary via-indigo-400 to-sky-400 bg-clip-text text-transparent">
+              more about my work & workflow.
+            </span>
+          </h2>
         </motion.div>
 
         {/* Cards Grid */}

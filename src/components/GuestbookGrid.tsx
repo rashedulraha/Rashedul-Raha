@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 import { PenLine, Share2, Send, Loader2 } from "lucide-react";
 import { FaGithub, FaGoogle } from "react-icons/fa6";
-import { addGuestbookMessage } from "@/actions/guestbook";
+import { getGuestbookMessages, createGuestbookMessage } from "@/services/apiService";
 
 const WavyDivider = () => (
   <div className="absolute -bottom-1 left-0 w-full overflow-hidden leading-none z-10">
@@ -14,21 +14,47 @@ const WavyDivider = () => (
 );
 
 export default function GuestbookGrid({ initialMessages }: { initialMessages: Record<string, string | number>[] }) {
+  const [messages, setMessages] = useState<any[]>(initialMessages || []);
   const [isWriting, setIsWriting] = useState(false);
+  const [name, setName] = useState("");
   const [newMessage, setNewMessage] = useState("");
   const [isPending, startTransition] = useTransition();
+
+  const fetchMessages = async () => {
+    try {
+      const res = await getGuestbookMessages();
+      if (res.data.success && Array.isArray(res.data.data)) {
+        setMessages(res.data.data);
+      }
+    } catch (err) {
+      console.error("Error fetching guestbook messages:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newMessage.trim() || isPending) return;
 
     startTransition(async () => {
-      const res = await addGuestbookMessage("Guest", newMessage);
-      if (res.success) {
-        setNewMessage("");
-        setIsWriting(false);
-      } else {
-        alert("Failed to save message. Please try again.");
+      try {
+        const res = await createGuestbookMessage({
+          name: name.trim() || "Anonymous Visitor",
+          message: newMessage.trim(),
+        });
+        if (res.data.success) {
+          setNewMessage("");
+          setName("");
+          setIsWriting(false);
+          fetchMessages();
+        } else {
+          alert("Failed to save message. Please try again.");
+        }
+      } catch (err) {
+        alert("Failed to submit message to server.");
       }
     });
   };
@@ -58,6 +84,13 @@ export default function GuestbookGrid({ initialMessages }: { initialMessages: Re
             </>
           ) : (
             <form onSubmit={handleSubmit} className="w-full relative z-20 animate-in fade-in zoom-in duration-300 flex flex-col gap-3">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name (optional)"
+                className="w-full px-4 py-2 bg-foreground/5 border border-foreground/12 rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 text-xs transition-all"
+              />
               <textarea 
                 autoFocus
                 value={newMessage}
@@ -100,7 +133,7 @@ export default function GuestbookGrid({ initialMessages }: { initialMessages: Re
       </div>
 
       {/* Message Cards */}
-      {initialMessages.map((msg) => (
+      {messages.map((msg) => (
         <div key={msg.id} className="break-inside-avoid relative rounded-3xl overflow-hidden border border-foreground/12 shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl group hover:-translate-y-1 hover:border-foreground/20 transition-all duration-300">
           <div className={`relative min-h-[220px] ${msg.bgColor} flex flex-col items-center justify-center p-8 text-center`}>
             {/* Abstract Doodles */}
