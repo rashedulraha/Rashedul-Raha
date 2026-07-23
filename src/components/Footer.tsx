@@ -18,7 +18,7 @@ export default function Footer() {
     general: [
       { name: t('general.home'), href: "/" },
       { name: t('general.about'), href: "/about" },
-      { name: t('general.projects'), href: "/projects" },
+      { name: t('general.projects'), href: "/work" },
       { name: t('general.blog'), href: "/blog" },
     ],
     specifics: [
@@ -28,11 +28,11 @@ export default function Footer() {
       { name: t('specifics.attribution'), href: "/attribution" },
     ],
     more: [
-      { name: t('more.bookCall'), href: "/contact" },
+      { name: t('more.bookCall'), href: "/links" },
       { name: t('more.links'), href: "/links" },
-      { name: t('more.rss'), href: "/rss" },
-      { name: t('more.privacy'), href: "/legal/privacy" },
-      { name: t('more.terms'), href: "/legal/terms" },
+      { name: t('more.rss'), href: "/sitemap.xml" },
+      { name: t('more.privacy'), href: "/attribution" },
+      { name: t('more.terms'), href: "/attribution" },
     ],
   };
 
@@ -200,19 +200,19 @@ export default function Footer() {
                 . {t('allRights')}
               </p>
               <div className="flex items-center gap-3 text-xs">
-                <a
+                <Link
                   className="text-muted-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
-                  href="/legal/privacy">
+                  href="/attribution">
                   {t('privacy')}
-                </a>
+                </Link>
                 <span className="text-muted-foreground/30">
                   ·
                 </span>
-                <a
+                <Link
                   className="text-muted-foreground transition-all duration-300 ease-out hover:text-primary hover:underline hover:underline-offset-4"
-                  href="/legal/terms">
+                  href="/attribution">
                   {t('terms')}
-                </a>
+                </Link>
                 <span className="text-muted-foreground/30">
                   ·
                 </span>
