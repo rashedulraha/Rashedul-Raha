@@ -87,29 +87,26 @@ interface IActivity {
 
 // Memoized Components
 const StatCard = React.memo(
-  ({ title, value, icon, trend, color, subtitle }: IStatCard) => (
+  ({ title, value, icon, trend, subtitle }: IStatCard) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className="relative overflow-hidden rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm p-6 hover:shadow-xl transition-all duration-300"
+      whileHover={{ y: -2, transition: { duration: 0.2 } }}
+      className="relative overflow-hidden rounded-xl border border-border/40 bg-card/40 p-5 hover:bg-card/60 transition-colors duration-300"
     >
-      <div
-        className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-10 ${color}`}
-      />
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-medium text-muted-foreground">{title}</p>
-          <h4 className="text-3xl font-bold mt-2 text-foreground">{value}</h4>
+          <h4 className="text-2xl font-semibold mt-1.5 text-foreground">{value}</h4>
           {subtitle && (
             <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>
           )}
         </div>
-        <div className={`p-3 rounded-xl ${color} bg-opacity-10`}>{icon}</div>
+        <div className="text-muted-foreground/70">{icon}</div>
       </div>
       <div className="flex items-center gap-2 mt-4">
         <span
-          className={`text-xs font-bold ${trend >= 0 ? "text-emerald-400" : "text-red-400"} flex items-center gap-1`}
+          className={`text-xs font-medium ${trend >= 0 ? "text-emerald-500" : "text-red-500"} flex items-center gap-1`}
         >
           {trend >= 0 ? (
             <TrendingUp className="w-3 h-3" />
@@ -171,12 +168,6 @@ export function OverviewTab() {
     messages: 0,
     unreadMessages: 0,
   });
-
-  // Effects
-  useEffect(() => {
-    setMounted(true);
-    loadStats();
-  }, [refreshKey]);
 
   async function loadStats() {
     setIsLoading(true);
@@ -262,6 +253,12 @@ export function OverviewTab() {
     }
   }
 
+  // Effects
+  useEffect(() => {
+    setMounted(true);
+    loadStats();
+  }, [refreshKey]);
+
   // Mock data generator
   function generateMockGraphData() {
     const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -318,33 +315,33 @@ export function OverviewTab() {
       {
         title: "Total Views",
         value: trafficData.totalViews.toLocaleString(),
-        icon: <Eye className="w-5 h-5 text-blue-400" />,
+        icon: <Eye className="w-5 h-5" />,
         trend: 12.5,
-        color: "bg-blue-500",
+        color: "",
         subtitle: `${trafficData.uniqueVisitors.toLocaleString()} unique visitors`,
       },
       {
         title: "Chatbot Interactions",
         value: trafficData.chatbotInteractions.toLocaleString(),
-        icon: <MessageSquare className="w-5 h-5 text-purple-400" />,
+        icon: <MessageSquare className="w-5 h-5" />,
         trend: 8.3,
-        color: "bg-purple-500",
+        color: "",
         subtitle: `${((trafficData.chatbotInteractions / trafficData.totalViews) * 100).toFixed(1)}% engagement rate`,
       },
       {
         title: "Form Submissions",
         value: trafficData.formSubmissions.toLocaleString(),
-        icon: <Mail className="w-5 h-5 text-emerald-400" />,
+        icon: <Mail className="w-5 h-5" />,
         trend: -2.1,
-        color: "bg-emerald-500",
+        color: "",
         subtitle: `${counts.messages} total messages`,
       },
       {
         title: "Active Projects",
         value: counts.projects,
-        icon: <Briefcase className="w-5 h-5 text-amber-400" />,
+        icon: <Briefcase className="w-5 h-5" />,
         trend: 5.0,
-        color: "bg-amber-500",
+        color: "",
         subtitle: `${counts.certificates} certificates earned`,
       },
     ],
@@ -457,29 +454,22 @@ export function OverviewTab() {
     );
   };
 
-  const renderBarChart = () => (
+  const renderDistributionChart = () => (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart
-        data={comparisonData}
-        margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
-      >
-        <CartesianGrid
-          strokeDasharray="3 3"
-          stroke="rgba(255,255,255,0.05)"
-          vertical={false}
-        />
-        <XAxis
-          dataKey="name"
-          stroke="#8b949e"
-          tickLine={false}
-          axisLine={false}
-        />
-        <YAxis
-          allowDecimals={false}
-          stroke="#8b949e"
-          tickLine={false}
-          axisLine={false}
-        />
+      <PieChart>
+        <Pie
+          data={comparisonData}
+          cx="50%"
+          cy="50%"
+          innerRadius={60}
+          outerRadius={80}
+          paddingAngle={5}
+          dataKey="count"
+        >
+          {comparisonData.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+        </Pie>
         <Tooltip
           contentStyle={{
             backgroundColor: "#1f242c",
@@ -488,13 +478,15 @@ export function OverviewTab() {
             color: "#c9d1d9",
             fontSize: "12px",
           }}
+          itemStyle={{ color: "#c9d1d9" }}
         />
-        <Bar dataKey="count" radius={[8, 8, 0, 0]} maxBarSize={40}>
-          {comparisonData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={entry.color} />
-          ))}
-        </Bar>
-      </BarChart>
+        <Legend 
+          verticalAlign="bottom" 
+          height={36}
+          iconType="circle"
+          wrapperStyle={{ fontSize: '12px', color: '#8b949e' }}
+        />
+      </PieChart>
     </ResponsiveContainer>
   );
 
@@ -512,74 +504,42 @@ export function OverviewTab() {
         <LoadingSkeleton />
       ) : (
         <>
-          {/* Premium Profile Header */}
+          {/* Clean Profile Header */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-card/80 to-card/20 backdrop-blur-xl p-6 md:p-8"
+            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 mb-2 border-b border-border/40"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-emerald-500/5" />
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center font-bold text-lg text-foreground border border-border/50">
+                RR
+              </div>
 
-            <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-              <div className="flex items-center gap-5">
-                <motion.div whileHover={{ scale: 1.05 }} className="relative">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-emerald-400 p-0.5 shadow-xl">
-                    <div className="w-full h-full rounded-full bg-background flex items-center justify-center font-extrabold text-2xl text-foreground">
-                      RR
-                    </div>
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-emerald-500 rounded-full border-2 border-background flex items-center justify-center">
-                    <CheckCircle className="w-4 h-4 text-white" />
-                  </div>
-                </motion.div>
-
-                <div>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <h2 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">
-                      Rashedul Raha
-                    </h2>
-                    <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-xs font-bold rounded-full uppercase tracking-wider">
-                      Admin
-                    </span>
-                    <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold rounded-full flex items-center gap-1">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      Online
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground mt-1 text-sm">
-                    System Admin & Developer Portfolio Dashboard
-                  </p>
-                  <div className="flex flex-wrap items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-primary" /> Active
-                      Session
-                    </span>
-                    <span className="hidden sm:inline">•</span>
-                    <span className="flex items-center gap-1.5">
-                      <Terminal className="w-3.5 h-3.5 text-emerald-400" /> Host
-                      Operational
-                    </span>
-                    <span className="hidden sm:inline">•</span>
-                    <span className="flex items-center gap-1.5">
-                      <ShieldAlert className="w-3.5 h-3.5 text-blue-400" /> SSL
-                      Secured
-                    </span>
-                  </div>
+              <div>
+                <div className="flex items-center gap-3">
+                  <h2 className="text-xl md:text-2xl font-bold text-foreground tracking-tight">
+                    Rashedul Raha
+                  </h2>
+                  <span className="px-2 py-0.5 bg-muted text-muted-foreground text-xs font-medium rounded-md">
+                    Admin
+                  </span>
                 </div>
+                <p className="text-muted-foreground mt-0.5 text-sm">
+                  System Admin & Developer Portfolio Dashboard
+                </p>
               </div>
+            </div>
 
-              <div className="flex items-center gap-3 self-start md:self-center">
-                <button
-                  onClick={() => setRefreshKey((prev) => prev + 1)}
-                  className="p-2 rounded-xl bg-muted/30 hover:bg-muted/50 border border-border/50 transition-colors"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                </button>
-                <button className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-xl text-sm font-bold transition-colors flex items-center gap-2">
-                  <Zap className="w-4 h-4" /> Quick Action
-                </button>
-              </div>
+            <div className="flex items-center gap-3 self-start md:self-center">
+              <button
+                onClick={() => setRefreshKey((prev) => prev + 1)}
+                className="p-2.5 rounded-lg bg-card border border-border/40 hover:bg-muted/50 transition-colors text-muted-foreground"
+              >
+                <RefreshCw className="w-4 h-4" />
+              </button>
+              <button className="px-4 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg text-sm font-medium transition-colors">
+                Quick Action
+              </button>
             </div>
           </motion.div>
 
@@ -599,27 +559,19 @@ export function OverviewTab() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm p-6"
+                className="rounded-2xl border border-border/40 bg-card/40 p-6"
               >
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h3 className="text-lg font-bold text-foreground">
+                    <h3 className="text-base font-semibold text-foreground">
                       Portfolio Distribution
                     </h3>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-xs text-muted-foreground mt-1">
                       Content breakdown across all sections
                     </p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Filter className="w-4 h-4 text-muted-foreground" />
-                    <select className="bg-muted/30 border border-border/50 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-primary">
-                      <option>All Time</option>
-                      <option>Last 30 Days</option>
-                      <option>Last 90 Days</option>
-                    </select>
-                  </div>
                 </div>
-                <div className="h-64 w-full">{renderBarChart()}</div>
+                <div className="h-64 w-full">{renderDistributionChart()}</div>
               </motion.div>
 
               {/* Traffic Chart Card */}
