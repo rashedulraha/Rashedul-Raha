@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Users, Eye, MessageSquare, Briefcase, ArrowUpRight, ArrowDownRight, Activity, Server, Database } from "lucide-react";
+import { Users, Eye, MessageSquare, Briefcase, ArrowUpRight, ArrowDownRight, Activity, Server, Database, GitCommit } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function OverviewTab() {
@@ -12,92 +12,151 @@ export function OverviewTab() {
     { title: "Form Submissions", value: "12", change: "-2.1%", isPositive: false, icon: Briefcase },
   ];
 
+  // Weeks and days for GitHub style heat map
+  const weeksCount = 28;
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+  
+  const getLevel = (dayIndex: number, weekIndex: number) => {
+    // Generate a pseudo-random pattern for the heatmap
+    const val = (dayIndex * 3 + weekIndex * 7 + 2) % 5;
+    return val; // 0 to 4
+  };
+
+  const getLevelClass = (level: number) => {
+    switch (level) {
+      case 1:
+        return "bg-emerald-500/20 dark:bg-emerald-950/40 border border-emerald-500/10";
+      case 2:
+        return "bg-emerald-500/40 dark:bg-emerald-800/60 border border-emerald-500/20";
+      case 3:
+        return "bg-emerald-500/70 dark:bg-emerald-600/80 border border-emerald-500/30";
+      case 4:
+        return "bg-emerald-500 dark:bg-emerald-500 border border-emerald-400/30";
+      default:
+        return "bg-muted/40 dark:bg-zinc-800/30 border border-border/10";
+    }
+  };
+
   return (
     <div className="space-y-6">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-foreground tracking-tight">Dashboard Overview</h2>
-        <p className="text-muted-foreground mt-1">Welcome back, Rashedul. Here's what's happening today.</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-bold text-foreground tracking-tight">Dashboard Overview</h2>
+          <p className="text-muted-foreground mt-1">Welcome back, Rashedul. Here's what's happening today.</p>
+        </div>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat, i) => {
-          const Icon = stat.icon;
-          return (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              key={stat.title}
-              className="card-premium p-5 flex flex-col justify-between group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="p-2 bg-primary/10 text-primary rounded-lg group-hover:scale-110 transition-transform">
-                  <Icon className="w-5 h-5" />
+      {/* Stats Card - Combined into a single beautiful panel */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="card-premium p-6"
+      >
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 divide-y lg:divide-y-0 lg:divide-x lg:divide-border/40">
+          {stats.map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <div 
+                key={stat.title} 
+                className={`flex flex-col justify-between pt-4 lg:pt-0 lg:px-6 first:pt-0 first:pl-0`}
+              >
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{stat.title}</span>
+                  <span className={`text-xs font-bold flex items-center gap-0.5 ${stat.isPositive ? 'text-emerald-500' : 'text-rose-500'}`}>
+                    {stat.change} {stat.isPositive ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
+                  </span>
                 </div>
-                <span className={`text-xs font-bold flex items-center gap-1 ${stat.isPositive ? 'text-green-500' : 'text-red-500'}`}>
-                  {stat.change} {stat.isPositive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-                </span>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/10 text-primary rounded-xl">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <h4 className="text-3xl font-bold text-foreground tracking-tight">{stat.value}</h4>
+                </div>
               </div>
-              <div>
-                <h3 className="text-3xl font-bold text-foreground">{stat.value}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{stat.title}</p>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* Main Graph Area */}
+        {/* Main Graph Area - GitHub style graph */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="lg:col-span-2 card-premium p-6"
+          transition={{ delay: 0.2 }}
+          className="lg:col-span-2 card-premium p-6 flex flex-col justify-between"
         >
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <h3 className="text-lg font-bold text-foreground">Traffic Overview</h3>
-              <p className="text-xs text-muted-foreground">Visitors over the last 7 days</p>
-            </div>
-            <select className="bg-muted text-xs border border-border rounded-lg px-2 py-1 outline-none">
-              <option>Last 7 days</option>
-              <option>Last 30 days</option>
-              <option>This Year</option>
-            </select>
-          </div>
-          
-          {/* Custom Animated CSS Graph */}
-          <div className="h-64 mt-4 flex items-end gap-2 sm:gap-4 relative group">
-            {/* Background Grid lines */}
-            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
-              <div className="w-full border-t border-border border-dashed h-0" />
-              <div className="w-full border-t border-border border-dashed h-0" />
-              <div className="w-full border-t border-border border-dashed h-0" />
-              <div className="w-full border-t border-border border-dashed h-0" />
-            </div>
-
-            {/* Bars */}
-            {[40, 70, 45, 90, 65, 80, 100].map((height, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center justify-end h-full group/bar relative z-10">
-                {/* Tooltip */}
-                <div className="absolute -top-8 bg-foreground text-background text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover/bar:opacity-100 transition-opacity translate-y-2 group-hover/bar:translate-y-0">
-                  {height * 12} views
-                </div>
-                {/* Bar */}
-                <motion.div 
-                  initial={{ height: 0 }}
-                  animate={{ height: `${height}%` }}
-                  transition={{ duration: 1, delay: 0.5 + (i * 0.1), type: "spring", bounce: 0.2 }}
-                  className="w-full max-w-[40px] bg-gradient-to-t from-primary/40 to-primary rounded-t-sm hover:from-primary/60 hover:to-primary cursor-pointer transition-colors"
-                />
-                <span className="text-[10px] text-muted-foreground mt-2 font-medium">
-                  {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i]}
-                </span>
+          <div>
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
+                  <GitCommit className="w-5 h-5 text-emerald-500" />
+                  Traffic Contribution Graph
+                </h3>
+                <p className="text-xs text-muted-foreground">Visitors activity heatmap over the last 28 weeks</p>
               </div>
-            ))}
+              <select className="bg-muted text-xs border border-border/50 rounded-lg px-2 py-1 outline-none">
+                <option>Last 28 weeks</option>
+                <option>This Year</option>
+              </select>
+            </div>
+            
+            {/* GitHub Style Contribution Graph */}
+            <div className="flex gap-3 overflow-x-auto pb-4 pt-2 scrollbar-thin">
+              {/* Row labels */}
+              <div className="flex flex-col justify-between text-[9px] text-muted-foreground pb-1 pt-5 select-none font-mono pr-1">
+                <span>Sun</span>
+                <span>Tue</span>
+                <span>Thu</span>
+                <span>Sat</span>
+              </div>
+
+              {/* Grid Column wrapper */}
+              <div className="flex-1 min-w-[340px]">
+                {/* Months labels */}
+                <div className="flex justify-between text-[9px] text-muted-foreground mb-1 select-none pr-4 font-semibold">
+                  {months.map((m, i) => (
+                    <span key={i}>{m}</span>
+                  ))}
+                </div>
+
+                {/* Contribution Cells */}
+                <div className="flex gap-[3px]">
+                  {Array.from({ length: weeksCount }).map((_, weekIdx) => (
+                    <div key={weekIdx} className="flex flex-col gap-[3px]">
+                      {Array.from({ length: 7 }).map((_, dayIdx) => {
+                        const level = getLevel(dayIdx, weekIdx);
+                        const baseVisitors = level * 14 + (weekIdx * 3 + dayIdx * 2);
+                        return (
+                          <motion.div
+                            key={dayIdx}
+                            whileHover={{ scale: 1.2, zIndex: 20 }}
+                            className={`w-[11px] h-[11px] rounded-[2px] cursor-pointer transition-colors ${getLevelClass(level)}`}
+                            title={`${baseVisitors} unique visitors`}
+                          />
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Graph Legend */}
+          <div className="flex justify-between items-center text-[10px] text-muted-foreground mt-4 pt-3 border-t border-border/40 select-none">
+            <span>Learn how we measure traffic data</span>
+            <div className="flex items-center gap-1.5 font-medium">
+              <span>Less</span>
+              <div className="w-[10px] h-[10px] rounded-[2px] bg-muted/40 dark:bg-zinc-800/30" />
+              <div className="w-[10px] h-[10px] rounded-[2px] bg-emerald-500/20" />
+              <div className="w-[10px] h-[10px] rounded-[2px] bg-emerald-500/40" />
+              <div className="w-[10px] h-[10px] rounded-[2px] bg-emerald-500/70" />
+              <div className="w-[10px] h-[10px] rounded-[2px] bg-emerald-500" />
+              <span>More</span>
+            </div>
           </div>
         </motion.div>
 
@@ -108,24 +167,24 @@ export function OverviewTab() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.3 }}
             className="card-premium p-6"
           >
             <h3 className="text-sm font-bold text-foreground mb-4">System Status</h3>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-green-500/10 text-green-500 rounded-lg"><Server className="w-4 h-4" /></div>
+                  <div className="p-2 bg-emerald-500/10 text-emerald-500 rounded-lg"><Server className="w-4 h-4" /></div>
                   <span className="text-sm font-medium text-foreground">Main Server</span>
                 </div>
-                <span className="text-xs font-bold text-green-500">Operational</span>
+                <span className="text-xs font-bold text-emerald-500">Operational</span>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-green-500/10 text-green-500 rounded-lg"><Database className="w-4 h-4" /></div>
+                  <div className="p-2 bg-emerald-500/10 text-emerald-500 rounded-lg"><Database className="w-4 h-4" /></div>
                   <span className="text-sm font-medium text-foreground">Database</span>
                 </div>
-                <span className="text-xs font-bold text-green-500">Connected</span>
+                <span className="text-xs font-bold text-emerald-500">Connected</span>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -141,7 +200,7 @@ export function OverviewTab() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.4 }}
             className="card-premium p-6"
           >
             <h3 className="text-sm font-bold text-foreground mb-4">Recent Activity</h3>
