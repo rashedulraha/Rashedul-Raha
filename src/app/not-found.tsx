@@ -1,45 +1,30 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Ghost } from "lucide-react";
+import { ArrowLeft, Home } from "lucide-react";
 
-export default function GlobalNotFound() {
+export default function NotFound() {
   return (
-    <html lang="en" className="dark">
-      <body style={{ backgroundColor: "#0A0A0B", color: "#F8FAFC", margin: 0, fontFamily: "sans-serif" }}>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", textAlign: "center", padding: "0 20px" }}>
-          
-          <h1 style={{ fontSize: "6rem", fontWeight: "bold", marginBottom: "1rem", color: "#38BDF8" }}>
-            404
-          </h1>
-          <h2 style={{ fontSize: "2rem", fontWeight: "600", marginBottom: "1.5rem" }}>
-            Page Not Found
-          </h2>
-          <p style={{ color: "#94A3B8", fontSize: "1.125rem", maxWidth: "500px", marginBottom: "2.5rem" }}>
-            The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+      <div className="max-w-md w-full text-center space-y-6">
+        <div className="space-y-2">
+          <h1 className="text-7xl font-extrabold text-primary tracking-tight">404</h1>
+          <h2 className="text-2xl font-bold text-foreground">Page Not Found</h2>
+          <p className="text-muted-foreground text-sm">
+            The page you are looking for doesn't exist or has been moved.
           </p>
-          
-          <Link 
-            href="/en"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              backgroundColor: "#38BDF8",
-              color: "#0F172A",
-              padding: "16px 32px",
-              borderRadius: "9999px",
-              textDecoration: "none",
-              fontWeight: "600",
-              transition: "transform 0.2s"
-            }}
+        </div>
+
+        <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
+          <Link
+            href="/"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity"
           >
-            <ArrowLeft size={20} />
-            Return Home
+            <Home className="w-4 h-4" />
+            Back to Home
           </Link>
         </div>
-      </body>
-    </html>
+      </div>
+    </div>
   );
 }
