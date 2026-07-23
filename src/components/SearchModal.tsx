@@ -204,7 +204,7 @@ export default function SearchModal() {
                             <Command.Item
                               value={`home index ${t("home")}`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}`))
+                                runCommand(() => router.push("/"))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
                             >
@@ -218,7 +218,7 @@ export default function SearchModal() {
                               value={`about me profile resume ${t("about")}`}
                               onSelect={() =>
                                 runCommand(() =>
-                                  router.push(`/${locale}/about`),
+                                  router.push("/about"),
                                 )
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
@@ -232,7 +232,7 @@ export default function SearchModal() {
                             <Command.Item
                               value={`work project projects portfolio ${t("work")}`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}/work`))
+                                runCommand(() => router.push("/work"))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
                             >
@@ -245,7 +245,7 @@ export default function SearchModal() {
                             <Command.Item
                               value={`blog writing posts article ${t("blog")}`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}/blog`))
+                                runCommand(() => router.push("/blog"))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
                             >
@@ -259,7 +259,7 @@ export default function SearchModal() {
                               value={`guestbook comments sign message ${t("guestbook")}`}
                               onSelect={() =>
                                 runCommand(() =>
-                                  router.push(`/${locale}/guestbook`),
+                                  router.push("/guestbook"),
                                 )
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
@@ -274,7 +274,7 @@ export default function SearchModal() {
                               value={`bucket list goals ${t("bucketList")}`}
                               onSelect={() =>
                                 runCommand(() =>
-                                  router.push(`/${locale}/bucket-list`),
+                                  router.push("/bucket-list"),
                                 )
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
@@ -289,7 +289,7 @@ export default function SearchModal() {
                               value={`certificates awards achievements`}
                               onSelect={() =>
                                 runCommand(() =>
-                                  router.push(`/${locale}/certificates`),
+                                  router.push("/certificates"),
                                 )
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
@@ -314,7 +314,7 @@ export default function SearchModal() {
                             <Command.Item
                               value={`uses gear hardware tools ${t("uses")}`}
                               onSelect={() =>
-                                runCommand(() => router.push(`/${locale}/uses`))
+                                runCommand(() => router.push("/uses"))
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
                             >
@@ -328,7 +328,7 @@ export default function SearchModal() {
                               value={`attribution credits inspiration thanks ${t("attribution")}`}
                               onSelect={() =>
                                 runCommand(() =>
-                                  router.push(`/${locale}/attribution`),
+                                  router.push("/attribution"),
                                 )
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
@@ -343,7 +343,7 @@ export default function SearchModal() {
                               value={`links social connect network ${t("links")}`}
                               onSelect={() =>
                                 runCommand(() =>
-                                  router.push(`/${locale}/links`),
+                                  router.push("/links"),
                                 )
                               }
                               className="group flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:bg-accent rounded-md px-2 py-1 transition-colors aria-selected:bg-accent aria-selected:text-accent-foreground"
@@ -835,7 +835,7 @@ export default function SearchModal() {
                               JSON.stringify(data.data.user),
                             );
                             setIsOpen(false);
-                            router.push(`/${locale}/dashboard`);
+                            router.push("/dashboard");
                           } else {
                             setLoginError(
                               data.message || "Invalid email or password!",
