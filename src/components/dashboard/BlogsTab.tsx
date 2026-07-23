@@ -1,8 +1,22 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Edit2, Trash2, ExternalLink, X, RefreshCw, BookOpen } from "lucide-react";
+import { 
+  Plus, 
+  Edit2, 
+  Trash2, 
+  ExternalLink, 
+  X, 
+  RefreshCw, 
+  BookOpen, 
+  Search, 
+  LayoutGrid, 
+  List, 
+  Clock, 
+  FileText,
+  Sparkles
+} from "lucide-react";
 import { getBlogs, createBlog, updateBlog, deleteBlog } from "@/services/apiService";
 import { ConfirmModal } from "./ConfirmModal";
 
@@ -24,6 +38,11 @@ export function BlogsTab() {
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBlog, setEditingBlog] = useState<IBlog | null>(null);
+
+  // View Mode & Filters
+  const [viewMode, setViewMode] = useState<"cards" | "list">("cards");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
 
   // Confirm delete states
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -133,8 +152,25 @@ export function BlogsTab() {
     }
   };
 
+  const categories = useMemo(() => {
+    const cats = Array.from(new Set(blogs.map((b) => b.category || "General")));
+    return ["All", ...cats];
+  }, [blogs]);
+
+  const filteredBlogs = useMemo(() => {
+    return blogs.filter((blog) => {
+      const matchesSearch =
+        blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        blog.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        blog.category.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCat = activeCategory === "All" || blog.category === activeCategory;
+      return matchesSearch && matchesCat;
+    });
+  }, [blogs, searchQuery, activeCategory]);
+
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-bold text-foreground tracking-tight">Blog Posts</h2>
@@ -152,10 +188,94 @@ export function BlogsTab() {
           </button>
           <button
             onClick={openAddModal}
-            className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90 transition-all shadow-lg"
+            className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20"
           >
             <Plus className="w-4 h-4" />
             Add Blog Post
+          </button>
+        </div>
+      </div>
+
+      {/* Top Metrics */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="card-premium p-5 flex items-center gap-4">
+          <div className="p-3 bg-primary/10 text-primary rounded-2xl">
+            <FileText className="w-6 h-6" />
+          </div>
+          <div>
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block">Published Posts</span>
+            <h4 className="text-2xl font-extrabold text-foreground mt-0.5">{blogs.length}</h4>
+          </div>
+        </div>
+
+        <div className="card-premium p-5 flex items-center gap-4">
+          <div className="p-3 bg-blue-500/10 text-blue-500 rounded-2xl">
+            <BookOpen className="w-6 h-6" />
+          </div>
+          <div>
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block">Categories</span>
+            <h4 className="text-2xl font-extrabold text-foreground mt-0.5">{categories.length - 1 || 1} Topics</h4>
+          </div>
+        </div>
+
+        <div className="card-premium p-5 flex items-center gap-4">
+          <div className="p-3 bg-emerald-500/10 text-emerald-500 rounded-2xl">
+            <Clock className="w-6 h-6" />
+          </div>
+          <div>
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider block">Avg Read Time</span>
+            <h4 className="text-2xl font-extrabold text-foreground mt-0.5">5 Mins</h4>
+          </div>
+        </div>
+      </div>
+
+      {/* Controls Bar */}
+      <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-card/40 border border-border/50 rounded-2xl p-3 backdrop-blur-sm">
+        <div className="relative w-full md:w-72">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Search articles..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-muted/60 border border-border rounded-xl pl-10 pr-4 py-2 text-xs text-foreground focus:outline-none focus:border-primary/50 transition-all"
+          />
+        </div>
+
+        <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                activeCategory === cat
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                  : "bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center bg-muted/60 border border-border p-1 rounded-xl gap-1 shrink-0">
+          <button
+            onClick={() => setViewMode("cards")}
+            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
+              viewMode === "cards" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <LayoutGrid className="w-4 h-4" />
+            <span className="hidden sm:inline">Cards</span>
+          </button>
+          <button
+            onClick={() => setViewMode("list")}
+            className={`p-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
+              viewMode === "list" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <List className="w-4 h-4" />
+            <span className="hidden sm:inline">List</span>
           </button>
         </div>
       </div>
@@ -171,13 +291,14 @@ export function BlogsTab() {
           <RefreshCw className="w-6 h-6 animate-spin text-primary" />
           <span>Loading blogs...</span>
         </div>
-      ) : blogs.length === 0 ? (
+      ) : filteredBlogs.length === 0 ? (
         <div className="card-premium p-12 text-center text-muted-foreground">
           No blog posts found. Write your first blog post!
         </div>
-      ) : (
+      ) : viewMode === "cards" ? (
+        /* CARDS VIEW */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogs.map((blog) => (
+          {filteredBlogs.map((blog) => (
             <div key={blog.id} className="card-premium p-5 flex flex-col justify-between group">
               <div>
                 <div className="aspect-video w-full rounded-xl overflow-hidden bg-muted mb-4 relative">
@@ -232,6 +353,55 @@ export function BlogsTab() {
               </div>
             </div>
           ))}
+        </div>
+      ) : (
+        /* LIST VIEW */
+        <div className="card-premium overflow-hidden">
+          <div className="divide-y divide-border/50">
+            {filteredBlogs.map((blog) => (
+              <div
+                key={blog.id}
+                className="p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-muted/30 transition-colors"
+              >
+                <div className="flex items-center gap-4 min-w-0">
+                  <img
+                    src={blog.image || "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&q=80"}
+                    alt={blog.title}
+                    className="w-16 h-12 object-cover rounded-lg bg-muted shrink-0 border border-border/40"
+                  />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-sm font-bold text-foreground truncate">{blog.title}</h4>
+                      <span className="px-2 py-0.5 bg-primary/10 text-primary rounded-md text-[10px] font-bold">
+                        {blog.category}
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted-foreground truncate max-w-lg mt-0.5">
+                      {blog.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 shrink-0 self-end md:self-center">
+                  <span className="text-xs text-muted-foreground font-medium">{blog.readTime}</span>
+                  <button
+                    onClick={() => openEditModal(blog)}
+                    className="flex items-center gap-1 px-3 py-1.5 bg-muted hover:bg-accent text-xs font-semibold rounded-lg transition-colors"
+                  >
+                    <Edit2 className="w-3.5 h-3.5" />
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => confirmDelete(blog.id)}
+                    className="p-2 hover:bg-red-500/10 hover:text-red-500 text-muted-foreground rounded-lg transition-colors"
+                    title="Delete blog"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
