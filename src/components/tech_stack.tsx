@@ -1,23 +1,24 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { 
-  Code, 
-  Box, 
-  Layout, 
-  Server, 
-  Database, 
-  Wind, 
-  Layers, 
-  Terminal, 
-  Monitor, 
-  Sparkles, 
-  X, 
-  ChevronRight, 
-  Cpu, 
-  Globe, 
-  ShieldCheck, 
-  Zap 
+import { useState, useRef, useEffect, useMemo } from "react";
+import {
+  Code,
+  Box,
+  Layout,
+  Server,
+  Database,
+  Wind,
+  Layers,
+  Terminal,
+  Monitor,
+  Sparkles,
+  X,
+  ChevronRight,
+  Cpu,
+  Globe,
+  ShieldCheck,
+  Zap,
+  CheckCircle2,
 } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { getSkills } from "@/services/apiService";
@@ -47,9 +48,184 @@ const iconMap: Record<string, React.ElementType> = {
   Zap,
 };
 
-export default function TechStack() {
+function TechModal({
+  isOpen,
+  onClose,
+  skills,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  skills: ISkillItem[];
+}) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleOutsideClick = (e: React.MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const categories = [
+    {
+      title: "Frontend",
+      desc: "Modern and responsive UIs",
+      icon: Layout,
+      defaultItems: [
+        { name: "Next.js 16", desc: "React framework with SSR & SSG" },
+        { name: "React 19", desc: "UI library with hooks & concurrent features" },
+        { name: "TypeScript", desc: "Type-safe JavaScript" },
+        { name: "Tailwind CSS", desc: "Utility-first CSS framework" },
+        { name: "shadcn/ui", desc: "Beautiful & accessible components" },
+        { name: "Framer Motion", desc: "Production-ready animations" },
+      ],
+    },
+    {
+      title: "Backend",
+      desc: "Secure and scalable APIs",
+      icon: Server,
+      defaultItems: [
+        { name: "Node.js 24", desc: "JavaScript runtime" },
+        { name: "Express.js 5", desc: "Web framework for Node.js" },
+        { name: "GraphQL 16", desc: "API query language" },
+        { name: "MongoDB 8", desc: "NoSQL database" },
+        { name: "Redis 8", desc: "In-memory data store" },
+        { name: "PostgreSQL 17", desc: "Relational database" },
+      ],
+    },
+    {
+      title: "DevOps & Tools",
+      desc: "Efficient workflows",
+      icon: Terminal,
+      defaultItems: [
+        { name: "Docker 28", desc: "Containerization platform" },
+        { name: "Nginx 1.28", desc: "Web server & reverse proxy" },
+        { name: "AWS", desc: "Cloud computing services" },
+        { name: "Vercel", desc: "Frontend deployment platform" },
+        { name: "Git 2.50", desc: "Version control system" },
+        { name: "Linux Kernel 6.15", desc: "Development environment" },
+      ],
+    },
+    {
+      title: "Operating Systems",
+      desc: "My coding environments",
+      icon: Monitor,
+      defaultItems: [
+        { name: "macOS 26 Tahoe", desc: "Primary development OS" },
+        { name: "Ubuntu 24.04 LTS", desc: "Server & development" },
+        { name: "Windows 11 24H2", desc: "Testing & compatibility" },
+      ],
+    },
+  ];
+
+  const categoryBlocks = categories.map((cat) => {
+    const backendItems = skills.filter(
+      (s) =>
+        s.category?.toLowerCase() === cat.title.toLowerCase() ||
+        s.category?.toLowerCase().includes(cat.title.toLowerCase())
+    );
+    const itemsToDisplay =
+      backendItems.length > 0
+        ? backendItems.map((s) => ({ name: s.name, desc: s.description || "Production tool" }))
+        : cat.defaultItems;
+
+    return {
+      ...cat,
+      items: itemsToDisplay,
+    };
+  });
+
+  const totalToolsCount = categoryBlocks.reduce((acc, cat) => acc + cat.items.length, 0);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+          onClick={handleOutsideClick}
+        >
+          <motion.div
+            ref={modalRef}
+            initial={{ scale: 0.95, opacity: 0, y: 15 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 15 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="relative w-full max-w-5xl bg-[#090d16] border border-[#1e293b] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-8 py-6 border-b border-[#1e293b]/60">
+              <div className="flex items-baseline gap-3">
+                <h3 className="text-2xl font-bold text-[#00F0FF] tracking-tight">My Tech Stack</h3>
+                <span className="text-sm text-muted-foreground font-medium">Tools I use to build projects</span>
+              </div>
+              <button
+                onClick={onClose}
+                className="p-1.5 rounded-lg text-muted-foreground hover:text-white hover:bg-[#1e293b] transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* 2x2 Grid Body */}
+            <div className="p-8 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-6 custom-scrollbar">
+              {categoryBlocks.map((cat, idx) => {
+                const CategoryIcon = cat.icon;
+                return (
+                  <div
+                    key={idx}
+                    className="bg-[#0f172a]/70 border border-[#1e293b] rounded-xl p-6 space-y-4 shadow-inner"
+                  >
+                    <div className="flex items-center gap-3">
+                      <CategoryIcon className="w-5 h-5 text-[#00F0FF]" />
+                      <h4 className="text-base font-bold text-white">{cat.title}</h4>
+                    </div>
+                    <p className="text-xs text-muted-foreground font-medium">{cat.desc}</p>
+
+                    <div className="space-y-2.5 pt-2">
+                      {cat.items.map((item, itemIdx) => (
+                        <div key={itemIdx} className="flex items-center gap-2.5 text-xs">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-muted-foreground/40 shrink-0" />
+                          <span className="font-semibold text-white">{item.name}</span>
+                          <span className="text-muted-foreground/40">—</span>
+                          <span className="text-muted-foreground/70 truncate">{item.desc}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-4 bg-[#060911] border-t border-[#1e293b]/60 text-center">
+              <span className="text-xs text-muted-foreground/80 font-medium">
+                {totalToolsCount} tools across {categoryBlocks.length} categories
+              </span>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export function TechStack() {
   const [skills, setSkills] = useState<ISkillItem[]>([]);
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-50px" });
 
@@ -67,123 +243,165 @@ export default function TechStack() {
     loadSkills();
   }, []);
 
-  const categories = useMemo(() => {
-    const cats = Array.from(new Set(skills.map((s) => s.category || "General")));
-    return ["All", ...cats];
+  const formattedSkills = useMemo(() => {
+    if (skills.length === 0) return [];
+    return skills.map((s) => ({
+      name: s.name,
+      icon: iconMap[s.icon || "Code"] || Code,
+    }));
   }, [skills]);
 
-  const filteredSkills = useMemo(() => {
-    if (activeCategory === "All") return skills;
-    return skills.filter((s) => s.category === activeCategory);
-  }, [skills, activeCategory]);
+  const marqueeRows = useMemo(() => {
+    if (formattedSkills.length === 0) {
+      return { row1: [], row2: [], row3: [] };
+    }
+    const third = Math.ceil(formattedSkills.length / 3);
+    return {
+      row1: formattedSkills.slice(0, third),
+      row2: formattedSkills.slice(third, third * 2),
+      row3: formattedSkills.slice(third * 2),
+    };
+  }, [formattedSkills]);
+
+  const { row1, row2, row3 } = marqueeRows;
+  const totalCount = skills.length || 21;
 
   return (
-    <section ref={sectionRef} className="py-12 relative overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className="flex flex-col items-center text-center mb-10">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-3 backdrop-blur-md"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            Skills & Technologies
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight"
-          >
-            Technologies & Ecosystem
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-sm md:text-base text-muted-foreground mt-2 max-w-xl"
-          >
-            A modern tech stack designed for building high-performance web apps, APIs, and cross-platform systems.
-          </motion.p>
-
-          {/* Category Filter Pills */}
-          {categories.length > 1 && (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
+    <>
+      <div
+        ref={sectionRef}
+        className="md:col-span-6 lg:col-span-5 lg:row-span-5"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          className="group relative flex w-full flex-col justify-between overflow-hidden rounded-xl transition-all duration-300 h-full min-h-72 card-premium"
+        >
+          {/* Top Title exact match */}
+          <div className="pointer-events-none z-10 flex flex-col gap-1 p-6 text-center">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="flex items-center justify-center flex-wrap gap-2 mt-6"
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-semibold"
             >
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
-                    activeCategory === cat
-                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25 font-bold"
-                      : "bg-card/60 text-muted-foreground hover:bg-accent hover:text-foreground border border-border/50 backdrop-blur-md"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </motion.div>
-          )}
-        </div>
-
-        {/* Skills Cards Grid */}
-        {skills.length === 0 ? (
-          <div className="text-center py-12 text-muted-foreground text-sm">
-            Loading skills...
+              TECH STACK
+            </motion.p>
+            <motion.h3
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              className="text-xl md:text-2xl font-medium text-foreground tracking-tight"
+            >
+              My development toolkit
+            </motion.h3>
           </div>
-        ) : (
-          <motion.div
-            layout
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
-          >
-            {filteredSkills.map((skill, index) => {
-              const IconComponent = iconMap[skill.icon || "Code"] || Code;
-              return (
-                <motion.div
-                  key={skill.id || index}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  whileHover={{ y: -4, scale: 1.03 }}
-                  transition={{ duration: 0.2 }}
-                  className="card-premium p-4 flex flex-col items-center text-center justify-between group relative overflow-hidden cursor-pointer"
-                >
-                  <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 mb-3 shadow-md">
-                    <IconComponent className="w-6 h-6" />
-                  </div>
 
-                  <div>
-                    <h3 className="text-xs font-bold text-foreground group-hover:text-primary transition-colors">
-                      {skill.name}
-                    </h3>
-                    <span className="text-[10px] text-muted-foreground/80 mt-0.5 block font-medium">
-                      {skill.category}
+          {/* Marquee Rows Container */}
+          <div className="absolute inset-0 z-0 flex flex-col justify-center gap-3 overflow-hidden pt-14 mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            {/* Row 1 */}
+            <motion.div
+              initial={{ x: -20, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex w-max animate-marquee-left gap-3 hover:paused"
+            >
+              {[...row1, ...row1, ...row1].map((tech, i) => {
+                const Icon = tech.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent glass"
+                  >
+                    <Icon className="h-4 w-4 text-primary" />
+                    <span className="text-xs font-semibold text-foreground">
+                      {tech.name}
                     </span>
-                  </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
 
-                  {skill.description && (
-                    <p className="text-[10px] text-muted-foreground/70 mt-2 line-clamp-2 leading-tight">
-                      {skill.description}
-                    </p>
-                  )}
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        )}
+            {/* Row 2 */}
+            <motion.div
+              initial={{ x: 20, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex w-max animate-marquee-right gap-3 hover:paused"
+            >
+              {[...row2, ...row2, ...row2].map((tech, i) => {
+                const Icon = tech.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent glass"
+                  >
+                    <Icon className="h-4 w-4 text-primary" />
+                    <span className="text-xs font-semibold text-foreground">
+                      {tech.name}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+
+            {/* Row 3 */}
+            <motion.div
+              initial={{ x: -20, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex w-max animate-marquee-left gap-3 hover:paused"
+            >
+              {[...row3, ...row3, ...row3].map((tech, i) => {
+                const Icon = tech.icon;
+                return (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent glass"
+                  >
+                    <Icon className="h-4 w-4 text-primary" />
+                    <span className="text-xs font-semibold text-foreground">
+                      {tech.name}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+
+          {/* Bottom Bar exact match */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsModalOpen(true)}
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/40 transition-all duration-200 text-primary text-xs font-semibold backdrop-blur-md"
+            >
+              <span>See all</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </motion.button>
+
+            <span className="w-px h-4 bg-border/60" />
+
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-card/60 backdrop-blur-md border border-border/40 text-xs text-muted-foreground font-medium uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span>{totalCount}+ TOOLS</span>
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </section>
+
+      <TechModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        skills={skills}
+      />
+    </>
   );
 }
+
+export default TechStack;
