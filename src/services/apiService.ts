@@ -135,3 +135,71 @@ export const updateTestimonial = async (id: string, data: any) => {
 export const deleteTestimonial = async (id: string) => {
   return apiClient.delete(`/testimonials/${id}`);
 };
+
+// Experience API Calls
+export const getExperiences = async () => {
+  return apiClient.get("/experiences");
+};
+
+export const createExperience = async (data: any) => {
+  return apiClient.post("/experiences", data);
+};
+
+export const updateExperience = async (id: string, data: any) => {
+  return apiClient.patch(`/experiences/${id}`, data);
+};
+
+export const deleteExperience = async (id: string) => {
+  return apiClient.delete(`/experiences/${id}`);
+};
+
+// FAQ API Calls
+export const getFAQs = async () => {
+  return apiClient.get("/faqs");
+};
+
+export const createFAQ = async (data: any) => {
+  return apiClient.post("/faqs", data);
+};
+
+export const updateFAQ = async (id: string, data: any) => {
+  return apiClient.patch(`/faqs/${id}`, data);
+};
+
+export const deleteFAQ = async (id: string) => {
+  return apiClient.delete(`/faqs/${id}`);
+};
+
+// Tool API Calls
+export const getTools = async () => {
+  return apiClient.get("/tools");
+};
+
+export const createTool = async (data: any) => {
+  return apiClient.post("/tools", data);
+};
+
+export const updateTool = async (id: string, data: any) => {
+  return apiClient.patch(`/tools/${id}`, data);
+};
+
+export const deleteTool = async (id: string) => {
+  return apiClient.delete(`/tools/${id}`);
+};
+
+// SocialLink API Calls
+export const getSocialLinks = async () => {
+  return apiClient.get("/social-links");
+};
+
+export const createSocialLink = async (data: any) => {
+  return apiClient.post("/social-links", data);
+};
+
+export const updateSocialLink = async (id: string, data: any) => {
+  return apiClient.patch(`/social-links/${id}`, data);
+};
+
+export const deleteSocialLink = async (id: string) => {
+  return apiClient.delete(`/social-links/${id}`);
+};

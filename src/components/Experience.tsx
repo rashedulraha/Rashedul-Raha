@@ -28,27 +28,25 @@ export default function Experience() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
 
   useEffect(() => {
-    fetch("/project/project.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const projs = [
-          ...(data.projects1 || []),
-          ...(data.projects2 || []),
-          ...(data.projects3 || []),
-        ];
-        const exps: Experience[] = projs.map((p: any) => ({
-          id: p.id,
-          role: p.details?.role || "Full-Stack Developer",
-          company: p.title || p.name,
-          duration: p.details?.period || "2023 - Present",
-          location: "Remote",
-          description: p.details?.contributions || [p.description || p.overview],
-          skills: p.tags || p.tech_stack?.frameworks_libraries || [],
-          projectId: p.id,
-        }));
-        setExperiences(exps);
-      })
-      .catch((err) => console.error(err));
+    import("@/services/apiService").then(({ getExperiences }) => {
+      getExperiences()
+        .then((res) => {
+          if (res.data?.success && Array.isArray(res.data?.data)) {
+            const exps = res.data.data.map((item: any) => ({
+              id: item.id,
+              role: item.title,
+              company: item.company,
+              duration: item.duration,
+              location: item.location || "Remote",
+              description: item.description ? [item.description] : [],
+              skills: item.skills || [],
+              projectId: "",
+            }));
+            setExperiences(exps);
+          }
+        })
+        .catch((err) => console.error(err));
+    });
   }, []);
 
   return (

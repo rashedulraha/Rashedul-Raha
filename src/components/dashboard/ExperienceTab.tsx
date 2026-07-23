@@ -1,28 +1,42 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Edit2, Trash2, X, Briefcase, Calendar } from "lucide-react";
-
-const mockExperience = [
-  { 
-    id: 1, 
-    role: "Senior Full Stack Developer", 
-    company: "Tech Solutions Inc.", 
-    period: "2022 - Present",
-    description: "Leading the development of scalable web applications using Next.js and Node.js. Managing a team of 4 developers."
-  },
-  { 
-    id: 2, 
-    role: "Frontend Developer", 
-    company: "Creative Agency", 
-    period: "2020 - 2022",
-    description: "Built pixel-perfect, responsive user interfaces for high-profile clients using React and Tailwind CSS."
-  },
-];
+import { getExperiences, createExperience, deleteExperience } from "@/services/apiService";
 
 export function ExperienceTab() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [experiences, setExperiences] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchExperiences = async () => {
+    try {
+      const res = await getExperiences();
+      if (res.data?.success) {
+        setExperiences(res.data.data);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchExperiences();
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    if (confirm("Are you sure you want to delete this experience?")) {
+      try {
+        await deleteExperience(id);
+        fetchExperiences();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -41,44 +55,50 @@ export function ExperienceTab() {
       </div>
 
       <div className="space-y-6">
-        {mockExperience.map((exp, i) => (
-          <motion.div
-            key={exp.id}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="card-premium p-6 flex flex-col md:flex-row gap-6 relative group"
-          >
-            <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors">
-                <Edit2 className="w-4 h-4" />
-              </button>
-              <button className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors">
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : experiences.length === 0 ? (
+          <p>No experiences found.</p>
+        ) : (
+          experiences.map((exp, i) => (
+            <motion.div
+              key={exp.id}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="card-premium p-6 flex flex-col md:flex-row gap-6 relative group"
+            >
+              <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors">
+                  <Edit2 className="w-4 h-4" />
+                </button>
+                <button onClick={() => handleDelete(exp.id)} className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors">
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
 
-            <div className="shrink-0 w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center hidden md:flex">
-              <Briefcase className="w-8 h-8" />
-            </div>
-            
-            <div className="flex-1 space-y-3">
-              <div>
-                <h3 className="text-xl font-bold text-foreground pr-16">{exp.role}</h3>
-                <p className="text-primary font-medium">{exp.company}</p>
+              <div className="shrink-0 w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center hidden md:flex">
+                <Briefcase className="w-8 h-8" />
               </div>
               
-              <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 w-fit px-3 py-1 rounded-full">
-                <Calendar className="w-4 h-4" />
-                {exp.period}
+              <div className="flex-1 space-y-3">
+                <div>
+                  <h3 className="text-xl font-bold text-foreground pr-16">{exp.title}</h3>
+                  <p className="text-primary font-medium">{exp.company}</p>
+                </div>
+                
+                <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 w-fit px-3 py-1 rounded-full">
+                  <Calendar className="w-4 h-4" />
+                  {exp.duration}
+                </div>
+                
+                <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                  {exp.description}
+                </p>
               </div>
-              
-              <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-                {exp.description}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))
+        )}
       </div>
 
       {/* Add Experience Modal */}
