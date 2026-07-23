@@ -3,7 +3,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
-import { blogPosts } from "@/lib/blog-data";
 import { getBlogs } from "@/services/apiService";
 import Link from "next/link";
 
@@ -22,7 +21,7 @@ export default function Blog() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [hoveredCard, setHoveredCard] = useState<string | number | null>(null);
-  const [posts, setPosts] = useState<IBlog[]>(blogPosts as any);
+  const [posts, setPosts] = useState<IBlog[]>([]);
 
   // Floating particles (client-side only to prevent hydration mismatch)
   const [particles, setParticles] = useState<

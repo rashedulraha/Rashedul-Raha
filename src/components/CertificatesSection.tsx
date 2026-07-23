@@ -4,7 +4,6 @@ import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { certificatesData } from "@/lib/certificate-data";
 import { Link } from "@/routing";
 import { getCertificates } from "@/services/apiService";
 
@@ -22,7 +21,7 @@ export interface ICertificate {
 export default function CertificatesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
-  const [certs, setCerts] = useState<ICertificate[]>(certificatesData as any);
+  const [certs, setCerts] = useState<ICertificate[]>([]);
 
   useEffect(() => {
     async function loadCerts() {
