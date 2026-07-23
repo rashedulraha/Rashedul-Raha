@@ -68,6 +68,10 @@ export const createCertificate = async (data: any) => {
   return apiClient.post("/certificates", data);
 };
 
+export const updateCertificate = async (id: string, data: any) => {
+  return apiClient.patch(`/certificates/${id}`, data);
+};
+
 export const deleteCertificate = async (id: string) => {
   return apiClient.delete(`/certificates/${id}`);
 };

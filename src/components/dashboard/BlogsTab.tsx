@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Edit2, Trash2, ExternalLink, X, RefreshCw, BookOpen } from "lucide-react";
 import { getBlogs, createBlog, updateBlog, deleteBlog } from "@/services/apiService";
+import { ConfirmModal } from "./ConfirmModal";
 
 export interface IBlog {
   id: string;
@@ -23,6 +24,10 @@ export function BlogsTab() {
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBlog, setEditingBlog] = useState<IBlog | null>(null);
+
+  // Confirm delete states
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -82,15 +87,23 @@ export function BlogsTab() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this blog post?")) return;
+  const confirmDelete = (id: string) => {
+    setDeletingId(id);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deletingId) return;
+    setIsDeleting(true);
     try {
-      const res = await deleteBlog(id);
+      const res = await deleteBlog(deletingId);
       if (res.data.success) {
         fetchBlogs();
+        setDeletingId(null);
       }
     } catch (err) {
       alert("Failed to delete blog post.");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -100,7 +113,7 @@ export function BlogsTab() {
     try {
       const payload = {
         ...formData,
-        slug: formData.slug || formData.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+        slug: formData.slug || formData.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, ""),
       };
 
       const res = editingBlog
@@ -122,11 +135,11 @@ export function BlogsTab() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-foreground tracking-tight">Blogs Management</h2>
+          <h2 className="text-3xl font-bold text-foreground tracking-tight">Blog Posts</h2>
           <p className="text-muted-foreground mt-1">
-            Create, edit, and delete articles displayed on your portfolio blog.
+            Create, edit, and publish technical articles and tutorials.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -142,10 +155,16 @@ export function BlogsTab() {
             className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90 transition-all shadow-lg"
           >
             <Plus className="w-4 h-4" />
-            Add New Blog
+            Add Blog Post
           </button>
         </div>
       </div>
+
+      {error && (
+        <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-xl text-sm font-medium">
+          {error}
+        </div>
+      )}
 
       {isLoading ? (
         <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
@@ -154,7 +173,7 @@ export function BlogsTab() {
         </div>
       ) : blogs.length === 0 ? (
         <div className="card-premium p-12 text-center text-muted-foreground">
-          No blogs found. Click "Add New Blog" to create your first post!
+          No blog posts found. Write your first blog post!
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -163,30 +182,47 @@ export function BlogsTab() {
               <div>
                 <div className="aspect-video w-full rounded-xl overflow-hidden bg-muted mb-4 relative">
                   <img
-                    src={blog.image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"}
+                    src={blog.image || "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80"}
                     alt={blog.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <span className="absolute top-2 left-2 px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
-                    {blog.category}
-                  </span>
+                  <div className="absolute top-2 left-2 flex gap-2">
+                    <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
+                      {blog.category}
+                    </span>
+                    <span className="px-2.5 py-1 bg-primary/80 backdrop-blur-md rounded-full text-[10px] font-bold text-primary-foreground">
+                      {blog.readTime}
+                    </span>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-foreground line-clamp-1">{blog.title}</h3>
-                <p className="text-xs text-muted-foreground mt-2 line-clamp-2">{blog.description}</p>
+
+                <h3 className="text-base font-bold text-foreground line-clamp-1">{blog.title}</h3>
+                <p className="text-xs text-muted-foreground mt-2 line-clamp-3 leading-relaxed">
+                  {blog.description}
+                </p>
               </div>
 
               <div className="flex items-center justify-between pt-4 mt-4 border-t border-border/50 text-xs">
-                <span className="text-muted-foreground">{blog.readTime}</span>
+                <a
+                  href={`/blog/${blog.slug}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-1 text-primary hover:underline font-medium"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  View Article
+                </a>
+
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => openEditModal(blog)}
-                    className="p-2 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors text-muted-foreground"
-                    title="Edit blog"
+                    className="flex items-center gap-1 px-3 py-1.5 bg-muted hover:bg-accent text-foreground rounded-lg font-medium transition-colors"
                   >
-                    <Edit2 className="w-4 h-4" />
+                    <Edit2 className="w-3.5 h-3.5" />
+                    Edit
                   </button>
                   <button
-                    onClick={() => handleDelete(blog.id)}
+                    onClick={() => confirmDelete(blog.id)}
                     className="p-2 hover:bg-red-500/10 hover:text-red-500 rounded-lg transition-colors text-muted-foreground"
                     title="Delete blog"
                   >
@@ -199,6 +235,16 @@ export function BlogsTab() {
         </div>
       )}
 
+      {/* Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={Boolean(deletingId)}
+        title="Delete Blog Post"
+        message="Are you sure you want to delete this blog post? It will be removed permanently."
+        isLoading={isDeleting}
+        onConfirm={handleConfirmDelete}
+        onClose={() => setDeletingId(null)}
+      />
+
       {/* Add / Edit Modal */}
       <AnimatePresence>
         {isModalOpen && (
@@ -207,13 +253,13 @@ export function BlogsTab() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-background border border-border rounded-2xl p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl space-y-4"
+              className="bg-background border border-border rounded-2xl p-6 w-full max-w-2xl shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto"
             >
               <div className="flex justify-between items-center border-b border-border pb-3">
                 <h3 className="text-xl font-bold text-foreground">
                   {editingBlog ? "Edit Blog Post" : "Add New Blog Post"}
                 </h3>
-                <button onClick={() => setIsModalOpen(false)} className="p-1 hover:bg-muted rounded-lg">
+                <button onClick={() => setIsModalOpen(false)} className="p-1 hover:bg-muted rounded-lg text-muted-foreground">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -232,11 +278,13 @@ export function BlogsTab() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-semibold text-foreground">Category</label>
+                    <label className="text-xs font-semibold text-foreground">Category *</label>
                     <input
                       type="text"
+                      required
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                      placeholder="Tutorial, Architecture, Next.js"
                       className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                     />
                   </div>
@@ -246,6 +294,7 @@ export function BlogsTab() {
                       type="text"
                       value={formData.readTime}
                       onChange={(e) => setFormData({ ...formData, readTime: e.target.value })}
+                      placeholder="5 min read"
                       className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                     />
                   </div>
@@ -274,13 +323,14 @@ export function BlogsTab() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-foreground">Content (Markdown / Text) *</label>
+                  <label className="text-xs font-semibold text-foreground">Content (Markdown / HTML) *</label>
                   <textarea
                     required
-                    rows={5}
+                    rows={8}
                     value={formData.content}
                     onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    placeholder="Write your article content here..."
+                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50 font-mono text-xs"
                   />
                 </div>
 
@@ -297,7 +347,7 @@ export function BlogsTab() {
                     disabled={isSubmitting}
                     className="px-6 py-2 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90"
                   >
-                    {isSubmitting ? "Saving..." : "Save Blog"}
+                    {isSubmitting ? "Saving..." : editingBlog ? "Update Blog" : "Publish Blog"}
                   </button>
                 </div>
               </form>

@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Edit2, Trash2, ExternalLink, X, RefreshCw, Layers } from "lucide-react";
+import { Plus, Edit2, Trash2, ExternalLink, X, RefreshCw, Layers, Search, Code, CheckCircle2 } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { getProjects, createProject, updateProject, deleteProject } from "@/services/apiService";
+import { ConfirmModal } from "./ConfirmModal";
 
 export interface IProject {
   id: string;
@@ -29,6 +30,14 @@ export function ProjectsTab() {
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<IProject | null>(null);
+  
+  // Delete confirm modal state
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Search & Filter
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeType, setActiveType] = useState("All");
 
   // Form states
   const [formData, setFormData] = useState({
@@ -107,18 +116,25 @@ export function ProjectsTab() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this project?")) return;
+  const confirmDelete = (id: string) => {
+    setDeletingId(id);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deletingId) return;
+    setIsDeleting(true);
     try {
-      const res = await deleteProject(id);
-      const data = res.data;
-      if (data.success) {
+      const res = await deleteProject(deletingId);
+      if (res.data.success) {
         fetchProjects();
+        setDeletingId(null);
       } else {
-        alert(data.message || "Failed to delete project");
+        alert(res.data.message || "Failed to delete project");
       }
     } catch (err: any) {
-      alert(err.response?.data?.message || "Error connecting to backend server");
+      alert(err.response?.data?.message || "Error deleting project");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -160,28 +176,70 @@ export function ProjectsTab() {
     }
   };
 
+  const filteredProjects = useMemo(() => {
+    return projects.filter((p) => {
+      const matchesSearch =
+        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.tags?.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+      const matchesType = activeType === "All" || p.type === activeType;
+      return matchesSearch && matchesType;
+    });
+  }, [projects, searchQuery, activeType]);
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-foreground mb-2">Projects Management</h2>
-          <p className="text-muted-foreground">Add, edit, or remove backend projects dynamically.</p>
+          <h2 className="text-3xl font-bold text-foreground tracking-tight">Projects Management</h2>
+          <p className="text-muted-foreground mt-1">Manage and customize your portfolio projects dynamically.</p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchProjects}
-            className="p-2.5 bg-muted hover:bg-accent text-foreground rounded-xl border border-border transition-colors flex items-center gap-2"
-            title="Refresh Projects"
+            className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-accent text-foreground text-xs font-semibold rounded-xl transition-all"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
+            Refresh
           </button>
           <button 
             onClick={openAddModal}
-            className="px-4 py-2.5 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-all flex items-center gap-2 shadow-lg shadow-primary/20"
+            className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90 transition-all shadow-lg"
           >
-            <Plus className="w-5 h-5" />
+            <Plus className="w-4 h-4" />
             Add Project
           </button>
+        </div>
+      </div>
+
+      {/* Search and Filters */}
+      <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-card/40 border border-border/50 rounded-2xl p-3 backdrop-blur-sm">
+        <div className="relative w-full sm:w-80">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Search projects by name or tags..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-muted/60 border border-border rounded-xl pl-10 pr-4 py-2 text-xs text-foreground focus:outline-none focus:border-primary/50 transition-all"
+          />
+        </div>
+
+        <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
+          {["All", "Web App", "Mobile App", "UI Kit"].map((type) => (
+            <button
+              key={type}
+              onClick={() => setActiveType(type)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                activeType === type
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                  : "bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground"
+              }`}
+            >
+              {type}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -191,260 +249,293 @@ export function ProjectsTab() {
         </div>
       )}
 
-      <div className="card-premium overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-border bg-muted/50 text-xs uppercase tracking-wider">
-                <th className="p-4 font-semibold text-muted-foreground">Project Details</th>
-                <th className="p-4 font-semibold text-muted-foreground">Type & Badge</th>
-                <th className="p-4 font-semibold text-muted-foreground">Tags</th>
-                <th className="p-4 font-semibold text-muted-foreground text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {isLoading ? (
-                <tr>
-                  <td colSpan={4} className="p-8 text-center text-muted-foreground">
-                    <div className="flex items-center justify-center gap-2">
-                      <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                      Loading projects from backend...
-                    </div>
-                  </td>
-                </tr>
-              ) : projects.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="p-8 text-center text-muted-foreground">
-                    No projects found in database. Click <strong>Add Project</strong> to create your first project!
-                  </td>
-                </tr>
-              ) : (
-                projects.map((project) => (
-                  <tr key={project.id} className="border-b border-border/50 hover:bg-muted/20 transition-colors">
-                    <td className="p-4">
-                      <div className="flex items-center gap-3">
-                        {project.image ? (
-                          <img src={project.image} alt={project.title} className="w-12 h-12 rounded-xl object-cover border border-border" />
-                        ) : (
-                          <div className="w-12 h-12 rounded-xl bg-muted border border-border flex items-center justify-center text-muted-foreground">
-                            <Layers className="w-6 h-6" />
-                          </div>
-                        )}
-                        <div>
-                          <div className="font-semibold text-foreground">{project.title}</div>
-                          <div className="text-xs text-muted-foreground line-clamp-1">{project.subtitle || project.description}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <div className="flex flex-col gap-1">
-                        <span className="text-xs font-semibold text-primary">{project.type || "Web App"}</span>
-                        {project.badge && (
-                          <span className="px-2 py-0.5 text-[10px] font-mono bg-muted border border-border text-muted-foreground rounded-md w-fit">
-                            {project.badge}
-                          </span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <div className="flex flex-wrap gap-1 max-w-xs">
-                        {project.tags?.slice(0, 3).map((tag, idx) => (
-                          <span key={idx} className="px-2 py-0.5 text-[10px] bg-primary/10 text-primary rounded-md font-mono">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
-                    <td className="p-4">
-                      <div className="flex items-center justify-end gap-2">
-                        {project.liveUrl && (
-                          <a href={project.liveUrl} target="_blank" rel="noreferrer" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors">
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        )}
-                        <button onClick={() => openEditModal(project)} className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors">
-                          <Edit2 className="w-4 h-4" />
-                        </button>
-                        <button onClick={() => handleDelete(project.id)} className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors">
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+      {/* Projects Grid Cards */}
+      {isLoading ? (
+        <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
+          <RefreshCw className="w-6 h-6 animate-spin text-primary" />
+          <span>Loading projects...</span>
         </div>
-      </div>
+      ) : filteredProjects.length === 0 ? (
+        <div className="card-premium p-12 text-center text-muted-foreground">
+          No projects found. Add your first project!
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProjects.map((project) => (
+            <motion.div
+              key={project.id}
+              layout
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="card-premium p-5 flex flex-col justify-between group relative overflow-hidden"
+            >
+              <div>
+                <div className="aspect-video w-full rounded-xl overflow-hidden bg-muted mb-4 relative">
+                  <img
+                    src={project.image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-3 left-3 flex gap-2">
+                    <span className="px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
+                      {project.type}
+                    </span>
+                    {project.badge && (
+                      <span className="px-2.5 py-1 bg-primary/80 backdrop-blur-md rounded-full text-[10px] font-bold text-primary-foreground uppercase tracking-wider">
+                        {project.badge}
+                      </span>
+                    )}
+                  </div>
+                </div>
 
-      {/* Add / Edit Project Modal */}
+                <h3 className="text-lg font-bold text-foreground line-clamp-1">{project.title}</h3>
+                {project.subtitle && (
+                  <p className="text-xs font-semibold text-primary mt-0.5">{project.subtitle}</p>
+                )}
+                <p className="text-xs text-muted-foreground mt-2 line-clamp-2 leading-relaxed">
+                  {project.description}
+                </p>
+
+                {/* Tags */}
+                {project.tags && project.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {project.tags.slice(0, 4).map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="px-2 py-0.5 rounded-md bg-muted/60 text-[10px] font-medium text-foreground/80 border border-border/40"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {project.tags.length > 4 && (
+                      <span className="px-1.5 py-0.5 rounded-md bg-muted text-[10px] text-muted-foreground">
+                        +{project.tags.length - 4}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Actions Footer */}
+              <div className="flex items-center justify-between pt-4 mt-4 border-t border-border/50 text-xs">
+                <div className="flex items-center gap-2">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2 hover:bg-muted rounded-lg text-muted-foreground hover:text-primary transition-colors"
+                      title="Live Demo"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2 hover:bg-muted rounded-lg text-muted-foreground hover:text-foreground transition-colors"
+                      title="GitHub Repository"
+                    >
+                      <FaGithub className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => openEditModal(project)}
+                    className="flex items-center gap-1 px-3 py-1.5 bg-muted hover:bg-accent text-foreground rounded-lg font-medium transition-colors"
+                  >
+                    <Edit2 className="w-3.5 h-3.5" />
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => confirmDelete(project.id)}
+                    className="p-2 hover:bg-red-500/10 hover:text-red-500 text-muted-foreground rounded-lg transition-colors"
+                    title="Delete Project"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={Boolean(deletingId)}
+        title="Delete Project"
+        message="Are you sure you want to delete this project? It will be removed from your portfolio."
+        isLoading={isDeleting}
+        onConfirm={handleConfirmDelete}
+        onClose={() => setDeletingId(null)}
+      />
+
+      {/* Add / Edit Modal */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+              className="bg-background border border-border rounded-2xl p-6 w-full max-w-2xl shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto"
             >
-              <div className="flex items-center justify-between p-6 border-b border-border">
+              <div className="flex justify-between items-center border-b border-border pb-3">
                 <h3 className="text-xl font-bold text-foreground">
                   {editingProject ? "Edit Project" : "Add New Project"}
                 </h3>
-                <button onClick={() => setIsModalOpen(false)} className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-colors">
+                <button onClick={() => setIsModalOpen(false)} className="p-1 hover:bg-muted rounded-lg text-muted-foreground">
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              
-              <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
-                <div className="p-6 overflow-y-auto space-y-5 flex-1">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Project Title *</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.title}
-                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                        placeholder="e.g. Keythm"
-                        className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
-                      />
-                    </div>
 
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Slug (Optional)</label>
-                      <input
-                        type="text"
-                        value={formData.slug}
-                        onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                        placeholder="e.g. keythm"
-                        className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm font-mono"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Subtitle / Tagline</label>
-                      <input
-                        type="text"
-                        value={formData.subtitle}
-                        onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
-                        placeholder="e.g. Typing Test Reimagined"
-                        className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Project Type</label>
-                      <select
-                        value={formData.type}
-                        onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                        className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
-                      >
-                        <option value="Web App">Web App</option>
-                        <option value="Mobile App">Mobile App</option>
-                        <option value="Full-Stack">Full-Stack</option>
-                        <option value="UI/UX Design">UI/UX Design</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Description *</label>
-                    <textarea
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">Title *</label>
+                    <input
+                      type="text"
                       required
-                      rows={3}
-                      value={formData.description}
-                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      placeholder="Detailed overview of the project..."
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm resize-none"
+                      value={formData.title}
+                      onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                     />
                   </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Image URL (Leave blank or paste image link)</label>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">Subtitle (Optional)</label>
                     <input
                       type="text"
-                      value={formData.image}
-                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                      placeholder="/images/image.png or https://..."
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm font-mono"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                        <ExternalLink className="w-3.5 h-3.5" /> Live Demo URL
-                      </label>
-                      <input
-                        type="url"
-                        value={formData.liveUrl}
-                        onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })}
-                        placeholder="https://keythm.dev"
-                        className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                        <FaGithub className="w-3.5 h-3.5" /> GitHub Repo URL
-                      </label>
-                      <input
-                        type="url"
-                        value={formData.githubUrl}
-                        onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
-                        placeholder="https://github.com/..."
-                        className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Tags (comma separated)</label>
-                    <input
-                      type="text"
-                      value={formData.tags}
-                      onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                      placeholder="Next.js, React, TypeScript, Tailwind CSS"
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Key Features (comma separated)</label>
-                    <input
-                      type="text"
-                      value={formData.features}
-                      onChange={(e) => setFormData({ ...formData, features: e.target.value })}
-                      placeholder="Web Audio API sound, WPM tracking, PWA precaching"
-                      className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+                      value={formData.subtitle}
+                      onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
+                      placeholder="e.g. AI Powered Platform"
+                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                     />
                   </div>
                 </div>
 
-                <div className="p-6 border-t border-border flex justify-end gap-3 bg-muted/30">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">Type</label>
+                    <select
+                      value={formData.type}
+                      onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    >
+                      <option value="Web App">Web App</option>
+                      <option value="Mobile App">Mobile App</option>
+                      <option value="UI Kit">UI Kit</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">Badge</label>
+                    <input
+                      type="text"
+                      value={formData.badge}
+                      onChange={(e) => setFormData({ ...formData, badge: e.target.value })}
+                      placeholder="Q1 2026"
+                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">Stats Badge</label>
+                    <input
+                      type="text"
+                      value={formData.stats}
+                      onChange={(e) => setFormData({ ...formData, stats: e.target.value })}
+                      placeholder="4.3k checks"
+                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-foreground">Image URL *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.image}
+                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                    placeholder="https://images.unsplash.com/..."
+                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-foreground">Description *</label>
+                  <textarea
+                    required
+                    rows={3}
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">Tags (comma-separated)</label>
+                    <input
+                      type="text"
+                      value={formData.tags}
+                      onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+                      placeholder="Next.js, React, Tailwind CSS"
+                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">Features (comma-separated)</label>
+                    <input
+                      type="text"
+                      value={formData.features}
+                      onChange={(e) => setFormData({ ...formData, features: e.target.value })}
+                      placeholder="Feature 1, Feature 2"
+                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">Live Demo URL</label>
+                    <input
+                      type="text"
+                      value={formData.liveUrl}
+                      onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })}
+                      placeholder="https://..."
+                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-foreground">GitHub Repo URL</label>
+                    <input
+                      type="text"
+                      value={formData.githubUrl}
+                      onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
+                      placeholder="https://github.com/..."
+                      className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end gap-3 pt-4 border-t border-border">
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-5 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    className="px-4 py-2 bg-muted hover:bg-accent text-xs font-semibold rounded-xl"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-6 py-2.5 bg-primary text-primary-foreground rounded-xl text-sm font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 flex items-center gap-2"
+                    className="px-6 py-2 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90"
                   >
-                    {isSubmitting ? (
-                      <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-                    ) : editingProject ? (
-                      "Update Project"
-                    ) : (
-                      "Create Project"
-                    )}
+                    {isSubmitting ? "Saving..." : editingProject ? "Update Project" : "Create Project"}
                   </button>
                 </div>
               </form>
