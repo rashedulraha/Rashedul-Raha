@@ -703,7 +703,7 @@ export default function SearchModal() {
                               </label>
                               <input
                                 type="text"
-                                placeholder={t("namePlaceholder")}
+                                placeholder="Your Name"
                                 required
                                 value={contactName}
                                 onChange={(e) => setContactName(e.target.value)}
@@ -716,7 +716,7 @@ export default function SearchModal() {
                               </label>
                               <input
                                 type="email"
-                                placeholder="john@example.com"
+                                placeholder="your.email@gmail.com"
                                 required
                                 value={contactEmail}
                                 onChange={(e) =>
@@ -734,7 +734,7 @@ export default function SearchModal() {
                               </label>
                               <input
                                 type="tel"
-                                placeholder="+1 (555) 000-0000"
+                                placeholder="Your personal phone number"
                                 className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all glass"
                               />
                             </div>
@@ -744,7 +744,7 @@ export default function SearchModal() {
                               </label>
                               <input
                                 type="text"
-                                placeholder={t("topicPlaceholder")}
+                                placeholder="Topic of conversation"
                                 value={contactTopic}
                                 onChange={(e) =>
                                   setContactTopic(e.target.value)
@@ -760,7 +760,7 @@ export default function SearchModal() {
                             </label>
                             <textarea
                               className="bg-muted border border-border rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all h-32 resize-none glass"
-                              placeholder={t("messagePlaceholder")}
+                              placeholder="Write your message here..."
                               required
                               value={message}
                               onChange={(e) => setMessage(e.target.value)}
