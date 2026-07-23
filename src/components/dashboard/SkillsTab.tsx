@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Plus,
@@ -18,8 +18,14 @@ import {
   Edit2,
   Trash2,
   RefreshCw,
+  Search,
+  Cpu,
+  Globe,
+  ShieldCheck,
+  Zap,
 } from "lucide-react";
 import { getSkills, createSkill, updateSkill, deleteSkill } from "@/services/apiService";
+import { ConfirmModal } from "./ConfirmModal";
 
 export interface ISkill {
   id: string;
@@ -41,6 +47,10 @@ const iconMap: Record<string, React.ElementType> = {
   Terminal,
   Monitor,
   Sparkles,
+  Cpu,
+  Globe,
+  ShieldCheck,
+  Zap,
 };
 
 export function SkillsTab() {
@@ -49,6 +59,14 @@ export function SkillsTab() {
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingSkill, setEditingSkill] = useState<ISkill | null>(null);
+
+  // Delete confirm modal state
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Search & Filter
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -101,19 +119,25 @@ export function SkillsTab() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this skill?")) return;
+  const confirmDelete = (id: string) => {
+    setDeletingId(id);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deletingId) return;
+    setIsDeleting(true);
     try {
-      const res = await deleteSkill(id);
+      const res = await deleteSkill(deletingId);
       if (res.data.success) {
         fetchSkills();
+        setDeletingId(null);
       } else {
         alert(res.data.message || "Failed to delete skill");
       }
     } catch (err: any) {
-      alert(
-        err.response?.data?.message || "Error connecting to backend server",
-      );
+      alert(err.response?.data?.message || "Error deleting skill");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -146,34 +170,78 @@ export function SkillsTab() {
     }
   };
 
+  const categories = useMemo(() => {
+    const cats = Array.from(new Set(skills.map((s) => s.category || "General")));
+    return ["All", ...cats];
+  }, [skills]);
+
+  const filteredSkills = useMemo(() => {
+    return skills.filter((s) => {
+      const matchesSearch =
+        s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        s.category.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCat = activeCategory === "All" || s.category === activeCategory;
+      return matchesSearch && matchesCat;
+    });
+  }, [skills, searchQuery, activeCategory]);
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-foreground mb-2">
+          <h2 className="text-3xl font-bold text-foreground tracking-tight">
             Skills & Technologies
           </h2>
-          <p className="text-muted-foreground">
-            Manage your tech stack skills and toolkit dynamically.
+          <p className="text-muted-foreground mt-1">
+            Manage your tech stack skills, icons, and category badges dynamically.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchSkills}
-            className="p-2.5 bg-muted hover:bg-accent text-foreground rounded-xl border border-border transition-colors flex items-center gap-2"
-            title="Refresh Skills"
+            className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-accent rounded-xl text-xs font-semibold text-foreground transition-all"
           >
-            <RefreshCw
-              className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`}
-            />
+            <RefreshCw className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
+            Refresh
           </button>
           <button
             onClick={openAddModal}
-            className="px-4 py-2.5 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-all flex items-center gap-2 shadow-lg shadow-primary/20"
+            className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20"
           >
-            <Plus className="w-5 h-5" />
+            <Plus className="w-4 h-4" />
             Add Skill
           </button>
+        </div>
+      </div>
+
+      {/* Controls Bar */}
+      <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-card/40 border border-border/50 rounded-2xl p-3 backdrop-blur-sm">
+        <div className="relative w-full sm:w-72">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Search skills..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-muted/60 border border-border rounded-xl pl-10 pr-4 py-2 text-xs text-foreground focus:outline-none focus:border-primary/50 transition-all"
+          />
+        </div>
+
+        <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                activeCategory === cat
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                  : "bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -183,66 +251,52 @@ export function SkillsTab() {
         </div>
       )}
 
+      {/* Skills Grid */}
       {isLoading ? (
-        <div className="p-12 text-center text-muted-foreground card-premium">
-          <div className="flex items-center justify-center gap-2">
-            <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-            Loading skills from backend...
-          </div>
+        <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
+          <RefreshCw className="w-6 h-6 animate-spin text-primary" />
+          <span>Loading skills...</span>
         </div>
-      ) : skills.length === 0 ? (
-        <div className="p-12 text-center text-muted-foreground card-premium">
-          No skills found in database. Click <strong>Add Skill</strong> to
-          create your first tech skill!
+      ) : filteredSkills.length === 0 ? (
+        <div className="card-premium p-12 text-center text-muted-foreground">
+          No skills found. Add your first technology!
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {skills.map((skill, i) => {
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {filteredSkills.map((skill) => {
             const IconComponent = iconMap[skill.icon || "Code"] || Code;
             return (
               <motion.div
                 key={skill.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.03 }}
-                className="group relative card-premium p-5 flex flex-col justify-between transition-all duration-300 hover:border-primary/40 hover:shadow-lg"
+                layout
+                className="card-premium p-4 flex flex-col items-center text-center justify-between group relative overflow-hidden"
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <IconComponent className="w-5 h-5" />
-                  </div>
-                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button
-                      onClick={() => openEditModal(skill)}
-                      className="p-1.5 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"
-                      title="Edit Skill"
-                    >
-                      <Edit2 className="w-3.5 h-3.5" />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(skill.id)}
-                      className="p-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
-                      title="Delete Skill"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                <div className="p-3 rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 mb-3 shadow-md">
+                  <IconComponent className="w-6 h-6" />
                 </div>
 
-                <div className="mt-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="text-base font-bold text-foreground">
-                      {skill.name}
-                    </p>
-                    <span className="px-2 py-0.5 text-[10px] font-medium bg-primary/10 text-primary rounded-md">
-                      {skill.category}
-                    </span>
-                  </div>
-                  {skill.description && (
-                    <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                      {skill.description}
-                    </p>
-                  )}
+                <div>
+                  <h3 className="text-xs font-bold text-foreground line-clamp-1">{skill.name}</h3>
+                  <span className="text-[10px] text-muted-foreground/80 mt-0.5 block font-medium">
+                    {skill.category}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2 pt-3 mt-3 border-t border-border/50 w-full justify-center">
+                  <button
+                    onClick={() => openEditModal(skill)}
+                    className="p-1.5 hover:bg-muted rounded-lg text-muted-foreground hover:text-foreground transition-colors"
+                    title="Edit Skill"
+                  >
+                    <Edit2 className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    onClick={() => confirmDelete(skill.id)}
+                    className="p-1.5 hover:bg-red-500/10 hover:text-red-500 text-muted-foreground rounded-lg transition-colors"
+                    title="Delete Skill"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </motion.div>
             );
@@ -250,122 +304,99 @@ export function SkillsTab() {
         </div>
       )}
 
-      {/* Add / Edit Skill Modal */}
+      {/* Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={Boolean(deletingId)}
+        title="Delete Skill"
+        message="Are you sure you want to delete this skill? It will be removed from your public tech stack."
+        isLoading={isDeleting}
+        onConfirm={handleConfirmDelete}
+        onClose={() => setDeletingId(null)}
+      />
+
+      {/* Add / Edit Modal */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-md bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+              className="bg-background border border-border rounded-2xl p-6 w-full max-w-md shadow-2xl space-y-4"
             >
-              <div className="flex items-center justify-between p-6 border-b border-border">
+              <div className="flex justify-between items-center border-b border-border pb-3">
                 <h3 className="text-xl font-bold text-foreground">
                   {editingSkill ? "Edit Skill" : "Add New Skill"}
                 </h3>
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-colors"
-                >
+                <button onClick={() => setIsModalOpen(false)} className="p-1 hover:bg-muted rounded-lg text-muted-foreground">
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="p-6 space-y-5">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Skill Name *
-                  </label>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="text-xs font-semibold text-foreground">Skill Name *</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    placeholder="e.g. Next.js"
-                    className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="e.g. Next.js, PostgreSQL"
+                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                   />
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Category *
-                  </label>
-                  <select
-                    value={formData.category}
-                    onChange={(e) =>
-                      setFormData({ ...formData, category: e.target.value })
-                    }
-                    className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm cursor-pointer"
-                  >
-                    <option value="Frontend">Frontend</option>
-                    <option value="Backend">Backend</option>
-                    <option value="DevOps & Tools">DevOps & Tools</option>
-                    <option value="Operating Systems">Operating Systems</option>
-                  </select>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Description
-                  </label>
+                <div>
+                  <label className="text-xs font-semibold text-foreground">Category *</label>
                   <input
                     type="text"
-                    value={formData.description}
-                    onChange={(e) =>
-                      setFormData({ ...formData, description: e.target.value })
-                    }
-                    placeholder="e.g. React framework with SSR & SSG"
-                    className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+                    required
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    placeholder="Frontend, Backend, DevOps, etc."
+                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                   />
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Icon
-                  </label>
+                <div>
+                  <label className="text-xs font-semibold text-foreground">Icon</label>
                   <select
                     value={formData.icon}
-                    onChange={(e) =>
-                      setFormData({ ...formData, icon: e.target.value })
-                    }
-                    className="w-full px-4 py-2.5 bg-background border border-border rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm cursor-pointer"
+                    onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
+                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
                   >
-                    <option value="Layout">Layout (Frontend)</option>
-                    <option value="Code">Code (Languages)</option>
-                    <option value="Box">Box (Docker / Framework)</option>
-                    <option value="Server">Server (Backend)</option>
-                    <option value="Database">Database (MongoDB / SQL)</option>
-                    <option value="Wind">Wind (Tailwind CSS)</option>
-                    <option value="Layers">Layers (UI Component)</option>
-                    <option value="Terminal">Terminal (Linux / CLI)</option>
-                    <option value="Monitor">Monitor (OS / Vercel)</option>
-                    <option value="Sparkles">Sparkles (AI / Motion)</option>
+                    {Object.keys(iconMap).map((iconName) => (
+                      <option key={iconName} value={iconName}>
+                        {iconName}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
-                <div className="pt-4 border-t border-border flex justify-end gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-foreground">Description (Optional)</label>
+                  <textarea
+                    rows={2}
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary/50"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-3 pt-4 border-t border-border">
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-5 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    className="px-4 py-2 bg-muted hover:bg-accent text-xs font-semibold rounded-xl"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-6 py-2.5 bg-primary text-primary-foreground rounded-xl text-sm font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 flex items-center gap-2"
+                    className="px-6 py-2 bg-primary text-primary-foreground text-xs font-bold rounded-xl hover:opacity-90"
                   >
-                    {isSubmitting ? (
-                      <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-                    ) : editingSkill ? (
-                      "Update Skill"
-                    ) : (
-                      "Add Skill"
-                    )}
+                    {isSubmitting ? "Saving..." : editingSkill ? "Update Skill" : "Add Skill"}
                   </button>
                 </div>
               </form>
