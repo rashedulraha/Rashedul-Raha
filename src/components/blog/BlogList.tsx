@@ -6,6 +6,7 @@ import { Link } from "@/routing";
 import Image from "next/image";
 import { BlogPost } from "@/lib/blog-data";
 import { useTranslations } from "next-intl";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const categories = [
   "All Posts",
@@ -25,6 +26,7 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
   const t = useTranslations("BlogPage");
   const [activeCategory, setActiveCategory] = useState("All Posts");
   const [searchQuery, setSearchQuery] = useState("");
+  const isLoading = !initialPosts || initialPosts.length === 0;
 
   const formatDate = (dateStr: string | undefined) => {
     if (!dateStr) return "";
@@ -108,7 +110,58 @@ export default function BlogList({ initialPosts }: { initialPosts: BlogPost[] })
         </div>
       </div>
 
-      {filteredPosts.length === 0 ? (
+      {isLoading ? (
+        <div className="space-y-20">
+          {/* Featured Post Skeleton */}
+          <div>
+            <div className="flex justify-center mb-8">
+              <Skeleton className="h-4 w-36 rounded-md" />
+            </div>
+            <div className="overflow-hidden rounded-3xl border border-foreground/10 bg-[hsl(var(--background))] flex flex-col lg:flex-row min-h-[360px]">
+              <div className="w-full lg:w-[55%] p-4">
+                <Skeleton className="w-full aspect-video lg:h-full rounded-2xl" />
+              </div>
+              <div className="w-full lg:w-[45%] flex flex-col justify-between p-8 lg:p-12 space-y-6">
+                <div>
+                  <Skeleton className="h-4 w-28 rounded-md mb-4" />
+                  <Skeleton className="h-8 w-3/4 rounded-lg mb-4" />
+                  <Skeleton className="h-4 w-full rounded-md mb-2" />
+                  <Skeleton className="h-4 w-5/6 rounded-md mb-8" />
+                  <div className="flex gap-2">
+                    {[1, 2, 3, 4].map((t) => (
+                      <Skeleton key={t} className="h-6 w-16 rounded-full" />
+                    ))}
+                  </div>
+                </div>
+                <div className="flex justify-end">
+                  <Skeleton className="h-9 w-32 rounded-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Latest Posts Grid Skeleton */}
+          <div>
+            <div className="flex justify-center mb-8">
+              <Skeleton className="h-4 w-32 rounded-md" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="flex flex-col rounded-3xl p-3 card-premium h-full space-y-4">
+                  <Skeleton className="aspect-16/11 rounded-2xl w-full" />
+                  <Skeleton className="h-6 w-3/4 rounded-lg" />
+                  <Skeleton className="h-4 w-full rounded-md" />
+                  <Skeleton className="h-4 w-4/5 rounded-md" />
+                  <div className="mt-auto pt-4 border-t border-border flex justify-between items-center">
+                    <Skeleton className="h-4 w-28 rounded-md" />
+                    <Skeleton className="h-7 w-20 rounded-lg" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : filteredPosts.length === 0 ? (
         <div className="text-center text-muted-foreground py-20">
           <p>{t("noPosts")}</p>
         </div>

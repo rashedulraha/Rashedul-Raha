@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { getGuestbookMessages, deleteGuestbookMessage } from "@/services/apiService";
 import { ConfirmModal } from "./ConfirmModal";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface IGuestbookMessage {
   id: string;
@@ -213,9 +214,20 @@ export function GuestbookTab() {
       </div>
 
       {isLoading ? (
-        <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
-          <RefreshCw className="w-8 h-8 animate-spin text-primary" />
-          <span className="text-sm font-medium animate-pulse">Loading guestbook messages...</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="card-premium p-5 flex flex-col justify-between space-y-4">
+              <Skeleton className="h-5 w-full rounded-md" />
+              <Skeleton className="h-5 w-4/5 rounded-md" />
+              <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                <div className="flex items-center gap-3">
+                  <Skeleton className="w-8 h-8 rounded-full" />
+                  <Skeleton className="h-4 w-24 rounded-md" />
+                </div>
+                <Skeleton className="h-7 w-12 rounded-lg" />
+              </div>
+            </div>
+          ))}
         </div>
       ) : filteredMessages.length === 0 ? (
         <div className="card-premium p-16 text-center text-muted-foreground border-dashed border-2 border-border/50 rounded-3xl flex flex-col items-center justify-center gap-4">

@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { getSkills } from "@/services/apiService";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface ISkillItem {
   id: string;
@@ -225,12 +226,14 @@ function TechModal({
 
 export function TechStack() {
   const [skills, setSkills] = useState<ISkillItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-50px" });
 
   useEffect(() => {
     async function loadSkills() {
+      setIsLoading(true);
       try {
         const res = await getSkills();
         if (res.data.success && Array.isArray(res.data.data) && res.data.data.length > 0) {
@@ -238,6 +241,8 @@ export function TechStack() {
         }
       } catch (err) {
         console.error("Failed to load skills:", err);
+      } finally {
+        setIsLoading(false);
       }
     }
     loadSkills();
@@ -300,77 +305,99 @@ export function TechStack() {
 
           {/* Marquee Rows Container */}
           <div className="absolute inset-0 z-0 flex flex-col justify-center gap-3 overflow-hidden pt-14 mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            {/* Row 1 */}
-            <motion.div
-              initial={{ x: -20, opacity: 0 }}
-              animate={isInView ? { x: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex w-max animate-marquee-left gap-3 hover:paused"
-            >
-              {[...row1, ...row1, ...row1].map((tech, i) => {
-                const Icon = tech.icon;
-                return (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent glass"
-                  >
-                    <Icon className="h-4 w-4 text-primary" />
-                    <span className="text-xs font-semibold text-foreground">
-                      {tech.name}
-                    </span>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+            {isLoading ? (
+              <div className="flex flex-col gap-3 justify-center items-center h-full">
+                <div className="flex gap-3 overflow-hidden">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Skeleton key={i} className="h-9 w-28 rounded-full" />
+                  ))}
+                </div>
+                <div className="flex gap-3 overflow-hidden">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Skeleton key={i} className="h-9 w-28 rounded-full" />
+                  ))}
+                </div>
+                <div className="flex gap-3 overflow-hidden">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Skeleton key={i} className="h-9 w-28 rounded-full" />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <>
+                {/* Row 1 */}
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={isInView ? { x: 0, opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="flex w-max animate-marquee-left gap-3 hover:paused"
+                >
+                  {[...row1, ...row1, ...row1].map((tech, i) => {
+                    const Icon = tech.icon;
+                    return (
+                      <motion.div
+                        key={i}
+                        whileHover={{ scale: 1.05 }}
+                        className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent glass"
+                      >
+                        <Icon className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-semibold text-foreground">
+                          {tech.name}
+                        </span>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
 
-            {/* Row 2 */}
-            <motion.div
-              initial={{ x: 20, opacity: 0 }}
-              animate={isInView ? { x: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex w-max animate-marquee-right gap-3 hover:paused"
-            >
-              {[...row2, ...row2, ...row2].map((tech, i) => {
-                const Icon = tech.icon;
-                return (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent glass"
-                  >
-                    <Icon className="h-4 w-4 text-primary" />
-                    <span className="text-xs font-semibold text-foreground">
-                      {tech.name}
-                    </span>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+                {/* Row 2 */}
+                <motion.div
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={isInView ? { x: 0, opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="flex w-max animate-marquee-right gap-3 hover:paused"
+                >
+                  {[...row2, ...row2, ...row2].map((tech, i) => {
+                    const Icon = tech.icon;
+                    return (
+                      <motion.div
+                        key={i}
+                        whileHover={{ scale: 1.05 }}
+                        className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent glass"
+                      >
+                        <Icon className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-semibold text-foreground">
+                          {tech.name}
+                        </span>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
 
-            {/* Row 3 */}
-            <motion.div
-              initial={{ x: -20, opacity: 0 }}
-              animate={isInView ? { x: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex w-max animate-marquee-left gap-3 hover:paused"
-            >
-              {[...row3, ...row3, ...row3].map((tech, i) => {
-                const Icon = tech.icon;
-                return (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent glass"
-                  >
-                    <Icon className="h-4 w-4 text-primary" />
-                    <span className="text-xs font-semibold text-foreground">
-                      {tech.name}
-                    </span>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
+                {/* Row 3 */}
+                <motion.div
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={isInView ? { x: 0, opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="flex w-max animate-marquee-left gap-3 hover:paused"
+                >
+                  {[...row3, ...row3, ...row3].map((tech, i) => {
+                    const Icon = tech.icon;
+                    return (
+                      <motion.div
+                        key={i}
+                        whileHover={{ scale: 1.05 }}
+                        className="flex items-center gap-2 rounded-full border border-border bg-muted/30 px-4 py-2 text-sm text-foreground shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-primary/30 hover:bg-accent glass"
+                      >
+                        <Icon className="h-4 w-4 text-primary" />
+                        <span className="text-xs font-semibold text-foreground">
+                          {tech.name}
+                        </span>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              </>
+            )}
           </div>
 
           {/* Bottom Bar exact match */}

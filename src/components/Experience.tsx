@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 import { Link } from "@/routing";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type Experience = {
   id: string;
@@ -26,8 +27,10 @@ export default function Experience() {
   const lineHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", "100%"]);
 
   const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     import("@/services/apiService").then(({ getExperiences }) => {
       getExperiences()
         .then((res) => {
@@ -45,7 +48,8 @@ export default function Experience() {
             setExperiences(exps);
           }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
+        .finally(() => setIsLoading(false));
     });
   }, []);
 
@@ -87,9 +91,40 @@ export default function Experience() {
           </div>
 
           <div className="space-y-16">
-            {experiences.map((exp, index) => (
-              <ExperienceItem key={exp.id} exp={exp} index={index} />
-            ))}
+            {isLoading ? (
+              [1, 2].map((i, index) => (
+                <div
+                  key={i}
+                  className={`relative flex flex-col md:flex-row items-start ${
+                    index % 2 === 0 ? "md:flex-row-reverse" : ""
+                  }`}
+                >
+                  <div className="absolute left-[28px] md:left-1/2 top-6 md:-translate-x-1/2 z-20 flex items-center justify-center">
+                    <Skeleton className="w-14 h-14 -ml-7 md:ml-0 rounded-full border-4 border-background" />
+                  </div>
+                  <div className={`w-full md:w-1/2 pl-20 pr-4 md:px-12 ${index % 2 === 0 ? "md:text-right" : "text-left"}`}>
+                    <div className="relative rounded-3xl border border-foreground/12 p-6 sm:p-8 space-y-4 card-premium">
+                      <Skeleton className="h-7 w-1/2 rounded-md mb-2" />
+                      <div className="flex gap-3 items-center">
+                        <Skeleton className="h-6 w-24 rounded-full" />
+                        <Skeleton className="h-4 w-20 rounded-md" />
+                      </div>
+                      <Skeleton className="h-4 w-full rounded-md" />
+                      <Skeleton className="h-4 w-4/5 rounded-md" />
+                      <div className="flex gap-2">
+                        {[1, 2, 3].map((tag) => (
+                          <Skeleton key={tag} className="h-6 w-16 rounded-full" />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              experiences.map((exp, index) => (
+                <ExperienceItem key={exp.id} exp={exp} index={index} />
+              ))
+            )}
           </div>
         </div>
       </div>

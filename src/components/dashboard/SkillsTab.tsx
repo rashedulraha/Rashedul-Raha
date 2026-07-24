@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { getSkills, createSkill, updateSkill, deleteSkill } from "@/services/apiService";
 import { ConfirmModal } from "./ConfirmModal";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface ISkill {
   id: string;
@@ -254,9 +255,22 @@ export function SkillsTab() {
 
       {/* Tabular Skill List View instead of cards */}
       {isLoading ? (
-        <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
-          <RefreshCw className="w-8 h-8 animate-spin text-primary" />
-          <span className="text-sm font-medium animate-pulse">Loading skills...</span>
+        <div className="card-premium overflow-hidden divide-y divide-border/50">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="p-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Skeleton className="w-9 h-9 rounded-lg" />
+                <div className="space-y-1">
+                  <Skeleton className="h-5 w-32 rounded-md" />
+                  <Skeleton className="h-3 w-48 rounded-md" />
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <Skeleton className="h-5 w-20 rounded-full" />
+                <Skeleton className="h-7 w-16 rounded-lg" />
+              </div>
+            </div>
+          ))}
         </div>
       ) : filteredSkills.length === 0 ? (
         <div className="card-premium p-16 text-center text-muted-foreground border-dashed border-2 border-border/50 rounded-3xl flex flex-col items-center justify-center gap-4">

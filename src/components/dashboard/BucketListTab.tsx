@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { getBucketList, createBucketListItem, updateBucketListItem, deleteBucketListItem } from "@/services/apiService";
 import { ConfirmModal } from "./ConfirmModal";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface IBucketItem {
   id: string;
@@ -289,9 +290,19 @@ export function BucketListTab() {
 
       {/* Goals Grid */}
       {isLoading ? (
-        <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
-          <RefreshCw className="w-8 h-8 animate-spin text-primary" />
-          <span className="text-sm font-medium animate-pulse">Loading bucket list items...</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="card-premium p-5 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Skeleton className="w-5 h-5 rounded-full" />
+                <div className="space-y-1">
+                  <Skeleton className="h-5 w-48 rounded-md" />
+                  <Skeleton className="h-3 w-24 rounded-md" />
+                </div>
+              </div>
+              <Skeleton className="h-7 w-16 rounded-lg" />
+            </div>
+          ))}
         </div>
       ) : filteredItems.length === 0 ? (
         <div className="card-premium p-16 text-center text-muted-foreground border-dashed border-2 border-border/50 rounded-3xl flex flex-col items-center justify-center gap-4">

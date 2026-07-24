@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { getBlogs, createBlog, updateBlog, deleteBlog } from "@/services/apiService";
 import { ConfirmModal } from "./ConfirmModal";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface IBlog {
   id: string;
@@ -505,9 +506,19 @@ export function BlogsTab() {
       )}
 
       {isLoading ? (
-        <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
-          <RefreshCw className="w-8 h-8 animate-spin text-primary" />
-          <span className="text-sm font-medium animate-pulse">Loading articles...</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="card-premium p-5 flex flex-col justify-between space-y-4">
+              <Skeleton className="aspect-16/11 w-full rounded-xl" />
+              <Skeleton className="h-6 w-5/6 rounded-lg" />
+              <Skeleton className="h-4 w-full rounded-md" />
+              <Skeleton className="h-4 w-4/5 rounded-md" />
+              <div className="flex justify-between pt-4 border-t border-border/50 items-center">
+                <Skeleton className="h-4 w-24 rounded-md" />
+                <Skeleton className="h-7 w-20 rounded-lg" />
+              </div>
+            </div>
+          ))}
         </div>
       ) : filteredBlogs.length === 0 ? (
         <div className="card-premium p-16 text-center text-muted-foreground border-dashed border-2 border-border/50 rounded-3xl flex flex-col items-center justify-center gap-4">

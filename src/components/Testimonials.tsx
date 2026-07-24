@@ -13,15 +13,18 @@ type Testimonial = {
 };
 
 import { getTestimonials } from "@/services/apiService";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Testimonials() {
   const [items, setItems] = useState<Testimonial[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function loadTestimonials() {
+      setIsLoading(true);
       try {
         const res = await getTestimonials();
         if (
@@ -33,6 +36,8 @@ export default function Testimonials() {
         }
       } catch (err) {
         console.error("Error loading testimonials:", err);
+      } finally {
+        setIsLoading(false);
       }
     }
     loadTestimonials();
@@ -107,13 +112,37 @@ export default function Testimonials() {
         </div>
 
         {/* Slider Layout */}
-        <div
-          ref={sliderRef}
-          onScroll={handleScroll}
-          className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-6 pb-4 -mx-4 px-4 hide-scrollbar"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {items.map((testimonial) => {
+        {isLoading ? (
+          <div className="flex overflow-x-auto gap-6 pb-4 -mx-4 px-4 hide-scrollbar">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-6 md:p-8 shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] card-premium min-h-[260px]"
+              >
+                <div>
+                  <Skeleton className="h-6 w-3/4 mb-4 rounded-md" />
+                  <Skeleton className="h-4 w-full mb-2 rounded-md" />
+                  <Skeleton className="h-4 w-5/6 mb-2 rounded-md" />
+                  <Skeleton className="h-4 w-2/3 mb-6 rounded-md" />
+                </div>
+                <div className="mt-auto flex items-center gap-4 pt-6 border-t border-foreground/12">
+                  <Skeleton className="size-12 rounded-full shrink-0" />
+                  <div className="flex flex-col gap-1.5 flex-1">
+                    <Skeleton className="h-4 w-28 rounded-md" />
+                    <Skeleton className="h-3 w-20 rounded-md" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div
+            ref={sliderRef}
+            onScroll={handleScroll}
+            className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-6 pb-4 -mx-4 px-4 hide-scrollbar"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {items.map((testimonial) => {
             return (
               <article
                 key={testimonial.id}
@@ -182,6 +211,7 @@ export default function Testimonials() {
             );
           })}
         </div>
+        )}
 
         {/* Bottom Controls */}
         <div className="flex items-center justify-center gap-4 mt-10 px-4">

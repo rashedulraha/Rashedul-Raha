@@ -4,6 +4,7 @@ import React, { useState, useEffect, useTransition } from "react";
 import { PenLine, Share2, Send, Loader2 } from "lucide-react";
 import { FaGithub, FaGoogle } from "react-icons/fa6";
 import { getGuestbookMessages, createGuestbookMessage } from "@/services/apiService";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const WavyDivider = () => (
   <div className="absolute -bottom-1 left-0 w-full overflow-hidden leading-none z-10">
@@ -15,12 +16,16 @@ const WavyDivider = () => (
 
 export default function GuestbookGrid({ initialMessages }: { initialMessages: Record<string, string | number>[] }) {
   const [messages, setMessages] = useState<any[]>(initialMessages || []);
+  const [isLoading, setIsLoading] = useState<boolean>(!initialMessages || initialMessages.length === 0);
   const [isWriting, setIsWriting] = useState(false);
   const [name, setName] = useState("");
   const [newMessage, setNewMessage] = useState("");
   const [isPending, startTransition] = useTransition();
 
   const fetchMessages = async () => {
+    if (!initialMessages || initialMessages.length === 0) {
+      setIsLoading(true);
+    }
     try {
       const res = await getGuestbookMessages();
       if (res.data.success && Array.isArray(res.data.data)) {
@@ -28,6 +33,8 @@ export default function GuestbookGrid({ initialMessages }: { initialMessages: Re
       }
     } catch (err) {
       console.error("Error fetching guestbook messages:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -133,35 +140,60 @@ export default function GuestbookGrid({ initialMessages }: { initialMessages: Re
       </div>
 
       {/* Message Cards */}
-      {messages.map((msg) => (
-        <div key={msg.id} className="break-inside-avoid relative rounded-3xl overflow-hidden border border-foreground/12 shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl group hover:-translate-y-1 hover:border-foreground/20 transition-all duration-300">
-          <div className={`relative min-h-[220px] ${msg.bgColor} flex flex-col items-center justify-center p-8 text-center`}>
-            {/* Abstract Doodles */}
-            <div className={msg.doodles as string}></div>
-            <div className={msg.doodle2 as string}></div>
-            
-            <p className="text-foreground text-lg font-bold leading-relaxed relative z-10 drop-shadow-md">
-              {msg.message}
-            </p>
-            <WavyDivider />
-          </div>
-          
-          <div className="h-20 bg-foreground/5 relative z-20 flex items-center justify-between px-6 border-t border-foreground/12">
-            <div className="flex items-center gap-3">
-              <div className={`flex items-center justify-center w-8 h-8 rounded-full ${msg.avatarBg} text-foreground font-bold text-xs uppercase shadow-lg border border-foreground/10`}>
-                {String(msg.name).charAt(0)}
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="text-xs font-bold text-foreground uppercase tracking-wider">{msg.name}</span>
-                <span className="text-[10px] text-muted-foreground">{msg.date}</span>
-              </div>
+      {isLoading ? (
+        [1, 2, 3, 4, 5].map((i) => (
+          <div
+            key={i}
+            className="break-inside-avoid relative rounded-3xl overflow-hidden border border-foreground/12 bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl mb-6"
+          >
+            <div className="relative min-h-[220px] flex flex-col items-center justify-center p-8 space-y-3">
+              <Skeleton className="h-5 w-4/5 rounded-md" />
+              <Skeleton className="h-5 w-2/3 rounded-md" />
+              <WavyDivider />
             </div>
-            <button className="p-2 text-muted-foreground hover:text-primary transition-colors">
-              <Share2 className="w-4 h-4" />
-            </button>
+            <div className="h-20 bg-foreground/5 flex items-center justify-between px-6 border-t border-foreground/12">
+              <div className="flex items-center gap-3">
+                <Skeleton className="w-8 h-8 rounded-full" />
+                <div className="flex flex-col gap-1">
+                  <Skeleton className="h-4 w-24 rounded-md" />
+                  <Skeleton className="h-3 w-16 rounded-md" />
+                </div>
+              </div>
+              <Skeleton className="w-4 h-4 rounded" />
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        messages.map((msg) => (
+          <div key={msg.id} className="break-inside-avoid relative rounded-3xl overflow-hidden border border-foreground/12 shadow-[0_8px_32px_rgba(var(--foreground), 0.3)] bg-gradient-to-br from-white/8 to-white/2 backdrop-blur-xl group hover:-translate-y-1 hover:border-foreground/20 transition-all duration-300">
+            <div className={`relative min-h-[220px] ${msg.bgColor} flex flex-col items-center justify-center p-8 text-center`}>
+              {/* Abstract Doodles */}
+              <div className={msg.doodles as string}></div>
+              <div className={msg.doodle2 as string}></div>
+              
+              <p className="text-foreground text-lg font-bold leading-relaxed relative z-10 drop-shadow-md">
+                {msg.message}
+              </p>
+              <WavyDivider />
+            </div>
+            
+            <div className="h-20 bg-foreground/5 relative z-20 flex items-center justify-between px-6 border-t border-foreground/12">
+              <div className="flex items-center gap-3">
+                <div className={`flex items-center justify-center w-8 h-8 rounded-full ${msg.avatarBg} text-foreground font-bold text-xs uppercase shadow-lg border border-foreground/10`}>
+                  {String(msg.name).charAt(0)}
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-xs font-bold text-foreground uppercase tracking-wider">{msg.name}</span>
+                  <span className="text-[10px] text-muted-foreground">{msg.date}</span>
+                </div>
+              </div>
+              <button className="p-2 text-muted-foreground hover:text-primary transition-colors">
+                <Share2 className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        ))
+      )}
 
     </div>
   );

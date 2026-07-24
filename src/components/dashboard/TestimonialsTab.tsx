@@ -26,6 +26,7 @@ import {
   deleteTestimonial,
 } from "@/services/apiService";
 import { ConfirmModal } from "./ConfirmModal";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface ITestimonial {
   id: string;
@@ -326,9 +327,23 @@ export function TestimonialsTab() {
 
       {/* Main Content Area */}
       {isLoading ? (
-        <div className="p-12 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
-          <RefreshCw className="w-6 h-6 animate-spin text-primary" />
-          <span>Loading testimonials...</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="card-premium p-6 flex flex-col justify-between space-y-4">
+              <div className="space-y-2">
+                <Skeleton className="h-6 w-3/4 rounded-md" />
+                <Skeleton className="h-4 w-full rounded-md" />
+                <Skeleton className="h-4 w-4/5 rounded-md" />
+              </div>
+              <div className="flex items-center gap-3 pt-4 border-t border-border/50">
+                <Skeleton className="size-10 rounded-full" />
+                <div className="space-y-1">
+                  <Skeleton className="h-4 w-24 rounded-md" />
+                  <Skeleton className="h-3 w-16 rounded-md" />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       ) : filteredItems.length === 0 ? (
         <div className="card-premium p-12 text-center text-muted-foreground">

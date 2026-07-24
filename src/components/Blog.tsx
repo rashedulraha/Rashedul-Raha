@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { getBlogs } from "@/services/apiService";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface IBlog {
   id: string | number;
@@ -22,6 +23,7 @@ export default function Blog() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [hoveredCard, setHoveredCard] = useState<string | number | null>(null);
   const [posts, setPosts] = useState<IBlog[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Floating particles (client-side only to prevent hydration mismatch)
   const [particles, setParticles] = useState<
@@ -37,6 +39,7 @@ export default function Blog() {
 
   useEffect(() => {
     async function loadBlogs() {
+      setIsLoading(true);
       try {
         const res = await getBlogs();
         if (
@@ -48,6 +51,8 @@ export default function Blog() {
         }
       } catch (err) {
         console.error("Error loading blogs:", err);
+      } finally {
+        setIsLoading(false);
       }
     }
     loadBlogs();
@@ -123,13 +128,31 @@ export default function Blog() {
         <div aria-hidden="true" className="w-full border-t" />
 
         {/* Blog Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {posts.map((post, index) => (
+        {isLoading ? (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="group flex h-full flex-col rounded-3xl p-2.5 card-premium">
+                <Skeleton className="relative aspect-16/11 overflow-hidden rounded-2xl w-full" />
+                <div className="flex flex-1 flex-col px-2 pt-4 pb-3 space-y-3">
+                  <Skeleton className="h-6 w-5/6 rounded-lg" />
+                  <Skeleton className="h-4 w-full rounded-md" />
+                  <Skeleton className="h-4 w-4/5 rounded-md" />
+                  <div className="mt-auto flex items-center justify-between pt-4 border-t border-foreground/12">
+                    <Skeleton className="h-4 w-28 rounded-md" />
+                    <Skeleton className="h-7 w-20 rounded-lg" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
+          >
+            {posts.map((post, index) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 30 }}
@@ -237,6 +260,7 @@ export default function Blog() {
             </motion.div>
           ))}
         </motion.div>
+        )}
 
         <div aria-hidden="true" className="w-full border-t mt-8" />
 
